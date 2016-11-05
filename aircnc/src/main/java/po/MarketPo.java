@@ -1,47 +1,41 @@
 package po;
 
-public class MarketPo {
+import util.market.MarketInfo;
 
-	private int id;
+public class MarketPo extends MarketInfo {
+	private String passwordHash;
 
-	private String username;
-
-	private String password;
-
-	public MarketPo(){
-		super();
-	}
-
-	public MarketPo(int id, String username, String phone, String password) {
-		super();
-		this.id = id;
-		this.username = username;
-		this.password = password;
+	MarketPo() {
 	}
 
 
-	public int getId() {
+	@Override
+	public String getID() {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getUsername() {
+	@Override
+	public String getName() {
 		return username;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public String getPasswordHash() {
+		return passwordHash;
 	}
 
-	public String getPassword() {
-		return password;
+
+	MarketPo setId(String id) {
+		this.id = id;
+		return this;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	MarketPo setName(String name) {
+		this.username = name;
+		return this;
 	}
 
+	MarketPo setPasswordHash(String passwordHash) {
+		this.passwordHash = passwordHash;
+		return this;
+	}
 }
