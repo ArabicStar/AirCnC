@@ -1,49 +1,53 @@
 package vo;
 
-import util.market.MarketInfo;
+import po.MarketPo;
+
 /**
- * VO of market<br>
- * Immutable<br>
+ *
  *
  * @author ParanoiaSun
- *
  */
-public final class MarketVo extends MarketInfo {
-	MarketVo() {
+public class MarketVo {
+
+	private String id;
+	private String username;
+	private String password;
+
+	public MarketVo(){
 		super();
-		isValid = true;
 	}
 
-	@Override
-	public String getID() {
-		if (isValid)
-			return id;
-		return null;
+	public MarketVo(MarketPo marketPo){
+		super();
+		this.id = marketPo.getId();
+		this.username = marketPo.getUsername();
+		this.password = marketPo.getPassword();
 	}
 
-	@Override
-	public String getName() {
-		if (isValid)
-			return username;
-		return null;
+	public String getId() {
+		return id;
 	}
 
-	MarketVo setID(String id) {
+	public void setId(String id) {
 		this.id = id;
-		return this;
 	}
 
-	MarketVo setName(String name) {
-		this.username = name;
-		return this;
+	public String getUsername() {
+		return username;
 	}
 
-	void invalidate() {
-		isValid = false;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	@Override
-	public String toString() {
-		return "Id:" + id + "\nname:" + username;
+	public String getPassword() {
+		return password;
 	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
+
 }

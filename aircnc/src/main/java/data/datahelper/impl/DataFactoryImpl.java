@@ -2,11 +2,14 @@ package data.datahelper.impl;
 
 import data.dao.OrderDao;
 import data.dao.UserDao;
+import data.dao.MarketDao;
 import data.dao.impl.OrderDaoImpl;
 import data.dao.impl.UserDaoImpl;
+import data.dao.impl.MarketDaoImpl;
 import data.datahelper.DataFactory;
 import data.datahelper.OrderDataHelper;
 import data.datahelper.UserDataHelper;
+import data.datahelper.MarketDataHelper;
 
 public class DataFactoryImpl implements DataFactory{
 
@@ -22,6 +25,12 @@ public class DataFactoryImpl implements DataFactory{
 		return userDao;
 	}
 
-	
+	public MarketDataHelper getMarketDataHelper() {
+		MarketDataHelper marketDao = new MarketDataTxtHelper();
+		//MarketDao marketDao = new MarketDataMysqlHelper();
+		return marketDao;
+	}
+
+
 
 }
