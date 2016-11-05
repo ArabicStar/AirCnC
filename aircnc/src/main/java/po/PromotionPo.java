@@ -4,25 +4,25 @@ import java.util.Date;
 
 public class PromotionPo {
 	/**
-	 * ¿ªÊ¼
-	 * TODO£º»»µôÕâ¸öÀà
+	 * å¼€å§‹
+	 * TODOï¼šæ¢æ‰è¿™ä¸ªç±»
 	 */
 	private Date startDate;
 	/**
-	 * ½áÊø
-	 * TODO£º»»µôÕâ¸öÀà
+	 * ç»“æŸ
+	 * TODOï¼šæ¢æ‰è¿™ä¸ªç±»
 	 */
 	private Date endDate;
 	/**
-	 * ÕÛ¿Û
+	 * æŠ˜æ‰£
 	 */
 	private double discount;
 	/**
-	 * ×îµÍÏû·Ñ
+	 * æœ€ä½æ¶ˆè´¹
 	 */
 	private double minSpent;
 	/**
-	 * ·µ»Ø½ğ¶î
+	 * è¿”å›é‡‘é¢
 	 */
 	private double returnMoney;
 	public Date getStartDate() {
