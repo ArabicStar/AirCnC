@@ -1,6 +1,6 @@
 package po;
 
-public class Hotel {
+public class HotelPo {
 	
 	private int id;
 	
