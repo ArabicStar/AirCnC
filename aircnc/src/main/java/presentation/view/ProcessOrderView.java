@@ -27,6 +27,11 @@ import javax.swing.table.DefaultTableModel;
 
 import vo.OrderVo;
 
+/**
+ * TODO: 用JavaFx写界面
+ * @author 15125_000
+ *
+ */
 public class ProcessOrderView extends JPanel{
 	
 	private static final long serialVersionUID = 1L;
