@@ -1,7 +1,6 @@
 package main;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import presentation.controller.ProcessOrderViewControllerImpl;
 import presentation.view.ProcessOrderView;
