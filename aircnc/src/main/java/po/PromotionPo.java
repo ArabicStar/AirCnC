@@ -1,18 +1,18 @@
 package po;
 
-import java.util.Date;
+import utils.HotelDate;
 
 public class PromotionPo {
 	/**
 	 * 开始
 	 * TODO：换掉这个类
 	 */
-	private Date startDate;
+	private HotelDate startDate;
 	/**
 	 * 结束
 	 * TODO：换掉这个类
 	 */
-	private Date endDate;
+	private HotelDate endDate;
 	/**
 	 * 折扣
 	 */
@@ -25,16 +25,16 @@ public class PromotionPo {
 	 * 返回金额
 	 */
 	private double returnMoney;
-	public Date getStartDate() {
+	public HotelDate getStartDate() {
 		return startDate;
 	}
-	public void setStartDate(Date startDate) {
+	public void setStartDate(HotelDate startDate) {
 		this.startDate = startDate;
 	}
-	public Date getEndDate() {
+	public HotelDate getEndDate() {
 		return endDate;
 	}
-	public void setEndDate(Date endDate) {
+	public void setEndDate(HotelDate endDate) {
 		this.endDate = endDate;
 	}
 	public double getDiscount() {
