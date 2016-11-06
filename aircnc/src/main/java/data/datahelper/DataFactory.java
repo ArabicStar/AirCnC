@@ -9,5 +9,7 @@ public interface DataFactory {
 	public MarketDataHelper getMarketDataHelper();
 	
 	public HotelDataHelper getHotelDataHelper();
+	
+	public PromotionDataHelper getPromotionDataHelper();
 
 }
