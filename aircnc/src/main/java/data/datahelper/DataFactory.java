@@ -7,5 +7,7 @@ public interface DataFactory {
 	public UserDataHelper getUserDataHelper();
 
 	public MarketDataHelper getMarketDataHelper();
+	
+	public HotelDataHelper getHotelDataHelper();
 
 }

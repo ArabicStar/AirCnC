@@ -2,17 +2,19 @@ package po;
 
 public class HotelPo {
 	
-	private int id;
+	private String id;
 	
 	private String hotelName;
 	
 	private String position;
+	
+	private String scope;
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -30,6 +32,10 @@ public class HotelPo {
 
 	public void setPosition(String position) {
 		this.position = position;
+	}
+	
+	public String getScope(){
+		return scope;
 	}
 	
 	
