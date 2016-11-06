@@ -151,5 +151,18 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	
+	@Override
+	public boolean revealOrder(int orderId) {
+		OrderPo orderPo = orderDao.getOrder(orderId);
+		if(orderPo != null) {
+			if(orderPo.getStatus() == 0) {
+				orderPo.setStatus(3);
+				// TODO:未处理信用值
+			}
+		}
+		return false;
+	}
+
+	
 
 }

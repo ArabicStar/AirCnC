@@ -2,19 +2,17 @@ package data.datahelper;
 
 import java.util.Map;
 
-import po.OrderPo;
+import po.PromotionPo;
 
-public interface OrderDataHelper {
-	
+public interface PromotionDataHelper {
 	/**
 	 * @return	从数据文件中读取订单数据
 	 */
-	public Map<Integer, OrderPo> getOrderData();
+	public Map<Integer,PromotionPo> getPromotionData();
 	
 	/**
 	 * 向数据文件中写入订单数据
 	 * @param list	
 	 */
-	public void updateOrderData(Map<Integer,OrderPo> map);
-
+	public void updatePromotionData(Map<Integer,PromotionPo> map);
 }

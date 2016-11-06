@@ -1,16 +1,11 @@
 package data.datahelper.impl;
 
-import data.dao.OrderDao;
-import data.dao.UserDao;
-import data.dao.MarketDao;
-import data.dao.impl.OrderDaoImpl;
-import data.dao.impl.UserDaoImpl;
-import data.dao.impl.MarketDaoImpl;
 import data.datahelper.DataFactory;
 import data.datahelper.HotelDataHelper;
-import data.datahelper.OrderDataHelper;
-import data.datahelper.UserDataHelper;
 import data.datahelper.MarketDataHelper;
+import data.datahelper.OrderDataHelper;
+import data.datahelper.PromotionDataHelper;
+import data.datahelper.UserDataHelper;
 
 public class DataFactoryImpl implements DataFactory{
 
@@ -38,6 +33,14 @@ public class DataFactoryImpl implements DataFactory{
 //		HotelDataHelper hotelDao = new HotelDataMysqlHelper();
 		// TODO Auto-generated method stub
 		return hotelDao;
+	}
+
+	@Override
+	public PromotionDataHelper getPromotionDataHelper() {
+		// TODO Auto-generated method stub
+		PromotionDataHelper promotionDao = new PromotionDataTxtHelper();
+		
+		return promotionDao;
 	}
 	
 	

@@ -1,7 +1,6 @@
 package po;
 
 import utils.HotelDate;
-import vo.OrderVo;
 
 public class PromotionPo {
 	/**
@@ -57,10 +56,4 @@ public class PromotionPo {
 		this.returnMoney = returnMoney;
 	}
 	
-	
-	public OrderPo apply(OrderVo vo) {
-		return new OrderPo();
-	}
-	
-
 }

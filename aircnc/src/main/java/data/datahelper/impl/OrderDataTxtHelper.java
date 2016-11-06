@@ -38,7 +38,7 @@ public class OrderDataTxtHelper implements OrderDataHelper{
 				String orderInfo=data[6];
 				int orderPrice = Integer.valueOf(data[7]);
 				
-				OrderPo orderPo=new OrderPo(orderId, hotelId, orderUserId, orderStatus, orderEntryTime, orderLastTime,orderInfo,orderPrice);
+				OrderPo orderPo=new OrderPo(orderId, hotelId, orderUserId, orderStatus, orderEntryTime, orderLastTime,orderInfo,orderPrice, 1, 2, 0);
 				map.put(orderId, orderPo);
 				
 				str = br.readLine();
