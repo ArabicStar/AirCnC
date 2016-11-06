@@ -132,17 +132,4 @@ public class HotelDate {
 		this.day = day;
 	}
 	
-//	public static void main(String[] args) {
-//		HotelDate h1 = new HotelDate(2015, 1, 1);
-//		HotelDate h2 = new HotelDate(2016, 1, 1);
-//		System.out.println(h2.getGapDays(h1));
-//		System.out.println(h1.toString());
-//		System.out.println(h2.toString());
-//		h1.setDate(2015, 3, 1);
-//		h2.setDate(2016, 3, 1);
-//		System.out.println(h1.getGapDays(h2));
-//		System.out.println(h1.toString());
-//		System.out.println(h2.toString());
-//	}
-	
 }

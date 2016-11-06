@@ -57,5 +57,12 @@ public interface OrderService {
 	 */
 	public boolean delayOrder(int orderId,String delayTime);
 	
+	/**
+	 * 
+	 * @param orderId
+	 * @return 撤销未执行订单
+	 */
+	public boolean revealOrder(int orderId);
+	
 
 }
