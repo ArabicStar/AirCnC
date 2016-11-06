@@ -1,16 +1,15 @@
 package po;
 
 import utils.HotelDate;
+import vo.OrderVo;
 
 public class PromotionPo {
 	/**
 	 * 开始
-	 * TODO：换掉这个类
 	 */
 	private HotelDate startDate;
 	/**
 	 * 结束
-	 * TODO：换掉这个类
 	 */
 	private HotelDate endDate;
 	/**
@@ -25,6 +24,8 @@ public class PromotionPo {
 	 * 返回金额
 	 */
 	private double returnMoney;
+	
+	
 	public HotelDate getStartDate() {
 		return startDate;
 	}
@@ -54,6 +55,11 @@ public class PromotionPo {
 	}
 	public void setReturnMoney(double returnMoney) {
 		this.returnMoney = returnMoney;
+	}
+	
+	
+	public OrderPo apply(OrderVo vo) {
+		return new OrderPo();
 	}
 	
 
