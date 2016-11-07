@@ -1,28 +1,33 @@
-package vo.member;
+package po.member;
 
 import java.time.LocalDate;
 
-public class PersonalMemberVo extends MemberVo {
-
-	PersonalMemberVo() {
+/**
+ * Po of personal member<br>
+ * 
+ * @author ClevelandAlto
+ *
+ */
+public class PersonalMemberPo extends MemberPo {
+	protected PersonalMemberPo() {
 		super(Type.PERSONAL);
 	}
 
 	@Override
-	MemberVo setBirthday(LocalDate birthday) {
+	MemberPo setBirthday(LocalDate birthday) {
 		this.birthday = birthday;
 		return this;
 	}
 
 	@Override
-	MemberVo setEnterprise(String enterprise) {
+	MemberPo setEnterprise(String enterprise) {
 		return this;
 	}
 
 	@Override
 	public LocalDate getBirthday() {
 		if (isValid())
-			return birthday;
+			return this.birthday;
 		return null;
 	}
 

@@ -2,7 +2,8 @@ package utils.info.member;
 
 /**
  * Abstract of contact info<br>
- * immutable object
+ * immutable object<br>
+ * P.S. Actually, ContactVo and ContactPo perform just the same<br>
  * 
  * @author ClevelandAlto
  *

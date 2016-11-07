@@ -1,5 +1,13 @@
 package utils.info.member;
 
+/**
+ * Builder for ContactVo, to assist to assure immutable object <br>
+ * Setters will be checked <br>
+ * P.S. the ContactVoBuilder and ContactPoBuilder perform just the same<br>
+ * 
+ * @author ClevelandAlto
+ *
+ */
 public abstract class ContactInfoBuilder extends ContactInfoTemplate {
 	protected ContactInfoBuilder(ContactInfo info) {
 		this.setEmail(info.getEmail()).setFixedPhone(info.getFixedPhone()).setMobilePhone(info.getMobilePhone());
@@ -9,26 +17,26 @@ public abstract class ContactInfoBuilder extends ContactInfoTemplate {
 		this.setEmail(null).setFixedPhone(null).setMobilePhone(null);
 	}
 
-	protected ContactInfoBuilder setEmail(String email) {
+	public ContactInfoBuilder setEmail(String email) {
 		this.email = email == null ? BLANK : (checkEmail(email) ? email : BLANK);
 		return this;
 	}
 
-	protected ContactInfoBuilder setFixedPhone(String fixedPhone) {
+	public ContactInfoBuilder setFixedPhone(String fixedPhone) {
 		this.fixedPhone = fixedPhone == null ? BLANK : (checkFixedPhone(fixedPhone) ? fixedPhone : BLANK);
 		return this;
 	}
 
-	protected ContactInfoBuilder setMobilePhone(String mobilePhone) {
+	public ContactInfoBuilder setMobilePhone(String mobilePhone) {
 		this.mobilePhone = mobilePhone == null ? BLANK : (checkMobilePhone(mobilePhone) ? mobilePhone : BLANK);
 		return this;
 	}
 
-	protected boolean isReady() {
+	public boolean isReady() {
 		// blank contact info is allowed
 		return (email == "" || checkEmail(email)) && (fixedPhone == "" || checkFixedPhone(fixedPhone))
 				&& (mobilePhone == "" || checkMobilePhone(mobilePhone));
 	}
 
-	protected abstract ContactInfo getContactInfo();
+	public abstract ContactInfo getContactInfo();
 }

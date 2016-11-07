@@ -57,4 +57,6 @@ public abstract class MemberInfoBuilder extends MemberInfoTemplate {
 		return id != null && name != null && contact != null
 				&& (type == Type.BUSINESS ? enterprise != null : birthday != null);
 	}
+
+	public abstract MemberInfo getMemberInfo();
 }
