@@ -2,7 +2,7 @@ package data.dao;
 
 import java.util.List;
 
-import po.HotelPo;
+import po.hotel.HotelPo;
 
 public interface HotelDao {
 	/**

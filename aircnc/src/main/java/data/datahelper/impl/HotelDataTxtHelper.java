@@ -3,7 +3,7 @@ package data.datahelper.impl;
 import java.util.Map;
 
 import data.datahelper.HotelDataHelper;
-import po.HotelPo;
+import po.hotel.HotelPo;
 
 public class HotelDataTxtHelper implements HotelDataHelper{
 

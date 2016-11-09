@@ -2,7 +2,7 @@ package vo;
 
 import java.util.Vector;
 
-import po.HotelPo;
+import po.hotel.HotelPo;
 
 public class HotelVo extends Vector<String>{
 	public HotelVo(HotelPo hotelPo){

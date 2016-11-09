@@ -8,8 +8,11 @@ import po.OrderPo;
 
 public class OrderPoTest {
 	
+	/**
+	 * 这些需要用到Dao
+	 * 
+	 */
 	
-
 	@Test
 	public void OrderPoTest1() {
 		OrderPo orderPo = new OrderPo(1, 1, 1, 0, "2016.11.6", "2016.11.7", "", 200, 222, 2, 0);
