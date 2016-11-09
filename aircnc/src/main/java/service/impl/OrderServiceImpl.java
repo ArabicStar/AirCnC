@@ -10,8 +10,6 @@ import data.dao.OrderDao;
 import data.dao.UserDao;
 import data.dao.impl.OrderDaoImpl;
 import data.dao.impl.UserDaoImpl;
-import data.datahelper.DataFactory;
-import data.datahelper.impl.DataFactoryImpl;
 import po.OrderPo;
 import po.UserPo;
 import service.OrderService;
