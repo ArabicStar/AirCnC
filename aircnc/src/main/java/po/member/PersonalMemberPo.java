@@ -14,13 +14,13 @@ public class PersonalMemberPo extends MemberPo {
 	}
 
 	@Override
-	MemberPo setBirthday(LocalDate birthday) {
+	public MemberPo setBirthday(LocalDate birthday) {
 		this.birthday = birthday;
 		return this;
 	}
 
 	@Override
-	MemberPo setEnterprise(String enterprise) {
+	public MemberPo setEnterprise(String enterprise) {
 		return this;
 	}
 

@@ -15,12 +15,12 @@ public class EnterpriseMemberPo extends MemberPo {
 	}
 
 	@Override
-	MemberPo setBirthday(LocalDate birthday) {
+	public MemberPo setBirthday(LocalDate birthday) {
 		return this;
 	}
 
 	@Override
-	MemberPo setEnterprise(String enterprise) {
+	public MemberPo setEnterprise(String enterprise) {
 		this.enterprise = enterprise;
 		return this;
 	}

@@ -3,25 +3,45 @@ package po.member;
 import utils.info.member.ContactInfo;
 
 /**
- * po of contact<br>
- * setter only for ContactPoBuilder, so immutable to outer package<br>
+ * Po of contact<br>
+ * public setter only for builder and Hibernate, should not be used other
+ * condition <br>
  * 
  * @author ClevelandAlto
  *
  */
 public class ContactPo extends ContactInfo {
-	ContactPo setEmail(String email) {
+	private int serialID;
+	private int memberID;
+
+	public ContactPo setEmail(String email) {
 		this.email = email;
 		return this;
 	}
 
-	ContactPo setFixedPhone(String fixedPhone) {
+	public ContactPo setFixedPhone(String fixedPhone) {
 		this.fixedPhone = fixedPhone;
 		return this;
 	}
 
-	ContactPo setMobilePhone(String mobilePhone) {
+	public ContactPo setMobilePhone(String mobilePhone) {
 		this.mobilePhone = mobilePhone;
 		return this;
+	}
+
+	public void setMemberID(int memberID) {
+		this.memberID = memberID;
+	}
+
+	public void setSerialID(int serialID) {
+		this.serialID = serialID;
+	}
+
+	public int getMemberID() {
+		return memberID;
+	}
+
+	public int getSerialID() {
+		return serialID;
 	}
 }

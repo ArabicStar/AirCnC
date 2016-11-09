@@ -7,6 +7,14 @@ import org.apache.commons.lang.StringUtils;
 import utils.info.member.ContactInfo;
 import utils.info.member.MemberInfo;
 
+/**
+ * po for Member<br>
+ * The public setters is only for builder and hibernate, should not be used
+ * other condition<br>
+ * 
+ * @author ClevelandAlto
+ *
+ */
 public abstract class MemberPo extends MemberInfo {
 	protected int passwordHash;
 
@@ -27,32 +35,32 @@ public abstract class MemberPo extends MemberInfo {
 		return Integer.MIN_VALUE;
 	}
 
-	MemberPo setID(String id) {
+	public MemberPo setID(String id) {
 		this.id = id;
 		return this;
 	}
 
-	MemberPo setName(String name) {
+	public MemberPo setName(String name) {
 		this.name = name;
 		return this;
 	}
 
-	MemberPo setPasswordHash(int passwordHash) {
+	public MemberPo setPasswordHash(int passwordHash) {
 		this.passwordHash = passwordHash;
 		return this;
 	}
 
-	MemberPo setContact(ContactInfo contact) {
+	public MemberPo setContact(ContactInfo contact) {
 		this.contact = contact;
 		return this;
 	}
 
-	MemberPo setCredit(int credit) {
+	public MemberPo setCredit(int credit) {
 		this.credit = credit;
 		return this;
 	}
 
-	abstract MemberPo setBirthday(LocalDate birthday);
+	public abstract MemberPo setBirthday(LocalDate birthday);
 
-	abstract MemberPo setEnterprise(String enterprise);
+	public abstract MemberPo setEnterprise(String enterprise);
 }
