@@ -9,7 +9,7 @@ import data.dao.HotelDao;
 import data.datahelper.DataFactory;
 import data.datahelper.HotelDataHelper;
 import data.datahelper.impl.DataFactoryImpl;
-import po.HotelPo;
+import po.hotel.HotelPo;
 
 public class HotelDaoImpl implements HotelDao{
 

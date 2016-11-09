@@ -1,4 +1,4 @@
-package po;
+package po.hotel;
 
 public class HotelPo {
 	
@@ -6,9 +6,21 @@ public class HotelPo {
 	
 	private String hotelName;
 	
-	private String position;
+	private String position;//地址
 	
-	private String scope;
+	private String scope;//商圈
+	
+	private int star;//星级
+	
+	private String introduction;
+	
+//	private 房型
+	
+//	private 设施
+	
+//	private 优惠策略
+	
+	
 
 	public String getId() {
 		return id;
@@ -37,7 +49,4 @@ public class HotelPo {
 	public String getScope(){
 		return scope;
 	}
-	
-	
-
 }
