@@ -5,6 +5,18 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>AirCnC</name>
   <description>CMS</description>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <configuration>
+                            <source>1.8</source>
+                            <target>1.8</target>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
   			<!-- 
   <build>
   	<plugins>
@@ -51,4 +63,7 @@
 			<version>1.0</version>
 		</dependency>
   </dependencies>
+  <properties>
+  	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
 </project>
