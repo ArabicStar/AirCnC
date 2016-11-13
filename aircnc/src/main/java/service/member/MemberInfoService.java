@@ -6,7 +6,7 @@ import java.util.List;
 import utils.info.member.MemberInfo;
 import utils.info.member.credit.CreditChangeInfo;
 import vo.HotelVo;
-import vo.OrderVo;
+import vo.order.OrderVo;
 
 public interface MemberInfoService {
 	public MemberInfo getMemberInfo(String id);
