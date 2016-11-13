@@ -1,27 +1,29 @@
 package service.impl.member;
 
-import java.util.Random;
-
 import data.dao.MemberDao;
 import po.member.MemberPo;
 import po.member.MemberPoBuilder;
 import service.member.MemberAccountService;
+import utils.info.member.MemberInfo;
 import vo.member.MemberVo;
 import vo.member.MemberVoBuilder;
 
 public final class AccountManager implements MemberAccountService {
-	private static final Random NEW_ID_GENERATOR = new Random(System.currentTimeMillis());
-	private static final int ID_BOUND = 100000000;
 	private MemberDao dao;
 
 	private boolean isLogined = false;
 	private MemberVo loginedMember = null;
+
+	public AccountManager(MemberDao dao) {
+		this.dao = dao;
+	}
 
 	@Override
 	public MemberVo register(MemberVoBuilder newMemberInfo, int passwordHash) {
 		String newID = generateNewID();
 		MemberVo newMemberVo = newMemberInfo.setID(newID).getMemberInfo();
 		MemberPo newMemberPo = new MemberPoBuilder(newMemberVo).setPasswordHash(passwordHash).getMemberInfo();
+		System.out.println(newMemberPo);
 		boolean result = dao.addMember(newMemberPo);
 		if (result)
 			return newMemberVo;
@@ -31,17 +33,7 @@ public final class AccountManager implements MemberAccountService {
 
 	// generate a never-used id
 	private String generateNewID() {
-		int i = NEW_ID_GENERATOR.nextInt(ID_BOUND);
-		String newID;
-		while (dao.existsMember(newID = formatID(i)))
-			i = NEW_ID_GENERATOR.nextInt(ID_BOUND);
-
-		return newID;
-	}
-
-	// format an id
-	private static String formatID(int i) {
-		return String.format("%08d", i);
+		return MemberInfo.formatID(dao.getAvaliableID());
 	}
 
 	@Override
@@ -55,6 +47,7 @@ public final class AccountManager implements MemberAccountService {
 
 		this.isLogined = true;
 		this.loginedMember = new MemberVoBuilder(memberAccount).getMemberInfo();
+//		System.out.println(loginedMember.getID());
 		return loginedMember;
 	}
 

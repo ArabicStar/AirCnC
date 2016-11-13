@@ -1,6 +1,6 @@
 package service.member;
 
-import utils.info.member.credit.ActionType;
+import utils.info.member.credit.ChangeAction;
 import vo.member.MemberVo;
 
 /**
@@ -15,11 +15,11 @@ public interface MemberCreditService {
 	 *            Member' ID
 	 * @param creditDelta
 	 *            Value change on credit, with sign
-	 * @param type
-	 *            Cause of credit change
+	 * @param action
+	 *            Action of credit change
 	 * @return Vo of member whose credit was changed.<br>
 	 *         if appointed member not exists or operation fails due to other
 	 *         cause, return null<br>
 	 */
-	public MemberVo changeCredit(String id, int creditDelta, ActionType type);
+	public MemberVo changeCredit(String id, int creditDelta, ChangeAction action);
 }

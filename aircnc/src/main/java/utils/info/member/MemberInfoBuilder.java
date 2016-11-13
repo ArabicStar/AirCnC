@@ -17,7 +17,7 @@ public abstract class MemberInfoBuilder extends MemberInfoTemplate {
 		if (type == null)
 			throw new IllegalArgumentException();
 
-		this.type = Type.valueOf(type);
+		this.type = Type.valueOf(type.toUpperCase());
 		if (this.type == null)
 			throw new IllegalArgumentException();
 	}
@@ -54,6 +54,7 @@ public abstract class MemberInfoBuilder extends MemberInfoTemplate {
 	}
 
 	public boolean isReady() {
+//		System.out.println(id + " " + name + " " + contact + " " + type + " " + enterprise + " " + birthday);
 		return id != null && name != null && contact != null
 				&& (type == Type.BUSINESS ? enterprise != null : birthday != null);
 	}

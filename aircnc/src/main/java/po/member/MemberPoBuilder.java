@@ -15,7 +15,7 @@ import org.apache.commons.lang.StringUtils;
  *
  */
 public class MemberPoBuilder extends MemberInfoBuilder {
-	private int passwordHash;
+	private int passwordHash = Integer.MIN_VALUE;
 
 	private static final MemberPo INVALID_MEMBER_PO;
 	static {
@@ -36,19 +36,20 @@ public class MemberPoBuilder extends MemberInfoBuilder {
 		if (!info.isValid())
 			return;
 
-		setID(info.getID()).setContactInfo(info.getContact()).setBirthday(birthday).setEnterprise(enterprise);
+		setID(info.getID()).setContactInfo(info.getContact()).setBirthday(info.getBirthday())
+				.setEnterprise(info.getEnterprise());
 		String name = StringUtils.deleteWhitespace(info.getName());
 		setName(name);
 	}
 
 	@Override
-	public MemberInfoBuilder setID(String id) {
+	public MemberPoBuilder setID(String id) {
 		super.setID(id);
 		return this;
 	}
 
 	@Override
-	public MemberInfoBuilder setCredit(int credit) {
+	public MemberPoBuilder setCredit(int credit) {
 		super.setCredit(credit);
 		return this;
 	}
@@ -86,7 +87,7 @@ public class MemberPoBuilder extends MemberInfoBuilder {
 
 	@Override
 	public MemberPo getMemberInfo() {
-		if (!isReady())
+		if (!isReady() && passwordHash != Integer.MIN_VALUE)
 			return null;
 
 		if (type == Type.BUSINESS)

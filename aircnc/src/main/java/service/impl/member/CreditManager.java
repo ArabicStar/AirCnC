@@ -5,8 +5,7 @@ import data.dao.MemberDao;
 import po.member.MemberPo;
 import po.member.credit.CreditChangePoBuilder;
 import service.member.MemberCreditService;
-import utils.info.member.credit.ActionProperties;
-import utils.info.member.credit.ActionType;
+import utils.info.member.credit.ChangeAction;
 import vo.member.MemberVo;
 import vo.member.MemberVoBuilder;
 
@@ -15,28 +14,21 @@ public class CreditManager implements MemberCreditService {
 	private CreditDao creditDao;
 
 	@Override
-	public MemberVo changeCredit(String id, int creditDelta, ActionType actionType) {
-		if (validateOperation(actionType, creditDelta))
+	public MemberVo changeCredit(String id, int creditDelta, ChangeAction action) {
+		if (action.validateChangeValue(creditDelta))
 			return MemberVoBuilder.getInvalidInfo();
 
 		MemberPo memberPo = memberDao.findMember(id);
 		if (null == memberPo)
 			return MemberVoBuilder.getInvalidInfo();
 
-		CreditChangePoBuilder builder = new CreditChangePoBuilder(memberPo, actionType);
+		CreditChangePoBuilder builder = new CreditChangePoBuilder(memberPo, action.getActionType());
 		builder.setCreditChange(creditDelta);
-		builder.setProperties(collectProperties(actionType));
+		builder.setProperties(action.getProperties());
 
 		creditDao.addCreditChange(builder.getCreditChangeInfo());
 
 		return new MemberVoBuilder(memberPo).getMemberInfo();
 	}
 
-	private ActionProperties collectProperties(ActionType actionType) {
-		return null;
-	}
-
-	private static final boolean validateOperation(ActionType actionType, int creditDelta) {
-		return actionType.validateChangeValue(creditDelta);
-	}
 }
