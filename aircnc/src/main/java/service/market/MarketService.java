@@ -1,6 +1,6 @@
-package service;
+package service.market;
 
-import vo.MarketVo;
+import vo.market.MarketVo;
 
 public interface MarketService {
 

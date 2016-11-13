@@ -5,7 +5,7 @@ import java.time.LocalDate;
 /**
  * Abstract of member info<br>
  * to implement immutable object, a;ll setters are added in specific subclass
- * 
+ *
  * @author ClevelandAlto
  *
  */
