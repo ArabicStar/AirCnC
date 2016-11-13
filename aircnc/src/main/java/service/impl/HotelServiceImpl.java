@@ -62,7 +62,7 @@ public class HotelServiceImpl implements HotelService {
 
 
 	@Override
-	public boolean addRoom(RoomPo room) {
+	public boolean addRoom(RoomVo room) {
 		// TODO Auto-generated method stub
 		return false;
 	}

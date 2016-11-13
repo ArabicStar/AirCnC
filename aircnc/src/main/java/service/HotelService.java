@@ -50,7 +50,7 @@ public interface HotelService {
 	public List<CommentVo> getHotelComments(String hotelId);
 	
 	
-	public boolean addRoom(RoomPo room);
+	public boolean addRoom(RoomVo room);
 	
 	public List<RoomVo> getRooms();
 	

@@ -71,6 +71,12 @@ public class MarketPoTest {
 		 * 查询营销信息
 		 * 查询Id为00000003的用户信息
 		 */
+		MarketPo marketPo = dao.findMarket("00000003");
+		marketPo.setName("李四");
+		marketPo.setPasswordHash("1234567".hashCode());
+
+		assertEquals(marketPo.getName(), "李四");
+		assertEquals(marketPo.getPasswordHash(),"1234567".hashCode());
 	}
 
 	@Test
