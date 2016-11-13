@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.swing.text.View;
 
-import vo.OrderVo;
+import vo.order.OrderVo;
 
 public interface ProcessOrderViewControllerService {
 	

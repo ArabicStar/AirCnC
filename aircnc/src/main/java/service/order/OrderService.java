@@ -1,9 +1,9 @@
-package service;
+package service.order;
 
 import java.util.List;
 
 import po.order.OrderPo;
-import vo.OrderVo;
+import vo.order.OrderVo;
 
 public interface OrderService {
 	

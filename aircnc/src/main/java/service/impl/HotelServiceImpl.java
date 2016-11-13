@@ -10,7 +10,7 @@ import data.dao.impl.UserDaoImpl;
 import service.HotelService;
 import vo.CommentVo;
 import vo.HotelVo;
-import vo.OrderVo;
+import vo.order.OrderVo;
 
 public class HotelServiceImpl implements HotelService {
 	

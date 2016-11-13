@@ -4,9 +4,9 @@ import java.util.List;
 
 import utils.condition.*;
 import vo.HotelVo;
-import vo.OrderVo;
 import vo.member.MemberVo;
 import vo.member.credit.CreditChangeVo;
+import vo.order.OrderVo;
 
 public interface QueryService {
 	public List<CreditChangeVo> findCreditChanges(CreditChangeCondition searchCondition);

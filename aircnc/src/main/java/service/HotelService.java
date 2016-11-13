@@ -4,7 +4,7 @@ import java.util.List;
 
 import vo.CommentVo;
 import vo.HotelVo;
-import vo.OrderVo;
+import vo.order.OrderVo;
 
 public interface HotelService {
 	

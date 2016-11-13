@@ -25,7 +25,7 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
-import vo.OrderVo;
+import vo.order.OrderVo;
 
 /**
  * TODO: 用JavaFx写界面
