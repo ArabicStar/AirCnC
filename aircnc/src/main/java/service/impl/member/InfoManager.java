@@ -12,10 +12,10 @@ import service.query.QueryService;
 import utils.condition.CreditChangeCondition;
 import utils.condition.OrderCondition;
 import utils.info.member.MemberInfo;
-import utils.info.member.credit.CreditChangeInfo;
 import vo.HotelVo;
-import vo.OrderVo;
 import vo.member.MemberVoBuilder;
+import vo.member.credit.CreditChangeVo;
+import vo.order.OrderVo;
 
 public class InfoManager implements MemberInfoService {
 	private MemberDao memberDao;
@@ -53,7 +53,7 @@ public class InfoManager implements MemberInfoService {
 	}
 
 	@Override
-	public List<CreditChangeInfo> getMemberCreditChange(String id) {
+	public List<CreditChangeVo> getMemberCreditChange(String id) {
 		if (!memberDao.existsMember(id))
 			return null;
 
