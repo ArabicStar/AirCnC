@@ -1,5 +1,7 @@
 package utils.info.market;
 
+import po.market.MarketPo;
+import vo.market.MarketVo;
 
 public abstract class MarketInfoBuilder extends MarketInfoTemplate{
 
