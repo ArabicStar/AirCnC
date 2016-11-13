@@ -7,6 +7,7 @@ import data.dao.OrderDao;
 import data.dao.impl.HotelDaoImpl;
 import data.dao.impl.OrderDaoImpl;
 import data.dao.impl.UserDaoImpl;
+import po.hotel.RoomPo;
 import service.HotelService;
 import vo.CommentVo;
 import vo.HotelVo;
@@ -20,8 +21,8 @@ public class HotelServiceImpl implements HotelService {
 	private List<CommentVo> commentList;
 	private List<OrderVo> orderList;
 
-	public HotelServiceImpl(String hotelId){
-		this.hotelId = hotelId;
+	public HotelServiceImpl(){
+//		this.hotelId = hotelId;
 		hotelDao = HotelDaoImpl.getInstance();
 		orderDao = OrderDaoImpl.getInstance();
 //		orderList = orderDao.getOrders(hotelId);
@@ -56,6 +57,13 @@ public class HotelServiceImpl implements HotelService {
 	public List<CommentVo> getHotelComments(String hotelId) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+	@Override
+	public boolean addRoom(RoomPo room) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

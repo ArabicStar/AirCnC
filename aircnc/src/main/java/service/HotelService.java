@@ -2,6 +2,7 @@ package service;
 
 import java.util.List;
 
+import po.hotel.RoomPo;
 import vo.CommentVo;
 import vo.HotelVo;
 import vo.OrderVo;
@@ -48,7 +49,7 @@ public interface HotelService {
 	public List<CommentVo> getHotelComments(String hotelId);
 	
 	
-	
+	public boolean addRoom(RoomPo room);
 	
 	
 	
