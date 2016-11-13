@@ -9,7 +9,7 @@ import data.dao.OrderDao;
 import data.datahelper.DataFactory;
 import data.datahelper.OrderDataHelper;
 import data.datahelper.impl.DataFactoryImpl;
-import po.OrderPo;
+import po.order.OrderPo;
 
 public class OrderDaoImpl implements OrderDao{
 	

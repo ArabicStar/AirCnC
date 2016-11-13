@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import po.OrderPo;
+import po.order.OrderPo;
 
 public class OrderPoTest {
 	

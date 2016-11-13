@@ -1,4 +1,4 @@
-package po;
+package po.order;
 
 /**
  * id 订单编号 

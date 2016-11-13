@@ -2,7 +2,7 @@ package service;
 
 import java.util.List;
 
-import po.OrderPo;
+import po.order.OrderPo;
 import vo.OrderVo;
 
 public interface OrderService {

@@ -10,8 +10,8 @@ import data.dao.OrderDao;
 import data.dao.UserDao;
 import data.dao.impl.OrderDaoImpl;
 import data.dao.impl.UserDaoImpl;
-import po.OrderPo;
 import po.UserPo;
+import po.order.OrderPo;
 import service.OrderService;
 import vo.OrderVo;
 

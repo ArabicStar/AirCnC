@@ -2,7 +2,7 @@ package data.dao;
 
 import java.util.List;
 
-import po.OrderPo;
+import po.order.OrderPo;
 
 public interface OrderDao {
 	

@@ -3,7 +3,7 @@ package data.datahelper.impl;
 import java.util.Map;
 
 import data.datahelper.PromotionDataHelper;
-import po.PromotionPo;
+import po.promotion.PromotionPo;
 
 public class PromotionDataTxtHelper implements PromotionDataHelper {
 

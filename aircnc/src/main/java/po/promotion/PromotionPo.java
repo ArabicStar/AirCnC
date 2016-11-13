@@ -1,4 +1,4 @@
-package po;
+package po.promotion;
 
 import utils.HotelDate;
 
