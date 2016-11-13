@@ -5,6 +5,7 @@ import java.util.List;
 import po.hotel.RoomPo;
 import vo.CommentVo;
 import vo.HotelVo;
+import vo.hotel.RoomVo;
 import vo.order.OrderVo;
 
 public interface HotelService {
@@ -50,6 +51,8 @@ public interface HotelService {
 	
 	
 	public boolean addRoom(RoomPo room);
+	
+	public List<RoomVo> getRooms();
 	
 	
 	

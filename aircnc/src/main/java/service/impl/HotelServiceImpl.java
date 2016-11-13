@@ -11,6 +11,7 @@ import po.hotel.RoomPo;
 import service.HotelService;
 import vo.CommentVo;
 import vo.HotelVo;
+import vo.hotel.RoomVo;
 import vo.order.OrderVo;
 
 public class HotelServiceImpl implements HotelService {
@@ -64,6 +65,13 @@ public class HotelServiceImpl implements HotelService {
 	public boolean addRoom(RoomPo room) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+
+	@Override
+	public List<RoomVo> getRooms() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
