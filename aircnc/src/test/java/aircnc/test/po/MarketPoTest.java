@@ -11,6 +11,10 @@ public class MarketPoTest {
 
 	private MarketDao dao ;
 
+	/**
+	 * 这里是管理营销信息的测试用例
+	 */
+
 	@Test
 	public void MarketPoTest1(){
 
