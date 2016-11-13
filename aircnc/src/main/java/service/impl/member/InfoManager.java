@@ -14,7 +14,7 @@ import utils.condition.OrderCondition;
 import utils.info.member.MemberInfo;
 import utils.info.member.credit.CreditChangeInfo;
 import vo.HotelVo;
-import vo.OrderVo;
+import vo.order.OrderVo;
 import vo.member.MemberVoBuilder;
 
 public class InfoManager implements MemberInfoService {
