@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import data.datahelper.MarketDataHelper;
-import po.MarketPo;
+import po.market.MarketPo;
 
 public class MarketDataTxtHelper implements MarketDataHelper{
 
@@ -31,7 +31,7 @@ public class MarketDataTxtHelper implements MarketDataHelper{
 				String username=data[1];
 				String password=data[2];
 
-				MarketPo userPo=new MarketPo(marketId, username, password);
+				MarketPo userPo=new MarketPo();
 				marketData.add(userPo);
 
 				str = br.readLine();
@@ -60,7 +60,7 @@ public class MarketDataTxtHelper implements MarketDataHelper{
 			while(iterator.hasNext()){
 				MarketPo entry = iterator.next();
 				MarketPo marketPo = entry;
-				String str = marketPo.getId()+";"+marketPo.getUsername()+";"+marketPo.getPassword();
+				String str = marketPo.getId()+";"+marketPo.getName()+";"+marketPo.getPasswordHash();
 				writer.write(str);
 				writer.write("\r\n");
 			}

@@ -2,7 +2,7 @@ package data.datahelper;
 
 import java.util.ArrayList;
 
-import po.MarketPo;
+import po.market.MarketPo;
 
 public interface MarketDataHelper {
 

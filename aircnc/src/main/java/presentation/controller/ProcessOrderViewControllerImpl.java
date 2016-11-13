@@ -4,9 +4,9 @@ import java.util.List;
 
 import presentation.view.ProcessOrderView;
 import presentation.view.ProcessOrderViewControllerService;
-import service.OrderService;
-import service.impl.OrderServiceImpl;
-import vo.OrderVo;
+import service.impl.order.OrderServiceImpl;
+import service.order.OrderService;
+import vo.order.OrderVo;
 
 public class ProcessOrderViewControllerImpl implements ProcessOrderViewControllerService{
 	

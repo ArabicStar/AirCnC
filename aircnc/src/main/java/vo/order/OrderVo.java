@@ -1,9 +1,9 @@
-package vo;
+package vo.order;
 
 import java.util.Vector;
 
-import po.OrderPo;
 import po.UserPo;
+import po.order.OrderPo;
 
 /**
  * orderNo		订单编号

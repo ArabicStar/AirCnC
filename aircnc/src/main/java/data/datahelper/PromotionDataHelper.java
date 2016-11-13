@@ -2,7 +2,7 @@ package data.datahelper;
 
 import java.util.Map;
 
-import po.PromotionPo;
+import po.promotion.PromotionPo;
 
 public interface PromotionDataHelper {
 	/**

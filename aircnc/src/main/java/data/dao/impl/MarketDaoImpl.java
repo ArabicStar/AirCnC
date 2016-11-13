@@ -7,11 +7,42 @@ import data.dao.MarketDao;
 import data.datahelper.DataFactory;
 import data.datahelper.MarketDataHelper;
 import data.datahelper.impl.DataFactoryImpl;
-import po.MarketPo;
+import po.market.MarketPo;
 
 public class MarketDaoImpl implements MarketDao{
 
-	private ArrayList<MarketPo> marketData;
+	@Override
+	public boolean addMarket(MarketPo po) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean deleteMarket(String id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean updateMarket(MarketPo po) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public MarketPo findMarket(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean existsMarket(String id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	/*private ArrayList<MarketPo> marketData;
 
 	private MarketDataHelper marketDataHelper;
 
@@ -64,6 +95,6 @@ public class MarketDaoImpl implements MarketDao{
 
 		return false;
 
-	}
+	}*/
 
 }

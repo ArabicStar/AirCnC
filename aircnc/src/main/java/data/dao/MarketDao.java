@@ -1,17 +1,15 @@
 package data.dao;
 
-import po.MarketPo;
+import po.market.MarketPo;
 
 public interface MarketDao {
-	/**
-	 * @param marketId
-	 * @return	获取营销用户信息
-	 */
-	public MarketPo getMarket(String marketId);
+	public boolean addMarket(MarketPo po);
 
-	/**
-	 * @param marketPo
-	 * @return	更新信息
-	 */
-	public boolean updateMarket(MarketPo marketPo);
+	public boolean deleteMarket(String id);
+
+	public boolean updateMarket(MarketPo po);
+
+	public MarketPo findMarket(String id);
+
+	public boolean existsMarket(String id);
 }
