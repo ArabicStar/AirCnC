@@ -51,4 +51,9 @@ public abstract class HotelInfoBuilder extends HotelInfoTemplate{
 			this.grade = grade;
 		return this;
 	}
+	
+	public boolean isReady(){
+		return id != null && name != null && scope != null && location != null && introduction != null 
+				&& id != null && 
+	}
 }
