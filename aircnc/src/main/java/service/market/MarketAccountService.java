@@ -11,7 +11,7 @@ import vo.market.MarketVoBuilder;
  */
 public interface MarketAccountService {
 	/**
-	 * Register a new member account<br>
+	 * Register a new market account<br>
 	 *
 	 * @param newMarket
 	 *            market info without id<br>

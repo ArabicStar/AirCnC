@@ -13,8 +13,10 @@ public class HotelInfoTemplate {
 	protected String introduction;
 	protected int star;
 	protected double grade;//评分
+//	protected List<PromotionVo> promomtions;
+//	protected List<RoomVo> rooms;
 //	protected List<CommentVo> comments;
-//	protected ContactInfo contact;
+	
 
 	private static final int ID_BOUND = 100000000;
 	private static final String ID_PATTERN = "[0-9]{8}";
@@ -29,8 +31,24 @@ public class HotelInfoTemplate {
 		return name != null && name.length() != 0 && !name.contains("\\s");
 	}
 	
+	public static final boolean checkHotelScope(String scope){
+		return true;
+	}
+	
+	public static final boolean checkHotelLocation(String location){
+		return true;
+	}
+	
+	public static final boolean checkHotelIntro(String intro){
+		return true;
+	}
+	
 	public static final boolean checkHotelStar(int star){
 		return star >= 1 && star <= 7;
+	}
+	
+	public static final boolean checkHotelGrade(double grade){
+		return grade <= 5 && grade > 0;
 	}
 
 	public static final int convertID2Num(String id) {

@@ -2,7 +2,6 @@ package service.impl.order;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,100 +9,30 @@ import data.dao.OrderDao;
 import data.dao.UserDao;
 import data.dao.impl.OrderDaoImpl;
 import data.dao.impl.UserDaoImpl;
-import po.UserPo;
 import po.order.OrderPo;
-import service.order.OrderService;
-import vo.order.OrderVo;
+import service.order.OrderLogicService;
 
-/**
- * FIXME:把这个类拆分成多个类
- * @author Water
- *
- */
-public class OrderServiceImpl implements OrderService{
-	
+public class OrderLogicServiceImpl implements OrderLogicService {
+
 	private int hotelId;
-	
+
 	private List<OrderPo> hotelOrderList;
-	
+
 	private OrderDao orderDao;
-	
+
 	private UserDao userDao;
 	/**
 	 * FIXME: 这个构造函数涉及到的地方特别多，注意修改用到OrderServiceImpl的地方
 	 * @param hotelId
 	 */
-	public OrderServiceImpl(int hotelId){
+	public OrderLogicServiceImpl(int hotelId){
 		this.hotelId = hotelId;
 		this.orderDao = OrderDaoImpl.getInstance();
 		this.userDao = UserDaoImpl.getInstance();
 		this.hotelOrderList = orderDao.getOrders(hotelId);
 	}
 
-	public List<OrderVo> getAllOrders(int hotelId) {
-		List<OrderVo> list = new ArrayList<OrderVo>();
-		for (OrderPo orderPo : hotelOrderList) {
-			UserPo userPo = userDao.getUser(orderPo.getUserId());
-			OrderVo orderVo = new OrderVo(orderPo, userPo);
-			list.add(orderVo);
-		}
-		return list;
-	}
-
-	public List<OrderVo> getUnfinishedOrders(int hotelId) {
-		List<OrderVo> list = new ArrayList<OrderVo>();
-		for (OrderPo orderPo : hotelOrderList) {
-			if(orderPo.getStatus() == 0){
-				UserPo userPo = userDao.getUser(orderPo.getUserId());
-				OrderVo orderVo = new OrderVo(orderPo, userPo);
-				list.add(orderVo);
-			}
-		}
-		return list;
-	}
-
-	public List<OrderVo> getFinishedOrders(int hotelId) {
-		List<OrderVo> list = new ArrayList<OrderVo>();
-		for (OrderPo orderPo : hotelOrderList) {
-			if(orderPo.getStatus() == 1){
-				UserPo userPo = userDao.getUser(orderPo.getUserId());
-				OrderVo orderVo = new OrderVo(orderPo, userPo);
-				list.add(orderVo);
-			}
-		}
-		return list;
-	}
-
-	public List<OrderVo> getAbnormalOrders(int hotelId) {
-		List<OrderVo> list = new ArrayList<OrderVo>();
-		for (OrderPo orderPo : hotelOrderList) {
-			if(orderPo.getStatus() == 2){
-				UserPo userPo = userDao.getUser(orderPo.getUserId());
-				OrderVo orderVo = new OrderVo(orderPo, userPo);
-				list.add(orderVo);
-			}
-		}
-		return list;
-	}
-
-	public int getOrderUser(int orderId) {
-		for (OrderPo orderPo : hotelOrderList) {
-			if(orderPo.getId() == orderId){
-				return orderPo.getUserId();
-			}
-		}
-		return -1;
-	}
-
-	public int getOrderPrice(int orderId) {
-		for (OrderPo orderPo : hotelOrderList) {
-			if(orderPo.getId() == orderId){
-				return orderPo.getPrice();
-			}
-		}
-		return -1;
-	}
-
+	@Override
 	public boolean finishOrder(int orderId) {
 		OrderPo orderPo = orderDao.getOrder(orderId);
 		if(orderPo != null){
@@ -132,6 +61,7 @@ public class OrderServiceImpl implements OrderService{
 		return false;
 	}
 
+	@Override
 	public boolean delayOrder(int orderId, String delayTime) {
 		OrderPo orderPo = orderDao.getOrder(orderId);
 		if(orderPo != null){
@@ -155,7 +85,6 @@ public class OrderServiceImpl implements OrderService{
 		}
 		return false;
 	}
-
 	
 	@Override
 	public boolean revealOrder(int orderId) {
@@ -169,6 +98,5 @@ public class OrderServiceImpl implements OrderService{
 		return false;
 	}
 
-	
 
 }

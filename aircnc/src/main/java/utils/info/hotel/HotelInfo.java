@@ -25,6 +25,24 @@ public abstract class HotelInfo extends HotelInfoTemplate{
 	}
 
 	public abstract String getName();
+	
+	public String getScope() {
+		if (isValid())
+			return scope;
+		return null;
+	}
+	
+	public String getLocaiton() {
+		if (isValid())
+			return location;
+		return null;
+	}
+	
+	public String getIntro() {
+		if (isValid())
+			return introduction;
+		return null;
+	}
 
 	public int getStar() {
 		if (isValid())
@@ -32,16 +50,10 @@ public abstract class HotelInfo extends HotelInfoTemplate{
 		return Integer.MIN_VALUE;
 	}
 
-	public double getGrage(){
+	public double getGrade(){
 		if(isValid())
 			return grade;
 		return Double.MIN_VALUE;
-	}
-	
-	public String getIntro(){
-		if(isValid())
-			return introduction;
-		return null;
 	}
 
 	public boolean isValid() {
