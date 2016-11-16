@@ -8,7 +8,6 @@ import data.dao.impl.OrderDaoImpl;
 import data.dao.impl.UserDaoImpl;
 import po.order.OrderPo;
 import service.order.OrderDetailService;
-import vo.order.OrderVo;
 
 public class OrderDetailServiceImpl implements OrderDetailService {
 	
