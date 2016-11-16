@@ -1,5 +1,7 @@
 package service.impl.hotel;
 
-public class InfoManager {
+import service.hotel.HotelInfoService;
+
+public class InfoManager implements HotelInfoService{
 
 }

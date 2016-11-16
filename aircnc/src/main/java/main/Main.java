@@ -7,8 +7,8 @@ import presentation.view.ProcessOrderView;
 import presentation.view.ProcessOrderViewControllerService;
 
 /**
- * 这是助教写的 不是我写的
- * @author Water
+ * 这个是万总写的，不是我写的
+ * @author jqwu
  *
  */
 public class Main {
