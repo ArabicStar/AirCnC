@@ -6,6 +6,11 @@ import presentation.controller.ProcessOrderViewControllerImpl;
 import presentation.view.ProcessOrderView;
 import presentation.view.ProcessOrderViewControllerService;
 
+/**
+ * 这是助教写的 不是我写的
+ * @author Water
+ *
+ */
 public class Main {
 	
 	public static void main(String[] args){
