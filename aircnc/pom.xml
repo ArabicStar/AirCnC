@@ -1,4 +1,4 @@
-<project
+﻿<project
 	xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -100,6 +100,28 @@
 			<artifactId>hibernate-jpa-2.0-api</artifactId>
 			<version>1.0.0.Final</version>
 		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.9</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.21</version>
+</dependency>
+<dependency>
+  <groupId>org.controlsfx</groupId>
+  <artifactId>controlsfx</artifactId>
+  <version>8.40.12</version>
+</dependency>
+<dependency>
+  <groupId>org.controlsfx</groupId>
+  <artifactId>openjfx-dialogs</artifactId>
+  <version>1.0.3</version>
+  <type>pom</type>
+</dependency>
 	</dependencies>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
