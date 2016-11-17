@@ -2,7 +2,7 @@ package vo.order;
 
 import java.util.Vector;
 
-import po.UserPo;
+import po.member.MemberPo;
 import po.order.OrderPo;
 
 /**
@@ -13,8 +13,8 @@ import po.order.OrderPo;
  */
 public class OrderVo extends Vector<String> {
 
-	public OrderVo(OrderPo orderPo, UserPo userPo) {
-		String userInfo = userPo.getUsername() + "(" + userPo.getCredit() + ")";
+	public OrderVo(OrderPo orderPo, MemberPo memberPo) {
+		String userInfo = memberPo.getName() + "(" + memberPo.getCredit() + ")";
 		this.add(String.valueOf(orderPo.getId()));
 		this.add(orderPo.getOrderInfo());
 		this.add(userInfo);

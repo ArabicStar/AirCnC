@@ -1,12 +1,16 @@
 package service.impl.promotion;
 
-import po.UserPo;
+import data.dao.MemberDao;
 import po.order.OrderPo;
 import service.promotion.PromotionService;
 import vo.order.OrderVo;
 
 public class PromotionServiceImpl implements PromotionService {
-
+	/**
+	 * FIXME:此处没有初始化memberDao，目标是在使用此处代码的时候报空指针
+	 */
+	MemberDao memberDao;
+	
 	@Override
 	public OrderVo apply(OrderVo orderVo) {
 		
@@ -19,7 +23,11 @@ public class PromotionServiceImpl implements PromotionService {
 		if(discountRate >= 1) {
 			return null;
 		}
-		return new OrderVo(new OrderPo(), new UserPo());
+		
+		/**
+		 * TODO:返回值应该修改
+		 */
+		return new OrderVo(new OrderPo(), memberDao.findMember(null));
 	}
 
 	@Override
@@ -28,7 +36,10 @@ public class PromotionServiceImpl implements PromotionService {
 		if(minSpentMoney <= returnedMoney) {
 			return null;
 		}
-		return new OrderVo(new OrderPo(), new UserPo());
+		/**
+		 * TODO:返回值应该修改
+		 */
+		return new OrderVo(new OrderPo(), memberDao.findMember(null));
 	}
 
 }

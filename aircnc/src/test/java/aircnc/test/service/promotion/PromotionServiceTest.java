@@ -1,15 +1,12 @@
 package aircnc.test.service.promotion;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import po.UserPo;
-import po.order.OrderPo;
 import service.impl.promotion.PromotionServiceImpl;
 import service.promotion.PromotionService;
-import vo.order.OrderVo;
 
 public class PromotionServiceTest {
 	private PromotionService promotion;

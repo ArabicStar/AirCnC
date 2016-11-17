@@ -3,11 +3,11 @@ package service.impl.order;
 import java.util.ArrayList;
 import java.util.List;
 
+import data.dao.MemberDao;
 import data.dao.OrderDao;
-import data.dao.UserDao;
+import data.dao.impl.MemberDaoImpl;
 import data.dao.impl.OrderDaoImpl;
-import data.dao.impl.UserDaoImpl;
-import po.UserPo;
+import po.member.MemberPo;
 import po.order.OrderPo;
 import service.order.OrderListingService;
 import vo.order.OrderVo;
@@ -21,7 +21,7 @@ public class OrderListingServiceImpl implements OrderListingService {
 	
 	private OrderDao orderDao;
 	
-	private UserDao userDao;
+	private MemberDao memberDao;
 	/**
 	 * FIXME: 这个构造函数涉及到的地方特别多，注意修改用到OrderServiceImpl的地方
 	 * @param hotelId
@@ -29,7 +29,7 @@ public class OrderListingServiceImpl implements OrderListingService {
 	public OrderListingServiceImpl(int hotelId){
 		this.hotelId = hotelId;
 		this.orderDao = OrderDaoImpl.getInstance();
-		this.userDao = UserDaoImpl.getInstance();
+		this.memberDao = new MemberDaoImpl();
 		this.hotelOrderList = orderDao.getOrders(hotelId);
 	}
 
@@ -37,8 +37,8 @@ public class OrderListingServiceImpl implements OrderListingService {
 	public List<OrderVo> getAllOrders(int hotelId) {
 		List<OrderVo> list = new ArrayList<OrderVo>();
 		for (OrderPo orderPo : hotelOrderList) {
-			UserPo userPo = userDao.getUser(orderPo.getUserId());
-			OrderVo orderVo = new OrderVo(orderPo, userPo);
+			MemberPo memberPo = memberDao.findMember(Integer.toString(orderPo.getUserId()));
+			OrderVo orderVo = new OrderVo(orderPo, memberPo);
 			list.add(orderVo);
 		}
 		return list;
@@ -49,8 +49,8 @@ public class OrderListingServiceImpl implements OrderListingService {
 		List<OrderVo> list = new ArrayList<OrderVo>();
 		for (OrderPo orderPo : hotelOrderList) {
 			if(orderPo.getStatus() == 0){
-				UserPo userPo = userDao.getUser(orderPo.getUserId());
-				OrderVo orderVo = new OrderVo(orderPo, userPo);
+				MemberPo memberPo = memberDao.findMember(Integer.toString(orderPo.getUserId()));
+				OrderVo orderVo = new OrderVo(orderPo, memberPo);
 				list.add(orderVo);
 			}
 		}
@@ -62,8 +62,8 @@ public class OrderListingServiceImpl implements OrderListingService {
 		List<OrderVo> list = new ArrayList<OrderVo>();
 		for (OrderPo orderPo : hotelOrderList) {
 			if(orderPo.getStatus() == 1){
-				UserPo userPo = userDao.getUser(orderPo.getUserId());
-				OrderVo orderVo = new OrderVo(orderPo, userPo);
+				MemberPo memberPo = memberDao.findMember(Integer.toString(orderPo.getUserId()));
+				OrderVo orderVo = new OrderVo(orderPo, memberPo);
 				list.add(orderVo);
 			}
 		}
@@ -75,8 +75,8 @@ public class OrderListingServiceImpl implements OrderListingService {
 		List<OrderVo> list = new ArrayList<OrderVo>();
 		for (OrderPo orderPo : hotelOrderList) {
 			if(orderPo.getStatus() == 2){
-				UserPo userPo = userDao.getUser(orderPo.getUserId());
-				OrderVo orderVo = new OrderVo(orderPo, userPo);
+				MemberPo memberPo = memberDao.findMember(Integer.toString(orderPo.getUserId()));
+				OrderVo orderVo = new OrderVo(orderPo, memberPo);
 				list.add(orderVo);
 			}
 		}
