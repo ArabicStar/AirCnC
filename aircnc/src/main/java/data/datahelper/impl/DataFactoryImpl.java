@@ -1,11 +1,11 @@
-﻿package data.datahelper.impl;
+package data.datahelper.impl;
 
 import data.datahelper.DataFactory;
 import data.datahelper.HotelDataHelper;
 import data.datahelper.MarketDataHelper;
 import data.datahelper.OrderDataHelper;
 import data.datahelper.PromotionDataHelper;
-//import data.datahelper.UserDataHelper;
+import data.datahelper.UserDataHelper;
 
 public class DataFactoryImpl implements DataFactory{
 	@Override
@@ -15,12 +15,12 @@ public class DataFactoryImpl implements DataFactory{
 		return orderDao;
 	}
 
-//	public UserDataHelper getUserDataHelper() {
+	public UserDataHelper getUserDataHelper() {
 //		UserDataHelper userDao = new UserDataTxtHelper();
 		//UserDao userDao = new UserDataMysqlHelper();
 		// TODO:此处返回值为空，目标是在使用时报错
-//		return null;
-//	}
+		return null;
+	}
 
 	public MarketDataHelper getMarketDataHelper() {
 		MarketDataHelper marketDao = new MarketDataTxtHelper();
