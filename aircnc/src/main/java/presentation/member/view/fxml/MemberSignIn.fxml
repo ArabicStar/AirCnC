@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="385.0" prefWidth="550.0" styleClass="root" stylesheets="@../css/MemberSignIn.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button fx:id="confirm" layoutX="163.0" layoutY="313.0" mnemonicParsing="false" text="登   录" />
+      <PasswordField fx:id="password" layoutX="166.0" layoutY="250.0" styleClass="textfield" />
+      <TextField fx:id="username" layoutX="166.0" layoutY="213.0" styleClass="textfield" />
+   </children>
+</Pane>
