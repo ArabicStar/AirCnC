@@ -6,12 +6,16 @@ import po.member.MemberPo;
 import po.order.OrderPo;
 
 /**
- * orderNo 订单编号 orderInfo 订单详情 userInfo 用户信息（用户名+信用值信息） entryTime 用户入住时间
- * lastTime 订单最晚执行时间 orderStatus 订单状态
+ * orderNo 订单编号 
+ * orderInfo 订单详情 
+ * userInfo 用户信息（用户名+信用值信息） 
+ * entryTime 用户入住时间
+ * lastTime 订单最晚执行时间 
+ * orderStatus 订单状态
  * 
- * @author sunfan314
  */
 public class OrderVo extends Vector<String> {
+	
 
 	public OrderVo(OrderPo orderPo, MemberPo memberPo) {
 		String userInfo = memberPo.getName() + "(" + memberPo.getCredit() + ")";

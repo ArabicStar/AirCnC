@@ -8,7 +8,7 @@ import data.datahelper.PromotionDataHelper;
 import data.datahelper.UserDataHelper;
 
 public class DataFactoryImpl implements DataFactory{
-
+	@Override
 	public OrderDataHelper getOrderDataHelper() {
 		OrderDataHelper orderDao = new OrderDataTxtHelper();
 		//OrderDao orderDao = new OrderDataMysqlHelper();
@@ -16,9 +16,10 @@ public class DataFactoryImpl implements DataFactory{
 	}
 
 	public UserDataHelper getUserDataHelper() {
-		UserDataHelper userDao = new UserDataTxtHelper();
+//		UserDataHelper userDao = new UserDataTxtHelper();
 		//UserDao userDao = new UserDataMysqlHelper();
-		return userDao;
+		// TODO:此处返回值为空，目标是在使用时报错
+		return null;
 	}
 
 	public MarketDataHelper getMarketDataHelper() {
@@ -37,7 +38,6 @@ public class DataFactoryImpl implements DataFactory{
 
 	@Override
 	public PromotionDataHelper getPromotionDataHelper() {
-		// TODO Auto-generated method stub
 		PromotionDataHelper promotionDao = new PromotionDataTxtHelper();
 		
 		return promotionDao;
