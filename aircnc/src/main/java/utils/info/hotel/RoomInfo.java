@@ -1,7 +1,45 @@
 package utils.info.hotel;
 
-public abstract class RoomInfo {
-	protected enum Type{
-		单人间,双人间,
+public abstract class RoomInfo extends RoomInfoTemplate{
+	protected boolean isValid;
+
+	private static final String BLANK = "";
+	
+	protected RoomInfo(Type type){
+		this.type = type;
+		name = BLANK;
+		numOfPeople = 0;
+		numOfRoom = 0;
+		isValid = true;
 	}
+	
+	public String getType(){
+		return type.name().toLowerCase();
+	}
+	
+	public abstract String getName();
+	
+	public int getPeopleNum(){
+		if(isValid())
+			return numOfPeople;
+		return Integer.MIN_VALUE;
+	}
+	
+	public int getRoomNum(){
+		if(isValid())
+			return numOfRoom;
+		return Integer.MIN_VALUE;
+	}
+	
+	
+	public boolean isValid() {
+		return isValid;
+	}
+
+	public void invalidate() {
+		isValid = false;
+	}
+	
+	
+
 }

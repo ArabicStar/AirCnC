@@ -6,7 +6,6 @@ import data.dao.HotelDao;
 import data.dao.OrderDao;
 import data.dao.impl.HotelDaoImpl;
 import data.dao.impl.OrderDaoImpl;
-import data.dao.impl.UserDaoImpl;
 import po.hotel.RoomPo;
 import service.HotelService;
 import vo.CommentVo;
