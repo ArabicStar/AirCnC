@@ -1,7 +1,5 @@
 package utils.info.hotel;
 
-import utils.info.market.MarketInfoBuilder;
-
 public abstract class HotelInfoBuilder extends HotelInfoTemplate{
 	public HotelInfoBuilder(HotelInfo info){
 		this.setID(info.getID()).setName(info.getName()).setScope(info.getScope())
@@ -53,7 +51,8 @@ public abstract class HotelInfoBuilder extends HotelInfoTemplate{
 	}
 	
 	public boolean isReady(){
-		return id != null && name != null && scope != null && location != null && introduction != null 
-				&& id != null && 
+		return id != null && name != null && scope != null && location != null && introduction != null ;
 	}
+	
+	public abstract HotelInfo getHotelInfo();
 }
