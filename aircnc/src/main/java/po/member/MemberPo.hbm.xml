@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-11-17 15:46:16 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+	<class name="po.member.MemberPo" table="member">
+		<id name="memberId" column="id" type="integer">
+			<generator class="assigned" />
+		</id>
+		<discriminator column="type" type="string" />
+		<property name="name" column="name" type="string" />
+		<property name="credit" column="credit" type="integer" />
+		<property name="passwordHash" column="pwd" type="integer" />
+		<property name="type" column="type" type="integer" />
+		<many-to-one name="contact" column="contact_id" unique="true" />
+	</class>
+</hibernate-mapping>
