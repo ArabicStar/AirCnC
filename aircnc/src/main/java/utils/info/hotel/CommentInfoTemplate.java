@@ -3,7 +3,7 @@ package utils.info.hotel;
 public class CommentInfoTemplate {
 	
 	protected String hotelId;
-	protected String userId;
+	protected String memberId;
 	protected String content;
 	protected int grade;
 	protected String checkInTime;
