@@ -11,6 +11,14 @@ public class HotelDate {
 	private int month;
 	
 	private int day;
+
+	private final int DEFAULT_HOUR = 21;
+	
+	private final int DEFAULT_MINUTE = 0;
+	
+	private int hour;
+	
+	private int minute;
 	
 	private final int[] daysOfAMonth = {
 			0, 
@@ -30,6 +38,8 @@ public class HotelDate {
 		this.year = year;
 		this.month = month;
 		this.day = day;
+		this.hour = DEFAULT_HOUR;
+		this.minute = DEFAULT_MINUTE;
 	}
 	
 	public HotelDate() {
@@ -42,12 +52,42 @@ public class HotelDate {
 		this.day = day;
 	}
 	
+	public void delayTime(int hour, int minute) {
+		
+		this.minute += minute;
+		while(this.minute >= 60) {
+			this.hour++;
+			this.minute -= 60;
+		}
+		this.hour += hour;
+		while(this.hour >= 24) {
+			this.day++;
+			this.hour -= 24;
+		}
+		boolean isLeapYear = isLeapYear(this.year);
+		if(isLeapYear) {
+			if(this.day > daysOfAMonthInLeapYear[this.month]) {
+				this.month++;
+				this.day = 1;
+			}
+		} else {
+			if(this.year > daysOfAMonth[this.month]) {
+				this.month++;
+				this.day = 1;
+			}
+		}
+		if(this.month > 12) {
+			this.month = 1;
+			this.year++;
+		}
+	}
+	
 	/**
 	 * 返回日期信息
 	 */
 	@Override
 	public String toString() {
-		return year + " " + month + " " + day;
+		return year + " " + month + " " + day + " " + hour + " " + minute;
 	}
 	
 	/**
@@ -130,6 +170,22 @@ public class HotelDate {
 
 	public void setDay(int day) {
 		this.day = day;
+	}
+
+	public int getHour() {
+		return hour;
+	}
+
+	public void setHour(int hour) {
+		this.hour = hour;
+	}
+
+	public int getMinute() {
+		return minute;
+	}
+
+	public void setMinute(int minute) {
+		this.minute = minute;
 	}
 	
 }
