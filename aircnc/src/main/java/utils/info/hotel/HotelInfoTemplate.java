@@ -13,9 +13,8 @@ public class HotelInfoTemplate {
 	protected String introduction;
 	protected int star;
 	protected double grade;//评分
-//	protected List<PromotionVo> promomtions;
-//	protected List<RoomVo> rooms;
-//	protected List<CommentVo> comments;
+//	protected List<PromotionInfo> promomtions;
+//	protected List<RoomInfo> rooms;
 	
 
 	private static final int ID_BOUND = 100000000;

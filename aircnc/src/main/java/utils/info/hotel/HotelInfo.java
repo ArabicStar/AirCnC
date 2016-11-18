@@ -1,5 +1,6 @@
 package utils.info.hotel;
 
+import java.util.List;
 
 public abstract class HotelInfo extends HotelInfoTemplate{
 	protected boolean isValid;
@@ -14,7 +15,6 @@ public abstract class HotelInfo extends HotelInfoTemplate{
 		introduction = BLANK;
 		star = 1;
 		grade = 0.0;
-//		comments = new List<CommentVo>;
 		isValid = true;
 	}
 
