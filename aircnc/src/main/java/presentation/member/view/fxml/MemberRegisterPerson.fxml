@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="385.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button layoutX="240.0" layoutY="302.0" mnemonicParsing="false" text="确认提交" />
+      <HBox layoutX="78.0" layoutY="216.0">
+         <children>
+            <Label fx:id="birthday" stylesheets="@../css/MemberRegisterPerson.css" text="生日" />
+            <ChoiceBox prefHeight="27.0" prefWidth="89.0" />
+            <Label layoutX="234.0" layoutY="208.0" text="年" />
+            <ChoiceBox prefHeight="27.0" prefWidth="123.0" />
+            <Label text="月" />
+            <ChoiceBox prefHeight="27.0" prefWidth="118.0" />
+            <Label text="日" />
+         </children>
+      </HBox>
+   </children>
+</Pane>
