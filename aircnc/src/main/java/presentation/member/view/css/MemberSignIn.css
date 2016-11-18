@@ -1,13 +1,13 @@
 
 .root{
-	-fx-background-image: url("../../../../../../src/main/resources/images/member/register/login_BG.png");
+	/*-fx-background-image: url("../../../../images/member/register/login_BG.png");*/
 	-fx-font-family:"DengXian Light","Microsoft Yahei","Pingfang SC","Helvetica Neue";
 	-fx--webkit-font-smoothing:antialiased;
 	-fx-moz-osx-font-smoothing: grayscale;
 	-fx-background: transparent;
 }
 
-.button{
+.confirm{
 	-fx-pref-width: 225px;
 	-fx-pref-height: 45px;
 	-fx-font-size: 23px;
@@ -16,8 +16,12 @@
 	-fx-border-radius:0 0 0 0;
 }
 
-.button:hover{
+.confirm:hover{
 	-fx-background-color: #47447d;
+}
+
+.next{
+	/*这里写注册按钮的样式*/
 }
 
 .textfield{
