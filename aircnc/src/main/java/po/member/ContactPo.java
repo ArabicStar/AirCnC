@@ -14,23 +14,22 @@ import utils.info.member.ContactInfo;
  */
 public class ContactPo extends ContactInfo {
 	/**
-	 * Id of the member who the contact info belongs to<br>
-	 * Also, being the primary key of table <i>contact</i>
+	 * Identifier, no need to set mannully
 	 */
-	private int memberID;
+	private int cid;
 
 	/**
-	 * @param memberID
-	 *            the member id<br>
+	 * @param cid<br>
+	 *            the cid<br>
 	 * @return this instance<br>
 	 */
-	public ContactPo setMemberID(int memberID) {
-		this.memberID = memberID;
+	public ContactPo setCid(int cid) {
+		this.cid = cid;
 		return this;
 	}
 
 	/**
-	 * @param email
+	 * @param email<br>
 	 *            the email address<br>
 	 * @return this instance<br>
 	 */
@@ -40,7 +39,7 @@ public class ContactPo extends ContactInfo {
 	}
 
 	/**
-	 * @param fixedPhone
+	 * @param fixedPhone<br>
 	 *            the fixed phone number<br>
 	 * @return this instance<br>
 	 */
@@ -50,7 +49,7 @@ public class ContactPo extends ContactInfo {
 	}
 
 	/**
-	 * @param mobilePhone
+	 * @param mobilePhone<br>
 	 *            the mobile phone number<br>
 	 * @return this instance<br>
 	 */
@@ -59,7 +58,10 @@ public class ContactPo extends ContactInfo {
 		return this;
 	}
 
-	public int getMemberID() {
-		return memberID;
+	/**
+	 * @return cid<br>
+	 */
+	public int getCid() {
+		return cid;
 	}
 }

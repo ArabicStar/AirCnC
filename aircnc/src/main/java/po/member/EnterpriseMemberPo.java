@@ -3,7 +3,7 @@ package po.member;
 import java.time.LocalDate;
 
 /**
- * Po for enterprise member<br>
+ * Po for enterprise member.<br>
  * 
  * @author ClevelandAlto
  *

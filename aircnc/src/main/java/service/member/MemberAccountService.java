@@ -1,6 +1,6 @@
 package service.member;
 
-import vo.member.MemberVo;
+import utils.info.member.MemberInfo;
 import vo.member.MemberVoBuilder;
 
 /**
@@ -20,7 +20,7 @@ public interface MemberAccountService {
 	 * @return If succeed, return vo of new member<br>
 	 *         Else, invalid member vo<br>
 	 */
-	public MemberVo register(MemberVoBuilder newMember, int passwordHash);
+	public MemberInfo register(MemberVoBuilder newMember, final int passwordHash);
 
 	/**
 	 * Login a member account
@@ -33,7 +33,7 @@ public interface MemberAccountService {
 	 *         If password wrong, return invalid member vo<br>
 	 *         If account not exists yet, return null
 	 */
-	public MemberVo login(String id, int passwordHash);
+	public MemberInfo login(final String id, final int passwordHash);
 
 	/**
 	 * Logout an member account<br>
@@ -54,14 +54,18 @@ public interface MemberAccountService {
 	 * 
 	 * @return logined member's vo
 	 */
-	public MemberVo getLoginedMember();
+	public MemberInfo getLoginedMember();
 
 	/**
 	 * Inquiry an id exists or not<br>
+	 * <b>NOTICE</b>: This method will cause a database query. So when you are
+	 * going to get a MemberVo instance immediately, avoid to use this method.
+	 * Insteadly, test the MemberVo instance got is null or not to determined if
+	 * the id exists or not<br>
 	 * 
 	 * @param id
 	 *            An id
 	 * @return appointed id exists or not
 	 */
-	public boolean existsMember(String id);
+	public boolean existsMember(final String id);
 }

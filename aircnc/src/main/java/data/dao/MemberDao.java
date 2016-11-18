@@ -12,6 +12,4 @@ public interface MemberDao {
 	public MemberPo findMember(final String id);
 
 	public boolean existsMember(final String id);
-
-	public int getAvaliableID();
 }

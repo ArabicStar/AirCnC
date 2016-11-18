@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import data.dao.MemberDao;
+import data.hibernate.MemberHibernator;
 import javafx.util.converter.LocalDateStringConverter;
 import po.member.MemberPo;
 import po.member.MemberPoBuilder;
 import utils.info.member.ContactInfo;
+import utils.info.member.MemberInfoTemplate;
 import vo.member.ContactVoBuilder;
 
 public class MemberDaoImpl implements MemberDao {
@@ -34,56 +36,46 @@ public class MemberDaoImpl implements MemberDao {
 	}
 	/* test data */
 
+	private MemberHibernator hiber;
+
 	@Override
-	public boolean addMember(MemberPo po) {
+	public boolean addMember(final MemberPo po) {
 		if (po == null)
 			return false;
 
-		if (existsMember(po.getID()))
-			return false;
+		return hiber.addMember(po);
 
-		return testData.add(po);
 	}
 
 	@Override
-	public boolean deleteMember(String id) {
-		if (!existsMember(id))
-			return false;
+	public boolean deleteMember(final String id) {
 
-		return testData.remove(findMember(id));
+		return hiber.deleteMember(parseId(id));
 	}
 
 	@Override
-	public boolean updateMember(MemberPo po) {
+	public boolean updateMember(final MemberPo po) {
 		if (po == null)
 			return false;
 
-		MemberPo old = findMember(po.getID());
-		if (old == null)
-			return false;
-
-		deleteMember(old.getID());
-		addMember(po);
-		return true;
+		return hiber.updateMember(po);
 	}
 
 	@Override
 	public MemberPo findMember(final String id) {
-		for (MemberPo p : testData)
-			if (p.getID().equals(id))
-				return p;
-
-		return null;
+		return hiber.findMember(parseId(id));
 	}
 
 	@Override
-	public boolean existsMember(String id) {
-		return testData.parallelStream().map(MemberPo::getID).anyMatch(s -> s.equals(id));
+	public boolean existsMember(final String id) {
+		return hiber.existId(parseId(id));
 	}
 
-	@Override
-	public int getAvaliableID() {
-		return avaliableID++;
-	}
+	// parse an id string. if invalid, throw IAE.
+	private static final int parseId(final String id) {
+		if (MemberInfoTemplate.checkID(id))
+			throw new IllegalArgumentException("Wrong ID");
 
+		return Integer.parseInt(id);
+	}
 }

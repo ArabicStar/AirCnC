@@ -1,5 +1,7 @@
 package service.impl.member;
 
+import java.util.Random;
+
 import data.dao.MemberDao;
 import po.member.MemberPo;
 import po.member.MemberPoBuilder;
@@ -8,22 +10,32 @@ import utils.info.member.MemberInfo;
 import vo.member.MemberVo;
 import vo.member.MemberVoBuilder;
 
-public final class AccountManager implements MemberAccountService {
+public final class MemberAccountManager implements MemberAccountService {
+	private static final int ID_BOUND = 100000000;
+	private static final Random R = new Random(System.currentTimeMillis());
+
 	private MemberDao dao;
 
 	private boolean isLogined = false;
-	private MemberVo loginedMember = null;
+	/**
+	 * Logined member info.<br>
+	 * Actually, it should be a MemberPo instance, so casts it when neccessary.
+	 * <br>
+	 */
+	private MemberPo loginedMember = null;
 
-	public AccountManager(MemberDao dao) {
+	public MemberAccountManager(MemberDao dao) {
 		this.dao = dao;
 	}
 
 	@Override
-	public MemberVo register(MemberVoBuilder newMemberInfo, int passwordHash) {
+	public MemberInfo register(MemberVoBuilder newMemberInfo, int passwordHash) {
 		String newID = generateNewID();
+
 		MemberVo newMemberVo = newMemberInfo.setID(newID).getMemberInfo();
 		MemberPo newMemberPo = new MemberPoBuilder(newMemberVo).setPasswordHash(passwordHash).getMemberInfo();
-		System.out.println(newMemberPo);
+
+		// System.out.println(newMemberPo);
 		boolean result = dao.addMember(newMemberPo);
 		if (result)
 			return newMemberVo;
@@ -31,23 +43,28 @@ public final class AccountManager implements MemberAccountService {
 		return MemberVoBuilder.getInvalidInfo();
 	}
 
-	// generate a never-used id
+	/* generate a never-used id */
 	private String generateNewID() {
-		return MemberInfo.formatID(dao.getAvaliableID());
+		String stringID = MemberInfo.formatID(R.nextInt(ID_BOUND));
+		for (int numId = R.nextInt(ID_BOUND); dao.existsMember(stringID); numId = R.nextInt(ID_BOUND))
+			stringID = MemberInfo.formatID(numId);
+
+		return stringID;
 	}
 
 	@Override
-	public MemberVo login(String id, int passwordHash) {
-		if (!existsMember(id))
+	public MemberInfo login(String id, int passwordHash) {
+		MemberPo memberAccount = dao.findMember(id);
+
+		if (memberAccount == null)
 			return null;
 
-		MemberPo memberAccount = dao.findMember(id);
 		if (!checkPassword(memberAccount, passwordHash))
 			return MemberVoBuilder.getInvalidInfo();
 
 		this.isLogined = true;
-		this.loginedMember = new MemberVoBuilder(memberAccount).getMemberInfo();
-//		System.out.println(loginedMember.getID());
+		this.loginedMember = memberAccount;
+		// System.out.println(loginedMember.getID());
 		return loginedMember;
 	}
 
@@ -64,7 +81,7 @@ public final class AccountManager implements MemberAccountService {
 	}
 
 	@Override
-	public MemberVo getLoginedMember() {
+	public MemberPo getLoginedMember() {
 		return loginedMember;
 	}
 

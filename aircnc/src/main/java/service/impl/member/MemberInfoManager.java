@@ -7,6 +7,7 @@ import data.dao.HotelDao;
 import data.dao.MemberDao;
 import po.member.MemberPo;
 import po.member.MemberPoBuilder;
+import service.member.MemberAccountService;
 import service.member.MemberInfoService;
 import service.query.QueryService;
 import utils.condition.CreditChangeCondition;
@@ -17,13 +18,19 @@ import vo.member.MemberVoBuilder;
 import vo.member.credit.CreditChangeVo;
 import vo.order.OrderVo;
 
-public class InfoManager implements MemberInfoService {
+public class MemberInfoManager implements MemberInfoService {
 	private MemberDao memberDao;
-	private QueryService queryService;
 	private HotelDao hotelDao;
 
-	public InfoManager(MemberDao memberDao, QueryService service, HotelDao hotelDao) {
+	private QueryService queryService;
+	private MemberAccountService accountService;
+
+	public MemberInfoManager(QueryService queryService, MemberAccountService accountService, MemberDao memberDao,
+			HotelDao hotelDao) {
 		this.memberDao = memberDao;
+		this.queryService = queryService;
+		this.hotelDao = hotelDao;
+		this.accountService = accountService;
 	}
 
 	@Override
@@ -63,9 +70,13 @@ public class InfoManager implements MemberInfoService {
 
 	@Override
 	public boolean updateInfo(MemberInfo modifiedInfo) {
-		MemberPo po = memberDao.findMember(modifiedInfo.getID());
-		if (po == null)
-			return false;
+		if (!accountService.isLogined())
+			throw new IllegalStateException("No Member Login");
+
+		MemberPo po = (MemberPo) accountService.getLoginedMember();
+
+		if (!modifiedInfo.getId().equals(po.getId()))
+			throw new IllegalArgumentException("Incorresponding Member Info");
 
 		return memberDao
 				.updateMember(new MemberPoBuilder(modifiedInfo).setPasswordHash(po.getPasswordHash()).getMemberInfo());

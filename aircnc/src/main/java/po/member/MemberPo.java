@@ -8,9 +8,9 @@ import utils.info.member.ContactInfo;
 import utils.info.member.MemberInfo;
 
 /**
- * po for Member<br>
- * The public setters is only for builder and hibernate, should not be used
- * other condition<br>
+ * Po for Member.<br>
+ * The public setters is only for builder and hibernate. Please <b>NOT</b> used
+ * in client code<br>
  * 
  * @author ClevelandAlto
  *

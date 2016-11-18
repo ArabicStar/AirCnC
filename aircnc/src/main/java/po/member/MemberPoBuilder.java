@@ -17,13 +17,22 @@ import org.apache.commons.lang.StringUtils;
 public class MemberPoBuilder extends MemberInfoBuilder {
 	private int passwordHash = Integer.MIN_VALUE;
 
+	/**
+	 * Invalid MemberPo instance.<br>
+	 * Usually, used to mark invalid access and operation, etc.<br>
+	 */
 	private static final MemberPo INVALID_MEMBER_PO;
 	static {
 		INVALID_MEMBER_PO = new PersonalMemberPo();
 		INVALID_MEMBER_PO.invalidate();
 	}
 
-	public static final MemberInfo getInvalidInfo() {
+	/**
+	 * Get an invalid MemberPo instance.
+	 * 
+	 * @return Invalid MemberPo instance
+	 */
+	public static final MemberPo getInvalidInfo() {
 		return INVALID_MEMBER_PO;
 	}
 
@@ -34,9 +43,9 @@ public class MemberPoBuilder extends MemberInfoBuilder {
 	public MemberPoBuilder(MemberInfo info) {
 		this(info.getType());
 		if (!info.isValid())
-			return;
+			throw new IllegalArgumentException("Invalid MemberInfo Instance");
 
-		setID(info.getID()).setContactInfo(info.getContact()).setBirthday(info.getBirthday())
+		setID(info.getId()).setContactInfo(info.getContact()).setBirthday(info.getBirthday())
 				.setEnterprise(info.getEnterprise());
 		String name = StringUtils.deleteWhitespace(info.getName());
 		setName(name);
@@ -58,6 +67,8 @@ public class MemberPoBuilder extends MemberInfoBuilder {
 		if (checkUserName(name))
 			// insert blank space to avoid injection attack
 			this.name = name.replaceAll("(.{1})", "$1 ");
+		else
+			throw new IllegalArgumentException("Wrong name");
 
 		return this;
 	}
@@ -80,6 +91,10 @@ public class MemberPoBuilder extends MemberInfoBuilder {
 		return this;
 	}
 
+	/**
+	 * @param passwordHash
+	 * @return this instance
+	 */
 	public MemberPoBuilder setPasswordHash(int passwordHash) {
 		this.passwordHash = passwordHash;
 		return this;
@@ -88,7 +103,7 @@ public class MemberPoBuilder extends MemberInfoBuilder {
 	@Override
 	public MemberPo getMemberInfo() {
 		if (!isReady() && passwordHash != Integer.MIN_VALUE)
-			return null;
+			throw new IllegalStateException("Lack Of Info");
 
 		if (type == Type.BUSINESS)
 			return new EnterpriseMemberPo().setID(id).setName(name).setPasswordHash(passwordHash).setCredit(credit)

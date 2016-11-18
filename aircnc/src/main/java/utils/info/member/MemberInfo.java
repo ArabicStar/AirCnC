@@ -30,7 +30,7 @@ public abstract class MemberInfo extends MemberInfoTemplate {
 		return type.name().toLowerCase();
 	}
 
-	public String getID() {
+	public String getId() {
 		if (isValid())
 			return id;
 		return null;

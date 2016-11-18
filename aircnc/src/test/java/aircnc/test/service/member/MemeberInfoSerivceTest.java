@@ -7,19 +7,23 @@ import org.junit.Test;
 
 import data.dao.MemberDao;
 import data.dao.impl.MemberDaoImpl;
-import service.impl.member.InfoManager;
+import service.impl.member.MemberInfoManager;
+import service.impl.member.MemberAccountManager;
+import service.member.MemberAccountService;
 import service.member.MemberInfoService;
 import utils.info.member.MemberInfo;
 import vo.member.MemberVoBuilder;
 
 public class MemeberInfoSerivceTest {
 	private MemberInfoService info;
+	private MemberAccountService account;
 	private MemberDao dao;
 
 	@Before
 	public void setUp() throws Exception {
 		dao = new MemberDaoImpl();
-		info = new InfoManager(dao, null, null);
+		account = new MemberAccountManager(dao);
+		info = new MemberInfoManager(null, account, dao, null);
 	}
 
 	@Test

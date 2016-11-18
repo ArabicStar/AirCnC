@@ -2,7 +2,7 @@ package data.hibernate;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.classic.Session;
+import org.hibernate.Session;
 
 /**
  * Helper for Hibernate Session, to auto open session and assure concurrent
@@ -75,15 +75,6 @@ public class HibernateSessionFactory {
 	}
 
 	/**
-	 * Get currently used SessionFactory<br>
-	 * 
-	 * @return currently used SessionFactoryinstance<r>
-	 */
-	public static SessionFactory getSessionFactory() {
-		return factory;
-	}
-
-	/**
 	 * Customize config file.<br>
 	 * <i>rebuildSessionFactory()</i> should be called before reuse.<br>
 	 * 
@@ -92,6 +83,15 @@ public class HibernateSessionFactory {
 	public static void serConfigFile(String configFile) {
 		HibernateSessionFactory.configFile = configFile;
 		factory = null;
+	}
+
+	/**
+	 * Get currently used SessionFactory<br>
+	 * 
+	 * @return currently used SessionFactoryinstance<r>
+	 */
+	public static SessionFactory getSessionFactory() {
+		return factory;
 	}
 
 	/**

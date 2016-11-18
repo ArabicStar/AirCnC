@@ -28,7 +28,7 @@ public class MemberVoBuilder extends MemberInfoBuilder {
 		if (!info.isValid())
 			return;
 
-		setID(info.getID()).setContactInfo(info.getContact()).setBirthday(info.getBirthday())
+		setID(info.getId()).setContactInfo(info.getContact()).setBirthday(info.getBirthday())
 				.setEnterprise(info.getEnterprise());
 		String name = StringUtils.deleteWhitespace(info.getName());
 		setName(name);
