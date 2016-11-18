@@ -2,10 +2,9 @@ package po.order;
 
 /**
  * id 订单编号 
- * hotelId 
- * 酒店编号 userId 
- * 用户编号 status 
- * 订单状态（0：未执行订单；1：已执行订单；2：异常订单 ；3：撤销订单）
+ * hotelId 酒店编号 
+ * userId 用户编号 
+ * status 订单状态（0：未执行订单；1：已执行订单；2：异常订单 ；3：撤销订单）
  * entryTime 用户入住时间 
  * lastTime 订单最晚执行时间 
  * orderInfo 订单详情 

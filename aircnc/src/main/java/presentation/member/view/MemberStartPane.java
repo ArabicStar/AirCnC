@@ -38,7 +38,7 @@ public class MemberStartPane extends Application{
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MemberStartPane.class.getResource("fxml/MemberStart.fxml"));
             rootLayout = (BorderPane) loader.load();
-//            primaryStage.initStyle(StageStyle.UNDECORATED);
+            primaryStage.initStyle(StageStyle.UNDECORATED);
 
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout,550,385);
