@@ -5,11 +5,11 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="385.0" prefWidth="550.0" styleClass="root" stylesheets="@../css/MemberSignIn.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="385.0" prefWidth="550.0" styleClass="root" stylesheets="@../css/MemberSignIn.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.member.view.fxml.MemberSignInController">
    <children>
-      <Button fx:id="confirm" layoutX="163.0" layoutY="313.0" mnemonicParsing="false" styleClass="confirm" text="登   录" />
-      <PasswordField fx:id="password" layoutX="166.0" layoutY="250.0" styleClass="textfield" />
-      <TextField fx:id="username" layoutX="166.0" layoutY="213.0" styleClass="textfield" />
-      <Button fx:id="next" layoutX="435.0" layoutY="322.0" mnemonicParsing="false" styleClass="next" text="注册" />
+      <Button fx:id="confirm" layoutX="163.0" layoutY="313.0" mnemonicParsing="false" onAction="#handleConfirm" styleClass="confirm" text="登   录" />
+      <PasswordField fx:id="password" layoutX="166.0" layoutY="250.0" styleClass="passwordfield" />
+      <TextField fx:id="username" layoutX="166.0" layoutY="213.0" styleClass=" textfield" />
+      <Button fx:id="register" layoutX="435.0" layoutY="322.0" mnemonicParsing="false" onAction="#handleRegister" styleClass="next" text="注册新用户" />
    </children>
 </Pane>

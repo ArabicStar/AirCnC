@@ -15,21 +15,14 @@ import javafx.stage.StageStyle;
  *
  */
 
-public class MemberStartPane extends Application{
+public class MemberStartPane{
 
 	private Stage primaryStage;
 	private BorderPane rootLayout;
-	private MemberSignInPane memberSignIn;
-
-	@Override
-	public void start(Stage primaryStage) throws Exception {
+	
+	public MemberStartPane(Stage primaryStage){
 		this.primaryStage = primaryStage;
-        //this.primaryStage.setTitle("AddressApp");  这里的标题写在main里面
-
-        initRootLayout();
-
-        memberSignIn = new MemberSignInPane(rootLayout);
-
+		initRootLayout();
 	}
 
 	public void initRootLayout() {
@@ -58,9 +51,14 @@ public class MemberStartPane extends Application{
     public Stage getPrimaryStage() {
         return primaryStage;
     }
+    
+    /**
+     * Returns the main pane.
+     * @return
+     */
+    public BorderPane getBorderPane() {
+        return rootLayout;
+    }
 
-	public static void main(String[] args){
-		launch(args);
-	}
 
 }

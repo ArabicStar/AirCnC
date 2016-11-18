@@ -1,4 +1,4 @@
-package presentation.member.control;
+package presentation.member.view.fxml;
 
 public class MemberMainController {
 	
