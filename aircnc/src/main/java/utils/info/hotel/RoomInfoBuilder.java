@@ -1,5 +1,6 @@
 package utils.info.hotel;
 
+
 public abstract class RoomInfoBuilder extends RoomInfoTemplate{
 	protected RoomInfoBuilder(RoomInfo info){
 		this(info.getType());
@@ -30,5 +31,11 @@ public abstract class RoomInfoBuilder extends RoomInfoTemplate{
 		}
 		return this;
 	}
+	
+	public boolean isReady() {
+		return (type == Type.OTHER ? name != null : true);
+	}
+
+	public abstract RoomInfo getRoomInfo();
 
 }

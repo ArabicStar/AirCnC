@@ -1,14 +1,12 @@
 package utils.info.hotel;
 
 public abstract class HotelInfoBuilder extends HotelInfoTemplate{
+	
 	public HotelInfoBuilder(HotelInfo info){
 		this.setID(info.getID()).setName(info.getName()).setScope(info.getScope())
 		.setLocation(info.getLocaiton()).setStar(info.getStar()).setGrade(info.getGrade());
 	}
 	
-	protected HotelInfoBuilder(){
-		
-	}
 	
 	
 	public HotelInfoBuilder setID(String id) {

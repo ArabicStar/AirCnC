@@ -1,7 +1,7 @@
 package utils.info.hotel;
 
 
-public class CommentInfoBuilder extends CommentInfoTemplate{
+public abstract class CommentInfoBuilder extends CommentInfoTemplate{
 	public CommentInfoBuilder(CommentInfo info){
 		this(info.getGrade());
 		this.setCheckInTime(info.getCheckInTime()).setCommentTime(info.getCommentTime()).setContent(info.getContent())
@@ -43,4 +43,11 @@ public class CommentInfoBuilder extends CommentInfoTemplate{
 		this.commentTime = commentTime;
 		return this;
 	}
+	
+	public boolean isReady() {
+//		System.out.println(id + " " + name + " " + contact + " " + type + " " + enterprise + " " + birthday);
+		return hotelId != null && memberId != null && content != null && checkInTime != null && commentTime != null;
+	}
+	
+	public abstract CommentInfo getCommentInfo();
 }
