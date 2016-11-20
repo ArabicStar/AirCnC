@@ -52,14 +52,45 @@ public class HotelDate {
 		this.day = day;
 	}
 	
-	public void delayTime(int hour, int minute) {
+	/**
+	 * 判断该日期是否有效
+	 * 注意：年份适用于2016-2099年！
+	 * @return
+	 */
+	public boolean isValid() {
+		if(this.year < 2016 || this.year > 2099) {
+			return false;
+		}
+		if(this.month < 1 || this.month > 12) {
+			return false;
+		}
 		
+		if(this.day < 1) {
+			return false;
+		}
+		
+		if(isLeapYear(this.year)) {
+			if(this.day > daysOfAMonthInLeapYear[this.month]) {
+				return false;
+			}
+		} else {
+			if(this.day > daysOfAMonth[this.month]) {
+				return false;
+			}
+		}
+		return true; 
+	}
+	
+	public void delayTime(int hour, int minute) {
+		// 先进行加法运算
 		this.minute += minute;
+		this.hour += hour;
+		
+		// 转化为正确的格式
 		while(this.minute >= 60) {
 			this.hour++;
 			this.minute -= 60;
 		}
-		this.hour += hour;
 		while(this.hour >= 24) {
 			this.day++;
 			this.hour -= 24;

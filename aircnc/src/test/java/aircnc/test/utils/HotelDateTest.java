@@ -64,5 +64,46 @@ public class HotelDateTest {
 		h1.delayTime(4, 30);
 		assertEquals(h1.toString(), "2016 3 1 4 0");
 	}
+	
+	@Test
+	public void isValidTest1() {
+		HotelDate h1 = new HotelDate(2016, 1, 1);
+		assertEquals(true, h1.isValid());
+	}
+	
+	@Test
+	public void isValidTest2() {
+		HotelDate h1 = new HotelDate(2016, 1, 32);
+		assertEquals(false, h1.isValid());
+	}
+	
+	@Test
+	public void isValidTest3() {
+		HotelDate h1 = new HotelDate(2016, 2, 29);
+		assertEquals(true, h1.isValid());
+	}
+	
+	@Test
+	public void isValidTest4() {
+		HotelDate h1 = new HotelDate(2016, 2, 30);
+		assertEquals(false, h1.isValid());
+	}
+	
+	@Test
+	public void isValidTest5() {
+		HotelDate h1 = new HotelDate(2015, 2, 1);
+		assertEquals(false, h1.isValid());
+	}
 
+	@Test
+	public void isValidTest6() {
+		HotelDate h1 = new HotelDate(2017, 2, 1);
+		assertEquals(false, h1.isValid());
+	}
+	
+	@Test
+	public void isValidTest7() {
+		HotelDate h1 = new HotelDate(2100, 2, 1);
+		assertEquals(false, h1.isValid());
+	}
 }
