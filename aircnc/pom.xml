@@ -1,6 +1,4 @@
-﻿<project
-	xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+﻿<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>edu.nju.software.arabicstar</groupId>
@@ -28,12 +26,12 @@
 			</plugin>
 		</plugins>
 	</build>
-	<!-- <build> <plugins> <plugin> <groupId>org.apache.maven.plugins</groupId>
-		<artifactId>maven-shade-plugin</artifactId> <version>2.4</version> <executions>
-		<execution> <id>manifest-helper</id> <phase>compile</phase> <goals> <goal>shade</goal>
-		</goals> <configuration> <transformers> <transformer implementation = "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-		<mainClass>edu.nju.software.arabicstar.aircnc.main.Main</mainClass> </transformer>
-		</transformers> </configuration> </execution> </executions> </plugin> </plugins>
+	<!-- <build> <plugins> <plugin> <groupId>org.apache.maven.plugins</groupId> 
+		<artifactId>maven-shade-plugin</artifactId> <version>2.4</version> <executions> 
+		<execution> <id>manifest-helper</id> <phase>compile</phase> <goals> <goal>shade</goal> 
+		</goals> <configuration> <transformers> <transformer implementation = "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer"> 
+		<mainClass>edu.nju.software.arabicstar.aircnc.main.Main</mainClass> </transformer> 
+		</transformers> </configuration> </execution> </executions> </plugin> </plugins> 
 		</build> -->
 	<dependencies>
 		<dependency>
@@ -53,18 +51,18 @@
 			<artifactId>google-collections</artifactId>
 			<version>1.0</version>
 		</dependency>
+
 		<!-- Oracle Jdbc Driver -->
-		<dependency>
-			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc14</artifactId>
-			<version>10.2.0.4.0</version>
-		</dependency>
+		<!-- <dependency> <groupId>com.oracle</groupId> <artifactId>ojdbc14</artifactId> 
+			<version>10.2.0.4.0</version> </dependency> -->
 		<!-- Hibernate 配置 -->
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>3.6.5.Final</version>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>5.1.0.Final</version>
 		</dependency>
+
 		<dependency>
 			<groupId>javassist</groupId>
 			<artifactId>javassist</artifactId>
@@ -95,11 +93,13 @@
 			<artifactId>slf4j-api</artifactId>
 			<version>1.6.1</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.hibernate.javax.persistence/hibernate-jpa-2.1-api -->
 		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>
-			<artifactId>hibernate-jpa-2.0-api</artifactId>
+			<artifactId>hibernate-jpa-2.1-api</artifactId>
 			<version>1.0.0.Final</version>
 		</dependency>
+
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -110,18 +110,18 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.7.21</version>
-</dependency>
-<dependency>
-  <groupId>org.controlsfx</groupId>
-  <artifactId>controlsfx</artifactId>
-  <version>8.40.12</version>
-</dependency>
-<dependency>
-  <groupId>org.controlsfx</groupId>
-  <artifactId>openjfx-dialogs</artifactId>
-  <version>1.0.3</version>
-  <type>pom</type>
-</dependency>
+		</dependency>
+		<dependency>
+			<groupId>org.controlsfx</groupId>
+			<artifactId>controlsfx</artifactId>
+			<version>8.40.12</version>
+		</dependency>
+		<dependency>
+			<groupId>org.controlsfx</groupId>
+			<artifactId>openjfx-dialogs</artifactId>
+			<version>1.0.3</version>
+			<type>pom</type>
+		</dependency>
 	</dependencies>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

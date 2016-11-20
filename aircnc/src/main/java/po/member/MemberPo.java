@@ -17,6 +17,7 @@ import utils.info.member.MemberInfo;
  */
 public abstract class MemberPo extends MemberInfo {
 	protected int passwordHash;
+	protected int numId = Integer.MIN_VALUE;
 
 	protected MemberPo(Type type) {
 		super(type);
@@ -35,8 +36,36 @@ public abstract class MemberPo extends MemberInfo {
 		return Integer.MIN_VALUE;
 	}
 
-	public MemberPo setID(String id) {
+	public int getNumId() {
+		return numId;
+	}
+
+	@Override
+	public ContactPo getContact() {
+		return (ContactPo) contact;
+	}
+
+	/**
+	 * Set id of a integer.<br>
+	 * Only for hibernate.<br>
+	 * 
+	 * @param numId
+	 */
+	public void setNumId(int numId) {
+		this.numId = numId;
+		this.id = formatID(numId);
+	}
+
+	/**
+	 * Set id of a string.<br>
+	 * Only for hibernate and builder.<br>
+	 * 
+	 * @param id
+	 * @return this instance
+	 */
+	public MemberPo setId(String id) {
 		this.id = id;
+		this.numId = Integer.valueOf(id);
 		return this;
 	}
 

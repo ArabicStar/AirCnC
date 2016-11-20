@@ -22,7 +22,7 @@ public final class MemberAccountManager implements MemberAccountService {
 	 * Actually, it should be a MemberPo instance, so casts it when neccessary.
 	 * <br>
 	 */
-	private MemberPo loginedMember = null;
+	private MemberPo currentAccount = null;
 
 	public MemberAccountManager(MemberDao dao) {
 		this.dao = dao;
@@ -32,11 +32,12 @@ public final class MemberAccountManager implements MemberAccountService {
 	public MemberInfo register(MemberVoBuilder newMemberInfo, int passwordHash) {
 		String newID = generateNewID();
 
-		MemberVo newMemberVo = newMemberInfo.setID(newID).getMemberInfo();
+		MemberVo newMemberVo = newMemberInfo.setId(newID).getMemberInfo();
 		MemberPo newMemberPo = new MemberPoBuilder(newMemberVo).setPasswordHash(passwordHash).getMemberInfo();
 
 		// System.out.println(newMemberPo);
 		boolean result = dao.addMember(newMemberPo);
+		System.out.println(result);
 		if (result)
 			return newMemberVo;
 
@@ -63,15 +64,15 @@ public final class MemberAccountManager implements MemberAccountService {
 			return MemberVoBuilder.getInvalidInfo();
 
 		this.isLogined = true;
-		this.loginedMember = memberAccount;
+		this.currentAccount = memberAccount;
 		// System.out.println(loginedMember.getID());
-		return loginedMember;
+		return currentAccount;
 	}
 
 	@Override
 	public boolean logout() {
 		this.isLogined = false;
-		this.loginedMember = null;
+		this.currentAccount = null;
 		return true;
 	}
 
@@ -81,8 +82,8 @@ public final class MemberAccountManager implements MemberAccountService {
 	}
 
 	@Override
-	public MemberPo getLoginedMember() {
-		return loginedMember;
+	public MemberPo getCurrentAccount() {
+		return currentAccount;
 	}
 
 	@Override
@@ -92,5 +93,10 @@ public final class MemberAccountManager implements MemberAccountService {
 
 	private static boolean checkPassword(MemberPo po, int passwordHash) {
 		return po.getPasswordHash() == passwordHash;
+	}
+
+	@Override
+	public void refreshCurrentAccount() {
+		currentAccount = dao.findMember(currentAccount.getId());
 	}
 }

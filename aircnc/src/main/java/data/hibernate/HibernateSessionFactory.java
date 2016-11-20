@@ -1,8 +1,12 @@
 package data.hibernate;
 
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import java.sql.SQLException;
+
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 /**
  * Helper for Hibernate Session, to auto open session and assure concurrent
@@ -18,25 +22,26 @@ public class HibernateSessionFactory {
 	 */
 	private static String CONFIG_FILE_LOCATION = "/hibernate.cfg.xml";
 	/**
-	 * For concurrent<br>
+	 * For concurrent use<br>
 	 */
 	private static final ThreadLocal<Session> threadLocal = new ThreadLocal<>();
 	/**
-	 * Configuration instance<br>
+	 * ServiceRegistry instance;
 	 */
-	private static final Configuration configuration = new Configuration();
+	private static StandardServiceRegistry serviceRegistry;
 	/**
 	 * SessionFactory instance<br>
 	 */
 	private static SessionFactory factory;
 
 	private static String configFile = CONFIG_FILE_LOCATION;
+	/* Default initialize */
 	static {
-		// Default initialization
 		try {
-			configuration.configure(configFile);
-			factory = configuration.buildSessionFactory();
+			serviceRegistry = new StandardServiceRegistryBuilder().configure(configFile).build();
+			factory = new MetadataSources(serviceRegistry).buildMetadata().buildSessionFactory();
 		} catch (Exception ex) {
+			StandardServiceRegistryBuilder.destroy(serviceRegistry);
 			ex.printStackTrace();
 		}
 	}
@@ -67,9 +72,10 @@ public class HibernateSessionFactory {
 	 */
 	public static void rebuildSessionFactory() {
 		try {
-			configuration.configure(configFile);
-			factory = configuration.buildSessionFactory();
+			serviceRegistry = new StandardServiceRegistryBuilder().configure(configFile).build();
+			factory = new MetadataSources(serviceRegistry).buildMetadata().buildSessionFactory();
 		} catch (Exception e) {
+			StandardServiceRegistryBuilder.destroy(serviceRegistry);
 			e.printStackTrace();
 		}
 	}
@@ -86,24 +92,33 @@ public class HibernateSessionFactory {
 	}
 
 	/**
-	 * Get currently used SessionFactory<br>
+	 * Get currently used SessionFactory.<br>
 	 * 
-	 * @return currently used SessionFactoryinstance<r>
+	 * @return currently used SessionFactory instance<r>
 	 */
 	public static SessionFactory getSessionFactory() {
 		return factory;
 	}
 
 	/**
-	 * Get currently used Configuration<br>
+	 * Get currently used StandardServiceRegistry.<br>
 	 * 
-	 * @return currently used Configuration instance<br>
+	 * @return currently used StandardSerivceRegistry instance<br>
 	 */
-	public static Configuration getConfiguration() {
-		return configuration;
+	public static StandardServiceRegistry getServiceRegistry() {
+		return serviceRegistry;
 	}
 
 	// test
-	// public static void main(String[] args) {
+	// public static void main(String[] args) throws InterruptedException,
+	// ClassNotFoundException, SQLException {
+	// Session s = getSession();
+	// s.beginTransaction();
+	// s.save(new
+	// ContactPoBuilder().setEmail("123@qq.com").getContactInfo());
+	// System.err.println("begin");
+	// Thread.sleep(5000);
+	// System.err.println("close");
+	// s.close();
 	// }
 }

@@ -50,11 +50,16 @@ public interface MemberAccountService {
 	public boolean isLogined();
 
 	/**
+	 * Refresh currently logined member account info.<br>
+	 */
+	public void refreshCurrentAccount();
+
+	/**
 	 * Get logined member's vo<br>
 	 * 
 	 * @return logined member's vo
 	 */
-	public MemberInfo getLoginedMember();
+	public MemberInfo getCurrentAccount();
 
 	/**
 	 * Inquiry an id exists or not<br>

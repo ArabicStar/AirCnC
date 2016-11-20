@@ -100,7 +100,7 @@ public class MemberHibernatorImpl implements MemberHibernator {
 				session.update(po);
 
 			ts.commit();
-			
+
 		} catch (HibernateException he) {
 			// exception
 			he.printStackTrace();
@@ -126,8 +126,10 @@ public class MemberHibernatorImpl implements MemberHibernator {
 			// normal
 			ts = session.beginTransaction();
 
-			if (!(flag = session.contains(po)))
+			if (!(flag = session.contains(po))) {
+				session.save(po.getContact());
 				session.save(po);
+			}
 
 			ts.commit();
 
@@ -143,7 +145,7 @@ public class MemberHibernatorImpl implements MemberHibernator {
 			session.close();
 		}
 
-		return flag;
+		return !flag;
 	}
 
 	@Override

@@ -51,10 +51,12 @@ public class MemberInfoManager implements MemberInfoService {
 
 		// TODO need modified
 		List<OrderVo> historyOrders = queryService.findOrders(new OrderCondition());
-		List<HotelVo> historyHotels = historyOrders.parallelStream().map(OrderVo::getHotel).distinct()
-				.map(Integer::valueOf).map(i -> hotelDao.getHotel(i))
-				.map(hp -> new HotelVo(hp.getHotelName(), hp.getHotelName(), hp.getScope()))
-				.collect(Collectors.toList());
+		List<HotelVo> historyHotels = null;// =
+		// historyOrders.parallelStream().map(OrderVo::getHotel).distinct()
+		// .map(Integer::valueOf).map(i -> hotelDao.getHotel(i))
+		// .map(hp -> new HotelVo(hp.getHotelName(), hp.getHotelName(),
+		// hp.getScope()))
+		// .collect(Collectors.toList());
 
 		return historyHotels;
 	}
@@ -73,7 +75,7 @@ public class MemberInfoManager implements MemberInfoService {
 		if (!accountService.isLogined())
 			throw new IllegalStateException("No Member Login");
 
-		MemberPo po = (MemberPo) accountService.getLoginedMember();
+		MemberPo po = (MemberPo) accountService.getCurrentAccount();
 
 		if (!modifiedInfo.getId().equals(po.getId()))
 			throw new IllegalArgumentException("Incorresponding Member Info");

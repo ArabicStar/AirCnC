@@ -28,7 +28,7 @@ public class MemberVoBuilder extends MemberInfoBuilder {
 		if (!info.isValid())
 			return;
 
-		setID(info.getId()).setContactInfo(info.getContact()).setBirthday(info.getBirthday())
+		setId(info.getId()).setContactInfo(info.getContact()).setBirthday(info.getBirthday())
 				.setEnterprise(info.getEnterprise());
 		String name = StringUtils.deleteWhitespace(info.getName());
 		setName(name);
@@ -41,8 +41,8 @@ public class MemberVoBuilder extends MemberInfoBuilder {
 	}
 
 	@Override
-	public MemberVoBuilder setID(String id) {
-		super.setID(id);
+	public MemberVoBuilder setId(String id) {
+		super.setId(id);
 		return this;
 	}
 

@@ -2,33 +2,49 @@ package service.impl.member;
 
 import data.dao.CreditDao;
 import data.dao.MemberDao;
-import po.member.MemberPo;
-import po.member.credit.CreditChangePoBuilder;
 import service.member.MemberCreditService;
-import utils.info.member.credit.ChangeAction;
 import vo.member.MemberVo;
-import vo.member.MemberVoBuilder;
+import vo.order.OrderVo;
 
 public class CreditManager implements MemberCreditService {
 	private MemberDao memberDao;
 	private CreditDao creditDao;
 
+
 	@Override
-	public MemberVo changeCredit(String id, int creditDelta, ChangeAction action) {
-		if (action.validateChangeValue(creditDelta))
-			return MemberVoBuilder.getInvalidInfo();
+	public MemberVo gainByCharge(int money, String memberId) {
+		// TODO 自动生成的方法存根
+		return null;
+	}
 
-		MemberPo memberPo = memberDao.findMember(id);
-		if (null == memberPo)
-			return MemberVoBuilder.getInvalidInfo();
+	@Override
+	public MemberVo gainByOrderExecution(OrderVo order) {
+		// TODO 自动生成的方法存根
+		return null;
+	}
 
-		CreditChangePoBuilder builder = new CreditChangePoBuilder(memberPo, action.getActionType());
-		builder.setCreditChange(creditDelta);
-		builder.setProperties(action.getProperties());
+	@Override
+	public MemberVo reduceByOverdue(OrderVo order) {
+		// TODO 自动生成的方法存根
+		return null;
+	}
 
-		creditDao.addCreditChange(builder.getCreditChangeInfo());
+	@Override
+	public MemberVo reduceByCancel(OrderVo order) {
+		// TODO 自动生成的方法存根
+		return null;
+	}
 
-		return new MemberVoBuilder(memberPo).getMemberInfo();
+	@Override
+	public MemberVo recoverByDelay(OrderVo order) {
+		// TODO 自动生成的方法存根
+		return null;
+	}
+
+	@Override
+	public MemberVo recoverByAppeal(OrderVo order) {
+		// TODO 自动生成的方法存根
+		return null;
 	}
 
 }

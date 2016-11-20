@@ -3,8 +3,8 @@ package utils.info.member.credit;
 import java.time.Instant;
 
 public abstract class CreditChangeInfo extends CreditChangeTemplate {
-	public String getMemberID() {
-		return memberID;
+	public String getMemberId() {
+		return memberId;
 	}
 
 	public Instant getTimeInstant() {
@@ -19,7 +19,19 @@ public abstract class CreditChangeInfo extends CreditChangeTemplate {
 		return afterCredit;
 	}
 
+	public ActionType getActionType() {
+		return actionType;
+	}
+
+	public int getMoney() {
+		return money;
+	}
+
+	public String getOrderId() {
+		return orderId;
+	}
+
 	public String getFormatString() {
-		return new StringBuilder(action.getFormatString()).append(STRING_CACHE).toString();
+		return new StringBuilder(actionType.getFormatString()).append(STRING_CACHE).toString();
 	}
 }

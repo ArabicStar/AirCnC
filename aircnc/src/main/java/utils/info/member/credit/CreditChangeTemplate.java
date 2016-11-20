@@ -1,34 +1,50 @@
 package utils.info.member.credit;
 
 import java.time.Instant;
-import java.util.function.Predicate;
 
+/**
+ * Abstract of credit change info object.<br>
+ * 
+ * @author ClevelandAlto
+ *
+ */
 public abstract class CreditChangeTemplate {
-	protected enum ChangeResultType {
-		UP("增加", i -> i > 0), DOWN("扣除", i -> i < 0), RECOVER("恢复", i -> true);
-
-		private String verb;
-		private Predicate<Integer> validation;
-
-		private ChangeResultType(String verb, Predicate<Integer> validation) {
-			this.verb = verb;
-			this.validation = validation;
-		}
-
-		public String getVerb() {
-			return verb;
-		}
-
-		public boolean validateChangeValue(int changeValue) {
-			return validation.test(changeValue);
-		}
-	}
-
+	/**
+	 * Cache of format string <br>
+	 */
 	protected static final String STRING_CACHE = "信用值%d";
 
-	protected String memberID;
+	/**
+	 * related member's id
+	 */
+	protected String memberId;
+
+	/**
+	 * time stamp of change
+	 */
 	protected Instant timeInstant;
-	protected ChangeAction action;
+
+	/**
+	 * action type of change
+	 */
+	protected ActionType actionType;
+
+	/**
+	 * money amount charged
+	 */
+	protected int money;
+
+	/**
+	 * relative order id
+	 */
+	protected String orderId;
+	/**
+	 * member's credit before change
+	 */
 	protected int beforeCredit = Integer.MIN_VALUE;
+
+	/**
+	 * member's credit after change
+	 */
 	protected int afterCredit = Integer.MIN_VALUE;
 }

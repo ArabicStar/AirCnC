@@ -45,15 +45,15 @@ public class MemberPoBuilder extends MemberInfoBuilder {
 		if (!info.isValid())
 			throw new IllegalArgumentException("Invalid MemberInfo Instance");
 
-		setID(info.getId()).setContactInfo(info.getContact()).setBirthday(info.getBirthday())
+		setId(info.getId()).setContactInfo(info.getContact()).setBirthday(info.getBirthday())
 				.setEnterprise(info.getEnterprise());
 		String name = StringUtils.deleteWhitespace(info.getName());
 		setName(name);
 	}
 
 	@Override
-	public MemberPoBuilder setID(String id) {
-		super.setID(id);
+	public MemberPoBuilder setId(String id) {
+		super.setId(id);
 		return this;
 	}
 
@@ -81,7 +81,7 @@ public class MemberPoBuilder extends MemberInfoBuilder {
 
 	@Override
 	public MemberPoBuilder setContactInfo(ContactInfo contact) {
-		super.setContactInfo(contact);
+		super.setContactInfo(new ContactPoBuilder(contact).getContactInfo());
 		return this;
 	}
 
@@ -106,10 +106,10 @@ public class MemberPoBuilder extends MemberInfoBuilder {
 			throw new IllegalStateException("Lack Of Info");
 
 		if (type == Type.BUSINESS)
-			return new EnterpriseMemberPo().setID(id).setName(name).setPasswordHash(passwordHash).setCredit(credit)
+			return new EnterpriseMemberPo().setId(id).setName(name).setPasswordHash(passwordHash).setCredit(credit)
 					.setContact(contact).setEnterprise(enterprise);
 		else
-			return new PersonalMemberPo().setID(id).setName(name).setPasswordHash(passwordHash).setCredit(credit)
+			return new PersonalMemberPo().setId(id).setName(name).setPasswordHash(passwordHash).setCredit(credit)
 					.setContact(contact).setBirthday(birthday);
 	}
 }

@@ -23,6 +23,7 @@ public class ContactPo extends ContactInfo {
 	 *            the cid<br>
 	 * @return this instance<br>
 	 */
+
 	public ContactPo setCid(int cid) {
 		this.cid = cid;
 		return this;

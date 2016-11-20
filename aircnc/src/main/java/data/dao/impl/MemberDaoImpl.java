@@ -28,7 +28,7 @@ public class MemberDaoImpl implements MemberDao {
 	static {
 		for (int i = 0; i < 5; i++) {
 			MemberPoBuilder b = new MemberPoBuilder(testType[i]).setName(testName[i]).setContactInfo(c)
-					.setCredit(testCredit[i]).setID(testID[i]).setEnterprise(testExtra[i]).setPasswordHash(testPass);
+					.setCredit(testCredit[i]).setId(testID[i]).setEnterprise(testExtra[i]).setPasswordHash(testPass);
 			if (i <= 2)
 				b.setBirthday(new LocalDateStringConverter().fromString(testExtra[i]));
 			testData.add(b.getMemberInfo());
@@ -38,13 +38,16 @@ public class MemberDaoImpl implements MemberDao {
 
 	private MemberHibernator hiber;
 
+	public MemberDaoImpl(MemberHibernator hiber) {
+		this.hiber = hiber;
+	}
+
 	@Override
 	public boolean addMember(final MemberPo po) {
 		if (po == null)
 			return false;
 
 		return hiber.addMember(po);
-
 	}
 
 	@Override
@@ -68,12 +71,13 @@ public class MemberDaoImpl implements MemberDao {
 
 	@Override
 	public boolean existsMember(final String id) {
+//		System.out.println(id);
 		return hiber.existId(parseId(id));
 	}
 
 	// parse an id string. if invalid, throw IAE.
 	private static final int parseId(final String id) {
-		if (MemberInfoTemplate.checkID(id))
+		if (!MemberInfoTemplate.checkID(id))
 			throw new IllegalArgumentException("Wrong ID");
 
 		return Integer.parseInt(id);

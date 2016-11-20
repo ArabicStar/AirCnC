@@ -27,7 +27,7 @@ public class PromotionServiceImpl implements PromotionService {
 		/**
 		 * TODO:返回值应该修改
 		 */
-		return new OrderVo(new OrderPo(), memberDao.findMember(null));
+		return new OrderVo();
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class PromotionServiceImpl implements PromotionService {
 		/**
 		 * TODO:返回值应该修改
 		 */
-		return new OrderVo(new OrderPo(), memberDao.findMember(null));
+		return new OrderVo();
 	}
 
 }
