@@ -14,8 +14,6 @@ import utils.info.order.OrderStatus;
  * 
  */
 public class OrderVo extends OrderInfo {
-	
-
 //	public OrderVo(OrderPo orderPo, MemberPo memberPo) {
 //		String userInfo = memberPo.getName() + "(" + memberPo.getCredit() + ")";
 //		this.add(String.valueOf(orderPo.getId()));
@@ -135,6 +133,17 @@ public class OrderVo extends OrderInfo {
 	@Override
 	public OrderVo setHasChildren(boolean hasChildren) {
 		this.hasChildren = hasChildren;
+		return this;
+	}
+	@Override
+	public OrderVo setPrice(double price) {
+		if(price < 0) {
+			/**
+			 * TODO:错误信息处理
+			 */
+			return null;
+		}
+		this.price = price;
 		return this;
 	}
 

@@ -24,6 +24,8 @@ public abstract class OrderInfoTemplate {
 	 * 除去小孩的总人数
 	 */
 	protected int peopleNumber;
+	
+	protected double price;
 
 	protected boolean hasChildren;
 

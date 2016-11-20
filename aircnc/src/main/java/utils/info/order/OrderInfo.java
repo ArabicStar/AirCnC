@@ -85,4 +85,19 @@ public abstract class OrderInfo extends OrderInfoTemplate {
 		return this;
 	}
 	
+	public double getPrice() {
+		return price;
+	}
+	
+	public OrderInfo setPrice(double price) {
+		if(price < 0) {
+			/**
+			 * TODO:错误信息处理
+			 */
+			return null;
+		}
+		this.price = price;
+		return this;
+	}
+	
 }

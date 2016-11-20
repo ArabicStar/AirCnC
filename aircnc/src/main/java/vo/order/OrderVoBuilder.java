@@ -9,7 +9,7 @@ public class OrderVoBuilder extends OrderInfoBuilder {
 		return new OrderVo().setEntryTime(entryTime).setHasChildren(hasChildren)
 				.setLastTime(lastTime).setOrderId(orderId).setPeopleNumber(peopleNumber)
 				.setRoomType(roomType).setStatus(status).setStayDays(stayDays)
-				.setUserId(userId);
+				.setUserId(userId).setPrice(price);
 	}
 	
 	 
