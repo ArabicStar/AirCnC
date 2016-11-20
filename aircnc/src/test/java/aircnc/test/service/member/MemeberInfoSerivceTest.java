@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import data.dao.MemberDao;
 import data.dao.impl.MemberDaoImpl;
+import data.hibernate.impl.member.MemberHibernatorImpl;
 import service.impl.member.MemberInfoManager;
 import service.impl.member.MemberAccountManager;
 import service.member.MemberAccountService;
@@ -21,7 +22,7 @@ public class MemeberInfoSerivceTest {
 
 	@Before
 	public void setUp() throws Exception {
-		dao = new MemberDaoImpl();
+		dao = new MemberDaoImpl(new MemberHibernatorImpl());
 		account = new MemberAccountManager(dao);
 		info = new MemberInfoManager(null, account, dao, null);
 	}

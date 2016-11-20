@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import data.dao.MemberDao;
 import data.dao.impl.MemberDaoImpl;
+import data.hibernate.impl.member.MemberHibernatorImpl;
 import service.impl.member.MemberAccountManager;
 import service.member.MemberAccountService;
 import utils.info.member.MemberInfo;
@@ -21,7 +22,7 @@ public class MemberAccountServiceTest {
 
 	@Before
 	public void setUp() throws Exception {
-		dao = new MemberDaoImpl();
+		dao = new MemberDaoImpl(new MemberHibernatorImpl());
 		acc = new MemberAccountManager(dao);
 	}
 
@@ -38,7 +39,7 @@ public class MemberAccountServiceTest {
 	public void testLogin() {
 		MemberInfo v = acc.login("11111111", "12345678".hashCode());
 		assertEquals("AA", v.getName());
-		assertEquals("AA", acc.getLoginedMember().getName());
+		assertEquals("AA", acc.getCurrentAccount().getName());
 		assertEquals(true, acc.isLogined());
 	}
 

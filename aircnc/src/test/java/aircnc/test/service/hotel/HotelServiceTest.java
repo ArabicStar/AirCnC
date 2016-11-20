@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import service.impl.HotelServiceImpl;
-import vo.HotelVo;
+import utils.info.hotel.RoomInfoTemplate;
 import vo.hotel.RoomVo;
 
 public class HotelServiceTest {
@@ -22,7 +22,7 @@ public class HotelServiceTest {
 	@Test
 	public void HotelServiceTest2(){
 		HotelServiceImpl hotelService = new HotelServiceImpl();
-		RoomVo room = new RoomVo(3,2);
+		RoomVo room =null;
 		hotelService.addRoom(room);
 		assertEquals(hotelService.getRooms(),room);
 	}

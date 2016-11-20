@@ -1,7 +1,7 @@
 package utils.info.hotel;
 
 public abstract class RoomInfoTemplate {
-	protected enum Type {
+	public enum Type {
 		SINGLE, DOUBLE, TRIPLE, OTHER;
 	}
 
