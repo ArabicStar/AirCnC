@@ -64,7 +64,7 @@ public class HotelDaoImpl implements HotelDao{
 
 	@Override
 	public boolean updateHotel(HotelPo hotelPo) {
-		String hotelId = hotelPo.getId();
+		String hotelId = hotelPo.getID();
 		if(map.get(hotelId) != null){
 			map.put(hotelId,hotelPo);
 			hotelDataHelper.updateHotelData(map);

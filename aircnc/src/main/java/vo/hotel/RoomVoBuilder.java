@@ -5,7 +5,12 @@ import utils.info.hotel.RoomInfoBuilder;
 
 public class RoomVoBuilder extends RoomInfoBuilder{
 	
-
+	private static final RoomVo INVALID_ROOM_VO;
+	static {
+		INVALID_ROOM_VO = new RoomVo(null);
+		INVALID_ROOM_VO.invalidate();
+	}
+	
 	protected RoomVoBuilder(RoomInfo info) {
 		this(info.getType());
 		this.setName(info.getName()).setPeopleNum(info.getPeopleNum()).setRoomNum(info.getRoomNum());

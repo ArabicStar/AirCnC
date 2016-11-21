@@ -33,7 +33,7 @@ public class HotelVoBuilder extends HotelInfoBuilder{
 	@Override
 	public HotelVo getHotelInfo() {
 		if (!isReady())
-			return null;
+			throw new IllegalArgumentException("Invalid HotelInfo Instance");
 
 		return new HotelVo().setID(id).setName(name).setScope(scope).setLocation(location)
 				.setIntro(introduction).setStar(star).setGrade(grade);

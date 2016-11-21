@@ -13,7 +13,7 @@ import service.query.QueryService;
 import utils.condition.CreditChangeCondition;
 import utils.condition.OrderCondition;
 import utils.info.member.MemberInfo;
-import vo.HotelVo;
+import vo.hotel.HotelVo;
 import vo.member.MemberVoBuilder;
 import vo.member.credit.CreditChangeVo;
 import vo.order.OrderVo;
