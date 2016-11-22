@@ -2,9 +2,8 @@ package service;
 
 import java.util.List;
 
-import po.hotel.RoomPo;
-import vo.CommentVo;
-import vo.HotelVo;
+import vo.hotel.CommentVo;
+import vo.hotel.HotelVo;
 import vo.hotel.RoomVo;
 import vo.order.OrderVo;
 

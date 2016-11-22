@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping">
+<!-- Generated 2016-11-17 15:10:14 by Hibernate Tools 3.5.0.Final -->
+<!-- ContactPo mapping xml -->
+<hibernate-mapping>
+	<class name="po.hotel.HotelPo" table="hotels">
+	
+		<!-- hotelId, the key column, auto increase -->
+		<id column="id" name="numId" type="integer">
+			<generator class="assigned" />
+		</id>
+		
+		<!-- name -->
+		<property column="name" generated="never" lazy="false" name="name"
+			type="string" />
+			
+		<!-- passwordHash -->
+		<property column="pwd" generated="never" lazy="false" name="passwordHash"
+			type="integer" />
+			
+		<!-- star -->
+		<property column="star" generated="never" lazy="false" name="star"
+			type="integer"
+			
+		<!-- grade -->
+		<property column="grade" generated="never" lazy="false" name="grade"
+			type="double"
+			
+		<!-- scope -->
+		<property column="scope" generated="never" lazy="false" name="scope"
+			type="string" />
+			
+		<!-- location -->
+		<property column="location" generated="never" lazy="false" 
+			name="location" type="string" />
+			
+		<!-- introduction -->
+		<property column="intro" generated="never" lazy="false"
+			name="introduction" type="string"
+			
+		<!-- association table -->
+		
+	</class>
+</hibernate-mapping>
+
+
+			
+		
+	</class>
+</hibernate-mapping>

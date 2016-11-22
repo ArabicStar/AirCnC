@@ -18,19 +18,19 @@ public abstract class HotelInfoBuilder extends HotelInfoTemplate{
 	public abstract HotelInfoBuilder setName(String name);
 	
 	public HotelInfoBuilder setScope(String scope) {
-		if (checkHotelScope(scope))
+		if (scope != null)
 			this.scope = scope;
 		return this;
 	}
 	
 	public HotelInfoBuilder setLocation(String locaiton) {
-		if (checkHotelLocation(locaiton))
+		if (locaiton != null)
 			this.location = locaiton;
 		return this;
 	}
 	
 	public HotelInfoBuilder setIntro(String intro) {
-		if (checkHotelScope(intro))
+		if (intro != null)
 			this.introduction = intro;
 		return this;
 	}
@@ -43,7 +43,7 @@ public abstract class HotelInfoBuilder extends HotelInfoTemplate{
 	
 	
 	public HotelInfoBuilder setGrade(Double grade) {
-		if (checkHotelGrade(grade))
+		if (grade != 0)
 			this.grade = grade;
 		return this;
 	}

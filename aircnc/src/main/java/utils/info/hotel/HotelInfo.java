@@ -2,11 +2,41 @@ package utils.info.hotel;
 
 import java.util.List;
 
+
+/**
+ * Abstract of hotel info<br>
+ * Immutable object.<br>
+ * All setter parameters will be assumed checked already, so checks are skipped.
+ * <br>
+ * 
+ * @author jqwu
+ *
+ */
 public abstract class HotelInfo extends HotelInfoTemplate{
+	
+	/**
+	 * mark a HotelInfo instance is valid or not. <br>
+	 */
 	protected boolean isValid;
 
+	/**
+	 * buffered blank string
+	 */
 	private static final String BLANK = "";
 
+	
+	/**
+	 * Default initialization <br>
+	 * <br>
+	 * <b>Default value:</b>
+	 * <ul>
+	 * <li>String fields : blank string <br>
+	 * <li>instance fields : null <br>
+	 * <li>integer fileds : 0 <br>
+	 * </ul>
+	 * 
+	 * @param type
+	 */
 	protected HotelInfo() {
 		id = BLANK;
 		name = BLANK;

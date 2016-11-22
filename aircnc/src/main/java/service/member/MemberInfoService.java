@@ -3,7 +3,7 @@ package service.member;
 import java.util.List;
 
 import utils.info.member.MemberInfo;
-import vo.HotelVo;
+import vo.hotel.HotelVo;
 import vo.member.credit.CreditChangeVo;
 import vo.order.OrderVo;
 
