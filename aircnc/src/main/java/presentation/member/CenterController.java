@@ -35,6 +35,9 @@ public class CenterController extends Application{
 	private final static int Login_Width = 550;
 	private final static int Login_Height = 385;
 	
+	private final static int Client_Width = 1024;
+	private final static int Client_Height = 1024;
+	
 
 	public static void main(String[] args) throws Exception {
 		launch(args);
@@ -98,16 +101,16 @@ public class CenterController extends Application{
 	 * add the pane of business register (MemberRegisterEnterprisePane)
 	 */
 	public void addRegisterBusinessPane(){
-//		start.getBorderPane().getChildren().clear();
-//		registerBusiness = new MemberRegisterEnterprisePane();
-//		registerBusiness.getController().setCenterController(this);
-//		start.getBorderPane().setCenter(registerPerson.getPane());
+		start.getBorderPane().getChildren().clear();
+		registerBusiness = new MemberRegisterEnterprisePane();
+		registerBusiness.getController().setCenterController(this);
+		start.getBorderPane().setCenter(registerBusiness.getPane());
 	}
 	
 	/**
 	 * jump to the main client
 	 */
-	public void jumpToClient(){
+	public void initializeClient(){
 		
 	}
 

@@ -13,10 +13,10 @@
          <children>
             <HBox styleClass="choice">
                <children>
-                  <RadioButton fx:id="personal" layoutX="162.0" layoutY="92.0" mnemonicParsing="false" text="普通会员" />
                   <RadioButton fx:id="business" mnemonicParsing="false" text="企业会员" />
                </children>
             </HBox>
+            <RadioButton fx:id="personal" mnemonicParsing="false" text="普通会员" />
             <TextField fx:id="username" styleClass="textfield" />
             <PasswordField fx:id="password" styleClass="passwordfield" />
             <PasswordField fx:id="confirmPassword" styleClass="passwordfield" />

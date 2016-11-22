@@ -42,7 +42,7 @@ public class MemberRegisterEnterpriseController implements Initializable{
 	@FXML
 	public void handleConfirm(){
 		//这里将键入的数据传入逻辑层，跳转至memberSignInPane。
-		
+		controller.addSignInPane();
 		
 	}
 	

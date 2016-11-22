@@ -22,11 +22,6 @@ public class DataFactoryImpl implements DataFactory{
 		return null;
 	}
 
-	public MarketDataHelper getMarketDataHelper() {
-		MarketDataHelper marketDao = new MarketDataTxtHelper();
-		//MarketDao marketDao = new MarketDataMysqlHelper();
-		return marketDao;
-	}
 
 	@Override
 	public HotelDataHelper getHotelDataHelper() {
@@ -41,6 +36,12 @@ public class DataFactoryImpl implements DataFactory{
 		PromotionDataHelper promotionDao = new PromotionDataTxtHelper();
 		
 		return promotionDao;
+	}
+
+	@Override
+	public MarketDataHelper getMarketDataHelper() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

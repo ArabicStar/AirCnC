@@ -11,6 +11,11 @@ import presentation.member.CenterController;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Button;
 
+/**
+ * the controller of personal register pane.
+ * @author paranoia
+ *
+ */
 public class MemberRegisterPersonController implements Initializable{
 	
 	@FXML 
@@ -62,6 +67,7 @@ public class MemberRegisterPersonController implements Initializable{
 	@FXML
 	public void handleConfirm(){
 		//将数据传入逻辑层，跳转至memberSignInPane
+		controller.addSignInPane();
 	}
 	
 	/**
