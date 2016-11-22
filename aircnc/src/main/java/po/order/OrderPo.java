@@ -1,6 +1,8 @@
 package po.order;
 
 /**
+ * FIXME:修正这个类的继承关系，重写属性和方法，构造方法也要改
+ * FIXME:注意涉及构造方法的地方要在修改后看一下是否会报错
  * id 订单编号 
  * hotelId 酒店编号 
  * userId 用户编号 

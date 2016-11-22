@@ -19,8 +19,8 @@ public class OrderLogicServiceImpl implements OrderLogicService {
 	private OrderDao orderDao;
 
 	/**
-	 * FIXME: 这个构造函数涉及到的地方特别多，注意修改用到OrderServiceImpl的地方
-	 * @param hotelId
+	 * 订单逻辑操作的接口实现类
+	 * @param hotelId 酒店的Id
 	 */
 	public OrderLogicServiceImpl(int hotelId){
 		this.hotelId = hotelId;
@@ -29,6 +29,11 @@ public class OrderLogicServiceImpl implements OrderLogicService {
 		this.hotelOrderList = orderDao.getOrders(hotelId);
 	}
 
+	/**
+	 * 执行订单
+	 * @param orderId 订单的Id
+	 * @return 成功执行则返回true，不成功则返回false
+	 */
 	@Override
 	public boolean finishOrder(int orderId) {
 		OrderPo orderPo = orderDao.getOrder(orderId);
@@ -58,6 +63,13 @@ public class OrderLogicServiceImpl implements OrderLogicService {
 		return false;
 	}
 
+	/**
+	 * 延迟订单的执行时间
+	 * @param orderId 订单的Id
+	 * @return 成功延迟则返回true，不成功则返回false
+	 * TODO:重写该方法
+	 * 原因：这里的时间计算方法不一样
+	 */
 	@Override
 	public boolean delayOrder(int orderId, String delayTime) {
 		OrderPo orderPo = orderDao.getOrder(orderId);
@@ -83,6 +95,11 @@ public class OrderLogicServiceImpl implements OrderLogicService {
 		return false;
 	}
 	
+	/**
+	 * 取消订单
+	 * @param orderId 订单的Id
+	 * @return 成功取消则返回true，不成功则返回false
+	 */
 	@Override
 	public boolean revealOrder(int orderId) {
 		OrderPo orderPo = orderDao.getOrder(orderId);

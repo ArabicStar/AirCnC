@@ -24,9 +24,8 @@ public class OrderListingServiceImpl implements OrderListingService {
 	private MemberDao memberDao;
 
 	/**
-	 * FIXME: 这个构造函数涉及到的地方特别多，注意修改用到OrderServiceImpl的地方
-	 * 
-	 * @param hotelId
+	 * 用于获取各种状态的订单的构造方法
+	 * @param hotelId 酒店的Id
 	 */
 	public OrderListingServiceImpl(int hotelId) {
 		this.hotelId = hotelId;
@@ -35,23 +34,43 @@ public class OrderListingServiceImpl implements OrderListingService {
 		this.hotelOrderList = orderDao.getOrders(hotelId);
 	}
 
+	/**
+	 * @param hotelId 酒店的Id
+	 * @return 所有的订单
+	 */
 	@Override
 	public List<OrderVo> getAllOrders(int hotelId) {
 		List<OrderVo> list = new ArrayList<OrderVo>();
 		for (OrderPo orderPo : hotelOrderList) {
 			MemberPo memberPo = memberDao.findMember(Integer.toString(orderPo.getUserId()));
+			/**
+			 * FIXME:这里的orderVo并没有设置该有的属性，
+			 * 原因是在修改了构造方法后，为了让编译不报错
+			 * {@link vo.order.OrderVo}
+			 * 这里需要添加合适的构造方法
+			 */
 			OrderVo orderVo =new OrderVo(); //new OrderVo(orderPo, memberPo);
 			list.add(orderVo);
 		}
 		return list;
 	}
 
+	/**
+	 * @param hotelId 酒店的Id
+	 * @return 未执行的订单
+	 */
 	@Override
 	public List<OrderVo> getUnfinishedOrders(int hotelId) {
 		List<OrderVo> list = new ArrayList<OrderVo>();
 		for (OrderPo orderPo : hotelOrderList) {
 			if (orderPo.getStatus() == 0) {
 				MemberPo memberPo = memberDao.findMember(Integer.toString(orderPo.getUserId()));
+				/**
+				 * FIXME:这里的orderVo并没有设置该有的属性，
+				 * 原因是在修改了构造方法后，为了让编译不报错
+				 * {@link vo.order.OrderVo}
+				 * 这里需要添加合适的构造方法
+				 */
 				OrderVo orderVo = new OrderVo();
 				list.add(orderVo);
 			}
@@ -59,12 +78,22 @@ public class OrderListingServiceImpl implements OrderListingService {
 		return list;
 	}
 
+	/**
+	 * @param hotelId 酒店的Id
+	 * @return 已执行的订单
+	 */
 	@Override
 	public List<OrderVo> getFinishedOrders(int hotelId) {
 		List<OrderVo> list = new ArrayList<OrderVo>();
 		for (OrderPo orderPo : hotelOrderList) {
 			if (orderPo.getStatus() == 1) {
 				MemberPo memberPo = memberDao.findMember(Integer.toString(orderPo.getUserId()));
+				/**
+				 * FIXME:这里的orderVo并没有设置该有的属性，
+				 * 原因是在修改了构造方法后，为了让编译不报错
+				 * {@link vo.order.OrderVo}
+				 * 这里需要添加合适的构造方法
+				 */
 				OrderVo orderVo = new OrderVo();
 				list.add(orderVo);
 			}
@@ -72,12 +101,22 @@ public class OrderListingServiceImpl implements OrderListingService {
 		return list;
 	}
 
+	/**
+	 * @param hotelId 酒店的Id
+	 * @return 异常的订单
+	 */
 	@Override
 	public List<OrderVo> getAbnormalOrders(int hotelId) {
 		List<OrderVo> list = new ArrayList<OrderVo>();
 		for (OrderPo orderPo : hotelOrderList) {
 			if (orderPo.getStatus() == 2) {
 				MemberPo memberPo = memberDao.findMember(Integer.toString(orderPo.getUserId()));
+				/**
+				 * FIXME:这里的orderVo并没有设置该有的属性，
+				 * 原因是在修改了构造方法后，为了让编译不报错
+				 * {@link vo.order.OrderVo}
+				 * 这里需要添加合适的构造方法
+				 */
 				OrderVo orderVo = new OrderVo();
 				list.add(orderVo);
 			}

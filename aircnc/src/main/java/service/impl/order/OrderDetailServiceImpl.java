@@ -16,8 +16,9 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 	private OrderDao orderDao;
 	
 	/**
-	 * FIXME: 这个构造函数涉及到的地方特别多，注意修改用到OrderServiceImpl的地方
-	 * @param hotelId
+	 * 获取订单详细信息的接口实现类<br>
+	 * 负责返回订单的用户Id、订单的价格<br>
+	 * @param hotelId 酒店的Id
 	 */
 	public OrderDetailServiceImpl(int hotelId){
 		this.hotelId = hotelId;
@@ -25,6 +26,12 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 		this.hotelOrderList = orderDao.getOrders(hotelId);
 	}
 
+
+	/**
+	 * @param orderId 订单的Id
+	 * @return 返回订单的用户Id，查找失败则返回-1
+	 * FIXME:返回值类型应该为String {@link utils.info.order.OrderInfoTemplate}
+	 */
 	@Override
 	public int getOrderUser(int orderId) {
 		for (OrderPo orderPo : hotelOrderList) {
