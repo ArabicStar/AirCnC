@@ -33,7 +33,7 @@ public class MemberRegisterPersonPane{
             URL location = getClass().getResource("fxml/MemberRegisterPerson.fxml");
             loader.setLocation(location);
             loader.setBuilderFactory(new JavaFXBuilderFactory());
-            //javafx.scene.Parent root = (javafx.scene.Parent) loader.load(location.openStream());
+
             loader.load();
             controller = (MemberRegisterPersonController)loader.getController();
             registerPersonLayout = loader.getRoot();

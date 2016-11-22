@@ -38,7 +38,11 @@ public class MemberRegisterPersonController implements Initializable{
 	private Button confirm;
 	
 	private CenterController controller;
-
+	
+	/**
+	 * Initializes the controller class. This method is automatically called
+     * after the fxml file has been loaded.
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		//add the content of chioces
@@ -49,11 +53,21 @@ public class MemberRegisterPersonController implements Initializable{
 		//use "new Separator" to create subitems.
 	}
 	
+	/**
+	 * handle the button action (Confirm)
+	 * check the input value
+	 * if the value is valid, jump to sign in pane (MemberSignInPane).
+	 * otherwise, pop up error message.
+	 */
 	@FXML
 	public void handleConfirm(){
 		//将数据传入逻辑层，跳转至memberSignInPane
 	}
 	
+	/**
+	 * set the centerController
+	 * @param centerController
+	 */
 	public void setCenterController(CenterController centerController) {
 		// TODO Auto-generated method stub
 		this.controller=centerController;

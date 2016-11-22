@@ -20,7 +20,7 @@
             <TextField fx:id="username" styleClass="textfield" />
             <PasswordField fx:id="password" styleClass="passwordfield" />
             <PasswordField fx:id="confirmPassword" styleClass="passwordfield" />
-            <Button fx:id="next" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" styleClass="confirm" text="下一步">
+            <Button fx:id="next" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleNext" styleClass="confirm" text="下一步">
                <VBox.margin>
                   <Insets top="30.0" />
                </VBox.margin></Button>

@@ -8,13 +8,14 @@ import java.time.LocalDate;
 import org.apache.commons.lang.StringUtils;
 
 /**
- * Builder or MemberPo<br>
+ * Builder or MarketPo<br>
  *
- * @author ClevelandAlto
+ * @author paranoia
  *
  */
 public class MarketPoBuilder extends MarketInfoBuilder {
-	private int passwordHash;
+	
+	private int passwordHash = Integer.MIN_VALUE;
 
 	private static final MarketPo INVALID_MARKET_PO;
 	static {
@@ -61,6 +62,6 @@ public class MarketPoBuilder extends MarketInfoBuilder {
 		if (!isReady())
 			return null;
 
-		return new MarketPo().setID(id).setName(name);
+		return new MarketPo().setId(id).setName(name);
 	}
 }

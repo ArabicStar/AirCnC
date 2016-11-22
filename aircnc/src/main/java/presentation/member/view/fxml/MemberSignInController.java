@@ -45,11 +45,21 @@ public class MemberSignInController implements Initializable{
 		
 	}
 	
+	/**
+	 * handle the button action (Confirm)
+	 * check the input value
+	 * if the value is valid, jump to main client.
+	 * otherwise, pop up error message.
+	 */
 	@FXML
 	public void handleConfirm(){
 		//按下登陆键，验证正确性，正确则跳只memberMainPane，错误跳出对话框
 	}
 	
+	/**
+	 * handle the button action (Register)
+	 * jump to the register pane.
+	 */
 	@FXML
 	public void handleRegister(){
 		//注册跳转按钮，跳转至memberRegisterMainPane
@@ -58,6 +68,10 @@ public class MemberSignInController implements Initializable{
 		
 	}
 	
+	/**
+	 * set the centerController
+	 * @param centerController
+	 */
 	public void setCenterController(CenterController controller){
 		this.controller=controller;
 	}

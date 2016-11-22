@@ -14,6 +14,7 @@ import presentation.member.view.MemberRegisterEnterprisePane;
 
 /**
  * the whole stage.
+ * contains the connection of every pane of sign in and register.
  * @author paranoia
  *
  */
@@ -30,7 +31,6 @@ public class CenterController extends Application{
 	
 	private Scene scene;
 	
-	private MemberSignInController signInController;
 	
 	private final static int Login_Width = 550;
 	private final static int Login_Height = 385;
@@ -64,6 +64,9 @@ public class CenterController extends Application{
         primaryStage.show();
 	}
 	
+	/**
+	 * add the pane of sign in (MemberSignInPane)
+	 */
 	public void addSignInPane(){
 		start.getBorderPane().getChildren().clear();
 		signIn = new MemberSignInPane();
@@ -71,6 +74,9 @@ public class CenterController extends Application{
 		signIn.getController().setCenterController(this);
 	}
 	
+	/**
+	 * add the pane of register (MemberRegisterMainPane)
+	 */
 	public void addRegisterPane(){
 		start.getBorderPane().getChildren().clear();
 		registerMain = new MemberRegisterMainPane();
@@ -78,18 +84,31 @@ public class CenterController extends Application{
 		start.getBorderPane().setCenter(registerMain.getPane());
 	}
 	
+	/**
+	 * add the pane of personal register (MemberRegisterPersonPane)
+	 */
 	public void addRegisterPersonPane(){
-		start.getBorderPane().getChildren().clear();
-		registerMain = new MemberRegisterMainPane();
-		registerMain.getController().setCenterController(this);
-		start.getBorderPane().setCenter(registerMain.getPane());
-	}
-	
-	public void addRegisterBusinessPane(){
 		start.getBorderPane().getChildren().clear();
 		registerPerson = new MemberRegisterPersonPane();
 		registerPerson.getController().setCenterController(this);
 		start.getBorderPane().setCenter(registerPerson.getPane());
+	}
+	
+	/**
+	 * add the pane of business register (MemberRegisterEnterprisePane)
+	 */
+	public void addRegisterBusinessPane(){
+//		start.getBorderPane().getChildren().clear();
+//		registerBusiness = new MemberRegisterEnterprisePane();
+//		registerBusiness.getController().setCenterController(this);
+//		start.getBorderPane().setCenter(registerPerson.getPane());
+	}
+	
+	/**
+	 * jump to the main client
+	 */
+	public void jumpToClient(){
+		
 	}
 
 }

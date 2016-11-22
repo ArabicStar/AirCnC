@@ -1,25 +1,22 @@
 package po.market;
 
 
+import org.apache.commons.lang.StringUtils;
+
 import utils.info.market.MarketInfo;
 
 public class MarketPo extends MarketInfo{
-
 	protected int passwordHash;
+	protected int numId = Integer.MIN_VALUE;
 
-	public MarketPo() {
+	protected MarketPo() {
 		super();
 	}
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getId() {
-		// TODO Auto-generated method stub
+		if (isValid())
+			return StringUtils.deleteWhitespace(this.name);
 		return null;
 	}
 
@@ -29,8 +26,32 @@ public class MarketPo extends MarketInfo{
 		return Integer.MIN_VALUE;
 	}
 
-	public MarketPo setID(String id) {
+	public int getNumId() {
+		return numId;
+	}
+
+
+	/**
+	 * Set id of a integer.<br>
+	 * Only for hibernate.<br>
+	 * 
+	 * @param numId
+	 */
+	public void setNumId(int numId) {
+		this.numId = numId;
+		this.id = formatID(numId);
+	}
+
+	/**
+	 * Set id of a string.<br>
+	 * Only for hibernate and builder.<br>
+	 * 
+	 * @param id
+	 * @return this instance
+	 */
+	public MarketPo setId(String id) {
 		this.id = id;
+		this.numId = Integer.valueOf(id);
 		return this;
 	}
 
