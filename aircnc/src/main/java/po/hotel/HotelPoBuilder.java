@@ -1,10 +1,13 @@
 package po.hotel;
 
+import java.util.List;
+
 import utils.info.hotel.HotelInfo;
 import utils.info.hotel.HotelInfoBuilder;
 
 public class HotelPoBuilder extends HotelInfoBuilder{
 	private int passwordHash = Integer.MIN_VALUE;
+	private List<RoomPo> rooms = null;
 	
 	private static final HotelPo INVALID_HOTEL_PO;
 	static {
@@ -47,7 +50,7 @@ public class HotelPoBuilder extends HotelInfoBuilder{
 			throw new IllegalStateException("Lack Of Info");
 		
 		return new HotelPo().setID(id).setName(name).setName(name).setPasswordHash(passwordHash).setScope(scope).setLocation(location)
-				.setIntro(introduction).setStar(star).setGrade(grade);
+				.setIntro(introduction).setStar(star).setGrade(grade).setRooms(rooms);
 	}
 	
 	/**
@@ -56,6 +59,11 @@ public class HotelPoBuilder extends HotelInfoBuilder{
 	 */
 	public HotelPoBuilder setPasswordHash(int passwordHash) {
 		this.passwordHash = passwordHash;
+		return this;
+	}
+	
+	public HotelPoBuilder setRooms(List<RoomPo> rooms){
+		this.rooms = rooms;
 		return this;
 	}
 	

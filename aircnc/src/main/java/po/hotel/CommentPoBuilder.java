@@ -27,8 +27,8 @@ public class CommentPoBuilder extends CommentInfoBuilder{
 		if (!isReady())
 			return new CommentPo(0);
 
-		return new CommentPo(grade).setHotelId(hotelId).setMemberId(memberId).setCheckInTime(checkInTime)
-				.setCommentTime(commentTime);
+		return new CommentPo(grade).setHotelId(hotelId).setMemberId(memberId).
+				setCheckInTime(checkInTime).setCommentTime(commentTime);
 	}
 
 }

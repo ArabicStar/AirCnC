@@ -1,11 +1,14 @@
 package vo.hotel;
 
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
 
 import utils.info.hotel.HotelInfo;
 import utils.info.hotel.HotelInfoBuilder;
 
 public class HotelVoBuilder extends HotelInfoBuilder{
+	private List<RoomVo> rooms;
 
 	private static final HotelVo INVALID_HOTEL_VO;
 	static {
@@ -21,6 +24,11 @@ public class HotelVoBuilder extends HotelInfoBuilder{
 		super(info);
 		String name = StringUtils.deleteWhitespace(info.getName());
 		setName(name);
+	}
+	
+	HotelVoBuilder setRooms(List<RoomVo> rooms){
+		this.rooms = rooms;
+		return this;
 	}
 	
 	@Override
@@ -42,6 +50,12 @@ public class HotelVoBuilder extends HotelInfoBuilder{
 	@Override
 	public HotelVoBuilder setScope(String scope) {
 		super.setScope(scope);
+		return this;
+	}
+	
+	@Override
+	public HotelVoBuilder setID(String id) {
+		this.id = id;
 		return this;
 	}
 	

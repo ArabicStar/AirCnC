@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping">
+<!-- Generated 2016-11-22 16:22:46 by Hibernate Tools 3.5.0.Final -->
+<!-- CommentPo mapping xml -->
+<hibernate-mapping>
+	<class name="po.hotel.CommentPo" table="rooms">
+	
+		<!-- key column, auto generated -->
+		<id name="cid" column="cid" type="integer">
+			<generator class="native" />
+		</id>
+
+		<!-- hotelId -->
+		<property column="hid" name="hotelId" type="integer" />
+		
+		<!-- memberId -->
+		<property column="mid" name="memberId" type="integer" />
+		
+		<!-- grade -->
+		<property column="grade" name="grade" type="integer" nuo-null="true"/>
+		
+		<!-- content -->
+		<property column="content" name="content" type="string" />
+		
+		<!-- checkInTime -->
+		<property column="checktime" name="checkInTime" type="date" />
+		
+		<!-- commentTime -->
+		<property column="comtime" name="commentTime" generated="insert" 
+			not-null="true" sql-stamp="timestamp" default="CURRENT_TIMESTAMP"/>
+		
+	</class>
+</hibernate-mapping>

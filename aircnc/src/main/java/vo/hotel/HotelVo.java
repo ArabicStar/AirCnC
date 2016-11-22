@@ -1,13 +1,22 @@
 package vo.hotel;
 
+import java.util.List;
+
 import utils.info.hotel.HotelInfo;
 
 public class HotelVo extends HotelInfo{
+	
+	private List<RoomVo> rooms;
 	
 	public String getName() {
 		if (isValid())
 			return this.name;
 		return null;
+	}
+	
+	HotelVo setRooms(List<RoomVo> rooms){
+		this.rooms = rooms;
+		return this;
 	}
 	
 	HotelVo setID(String id){
