@@ -1,12 +1,13 @@
 package presentation.member.view;
 
 import java.io.IOException;
+import java.net.URL;
 
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.layout.Pane;
-import presentation.member.CenterController;
 import presentation.member.view.fxml.MemberRegisterMainController;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.Node;
 
 /**
  * the pane of register(Main)
@@ -15,33 +16,37 @@ import javafx.scene.layout.BorderPane;
  */
 
 public class MemberRegisterMainPane {
-	
-	private BorderPane rootLayout;
+
 	private Pane registerLayout;
 	private MemberRegisterMainController controller;
-	private CenterController centerController;
 	
-	public MemberRegisterMainPane(BorderPane rootLayout,CenterController centerController){
-		this.rootLayout = rootLayout;
-		this.centerController = centerController;
+	public MemberRegisterMainPane(){
 		init();
 	}
 	
 	public void init() {
         try {
-            // Load sign in overview.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MemberStartPane.class.getResource("fxml/MemberRegisterMain.fxml"));
-            controller.setCenterController(centerController);
-            controller = loader.getController();
+			
+			FXMLLoader loader = new FXMLLoader();
+            URL location = getClass().getResource("fxml/MemberRegisterMain.fxml");
+            loader.setLocation(location);
+            loader.setBuilderFactory(new JavaFXBuilderFactory());
+            //javafx.scene.Parent root = (javafx.scene.Parent) loader.load(location.openStream());
             loader.load();
+            controller = (MemberRegisterMainController)loader.getController();
 			registerLayout = loader.getRoot();
 
-            // Set sign in overview into the center of root layout.
-            rootLayout.setCenter(registerLayout);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+	
+	public MemberRegisterMainController getController(){
+		return controller;
+	}
+	
+	public Node getPane(){
+		return registerLayout;
+	}
 }

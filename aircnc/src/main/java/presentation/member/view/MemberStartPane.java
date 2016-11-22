@@ -11,7 +11,7 @@ import javafx.stage.StageStyle;
 
 /**
  * the pane of sign in(scene)
- * @author ParanoiaSun
+ * @author paranoia
  *
  */
 
@@ -31,14 +31,7 @@ public class MemberStartPane{
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MemberStartPane.class.getResource("fxml/MemberStart.fxml"));
             rootLayout = (BorderPane) loader.load();
-            primaryStage.initStyle(StageStyle.UNDECORATED);
 
-            // Show the scene containing the root layout.
-            Scene scene = new Scene(rootLayout,550,385);
-            primaryStage.setScene(scene);
-            primaryStage.setTitle("AirCnC");
-            primaryStage.setResizable(false);
-            primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }

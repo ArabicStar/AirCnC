@@ -1,11 +1,12 @@
 package presentation.member.view;
 
 import java.io.IOException;
+import java.net.URL;
 
 import javafx.fxml.FXMLLoader;
-import javafx.scene.layout.BorderPane;
+import javafx.fxml.JavaFXBuilderFactory;
+import javafx.scene.Node;
 import javafx.scene.layout.Pane;
-import presentation.member.CenterController;
 import presentation.member.view.fxml.MemberSignInController;
 
 /**
@@ -17,14 +18,10 @@ import presentation.member.view.fxml.MemberSignInController;
 public class MemberSignInPane {
 
 	private Pane signInLayout;
-	private BorderPane rootLayout;
 	private MemberSignInController controller;
-	private CenterController centerController;
 
 
-	public MemberSignInPane(BorderPane rootLayout,CenterController centerController){
-		this.rootLayout = rootLayout;
-		this.centerController = centerController;
+	public MemberSignInPane(){
 		init();
 	}
 
@@ -32,17 +29,25 @@ public class MemberSignInPane {
         try {
             // Load sign in overview.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MemberStartPane.class.getResource("fxml/MemberSignIn.fxml"));
-            controller = (MemberSignInController)loader.getController();
-            controller.setCenterController(centerController);
+            URL location = getClass().getResource("fxml/MemberSignIn.fxml");
+            loader.setLocation(location);
+            loader.setBuilderFactory(new JavaFXBuilderFactory());
+            //javafx.scene.Parent root = (javafx.scene.Parent) loader.load(location.openStream());
             loader.load();
+            controller = (MemberSignInController)loader.getController();
 			signInLayout = loader.getRoot();
 
-            // Set sign in overview into the center of root layout.
-            rootLayout.setCenter(signInLayout);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public MemberSignInController getController(){
+    	return this.controller;
+    }
+    
+    public Node getPane(){
+    	return signInLayout;
     }
 	
 	

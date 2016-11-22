@@ -53,10 +53,13 @@ public class MemberRegisterMainController implements Initializable{
 	public void handleConfirmPassword(){
 		//验证用户填写的正确性，正确就将内容传到逻辑层，逻辑层存入数据库，然后跳至下一个注册界面
 		//检查单选的选择，选择1则跳至memberRegsiterPerson，选择2则跳至memberRegisterBusiness
+//		if(password.getText().equals(confirmPassword.getText())){
+			controller.addRegisterPersonPane();
+//		}
 	}
 
 	public void setCenterController(CenterController centerController) {
 		// TODO Auto-generated method stub
-		this.controller=controller;
+		this.controller=centerController;
 	}
 }
