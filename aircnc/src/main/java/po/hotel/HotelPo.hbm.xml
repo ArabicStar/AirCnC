@@ -39,6 +39,10 @@
 		<property column="intro" generated="never" lazy="false"
 			name="introduction" type="string"
 			
-		<!-- association table -->		
+		<!-- association table -->
+		<set name="rooms" cascade="save-update,delete">
+            <key column="hotelId"></key>
+            <one-to-many class="po.hotel.RoomPo"/>
+        </set>		
 	</class>
 </hibernate-mapping>

@@ -8,6 +8,10 @@ public abstract class HotelInfoBuilder extends HotelInfoTemplate{
 	}
 	
 	
+	public HotelInfoBuilder(){
+		
+	}
+	
 	
 	public HotelInfoBuilder setID(String id) {
 		if (checkID(id))

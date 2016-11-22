@@ -1,13 +1,13 @@
 package po.hotel;
 
-import java.util.List;
+import java.util.Set;
 
 import utils.info.hotel.HotelInfo;
 import utils.info.hotel.HotelInfoBuilder;
 
 public class HotelPoBuilder extends HotelInfoBuilder{
 	private int passwordHash = Integer.MIN_VALUE;
-	private List<RoomPo> rooms = null;
+	private Set<RoomPo> rooms = null;
 	
 	private static final HotelPo INVALID_HOTEL_PO;
 	static {
@@ -32,9 +32,14 @@ public class HotelPoBuilder extends HotelInfoBuilder{
 		super(info);
 		// TODO Auto-generated constructor stub
 	}
-
+	
+	public HotelPoBuilder() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
 	@Override
-	public HotelInfoBuilder setName(String name) {
+	public HotelPoBuilder setName(String name) {
 		if (checkHotelName(name))
 			// insert blank space to avoid injection attack
 			this.name = name.replaceAll("(.{1})", "$1 ");
@@ -62,7 +67,7 @@ public class HotelPoBuilder extends HotelInfoBuilder{
 		return this;
 	}
 	
-	public HotelPoBuilder setRooms(List<RoomPo> rooms){
+	public HotelPoBuilder setRooms(Set<RoomPo> rooms){
 		this.rooms = rooms;
 		return this;
 	}
@@ -99,5 +104,12 @@ public class HotelPoBuilder extends HotelInfoBuilder{
 		super.setGrade(grade);
 		return this;
 	}
+	
+	@Override
+	public HotelPoBuilder setID(String id) {
+		super.setID(id);
+		return this;
+	}
+
 
 }

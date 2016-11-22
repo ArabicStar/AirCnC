@@ -1,6 +1,6 @@
 package po.hotel;
 
-import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -8,7 +8,7 @@ import utils.info.hotel.HotelInfo;
 
 public class HotelPo extends HotelInfo{
 	protected int passwordHash;
-	protected List<RoomPo> rooms;
+	protected Set<RoomPo> rooms;
 	
 	@Override
 	public String getName() {
@@ -28,7 +28,7 @@ public class HotelPo extends HotelInfo{
 		return this;
 	}
 	
-	public HotelPo setRooms(List<RoomPo> rooms){
+	public HotelPo setRooms(Set<RoomPo> rooms){
 		this.rooms = rooms;
 		return this;
 	}
