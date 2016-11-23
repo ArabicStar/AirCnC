@@ -13,5 +13,7 @@
 
 		<mapping resource="po/member/ContactPo.hbm.xml" />
 		<mapping resource="po/member/MemberPo.hbm.xml" />
+		<mapping resource="po/hotel/HotelPo.hbm.xml" />
+		<mapping resource="po/hotel/RoomPo.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>

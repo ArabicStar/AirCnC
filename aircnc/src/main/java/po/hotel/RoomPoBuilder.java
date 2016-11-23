@@ -12,8 +12,9 @@ public class RoomPoBuilder extends RoomInfoBuilder {
 	}
 
 	protected RoomPoBuilder(RoomInfo info) {
-		this(info.getType());
-		this.setName(info.getName()).setPeopleNum(info.getPeopleNum()).setRoomNum(info.getRoomNum());
+		super(info.getType());
+		this.setName(info.getName()).setPeopleNum(info.getPeopleNum()).
+			setRoomNum(info.getRoomNum()).setPrice(info.getPrice());
 	}
 	
 	protected RoomPoBuilder(String type){
@@ -31,12 +32,7 @@ public class RoomPoBuilder extends RoomInfoBuilder {
 
 	@Override
 	public RoomPoBuilder setName(String name) {
-		if (checkName(name))
-			// insert blank space to avoid injection attack
-			this.name = name.replaceAll("(.{1})", "$1 ");
-		else
-			throw new IllegalArgumentException("Wrong room name");
-
+		super.setName(name);
 		return this;
 	}
 
@@ -52,12 +48,22 @@ public class RoomPoBuilder extends RoomInfoBuilder {
 	}
 	
 	public RoomPoBuilder setPeopleNum(int peopleNum){
-		this.setPeopleNum(peopleNum);
+		super.setPeopleNum(peopleNum);
+		return this;
+	}
+	
+	public RoomPoBuilder setHotelId(String id){
+		super.setHotelId(id);
 		return this;
 	}
 	
 	public RoomPoBuilder setRoomNum(int roomNum){
-		this.setRoomNum(roomNum);
+		super.setRoomNum(roomNum);
+		return this;
+	}
+	
+	public RoomPoBuilder setPrice(double price){
+		super.setPrice(price);
 		return this;
 	}
 

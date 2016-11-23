@@ -7,41 +7,41 @@
 	<class name="po.hotel.HotelPo" table="hotels">
 	
 		<!-- hotelId, the key column, auto increase -->
-		<id column="id" name="numId" type="integer">
+		<id column="ID" name="numId" type="integer">
 			<generator class="assigned" />
 		</id>
 		
 		<!-- name -->
-		<property column="name" generated="never" lazy="false" name="name"
+		<property column="NAME" generated="never" lazy="false" name="name"
 			type="string" />
 			
 		<!-- passwordHash -->
-		<property column="pwd" generated="never" lazy="false" name="passwordHash"
+		<property column="PWD" generated="never" lazy="false" name="passwordHash"
 			type="integer" />
 			
 		<!-- star -->
-		<property column="star" generated="never" lazy="false" name="star"
-			type="integer"
+		<property column="STAR" generated="never" lazy="false" name="star"
+			type="integer" />
 			
 		<!-- grade -->
-		<property column="grade" generated="never" lazy="false" name="grade"
-			type="double"
+		<property column="GRADE" generated="never" lazy="false" name="grade"
+			type="double" />
 			
 		<!-- scope -->
-		<property column="scope" generated="never" lazy="false" name="scope"
+		<property column="SCOPE" generated="never" lazy="false" name="scope"
 			type="string" />
 			
 		<!-- location -->
-		<property column="location" generated="never" lazy="false" 
+		<property column="LOCATION" generated="never" lazy="false" 
 			name="location" type="string" />
 			
 		<!-- introduction -->
-		<property column="intro" generated="never" lazy="false"
-			name="introduction" type="string"
+		<property column="INTRODUCTION" generated="never" lazy="false"
+			name="introduction" type="string" />
 			
 		<!-- association table -->
-		<set name="rooms" cascade="save-update,delete">
-            <key column="hotelId"></key>
+		<set name="rooms" inverse="true" cascade="all">
+            <key column="HOTELID"></key>
             <one-to-many class="po.hotel.RoomPo"/>
         </set>		
 	</class>

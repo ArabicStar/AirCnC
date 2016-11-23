@@ -50,12 +50,12 @@ public class HotelPoBuilder extends HotelInfoBuilder{
 	}
 
 	@Override
-	public HotelInfo getHotelInfo() {
+	public HotelPo getHotelInfo() {
 		if (!isReady() && passwordHash != Integer.MIN_VALUE)
 			throw new IllegalStateException("Lack Of Info");
 		
 		return new HotelPo().setID(id).setName(name).setName(name).setPasswordHash(passwordHash).setScope(scope).setLocation(location)
-				.setIntro(introduction).setStar(star).setGrade(grade).setRooms(rooms);
+				.setIntroduction(introduction).setStar(star).setGrade(grade).setRooms(rooms);
 	}
 	
 	/**

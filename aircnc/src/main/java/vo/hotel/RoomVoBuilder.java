@@ -12,7 +12,7 @@ public class RoomVoBuilder extends RoomInfoBuilder{
 	}
 	
 	protected RoomVoBuilder(RoomInfo info) {
-		this(info.getType());
+		super(info.getType());
 		this.setName(info.getName()).setPeopleNum(info.getPeopleNum()).setRoomNum(info.getRoomNum());
 	}
 	
@@ -28,12 +28,12 @@ public class RoomVoBuilder extends RoomInfoBuilder{
 	}
 	
 	public RoomVoBuilder setPeopleNum(int peopleNum){
-		this.setPeopleNum(peopleNum);
+		super.setPeopleNum(peopleNum);
 		return this;
 	}
 	
 	public RoomVoBuilder setRoomNum(int roomNum){
-		this.setRoomNum(roomNum);
+		super.setRoomNum(roomNum);
 		return this;
 	}
 

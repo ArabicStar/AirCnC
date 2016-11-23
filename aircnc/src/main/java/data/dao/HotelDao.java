@@ -5,33 +5,51 @@ import java.util.List;
 import po.hotel.HotelPo;
 
 public interface HotelDao {
-	/**
-	 * @param hotelId
-	 * @return	获取酒店信息
-	 */
-	public HotelPo getHotel(int hotelId);
 	
 	/**
-	 * @param scope  输入商圈
-	 * @return	获取酒店列表
+	 * Find a hotel by id.<br>
+	 * 
+	 * @param id
+	 * @return a HotelPo<br>
+	 *         if not exist, return null<br>
 	 */
-	public List<HotelPo> getHotels(String scope);
+	public HotelPo findHotel(final String id);
+
+	/**
+	 * Delete a hotel by id.<br>
+	 * 
+	 * @param id
+	 * @return operation result <br>
+	 *         Fail if id does not exist.<br>
+	 */
+	public boolean deleteHotel(final String id);
+
+	/**
+	 * Update a hotel.<br>
+	 * The id is assumed being contained in po.<br>
+	 * 
+	 * @param po
+	 *            HotelPo to be updated.<br>
+	 * @return operation result<br>
+	 *         Fail if id does not exist.<br>
+	 */
+	public boolean updateHotel(final HotelPo po);
+
+	/**
+	 * Add a hotel<br>
+	 * 
+	 * @param po
+	 *            HotelPo to be added.<br>
+	 * @return operation result<br>
+	 *         Fail if id has existed.<br>
+	 */
+	public boolean addHotel(final HotelPo po);
 	
 	/**
-	 * @param hotelPo
-	 * @return	更新酒店信息
+	 * Query an hotel exists or not
+	 * 
+	 * @param id
+	 * @return whether given id exists or not<br>
 	 */
-	public boolean updateHotel(HotelPo hotelPo);
-	
-	/**
-	 * @param hotelPo
-	 * @return	添加酒店
-	 */
-	public boolean addHotelPo(HotelPo hotelPo);
-	
-	/**
-	 * @param hotelId
-	 * @return	删除酒店
-	 */
-	public boolean deleteHotelPo(int hotelId);
+	public boolean existHotel(final String id);
 }

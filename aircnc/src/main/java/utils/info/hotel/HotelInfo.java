@@ -62,13 +62,13 @@ public abstract class HotelInfo extends HotelInfoTemplate{
 		return null;
 	}
 	
-	public String getLocaiton() {
+	public String getLocation() {
 		if (isValid())
 			return location;
 		return null;
 	}
 	
-	public String getIntro() {
+	public String getIntroduction() {
 		if (isValid())
 			return introduction;
 		return null;

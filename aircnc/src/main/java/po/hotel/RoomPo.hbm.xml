@@ -7,18 +7,24 @@
 	<class name="po.hotel.RoomPo" table="rooms">
 	
 		<!-- key column, auto generated -->
-		<id name="cid" column="cid" type="integer">
+		<id column="ID" name="id" type="integer">
 			<generator class="native" />
 		</id>
 
 		<!-- type, the type of room -->
-		<property column="type" name="type" type="string" />
+		<property column="NAME" name="name" type="string" />
 		
 		<!-- peopleNumber, the capacity of room-->
-		<property column="pnum" name="peopleNum" type="integer" />
+		<property column="PNUM" name="peopleNum" type="integer" />
 		
 		<!-- roomNumber, the amount of room-->
-		<property column="rnum" name="roomNum" type="integer" />
+		<property column="RNUM" name="roomNum" type="integer" />
+		
+		<!-- price, the price of room-->
+		<property column="PRICE" name="price" type="double" />
+		
+		<!-- hotelId, foreign key -->
+		<property column="HOTELID" name="hotelId" />
 		
 	</class>
 </hibernate-mapping>

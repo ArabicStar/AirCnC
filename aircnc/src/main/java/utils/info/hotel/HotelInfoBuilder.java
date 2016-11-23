@@ -4,7 +4,7 @@ public abstract class HotelInfoBuilder extends HotelInfoTemplate{
 	
 	public HotelInfoBuilder(HotelInfo info){
 		this.setID(info.getID()).setName(info.getName()).setScope(info.getScope())
-		.setLocation(info.getLocaiton()).setStar(info.getStar()).setGrade(info.getGrade());
+		.setLocation(info.getLocation()).setStar(info.getStar()).setGrade(info.getGrade());
 	}
 	
 	

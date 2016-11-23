@@ -31,6 +31,7 @@ public class MemberAccountServiceTest {
 		MemberVoBuilder b = new MemberVoBuilder("Personal").setBirthday(LocalDate.parse("1998-04-17"))
 				.setContactInfo(new ContactVoBuilder().getContactInfo()).setCredit(0).setName("FF");
 		MemberInfo v = acc.register(b, "12345678".hashCode());
+		dao.deleteMember(v.getId());
 		assertEquals("10000000", v.getId());
 		assertEquals(true, acc.existsMember(v.getId()));
 	}
