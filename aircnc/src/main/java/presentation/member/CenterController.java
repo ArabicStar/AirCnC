@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import presentation.member.view.MemberMainPane;
 import presentation.member.view.MemberRegisterEnterprisePane;
 
 /**
@@ -22,11 +23,15 @@ import presentation.member.view.MemberRegisterEnterprisePane;
 public class CenterController extends Application{
 	
 	private Stage primaryStage;
+	
 	private MemberStartPane start;
 	private MemberSignInPane signIn;
 	private MemberRegisterMainPane registerMain;
 	private MemberRegisterPersonPane registerPerson;
 	private MemberRegisterEnterprisePane registerBusiness;
+	
+	private MemberMainPane mainclient;
+	
 	private BorderPane rootLayout;
 	
 	private Scene scene;
@@ -111,7 +116,14 @@ public class CenterController extends Application{
 	 * jump to the main client
 	 */
 	public void initializeClient(){
-		
+		primaryStage.close();
+		ClientCenterController client = new ClientCenterController();
+		try {
+			client.start(new Stage());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -11,10 +11,6 @@
 
 }
 
-.label:hover{
-	-fx-background-color:#ffffff;
-}
-
 .nav-vbox{
 	
 }
@@ -22,4 +18,8 @@
 .label{
 	-fx-text-fill:#ffffff;
 	-fx-font-size: 18px;
+}
+
+.hbox:hover{
+	-fx-background-color:#ff1111;
 }
