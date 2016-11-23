@@ -37,18 +37,10 @@ public class MemberStartPane{
         }
     }
 
-    /**
-     * Returns the main stage.
-     * @return
-     */
     public Stage getPrimaryStage() {
         return primaryStage;
     }
     
-    /**
-     * Returns the main pane.
-     * @return
-     */
     public BorderPane getBorderPane() {
         return rootLayout;
     }

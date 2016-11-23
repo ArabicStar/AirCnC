@@ -54,6 +54,7 @@ public class MemberSignInController implements Initializable{
 	@FXML
 	public void handleConfirm(){
 		//按下登陆键，验证正确性，正确则跳只memberMainPane，错误跳出对话框
+		controller.initializeClient();
 	}
 	
 	/**
