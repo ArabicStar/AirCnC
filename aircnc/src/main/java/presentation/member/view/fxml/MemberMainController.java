@@ -1,5 +1,30 @@
 package presentation.member.view.fxml;
 
-public class MemberMainController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+
+public class MemberMainController implements Initializable{
+	
+	@FXML
+	private Button memberInfo;
+	
+	@FXML
+	private Button searchHotel;
+	
+	@FXML
+	private Button myOrder;
+	
+	@FXML
+	private Button creditChange;
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
