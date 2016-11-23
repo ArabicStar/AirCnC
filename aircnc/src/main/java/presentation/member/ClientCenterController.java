@@ -26,7 +26,7 @@ public class ClientCenterController extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		this.primaryStage=primaryStage;
 		
-		primaryStage.initStyle(StageStyle.UNDECORATED);
+		//primaryStage.initStyle(StageStyle.UNDECORATED);
 		primaryStage.setTitle("AirCnC");
         primaryStage.setResizable(false);
         
@@ -44,10 +44,10 @@ public class ClientCenterController extends Application{
 	}
 	
 	public void addInfoMainPane(){
-		//mainClient.getBorderPane().getChildren().clear();
+		mainClient.getBorderPane().getCenter();
 		infoMain = new MemberInfoMainPane();
 		mainClient.getBorderPane().setCenter(infoMain.getPane());
-		//infoMain.getController().setCenterController(this);
+		infoMain.getController().setCenterController(this);
 	}
 
 }
