@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.Pane?>
+
+
+<Pane prefHeight="768.0" prefWidth="777.0" stylesheets="@../css/MemberCreditChange.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="presentation.member.view.creditchange.fxml.MemberCreditChangeController">
+   <children>
+      <Label layoutX="70.0" layoutY="45.0" styleClass="title" text="信用记录变化情况" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="21.0" layoutX="49.0" layoutY="140.0" stroke="BLACK" strokeType="INSIDE" styleClass="split-line" width="662.0" />
+   </children>
+</Pane>

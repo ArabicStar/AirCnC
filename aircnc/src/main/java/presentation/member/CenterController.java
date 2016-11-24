@@ -1,17 +1,17 @@
 package presentation.member;
 
-import presentation.member.view.MemberStartPane;
-import presentation.member.view.fxml.MemberSignInController;
-import presentation.member.view.MemberSignInPane;
-import presentation.member.view.MemberRegisterMainPane;
-import presentation.member.view.MemberRegisterPersonPane;
+import presentation.member.view.signin.MemberStartPane;
+import presentation.member.view.signin.fxml.MemberSignInController;
+import presentation.member.view.signin.MemberSignInPane;
+import presentation.member.view.signin.MemberRegisterMainPane;
+import presentation.member.view.signin.MemberRegisterPersonPane;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import presentation.member.view.MemberMainPane;
-import presentation.member.view.MemberRegisterEnterprisePane;
+import presentation.member.view.signin.MemberRegisterEnterprisePane;
 
 /**
  * the whole stage.

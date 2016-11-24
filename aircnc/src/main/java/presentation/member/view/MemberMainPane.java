@@ -8,7 +8,7 @@ import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import presentation.member.view.fxml.MemberMainController;
+import presentation.member.view.memberinfo.fxml.MemberMainController;
 
 public class MemberMainPane {
 	
@@ -25,7 +25,7 @@ public class MemberMainPane {
         try {
         	// Load sign in overview.
             FXMLLoader loader = new FXMLLoader();
-            URL location = getClass().getResource("fxml/MemberMain.fxml");
+            URL location = getClass().getResource("memberinfo/fxml/MemberMain.fxml");
             loader.setLocation(location);
             loader.setBuilderFactory(new JavaFXBuilderFactory());
             //javafx.scene.Parent root = (javafx.scene.Parent) loader.load(location.openStream());

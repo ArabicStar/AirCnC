@@ -5,17 +5,26 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import presentation.member.view.MemberInfoMainPane;
+import presentation.member.view.memberinfo.MemberInfoMainPane;
+import presentation.member.view.memberinfo.MemberInfoModifyPane;
+import presentation.member.view.searchhotel.MemberSearchHotelPane;
 import presentation.member.view.MemberMainPane;
-import presentation.member.view.MemberSignInPane;
-import presentation.member.view.MemberStartPane;
+import presentation.member.view.creditchange.MemberCreditChangePane;
 
+/**
+ * the controller of the whole client.
+ * @author paranoia
+ *
+ */
 public class ClientCenterController extends Application{
 	
 	private Stage primaryStage;
 	private Scene scene;
 	private MemberMainPane mainClient;
 	private MemberInfoMainPane infoMain;
+	private MemberInfoModifyPane infoModify;
+	private MemberCreditChangePane creditMain;
+	private MemberSearchHotelPane searchMain;
 	
 	private BorderPane rootLayout;
 	
@@ -44,10 +53,43 @@ public class ClientCenterController extends Application{
 	}
 	
 	public void addInfoMainPane(){
-		mainClient.getBorderPane().getCenter();
+		clearContent();
 		infoMain = new MemberInfoMainPane();
-		mainClient.getBorderPane().setCenter(infoMain.getPane());
+		mainClient.getBorderPane().setCenter(infoMain.getContentPane());
 		infoMain.getController().setCenterController(this);
+	}
+	
+	public void addInfoModifyPane(){
+		clearContent();
+		infoModify = new MemberInfoModifyPane();
+		mainClient.getBorderPane().setCenter(infoModify.getPane());
+		infoModify.getController().setCenterController(this);
+	}
+	
+	public void addCreditChangePane(){
+		clearContent();
+		creditMain = new MemberCreditChangePane();
+		mainClient.getBorderPane().setCenter(creditMain.getPane());
+		creditMain.getController().setCenterController(this);
+	}
+	
+	public void addSearchHotelPane(){
+		clearContent();
+		searchMain = new MemberSearchHotelPane();
+		mainClient.getBorderPane().setCenter(searchMain.getPane());
+		searchMain.getController().setCenterController(this);
+	}
+	
+	/**
+	 * remove all the children nodes of the main border pane, except the nav-bar.
+	 */
+	public void clearContent(){
+		int childrenAmount=mainClient.getBorderPane().getChildren().size();
+		if(childrenAmount>1){
+			for(int i=1;i<childrenAmount;i++){
+				mainClient.getBorderPane().getChildren().remove(i);
+			}
+		}
 	}
 
 }

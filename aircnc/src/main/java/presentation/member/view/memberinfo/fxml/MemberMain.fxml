@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #000;" stylesheets="@../css/MemberMain.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.member.view.memberinfo.fxml.MemberMainController">
+   <left>
+      <Pane prefHeight="768.0" prefWidth="247.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox layoutY="271.0" prefHeight="250.0" prefWidth="247.0" styleClass="nav-vbox">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="121.0">
+                     <children>
+                        <Label fx:id="memberInfo" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#HandleMemberInfo" prefHeight="50.0" prefWidth="247.0" text="个人中心">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <padding>
+                              <Insets right="30.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                     <styleClass>
+                        <String fx:value="member-info-hbox" />
+                        <String fx:value="hbox" />
+                     </styleClass>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="searchHotel" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#HandleSearchHotel" prefHeight="50.0" prefWidth="247.0" text="搜索酒店">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <padding>
+                              <Insets right="30.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                     <styleClass>
+                        <String fx:value="search-hotel-hbox" />
+                        <String fx:value="hbox" />
+                     </styleClass>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="myOrder" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#HandleMyOrder" prefHeight="50.0" prefWidth="247.0" text="我的订单">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <padding>
+                              <Insets right="30.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                     <styleClass>
+                        <String fx:value="my-order-hbox" />
+                        <String fx:value="hbox" />
+                     </styleClass>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="creditChange" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#HandleCreditChange" prefHeight="50.0" prefWidth="247.0" text="信用记录">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <padding>
+                              <Insets right="30.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                     <styleClass>
+                        <String fx:value="credit-change-hbox" />
+                        <String fx:value="hbox" />
+                     </styleClass>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </Pane>
+   </left>
+   <center>
+      <Pane prefHeight="768.0" prefWidth="777.0" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>
