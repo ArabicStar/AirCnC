@@ -36,4 +36,12 @@ public abstract class OrderInfoTemplate {
 	public LocalDateTime getLastTime() {
 		return lastTime;
 	}
+	
+	/**
+	 * TODO:添加具体代码
+	 * @return
+	 */
+	public static boolean checkOrderId() {
+		return true;
+	}
 }
