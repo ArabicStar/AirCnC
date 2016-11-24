@@ -1,16 +1,16 @@
 package po.promotion;
 
-import utils.HotelDate;
+import java.time.LocalDateTime;
 
 public class PromotionPo {
 	/**
 	 * 开始
 	 */
-	private HotelDate startDate;
+	private LocalDateTime startDate;
 	/**
 	 * 结束
 	 */
-	private HotelDate endDate;
+	private LocalDateTime endDate;
 	/**
 	 * 折扣
 	 */
@@ -25,16 +25,16 @@ public class PromotionPo {
 	private double returnMoney;
 	
 	
-	public HotelDate getStartDate() {
+	public LocalDateTime getStartDate() {
 		return startDate;
 	}
-	public void setStartDate(HotelDate startDate) {
+	public void setStartDate(LocalDateTime startDate) {
 		this.startDate = startDate;
 	}
-	public HotelDate getEndDate() {
+	public LocalDateTime getEndDate() {
 		return endDate;
 	}
-	public void setEndDate(HotelDate endDate) {
+	public void setEndDate(LocalDateTime endDate) {
 		this.endDate = endDate;
 	}
 	public double getDiscount() {

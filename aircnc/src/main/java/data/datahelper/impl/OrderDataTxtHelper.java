@@ -15,9 +15,9 @@ import po.order.OrderPo;
 
 public class OrderDataTxtHelper implements OrderDataHelper{
 
-	public Map<Integer,OrderPo> getOrderData() {
+	public Map<String,OrderPo> getOrderData() {
 		File file = new File("TxtData/order.txt");
-		Map<Integer,OrderPo> map = new HashMap<Integer, OrderPo>();
+		Map<String,OrderPo> map = new HashMap<String, OrderPo>();
 		try {
 			InputStreamReader reader = new InputStreamReader(new FileInputStream(
 					file), "UTF-8");
@@ -27,7 +27,7 @@ public class OrderDataTxtHelper implements OrderDataHelper{
 			while (str != null) {
 				
 				String[] data = str.split(";");
-				int orderId = Integer.valueOf(data[0]);
+				String orderId = String.valueOf(data[0]);
 				int hotelId = Integer.valueOf(data[1]) ;
 				int orderUserId = Integer.valueOf(data[2]);
 				int orderStatus = Integer.valueOf(data[3]);
@@ -36,7 +36,10 @@ public class OrderDataTxtHelper implements OrderDataHelper{
 				String orderInfo=data[6];
 				int orderPrice = Integer.valueOf(data[7]);
 				
-				OrderPo orderPo=new OrderPo(orderId, hotelId, orderUserId, orderStatus, orderEntryTime, orderLastTime,orderInfo,orderPrice, 1, 2, 0);
+				/**
+				 * FIXME:这些参数都没有加上去
+				 */
+				OrderPo orderPo=new OrderPo();
 				map.put(orderId, orderPo);
 				
 				str = br.readLine();
@@ -53,7 +56,7 @@ public class OrderDataTxtHelper implements OrderDataHelper{
 		return null;
 	}
 
-	public void updateOrderData(Map<Integer,OrderPo> map) {
+	public void updateOrderData(Map<String, OrderPo> map) {
 		//写入数据
 		File file = new File("TxtData/order.txt");
 		try {		
@@ -61,9 +64,9 @@ public class OrderDataTxtHelper implements OrderDataHelper{
 			BufferedWriter writer = new BufferedWriter(fw);
 			
 			//对map进行遍历
-			Iterator<Map.Entry<Integer,OrderPo>> iterator = map.entrySet().iterator();
+			Iterator<Map.Entry<String,OrderPo>> iterator = map.entrySet().iterator();
 			while(iterator.hasNext()){
-				Map.Entry<Integer,OrderPo> entry = iterator.next();
+				Map.Entry<String, OrderPo> entry = iterator.next();
 				OrderPo orderPo = entry.getValue();
 				String str = orderPo.getId()+";"+orderPo.getHotelId()+";"+orderPo.getUserId()+";"
 			+orderPo.getStatus()+";"+orderPo.getEntryTime()+";"+orderPo.getLastTime()+";"+orderPo.getOrderInfo()+";"+orderPo.getPrice();

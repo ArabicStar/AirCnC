@@ -1,5 +1,8 @@
 package utils;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 /**
  * 不要删除这个类，方法要重写
  * 这是用来处理日期计算的类
@@ -47,6 +50,16 @@ public class HotelDate {
 		this(2016, 1, 1);
 	}
 	
+	/**
+	 * 使用Java自带的API
+	 * {@link java.time.LocalDate}
+	 * {@link java.time.LocalTime}
+	 * {@link java.time.LocalDateTime}
+	 * @param year 想要设定的年份
+	 * @param month 想要设定的月份
+	 * @param day 想要设定的天数
+	 */
+	@Deprecated
 	public void setDate(int year, int month, int day) {
 		this.year = year;
 		this.month = month;
@@ -54,10 +67,11 @@ public class HotelDate {
 	}
 	
 	/**
-	 * 判断该日期是否有效
-	 * 注意：年份适用于2016-2099年！
+	 * 类的功能发生了变化，这个方法不再使用
+	 * 在生成日期时，用Java自带的API，会自动检测时间是否合法，从而无需检测
 	 * @return
 	 */
+	@Deprecated
 	public boolean isValid() {
 		if(this.year < 2016 || this.year > 2099) {
 			return false;
@@ -82,36 +96,14 @@ public class HotelDate {
 		return true; 
 	}
 	
-	public void delayTime(int hour, int minute) {
-		// 先进行加法运算
-		this.minute += minute;
-		this.hour += hour;
+	/**
+	 * FIXME:写完这部分代码
+	 * TODO:加注释
+	 * @param destinationDate
+	 * @param delayedTime
+	 */
+	public void delayTime(LocalDateTime destinationDate, LocalTime delayedTime) {
 		
-		// 转化为正确的格式
-		while(this.minute >= 60) {
-			this.hour++;
-			this.minute -= 60;
-		}
-		while(this.hour >= 24) {
-			this.day++;
-			this.hour -= 24;
-		}
-		boolean isLeapYear = isLeapYear(this.year);
-		if(isLeapYear) {
-			if(this.day > daysOfAMonthInLeapYear[this.month]) {
-				this.month++;
-				this.day = 1;
-			}
-		} else {
-			if(this.year > daysOfAMonth[this.month]) {
-				this.month++;
-				this.day = 1;
-			}
-		}
-		if(this.month > 12) {
-			this.month = 1;
-			this.year++;
-		}
 	}
 	
 	/**
@@ -139,44 +131,44 @@ public class HotelDate {
 	 * 计算方法遵循左闭右开的原则
 	 * 例如：2016.11.6 - 2016.11.7 
 	 * 返回值应为1
-	 * @param hotelDate 目标日期
+	 * TODO: 重写此方法，这个方法应该有两个参数，分别是两个日期
 	 * @return 当前日期与目标日期的差值
 	 */
-	public int getGapDays(HotelDate hotelDate) {
+	public int getGapDays(LocalDateTime hotelDate) {
 		int tempYear = this.year;
 		int tempMonth = this.month;
 		int tempDay = this.day;
 		int gapDays = 0;
-		if(hotelDate.year < this.year || 
-				(hotelDate.year == this.year && hotelDate.month < this.month) ||
-				(hotelDate.year == this.year && hotelDate.month == this.month && hotelDate.day < this.day)) {
-			return hotelDate.getGapDays(this);
-		}
-		
-		while(hotelDate.year != this.year || 
-				hotelDate.month != this.month ||
-				hotelDate.day != this.day) {
-			gapDays++;
-			this.day++;
-			if(!isLeapYear(this.year)) {
-				if (this.day > daysOfAMonth[this.month]) {
-					this.day = 1;
-					this.month++;
-				}
-			} else {
-				if (this.day > daysOfAMonthInLeapYear[this.month]) {
-					this.day = 1;
-					this.month++;
-				}
-			}
-			
-			
-			if(this.month > 12) {
-				this.month = 1;
-				this.year++;
-			}
-		}
-		this.setDate(tempYear, tempMonth, tempDay);
+//		if(hotelDate.year < this.year || 
+//				(hotelDate.year == this.year && hotelDate.month < this.month) ||
+//				(hotelDate.year == this.year && hotelDate.month == this.month && hotelDate.day < this.day)) {
+//			return hotelDate.getGapDays(this);
+//		}
+//		
+//		while(hotelDate.year != this.year || 
+//				hotelDate.month != this.month ||
+//				hotelDate.day != this.day) {
+//			gapDays++;
+//			this.day++;
+//			if(!isLeapYear(this.year)) {
+//				if (this.day > daysOfAMonth[this.month]) {
+//					this.day = 1;
+//					this.month++;
+//				}
+//			} else {
+//				if (this.day > daysOfAMonthInLeapYear[this.month]) {
+//					this.day = 1;
+//					this.month++;
+//				}
+//			}
+//			
+//			
+//			if(this.month > 12) {
+//				this.month = 1;
+//				this.year++;
+//			}
+//		}
+//		this.setDate(tempYear, tempMonth, tempDay);
 		return gapDays;
 	}
 

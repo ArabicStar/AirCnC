@@ -1,5 +1,7 @@
 package utils.info.order;
 
+import java.time.LocalDateTime;
+
 import utils.HotelDate;
 
 public abstract class OrderInfoBuilder extends OrderInfoTemplate {
@@ -28,22 +30,19 @@ public abstract class OrderInfoBuilder extends OrderInfoTemplate {
 		return this;
 	}
 
-	public OrderInfoBuilder setEntryTime(HotelDate entryTime) {
-		if (entryTime.isValid()) {
-			this.entryTime = entryTime;
-			return this;
-		}
+	public OrderInfoBuilder setEntryTime(LocalDateTime entryTime) {
 		/**
 		 * TODO:处理异常情况
 		 */
 		return null;
 	}
 
-	public OrderInfoBuilder setLastTime(HotelDate lastTime) {
-		if (lastTime.isValid()) {
-			this.lastTime = lastTime;
-			return this;
-		}
+	public OrderInfoBuilder setLastTime(LocalDateTime lastTime) {
+//		if (lastTime.isValid()) {
+//			this.lastTime = lastTime;
+//			return this;
+//		}
+		
 		/**
 		 * TODO:处理异常情况
 		 */

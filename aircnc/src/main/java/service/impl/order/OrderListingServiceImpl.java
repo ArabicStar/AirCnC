@@ -11,6 +11,7 @@ import data.hibernate.impl.member.MemberHibernatorImpl;
 import po.member.MemberPo;
 import po.order.OrderPo;
 import service.order.OrderListingService;
+import utils.info.order.OrderStatus;
 import vo.order.OrderVo;
 
 public class OrderListingServiceImpl implements OrderListingService {
@@ -63,7 +64,7 @@ public class OrderListingServiceImpl implements OrderListingService {
 	public List<OrderVo> getUnfinishedOrders(int hotelId) {
 		List<OrderVo> list = new ArrayList<OrderVo>();
 		for (OrderPo orderPo : hotelOrderList) {
-			if (orderPo.getStatus() == 0) {
+			if (orderPo.getStatus() == OrderStatus.UNEXECUTED) {
 				MemberPo memberPo = memberDao.findMember(Integer.toString(orderPo.getUserId()));
 				/**
 				 * FIXME:这里的orderVo并没有设置该有的属性，
@@ -86,7 +87,7 @@ public class OrderListingServiceImpl implements OrderListingService {
 	public List<OrderVo> getFinishedOrders(int hotelId) {
 		List<OrderVo> list = new ArrayList<OrderVo>();
 		for (OrderPo orderPo : hotelOrderList) {
-			if (orderPo.getStatus() == 1) {
+			if (orderPo.getStatus() == OrderStatus.EXECUTED) {
 				MemberPo memberPo = memberDao.findMember(Integer.toString(orderPo.getUserId()));
 				/**
 				 * FIXME:这里的orderVo并没有设置该有的属性，
@@ -109,7 +110,7 @@ public class OrderListingServiceImpl implements OrderListingService {
 	public List<OrderVo> getAbnormalOrders(int hotelId) {
 		List<OrderVo> list = new ArrayList<OrderVo>();
 		for (OrderPo orderPo : hotelOrderList) {
-			if (orderPo.getStatus() == 2) {
+			if (orderPo.getStatus() == OrderStatus.ABNORMAL) {
 				MemberPo memberPo = memberDao.findMember(Integer.toString(orderPo.getUserId()));
 				/**
 				 * FIXME:这里的orderVo并没有设置该有的属性，

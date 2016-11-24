@@ -10,7 +10,7 @@ public interface OrderDao {
 	 * @param orderId
 	 * @return	获取订单信息
 	 */
-	public OrderPo getOrder(int orderId);
+	public OrderPo getOrder(String orderId);
 	
 	/**
 	 * @return	获取酒店订单列表

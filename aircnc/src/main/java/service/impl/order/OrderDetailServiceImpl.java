@@ -30,10 +30,10 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 	/**
 	 * @param orderId 订单的Id
 	 * @return 返回订单的用户Id，查找失败则返回-1
-	 * FIXME:返回值类型应该为String {@link utils.info.order.OrderInfoTemplate}
+	 * 传入值类型应该为String {@link utils.info.order.OrderInfoTemplate}
 	 */
 	@Override
-	public int getOrderUser(int orderId) {
+	public int getOrderUser(String orderId) {
 		for (OrderPo orderPo : hotelOrderList) {
 			if(orderPo.getId() == orderId){
 				return orderPo.getUserId();
@@ -43,7 +43,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 	}
 
 	@Override
-	public int getOrderPrice(int orderId) {
+	public double getOrderPrice(String orderId) {
 		for (OrderPo orderPo : hotelOrderList) {
 			if(orderPo.getId() == orderId){
 				return orderPo.getPrice();

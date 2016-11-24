@@ -1,6 +1,6 @@
 package utils.info.order;
 
-import utils.HotelDate;
+import java.time.LocalDateTime;
 
 public abstract class OrderInfoTemplate {
 	protected String orderId;
@@ -13,12 +13,12 @@ public abstract class OrderInfoTemplate {
 
 	protected OrderStatus status;
 
-	protected HotelDate entryTime;
+	protected LocalDateTime entryTime;
 
 	/**
 	 * 订单最晚执行时间
 	 */
-	protected HotelDate lastTime;
+	protected LocalDateTime lastTime;
 
 	/**
 	 * 除去小孩的总人数
@@ -29,11 +29,11 @@ public abstract class OrderInfoTemplate {
 
 	protected boolean hasChildren;
 
-	public HotelDate getEntryTime() {
+	public LocalDateTime getEntryTime() {
 		return entryTime;
 	}
 	
-	public HotelDate getLastTime() {
+	public LocalDateTime getLastTime() {
 		return lastTime;
 	}
 }

@@ -13,7 +13,7 @@ import po.order.OrderPo;
 
 public class OrderDaoImpl implements OrderDao{
 	
-	private Map<Integer, OrderPo> map;
+	private Map<String, OrderPo> map;
 	
 	private OrderDataHelper orderDataHelper;
 	
@@ -36,16 +36,16 @@ public class OrderDaoImpl implements OrderDao{
 		}
 	}
 
-	public OrderPo getOrder(int orderId) {
+	public OrderPo getOrder(String orderId) {
 		OrderPo orderPo = map.get(orderId);
 		return orderPo;
 	}
 
 	public List<OrderPo> getOrders(int hotelId) {
 		List<OrderPo> orderList = new ArrayList<OrderPo>();
-		Iterator<Map.Entry<Integer,OrderPo>> iterator = map.entrySet().iterator();
+		Iterator<Map.Entry<String,OrderPo>> iterator = map.entrySet().iterator();
 		while(iterator.hasNext()){
-			Map.Entry<Integer, OrderPo> entry = iterator.next();
+			Map.Entry<String, OrderPo> entry = iterator.next();
 			OrderPo orderPo = entry.getValue();
 			if(orderPo.getHotelId() == hotelId){
 				orderList.add(orderPo);
@@ -55,7 +55,7 @@ public class OrderDaoImpl implements OrderDao{
 	}
 
 	public boolean updateOrder(OrderPo orderPo) {
-		int orderId = orderPo.getId();
+		String orderId = orderPo.getId();
 		if(map.get(orderId) != null){
 			map.put(orderId,orderPo);
 			orderDataHelper.updateOrderData(map);

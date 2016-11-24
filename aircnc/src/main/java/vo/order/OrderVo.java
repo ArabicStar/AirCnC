@@ -1,6 +1,7 @@
 package vo.order;
 
-import utils.HotelDate;
+import java.time.LocalDateTime;
+
 import utils.info.order.OrderInfo;
 import utils.info.order.OrderStatus;
 
@@ -113,13 +114,13 @@ public class OrderVo extends OrderInfo {
 	}
 
 	@Override
-	public OrderVo setEntryTime(HotelDate entryTime) {
+	public OrderVo setEntryTime(LocalDateTime entryTime) {
 		this.entryTime = entryTime;
 		return this;
 	}
 
 	@Override
-	public OrderVo setLastTime(HotelDate lastTime) {
+	public OrderVo setLastTime(LocalDateTime lastTime) {
 		this.lastTime = lastTime;
 		return this;
 	}

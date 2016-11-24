@@ -1,5 +1,7 @@
 package utils.info.order;
 
+import java.time.LocalDateTime;
+
 import utils.HotelDate;
 
 public abstract class OrderInfo extends OrderInfoTemplate {
@@ -49,20 +51,20 @@ public abstract class OrderInfo extends OrderInfoTemplate {
 		return this;
 	}
 
-	public HotelDate getEntryTime() {
+	public LocalDateTime getEntryTime() {
 		return entryTime;
 	}
 
-	public OrderInfo setEntryTime(HotelDate entryTime) {
+	public OrderInfo setEntryTime(LocalDateTime entryTime) {
 		this.entryTime = entryTime;
 		return this;
 	}
 
-	public HotelDate getLastTime() {
+	public LocalDateTime getLastTime() {
 		return lastTime;
 	}
 
-	public OrderInfo setLastTime(HotelDate lastTime) {
+	public OrderInfo setLastTime(LocalDateTime lastTime) {
 		this.lastTime = lastTime;
 		return this;
 	}

@@ -1,5 +1,11 @@
 package po.order;
 
+import java.time.LocalDateTime;
+
+import utils.HotelDate;
+import utils.info.order.OrderInfo;
+import utils.info.order.OrderStatus;
+
 /**
  * FIXME:修正这个类的继承关系，重写属性和方法，构造方法也要改
  * FIXME:注意涉及构造方法的地方要在修改后看一下是否会报错
@@ -12,19 +18,19 @@ package po.order;
  * orderInfo 订单详情 
  * price 订单价值
  */
-public class OrderPo {
+public class OrderPo extends OrderInfo{
 
-	private int id;
+	private String id;
 
 	private int hotelId;
 
 	private int userId;
 
-	private int status;
+	private OrderStatus status;
 
-	private String entryTime;
+	private LocalDateTime entryTime;
 
-	private String lastTime;
+	private LocalDateTime lastTime;
 
 	private String orderInfo;
 
@@ -49,8 +55,8 @@ public class OrderPo {
 		super();
 	}
 
-	public OrderPo(int id, int hotelId, int userId, int status, 
-			String entryTime, String lastTime, String orderInfo,
+	public OrderPo(String id, int hotelId, int userId, OrderStatus status, 
+			LocalDateTime entryTime, LocalDateTime lastTime, String orderInfo,
 			int price, int roomNumber, int peopleNumber, int childrenNumber) {
 		super();
 		this.id = id;
@@ -66,11 +72,11 @@ public class OrderPo {
 		this.childrenNumber = childrenNumber;
 	}
 	
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -86,32 +92,36 @@ public class OrderPo {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public OrderPo setUserId(int userId) {
 		this.userId = userId;
+		return this;
 	}
 
-	public int getStatus() {
+	public OrderStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public OrderPo setStatus(OrderStatus status) {
 		this.status = status;
+		return this;
 	}
 
-	public String getEntryTime() {
+	public LocalDateTime getEntryTime() {
 		return entryTime;
 	}
 
-	public void setEntryTime(String entryTime) {
+	public OrderPo setEntryTime(LocalDateTime entryTime) {
 		this.entryTime = entryTime;
+		return this;
 	}
 
-	public String getLastTime() {
+	public LocalDateTime getLastTime() {
 		return lastTime;
 	}
 
-	public void setLastTime(String lastTime) {
+	public OrderPo setLastTime(LocalDateTime lastTime) {
 		this.lastTime = lastTime;
+		return this;
 	}
 
 	public String getOrderInfo() {
@@ -122,7 +132,7 @@ public class OrderPo {
 		this.orderInfo = orderInfo;
 	}
 
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
@@ -150,8 +160,9 @@ public class OrderPo {
 		return peopleNumber;
 	}
 
-	public void setPeopleNumber(int peopleNumber) {
+	public OrderPo setPeopleNumber(int peopleNumber) {
 		this.peopleNumber = peopleNumber;
+		return this;
 	}
 
 }
