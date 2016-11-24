@@ -1,20 +1,12 @@
-package presentation.member.view.creditchange.fxml;
+package presentation.member.view.myorder.fxml;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import presentation.member.ClientCenterController;
 
-/**
- * the controller of 
- * @author paranoia
- *
- */
-public class MemberCreditChangeController implements Initializable{
+public class MemberOrderMainController implements Initializable{
 	
 	private ClientCenterController controller;
 	

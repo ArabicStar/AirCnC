@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import presentation.member.view.memberinfo.MemberInfoMainPane;
 import presentation.member.view.memberinfo.MemberInfoModifyPane;
+import presentation.member.view.myorder.MemberOrderMainPane;
 import presentation.member.view.searchhotel.MemberSearchHotelPane;
 import presentation.member.view.MemberMainPane;
 import presentation.member.view.creditchange.MemberCreditChangePane;
@@ -25,6 +26,7 @@ public class ClientCenterController extends Application{
 	private MemberInfoModifyPane infoModify;
 	private MemberCreditChangePane creditMain;
 	private MemberSearchHotelPane searchMain;
+	private MemberOrderMainPane orderMain;
 	
 	private BorderPane rootLayout;
 	
@@ -78,6 +80,13 @@ public class ClientCenterController extends Application{
 		searchMain = new MemberSearchHotelPane();
 		mainClient.getBorderPane().setCenter(searchMain.getPane());
 		searchMain.getController().setCenterController(this);
+	}
+	
+	public void addOrderMainPane(){
+		clearContent();
+		orderMain = new MemberOrderMainPane();
+		mainClient.getBorderPane().setCenter(orderMain.getPane());
+		orderMain.getController().setCenterController(this);
 	}
 	
 	/**

@@ -53,7 +53,8 @@ public class MemberMainController implements Initializable{
 	
 	@FXML
 	private void HandleMyOrder(){
-		
+		myOrder.setText("哈哈哈哈");
+		controller.addOrderMainPane();
 	}
 	
 	@FXML
