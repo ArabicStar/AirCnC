@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.Pane?>
+
+
+<Pane prefHeight="768.0" prefWidth="777.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="presentation.member.view.searchhotel.fxml.MemberSearchHotelController">
+   <children>
+      <TextField fx:id="hotelName" layoutX="305.0" layoutY="45.0" />
+      <Label fx:id="supreme" layoutX="548.0" layoutY="50.0" text="高级搜索选项" />
+   </children>
+</Pane>
