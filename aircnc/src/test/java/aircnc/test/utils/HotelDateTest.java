@@ -6,109 +6,79 @@ import java.time.LocalDateTime;
 
 import org.junit.Test;
 
-import utils.HotelDate;
+import utils.date.HotelDate;
 
 public class HotelDateTest {
 
 	@Test
 	public void getGapDaysTest1() {
 		/**
-		 * TODO:实例化h1, h2
-		 * 改变使用getGapDays的使用方法
+		 * TODO:实例化h1, h2 改变使用getGapDays的使用方法
 		 */
 		LocalDateTime h1 = null;
 		LocalDateTime h2 = null;
-		//2015, 2, 28
-		//2016, 2, 28
-//		assertEquals(h1.getGapDays(h2), 365);
+		// 2015, 2, 28
+		// 2016, 2, 28
+		// assertEquals(h1.getGapDays(h2), 365);
 	}
-	
+
 	@Test
 	public void getGapDaysTest2() {
 		/**
-		 * TODO:实例化h1, h2
-		 * 改变使用getGapDays的使用方法
+		 * TODO:实例化h1, h2 改变使用getGapDays的使用方法
 		 */
 		LocalDateTime h1 = null;
 		LocalDateTime h2 = null;
-//		******* h1 = new HotelDate(2015, 3, 1);
-//		******* h2 = new HotelDate(2016, 3, 1);
-//		assertEquals(h2.getGapDays(h1), 366);
+		// ******* h1 = new HotelDate(2015, 3, 1);
+		// ******* h2 = new HotelDate(2016, 3, 1);
+		// assertEquals(h2.getGapDays(h1), 366);
 	}
-	
+
+	@Test
+	public void showDateAndTimeTest1() {
+		LocalDateTime h1 = LocalDateTime.of(2016, 11, 18, 4, 0, 0);
+		assertEquals("2016/11/18 04:00", HotelDate.showDateAndTime(h1));
+		
+	}
+
 	@Test
 	public void delayTimeTest1() {
-		/**
-		 * TODO:实例化h1
-		 * 改变方法来显示日期和时间信息
-		 */
-		LocalDateTime h1 = null;
-//		******* h1 = new HotelDate(2016, 11, 18);
-//		assertEquals(h1.toString(), "2016 11 18 21 0");
+		LocalDateTime actual = LocalDateTime.of(2015, 2, 28, 11, 25, 30);
+		actual = HotelDate.delayTime(actual, 365, 1, 35);
+		LocalDateTime expected = LocalDateTime.of(2016, 2, 28, 13, 0, 30);
+		assertEquals(expected, actual);
 	}
-	
+
 	@Test
 	public void delayTimeTest2() {
-		/**
-		 * TODO:实例化h1
-		 * 改变方法来显示日期和时间信息
-		 */
-		LocalDateTime h1 = null;
-//		LocalDateTime h1 = new HotelDate(2016, 11, 18);
-//		h1.delayTime(4, 0);
-//		assertEquals(h1.toString(), "2016 11 19 1 0");
+		LocalDateTime actual = LocalDateTime.of(2016, 11, 18, 4, 0, 0);
+		actual = HotelDate.delayTime(actual, 1, 1, 0);
+		LocalDateTime expected = LocalDateTime.of(2016, 11, 19, 5, 0, 0);
+		assertEquals(expected, actual);
 	}
 	
 	@Test
 	public void delayTimeTest3() {
-		/**
-		 * TODO:实例化h1
-		 * 改变方法来显示日期和时间信息
-		 */
-		LocalDateTime h1 = null;
-//		******* h1 = new HotelDate(2016, 2, 28);
-//		h1.delayTime(4, 30);
-//		assertEquals(h1.toString(), "2016 2 29 1 30");
+		LocalDateTime actual = LocalDateTime.of(2016, 2, 28, 21, 0, 0);
+		actual = HotelDate.delayTime(actual, 0, 4, 30);
+		LocalDateTime expected = LocalDateTime.of(2016, 2, 29, 1, 30, 0);
+		assertEquals(expected, actual);
 	}
 	
 	@Test
 	public void delayTimeTest4() {
-		/**
-		 * TODO:实例化h1
-		 * 改变方法来显示日期和时间信息
-		 */
-		LocalDateTime h1 = null;
-//		******* h1 = new HotelDate(2015, 2, 28);
-//		h1.delayTime(4, 30);
-//		assertEquals(h1.toString(), "2015 3 1 1 30");
+		LocalDateTime actual = LocalDateTime.of(2015, 2, 28, 21, 0, 0);
+		actual = HotelDate.delayTime(actual, 0, 4, 30);
+		LocalDateTime expected = LocalDateTime.of(2015, 3, 1, 1, 30, 0);
+		assertEquals(expected, actual);
 	}
 	
 	@Test
 	public void delayTimeTest5() {
-		/**
-		 * TODO:实例化h1
-		 * 改变方法来显示日期和时间信息
-		 */
-		LocalDateTime h1 = null;
-//		******* h1 = new HotelDate(2016, 2, 29);
-//		h1.delayTime(4, 30);
-//		assertEquals(h1.toString(), "2016 3 1 1 30");
+		LocalDateTime actual = LocalDateTime.of(2016, 2, 29, 21, 0, 0);
+		actual = HotelDate.delayTime(actual, 0, 4, 30);
+		LocalDateTime expected = LocalDateTime.of(2016, 3, 1, 1, 30, 0);
+		assertEquals(expected, actual);
 	}
-	
-	@Test
-	public void delayTimeTest6() {
-		/**
-		 * TODO:实例化h1
-		 * 改变方法来显示日期和时间信息
-		 * 使用Java自带的API进行时间的修改
-		 */
-		LocalDateTime h1 = null;
-//		******* h1 = new HotelDate(2016, 2, 29);
-//		h1.setHour(23);
-//		h1.setMinute(30);
-//		h1.delayTime(4, 30);
-//		assertEquals(h1.toString(), "2016 3 1 4 0");
-	}
-	
 
 }

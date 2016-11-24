@@ -2,8 +2,6 @@ package utils.info.order;
 
 import java.time.LocalDateTime;
 
-import utils.HotelDate;
-
 public abstract class OrderInfoBuilder extends OrderInfoTemplate {
 	public OrderInfoBuilder setOrderId(String orderId) {
 		this.orderId = orderId;

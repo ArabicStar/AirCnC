@@ -2,7 +2,6 @@ package po.order;
 
 import java.time.LocalDateTime;
 
-import utils.HotelDate;
 import utils.info.order.OrderInfo;
 import utils.info.order.OrderStatus;
 
