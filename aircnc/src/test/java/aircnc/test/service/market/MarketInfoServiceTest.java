@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import data.dao.MarketDao;
 import data.dao.impl.MarketDaoImpl;
-import service.impl.market.InfoManager;
+//import service.impl.market.InfoManager;
 import service.market.MarketInfoService;
 import utils.info.market.MarketInfo;
 import vo.market.MarketVoBuilder;
@@ -19,7 +19,7 @@ public class MarketInfoServiceTest {
 	@Before
 	public void setUp() throws Exception {
 		dao = new MarketDaoImpl();
-		info = new InfoManager(dao);
+		//info = new InfoManager(dao);
 	}
 
 	@Test

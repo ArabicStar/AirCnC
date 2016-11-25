@@ -12,7 +12,7 @@ import org.apache.commons.lang.StringUtils;
  *
  */
 public class MarketPoBuilder extends MarketInfoBuilder {
-	
+
 	private int passwordHash = Integer.MIN_VALUE;
 
 	private static final MarketPo INVALID_MARKET_PO;
@@ -24,7 +24,6 @@ public class MarketPoBuilder extends MarketInfoBuilder {
 	public static final MarketInfo getInvalidInfo() {
 		return INVALID_MARKET_PO;
 	}
-
 
 	public MarketPoBuilder(MarketInfo info) {
 		super(info);
@@ -51,7 +50,7 @@ public class MarketPoBuilder extends MarketInfoBuilder {
 
 		return this;
 	}
-	
+
 	/**
 	 * @param passwordHash
 	 * @return this instance
