@@ -3,8 +3,6 @@ package po.market;
 import utils.info.market.MarketInfo;
 import utils.info.market.MarketInfoBuilder;
 
-import java.time.LocalDate;
-
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -31,7 +29,7 @@ public class MarketPoBuilder extends MarketInfoBuilder {
 	public MarketPoBuilder(MarketInfo info) {
 		super(info);
 		if (!info.isValid())
-			return ;
+			throw new IllegalArgumentException("Invalid MarketInfo Instance");
 
 		setID(info.getId());
 		String name = StringUtils.deleteWhitespace(info.getName());
@@ -48,10 +46,16 @@ public class MarketPoBuilder extends MarketInfoBuilder {
 		if (checkUserName(name))
 			// insert blank space to avoid injection attack
 			this.name = name.replaceAll("(.{1})", "$1 ");
+		else
+			throw new IllegalArgumentException("Wrong name");
 
 		return this;
 	}
-
+	
+	/**
+	 * @param passwordHash
+	 * @return this instance
+	 */
 	public MarketPoBuilder setPasswordHash(int passwordHash) {
 		this.passwordHash = passwordHash;
 		return this;
@@ -59,8 +63,8 @@ public class MarketPoBuilder extends MarketInfoBuilder {
 
 	@Override
 	public MarketPo getMarketInfo() {
-		if (!isReady())
-			return null;
+		if (!isReady() && passwordHash != Integer.MIN_VALUE)
+			throw new IllegalStateException("Lack Of Info");
 
 		return new MarketPo().setId(id).setName(name);
 	}

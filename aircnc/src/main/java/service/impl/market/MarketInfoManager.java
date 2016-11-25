@@ -9,10 +9,10 @@ import service.query.QueryService;
 import utils.info.market.MarketInfo;
 import vo.market.MarketVoBuilder;
 
-public class InfoManager implements MarketInfoService{
+public class MarketInfoManager implements MarketInfoService{
 	private MarketDao marketDao;
 
-	public InfoManager(MarketDao marketDao) {
+	public MarketInfoManager(MarketDao marketDao) {
 		this.marketDao = marketDao;
 	}
 

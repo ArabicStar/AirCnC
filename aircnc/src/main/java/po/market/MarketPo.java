@@ -5,6 +5,15 @@ import org.apache.commons.lang.StringUtils;
 
 import utils.info.market.MarketInfo;
 
+/**
+ * Po for Market.<br>
+ * The public setters is only for builder and hibernate. Please <b>NOT</b> used
+ * in client code<br>
+ * 
+ * @author paranoia
+ *
+ */
+
 public class MarketPo extends MarketInfo{
 	protected int passwordHash;
 	protected int numId = Integer.MIN_VALUE;

@@ -69,7 +69,7 @@ public abstract class MemberInfoTemplate {
 	/**
 	 * mark a wrong id integer <br>
 	 */
-	private static final int WRONG_ID = -1;
+	private static final int WRONG_ID_MARKER = -1;
 
 	/**
 	 * mark a wrong credit value <br>
@@ -107,7 +107,7 @@ public abstract class MemberInfoTemplate {
 	 */
 	public static final int convertID2Num(String id) {
 		if (!checkID(id))
-			return WRONG_ID;
+			return WRONG_ID_MARKER;
 
 		return Integer.valueOf(id);
 	}

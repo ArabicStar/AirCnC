@@ -9,7 +9,7 @@ import service.market.MarketAccountService;
 import vo.market.MarketVo;
 import vo.market.MarketVoBuilder;
 
-public final class AccountManager implements MarketAccountService {
+public final class MarketAccountManager implements MarketAccountService {
 	private static final Random NEW_ID_GENERATOR = new Random(System.currentTimeMillis());
 	private static final int ID_BOUND = 100000000;
 	private MarketDao dao;

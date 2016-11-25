@@ -1,11 +1,14 @@
 package vo.market;
 
+import org.apache.commons.lang.StringUtils;
+
 import utils.info.market.MarketInfo;
 import utils.info.market.MarketInfoBuilder;
 
 public class MarketVoBuilder extends MarketInfoBuilder{
 
 	private static final MarketVo INVALID_MARKET_VO;
+	
 	static {
 		INVALID_MARKET_VO = new MarketVo();
 		INVALID_MARKET_VO.invalidate();
@@ -17,13 +20,19 @@ public class MarketVoBuilder extends MarketInfoBuilder{
 
 	public MarketVoBuilder(MarketInfo info) {
 		super(info);
-		// TODO Auto-generated constructor stub
+		if (!info.isValid())
+			return;
+
+		setID(info.getId());
+		String name = StringUtils.deleteWhitespace(info.getName());
+		setName(name);
 	}
 
 
 	public MarketInfoBuilder setName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		if (checkUserName(name))
+			this.name = name;
+		return this;
 	}
 
 	@Override

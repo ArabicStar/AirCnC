@@ -1,6 +1,7 @@
 package vo.market;
 
 import utils.info.market.MarketInfo;
+
 /**
  *
  *
@@ -14,13 +15,15 @@ public class MarketVo extends MarketInfo{
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
+		if(isValid())
+			return this.name;
 		return null;
 	}
 
 	@Override
 	public String getId() {
-		// TODO Auto-generated method stub
+		if(isValid())
+			return this.id;
 		return null;
 	}
 
