@@ -1,8 +1,8 @@
 package utils.date;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 /**
  * 不要删除这个类，方法要重写 这是用来处理日期计算的类
@@ -11,10 +11,13 @@ import java.time.format.DateTimeFormatter;
  *
  */
 public class HotelDate {
+	@Deprecated
 	private int year;
 
+	@Deprecated
 	private int month;
 
+	@Deprecated
 	private int day;
 
 	private final int DEFAULT_HOUR = 21;
@@ -43,8 +46,10 @@ public class HotelDate {
 	}
 
 	/**
-	 * 使用Java自带的API {@link java.time.LocalDate} {@link java.time.LocalTime}
-	 * {@link java.time.LocalDateTime}
+	 * 使用Java自带的API <br>
+	 * {@link java.time.LocalDate} <br>
+	 * {@link java.time.LocalTime} <br>
+	 * {@link java.time.LocalDateTime} <br>
 	 * 
 	 * @param year
 	 *            想要设定的年份
@@ -94,7 +99,8 @@ public class HotelDate {
 	 * 推迟时间<br>
 	 * 由于自带的API是不会修改LocalDateTime的引用，而是传递被修改后的引用，所以用法应该如下：<br>
 	 * 已有一个LocalDateTime的实体destinationDate<br>
-	 * LocalDateTime excepted = HotelDate.delayTime(destinationDate, 1, 1, 0)这个样子<br>
+	 * LocalDateTime excepted = HotelDate.delayTime(destinationDate, 1, 1,
+	 * 0)这个样子<br>
 	 * 
 	 * @param destinationDate
 	 *            被推迟的日期<br>
@@ -107,16 +113,14 @@ public class HotelDate {
 	 */
 	public static LocalDateTime delayTime(LocalDateTime destinationDate, int delayedDay, int delayedHour,
 			int delayedMinute) {
-		destinationDate = destinationDate.
-				plusDays(delayedDay).
-				plusHours(delayedHour).
-				plusMinutes(delayedMinute);
-		
+		destinationDate = destinationDate.plusDays(delayedDay).plusHours(delayedHour).plusMinutes(delayedMinute);
+
 		return destinationDate;
 	}
 
 	/**
 	 * 该方法虽然名称是show方法，但是并不打印具体信息
+	 * 
 	 * @param dateTime
 	 * @return
 	 */
@@ -150,86 +154,61 @@ public class HotelDate {
 	}
 
 	/**
-	 * 用来计算两个日期之间相隔的天数 计算方法遵循左闭右开的原则 例如：2016.11.6 - 2016.11.7 返回值应为1 <br>
-	 * TODO:重写此方法，这个方法应该有两个参数，分别是两个日期，重写注释
-	 * 
+	 * 用来计算两个日期之间相隔的天数 计算方法遵循左闭右开的原则<br>
+	 * 例如：2016.11.6 - 2016.11.7 返回值应为1 <br>
 	 * @return 当前日期与目标日期的差值
 	 */
-	public int getGapDays(LocalDateTime hotelDate) {
-		int tempYear = this.year;
-		int tempMonth = this.month;
-		int tempDay = this.day;
-		int gapDays = 0;
-		// if(hotelDate.year < this.year ||
-		// (hotelDate.year == this.year && hotelDate.month < this.month) ||
-		// (hotelDate.year == this.year && hotelDate.month == this.month &&
-		// hotelDate.day < this.day)) {
-		// return hotelDate.getGapDays(this);
-		// }
-		//
-		// while(hotelDate.year != this.year ||
-		// hotelDate.month != this.month ||
-		// hotelDate.day != this.day) {
-		// gapDays++;
-		// this.day++;
-		// if(!isLeapYear(this.year)) {
-		// if (this.day > daysOfAMonth[this.month]) {
-		// this.day = 1;
-		// this.month++;
-		// }
-		// } else {
-		// if (this.day > daysOfAMonthInLeapYear[this.month]) {
-		// this.day = 1;
-		// this.month++;
-		// }
-		// }
-		//
-		//
-		// if(this.month > 12) {
-		// this.month = 1;
-		// this.year++;
-		// }
-		// }
-		// this.setDate(tempYear, tempMonth, tempDay);
-		return gapDays;
+	public static int getGapDays(LocalDateTime reverseDate, LocalDateTime leaveDate) {
+		int gapDays = (int) reverseDate.until(leaveDate, ChronoUnit.DAYS);
+		return Math.abs(gapDays);
 	}
 
+	@Deprecated
 	public int getYear() {
 		return year;
 	}
 
+	@Deprecated
 	public void setYear(int year) {
 		this.year = year;
 	}
 
+	@Deprecated
 	public int getMonth() {
 		return month;
 	}
 
+	@Deprecated
 	public void setMonth(int month) {
 		this.month = month;
 	}
 
+	@Deprecated
 	public int getDay() {
 		return day;
 	}
 
+	@Deprecated
 	public void setDay(int day) {
 		this.day = day;
 	}
 
+	@Deprecated
 	public int getHour() {
 		return hour;
 	}
 
+	@Deprecated
 	public void setHour(int hour) {
 		this.hour = hour;
 	}
 
+	@Deprecated
 	public int getMinute() {
 		return minute;
 	}
 
+	@Deprecated
 	public void setMinute(int minute) {
 		this.minute = minute;
 	}

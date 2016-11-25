@@ -12,26 +12,30 @@ public class HotelDateTest {
 
 	@Test
 	public void getGapDaysTest1() {
-		/**
-		 * TODO:实例化h1, h2 改变使用getGapDays的使用方法
-		 */
-		LocalDateTime h1 = null;
-		LocalDateTime h2 = null;
-		// 2015, 2, 28
-		// 2016, 2, 28
-		// assertEquals(h1.getGapDays(h2), 365);
+		LocalDateTime h1 = LocalDateTime.of(2015, 2, 28, 12, 30, 0);
+		LocalDateTime h2 = LocalDateTime.of(2015, 3, 1, 12, 30, 0);
+		assertEquals(1, HotelDate.getGapDays(h1, h2));
 	}
 
 	@Test
 	public void getGapDaysTest2() {
-		/**
-		 * TODO:实例化h1, h2 改变使用getGapDays的使用方法
-		 */
-		LocalDateTime h1 = null;
-		LocalDateTime h2 = null;
-		// ******* h1 = new HotelDate(2015, 3, 1);
-		// ******* h2 = new HotelDate(2016, 3, 1);
-		// assertEquals(h2.getGapDays(h1), 366);
+		LocalDateTime h1 = LocalDateTime.of(2015, 2, 28, 1, 30, 0);
+		LocalDateTime h2 = LocalDateTime.of(2015, 3, 1, 22, 30, 0);
+		assertEquals(1, HotelDate.getGapDays(h1, h2));
+	}
+	
+	@Test
+	public void getGapDaysTest3() {
+		LocalDateTime h1 = LocalDateTime.of(2016, 2, 28, 1, 30, 0);
+		LocalDateTime h2 = LocalDateTime.of(2016, 3, 1, 22, 30, 0);
+		assertEquals(2, HotelDate.getGapDays(h1, h2));
+	}
+	
+	@Test
+	public void getGapDaysTest4() {
+		LocalDateTime h1 = LocalDateTime.of(2016, 2, 28, 1, 30, 0);
+		LocalDateTime h2 = LocalDateTime.of(2016, 3, 1, 22, 30, 0);
+		assertEquals(2, HotelDate.getGapDays(h2, h1));
 	}
 
 	@Test
