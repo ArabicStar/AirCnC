@@ -10,5 +10,8 @@
     <!-- name -->
 	<property column="name" generated="never" lazy="false" name="name"
 		type="string" />
-	<!-- credit -->
+	<!-- passwordHash -->
+	<property column="pwd" generated="never" lazy="false" name="passwordHash"
+		type="integer" />
+	</class>
 </hibernate-mapping>
