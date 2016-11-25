@@ -28,6 +28,15 @@ public abstract class OrderInfoTemplate {
 	protected double price;
 
 	protected boolean hasChildren;
+	
+	/**
+	 * TODO:添加具体代码
+	 * @return
+	 */
+	public static boolean checkOrderId() {
+		return true;
+	}
+
 
 	public LocalDateTime getEntryTime() {
 		return entryTime;
@@ -37,11 +46,37 @@ public abstract class OrderInfoTemplate {
 		return lastTime;
 	}
 	
-	/**
-	 * TODO:添加具体代码
-	 * @return
-	 */
-	public static boolean checkOrderId() {
-		return true;
+	public String getOrderId() {
+		return orderId;
 	}
+
+	public String getRoomType() {
+		return roomType;
+	}
+
+	public int getStayDays() {
+		return stayDays;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public OrderStatus getStatus() {
+		return status;
+	}
+
+	public int getPeopleNumber() {
+		return peopleNumber;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public boolean isHasChildren() {
+		return hasChildren;
+	}
+
+
 }

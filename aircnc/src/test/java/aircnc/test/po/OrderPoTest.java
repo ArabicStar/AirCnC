@@ -2,6 +2,8 @@ package aircnc.test.po;
 
 import static org.junit.Assert.assertEquals;
 
+import javax.persistence.criteria.Order;
+
 import org.junit.Test;
 
 import po.order.OrderPo;
@@ -17,8 +19,10 @@ public class OrderPoTest {
 	
 	@Test
 	public void OrderPoTest1() {
-		OrderPo orderPo = new OrderPo("1", 1, 1, OrderStatus.UNEXECUTED, 
-				null, null, "", 200, 222, 2, 0);
+//		OrderPo orderPo = new OrderPo("1", 1, 1, OrderStatus.UNEXECUTED, 
+//				null, null, "", 200, 222, 2, 0);
+		// TODO:为orderPo赋值
+		OrderPo orderPo = new OrderPo();
 		// TODO: 撤销订单
 		orderPo.setStatus(OrderStatus.REPEALED);
 		assertEquals(orderPo.getStatus(), OrderStatus.REPEALED);
@@ -26,8 +30,10 @@ public class OrderPoTest {
 	
 	@Test
 	public void OrderPoTest2() {
-		OrderPo orderPo = new OrderPo("1", 1, 1, OrderStatus.UNEXECUTED, 
-				null, null, "", 200, 222, 2, 0);
+//		OrderPo orderPo = new OrderPo("1", 1, 1, OrderStatus.UNEXECUTED, 
+//				null, null, "", 200, 222, 2, 0);
+		// TODO:为orderPo赋值
+		OrderPo orderPo = new OrderPo();
 		
 		// TODO: 使订单异常
 		orderPo.setStatus(OrderStatus.ABNORMAL);
@@ -36,12 +42,13 @@ public class OrderPoTest {
 	
 	@Test
 	public void OrderPoTest3() {
-		OrderPo orderPo = new OrderPo("1", 1, 1, OrderStatus.UNEXECUTED, 
-				null, null, "", 200, 222, 2, 0);
-		
+//		OrderPo orderPo = new OrderPo("1", 1, 1, OrderStatus.UNEXECUTED, 
+//				null, null, "", 200, 222, 2, 0);
+		// TODO:为orderPo赋值
+		OrderPo orderPo = new OrderPo();
 		// TODO: 使订单执行
 		orderPo.setStatus(OrderStatus.EXECUTED);
-		assertEquals(orderPo.getStatus(), 1);
+		assertEquals(orderPo.getStatus(), OrderStatus.EXECUTED);
 	}
 
 }

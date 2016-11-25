@@ -55,7 +55,7 @@ public class OrderDaoImpl implements OrderDao{
 	}
 
 	public boolean updateOrder(OrderPo orderPo) {
-		String orderId = orderPo.getId();
+		String orderId = orderPo.getOrderId();
 		if(map.get(orderId) != null){
 			map.put(orderId,orderPo);
 			orderDataHelper.updateOrderData(map);

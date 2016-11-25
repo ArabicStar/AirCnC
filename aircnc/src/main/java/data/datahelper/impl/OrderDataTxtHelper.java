@@ -68,10 +68,13 @@ public class OrderDataTxtHelper implements OrderDataHelper{
 			while(iterator.hasNext()){
 				Map.Entry<String, OrderPo> entry = iterator.next();
 				OrderPo orderPo = entry.getValue();
-				String str = orderPo.getId()+";"+orderPo.getHotelId()+";"+orderPo.getUserId()+";"
-			+orderPo.getStatus()+";"+orderPo.getEntryTime()+";"+orderPo.getLastTime()+";"+orderPo.getOrderInfo()+";"+orderPo.getPrice();
-				writer.write(str);
-				writer.write("\r\n");
+				/**
+				 * FIXME:这个方法不完整
+				 */
+//				String str = orderPo.getOrderId()+";"+orderPo.getHotelId()+";"+orderPo.getUserId()+";"
+//			+orderPo.getStatus()+";"+orderPo.getEntryTime()+";"+orderPo.getLastTime()+";"+orderPo.getOrderInfo()+";"+orderPo.getPrice();
+//				writer.write(str);
+//				writer.write("\r\n");
 			}
 			
 			writer.close();	
