@@ -32,7 +32,7 @@ public class MarketPo extends MarketInfo{
 
 
 	/**
-	 * Set id of a integer.<br>
+	 * Set id of an integer.<br>
 	 * Only for hibernate.<br>
 	 * 
 	 * @param numId
