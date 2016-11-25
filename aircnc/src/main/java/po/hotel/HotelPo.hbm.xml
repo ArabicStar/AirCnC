@@ -40,9 +40,9 @@
 			name="introduction" type="string" />
 			
 		<!-- association table -->
-		<set name="rooms" inverse="true" cascade="all">
+		<set name="rooms" inverse="false" cascade="all">
             <key column="HOTELID"></key>
-            <one-to-many class="po.hotel.RoomPo"/>
+            <one-to-many class ="po.hotel.RoomPo"/>
         </set>		
 	</class>
 </hibernate-mapping>

@@ -5,7 +5,7 @@
 <!-- RoomPo mapping xml -->
 <hibernate-mapping>
 	<class name="po.hotel.RoomPo" table="rooms">
-	
+
 		<!-- key column, auto generated -->
 		<id column="ID" name="id" type="integer">
 			<generator class="native" />
@@ -13,18 +13,18 @@
 
 		<!-- type, the type of room -->
 		<property column="NAME" name="name" type="string" />
-		
-		<!-- peopleNumber, the capacity of room-->
+
+		<!-- peopleNumber, the capacity of room -->
 		<property column="PNUM" name="peopleNum" type="integer" />
-		
-		<!-- roomNumber, the amount of room-->
+
+		<!-- roomNumber, the amount of room -->
 		<property column="RNUM" name="roomNum" type="integer" />
-		
-		<!-- price, the price of room-->
+
+		<!-- price, the price of room -->
 		<property column="PRICE" name="price" type="double" />
-		
+
 		<!-- hotelId, foreign key -->
 		<property column="HOTELID" name="hotelId" />
-		
+
 	</class>
 </hibernate-mapping>
