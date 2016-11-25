@@ -30,11 +30,27 @@ public abstract class OrderInfoTemplate {
 	protected boolean hasChildren;
 	
 	/**
-	 * TODO:添加具体代码
+	 * TODO:添加其他测试代码
 	 * @return
 	 */
-	public static boolean checkOrderId() {
+	public static boolean checkOrderId(String orderId) {
+		if(orderId.length() % 2 == 1) {
+			return false;
+		}
+		if(orderId.length() < 16) {
+			return false;
+		}
+		if(!isNumber(orderId)){
+			return false;
+		}
 		return true;
+	}
+	
+	private static boolean isNumber(String str) {
+		if(str.matches("[0-9]+")) {
+			return true;
+		}
+		return false;
 	}
 
 
