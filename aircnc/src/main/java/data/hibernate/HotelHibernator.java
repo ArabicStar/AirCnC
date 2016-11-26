@@ -7,7 +7,7 @@ import po.hotel.HotelPo;
  * Public methods should only be used by HotelDao. Please <b>NOT</b> used in
  * client code.<br>
  * 
- * @see data.dao.HotelDao
+ * @see data.dao.hotel.HotelDao
  * 
  * @author jqwu
  *

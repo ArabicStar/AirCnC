@@ -2,7 +2,7 @@ package service.impl.market;
 
 import java.util.Random;
 
-import data.dao.MarketDao;
+import data.dao.market.MarketDao;
 import po.market.MarketPo;
 import po.market.MarketPoBuilder;
 import service.market.MarketAccountService;

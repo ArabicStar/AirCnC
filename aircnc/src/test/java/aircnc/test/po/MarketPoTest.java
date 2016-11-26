@@ -3,9 +3,8 @@ package aircnc.test.po;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
+import data.dao.market.MarketDao;
 import po.market.MarketPo;
-
-import data.dao.MarketDao;
 
 public class MarketPoTest {
 

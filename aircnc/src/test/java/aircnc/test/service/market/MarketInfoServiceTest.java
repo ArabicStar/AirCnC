@@ -5,8 +5,8 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import data.dao.MarketDao;
-import data.dao.impl.MarketDaoImpl;
+import data.dao.impl.market.MarketDaoImpl;
+import data.dao.market.MarketDao;
 //import service.impl.market.InfoManager;
 import service.market.MarketInfoService;
 import utils.info.market.MarketInfo;

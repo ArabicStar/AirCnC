@@ -5,11 +5,10 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import data.dao.MemberDao;
-import data.dao.impl.MemberDaoImpl;
-import data.hibernate.impl.member.MemberHibernatorImpl;
-import service.impl.member.MemberInfoManager;
+import data.dao.impl.member.MemberDaoImpl;
+import data.dao.member.MemberDao;
 import service.impl.member.MemberAccountManager;
+import service.impl.member.MemberInfoManager;
 import service.member.MemberAccountService;
 import service.member.MemberInfoService;
 import utils.info.member.MemberInfo;
@@ -22,9 +21,9 @@ public class MemeberInfoSerivceTest {
 
 	@Before
 	public void setUp() throws Exception {
-		dao = new MemberDaoImpl(new MemberHibernatorImpl());
+		dao = new MemberDaoImpl();
 		account = new MemberAccountManager(dao);
-		info = new MemberInfoManager(null, account, dao, null);
+		info = new MemberInfoManager(account, dao, null);
 	}
 
 	@Test

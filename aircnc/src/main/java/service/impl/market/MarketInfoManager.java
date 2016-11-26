@@ -1,11 +1,9 @@
 package service.impl.market;
 
-import data.dao.HotelDao;
-import data.dao.MarketDao;
+import data.dao.market.MarketDao;
 import po.market.MarketPo;
 import po.market.MarketPoBuilder;
 import service.market.MarketInfoService;
-import service.query.QueryService;
 import utils.info.market.MarketInfo;
 import vo.market.MarketVoBuilder;
 

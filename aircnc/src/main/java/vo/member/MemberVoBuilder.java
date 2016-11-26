@@ -15,7 +15,7 @@ public class MemberVoBuilder extends MemberInfoBuilder {
 		INVALID_MEMBER_VO.invalidate();
 	}
 
-	public static final MemberVo getInvalidInfo() {
+	public static final MemberVo invalidInfo() {
 		return INVALID_MEMBER_VO;
 	}
 

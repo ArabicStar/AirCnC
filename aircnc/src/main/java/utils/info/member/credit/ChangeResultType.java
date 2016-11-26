@@ -10,9 +10,26 @@ import java.util.function.Predicate;
  *
  */
 enum ChangeResultType {
-	UP("增加", i -> i > 0), DOWN("扣除", i -> i < 0), RECOVER("恢复", i -> true);
+	/**
+	 * gain
+	 */
+	UP("增加", i -> i > 0),
+	/**
+	 * reduce
+	 */
+	DOWN("扣除", i -> i < 0),
+	/**
+	 * recover
+	 */
+	RECOVER("恢复", i -> true);
 
+	/**
+	 * verb string which will be used on ui <br>
+	 */
 	private String verb;
+	/**
+	 * credit change value checker <br>
+	 */
 	private Predicate<Integer> checker;
 
 	private ChangeResultType(String verb, Predicate<Integer> checker) {
@@ -20,10 +37,22 @@ enum ChangeResultType {
 		this.checker = checker;
 	}
 
+	/**
+	 * Get action type correspondent verb.<br>
+	 * 
+	 * @return verb <br>
+	 */
 	public String getVerb() {
 		return verb;
 	}
 
+	/**
+	 * Check credit change value.<br>
+	 * 
+	 * @param changeValue
+	 *            credit change value <br>
+	 * @return if change value is valid bb
+	 */
 	public boolean checkChangeValue(int changeValue) {
 		return checker.test(changeValue);
 	}

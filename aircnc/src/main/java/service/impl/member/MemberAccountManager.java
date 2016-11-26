@@ -2,7 +2,7 @@ package service.impl.member;
 
 import java.util.Random;
 
-import data.dao.MemberDao;
+import data.dao.member.MemberDao;
 import po.member.MemberPo;
 import po.member.MemberPoBuilder;
 import service.member.MemberAccountService;
@@ -30,23 +30,29 @@ public final class MemberAccountManager implements MemberAccountService {
 
 	@Override
 	public MemberInfo register(MemberVoBuilder newMemberInfo, int passwordHash) {
-		String newID = generateNewID();
+		if (newMemberInfo == null)
+			return null;
 
+		String newID = generateNewID();// generate a new id
+
+		// set id and password, build po
 		MemberVo newMemberVo = newMemberInfo.setId(newID).getMemberInfo();
 		MemberPo newMemberPo = new MemberPoBuilder(newMemberVo).setPasswordHash(passwordHash).getMemberInfo();
 
-		// System.out.println(newMemberPo);
+		// add new memebr
 		boolean result = dao.addMember(newMemberPo);
-		System.out.println(result);
 		if (result)
 			return newMemberVo;
 
-		return MemberVoBuilder.getInvalidInfo();
+		return MemberVoBuilder.invalidInfo();
 	}
 
 	/* generate a never-used id */
 	private String generateNewID() {
+		// random generate
 		String stringID = MemberInfo.formatID(R.nextInt(ID_BOUND));
+
+		// check and generate loop
 		for (int numId = R.nextInt(ID_BOUND); dao.existsMember(stringID); numId = R.nextInt(ID_BOUND))
 			stringID = MemberInfo.formatID(numId);
 
@@ -55,22 +61,27 @@ public final class MemberAccountManager implements MemberAccountService {
 
 	@Override
 	public MemberInfo login(String id, int passwordHash) {
-		MemberPo memberAccount = dao.findMember(id);
-
-		if (memberAccount == null)
+		if (!MemberInfo.checkID(id))
 			return null;
 
-		if (!checkPassword(memberAccount, passwordHash))
-			return MemberVoBuilder.getInvalidInfo();
+		MemberPo memberAccount = dao.findMember(id);
 
+		if (memberAccount == null)// not exist
+			return null;
+
+		// password verify
+		if (!checkPassword(memberAccount, passwordHash))
+			return MemberVoBuilder.invalidInfo();
+
+		// set login status
 		this.isLogined = true;
 		this.currentAccount = memberAccount;
-		// System.out.println(loginedMember.getID());
 		return currentAccount;
 	}
 
 	@Override
 	public boolean logout() {
+		// set logout status
 		this.isLogined = false;
 		this.currentAccount = null;
 		return true;
@@ -88,6 +99,9 @@ public final class MemberAccountManager implements MemberAccountService {
 
 	@Override
 	public boolean existsMember(String id) {
+		if (!MemberInfo.checkID(id))
+			return false;
+
 		return dao.existsMember(id);
 	}
 

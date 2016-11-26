@@ -15,7 +15,7 @@ import org.apache.commons.lang.StringUtils;
  *
  */
 public class MemberPoBuilder extends MemberInfoBuilder {
-	
+
 	private int passwordHash = Integer.MIN_VALUE;
 
 	/**
@@ -33,7 +33,7 @@ public class MemberPoBuilder extends MemberInfoBuilder {
 	 * 
 	 * @return Invalid MemberPo instance
 	 */
-	public static final MemberPo getInvalidInfo() {
+	public static final MemberPo invalidInfo() {
 		return INVALID_MEMBER_PO;
 	}
 
@@ -44,12 +44,15 @@ public class MemberPoBuilder extends MemberInfoBuilder {
 	public MemberPoBuilder(MemberInfo info) {
 		this(info.getType());
 		if (!info.isValid())
-			throw new IllegalArgumentException("Invalid MemberInfo Instance");
+			throw new IllegalArgumentException("MemberPoBuilder - Invalid MemberInfo Instance");
 
 		setId(info.getId()).setContactInfo(info.getContact()).setBirthday(info.getBirthday())
 				.setEnterprise(info.getEnterprise());
 		String name = StringUtils.deleteWhitespace(info.getName());
 		setName(name);
+
+		if (info instanceof MemberPo)
+			setPasswordHash(((MemberPo) info).getPasswordHash());
 	}
 
 	@Override
@@ -69,7 +72,7 @@ public class MemberPoBuilder extends MemberInfoBuilder {
 			// insert blank space to avoid injection attack
 			this.name = name.replaceAll("(.{1})", "$1 ");
 		else
-			throw new IllegalArgumentException("Wrong name");
+			throw new IllegalArgumentException("MemberPoBuilder - Wrong name");
 
 		return this;
 	}
@@ -104,7 +107,7 @@ public class MemberPoBuilder extends MemberInfoBuilder {
 	@Override
 	public MemberPo getMemberInfo() {
 		if (!isReady() && passwordHash != Integer.MIN_VALUE)
-			throw new IllegalStateException("Lack Of Info");
+			throw new IllegalStateException("MemberPoBuilder - Lack Of Info");
 
 		if (type == Type.BUSINESS)
 			return new EnterpriseMemberPo().setId(id).setName(name).setPasswordHash(passwordHash).setCredit(credit)

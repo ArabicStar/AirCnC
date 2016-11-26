@@ -89,6 +89,8 @@ public abstract class ContactInfoBuilder extends ContactInfoTemplate {
 	 * If not ready, <b>IllgealStateException</b> will be thrown. <br>
 	 * 
 	 * @return ContactInfo instance built <br>
+	 * @throws IllegalStateException
+	 *             not ready
 	 */
 	public abstract ContactInfo getContactInfo();
 }

@@ -1,34 +1,28 @@
 package service.impl.member;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-import data.dao.HotelDao;
-import data.dao.MemberDao;
+import data.dao.hotel.HotelDao;
+import data.dao.member.MemberDao;
 import po.member.MemberPo;
 import po.member.MemberPoBuilder;
 import service.member.MemberAccountService;
 import service.member.MemberInfoService;
-import service.query.QueryService;
-import utils.condition.CreditChangeCondition;
-import utils.condition.OrderCondition;
+import service.query.MemberQueryService;
 import utils.info.member.MemberInfo;
 import vo.hotel.HotelVo;
 import vo.member.MemberVoBuilder;
 import vo.member.credit.CreditChangeVo;
 import vo.order.OrderVo;
 
-public class MemberInfoManager implements MemberInfoService {
+public class MemberInfoManager implements MemberInfoService, MemberQueryService {
 	private MemberDao memberDao;
 	private HotelDao hotelDao;
 
-	private QueryService queryService;
 	private MemberAccountService accountService;
 
-	public MemberInfoManager(QueryService queryService, MemberAccountService accountService, MemberDao memberDao,
-			HotelDao hotelDao) {
+	public MemberInfoManager(MemberAccountService accountService, MemberDao memberDao, HotelDao hotelDao) {
 		this.memberDao = memberDao;
-		this.queryService = queryService;
 		this.hotelDao = hotelDao;
 		this.accountService = accountService;
 	}
@@ -41,7 +35,7 @@ public class MemberInfoManager implements MemberInfoService {
 	@Override
 	public List<OrderVo> getMemberOrder(String id) {
 		// TODO need implemented
-		return queryService.findOrders(new OrderCondition());
+		return null;
 	}
 
 	@Override
@@ -50,7 +44,7 @@ public class MemberInfoManager implements MemberInfoService {
 			return null;
 
 		// TODO need modified
-		List<OrderVo> historyOrders = queryService.findOrders(new OrderCondition());
+		List<OrderVo> historyOrders = null;
 		List<HotelVo> historyHotels = null;// =
 		// historyOrders.parallelStream().map(OrderVo::getHotel).distinct()
 		// .map(Integer::valueOf).map(i -> hotelDao.getHotel(i))
@@ -67,7 +61,7 @@ public class MemberInfoManager implements MemberInfoService {
 			return null;
 
 		// TODO need modified
-		return queryService.findCreditChanges(new CreditChangeCondition());
+		return null;
 	}
 
 	@Override
@@ -82,6 +76,11 @@ public class MemberInfoManager implements MemberInfoService {
 
 		return memberDao
 				.updateMember(new MemberPoBuilder(modifiedInfo).setPasswordHash(po.getPasswordHash()).getMemberInfo());
+	}
+
+	@Override
+	public MemberInfo searchById(String id) {
+		return getMemberInfo(id);
 	}
 
 }

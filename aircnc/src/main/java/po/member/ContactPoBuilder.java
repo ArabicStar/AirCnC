@@ -34,9 +34,9 @@ public class ContactPoBuilder extends ContactInfoBuilder {
 
 	@Override
 	public ContactInfo getContactInfo() {
-		if (isReady())
-			return new ContactPo().setEmail(email).setFixedPhone(fixedPhone).setMobilePhone(mobilePhone);
-
-		return new ContactPoBuilder().getContactInfo();
+		if (!isReady())
+			throw new IllegalStateException("ContactPoBuilder - Lack Of Info");
+		
+		return new ContactPo().setEmail(email).setFixedPhone(fixedPhone).setMobilePhone(mobilePhone);
 	}
 }

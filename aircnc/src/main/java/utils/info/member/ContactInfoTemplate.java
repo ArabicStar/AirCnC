@@ -30,7 +30,7 @@ public abstract class ContactInfoTemplate {
 
 	/**
 	 * email address string pattern<br>
-	 * <i>%username%</i> @<i>%servername%</i> . <i>%domain%</i>
+	 * <i>%username%</i> <b>@</b><i>%servername%</i> <b>. </b><i>%domain%</i>
 	 */
 	private static final String EMAIL_PATTERN = "\\w+@\\w+\\.\\w+";
 

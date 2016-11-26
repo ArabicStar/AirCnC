@@ -25,11 +25,11 @@ public abstract class MemberInfoBuilder extends MemberInfoTemplate {
 	 */
 	public MemberInfoBuilder(String type) {
 		if (type == null)
-			throw new IllegalArgumentException("Null Type String");
+			throw new IllegalArgumentException("MemberInfoBuilder - Null Type String");
 
 		this.type = Type.valueOf(type.toUpperCase());
 		if (this.type == null)
-			throw new IllegalArgumentException("Invalid Type String");
+			throw new IllegalArgumentException("MemberInfoBuilder - Invalid Type String");
 
 		credit = 0;
 	}
@@ -52,12 +52,14 @@ public abstract class MemberInfoBuilder extends MemberInfoTemplate {
 	 * @param id
 	 *            id string <br>
 	 * @return this instance <br>
+	 * @throws IllegalArgumentException
+	 *             wrong id
 	 */
 	public MemberInfoBuilder setId(String id) {
 		if (checkID(id))
 			this.id = id;
 		else
-			throw new IllegalArgumentException("Wrong ID");
+			throw new IllegalArgumentException("MemberInfoBuilder - Wrong ID");
 		return this;
 	}
 
@@ -67,6 +69,8 @@ public abstract class MemberInfoBuilder extends MemberInfoTemplate {
 	 * @param name
 	 *            name string <br>
 	 * @return this instance <br>
+	 * @throws IllegalArgumentException
+	 *             invalid name
 	 */
 	public abstract MemberInfoBuilder setName(String name);
 
@@ -76,12 +80,14 @@ public abstract class MemberInfoBuilder extends MemberInfoTemplate {
 	 * @param contact
 	 *            ContactInfo instance <br>
 	 * @return this instance <br>
+	 * @throws IllegalArgumentException
+	 *             null contact info
 	 */
 	public MemberInfoBuilder setContactInfo(ContactInfo contact) {
 		if (contact != null)
 			this.contact = contact;
 		else
-			throw new IllegalArgumentException("Null Contact info");
+			throw new IllegalArgumentException("MemberInfoBuilder - Null Contact info");
 		return this;
 	}
 
@@ -91,12 +97,14 @@ public abstract class MemberInfoBuilder extends MemberInfoTemplate {
 	 * @param credit
 	 *            credit integer <br>
 	 * @return this instance <br>
+	 * @throws IllegalArgumentException
+	 *             wrong credit value
 	 */
 	public MemberInfoBuilder setCredit(int credit) {
 		if (credit != WRONG_CREDIT)
 			this.credit = credit;
 		else
-			throw new IllegalArgumentException("Wrong credit value");
+			throw new IllegalArgumentException("MemberInfoBuilder - Wrong credit value");
 		return this;
 	}
 
@@ -106,6 +114,8 @@ public abstract class MemberInfoBuilder extends MemberInfoTemplate {
 	 * @param enterprise
 	 *            enterprise name string <br>
 	 * @return this instance <br>
+	 * @throws IllegalArgumentException
+	 *             null enterprise string
 	 */
 	public MemberInfoBuilder setEnterprise(String enterprise) {
 		if (type != Type.BUSINESS)
@@ -114,7 +124,7 @@ public abstract class MemberInfoBuilder extends MemberInfoTemplate {
 		if (enterprise != null)
 			this.enterprise = enterprise;
 		else
-			throw new IllegalArgumentException("Null enterprise string");
+			throw new IllegalArgumentException("MemberInfoBuilder - Null enterprise string");
 		return this;
 	}
 
@@ -124,6 +134,8 @@ public abstract class MemberInfoBuilder extends MemberInfoTemplate {
 	 * @param birthday
 	 *            birthdat LocalDate instance <br>
 	 * @return this instance <br>
+	 * @throws IllegalArgumentException
+	 *             null birthday LocalDate
 	 */
 	public MemberInfoBuilder setBirthday(LocalDate birthday) {
 		if (type != Type.PERSONAL)
@@ -132,7 +144,7 @@ public abstract class MemberInfoBuilder extends MemberInfoTemplate {
 		if (birthday != null)
 			this.birthday = birthday;
 		else
-			throw new IllegalArgumentException("Null birthday LocalDate");
+			throw new IllegalArgumentException("MemberInfoBuilder - Null birthday LocalDate");
 		return this;
 	}
 
@@ -151,9 +163,11 @@ public abstract class MemberInfoBuilder extends MemberInfoTemplate {
 
 	/**
 	 * Build a MemberInfo instance. <br>
-	 * If not ready,<b>IllgealStateException</b> will be thrown. <br>
+	 * If not ready,<b>IllegalStateException</b> will be thrown. <br>
 	 * 
 	 * @return MemberInfo instance built <br>
+	 * @throws IllegalStateException
+	 *             not ready for building <br>
 	 */
 	public abstract MemberInfo getMemberInfo();
 }

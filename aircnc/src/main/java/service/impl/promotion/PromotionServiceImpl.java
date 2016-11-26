@@ -1,6 +1,6 @@
 package service.impl.promotion;
 
-import data.dao.MemberDao;
+import data.dao.member.MemberDao;
 import po.order.OrderPo;
 import service.promotion.PromotionService;
 import vo.order.OrderVo;
