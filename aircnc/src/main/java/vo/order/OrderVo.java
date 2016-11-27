@@ -69,6 +69,7 @@ public class OrderVo extends OrderInfo {
 		this.hasChildren = hasChildren;
 		return this;
 	}
+	
 	@Override
 	public OrderVo setPrice(double price) {
 		this.price = price;

@@ -94,5 +94,24 @@ public abstract class OrderInfoTemplate {
 		return hasChildren;
 	}
 
+	public abstract OrderInfoTemplate setOrderId(String orderId);
+
+	public abstract OrderInfoTemplate setRoomType(String roomType);
+
+	public abstract OrderInfoTemplate setStayDays(int stayDays);
+
+	public abstract OrderInfoTemplate setUserId(int userId);
+
+	public abstract OrderInfoTemplate setStatus(OrderStatus status);
+
+	public abstract OrderInfoTemplate setEntryTime(LocalDateTime entryTime);
+
+	public abstract OrderInfoTemplate setLastTime(LocalDateTime lastTime);
+
+	public abstract OrderInfoTemplate setPeopleNumber(int peopleNumber);
+
+	public abstract OrderInfoTemplate setPrice(double price);
+
+	public abstract OrderInfoTemplate setHasChildren(boolean hasChildren);
 
 }
