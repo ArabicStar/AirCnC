@@ -1,7 +1,5 @@
 package data.hibernate;
 
-import java.sql.SQLException;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
@@ -110,15 +108,7 @@ public class HibernateSessionFactory {
 	}
 
 	// test
-	// public static void main(String[] args) throws InterruptedException,
-	// ClassNotFoundException, SQLException {
-	// Session s = getSession();
-	// s.beginTransaction();
-	// s.save(new
-	// ContactPoBuilder().setEmail("123@qq.com").getContactInfo());
-	// System.err.println("begin");
-	// Thread.sleep(5000);
-	// System.err.println("close");
-	// s.close();
-	// }
+	public static void main(String[] args) {
+
+	}
 }

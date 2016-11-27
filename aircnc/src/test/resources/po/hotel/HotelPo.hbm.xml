@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping">
+<!-- Generated 2016-11-22 10:03:21 by Hibernate Tools 3.5.0.Final -->
+<!-- ContactPo mapping xml -->
+<hibernate-mapping>
+	<class name="po.hotel.HotelPo" table="hotels">
+	
+		<!-- hotelId, the key column, auto increase -->
+		<id column="ID" name="id" type="integer">
+			<generator class="native" />
+		</id>
+		
+		<!-- name -->
+		<property column="NAME" generated="never" lazy="false" name="name"
+			type="string" />
+			
+		<!-- passwordHash -->
+		<property column="PWD" generated="never" lazy="false" name="passwordHash"
+			type="integer" />
+			
+		<!-- star -->
+		<property column="STAR" generated="never" lazy="false" name="star"
+			type="integer" />
+			
+		<!-- grade -->
+		<property column="GRADE" generated="never" lazy="false" name="grade"
+			type="double" />
+			
+		<!-- scope -->
+		<property column="SCOPE" generated="never" lazy="false" name="scope"
+			type="string" />
+			
+		<!-- location -->
+		<property column="LOCATION" generated="never" lazy="false" 
+			name="location" type="string" />
+			
+		<!-- introduction -->
+		<property column="INTRODUCTION" generated="never" lazy="false"
+			name="introduction" type="string" />
+			
+		<!-- association table -->
+		<set name="rooms"  cascade="all">
+            <key column="HOTELID" ></key>
+            <one-to-many class ="po.hotel.RoomPo"/>
+        </set>		
+	</class>
+</hibernate-mapping>

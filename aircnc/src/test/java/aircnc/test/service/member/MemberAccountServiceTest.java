@@ -44,6 +44,7 @@ public class MemberAccountServiceTest {
 		}
 	}
 	/* test data */
+	
 	private MemberAccountService acc;
 	private MemberDao dao;
 

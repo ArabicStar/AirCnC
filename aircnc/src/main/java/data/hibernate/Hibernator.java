@@ -8,6 +8,7 @@ import org.hibernate.Transaction;
 
 public interface Hibernator {
 	public static <R> R execute(HibernateOperation<R> op) {
+		//System.out.println(1);
 		// normal
 		R result = null;
 		Session session = getSession();
@@ -20,6 +21,7 @@ public interface Hibernator {
 			result = op.execute(session);
 
 			ts.commit();
+
 		} catch (HibernateException he) {
 			// exception
 			he.printStackTrace();
@@ -34,33 +36,4 @@ public interface Hibernator {
 
 		return result;
 	}
-
-	// public static <T> T fetch(HibernateObjectOperation<T> op) {
-	// Session session = getSession();
-	//
-	// T obj = null;
-	// Transaction ts = null;
-	//
-	// try {
-	// // normal
-	// ts = session.beginTransaction();
-	//
-	// obj = op.execute(session);
-	//
-	// ts.commit();
-	//
-	// } catch (HibernateException he) {
-	// // exception
-	// he.printStackTrace();
-	//
-	// if (ts != null)
-	// ts.rollback();
-	//
-	// } finally {
-	// // close
-	// session.close();
-	// }
-	//
-	// return obj;
-	// }
 }

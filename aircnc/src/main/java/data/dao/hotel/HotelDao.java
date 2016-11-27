@@ -1,7 +1,5 @@
 package data.dao.hotel;
 
-import java.util.List;
-
 import po.hotel.HotelPo;
 
 public interface HotelDao {

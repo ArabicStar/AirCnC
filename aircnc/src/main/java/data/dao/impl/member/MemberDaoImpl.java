@@ -4,9 +4,11 @@ import static data.hibernate.Hibernator.execute;
 
 import data.dao.member.MemberDao;
 import po.member.MemberPo;
+import po.member.MemberPoBuilder;
 
 /**
  * Implemention of MemberDao.<br>
+ * 
  * @see MemberDao
  * @author ClevelandAlto
  *
@@ -18,18 +20,17 @@ public class MemberDaoImpl implements MemberDao {
 		if (po == null)
 			return false;
 
+		// should not exist yet
+		if (existsMember(po.getId()))
+			return false;
+
 		return execute(session -> {
-			boolean flag = false;
+			// save associated ContactPo first
+			session.save(po.getContact());
+			// save MemberPo
+			session.save(po);
 
-			// member id shoud not exist
-			if (flag = (!existsMember(po.getId()))) {
-				// persist associated ContactPo first
-				session.persist(po.getContact());
-				// the save MemberPo
-				session.save(po);
-			}
-
-			return flag;
+			return true;
 		});
 	}
 
@@ -54,9 +55,9 @@ public class MemberDaoImpl implements MemberDao {
 		return execute(session -> {
 			Boolean flag = Boolean.FALSE;
 
-			MemberPo member = (MemberPo) session.get(MemberPo.class, parseId(po.getId()));
-			if (flag = Boolean.valueOf(member != null))// check existence
-				session.update(po);
+			MemberPo mem = session.get(MemberPo.class, parseId(po.getId()));
+			if (flag = Boolean.valueOf(mem != null))
+				MemberPoBuilder.updatePo(po, mem);
 
 			return flag;
 		});
@@ -72,7 +73,7 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public boolean existsMember(final String idString) {
 		return execute(session -> {
-			return (MemberPo) session.get(MemberPo.class, parseId(idString)) == null;
+			return (MemberPo) session.get(MemberPo.class, parseId(idString)) != null;
 		});
 	}
 

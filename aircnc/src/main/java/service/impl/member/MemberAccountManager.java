@@ -53,7 +53,7 @@ public final class MemberAccountManager implements MemberAccountService {
 		String stringID = MemberInfo.formatID(R.nextInt(ID_BOUND));
 
 		// check and generate loop
-		for (int numId = R.nextInt(ID_BOUND); dao.existsMember(stringID); numId = R.nextInt(ID_BOUND))
+		for (int numId = R.nextInt(ID_BOUND); dao.existsMember(stringID); numId = R.nextInt(ID_BOUND))	
 			stringID = MemberInfo.formatID(numId);
 
 		return stringID;
