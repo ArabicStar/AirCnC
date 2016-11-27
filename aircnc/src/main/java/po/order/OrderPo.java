@@ -19,149 +19,81 @@ import utils.info.order.OrderStatus;
  */
 public class OrderPo extends OrderInfo{
 
-	private String id;
-
 	private int hotelId;
-
-	private int userId;
-
-	private OrderStatus status;
-
-	private LocalDateTime entryTime;
-
-	private LocalDateTime lastTime;
-
-	private String orderInfo;
-
-	private int price;
-
-	/**
-	 * 房间数量
-	 */
-	private int roomNumber;
-
-	/**
-	 * 小孩人数
-	 */
-	private int childrenNumber;
-
-	/**
-	 * 总人数（包括小孩）
-	 */
-	private int peopleNumber;
 
 	public OrderPo() {
 		super();
-	}
-
-	public OrderPo(String id, int hotelId, int userId, OrderStatus status, 
-			LocalDateTime entryTime, LocalDateTime lastTime, String orderInfo,
-			int price, int roomNumber, int peopleNumber, int childrenNumber) {
-		super();
-		this.id = id;
-		this.hotelId = hotelId;
-		this.userId = userId;
-		this.status = status;
-		this.entryTime = entryTime;
-		this.lastTime = lastTime;
-		this.orderInfo = orderInfo;
-		this.price = price;
-		this.roomNumber = roomNumber;
-		this.peopleNumber = peopleNumber;
-		this.childrenNumber = childrenNumber;
-	}
-	
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	public int getHotelId() {
 		return hotelId;
 	}
 
-	public void setHotelId(int hotelId) {
+	public OrderPo setHotelId(int hotelId) {
 		this.hotelId = hotelId;
+		return this;
 	}
 
-	public int getUserId() {
-		return userId;
+	@Override
+	public OrderPo setOrderId(String orderId) {
+		this.orderId = orderId;
+		return this;
 	}
 
+	@Override
+	public OrderPo setRoomType(String roomType) {
+		this.roomType = roomType;
+		return this;
+	}
+
+	@Override
+	public OrderPo setStayDays(int stayDays) {
+		this.stayDays = stayDays;
+		return this;
+	}
+
+	@Override
 	public OrderPo setUserId(int userId) {
 		this.userId = userId;
 		return this;
 	}
 
-	public OrderStatus getStatus() {
-		return status;
-	}
-
+	@Override
 	public OrderPo setStatus(OrderStatus status) {
 		this.status = status;
 		return this;
 	}
 
-	public LocalDateTime getEntryTime() {
-		return entryTime;
-	}
-
+	@Override
 	public OrderPo setEntryTime(LocalDateTime entryTime) {
 		this.entryTime = entryTime;
 		return this;
 	}
 
-	public LocalDateTime getLastTime() {
-		return lastTime;
-	}
-
+	@Override
 	public OrderPo setLastTime(LocalDateTime lastTime) {
 		this.lastTime = lastTime;
 		return this;
 	}
 
-	public String getOrderInfo() {
-		return orderInfo;
-	}
-
-	public void setOrderInfo(String orderInfo) {
-		this.orderInfo = orderInfo;
-	}
-
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(int price) {
-		this.price = price;
-	}
-
-	public int getRoomNumber() {
-		return roomNumber;
-	}
-
-	public void setRoomNumber(int roomNumber) {
-		this.roomNumber = roomNumber;
-	}
-
-	public int getChildrenNumber() {
-		return childrenNumber;
-	}
-
-	public void setChildrenNumber(int childrenNumber) {
-		this.childrenNumber = childrenNumber;
-	}
-
-	public int getPeopleNumber() {
-		return peopleNumber;
-	}
-
+	@Override
 	public OrderPo setPeopleNumber(int peopleNumber) {
 		this.peopleNumber = peopleNumber;
 		return this;
 	}
+
+	@Override
+	public OrderPo setPrice(double price) {
+		this.price = price;
+		return this;
+	}
+
+	@Override
+	public OrderPo setHasChildren(boolean hasChildren) {
+		this.hasChildren = hasChildren;
+		return this;
+	}
+	
+	
 
 }
