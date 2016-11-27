@@ -14,13 +14,13 @@ public class HotelDaoImpl implements HotelDao{
 	}
 	
 	@Override
-	public HotelPo findHotel(final String id) {
-		return hiber.findHotel(parseId(id));
+	public HotelPo findHotel(final int id) {
+		return hiber.findHotel(id);
 	}
 
 	@Override
-	public boolean deleteHotel(final String id) {
-		return hiber.deleteHotel(parseId(id));
+	public boolean deleteHotel(final int id) {
+		return hiber.deleteHotel(id);
 	}
 
 	@Override
@@ -40,17 +40,10 @@ public class HotelDaoImpl implements HotelDao{
 	}
 
 	@Override
-	public boolean existHotel(final String id) {
-		return hiber.existId(parseId(id));
+	public boolean existHotel(final int id) {
+		return hiber.existId(id);
 	}
-	
-	// parse an id string. if invalid, throw IAE.
-	private static final int parseId(final String id) {
-		if (!HotelInfoTemplate.checkID(id))
-			throw new IllegalArgumentException("Wrong ID");
 
-		return Integer.parseInt(id);
-	}	
 
 	
 

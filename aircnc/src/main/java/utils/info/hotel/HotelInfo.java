@@ -38,7 +38,7 @@ public abstract class HotelInfo extends HotelInfoTemplate{
 	 * @param type
 	 */
 	protected HotelInfo() {
-		id = BLANK;
+		id = 1;
 		name = BLANK;
 		scope = BLANK;
 		location = BLANK;
@@ -48,10 +48,10 @@ public abstract class HotelInfo extends HotelInfoTemplate{
 		isValid = true;
 	}
 
-	public String getID() {
+	public int getId() {
 		if (isValid())
 			return id;
-		return null;
+		return 0;
 	}
 
 	public abstract String getName();

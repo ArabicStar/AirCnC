@@ -9,7 +9,6 @@ import utils.info.hotel.HotelInfo;
 public class HotelPo extends HotelInfo{
 	protected int passwordHash;
 	protected Set<RoomPo> rooms;
-	protected int numId = Integer.MIN_VALUE;
 	
 	
 	@Override
@@ -25,19 +24,10 @@ public class HotelPo extends HotelInfo{
 		return Integer.MIN_VALUE;
 	}
 	
-	public int getNumId(){
-		return numId;
-	}
-	
 	public Set<RoomPo> getRooms(){
 		if (isValid())
 			return this.rooms;
 		return null;
-	}
-	
-	public void setNumId(int numId){
-		this.numId = numId;
-		this.id = formatID(numId);
 	}
 	
 	public HotelPo setPasswordHash(int passwordHash) {
@@ -51,9 +41,8 @@ public class HotelPo extends HotelInfo{
 	}
 	
 	
-	public HotelPo setID(String id){
+	public HotelPo setId(int id){
 		this.id = id;
-		this.numId = Integer.valueOf(id);
 		return this;
 	}
 	

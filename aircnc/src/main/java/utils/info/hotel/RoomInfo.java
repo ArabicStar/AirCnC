@@ -11,7 +11,6 @@ public abstract class RoomInfo extends RoomInfoTemplate {
 		numOfPeople = 0;
 		numOfRoom = 0;
 		isValid = true;
-		hotelId = BLANK;
 	}
 
 	public String getType() {
@@ -42,12 +41,6 @@ public abstract class RoomInfo extends RoomInfoTemplate {
 		if(isValid())
 			return price;
 		return Double.MIN_VALUE;
-	}
-	
-	public String getHotelId(){
-		if(isValid())
-			return hotelId;
-		return null;
 	}
 
 	public boolean isValid() {

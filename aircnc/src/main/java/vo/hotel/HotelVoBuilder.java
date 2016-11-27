@@ -1,6 +1,7 @@
 package vo.hotel;
 
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -8,7 +9,7 @@ import utils.info.hotel.HotelInfo;
 import utils.info.hotel.HotelInfoBuilder;
 
 public class HotelVoBuilder extends HotelInfoBuilder{
-	private List<RoomVo> rooms;
+	private Set<RoomVo> rooms;
 
 	private static final HotelVo INVALID_HOTEL_VO;
 	static {
@@ -26,7 +27,7 @@ public class HotelVoBuilder extends HotelInfoBuilder{
 		setName(name);
 	}
 	
-	HotelVoBuilder setRooms(List<RoomVo> rooms){
+	HotelVoBuilder setRooms(Set<RoomVo> rooms){
 		this.rooms = rooms;
 		return this;
 	}
@@ -54,7 +55,7 @@ public class HotelVoBuilder extends HotelInfoBuilder{
 	}
 	
 	@Override
-	public HotelVoBuilder setID(String id) {
+	public HotelVoBuilder setID(int id) {
 		this.id = id;
 		return this;
 	}

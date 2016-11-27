@@ -1,12 +1,12 @@
 package vo.hotel;
 
-import java.util.List;
+import java.util.Set;
 
 import utils.info.hotel.HotelInfo;
 
 public class HotelVo extends HotelInfo{
 	
-	private List<RoomVo> rooms;
+	private Set<RoomVo> rooms;
 	
 	public String getName() {
 		if (isValid())
@@ -14,12 +14,12 @@ public class HotelVo extends HotelInfo{
 		return null;
 	}
 	
-	HotelVo setRooms(List<RoomVo> rooms){
+	HotelVo setRooms(Set<RoomVo> rooms){
 		this.rooms = rooms;
 		return this;
 	}
 	
-	HotelVo setID(String id){
+	HotelVo setID(int id){
 		this.id = id;		
 		return this;
 	}

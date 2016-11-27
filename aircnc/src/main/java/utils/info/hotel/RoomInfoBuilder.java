@@ -83,18 +83,13 @@ public abstract class RoomInfoBuilder extends RoomInfoTemplate{
 		return this;
 	}
 	
-	protected RoomInfoBuilder setHotelId(String id){
-		this.hotelId = id;
-		return this;
-	}
-	
 	protected RoomInfoBuilder setPrice(double price){
 		this.price = price;
 		return this;
 	}
 	
 	public boolean isReady() {
-		return (type == Type.OTHER ? name != null : true);
+		return (name != null);
 	}
 
 	public abstract RoomInfo getRoomInfo();

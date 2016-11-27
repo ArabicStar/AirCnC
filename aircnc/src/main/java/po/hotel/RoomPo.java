@@ -6,7 +6,7 @@ import utils.info.hotel.RoomInfo;
 
 public class RoomPo extends RoomInfo{
 	
-	protected int numId = Integer.MIN_VALUE;
+//	protected HotelPo hotel;
 
 	protected RoomPo(Type type) {
 		super(type);
@@ -18,6 +18,12 @@ public class RoomPo extends RoomInfo{
 			return (type == Type.OTHER ? StringUtils.deleteWhitespace(this.name):type.name().toLowerCase());
 		return null;
 	}
+	
+//	public HotelPo getHotel() {
+//		if (isValid())
+//			return hotel;
+//		return null;
+//	}
 	
 	RoomPo setName(String name){
 		this.name = name;
@@ -44,18 +50,9 @@ public class RoomPo extends RoomInfo{
 		return this;
 	}
 	
-	RoomPo setHotelId(String hotelId){
-		this.hotelId = hotelId;
-		this.numId = Integer.valueOf(hotelId);
-		return this;
-	}
-	
-	void setNumId(int numId){
-		this.numId = numId;
-	}
-	
-	int getNumId(){
-		return numId;
-	}
+//	RoomPo setHotel(HotelPo hotel){
+//		this.hotel = hotel;
+//		return this;
+//	}
 
 }

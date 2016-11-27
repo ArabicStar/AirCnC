@@ -7,8 +7,8 @@
 	<class name="po.hotel.HotelPo" table="hotels">
 	
 		<!-- hotelId, the key column, auto increase -->
-		<id column="ID" name="numId" type="integer">
-			<generator class="assigned" />
+		<id column="ID" name="id" type="integer">
+			<generator class="native" />
 		</id>
 		
 		<!-- name -->
@@ -40,8 +40,8 @@
 			name="introduction" type="string" />
 			
 		<!-- association table -->
-		<set name="rooms" inverse="false" cascade="all">
-            <key column="HOTELID"></key>
+		<set name="rooms"  cascade="all">
+            <key column="HOTELID" ></key>
             <one-to-many class ="po.hotel.RoomPo"/>
         </set>		
 	</class>

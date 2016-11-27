@@ -94,7 +94,7 @@ public class HotelHibernateImpl implements HotelHibernator{
 			// normal
 			ts = session.beginTransaction();
 
-			hotel = (HotelPo) session.get(HotelPo.class, po.getID());
+			hotel = (HotelPo) session.get(HotelPo.class, po.getId());
 
 			if (!(flag = (hotel == null)))
 				session.update(po);

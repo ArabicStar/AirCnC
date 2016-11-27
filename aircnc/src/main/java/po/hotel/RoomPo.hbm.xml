@@ -23,8 +23,7 @@
 		<!-- price, the price of room -->
 		<property column="PRICE" name="price" type="double" />
 
-		<!-- hotelId, foreign key -->
-		<property column="HOTELID" name="hotelId" />
+
 
 	</class>
 </hibernate-mapping>

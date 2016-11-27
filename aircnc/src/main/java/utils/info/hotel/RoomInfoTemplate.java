@@ -33,11 +33,6 @@ public abstract class RoomInfoTemplate {
 	protected int numOfRoom;
 
 	/**
-	 * hotelId string <br>
-	 */
-	protected String hotelId;
-
-	/**
 	 * id int <br>
 	 */
 	protected int id;

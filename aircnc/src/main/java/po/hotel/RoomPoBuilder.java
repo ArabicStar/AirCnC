@@ -52,11 +52,6 @@ public class RoomPoBuilder extends RoomInfoBuilder {
 		return this;
 	}
 	
-	public RoomPoBuilder setHotelId(String id){
-		super.setHotelId(id);
-		return this;
-	}
-	
 	public RoomPoBuilder setRoomNum(int roomNum){
 		super.setRoomNum(roomNum);
 		return this;
