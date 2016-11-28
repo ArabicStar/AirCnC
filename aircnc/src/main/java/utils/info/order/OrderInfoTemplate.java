@@ -35,15 +35,17 @@ public abstract class OrderInfoTemplate {
 	
 	protected int roomNumber;
 	
-	public boolean isReviewed() {
-		return isReviewed;
-	}
-
 	/**
 	 * 是否评价过
 	 */
 	protected boolean isReviewed;
 	
+	protected String userName;
+	
+	public String getUserName() {
+		return userName;
+	}
+
 	public String getHotelName() {
 		return hotelName;
 	}
@@ -117,8 +119,12 @@ public abstract class OrderInfoTemplate {
 		return price;
 	}
 
-	public boolean isHasChildren() {
+	public boolean hasChildren() {
 		return hasChildren;
+	}
+	
+	public boolean isReviewed() {
+		return isReviewed;
 	}
 
 	public abstract OrderInfoTemplate setOrderId(String orderId);
@@ -149,4 +155,5 @@ public abstract class OrderInfoTemplate {
 	
 	public abstract OrderInfoTemplate setReviewed(boolean isReviewed);
 
+	public abstract OrderInfoTemplate setUserName(String userName);
 }

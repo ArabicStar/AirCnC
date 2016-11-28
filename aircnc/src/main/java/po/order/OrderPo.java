@@ -111,6 +111,12 @@ public class OrderPo extends OrderInfo{
 		this.isReviewed = isReviewed;
 		return this;
 	}
+
+	@Override
+	public OrderPo setUserName(String userName) {
+		this.userName = userName;
+		return this;
+	}
 	
 
 }

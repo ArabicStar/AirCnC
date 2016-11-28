@@ -3,6 +3,7 @@ package vo.order;
 import java.time.LocalDateTime;
 
 import utils.info.order.OrderInfo;
+import utils.info.order.OrderInfoTemplate;
 import utils.info.order.OrderStatus;
 
 /**
@@ -97,6 +98,12 @@ public class OrderVo extends OrderInfo {
 	@Override
 	public OrderVo setReviewed(boolean isReviewed) {
 		this.isReviewed = isReviewed;
+		return this;
+	}
+
+	@Override
+	public OrderVo setUserName(String userName) {
+		this.userName = userName;
 		return this;
 	}
 

@@ -13,7 +13,8 @@ public class OrderVoBuilder extends OrderInfoBuilder {
 				.setLastTime(lastTime).setOrderId(orderId).setPeopleNumber(peopleNumber)
 				.setRoomType(roomType).setStatus(status).setStayDays(stayDays)
 				.setUserId(userId).setPrice(price).setHotelId(hotelId)
-				.setHotelName(hotelName).setRoomNumber(roomNumber).setReviewed(isReviewed);
+				.setHotelName(hotelName).setRoomNumber(roomNumber).setReviewed(isReviewed)
+				.setUserName(userName);
 	}
 
 	@Override
@@ -97,6 +98,12 @@ public class OrderVoBuilder extends OrderInfoBuilder {
 	@Override
 	public OrderVoBuilder setReviewed(boolean isReviewed) {
 		this.isReviewed = isReviewed;
+		return this;
+	}
+
+	@Override
+	public OrderVoBuilder setUserName(String userName) {
+		this.userName = userName;
 		return this;
 	}
 	

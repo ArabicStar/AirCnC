@@ -98,4 +98,10 @@ public class OrderPoBuilder extends OrderInfoBuilder {
 		return this;
 	}
 
+	@Override
+	public OrderPoBuilder setUserName(String userName) {
+		this.userName = userName;
+		return this;
+	}
+
 }
