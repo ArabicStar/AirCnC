@@ -12,7 +12,7 @@ public class OrderVoBuilder extends OrderInfoBuilder {
 		return new OrderVo().setEntryTime(entryTime).setHasChildren(hasChildren)
 				.setLastTime(lastTime).setOrderId(orderId).setPeopleNumber(peopleNumber)
 				.setRoomType(roomType).setStatus(status).setStayDays(stayDays)
-				.setUserId(userId).setPrice(price);
+				.setUserId(userId).setPrice(price).setHotelId(hotelId);
 	}
 
 	@Override
@@ -72,6 +72,12 @@ public class OrderVoBuilder extends OrderInfoBuilder {
 	@Override
 	public OrderVoBuilder setHasChildren(boolean hasChildren) {
 		this.hasChildren = hasChildren;
+		return this;
+	}
+
+	@Override
+	public OrderVoBuilder setHotelId(int hotelId) {
+		this.hotelId = hotelId;
 		return this;
 	}
 	

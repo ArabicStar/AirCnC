@@ -76,4 +76,10 @@ public class OrderVo extends OrderInfo {
 		return this;
 	}
 
+	@Override
+	public OrderVo setHotelId(int hotelId) {
+		this.hotelId = hotelId;
+		return this;
+	}
+
 }

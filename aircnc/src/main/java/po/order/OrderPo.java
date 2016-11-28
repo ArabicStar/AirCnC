@@ -19,7 +19,7 @@ import utils.info.order.OrderStatus;
  */
 public class OrderPo extends OrderInfo{
 
-	private int hotelId;
+
 
 	public OrderPo() {
 		super();

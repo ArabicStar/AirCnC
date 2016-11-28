@@ -29,6 +29,24 @@ public abstract class OrderInfoTemplate {
 
 	protected boolean hasChildren;
 	
+	protected int hotelId;
+	
+	protected String hotelName;
+	
+	protected int roomNumber;
+	
+	public String getHotelName() {
+		return hotelName;
+	}
+
+	public int getRoomNumber() {
+		return roomNumber;
+	}
+
+	public int getHotelId() {
+		return hotelId;
+	}
+
 	/**
 	 * TODO:添加其他测试代码
 	 * @return
@@ -113,5 +131,7 @@ public abstract class OrderInfoTemplate {
 	public abstract OrderInfoTemplate setPrice(double price);
 
 	public abstract OrderInfoTemplate setHasChildren(boolean hasChildren);
+	
+	public abstract OrderInfoTemplate setHotelId(int hotelId);
 
 }
