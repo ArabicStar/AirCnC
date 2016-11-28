@@ -1,6 +1,92 @@
 package presentation.hotel.view;
 
-public class HotelMainController {
+import java.net.URL;
+import java.util.ResourceBundle;
 
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import presentation.hotel.HotelCenterController;
+
+public class HotelMainController implements Initializable{
+	@FXML
+	private Label hotelInfo;
+	
+	@FXML
+	private Label orderExecute;
+	
+	@FXML
+	private Label orderBrowse;
+	
+	@FXML
+	private Label checkInLive;
+	
+	@FXML
+	private Label checkOut;
+	
+	@FXML
+	private Label abnormalOrder;
+	
+	@FXML
+	private Label hotelPromotion;
+	
+	private HotelCenterController controller;
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		
+	}
+	
+	
+	@FXML
+	private void handleHotelInfo(){
+		hotelInfo.setText("d");
+//		controller.addInfoMainPane();
+	}
+	
+	@FXML
+	private void handleOrderExecute(){
+		orderExecute.setText("d");
+//		controller.addSearchHotelPane();
+	}
+	
+	@FXML
+	private void handleOrderBrowse(){
+		orderBrowse.setText("l");
+//		controller.addOrderMainPane();
+	}
+	
+	@FXML
+	private void handleCheckInLive(){
+		checkInLive.setText("要");
+//		controller.addCreditChangePane();
+	}
+	
+	@FXML
+	private void handleCheckOut(){
+		checkOut.setText("到");
+//		controller.addSearchHotelPane();
+	}
+	
+	@FXML
+	private void handleAbnormalOrder(){
+		abnormalOrder.setText("了");
+//		controller.addOrderMainPane();
+	}
+	
+	@FXML
+	private void handleHotelPromotion(){
+		hotelPromotion.setText("啊");
+//		controller.addCreditChangePane();
+	}
+	
+	/**
+	 * set the centerController
+	 * @param centerController
+	 */
+	public void setCenterController(HotelCenterController centerController) {
+		// TODO Auto-generated method stub
+		this.controller=centerController;
+	}
 	
 }

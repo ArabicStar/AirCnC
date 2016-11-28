@@ -48,6 +48,13 @@ public class CenterController extends Application{
 	
 	public void initializeClient() {
 		primaryStage.close();
+		HotelCenterController client = new HotelCenterController();
+		try {
+			client.start(new Stage());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
