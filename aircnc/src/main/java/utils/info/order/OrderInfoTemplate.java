@@ -133,5 +133,9 @@ public abstract class OrderInfoTemplate {
 	public abstract OrderInfoTemplate setHasChildren(boolean hasChildren);
 	
 	public abstract OrderInfoTemplate setHotelId(int hotelId);
+	
+	public abstract OrderInfoTemplate setHotelName(String hotelName);
+	
+	public abstract OrderInfoTemplate setRoomNumber(int roomNumber);
 
 }

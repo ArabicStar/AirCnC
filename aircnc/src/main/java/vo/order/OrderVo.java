@@ -81,5 +81,17 @@ public class OrderVo extends OrderInfo {
 		this.hotelId = hotelId;
 		return this;
 	}
+	
+	@Override
+	public OrderVo setHotelName(String hotelName) {
+		this.hotelName = hotelName;
+		return this;
+	}
+
+	@Override
+	public OrderVo setRoomNumber(int roomNumber) {
+		this.roomNumber = roomNumber;
+		return this;
+	}
 
 }

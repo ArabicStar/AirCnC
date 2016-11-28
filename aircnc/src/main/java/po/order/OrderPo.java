@@ -94,6 +94,17 @@ public class OrderPo extends OrderInfo{
 		return this;
 	}
 	
+	@Override
+	public OrderPo setHotelName(String hotelName) {
+		this.hotelName = hotelName;
+		return this;
+	}
+
+	@Override
+	public OrderPo setRoomNumber(int roomNumber) {
+		this.roomNumber = roomNumber;
+		return this;
+	}
 	
 
 }
