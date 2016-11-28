@@ -1,12 +1,13 @@
 package data.dao.impl.member;
 
-import data.dao.member.MemberDaoAccess;
 import data.dao.member.MemberDaoProxy;
+import utils.proxy.AuthenticatePolicy.Client;
 
 public class MemberDaoProxyImpl extends MemberDaoProxy {
 
-	public MemberDaoProxyImpl(MemberDaoAccess access) {
-		super(access);
+
+	protected MemberDaoProxyImpl(Client clientId) {
+		super(clientId);
 	}
 
 	@Override

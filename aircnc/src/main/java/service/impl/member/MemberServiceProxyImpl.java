@@ -1,13 +1,13 @@
 package service.impl.member;
 
 import data.dao.member.MemberDaoProxy;
-import service.member.MemberServiceAccess;
 import service.member.MemberServiceProxy;
+import utils.proxy.AuthenticatePolicy.Client;
 
 public class MemberServiceProxyImpl extends MemberServiceProxy {
 
-	public MemberServiceProxyImpl(MemberServiceAccess access, MemberDaoProxy dao) {
-		super(access, dao);
+	public MemberServiceProxyImpl(Client clientId, MemberDaoProxy dao) {
+		super(clientId, dao);
 	}
 
 	@Override
