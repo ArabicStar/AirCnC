@@ -23,37 +23,27 @@ import org.hibernate.criterion.Restrictions;
  *
  */
 public class CreditDaoImpl implements CreditDao, CreditChangeQueryService {
-	private MemberDao memberDao;
-
-	public CreditDaoImpl(MemberDao memberDao) {
-		this.memberDao = memberDao;
-	}
-
 	@Override
 	public MemberPo changeCredit(CreditChangePo aChange) {
 		if (aChange == null)
 			return null;
 
-		MemberPo po = memberDao.findMember(aChange.getMemberId());
-		// existence check
-		if (po == null)
-			return null;
-
-		// consistency check
-		if (po.getCredit() != aChange.getBeforeCredit())
-			// return invalid MemberPo instance to mark
-			return MemberPoBuilder.invalidInfo();
-
-		// build a new MemberPo instance with changed credit value
-		MemberPo newOne = new MemberPoBuilder(po).setCredit(aChange.getAfterCredit()).getMemberInfo();
-
 		return execute(session -> {
-			// Not using MemberDao.updateMember() to assure transaction
-			// integrity. When encounter exception, rollback can be invoked
-			// properly.
-			session.update(newOne);// update member credit value
-			session.save(aChange);// add credit change record
-			return newOne;
+			MemberPo mem = session.get(MemberPo.class, parseId(aChange.getMemberId()));
+			// existence check
+			if (mem == null)
+				return null;
+
+			// consistency check
+			if (mem.getCredit() != aChange.getBeforeCredit())
+				// return invalid MemberPo instance to mark
+				return MemberPoBuilder.invalidInfo();
+
+			// update member credit value
+			mem.setCredit(aChange.getAfterCredit());
+			// add credit change record
+			session.save(aChange);
+			return mem;
 		});
 	}
 
@@ -63,12 +53,14 @@ public class CreditDaoImpl implements CreditDao, CreditChangeQueryService {
 			throw new IllegalArgumentException(
 					"MemberCreditDaoImpl.searchByMemberId : null or invalid member id string");
 
-		if (!memberDao.existsMember(memberId))
-			return null;
-
-		int numMemId = MemberPo.convertID2Num(memberId);
+		int numMemId = parseId(memberId);
 
 		return execute(session -> {
+			// use null to discriminate from the condition where member has no
+			// credit change record.
+			if (session.get(MemberPo.class, numMemId) == null)
+				return null;
+
 			Criteria criteria = session.createCriteria(CreditChangePo.class);
 			Criterion c1 = Restrictions.eq("numMemId", numMemId);
 			criteria.add(c1);
@@ -78,5 +70,13 @@ public class CreditDaoImpl implements CreditDao, CreditChangeQueryService {
 
 			return l;
 		});
+	}
+
+	/* parse an id string. if invalid, throw IAE. */
+	private static final int parseId(final String id) {
+		if (!MemberPo.checkID(id))
+			throw new IllegalArgumentException("Wrong ID");
+
+		return Integer.parseInt(id);
 	}
 }

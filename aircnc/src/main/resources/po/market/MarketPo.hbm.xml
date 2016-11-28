@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-11-25 16:39:24 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="po.market.MarketPo" table="market">
+    <id column="id" name="numId" type="integer">
+    	<generator class="assigned"></generator>
+    </id>
+    <!-- name -->
+	<property column="name" generated="never" lazy="false" name="name"
+		type="string" />
+	<!-- passwordHash -->
+	<property column="pwd" generated="never" lazy="false" name="passwordHash"
+		type="integer" />
+	</class>
+</hibernate-mapping>

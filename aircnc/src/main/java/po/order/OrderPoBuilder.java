@@ -74,4 +74,22 @@ public class OrderPoBuilder extends OrderInfoBuilder {
 		return this;
 	}
 
+	@Override
+	public OrderPoBuilder setHotelId(int hotelId) {
+		this.hotelId = hotelId;
+		return this;
+	}
+
+	@Override
+	public OrderPoBuilder setHotelName(String hotelName) {
+		this.hotelName = hotelName;
+		return this;
+	}
+
+	@Override
+	public OrderPoBuilder setRoomNumber(int roomNumber) {
+		this.roomNumber = roomNumber;
+		return this;
+	}
+
 }

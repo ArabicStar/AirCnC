@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-11-25 14:49:59 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+	<class name="po.member.credit.CreditChangePo" table="credit">
+		<id name="ccid" type="java.lang.Long">
+			<column name="ccid" />
+			<generator class="native" />
+		</id>
+		<!-- number member id -->
+		<property name="numMemId" column="m_id" type="int" />
+
+		<!-- time stamp -->
+		<property name="timeInstant" column="timestamp" type="java.time.Instant" />
+
+		<!-- type string -->
+		<property name="typeString" column="type" type="string" />
+
+		<!-- money -->
+		<property name="money" column="money" type="int" />
+
+		<!-- order id -->
+		<property name="orderId" column="o_id" type="string" />
+
+		<!-- before credit -->
+		<property name="beforeCredit" column="before" type="int" />
+
+		<!-- after credit -->
+		<property name="afterCredit" column="after" type="int" />
+	</class>
+</hibernate-mapping>

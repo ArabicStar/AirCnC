@@ -12,7 +12,8 @@ public class OrderVoBuilder extends OrderInfoBuilder {
 		return new OrderVo().setEntryTime(entryTime).setHasChildren(hasChildren)
 				.setLastTime(lastTime).setOrderId(orderId).setPeopleNumber(peopleNumber)
 				.setRoomType(roomType).setStatus(status).setStayDays(stayDays)
-				.setUserId(userId).setPrice(price);
+				.setUserId(userId).setPrice(price).setHotelId(hotelId)
+				.setHotelName(hotelName).setRoomNumber(roomNumber);
 	}
 
 	@Override
@@ -74,5 +75,25 @@ public class OrderVoBuilder extends OrderInfoBuilder {
 		this.hasChildren = hasChildren;
 		return this;
 	}
+
+	@Override
+	public OrderVoBuilder setHotelId(int hotelId) {
+		this.hotelId = hotelId;
+		return this;
+	}
+
+	@Override
+	public OrderVoBuilder setHotelName(String hotelName) {
+		this.hotelName = hotelName;
+		return this;
+	}
+
+	@Override
+	public OrderVoBuilder setRoomNumber(int roomNumber) {
+		this.roomNumber = roomNumber;
+		return this;
+	}
+	
+
 	
 }

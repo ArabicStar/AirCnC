@@ -30,14 +30,26 @@ public abstract class MemberPo extends MemberInfo {
 		return null;
 	}
 
+	/**
+	 * Get password hash value.<br>
+	 * 
+	 * @return pwd hash value
+	 */
 	public int getPasswordHash() {
 		if (isValid())
 			return this.passwordHash;
 		return Integer.MIN_VALUE;
 	}
 
+	/**
+	 * Get id number.<br>
+	 * 
+	 * @return id number
+	 */
 	public int getNumId() {
-		return numId;
+		if (isValid())
+			return numId;
+		return Integer.MIN_VALUE;
 	}
 
 	@Override
