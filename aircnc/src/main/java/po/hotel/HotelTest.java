@@ -52,7 +52,7 @@ public class HotelTest {
 			ts = session.beginTransaction();
 
 			if (!(flag = session.contains(po))) {
-//				session.save(po);
+				session.save(po);
 				session.delete(po);
 //				session.update(po);
 			}

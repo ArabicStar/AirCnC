@@ -6,7 +6,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import presentation.hotel.view.signIn.HotelSignInPane;
-import presentation.member.ClientCenterController;
 
 /**
  * use to control sign in
@@ -39,10 +38,11 @@ public class CenterController extends Application{
 		
 		// show the pane of sign in.
 		signIn = new HotelSignInPane();
-//		scene = new Scene(signIn.getBorderPane(), Login_Width, Login_Height);
+		scene = new Scene(signIn.getBorderPane(), Login_Width, Login_Height);
 		primaryStage.setScene(scene);
 		
 		primaryStage.show();
+		signIn.getController().setCenterController(this);
 		
 	}
 	

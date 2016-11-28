@@ -4,10 +4,15 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="385.0" prefWidth="550.0" styleClass="root" stylesheets="@HotelSignIn.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Button fx:id="confirm" layoutX="163.0" layoutY="313.0" mnemonicParsing="false" text="登    陆" textAlignment="CENTER" />
-      <PasswordField fx:id="password" layoutX="166.0" layoutY="250.0" />
-      <TextField fx:id="username" alignment="CENTER" layoutX="166.0" layoutY="213.0" text="username" />
-   </children>
-</Pane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="385.0" prefWidth="550.0" styleClass="root" stylesheets="@HotelSignIn.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.hotel.view.signIn.HotelSignInController">
+	
+   <center>
+      <Pane prefHeight="200.0" prefWidth="200.0" styleClass="pane" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="name" layoutX="166.0" layoutY="213.0" styleClass="textfield" text="name" />
+            <PasswordField fx:id="password" layoutX="166.0" layoutY="250.0" styleClass="passwordfield" />
+            <Button fx:id="confirm" layoutX="163.0" layoutY="313.0" mnemonicParsing="false" onAction="#handleConfirm" styleClass="confirm" text="登  陆" />
+         </children>
+      </Pane>
+   </center>
+</BorderPane>

@@ -1,6 +1,6 @@
 
-.root{
-	-fx-background-image: url("../../../images/member/register/login_BG.png");
+.pane{
+	-fx-background-image: url("../../../../images/member/register/login_BG.png");
 	-fx-font-family:"DengXian Light","Microsoft Yahei","Pingfang SC","Helvetica Neue";
 	-fx--webkit-font-smoothing:antialiased;
 	-fx-moz-osx-font-smoothing: grayscale;

@@ -11,6 +11,7 @@ import javafx.scene.layout.Pane;
 public class HotelSignInPane {
 	private Pane signInLayout;
 	private HotelSignInController controller;
+	private BorderPane rootLayout;
 
 
 	public HotelSignInPane(){
@@ -23,7 +24,7 @@ public class HotelSignInPane {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("HotelSignIn.fxml"));
             loader.setBuilderFactory(new JavaFXBuilderFactory());
             //javafx.scene.Parent root = (javafx.scene.Parent) loader.load(location.openStream());
-            loader.load();
+            rootLayout = (BorderPane) loader.load();
             controller = (HotelSignInController)loader.getController();
 			signInLayout = loader.getRoot();
 
@@ -38,5 +39,9 @@ public class HotelSignInPane {
     
     public Node getPane(){
     	return signInLayout;
+    }
+    
+    public BorderPane getBorderPane() {
+        return rootLayout;
     }
 }

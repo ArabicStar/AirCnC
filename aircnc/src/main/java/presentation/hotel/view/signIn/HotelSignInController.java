@@ -8,7 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import presentation.member.CenterController;
+import presentation.hotel.CenterController;
 
 public class HotelSignInController implements Initializable{
 
@@ -45,6 +45,14 @@ public class HotelSignInController implements Initializable{
 	public void handleConfirm(){
 		//按下登陆键，验证正确性，正确则跳只hotelMainPane，错误跳出对话框
 		controller.initializeClient();
+	}
+	
+	/**
+	 * set the centerController
+	 * @param centerController
+	 */
+	public void setCenterController(CenterController controller){
+		this.controller=controller;
 	}
 
 }
