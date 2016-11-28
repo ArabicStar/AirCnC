@@ -94,4 +94,10 @@ public class OrderVo extends OrderInfo {
 		return this;
 	}
 
+	@Override
+	public OrderVo setReviewed(boolean isReviewed) {
+		this.isReviewed = isReviewed;
+		return this;
+	}
+
 }

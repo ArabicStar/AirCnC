@@ -35,6 +35,15 @@ public abstract class OrderInfoTemplate {
 	
 	protected int roomNumber;
 	
+	public boolean isReviewed() {
+		return isReviewed;
+	}
+
+	/**
+	 * 是否评价过
+	 */
+	protected boolean isReviewed;
+	
 	public String getHotelName() {
 		return hotelName;
 	}
@@ -137,5 +146,7 @@ public abstract class OrderInfoTemplate {
 	public abstract OrderInfoTemplate setHotelName(String hotelName);
 	
 	public abstract OrderInfoTemplate setRoomNumber(int roomNumber);
+	
+	public abstract OrderInfoTemplate setReviewed(boolean isReviewed);
 
 }

@@ -92,4 +92,10 @@ public class OrderPoBuilder extends OrderInfoBuilder {
 		return this;
 	}
 
+	@Override
+	public OrderPoBuilder setReviewed(boolean isReviewed) {
+		this.isReviewed = isReviewed;
+		return this;
+	}
+
 }

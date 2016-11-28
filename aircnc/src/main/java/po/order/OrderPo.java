@@ -105,6 +105,12 @@ public class OrderPo extends OrderInfo{
 		this.roomNumber = roomNumber;
 		return this;
 	}
+
+	@Override
+	public OrderPo setReviewed(boolean isReviewed) {
+		this.isReviewed = isReviewed;
+		return this;
+	}
 	
 
 }

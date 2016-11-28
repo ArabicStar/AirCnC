@@ -13,7 +13,7 @@ public class OrderVoBuilder extends OrderInfoBuilder {
 				.setLastTime(lastTime).setOrderId(orderId).setPeopleNumber(peopleNumber)
 				.setRoomType(roomType).setStatus(status).setStayDays(stayDays)
 				.setUserId(userId).setPrice(price).setHotelId(hotelId)
-				.setHotelName(hotelName).setRoomNumber(roomNumber);
+				.setHotelName(hotelName).setRoomNumber(roomNumber).setReviewed(isReviewed);
 	}
 
 	@Override
@@ -93,7 +93,11 @@ public class OrderVoBuilder extends OrderInfoBuilder {
 		this.roomNumber = roomNumber;
 		return this;
 	}
-	
 
+	@Override
+	public OrderVoBuilder setReviewed(boolean isReviewed) {
+		this.isReviewed = isReviewed;
+		return this;
+	}
 	
 }
