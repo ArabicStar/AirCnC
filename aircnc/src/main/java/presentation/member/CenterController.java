@@ -40,9 +40,6 @@ public class CenterController extends Application {
 	private final static int Login_Width = 550;
 	private final static int Login_Height = 385;
 
-	private final static int Client_Width = 1024;
-	private final static int Client_Height = 1024;
-
 	public static void main(String[] args) throws Exception {
 		launch(args);
 	}

@@ -1,0 +1,10 @@
+.root{
+	-fx-font-family:"DengXian Light","Pingfang SC","Microsoft Yahei","Helvetica Neue";
+	/*-fx-background-image:url("main_BG.png");
+	-fx-background-size: 1024px 768px;*/
+}
+
+.title{
+	-fx-text-fill:#4f4e84;
+	-fx-font-size: 40px;
+}

@@ -5,17 +5,30 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.Pane?>
 
-
-<Pane prefHeight="768.0" prefWidth="777.0" stylesheets="@../css/MemberOrderMain.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="presentation.member.view.myorder.fxml.MemberOrderMainController">
+<Pane prefHeight="768.0" prefWidth="777.0" stylesheets="@../css/MemberOrderMain.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.member.view.myorder.fxml.MemberOrderMainController">
    <children>
       <HBox layoutX="53.0" layoutY="26.0" spacing="40.0">
          <children>
-            <CheckBox layoutX="214.0" layoutY="107.0" mnemonicParsing="false" text="未执行订单" />
-            <CheckBox layoutX="330.0" layoutY="98.0" mnemonicParsing="false" text="已执行订单" />
-            <CheckBox layoutX="340.0" layoutY="108.0" mnemonicParsing="false" text="异常订单" />
-            <CheckBox layoutX="350.0" layoutY="118.0" mnemonicParsing="false" text="撤销订单" />
+            <CheckBox fx:id="unfinished" layoutX="214.0" layoutY="107.0" mnemonicParsing="false" text="未执行订单" />
+            <CheckBox fx:id="finished" layoutX="330.0" layoutY="98.0" mnemonicParsing="false" text="已执行订单" />
+            <CheckBox fx:id="exception" layoutX="340.0" layoutY="108.0" mnemonicParsing="false" text="异常订单" />
+            <CheckBox fx:id="cancelled" layoutX="350.0" layoutY="118.0" mnemonicParsing="false" text="撤销订单" />
          </children>
       </HBox>
-      <Button layoutX="634.0" layoutY="24.0" mnemonicParsing="false" text="查询" />
+      <Button fx:id="query" layoutX="634.0" layoutY="24.0" mnemonicParsing="false" onAction="#handleQuery" text="查询" />
+      <TableView fx:id="orderTable" layoutX="44.0" layoutY="143.0" prefHeight="462.0" prefWidth="702.0">
+        <columns>
+          <TableColumn fx:id="hotelName" prefWidth="75.0" text="酒店名称" />
+          <TableColumn fx:id="checkInTime" prefWidth="75.0" text="入住时间" />
+            <TableColumn fx:id="state" prefWidth="75.0" text="状态" />
+            <TableColumn fx:id="timeAndSum" prefWidth="75.0" text="时间/数量" />
+            <TableColumn fx:id="totalPrice" prefWidth="75.0" text="总价" />
+            <TableColumn fx:id="operation" prefWidth="75.0" text="操作" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <Label layoutX="27.0" layoutY="63.0" prefHeight="62.0" prefWidth="169.0" styleClass="title" text="搜索结果" />
    </children>
 </Pane>

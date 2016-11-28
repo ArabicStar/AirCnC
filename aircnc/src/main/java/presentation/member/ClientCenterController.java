@@ -1,6 +1,8 @@
 package presentation.member;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -8,6 +10,7 @@ import javafx.stage.StageStyle;
 import presentation.member.view.memberinfo.MemberInfoMainPane;
 import presentation.member.view.memberinfo.MemberInfoModifyPane;
 import presentation.member.view.myorder.MemberOrderMainPane;
+import presentation.member.view.myorder.MyorderModel;
 import presentation.member.view.searchhotel.MemberSearchHotelPane;
 import presentation.member.view.MemberMainPane;
 import presentation.member.view.creditchange.MemberCreditChangePane;
@@ -82,12 +85,15 @@ public class ClientCenterController extends Application {
 		mainClient.getBorderPane().setCenter(searchMain.getPane());
 		searchMain.getController().setCenterController(this);
 	}
-
+	
+	private ObservableList<MyorderModel> orderData = FXCollections.observableArrayList();
+	
 	public void addOrderMainPane() {
 		clearContent();
 		orderMain = new MemberOrderMainPane();
 		mainClient.getBorderPane().setCenter(orderMain.getPane());
 		orderMain.getController().setCenterController(this);
+		
 	}
 
 	/**
@@ -102,5 +108,14 @@ public class ClientCenterController extends Application {
 			}
 		}
 	}
+	
+	public ObservableList<MyorderModel> getData(){
+    	ObservableList<MyorderModel> orderData = FXCollections.observableArrayList();
+    	orderData.add(new MyorderModel("速吧酒店","2016-10-09","异常","5晚/1间","290元"));
+		orderData.add(new MyorderModel("速吧酒店","2016-10-09","异常","5晚/1间","290元"));
+		orderData.add(new MyorderModel("速吧酒店","2016-10-09","异常","5晚/1间","290元"));
+		orderData.add(new MyorderModel("速吧酒店","2016-10-09","异常","5晚/1间","290元"));
+		return orderData;
+    }
 
 }
