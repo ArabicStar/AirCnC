@@ -32,26 +32,53 @@ public class MarketDaoImpl implements MarketDao{
 
 	@Override
 	public boolean deleteMarket(String id) {
-		// TODO Auto-generated method stub
-		return false;
+		return execute(session -> {
+			Boolean flag = Boolean.FALSE;// for performance
+
+			MarketPo deleted = (MarketPo) session.get(MarketPo.class, parseId(id));
+			if (flag = Boolean.valueOf((deleted != null)))// check existence
+				session.delete(deleted);
+
+			return flag;
+		});
 	}
 
 	@Override
 	public boolean updateMarket(MarketPo po) {
-		// TODO Auto-generated method stub
-		return false;
+		if(po==null){
+			return false;
+		}
+		return execute(session -> {
+			Boolean flag = Boolean.FALSE;
+			
+			MarketPo modified = (MarketPo) session.get(MarketPo.class, po.getId());
+			if(flag = Boolean.valueOf(modified !=null))
+				session.update(modified);
+			
+			return flag;
+		});
 	}
 
 	@Override
-	public MarketPo findMarket(String id) {
-		// TODO Auto-generated method stub
-		return null;
+	public MarketPo findMarket(String idString) {
+		return execute(session -> {
+			return (MarketPo) session.get(MarketPo.class, parseId(idString));
+		});
 	}
 
 	@Override
-	public boolean existsMarket(String id) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean existsMarket(String idString) {
+		return execute(session -> {
+			return (MarketPo) session.get(MarketPo.class, parseId(idString)) != null;
+		});
+	}
+	
+	/* parse an id string. if invalid, throw IAE. */
+	private static final int parseId(final String id) {
+		if (!MarketPo.checkID(id))
+			throw new IllegalArgumentException("Wrong ID");
+
+		return Integer.parseInt(id);
 	}
 
 

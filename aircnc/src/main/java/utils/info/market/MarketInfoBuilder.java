@@ -6,8 +6,6 @@ package utils.info.market;
  * <br>
  * <b>NOTICE:</b>
  * <ul>
- * <li>Default credit value is 0. Other field have <b>NO</b> default value. All
- * field should be set before build a MemberInfo instance.<br>
  * <li>All parameters of setter will be checked firstly. If invalid, the setting
  * will not take effect, and IllgealArgumentException will be thrown. <br>
  * </ul>
@@ -17,6 +15,15 @@ package utils.info.market;
  */
 
 public abstract class MarketInfoBuilder extends MarketInfoTemplate{
+	
+	/**
+	 * Initialize a builder.
+	 * <br>
+	 * 
+	 */
+	public MarketInfoBuilder(){
+		
+	}
 	
 	/**
 	 * Initialize a builder by given MemberInfo, all information will be kept.

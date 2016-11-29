@@ -1,37 +1,31 @@
 package po.market;
 
+import static data.hibernate.HibernateSessionFactory.getSession;
+
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.tool.hbm2ddl.SchemaExport;
+import org.hibernate.Transaction;
 
 public class MarketTest {
 	  
 	 public static void main(String[]args){  
-	        //读取hibernate.cfg.xml文件  
-	        Configuration cfg = new Configuration().configure();  
-	        //建立SessionFactory  
-	        SessionFactory factory =cfg.buildSessionFactory();  
-	          
-	        //取得session  
-	        Session session = null;  
-	          
+		 
+	        Session session = getSession();
+	        
+	        Transaction ts = null; 
 	        try{  
 	            //开启session  
-	            session = factory.openSession();  
 	            //开启事务  
-	            session.beginTransaction();  
+	            ts=session.beginTransaction();  
+	            
+	            int pwdHash = "12345678".hashCode();
 	              
-	            MarketPo user = new MarketPo();
-	            user.setId("12345678");
-	            user.setName("我是小管理～");  
-	            user.setPasswordHash(123456);  
- 
+	            MarketPo po = new MarketPo().setId("00123456").setName("market1").setPasswordHash(pwdHash); 
+	            MarketPo po2 = new MarketPo().setId("00111111").setName("market2").setPasswordHash("6666".hashCode());
 	            //保存User对象  
-	            session.save(user);  
+	            session.save(po2); 
 	              
 	            //提交事务  
-	            session.getTransaction().commit();  
+	            ts.commit();  
 	              
 	        }catch(Exception e){  
 	            e.printStackTrace();  

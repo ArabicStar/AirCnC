@@ -24,6 +24,10 @@ public class MarketPoBuilder extends MarketInfoBuilder {
 	public static final MarketInfo getInvalidInfo() {
 		return INVALID_MARKET_PO;
 	}
+	
+	public MarketPoBuilder(){
+		super();
+	}
 
 	public MarketPoBuilder(MarketInfo info) {
 		super(info);
@@ -65,6 +69,6 @@ public class MarketPoBuilder extends MarketInfoBuilder {
 		if (!isReady() && passwordHash != Integer.MIN_VALUE)
 			throw new IllegalStateException("Lack Of Info");
 
-		return new MarketPo().setId(id).setName(name);
+		return new MarketPo().setName(name).setPasswordHash(passwordHash);
 	}
 }
