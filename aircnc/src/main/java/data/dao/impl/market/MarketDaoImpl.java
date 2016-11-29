@@ -1,14 +1,33 @@
 package data.dao.impl.market;
 
+import static data.hibernate.Hibernator.execute;
 import data.dao.market.MarketDao;
 import po.market.MarketPo;
 
+/**
+ * the implementation of MarketDao
+ * @author paranoia
+ *
+ */
 public class MarketDaoImpl implements MarketDao{
 
 	@Override
-	public boolean addMarket(MarketPo po) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean addMarket(final MarketPo po) {
+		if(po==null)
+			return false;
+		
+		/*
+		 * check the valiation
+		 */
+		if(existsMarket(po.getId()))
+			return false;
+		
+		return execute(session -> {
+			// save
+			session.save(po);
+
+			return true;
+		});
 	}
 
 	@Override

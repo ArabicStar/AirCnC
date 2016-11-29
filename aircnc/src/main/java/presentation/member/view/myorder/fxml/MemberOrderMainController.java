@@ -57,7 +57,7 @@ public class MemberOrderMainController implements Initializable{
 	private TableColumn<MyorderModel,String> totalPrice;
 	
 	@FXML
-	private TableColumn<MyorderModel,String> operation;
+	private TableColumn<MyorderModel,Button[]> operation;
 	
 	public void setCenterController(ClientCenterController controller){
 		this.controller=controller;
@@ -65,7 +65,7 @@ public class MemberOrderMainController implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
+		orderTable.setEditable(false);
 	}
 	
 	@FXML
@@ -76,25 +76,10 @@ public class MemberOrderMainController implements Initializable{
 		state.setCellValueFactory(cellData -> cellData.getValue().stateProperty());
 		timeAndSum.setCellValueFactory(cellData -> cellData.getValue().timeAndSumProperty());
 		totalPrice.setCellValueFactory(cellData -> cellData.getValue().totalPriceProperty());
+		//operation.setCellValueFactory(cellData -> cellData.getValue().operationProperty());
 	}
 	
 	public void setContent(ObservableList<MyorderModel> orderdata){
-		
-	}
-	
-	public void setOrders(List<OrderVo> orders){
-		this.orders = orders;
-		initOrderList();
-	}
-	
-	private void initOrderList(){
-		Iterator<OrderVo> it = orders.iterator();
-		while(it.hasNext()){
-			addOrderRecord(it.next());
-		}
-	}
-	
-	private void addOrderRecord(OrderVo order){
 		
 	}
 	
