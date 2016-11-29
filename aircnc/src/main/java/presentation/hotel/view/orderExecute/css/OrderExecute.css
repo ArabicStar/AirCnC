@@ -8,3 +8,39 @@
 	-fx-text-fill:#4f4e84;
 	-fx-font-size: 40px;
 }
+
+.table-view {
+    -fx-base: #fff;
+    -fx-control-inner-background: #fff;
+    -fx-background-color: #fff;
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+    -fx-padding: 5;
+}
+
+.column-header-background {
+    -fx-background-color: transparent;
+}
+
+.column-header .filler {
+    -fx-border-width: 0 0 1 0;
+    -fx-background-color: transparent;
+}
+
+.column-header .label {
+	-fx-background-color: transparent;
+    -fx-text-fill: gray;
+    -fx-alignment: center;
+}
+
+.table-cell{
+    -fx-alignment: center;
+    -fx-pref-height: 45px;
+    -fx-border-width:0px 0px 1px 0px;
+	-fx-border-color:#585697;
+	/*-fx-margin: 10px 0px 10px 0px*/
+}
+
+.table-row-cell{
+    -fx-background-color: transparent;
+}

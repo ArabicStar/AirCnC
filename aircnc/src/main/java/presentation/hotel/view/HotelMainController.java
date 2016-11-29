@@ -47,7 +47,7 @@ public class HotelMainController implements Initializable{
 	@FXML
 	private void handleOrderExecute(){
 		orderExecute.setText("d");
-//		controller.addSearchHotelPane();
+		controller.addOrderExecutePane();
 	}
 	
 	@FXML

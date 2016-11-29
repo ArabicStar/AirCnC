@@ -2,8 +2,12 @@ package presentation.hotel.view.orderExecute;
 
 import java.time.LocalDateTime;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.control.Button;
+import presentation.member.view.myorder.utils.FunctionButtons;
 import vo.order.OrderVo;
 
 public class UnexecutedOrderModel {
@@ -14,6 +18,7 @@ public class UnexecutedOrderModel {
 	private final StringProperty checkinTime;
 	private final StringProperty timeAndSum;
 	private final StringProperty totalPrice;
+	private final ObjectProperty<Button> operation;
 
 	/**
 	 * Default constructor.
@@ -39,7 +44,8 @@ public class UnexecutedOrderModel {
 		this.checkinTime = new SimpleStringProperty(transformTime(order.getEntryTime()));
 		this.timeAndSum = new SimpleStringProperty(order.getStayDays() + "晚/" + order.getRoomNumber() + "间");
 		this.totalPrice = new SimpleStringProperty(String.valueOf(order.getPrice()) + "元");
-
+		this.operation = new SimpleObjectProperty<Button>(new FunctionButtons("执行",false));
+		
 	}
 	
 	public UnexecutedOrderModel(String s1,String s2,String s3,String s4,String s5,String s6){
@@ -49,6 +55,7 @@ public class UnexecutedOrderModel {
 		this.checkinTime = new SimpleStringProperty(s4);
 		this.timeAndSum = new SimpleStringProperty(s5);
 		this.totalPrice = new SimpleStringProperty(s6);
+		this.operation = new SimpleObjectProperty<Button>(new FunctionButtons("执行",false));
 	}
 
 	/**
@@ -136,6 +143,18 @@ public class UnexecutedOrderModel {
 
     public StringProperty totalPriceProperty() {
         return totalPrice;
+    }
+    
+    public Button getOperation() {
+        return operation.get();
+    }
+
+    public void setOperation(Button newButtons) {
+        this.operation.set(newButtons);
+    }
+
+    public ObjectProperty<Button> operationProperty() {
+        return operation;
     }
 
 }
