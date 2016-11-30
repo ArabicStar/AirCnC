@@ -19,14 +19,22 @@ import utils.info.member.credit.CreditChangeInfo;
  *
  */
 public class CreditChangePo extends CreditChangeInfo {
+<<<<<<< HEAD
 	private int ccid;
+=======
+	private long ccid;
+>>>>>>> 03f9a9bd1d384b0f7b1d8137c1e7624b394f7e42
 
 	/**
 	 * Set identifier.<br>
 	 * 
 	 * @param id
 	 */
+<<<<<<< HEAD
 	public void setCcid(int ccid) {
+=======
+	public void setCcid(long ccid) {
+>>>>>>> 03f9a9bd1d384b0f7b1d8137c1e7624b394f7e42
 		this.ccid = ccid;
 	}
 
@@ -56,6 +64,7 @@ public class CreditChangePo extends CreditChangeInfo {
 	 */
 	public int getNumMemId() {
 		return MemberInfoTemplate.convertID2Num(memberId);
+<<<<<<< HEAD
 	}
 
 	/**
@@ -66,6 +75,8 @@ public class CreditChangePo extends CreditChangeInfo {
 	 */
 	public void setTypeString(String type) {
 		this.actionType = ActionType.valueOf(type);
+=======
+>>>>>>> 03f9a9bd1d384b0f7b1d8137c1e7624b394f7e42
 	}
 
 	/**
