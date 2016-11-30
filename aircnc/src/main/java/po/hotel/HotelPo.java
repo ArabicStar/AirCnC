@@ -18,6 +18,12 @@ public class HotelPo extends HotelInfo{
 		return null;
 	}
 	
+	public String getStringId(){
+		if(isValid())
+			return Integer.toString(id);
+		return null;
+	}
+	
 	public int getPasswordHash() {
 		if (isValid())
 			return this.passwordHash;

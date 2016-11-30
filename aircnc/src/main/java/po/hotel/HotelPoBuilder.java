@@ -2,6 +2,8 @@ package po.hotel;
 
 import java.util.Set;
 
+import po.member.ContactPoBuilder;
+import po.member.MemberPo;
 import utils.info.hotel.HotelInfo;
 import utils.info.hotel.HotelInfoBuilder;
 
@@ -54,7 +56,7 @@ public class HotelPoBuilder extends HotelInfoBuilder{
 		if (!isReady() && passwordHash == Integer.MIN_VALUE)
 			throw new IllegalStateException("Lack Of Info");
 		
-		return new HotelPo().setName(name).setName(name).setPasswordHash(passwordHash).setScope(scope).setLocation(location)
+		return new HotelPo().setName(name).setPasswordHash(passwordHash).setScope(scope).setLocation(location)
 				.setIntroduction(introduction).setStar(star).setGrade(grade).setRooms(rooms).setId(id);
 	}
 	
@@ -111,5 +113,15 @@ public class HotelPoBuilder extends HotelInfoBuilder{
 		return this;
 	}
 
+	public static final void updatePo(HotelPo from, HotelPo to) {
+		if (from == null || to == null || from == to)
+			return;
+
+		if (!from.getStringId().equals(to.getStringId()) || !from.getName().equals(to.getName()))
+			throw new IllegalArgumentException("HotelPoBuilder.updatePo - Different identifier or name");
+
+		to.setPasswordHash(from.getPasswordHash()).setScope(from.getScope()).setLocation(from.getLocation())
+		.setIntroduction(from.getIntroduction()).setStar(from.getStar()).setGrade(from.getGrade()).setRooms(from.getRooms());
+	}
 
 }
