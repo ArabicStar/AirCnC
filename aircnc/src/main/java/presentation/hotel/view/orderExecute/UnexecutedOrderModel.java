@@ -44,7 +44,7 @@ public class UnexecutedOrderModel {
 		this.checkinTime = new SimpleStringProperty(transformTime(order.getEntryTime()));
 		this.timeAndSum = new SimpleStringProperty(order.getStayDays() + "晚/" + order.getRoomNumber() + "间");
 		this.totalPrice = new SimpleStringProperty(String.valueOf(order.getPrice()) + "元");
-		this.operation = new SimpleObjectProperty<Button>(new FunctionButtons("执行",false));
+		this.operation = new SimpleObjectProperty<Button>(new Button("执行"));
 		
 	}
 	
@@ -55,7 +55,7 @@ public class UnexecutedOrderModel {
 		this.checkinTime = new SimpleStringProperty(s4);
 		this.timeAndSum = new SimpleStringProperty(s5);
 		this.totalPrice = new SimpleStringProperty(s6);
-		this.operation = new SimpleObjectProperty<Button>(new FunctionButtons("执行",false));
+		this.operation = new SimpleObjectProperty<Button>(new Button("执行"));
 	}
 
 	/**
