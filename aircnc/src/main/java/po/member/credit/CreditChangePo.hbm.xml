@@ -14,13 +14,7 @@
 		<property name="timeInstant" column="timestamp" type="java.time.Instant" />
 
 		<!-- type string -->
-		<property name="actionType" column="type" >
-			<type name="org.hibernate.type.EnumType">
-				<param name="enumClass">utils.info.member.credit.ActionType</param>
-				<!-- type is VARCHAR -->
-				<param name="type">12</param>
-			</type>
-		</property>
+		<property name="typeString" column="type" type="string" />
 
 		<!-- money -->
 		<property name="money" column="money" type="integer" />
