@@ -111,10 +111,16 @@ public class ClientCenterController extends Application {
 	
 	public ObservableList<MyorderModel> getData(){
     	ObservableList<MyorderModel> orderData = FXCollections.observableArrayList();
-    	orderData.add(new MyorderModel("速吧酒店","2016-10-09","异常","5晚/1间","290元",null));
-		orderData.add(new MyorderModel("速吧酒店","2016-10-09","异常","5晚/1间","290元",null));
-		orderData.add(new MyorderModel("速吧酒店","2016-10-09","异常","5晚/1间","290元",null));
-		orderData.add(new MyorderModel("速吧酒店","2016-10-09","异常","5晚/1间","290元",null));
+    	orderData.add(new MyorderModel("速吧酒店","2016-10-09","异常","5晚/1间","290元"));
+		orderData.add(new MyorderModel("速吧酒店","2016-10-09","异常","5晚/1间","290元"));
+		orderData.add(new MyorderModel("速吧酒店","2016-10-09","异常","5晚/1间","290元"));
+		orderData.add(new MyorderModel("速吧酒店","2016-10-09","异常","5晚/1间","290元"));
+		orderData.add(new MyorderModel("速吧酒店","2016-10-09","异常","5晚/1间","290元"));
+		orderData.add(new MyorderModel("速吧酒店","2016-10-09","异常","5晚/1间","290元"));
+		orderData.add(new MyorderModel("速吧酒店","2016-10-09","异常","5晚/1间","290元"));
+		orderData.add(new MyorderModel("速吧酒店","2016-10-09","异常","5晚/1间","290元"));
+		orderData.add(new MyorderModel("速吧酒店","2016-10-09","异常","5晚/1间","290元"));
+		orderData.add(new MyorderModel("速吧酒店","2016-10-09","异常","5晚/1间","290元"));
 		return orderData;
     }
 

@@ -15,6 +15,8 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import presentation.member.CenterController;
 
+
+
 /**
  * this is the controller of register main pane.
  * @author paranoia
@@ -68,7 +70,7 @@ public class MemberRegisterMainController implements Initializable{
 	public void handleNext(){
 		//验证用户填写的正确性，正确就将内容传到逻辑层，逻辑层存入数据库，然后跳至下一个注册界面
 		//检查单选的选择，选择1则跳至memberRegsiterPerson，选择2则跳至memberRegisterBusiness
-//		if(password.getText().equals(confirmPassword.getText())){
+		if(password.getText().equals(confirmPassword.getText())){
 			if(personal.isSelected()){
 				controller.addRegisterPersonPane();
 			}else if(business.isSelected()){
@@ -76,7 +78,13 @@ public class MemberRegisterMainController implements Initializable{
 			}else{
 			
 			}
-//		}
+		}else{
+//			Dialogs.create()
+//	        .title("Error Dialog")
+//	        .masthead("Look, an Error Dialog")
+//	        .message("Ooops, there was an error!")
+//	        .showError();
+		}
 	}
 	
 	/**

@@ -16,7 +16,7 @@
          </children>
       </HBox>
       <Button fx:id="query" layoutX="634.0" layoutY="24.0" mnemonicParsing="false" onAction="#handleQuery" text="查询" />
-      <TableView fx:id="orderTable" layoutX="44.0" layoutY="143.0" prefHeight="462.0" prefWidth="702.0">
+      <TableView fx:id="orderTable" layoutX="44.0" layoutY="143.0" prefHeight="471.0" prefWidth="702.0">
         <columns>
           <TableColumn fx:id="hotelName" prefWidth="75.0" styleClass="table-row-cell" text="酒店名称" />
           <TableColumn fx:id="checkInTime" prefWidth="75.0" styleClass="table-row-cell" text="入住时间" />

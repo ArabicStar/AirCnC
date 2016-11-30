@@ -22,7 +22,8 @@ public class MarketTest {
 	            MarketPo po = new MarketPo().setId("00123456").setName("market1").setPasswordHash(pwdHash); 
 	            MarketPo po2 = new MarketPo().setId("00111111").setName("market2").setPasswordHash("6666".hashCode());
 	            //保存User对象  
-	            session.save(po2); 
+	            session.save(po2);
+	            session.delete(po2);
 	              
 	            //提交事务  
 	            ts.commit();  

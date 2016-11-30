@@ -1,6 +1,6 @@
 package presentation.member.view.myorder.utils;
 
-public enum ButtonType {
+public enum FunctionButtonType {
 	CHECK,
 	REVIEW,
 	APPEAL,

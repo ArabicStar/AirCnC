@@ -3,10 +3,8 @@ package presentation.member.view.myorder;
 import java.time.LocalDateTime;
 
 import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.control.Button;
 import presentation.member.view.myorder.utils.FunctionButtons;
+import utils.info.order.OrderStatus;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -24,7 +22,7 @@ public class MyorderModel {
     private final StringProperty state;
     private final StringProperty timeAndSum;
     private final StringProperty totalPrice;
-    private final ObjectProperty<Button[]> operation;
+    private final ObjectProperty<OrderStatus> operation;
 
     /**
      * Default constructor.
@@ -41,9 +39,8 @@ public class MyorderModel {
      * @param state
      * @param timeAndSum
      * @param totalPrice
-     * @param operation
      */
-    public MyorderModel(String s1,String s2,String s3,String s4,String s5,Button[] buttons) {
+    public MyorderModel(String s1,String s2,String s3,String s4,String s5) {
         this.hotelName = new SimpleStringProperty(s1);
         
         //process the checkinTime
@@ -52,9 +49,7 @@ public class MyorderModel {
         this.state = new SimpleStringProperty(s3);
         this.timeAndSum = new SimpleStringProperty(s4);
         this.totalPrice = new SimpleStringProperty(s5);
-        this.operation = new SimpleObjectProperty<Button[]>
-		(new Button[]{new FunctionButtons("查看",false),new FunctionButtons("申诉",true)});
-        
+        this.operation = new SimpleObjectProperty<OrderStatus>(OrderStatus.ABNORMAL);
     }
     
     public MyorderModel(OrderVo order) {
@@ -66,27 +61,8 @@ public class MyorderModel {
         this.state = new SimpleStringProperty(String.valueOf(order.getStatus()));
         this.timeAndSum = new SimpleStringProperty(order.getStayDays()+"晚/"+order.getRoomNumber()+"间");
         this.totalPrice = new SimpleStringProperty(String.valueOf(order.getPrice())+"元");
-        switch(order.getStatus()){
-        case UNEXECUTED : 
-        	this.operation = new SimpleObjectProperty<Button[]>
-        			(new Button[]{new FunctionButtons("查看",false),new FunctionButtons("撤销",true)});
-        	break;
-        case EXECUTED : 
-        	this.operation = new SimpleObjectProperty<Button[]>
-					(new Button[]{new FunctionButtons("查看",false),new FunctionButtons("评价",false)});
-        	break;
-        case ABNORMAL : 
-        	this.operation = new SimpleObjectProperty<Button[]>
-					(new Button[]{new FunctionButtons("查看",false),new FunctionButtons("申诉",true)});
-        	break;
-        case REPEALED :
-        	this.operation = new SimpleObjectProperty<Button[]>
-					(new Button[]{new FunctionButtons("查看",false)});
-        	break;
-        default : 
-        	this.operation = new SimpleObjectProperty<Button[]>(null);
-        	break;
-        }
+        this.operation = new SimpleObjectProperty<OrderStatus>(order.getStatus());
+        
     }
     
     /**
@@ -163,15 +139,15 @@ public class MyorderModel {
         return totalPrice;
     }
     
-    public Button[] getOperation() {
+    public OrderStatus getOperation() {
         return operation.get();
     }
 
-    public void setOperation(Button[] newButtons) {
-        this.operation.set(newButtons);
+    public void setOperation(OrderStatus status) {
+        this.operation.set(status);
     }
 
-    public ObjectProperty<Button[]> operationProperty() {
+    public ObjectProperty<OrderStatus> operationProperty() {
         return operation;
     }
     
