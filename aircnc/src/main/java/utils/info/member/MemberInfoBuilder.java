@@ -104,7 +104,7 @@ public abstract class MemberInfoBuilder extends MemberInfoTemplate {
 		if (credit != WRONG_CREDIT)
 			this.credit = credit;
 		else
-			throw new IllegalArgumentException("MemberInfoBuilder - Wrong credit value");
+			throw new IllegalArgumentException("MemberInfoBuilder - Wrong credit value: " + credit);
 		return this;
 	}
 

@@ -24,10 +24,6 @@ public class MarketPoBuilder extends MarketInfoBuilder {
 	public static final MarketInfo getInvalidInfo() {
 		return INVALID_MARKET_PO;
 	}
-	
-	public MarketPoBuilder(){
-		super();
-	}
 
 	public MarketPoBuilder(MarketInfo info) {
 		super(info);

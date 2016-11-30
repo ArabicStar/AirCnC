@@ -48,7 +48,7 @@ public class CreditChangePoBuilder extends CreditChangeInfoBuilder {
 			throw new IllegalStateException("CreditChangePoBuilder - Lack of Info");
 
 		return new CreditChangePo().setActionType(actionType).setBeforeCredit(beforeCredit).setAfterCredit(afterCredit)
-				.setMemberId(memberId).setOrderId(orderId).setTimeInstant(timeInstant);
+				.setMemberId(memberId).setMoney(money).setOrderId(orderId).setTimeInstant(timeInstant);
 	}
 
 }

@@ -8,7 +8,9 @@ import utils.info.member.credit.CreditChangeInfo;
 
 /**
  * Po of credit change.<br>
- * <br>
+ * Compared with CreditChangeVo, this po will be persisted in database, so an
+ * identifier field {@code ccid} and some functional methods are added. You can
+ * ignore them - just prepared for hibernate.<br>
  * <b>NOTICE:</b><br>
  * All public setter is for builder and hibernate, <b>DO NOT</b> use in client
  * code.<br>
@@ -17,25 +19,53 @@ import utils.info.member.credit.CreditChangeInfo;
  *
  */
 public class CreditChangePo extends CreditChangeInfo {
-	private long ccid;
-	private int numMemId;
-
-	/**
-	 * Get identifier.<br>
-	 * 
-	 * @return ccid;
-	 */
-	public long getCcid() {
-		return ccid;
-	}
+	private int ccid;
 
 	/**
 	 * Set identifier.<br>
 	 * 
 	 * @param id
 	 */
-	public void setCcid(long ccid) {
+	public void setCcid(int ccid) {
 		this.ccid = ccid;
+	}
+
+	/**
+	 * Get identifier.<br>
+	 * 
+	 * @return ccid;
+	 */
+	public int getCcid() {
+		return ccid;
+	}
+
+	/**
+	 * Set number member id, for hibernate.<br>
+	 * 
+	 * @param numMemId
+	 *            number member id
+	 */
+	public void setNumMemId(int numMemId) {
+		this.memberId = MemberInfoTemplate.formatID(numMemId);
+	}
+
+	/**
+	 * Get number member id, for hibernate.<br>
+	 * 
+	 * @return number member id
+	 */
+	public int getNumMemId() {
+		return MemberInfoTemplate.convertID2Num(memberId);
+	}
+
+	/**
+	 * Set string of type.<br>
+	 * 
+	 * @param type
+	 *            type string
+	 */
+	public void setTypeString(String type) {
+		this.actionType = ActionType.valueOf(type);
 	}
 
 	/**
@@ -47,17 +77,7 @@ public class CreditChangePo extends CreditChangeInfo {
 	 */
 	public CreditChangePo setMemberId(String memberId) {
 		this.memberId = memberId;
-		this.numMemId = MemberInfoTemplate.convertID2Num(memberId);
 		return this;
-	}
-
-	public void setNumMemId(int numMemId) {
-		this.memberId = MemberInfoTemplate.formatID(numMemId);
-		this.numMemId = numMemId;
-	}
-
-	public int getNumMemId() {
-		return numMemId;
 	}
 
 	/**
@@ -97,10 +117,6 @@ public class CreditChangePo extends CreditChangeInfo {
 		this.afterCredit = afterCredit;
 		return this;
 
-	}
-
-	public void setTypeString(String type) {
-		this.actionType = ActionType.valueOf(type);
 	}
 
 	/**

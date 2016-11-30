@@ -33,6 +33,13 @@ public interface CreditStrategy {
 	/**
 	 * @param vo
 	 *            order vo <br>
+	 * @return credit reduction
+	 */
+	public int getOverdueReduction(OrderVo vo);
+
+	/**
+	 * @param vo
+	 *            order vo <br>
 	 * @return credit recovery
 	 */
 	public int getAppealRecovery(OrderVo vo);

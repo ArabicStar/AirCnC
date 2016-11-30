@@ -41,7 +41,7 @@
 			
 		<!-- association table -->
 		<set name="rooms"  cascade="all">
-            <key column="HOTELID" ></key>
+            <key column="HOTELID" />
             <one-to-many class ="po.hotel.RoomPo"/>
         </set>		
 	</class>

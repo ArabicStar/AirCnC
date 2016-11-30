@@ -76,7 +76,7 @@ public class MemberCreditManager implements MemberCreditService {
 			return null;
 
 		CreditChangePo po = new CreditChangePoBuilder(m, ActionType.ORDER_OVERDUE).setOrderId(order.getOrderId())
-				.setCreditChange(strategy.getCancelReduction(order)).getCreditChangeInfo();
+				.setCreditChange(strategy.getOverdueReduction(order)).getCreditChangeInfo();
 
 		return new MemberVoBuilder(creditDao.changeCredit(po)).getMemberInfo();
 	}

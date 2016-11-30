@@ -41,7 +41,10 @@ public class MemberDaoImpl implements MemberDao {
 
 			MemberPo deleted = (MemberPo) session.get(MemberPo.class, parseId(id));
 			if (flag = Boolean.valueOf((deleted != null)))// check existence
+			{
 				session.delete(deleted);
+				session.delete(deleted.getContact());
+			}
 
 			return flag;
 		});

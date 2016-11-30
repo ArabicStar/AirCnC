@@ -4,12 +4,11 @@
 <!-- Generated 2016-11-25 14:49:59 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
 	<class name="po.member.credit.CreditChangePo" table="credit">
-		<id name="ccid" type="java.lang.Long">
-			<column name="ccid" />
+		<id name="ccid" type="integer" column="ccid">
 			<generator class="native" />
 		</id>
 		<!-- number member id -->
-		<property name="numMemId" column="m_id" type="int" />
+		<property name="numMemId" column="m_id" type="integer" />
 
 		<!-- time stamp -->
 		<property name="timeInstant" column="timestamp" type="java.time.Instant" />
@@ -18,15 +17,15 @@
 		<property name="typeString" column="type" type="string" />
 
 		<!-- money -->
-		<property name="money" column="money" type="int" />
+		<property name="money" column="money" type="integer" />
 
 		<!-- order id -->
 		<property name="orderId" column="o_id" type="string" />
 
 		<!-- before credit -->
-		<property name="beforeCredit" column="before" type="int" />
+		<property name="beforeCredit" column="bef_cre" type="integer" />
 
 		<!-- after credit -->
-		<property name="afterCredit" column="after" type="int" />
+		<property name="afterCredit" column="aft_cre" type="integer" />
 	</class>
 </hibernate-mapping>
