@@ -2,8 +2,9 @@ package vo.order;
 
 import java.time.LocalDateTime;
 
+import po.member.MemberPo;
+import po.order.OrderPo;
 import utils.info.order.OrderInfo;
-import utils.info.order.OrderInfoTemplate;
 import utils.info.order.OrderStatus;
 
 /**
@@ -16,6 +17,17 @@ import utils.info.order.OrderStatus;
  * 
  */
 public class OrderVo extends OrderInfo {
+	
+	/**
+	 * TODO:无参构造方法，目前还不知道需要不需要在这个里面初始化参数
+	 */
+	public OrderVo() {
+		
+	}
+	
+	public OrderVo(OrderPo orderPo, MemberPo memberPo) {
+		
+	}
 
 	@Override
 	public OrderVo setOrderId(String orderId) {

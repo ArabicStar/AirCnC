@@ -5,18 +5,6 @@ import java.time.LocalDateTime;
 import utils.info.order.OrderInfo;
 import utils.info.order.OrderStatus;
 
-/**
- * FIXME:修正这个类的继承关系，重写属性和方法，构造方法也要改
- * FIXME:注意涉及构造方法的地方要在修改后看一下是否会报错
- * id 订单编号 
- * hotelId 酒店编号 
- * userId 用户编号 
- * status 订单状态（0：未执行订单；1：已执行订单；2：异常订单 ；3：撤销订单）
- * entryTime 用户入住时间 
- * lastTime 订单最晚执行时间 
- * orderInfo 订单详情 
- * price 订单价值
- */
 public class OrderPo extends OrderInfo{
 
 

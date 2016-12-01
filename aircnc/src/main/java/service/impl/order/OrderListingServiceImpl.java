@@ -1,29 +1,36 @@
 package service.impl.order;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import data.dao.impl.member.MemberDaoImpl;
+import data.dao.impl.order.OrderDaoImpl;
+import data.dao.member.MemberDao;
+import data.dao.order.OrderDao;
+import po.member.MemberPo;
+import po.order.OrderPo;
 import service.order.OrderListingService;
 import vo.order.OrderVo;
 
 public class OrderListingServiceImpl implements OrderListingService {
 
-//	private int hotelId;
-//
-//	private List<OrderPo> hotelOrderList;
-//
-//	private OrderDao orderDao;
-//
-//	private MemberDao memberDao;
+	private int hotelId;
+
+	private List<OrderPo> hotelOrderList;
+
+	private OrderDao orderDao;
+
+	private MemberDao memberDao;
 
 	/**
 	 * 用于获取各种状态的订单的构造方法
 	 * @param hotelId 酒店的Id
 	 */
 	public OrderListingServiceImpl(int hotelId) {
-//		this.hotelId = hotelId;
-//		this.orderDao = OrderDaoImpl.getInstance();
-//		this.memberDao = new MemberDaoImpl(new MemberHibernatorImpl());
-//		this.hotelOrderList = orderDao.getOrders(hotelId);
+		this.hotelId = hotelId;
+		this.orderDao = OrderDaoImpl.getInstance();
+		this.memberDao = new MemberDaoImpl();
+		this.hotelOrderList = orderDao.getOrders(hotelId);
 	}
 
 	/**
@@ -32,18 +39,18 @@ public class OrderListingServiceImpl implements OrderListingService {
 	 */
 	@Override
 	public List<OrderVo> getAllOrders(int hotelId) {
-//		List<OrderVo> list = new ArrayList<OrderVo>();
-//		for (OrderPo orderPo : hotelOrderList) {
-//			MemberPo memberPo = memberDao.findMember(Integer.toString(orderPo.getUserId()));
-//			/**
-//			 * FIXME:这里的orderVo并没有设置该有的属性，
-//			 * 原因是在修改了构造方法后，为了让编译不报错
-//			 * {@link vo.order.OrderVo}
-//			 * 这里需要添加合适的构造方法
-//			 */
-//			OrderVo orderVo =new OrderVo(); //new OrderVo(orderPo, memberPo);
-//			list.add(orderVo);
-//		}
+		List<OrderVo> list = new ArrayList<OrderVo>();
+		for (OrderPo orderPo : hotelOrderList) {
+			MemberPo memberPo = memberDao.findMember(Integer.toString(orderPo.getUserId()));
+			/**
+			 * FIXME:这里的orderVo并没有设置该有的属性，
+			 * 原因是在修改了构造方法后，为了让编译不报错
+			 * {@link vo.order.OrderVo}
+			 * 这里需要添加合适的构造方法
+			 */
+			OrderVo orderVo =new OrderVo(); //new OrderVo(orderPo, memberPo);
+			list.add(orderVo);
+		}
 //		return list;
 		return null;
 	}

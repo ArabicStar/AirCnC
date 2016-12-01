@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping">
+<!-- Generated 2016-12-1 16:40:?? by Myself OrderPo mapping xml -->
+<hibernate-mapping>
+	<class name="po.order.OrderPo" table="order_db">
+		<!-- orderId, the key column, auto increase -->
+		<id column="orderId" name="orderId" type="string">
+			<generator class="assigned" />
+		</id>
+		<!-- roomType -->
+		<property column="roomType" generated="never" lazy="false"
+			name="roomType" type="string" />
+		<!-- stayDays -->
+		<property column="stayDays" generated="never" lazy="false"
+			name="stayDays" type="integer" />
+		<!-- userId -->
+		<property column="userId" generated="never" lazy="false"
+			name="userId" type="integer" />
+			<!-- orderStatus -->
+		<property column="userId" generated="never" lazy="false"
+			name="userId" type="integer" />
+			
+	</class>
+</hibernate-mapping>

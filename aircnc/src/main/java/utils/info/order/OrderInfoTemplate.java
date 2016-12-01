@@ -59,6 +59,12 @@ public abstract class OrderInfoTemplate {
 	}
 
 	/**
+	 * 年份4位<br>
+	 * 月份2位<br>
+	 * 日期2位<br>
+	 * 酒店id至少4位<br>
+	 * 订单编号至少4位<br>
+	 * 前八位固定为日期，后面2n位，取酒店id和订单编号位数较长的值，在较短的前面补0
 	 * TODO:添加其他测试代码
 	 * @return
 	 */
