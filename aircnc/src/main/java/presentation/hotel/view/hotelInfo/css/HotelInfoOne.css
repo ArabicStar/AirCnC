@@ -5,17 +5,22 @@
 }
 
 .info-index{
-	-fx-font-size: 30px;
+	-fx-text-fill: #a4a4a4;
 }
 
-.info-content{
-	-fx-font-size: 30px;
-}
-
-.label{
-	-fx-text-fill:#000000;
+.labal{
+	-fx-font-size: 26 px;
 }
 
 .modify{
 	-fx-font-size: 30px;
+	-fx-border-color:#575793;
+	-fx-text-fill: #575793;
+	-fx-background-color:transparent;
 }
+
+.page{
+	-fx-text-fill: #575793;
+
+}
+

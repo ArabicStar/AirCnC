@@ -4,7 +4,6 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="603.0" prefWidth="777.0" stylesheets="@../css/HotelInfoOne.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox layoutX="35.0" layoutY="27.0" prefHeight="461.0" prefWidth="687.0">
@@ -14,36 +13,36 @@
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="40.0">
                      <children>
                         <Label styleClass="info-index" text="所属商圈" />
-                        <Label styleClass="info-content" text="Label" />
+                        <Label fx:id="scope" styleClass="info-content" text="Label" />
                      </children>
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="40.0">
                      <children>
                         <Label styleClass="info-index" text="地址" />
-                        <Label styleClass="info-content" text="Label" />
+                        <Label fx:id="location" styleClass="info-content" text="Label" />
                      </children>
                   </HBox>
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" spacing="40.0">
+            <HBox prefHeight="36.0" prefWidth="687.0" spacing="40.0">
                <children>
                   <Label styleClass="info-index" text="星级" />
-                  <Label styleClass="info-content" text="Label" />
+                  <Label fx:id="star" styleClass="info-content" text="Label" />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="40.0">
                <children>
                   <Label styleClass="info-index" text="简介" />
-                  <Label styleClass="info-content" text="Label" />
+                  <Label fx:id="introduction" styleClass="info-content" text="Label" />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="40.0">
                <children>
                   <Label styleClass="info-index" text="拥有房型" />
-                  <Label styleClass="info-content" text="Label" />
+                  <Label fx:id="room" styleClass="info-content" text="Label" />
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" spacing="40.0">
+            <HBox fx:id="equipment" prefHeight="100.0" prefWidth="200.0" spacing="40.0">
                <children>
                   <Label styleClass="info-index" text="设施" />
                   <Label styleClass="info-content" text="Label" />
@@ -51,5 +50,13 @@
             </HBox>
          </children>
       </VBox>
+      <HBox layoutX="332.0" layoutY="529.0" prefHeight="24.0" prefWidth="111.0" spacing="40.0">
+         <children>
+            <Label styleClass="page-now" text="1" />
+            <Label fx:id="page2" onMouseClicked="#handlePage2" styleClass="page" text="2" />
+            <Label fx:id="page3" onMouseClicked="#handlePage3" styleClass="page" text="3" />
+         </children>
+      </HBox>
+      <Button fx:id="modify" layoutX="584.0" layoutY="500.0" mnemonicParsing="false" onAction="#handleModify" styleClass="modify" text="修改资料" />
    </children>
 </Pane>
