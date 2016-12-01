@@ -81,7 +81,7 @@ public class MemberOrderMainController implements Initializable{
 	
 	@FXML
 	public void handleQuery(){
-		orderTable.setItems(controller.getData());
+		orderTable.setItems(controller.getMyOrderData());
 		hotelName.setCellValueFactory(cellData -> cellData.getValue().hotelNameProperty());
 		checkInTime.setCellValueFactory(cellData -> cellData.getValue().checkInTimeProperty());
 		state.setCellValueFactory(cellData -> cellData.getValue().stateProperty());

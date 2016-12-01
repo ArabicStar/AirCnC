@@ -13,6 +13,7 @@ import presentation.member.view.myorder.MemberOrderMainPane;
 import presentation.member.view.myorder.MyorderModel;
 import presentation.member.view.searchhotel.MemberSearchHotelPane;
 import presentation.member.view.MemberMainPane;
+import presentation.member.view.creditchange.CreditModel;
 import presentation.member.view.creditchange.MemberCreditChangePane;
 
 /**
@@ -109,7 +110,7 @@ public class ClientCenterController extends Application {
 		}
 	}
 	
-	public ObservableList<MyorderModel> getData(){
+	public ObservableList<MyorderModel> getMyOrderData(){
     	ObservableList<MyorderModel> orderData = FXCollections.observableArrayList();
     	orderData.add(new MyorderModel("速吧酒店","2016-10-09","异常","5晚/1间","290元"));
 		orderData.add(new MyorderModel("速吧酒店","2016-10-09","异常","5晚/1间","290元"));
@@ -121,6 +122,12 @@ public class ClientCenterController extends Application {
 		orderData.add(new MyorderModel("速吧酒店","2016-10-09","异常","5晚/1间","290元"));
 		orderData.add(new MyorderModel("速吧酒店","2016-10-09","异常","5晚/1间","290元"));
 		orderData.add(new MyorderModel("速吧酒店","2016-10-09","异常","5晚/1间","290元"));
+		return orderData;
+    }
+	
+	public ObservableList<CreditModel> getCreditData(){
+    	ObservableList<CreditModel> orderData = FXCollections.observableArrayList();
+    	
 		return orderData;
     }
 
