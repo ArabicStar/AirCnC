@@ -47,6 +47,7 @@ public class CreditChangeVo extends CreditChangeInfo {
 	 * @return this instance <br>
 	 */
 	CreditChangeVo setBeforeCredit(int beforeCredit) {
+		
 		this.beforeCredit = beforeCredit;
 		return this;
 
