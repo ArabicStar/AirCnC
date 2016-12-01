@@ -21,8 +21,11 @@
 	-fx-font-size: 30px;
 }
 
-.modify{
-	-fx-font-size: 30px;
+.hotel-image{
+	-fx-background-radius:50px,50px,50px,50px;
+	-fx-border-color:#575793;
+	-fx-border-radius:50px,50px,50px,50px;
+	-fx-border-width: 5px;
 }
 
 .id{

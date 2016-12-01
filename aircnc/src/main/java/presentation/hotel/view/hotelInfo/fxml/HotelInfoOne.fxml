@@ -39,7 +39,8 @@
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="40.0">
                <children>
                   <Label styleClass="info-index" text="拥有房型" />
-                  <Label fx:id="room" styleClass="info-content" text="Label" />
+                  <Label fx:id="roomType" styleClass="info-content" text="类型" />
+                  <Label fx:id="roomPrice" styleClass="price" text="价格" />
                </children>
             </HBox>
             <HBox fx:id="equipment" prefHeight="100.0" prefWidth="200.0" spacing="40.0">
@@ -50,11 +51,11 @@
             </HBox>
          </children>
       </VBox>
-      <HBox layoutX="332.0" layoutY="529.0" prefHeight="24.0" prefWidth="111.0" spacing="40.0">
+      <HBox alignment="CENTER" layoutX="282.0" layoutY="509.0" prefHeight="43.0" prefWidth="193.0" spacing="40.0">
          <children>
-            <Label styleClass="page-now" text="1" />
-            <Label fx:id="page2" onMouseClicked="#handlePage2" styleClass="page" text="2" />
-            <Label fx:id="page3" onMouseClicked="#handlePage3" styleClass="page" text="3" />
+            <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="page-now" text="1" />
+            <Button fx:id="page2" mnemonicParsing="false" onAction="#handlePage2" styleClass="page" text="2" />
+            <Button fx:id="page3" mnemonicParsing="false" onAction="#handlePage3" prefHeight="30.0" prefWidth="30.0" styleClass="page" text="3" />
          </children>
       </HBox>
       <Button fx:id="modify" layoutX="584.0" layoutY="500.0" mnemonicParsing="false" onAction="#handleModify" styleClass="modify" text="修改资料" />
