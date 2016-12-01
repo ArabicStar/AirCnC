@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-12-1 17:27:37 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="utils.info.order.OrderInfoTemplate" table="ORDERINFOTEMPLATE" abstract="true">
+        <id name="userId" type="int">
+            <column name="USERID" />
+            <generator class="assigned" />
+        </id>
+        <discriminator type="string">
+            <column name="DISCR_COL" />
+        </discriminator>
+        <property name="orderId" type="java.lang.String">
+            <column name="ORDERID" />
+        </property>
+        <property name="roomType" type="java.lang.String">
+            <column name="ROOMTYPE" />
+        </property>
+        <property name="stayDays" type="int">
+            <column name="STAYDAYS" />
+        </property>
+        <property name="status">
+            <column name="STATUS" />
+            <type name="org.hibernate.type.EnumType">
+                <param name="type">12</param>
+                <param name="enumClass">utils.info.order.OrderStatus</param>
+            </type>
+        </property>
+        <property name="entryTime" type="java.time.LocalDateTime">
+            <column name="ENTRYTIME" />
+        </property>
+        <property name="lastTime" type="java.time.LocalDateTime">
+            <column name="LASTTIME" />
+        </property>
+        <property name="peopleNumber" type="int">
+            <column name="PEOPLENUMBER" />
+        </property>
+        <property name="price" type="double">
+            <column name="PRICE" />
+        </property>
+        <property name="hasChildren" type="boolean" access="field">
+            <column name="HASCHILDREN" />
+        </property>
+        <property name="hotelId" type="int">
+            <column name="HOTELID" />
+        </property>
+        <property name="hotelName" type="java.lang.String">
+            <column name="HOTELNAME" />
+        </property>
+        <property name="roomNumber" type="int">
+            <column name="ROOMNUMBER" />
+        </property>
+        <property name="isReviewed" type="boolean" access="field">
+            <column name="ISREVIEWED" />
+        </property>
+        <property name="userName" type="java.lang.String">
+            <column name="USERNAME" />
+        </property>
+    </class>
+</hibernate-mapping>
