@@ -24,15 +24,15 @@ public class OrderTest {
             
             OrderPo po2 = new OrderPoBuilder().setEntryTime(entryTime).setHasChildren(false)
             		.setHotelId(1000).setHotelName("乐天玛特").setLastTime(entryTime)
-            		.setOrderId("2016110110000020").setPeopleNumber(3).setPrice(200)
-            		.setReviewed(true).setRoomNumber(1).setRoomType("标准间")
-            		.setStatus(OrderStatus.EXECUTED).setStayDays(2).setUserId(20808121)
-            		.getOrderInfo();
+            		.setOrderId("201634").setPeopleNumber(3).setPrice(200)
+            		.setIsReviewed(true).setRoomNumber(1).setRoomType("标准间")
+            		.setStayDays(2).setUserId(20808121).setStatus(OrderStatus.EXECUTED)
+            		.getOrderInfo().setUserName("南京大学渣");
             
             
             //保存User对象  
             session.save(po2);
-//            session.delete(po2);
+            session.delete(po2);
               
             //提交事务  
             ts.commit();  

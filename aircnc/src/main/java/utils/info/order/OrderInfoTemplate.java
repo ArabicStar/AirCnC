@@ -2,6 +2,11 @@ package utils.info.order;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
+@Entity
 public abstract class OrderInfoTemplate {
 	protected String orderId;
 
@@ -125,11 +130,11 @@ public abstract class OrderInfoTemplate {
 		return price;
 	}
 
-	public boolean hasChildren() {
+	public boolean isHasChildren() {
 		return hasChildren;
 	}
 	
-	public boolean isReviewed() {
+	public boolean isIsReviewed() {
 		return isReviewed;
 	}
 
@@ -159,7 +164,7 @@ public abstract class OrderInfoTemplate {
 	
 	public abstract OrderInfoTemplate setRoomNumber(int roomNumber);
 	
-	public abstract OrderInfoTemplate setReviewed(boolean isReviewed);
+	public abstract OrderInfoTemplate setIsReviewed(boolean isReviewed);
 
 	public abstract OrderInfoTemplate setUserName(String userName);
 }

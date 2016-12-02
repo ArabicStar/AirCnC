@@ -108,7 +108,7 @@ public class OrderVo extends OrderInfo {
 	}
 
 	@Override
-	public OrderVo setReviewed(boolean isReviewed) {
+	public OrderVo setIsReviewed(boolean isReviewed) {
 		this.isReviewed = isReviewed;
 		return this;
 	}

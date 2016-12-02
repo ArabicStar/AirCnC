@@ -9,8 +9,11 @@ public class OrderPoBuilder extends OrderInfoBuilder {
 
 	@Override
 	public OrderPo getOrderInfo() {
-		// TODO 生成非空的OrderPo
-		return null;
+		return new OrderPo().setOrderId(orderId).setEntryTime(entryTime).setHasChildren(hasChildren)
+				.setHotelId(hotelId).setHotelName(hotelName).setLastTime(lastTime)
+				.setPeopleNumber(peopleNumber).setPrice(price)
+				.setIsReviewed(isReviewed).setRoomNumber(roomNumber).setRoomType(roomType)
+				.setStatus(status).setStayDays(stayDays).setUserId(userId).setUserName(userName);
 	}
 
 	@Override
@@ -93,7 +96,7 @@ public class OrderPoBuilder extends OrderInfoBuilder {
 	}
 
 	@Override
-	public OrderPoBuilder setReviewed(boolean isReviewed) {
+	public OrderPoBuilder setIsReviewed(boolean isReviewed) {
 		this.isReviewed = isReviewed;
 		return this;
 	}

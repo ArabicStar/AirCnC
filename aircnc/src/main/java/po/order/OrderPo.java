@@ -95,7 +95,7 @@ public class OrderPo extends OrderInfo{
 	}
 
 	@Override
-	public OrderPo setReviewed(boolean isReviewed) {
+	public OrderPo setIsReviewed(boolean isReviewed) {
 		this.isReviewed = isReviewed;
 		return this;
 	}
