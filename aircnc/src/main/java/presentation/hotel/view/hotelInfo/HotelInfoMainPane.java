@@ -5,18 +5,17 @@ import java.net.URL;
 
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
+import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import presentation.hotel.view.HotelMainController;
 import presentation.hotel.view.hotelInfo.fxml.HotelInfoMainController;
 
 public class HotelInfoMainPane {
-	private Stage primaryStage;
 	private BorderPane rootLayout;
 	private HotelInfoMainController controller;
 	
-	public HotelInfoMainPane(Stage primaryStage){
-		this.primaryStage = primaryStage;
+	public HotelInfoMainPane(){
 		initRootLayout();
 	}
 
@@ -40,12 +39,12 @@ public class HotelInfoMainPane {
 	public HotelInfoMainController getController(){
 		return controller;
 	}
-
-    public Stage getPrimaryStage() {
-        return primaryStage;
-    }
     
     public BorderPane getBorderPane() {
         return rootLayout;
     }
+    
+//    public Node getPane(){
+//    	return rootLayout;
+//    }
 }

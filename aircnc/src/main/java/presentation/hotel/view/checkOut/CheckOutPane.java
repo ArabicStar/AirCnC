@@ -1,4 +1,4 @@
-package presentation.hotel.view.hotelInfo;
+package presentation.hotel.view.checkOut;
 
 import java.io.IOException;
 import java.net.URL;
@@ -7,14 +7,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
-import presentation.hotel.view.hotelInfo.fxml.HotelInfoOneController;
+import presentation.hotel.view.checkOut.fxml.CheckOutController;
 
-public class HotelInfoOnePane {
+public class CheckOutPane {
 	private Pane orderLayout;
-	private HotelInfoOneController controller;
+	private CheckOutController controller;
 
 
-	public HotelInfoOnePane(){
+	public CheckOutPane(){
 		init();
 	}
 
@@ -22,12 +22,12 @@ public class HotelInfoOnePane {
         try {
             // Load sign in overview.
             FXMLLoader loader = new FXMLLoader();
-            URL location = getClass().getResource("fxml/HotelInfoOne.fxml");
+            URL location = getClass().getResource("fxml/CheckOut.fxml");
             loader.setLocation(location);
             loader.setBuilderFactory(new JavaFXBuilderFactory());
             //javafx.scene.Parent root = (javafx.scene.Parent) loader.load(location.openStream());
             loader.load();
-            controller = (HotelInfoOneController)loader.getController();
+            controller = (CheckOutController)loader.getController();
             orderLayout = loader.getRoot();
 
         } catch (IOException e) {
@@ -35,11 +35,11 @@ public class HotelInfoOnePane {
         }
     }
 
-    public HotelInfoOneController getController(){
+    public CheckOutController getController(){
     	return this.controller;
     }
     
     public Node getPane(){
     	return orderLayout;
-    }
+    }	
 }

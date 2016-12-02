@@ -7,7 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import presentation.hotel.HotelCenterController;
+import presentation.hotel.view.hotelInfo.HotelInfoController;
 
 public class HotelInfoOneController implements Initializable{
 
@@ -41,7 +41,7 @@ public class HotelInfoOneController implements Initializable{
 	@FXML
 	private Button modify;
 	
-	private HotelCenterController controller;
+	private HotelInfoController controller;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -51,12 +51,12 @@ public class HotelInfoOneController implements Initializable{
 	
 	@FXML
 	public void handleModify(){
-		
+		controller.addHotelModifyPane();
 	}
 	
 	@FXML
 	public void handlePage2(){
-		
+		controller.addHotelInfoTwoPane();
 	}
 	
 	@FXML
@@ -64,7 +64,7 @@ public class HotelInfoOneController implements Initializable{
 		
 	}
 	
-	public void setCenterController(HotelCenterController controller){
+	public void setInfoMainController(HotelInfoController controller){
 		this.controller=controller;
 	}
 	

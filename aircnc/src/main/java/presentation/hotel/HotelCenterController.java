@@ -7,6 +7,11 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import presentation.hotel.view.HotelMainPane;
+import presentation.hotel.view.checkInLive.CheckInLivePane;
+import presentation.hotel.view.checkOut.CheckOutPane;
+import presentation.hotel.view.hotelInfo.HotelInfoController;
+import presentation.hotel.view.hotelInfo.HotelInfoMainPane;
+import presentation.hotel.view.hotelInfo.HotelInfoModifyPane;
 import presentation.hotel.view.orderExecute.OrderExecutePane;
 import presentation.hotel.view.orderExecute.UnexecutedOrderModel;
 import vo.hotel.HotelVo;
@@ -19,6 +24,11 @@ public class HotelCenterController extends Application{
 	
 	private HotelMainPane mainClient;
 	private OrderExecutePane orderExecutePane;
+	private HotelInfoMainPane infoMainPane;
+	private HotelInfoModifyPane modifyPane;
+	private CheckInLivePane checkInPane;
+	private CheckOutPane checkOutPane;
+	
 	
 	private final static int Client_Width = 1024;
 	private final static int Client_Height = 768;
@@ -54,6 +64,36 @@ public class HotelCenterController extends Application{
 		orderExecutePane.getController().setCenterController(this);	
 		orderExecutePane.getController().test();
 	}
+	
+	public void addCheckInLivePane() {
+		clearContent();
+		checkInPane = new CheckInLivePane();
+		mainClient.getBorderPane().setCenter(checkInPane.getPane());
+		checkInPane.getController().setCenterController(this);	
+	}
+	
+	public void addCheckOutPane() {
+		clearContent();
+		checkOutPane = new CheckOutPane();
+		mainClient.getBorderPane().setCenter(checkOutPane.getPane());
+		checkOutPane.getController().setCenterController(this);	
+	}
+	
+	public void addHotelModifyPane() {
+		clearContent();
+		modifyPane = new HotelInfoModifyPane();
+		mainClient.getBorderPane().setCenter(modifyPane.getPane());
+		modifyPane.getController().setCenterController(this);
+	}
+	
+	public void addHotelInfoMainPane() {
+		clearContent();
+		infoMainPane = new HotelInfoMainPane();
+		mainClient.getBorderPane().setCenter(infoMainPane.getBorderPane());
+		infoMainPane.getController().setCenterController(this);	
+		HotelInfoController infoController = new HotelInfoController(infoMainPane,this);
+	}
+	
 
 	/**
 	 * remove all the children nodes of the main border pane, except the

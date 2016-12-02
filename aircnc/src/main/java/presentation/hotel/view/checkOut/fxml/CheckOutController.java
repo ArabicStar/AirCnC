@@ -1,4 +1,4 @@
-package presentation.hotel.view.hotelInfo.fxml;
+package presentation.hotel.view.checkOut.fxml;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -6,30 +6,19 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import presentation.hotel.HotelCenterController;
-import presentation.hotel.view.hotelInfo.HotelInfoController;
-import presentation.member.ClientCenterController;
 
-public class HotelInfoModifyController implements Initializable{
+public class CheckOutController implements Initializable{
 	@FXML
-	private TextField scope;
+	private Button comfirm;
 	
 	@FXML
-	private TextField location;
+	private TextField roomNum;
 	
 	@FXML
-	private TextArea introduction;	
-	
-	@FXML
-	private Button back;
-	
-	@FXML
-	private Button confirm;
-	
-	@FXML
-	private Button modifyRoom;
+	private ChoiceBox<String> roomType;
 	
 	private HotelCenterController controller;
 
@@ -40,17 +29,7 @@ public class HotelInfoModifyController implements Initializable{
 	}
 	
 	@FXML
-	public void handleBack(){
-		controller.addHotelInfoMainPane();
-	}
-	
-	@FXML
 	public void handleConfirm(){
-		
-	}
-	
-	@FXML
-	public void handleRoomModify(){
 		
 	}
 	

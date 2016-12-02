@@ -3,25 +3,40 @@ package presentation.hotel.view.hotelInfo;
 import presentation.hotel.HotelCenterController;
 
 public class HotelInfoController {
-	HotelInfoMainPane infoMainPane;
-	HotelInfoOnePane onePane;
-	HotelInfoTwoPane twoPane;
-	HotelInfoThreePane threePane;
-	HotelInfoModifyPane modifyPane;
+	private HotelInfoMainPane infoMainPane;
+	private HotelInfoOnePane onePane;
+	private HotelInfoTwoPane twoPane;
+	private HotelInfoThreePane threePane;
 	
-	HotelCenterController controller;
+	private HotelCenterController centerController;
 	
-	public HotelInfoController(HotelCenterController controller){
-		this.controller = controller;
+	public HotelInfoController(HotelInfoMainPane infoMainPane,HotelCenterController centerController){
+		this.infoMainPane = infoMainPane;
+		this.centerController = centerController;
+		addHotelInfoOnePane();
 	}
 	
-	public void addHotelInfoPane() {
+	public void addHotelModifyPane() {
+		centerController.addHotelModifyPane();
+	}
+	
+	public void addHotelInfoOnePane() {
 		clearContent();
-//		orderExecutePane = new OrderExecutePane();
-//		mainClient.getBorderPane().setCenter(orderExecutePane.getPane());
-//		orderExecutePane.getController().setCenterController(this);	
-//		orderExecutePane.getController().test();
+		if(onePane==null){
+			onePane = new HotelInfoOnePane();
+		}
+		infoMainPane.getBorderPane().setCenter(onePane.getPane());
+		onePane.getController().setInfoMainController(this);	
 	}
+	
+	public void addHotelInfoTwoPane() {
+		clearContent();
+		twoPane = new HotelInfoTwoPane();
+		infoMainPane.getBorderPane().setCenter(twoPane.getPane());
+		twoPane.getController().setInfoMainController(this);	
+	}
+	
+	
 	
 	/**
 	 * remove all the children nodes of the main border pane, except the

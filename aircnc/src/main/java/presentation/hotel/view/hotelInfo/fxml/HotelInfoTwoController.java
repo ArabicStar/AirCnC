@@ -6,11 +6,12 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import presentation.hotel.HotelCenterController;
+import presentation.hotel.view.hotelInfo.HotelInfoController;
 
 public class HotelInfoTwoController implements Initializable{
 
 	
-	private HotelCenterController controller;
+	private HotelInfoController controller;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -20,7 +21,7 @@ public class HotelInfoTwoController implements Initializable{
 	
 	@FXML
 	public void handlePage1(){
-		
+		controller.addHotelInfoOnePane();
 	}
 	
 	@FXML
@@ -28,7 +29,7 @@ public class HotelInfoTwoController implements Initializable{
 		
 	}
 	
-	public void setCenterController(HotelCenterController controller){
+	public void setInfoMainController(HotelInfoController controller){
 		this.controller=controller;
 	}
 
