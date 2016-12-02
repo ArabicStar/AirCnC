@@ -3,6 +3,13 @@ package presentation.member.manager.impl;
 import presentation.member.manager.MemberInfoManager;
 import vo.member.MemberVo;
 
+/**
+ * the manager of member info
+ * aiming to receive the MemberVo from the logic layer
+ * and deliver the member info model to the presentation layer
+ * @author paranoia
+ *
+ */
 public class MemberInfoManagerImpl implements MemberInfoManager{
 	
 	private MemberVo user;
@@ -15,6 +22,7 @@ public class MemberInfoManagerImpl implements MemberInfoManager{
 		}
 		return false;
 	}
+	
 	
 	@Override
 	public String getUsername(){

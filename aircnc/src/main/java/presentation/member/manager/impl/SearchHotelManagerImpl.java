@@ -9,6 +9,13 @@ import presentation.member.manager.SearchHotelManager;
 import presentation.member.model.SearchHotelsModel;
 import vo.hotel.HotelVo;
 
+/**
+ * the manager of member info
+ * aiming to receive the MemberVo from the logic layer
+ * and deliver the member info model to the presentation layer
+ * @author paranoia
+ *
+ */
 public class SearchHotelManagerImpl implements SearchHotelManager{
 	
 	private List<HotelVo> hotels;
@@ -22,7 +29,10 @@ public class SearchHotelManagerImpl implements SearchHotelManager{
 		}
 		return false;
 	}
-
+	
+	/**
+	 * wrap into the observablelist
+	 */
 	@Override
 	public ObservableList<SearchHotelsModel> getHotelList() {
 		searchHotelsData = FXCollections.observableArrayList();

@@ -13,6 +13,12 @@ import javafx.scene.layout.HBox;
 import presentation.member.model.MyorderModel;
 import utils.info.order.OrderStatus;
 
+/**
+ * FunctionButtons use a hbox(button) to show the operations.
+ * 
+ * @author paranoia
+ *
+ */
 public class FunctionButtons extends TableCell<MyorderModel, OrderStatus>{
 	
 	final Button[] cellButton;

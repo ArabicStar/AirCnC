@@ -1,6 +1,12 @@
 package presentation.member.utils;
 
-public class symbolCell {
+/**
+ * SymbolCell use a label(shape) to show the index of change.
+ * 
+ * @author paranoia
+ *
+ */
+public class SymbolCell {
 	
 	
 }

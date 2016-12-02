@@ -9,6 +9,13 @@ import presentation.member.manager.MyOrderManager;
 import presentation.member.model.MyorderModel;
 import vo.order.OrderVo;
 
+/**
+ * the manager of member info
+ * aiming to receive the MemberVo from the logic layer
+ * and deliver the member info model to the presentation layer
+ * @author paranoia
+ *
+ */
 public class MyOrderManagerImpl implements MyOrderManager{
 	
 	private List<OrderVo> orders;
@@ -23,7 +30,10 @@ public class MyOrderManagerImpl implements MyOrderManager{
 		}
 		return false;
 	}
-
+	
+	/**
+	 * wrap into the observablelist
+	 */
 	@Override
 	public ObservableList<MyorderModel> getOrderList() {
 		orderData = FXCollections.observableArrayList();

@@ -11,9 +11,10 @@ import javafx.beans.property.SimpleStringProperty;
 import vo.order.OrderVo;
 
 /**
- * Model class for an order.
- *
+ * the model of credit change
+ * aiming to wrap the OrderVo into the presentation manager.
  * @author paranoia
+ *
  */
 public class MyorderModel {
 

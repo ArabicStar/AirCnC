@@ -8,6 +8,12 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import vo.member.credit.CreditChangeVo;
 
+/**
+ * the model of credit change
+ * aiming to wrap the CreditChangeVo into the presentation manager.
+ * @author paranoia
+ *
+ */
 public class CreditModel {
 		
 	private final StringProperty date;
@@ -26,11 +32,11 @@ public class CreditModel {
 	/**
 	 * Constructor with some initial data.
 	 * 
-	 * @param hotelName
-	 * @param checkinTime
-	 * @param state
-	 * @param timeAndSum
-	 * @param totalPrice
+	 * @param date
+	 * @param symbol
+	 * @param time
+	 * @param description
+	 * @param creditChange
 	 */
 	public CreditModel(String s1, String s2, String s3) {
 		

@@ -9,6 +9,13 @@ import presentation.member.manager.CreditChangeManager;
 import presentation.member.model.CreditModel;
 import vo.member.credit.CreditChangeVo;
 
+/**
+ * the manager of member info
+ * aiming to receive the MemberVo from the logic layer
+ * and deliver the member info model to the presentation layer
+ * @author paranoia
+ *
+ */
 public class CreditChangeManagerImpl implements CreditChangeManager{
 	
 	private List<CreditChangeVo> changes;
@@ -22,7 +29,10 @@ public class CreditChangeManagerImpl implements CreditChangeManager{
 		}
 		return false;
 	}
-
+	
+	/**
+	 * wrap into the observablelist
+	 */
 	@Override
 	public ObservableList<CreditModel> getCreditList() {
 		creditChangesData = FXCollections.observableArrayList();
