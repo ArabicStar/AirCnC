@@ -1,4 +1,4 @@
-package presentation.member.view.myorder.utils;
+package presentation.member.utils;
 
 import java.util.Optional;
 
@@ -10,7 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableCell;
 import javafx.scene.layout.HBox;
-import presentation.member.view.myorder.MyorderModel;
+import presentation.member.model.MyorderModel;
 import utils.info.order.OrderStatus;
 
 public class FunctionButtons extends TableCell<MyorderModel, OrderStatus>{
@@ -103,7 +103,11 @@ public class FunctionButtons extends TableCell<MyorderModel, OrderStatus>{
     	 
     	return newButton;
     }
-    //Display button if the row is not empty
+    
+    /**
+     * Display button if the row is not empty
+     * @param status, empty
+     */
     @Override
     protected void updateItem(OrderStatus status, boolean empty) {
         super.updateItem(status, empty);

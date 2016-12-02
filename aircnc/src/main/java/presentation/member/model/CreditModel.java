@@ -1,4 +1,4 @@
-package presentation.member.view.creditchange;
+package presentation.member.model;
 
 import java.time.Instant;
 
@@ -13,7 +13,7 @@ public class CreditModel {
 	private final StringProperty date;
 	private final StringProperty time;
 	private final ObjectProperty<Boolean> symbol;
-	private final StringProperty description;
+	private final ObjectProperty<CreditChangeVo> description;
 	private final ObjectProperty<Integer> creditChange;
 
 	/**
@@ -34,10 +34,10 @@ public class CreditModel {
 	 */
 	public CreditModel(String s1, String s2, String s3) {
 		
-		this.date = new SimpleStringProperty(s2);
+		this.date = new SimpleStringProperty(s1);
 		this.symbol = new SimpleObjectProperty<Boolean>(true);
-		this.time = new SimpleStringProperty(s1);
-		this.description = new SimpleStringProperty(s3);
+		this.time = new SimpleStringProperty(s2);
+		this.description = new SimpleObjectProperty<CreditChangeVo>(null);
 		this.creditChange = new SimpleObjectProperty<Integer>(233);
 
 	}
@@ -52,7 +52,9 @@ public class CreditModel {
 		// process the concrete time
 		this.time = new SimpleStringProperty(transformTime(change.getTimeInstant()));
 
-		this.description = new SimpleStringProperty(change.getActionType().toString());
+		this.description = new SimpleObjectProperty<CreditChangeVo>(change);
+		
+		//这里要完善
 		this.creditChange = new SimpleObjectProperty<Integer>(233);
 
 	}
@@ -121,15 +123,15 @@ public class CreditModel {
 		return time;
 	}
 	
-	public String getDescription() {
+	public CreditChangeVo getDescription() {
 		return description.get();
 	}
 
-	public void setDescription(String firstName) {
-		this.description.set(firstName);
+	public void setDescription(CreditChangeVo newChange) {
+		this.description.set(newChange);
 	}
 
-	public StringProperty descriptionProperty() {
+	public ObjectProperty<CreditChangeVo> descriptionProperty() {
 		return description;
 	}
 	

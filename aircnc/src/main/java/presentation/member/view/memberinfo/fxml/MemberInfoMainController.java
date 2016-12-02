@@ -3,6 +3,7 @@ package presentation.member.view.memberinfo.fxml;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -34,11 +35,26 @@ public class MemberInfoMainController implements Initializable{
 	private Label credit;
 	
 	private ClientCenterController controller;
+	
+	private String memberName;
+	
+	private String memberUsername;
+	
+	private String memberTele;
+	
+	private String memberMobi;
+	
+	private String memberEmail;
+	
+	private int memberCredit;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-		
+		Platform.runLater(new Runnable() {
+			  @Override public void run() {
+				  initMemberInfo();
+			  }
+		});		
 	}
 	
 	@FXML
@@ -53,5 +69,38 @@ public class MemberInfoMainController implements Initializable{
 	public void setCenterController(ClientCenterController centerController) {
 		// TODO Auto-generated method stub
 		this.controller=centerController;
+	}
+	
+	public void setUsername(String username){
+		this.memberUsername = username;
+	}
+	
+	public void setName(String name){
+		this.memberName = name;
+	}
+	
+	public void setTele(String tele){
+		this.memberTele = tele;
+	}
+	
+	public void setMobi(String mobi){
+		this.memberMobi = mobi;
+	}
+	
+	public void setEmail(String email){
+		this.memberEmail = email;
+	}
+	
+	public void setCredit(int credit){
+		this.memberCredit = credit;
+	}
+	
+	private void initMemberInfo(){
+		username.setText(memberUsername);
+		name.setText(memberName);
+		tele.setText(memberTele);
+		mobi.setText(memberMobi);
+		email.setText(memberEmail);
+		credit.setText(String.valueOf(memberCredit));
 	}
 }

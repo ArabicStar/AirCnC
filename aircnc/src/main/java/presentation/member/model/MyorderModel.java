@@ -1,9 +1,9 @@
-package presentation.member.view.myorder;
+package presentation.member.model;
 
 import java.time.LocalDateTime;
 
 import javafx.beans.property.StringProperty;
-import presentation.member.view.myorder.utils.FunctionButtons;
+import presentation.member.utils.FunctionButtons;
 import utils.info.order.OrderStatus;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
