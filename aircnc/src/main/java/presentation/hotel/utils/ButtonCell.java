@@ -28,7 +28,10 @@ public class ButtonCell extends TableCell<OrderModel, ButtonName>{
     	createButton();  	
     }
     
-    
+    public void initial(){
+    	this.getTableView().getItems().remove(this.getIndex());
+    	this.updateItem(name, true);
+    }
     
    /**
     * create different buttons : check, appeal, cancel, review
@@ -47,10 +50,11 @@ public class ButtonCell extends TableCell<OrderModel, ButtonName>{
                	 Alert alert = new Alert(AlertType.CONFIRMATION);
                	 alert.setTitle("确认信息");
                	 alert.setHeaderText("请进行确认");
-               	 alert.setContentText("你确定吗？");
+               	 alert.setContentText("确定执行该订单吗？");
                	 
                	 Optional<ButtonType> result = alert.showAndWait();
                	 if (result.get() == ButtonType.OK){
+               		 initial();
                	 } else {
                	     // 
                	 }
@@ -66,7 +70,7 @@ public class ButtonCell extends TableCell<OrderModel, ButtonName>{
                	 Alert alert = new Alert(AlertType.CONFIRMATION);
                	 alert.setTitle("确认信息");
                	 alert.setHeaderText("请进行确认");
-               	 alert.setContentText("你确定吗？");
+               	 alert.setContentText("确定延时该订单吗？");
                	 
                	 Optional<ButtonType> result = alert.showAndWait();
                	 if (result.get() == ButtonType.OK){
@@ -92,7 +96,9 @@ public class ButtonCell extends TableCell<OrderModel, ButtonName>{
     protected void updateItem(ButtonName name, boolean empty) {
         super.updateItem(name, empty);
         if(!empty){
-        		setGraphic(cellButton);
+        	setGraphic(cellButton);
+        }else{
+        	setGraphic(null);
         }
     }
 	

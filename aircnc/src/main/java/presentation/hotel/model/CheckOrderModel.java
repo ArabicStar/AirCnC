@@ -80,6 +80,7 @@ public class CheckOrderModel {
            	 
            	 Optional<ButtonType> result = alert.showAndWait();
            	 if (result.get() == ButtonType.OK){
+           		 
            	 } else {
            	     // 
            	 }
