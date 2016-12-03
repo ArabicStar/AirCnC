@@ -33,6 +33,8 @@ public interface OrderDao {
 	 * @param orderId
 	 * @return	删除订单
 	 */
-	public boolean deleteOrderPo(int orderId);
+	public boolean deleteOrderPo(String orderId);
+	
+	public boolean existsOrder(String orderId);
 
 }

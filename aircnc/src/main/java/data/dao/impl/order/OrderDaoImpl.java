@@ -1,20 +1,14 @@
 package data.dao.impl.order;
 
+import static data.hibernate.Hibernator.execute;
+
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import data.dao.order.OrderDao;
 import po.order.OrderPo;
 
 public class OrderDaoImpl implements OrderDao{
-	
-	private Map<String, OrderPo> map;
-	
-	//private OrderDataHelper orderDataHelper;
-	
-	//private DataFactory dataFactory;
 	
 	private static OrderDaoImpl orderDataServiceImpl;
 	
@@ -26,54 +20,67 @@ public class OrderDaoImpl implements OrderDao{
 	}
 	
 	public OrderDaoImpl(){
-//		if(map == null){
-//			dataFactory = new DataFactoryImpl();
-//			orderDataHelper = dataFactory.getOrderDataHelper();
-//			map = orderDataHelper.getOrderData();
-//		}
+
 	}
 
 	public OrderPo getOrder(String orderId) {
-		OrderPo orderPo = map.get(orderId);
-		return orderPo;
+		return  execute(session -> {
+			return (OrderPo) session.get(OrderPo.class, orderId);
+		});
 	}
 
 	public List<OrderPo> getOrders(int hotelId) {
 		List<OrderPo> orderList = new ArrayList<OrderPo>();
-		Iterator<Map.Entry<String,OrderPo>> iterator = map.entrySet().iterator();
-		while(iterator.hasNext()){
-			Map.Entry<String, OrderPo> entry = iterator.next();
-			OrderPo orderPo = entry.getValue();
-			if(orderPo.getHotelId() == hotelId){
-				orderList.add(orderPo);
-			}
-		}
+
 		return orderList;
 	}
 
 	public boolean updateOrder(OrderPo orderPo) {
-		String orderId = orderPo.getOrderId();
-		if(map.get(orderId) != null){
-			map.put(orderId,orderPo);
-			//orderDataHelper.updateOrderData(map);
-			return true;
+		if (orderPo == null) {
+			return false;
 		}
-		return false;
+		if(!existsOrder(orderPo.getOrderId())) {
+			return false;
+		}
+
+		return execute(session -> {
+			session.update(orderPo);
+			return true;
+		});
 		
 	}
 
 	public boolean addOrderPo(OrderPo orderPo) {
-		/*
-		 * 列表中添加订单并写入数据文件中
-		 */
-		return false;
+		if (orderPo == null) {
+			return false;
+		}
+		// should not exist yet
+		if (existsOrder(orderPo.getOrderId())) {
+			return false;
+		}
+		return execute(session -> {
+			// save OrderPo
+			session.save(orderPo);
+			return true;
+		});
+	}
+	
+	public boolean existsOrder(String orderId) {
+		return execute(session -> {
+			return (OrderPo) session.get(OrderPo.class, orderId) != null;
+		});
 	}
 
-	public boolean deleteOrderPo(int orderId) {
-		/*
-		 * 列表中删除订单并更新数据文件
-		 */
-		return false;
+	public boolean deleteOrderPo(String orderId) {
+		// The order that exists can be deleted
+		if(!existsOrder(orderId)) {
+			return false;
+		}
+		OrderPo deleted = getOrder(orderId);
+		return execute(session -> {
+			session.delete(deleted);
+			return true;
+		});
 	}
 
 }

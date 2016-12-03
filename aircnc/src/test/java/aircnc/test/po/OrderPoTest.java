@@ -1,54 +1,53 @@
 package aircnc.test.po;
 
-import static org.junit.Assert.assertEquals;
+import java.time.LocalDateTime;
 
-import javax.persistence.criteria.Order;
-
+import org.junit.Before;
 import org.junit.Test;
 
+import data.dao.impl.order.OrderDaoImpl;
+import data.dao.order.OrderDao;
 import po.order.OrderPo;
+import po.order.OrderPoBuilder;
+import utils.date.HotelDate;
 import utils.info.order.OrderStatus;
 
 public class OrderPoTest {
-	
+	OrderDao orderDao;
+	OrderPo orderPo;
+	@Before
+	public void startUp() {
+		orderDao = new OrderDaoImpl();
+		LocalDateTime entryTime = LocalDateTime.now();
+		orderPo = new OrderPoBuilder().setEntryTime(entryTime).setHasChildren(false)
+        		.setHotelId(1000).setHotelName("乐天玛特").setLastTime(entryTime)
+        		.setOrderId("201634").setPeopleNumber(3).setPrice(200)
+        		.setIsReviewed(true).setRoomNumber(1).setRoomType("标准间")
+        		.setStayDays(2).setUserId(20808121).setStatus(OrderStatus.EXECUTED)
+        		.getOrderInfo().setUserName("南京大学渣");
+	}
+
 	/**
-	 * FIXME：重写测试代码！
-	 * 这些需要用到Dao
+	 * FIXME：重写测试代码！ 这些需要用到Dao
 	 * 
 	 */
-	
+
 	@Test
 	public void OrderPoTest1() {
-//		OrderPo orderPo = new OrderPo("1", 1, 1, OrderStatus.UNEXECUTED, 
-//				null, null, "", 200, 222, 2, 0);
-		// TODO:为orderPo赋值
-		OrderPo orderPo = new OrderPo();
-		// TODO: 撤销订单
-		orderPo.setStatus(OrderStatus.REPEALED);
-		assertEquals(orderPo.getStatus(), OrderStatus.REPEALED);
+		orderDao.addOrderPo(orderPo);
 	}
-	
+
 	@Test
 	public void OrderPoTest2() {
-//		OrderPo orderPo = new OrderPo("1", 1, 1, OrderStatus.UNEXECUTED, 
-//				null, null, "", 200, 222, 2, 0);
-		// TODO:为orderPo赋值
-		OrderPo orderPo = new OrderPo();
+		orderPo.setLastTime(HotelDate.delayTime(orderPo.getLastTime(), 1, 1, 1));
+		orderDao.updateOrder(orderPo);
 		
-		// TODO: 使订单异常
-		orderPo.setStatus(OrderStatus.ABNORMAL);
-		assertEquals(orderPo.getStatus(), OrderStatus.ABNORMAL);
 	}
-	
+
 	@Test
 	public void OrderPoTest3() {
-//		OrderPo orderPo = new OrderPo("1", 1, 1, OrderStatus.UNEXECUTED, 
-//				null, null, "", 200, 222, 2, 0);
-		// TODO:为orderPo赋值
-		OrderPo orderPo = new OrderPo();
-		// TODO: 使订单执行
-		orderPo.setStatus(OrderStatus.EXECUTED);
-		assertEquals(orderPo.getStatus(), OrderStatus.EXECUTED);
+		orderDao.deleteOrderPo("201634");
 	}
+	
 
 }
