@@ -1,4 +1,4 @@
-package presentation.hotel.view.orderExecute;
+package presentation.hotel.view.orderBrowse;
 
 import java.time.LocalDateTime;
 
@@ -7,23 +7,22 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.Button;
-import presentation.member.view.myorder.utils.FunctionButtons;
+import utils.info.order.OrderStatus;
 import vo.order.OrderVo;
 
-public class UnexecutedOrderModel {
-
+public class HotelOrderModel {
 	private final StringProperty userName;
 	private final StringProperty userId;
 	private final StringProperty orderId;
 	private final StringProperty checkinTime;
-	private final StringProperty status;
+	private final StringProperty timeAndSum;
 	private final StringProperty totalPrice;
 	private final ObjectProperty<Button> operation;
 
 	/**
 	 * Default constructor.
 	 */
-	public UnexecutedOrderModel() {
+	public HotelOrderModel() {
 		this(null);
 	}
 
@@ -34,26 +33,26 @@ public class UnexecutedOrderModel {
 	 * @param userId
 	 * @param orderId
 	 * @param checkinTime
-	 * @param status
+	 * @param timeAndSum
 	 * @param totalPrice
 	 */
-	public UnexecutedOrderModel(OrderVo order) {
+	public HotelOrderModel(OrderVo order) {
 		this.userName = new SimpleStringProperty(order.getUserName());
 		this.userId = new SimpleStringProperty(String.valueOf(order.getUserId()));
 		this.orderId = new SimpleStringProperty(String.valueOf(order.getOrderId()));
 		this.checkinTime = new SimpleStringProperty(transformTime(order.getEntryTime()));
-		this.status = new SimpleStringProperty(order.getStatus().toString());
+		this.timeAndSum = new SimpleStringProperty(order.getStayDays() + "晚/" + order.getRoomNumber() + "间");
 		this.totalPrice = new SimpleStringProperty(String.valueOf(order.getPrice()) + "元");
 		this.operation = new SimpleObjectProperty<Button>(new Button("执行"));
 		
 	}
 	
-	public UnexecutedOrderModel(String s1,String s2,String s3,String s4,String s5,String s6){
+	public HotelOrderModel(String s1,String s2,String s3,String s4,String s5,String s6){
 		this.userName = new SimpleStringProperty(s1);
 		this.userId = new SimpleStringProperty(s2);
 		this.orderId = new SimpleStringProperty(s3);
 		this.checkinTime = new SimpleStringProperty(s4);
-		this.status = new SimpleStringProperty(s5);
+		this.timeAndSum = new SimpleStringProperty(s5);
 		this.totalPrice = new SimpleStringProperty(s6);
 		this.operation = new SimpleObjectProperty<Button>(new Button("执行"));
 	}
@@ -122,15 +121,15 @@ public class UnexecutedOrderModel {
     }
     
     public String getTimeAndSum() {
-        return status.get();
+        return timeAndSum.get();
     }
 
     public void setTimeAndSum(String newTimeAndSum) {
-        this.status.set(newTimeAndSum);
+        this.timeAndSum.set(newTimeAndSum);
     }
 
     public StringProperty timeAndSumProperty() {
-        return status;
+        return timeAndSum;
     }
     
     public String getTotalPrice() {
@@ -156,5 +155,4 @@ public class UnexecutedOrderModel {
     public ObjectProperty<Button> operationProperty() {
         return operation;
     }
-
 }
