@@ -30,12 +30,11 @@
 }
 
 .column-header .filler {
-    -fx-border-width: 0 0 1 0;
     -fx-background-color: transparent;
 }
 
 .column-header {
-    -fx-border-width: 0 0 18px 0;
+    -fx-border-width: 20px 0 0 0;
     -fx-border-color: #4f4e84;
 }
 
@@ -49,11 +48,24 @@
 .table-cell{
     -fx-alignment: center;
     -fx-pref-height: 45px;
-    -fx-border-width:0px 0px 1px 0px;
-	-fx-border-color:#585697;
 	/*-fx-margin: 10px 0px 10px 0px*/
 }
 
 .table-row-cell{
     -fx-background-color: transparent;
 }
+
+.date-row{
+    -fx-font-size:10px;
+    -fx-text-fill: #999999;
+}
+
+.time-row{
+    -fx-font-size:12px;
+    -fx-text-fill: #999999;
+}
+
+.description-row .table-cell{
+    -fx-alignment: left;
+}
+

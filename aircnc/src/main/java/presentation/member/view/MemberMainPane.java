@@ -5,6 +5,7 @@ import java.net.URL;
 
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -13,7 +14,7 @@ import presentation.member.view.memberinfo.fxml.MemberMainController;
 public class MemberMainPane {
 	
 	private Stage primaryStage;
-	private BorderPane rootLayout;
+	private AnchorPane rootLayout;
 	private MemberMainController controller;
 	
 	public MemberMainPane(Stage primaryStage){
@@ -46,7 +47,7 @@ public class MemberMainPane {
         return primaryStage;
     }
     
-    public BorderPane getBorderPane() {
+    public AnchorPane getAnchorPane() {
         return rootLayout;
     }
 

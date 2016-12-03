@@ -19,9 +19,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
 import javafx.util.Callback;
 import presentation.member.ClientCenterController;
-import presentation.member.view.myorder.MyorderModel;
-import presentation.member.view.myorder.utils.FunctionButtonType;
-import presentation.member.view.myorder.utils.FunctionButtons;
+import presentation.member.model.MyorderModel;
+import presentation.member.utils.FunctionButtonType;
+import presentation.member.utils.FunctionButtons;
 import utils.info.order.OrderStatus;
 import vo.order.OrderVo;
 

@@ -41,7 +41,7 @@ public class HotelMainController implements Initializable{
 	@FXML
 	private void handleHotelInfo(){
 		hotelInfo.setText("d");
-//		controller.addInfoMainPane();
+		controller.addHotelInfoMainPane();
 	}
 	
 	@FXML
@@ -59,13 +59,13 @@ public class HotelMainController implements Initializable{
 	@FXML
 	private void handleCheckInLive(){
 		checkInLive.setText("要");
-//		controller.addCreditChangePane();
+		controller.addCheckInLivePane();
 	}
 	
 	@FXML
 	private void handleCheckOut(){
 		checkOut.setText("到");
-//		controller.addSearchHotelPane();
+		controller.addCheckOutPane();
 	}
 	
 	@FXML

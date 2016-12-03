@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="777.0" stylesheets="@../css/CheckInLive.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.hotel.view.checkInLive.fxml.CheckInLiveController">
+   <top>
+      <Pane BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="49.0" layoutY="47.0" styleClass="title" text="线下入住登记" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="21.0" layoutX="49.0" layoutY="150.0" stroke="BLACK" strokeType="INSIDE" styleClass="split-line" width="662.0" />
+         </children>
+      </Pane>
+   </top>
+   <center>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox layoutX="148.0" layoutY="102.0" prefHeight="221.0" prefWidth="375.0">
+               <children>
+                  <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="40.0">
+                     <children>
+                        <Label styleClass="info-index" text="房间数量" />
+                        <TextField fx:id="roomNum" prefHeight="41.0" prefWidth="149.0" styleClass="info-content" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="42.0">
+                     <children>
+                        <Label styleClass="info-index" text="房间类型" />
+                        <ChoiceBox fx:id="roomType" prefHeight="40.0" prefWidth="140.0" styleClass="box" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Button fx:id="confirm" layoutX="523.0" layoutY="323.0" mnemonicParsing="false" onAction="#handleConfirm" styleClass="confirm" text="确认" />
+         </children>
+      </Pane>
+   </center>
+</BorderPane>

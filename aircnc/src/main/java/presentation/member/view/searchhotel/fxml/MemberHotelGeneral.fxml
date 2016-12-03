@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="130.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox layoutX="27.0" layoutY="19.0" style="-fx-background-radius: 30;" />
+      <ImageView fitHeight="94.0" fitWidth="95.0" layoutX="42.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Documents/workspace/AirCnC/aircnc/src/main/resources/images/hotel/star/hotel-1r.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="638.0" layoutY="20.0" mnemonicParsing="false" text="预订" />
+   </children>
+</Pane>
+
