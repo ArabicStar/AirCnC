@@ -53,7 +53,7 @@ public class HotelMainController implements Initializable{
 	@FXML
 	private void handleOrderBrowse(){
 		orderBrowse.setText("l");
-//		controller.addOrderMainPane();
+		controller.addOrderBrowsePane();
 	}
 	
 	@FXML

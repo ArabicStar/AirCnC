@@ -4,13 +4,20 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.util.Callback;
 import presentation.hotel.HotelCenterController;
-import presentation.hotel.view.orderExecute.UnexecutedOrderModel;
+import presentation.hotel.model.OrderModel;
+import presentation.hotel.utils.ButtonCell;
+import presentation.hotel.utils.ButtonName;
 import vo.order.OrderVo;
 
 public class OrderExecuteController implements Initializable{
@@ -20,28 +27,28 @@ public class OrderExecuteController implements Initializable{
 	private List<OrderVo> orders;
 	
 	@FXML
-	private TableView<UnexecutedOrderModel> orderTable;
+	private TableView<OrderModel> orderTable;
 	
 	@FXML
-	private TableColumn<UnexecutedOrderModel, String> userName;
+	private TableColumn<OrderModel, String> userName;
 	
 	@FXML
-	private TableColumn<UnexecutedOrderModel,String> userId;	
+	private TableColumn<OrderModel,String> userId;	
 	
 	@FXML
-	private TableColumn<UnexecutedOrderModel,String> orderId;
+	private TableColumn<OrderModel,String> orderId;
 	
 	@FXML
-    private TableColumn<UnexecutedOrderModel, String> checkInTime;
+    private TableColumn<OrderModel, String> checkInTime;
 	
 	@FXML
-	private TableColumn<UnexecutedOrderModel,String> timeAndSum;
+	private TableColumn<OrderModel,String> timeAndSum;
 	
 	@FXML
-	private TableColumn<UnexecutedOrderModel,String> totalPrice;
+	private TableColumn<OrderModel,String> totalPrice;
 	
 	@FXML
-	private TableColumn<UnexecutedOrderModel,Button> operation;
+	private TableColumn<OrderModel,ButtonName> operation;
 	
 	public void setCenterController(HotelCenterController controller){
 		this.controller=controller;
@@ -54,7 +61,12 @@ public class OrderExecuteController implements Initializable{
 	}
 	
 	public void test(){
-		orderTable.setItems(controller.getData());
+		ObservableList<OrderModel> orderData = FXCollections.observableArrayList();
+    	orderData.add(new OrderModel("小手表","233","101","2016-10-09","5晚/1间","290元"));
+		orderData.add(new OrderModel("小手表","233","102","2016-10-12","2晚/1间","1000元"));
+		orderData.add(new OrderModel("小手表","233","103","2016-10-15","10晚/1间","400元"));
+		orderData.add(new OrderModel("小手表","233","104","2016-10-30","1晚/10间","2950元"));
+		orderTable.setItems(orderData);
 		userName.setCellValueFactory(cellData -> cellData.getValue().userNameProperty());
 		
 		userId.setCellValueFactory(cellData -> cellData.getValue().userIdProperty());
@@ -62,7 +74,25 @@ public class OrderExecuteController implements Initializable{
 		checkInTime.setCellValueFactory(cellData -> cellData.getValue().checkInTimeProperty());
 		timeAndSum.setCellValueFactory(cellData -> cellData.getValue().timeAndSumProperty());
 		totalPrice.setCellValueFactory(cellData -> cellData.getValue().totalPriceProperty());
-		operation.setCellValueFactory(cellData -> cellData.getValue().operationProperty());
+		operation.setSortable(false);
+		
+		operation.setCellValueFactory(
+                new Callback<TableColumn.CellDataFeatures<OrderModel, ButtonName>, 
+                ObservableValue<ButtonName>>() {
+
+            public ObservableValue<ButtonName> call(TableColumn.CellDataFeatures<OrderModel, ButtonName> p) {
+            	return new SimpleObjectProperty<ButtonName>(p.getValue().getOperation());
+            }
+        });
+		
+
+		operation.setCellFactory(
+                new Callback<TableColumn<OrderModel, ButtonName>, TableCell<OrderModel, ButtonName>>() {
+
+            public TableCell<OrderModel, ButtonName> call(TableColumn<OrderModel, ButtonName> p) {
+                return new ButtonCell(ButtonName.EXECUTE);
+            }    
+        });
 	}
 	
 	
