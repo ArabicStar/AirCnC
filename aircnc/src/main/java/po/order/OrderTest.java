@@ -31,8 +31,8 @@ public class OrderTest {
             
             
             //保存User对象  
-            session.save(po2);
-            session.delete(po2);
+//            session.save(po2);
+//            session.delete(po2);
               
             //提交事务  
             ts.commit();  

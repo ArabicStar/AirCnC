@@ -1,4 +1,4 @@
-package presentation.member.view.myorder.utils;
+package presentation.member.utils;
 
 public enum FunctionButtonType {
 	CHECK,

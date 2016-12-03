@@ -7,7 +7,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.Button;
-import presentation.member.view.myorder.utils.FunctionButtons;
+import presentation.member.utils.FunctionButtons;
 import vo.order.OrderVo;
 
 public class UnexecutedOrderModel {

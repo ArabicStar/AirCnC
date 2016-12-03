@@ -4,16 +4,17 @@ import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import presentation.member.view.memberinfo.MemberInfoMainPane;
 import presentation.member.view.memberinfo.MemberInfoModifyPane;
 import presentation.member.view.myorder.MemberOrderMainPane;
-import presentation.member.view.myorder.MyorderModel;
 import presentation.member.view.searchhotel.MemberSearchHotelPane;
+import presentation.member.model.CreditModel;
+import presentation.member.model.MyorderModel;
 import presentation.member.view.MemberMainPane;
-import presentation.member.view.creditchange.CreditModel;
 import presentation.member.view.creditchange.MemberCreditChangePane;
 
 /**
@@ -33,7 +34,9 @@ public class ClientCenterController extends Application {
 	private MemberSearchHotelPane searchMain;
 	private MemberOrderMainPane orderMain;
 
-	private BorderPane rootLayout;
+	private AnchorPane rootLayout;
+	private BorderPane mainPane;
+	private AnchorPane content;
 
 	private final static int Client_Width = 1024;
 	private final static int Client_Height = 768;
@@ -44,13 +47,14 @@ public class ClientCenterController extends Application {
 
 		// primaryStage.initStyle(StageStyle.UNDECORATED);
 		primaryStage.setTitle("AirCnC");
-		primaryStage.setResizable(false);
 
 		// show the pane of sign in.
 		mainClient = new MemberMainPane(primaryStage);
 		mainClient.getController().setCenterController(this);
-		rootLayout = mainClient.getBorderPane();
-		scene = new Scene(mainClient.getBorderPane(), Client_Width, Client_Height);
+		rootLayout = mainClient.getAnchorPane();
+		mainPane = (BorderPane) rootLayout.getChildren().get(0);
+		content = (AnchorPane) mainPane.getChildren().get(1);
+		scene = new Scene(mainClient.getAnchorPane(), Client_Width, Client_Height);
 		primaryStage.setScene(scene);
 
 		// addSignInPane();
@@ -60,54 +64,48 @@ public class ClientCenterController extends Application {
 	}
 
 	public void addInfoMainPane() {
-		clearContent();
+		content.getChildren().clear();
 		infoMain = new MemberInfoMainPane();
-		mainClient.getBorderPane().setCenter(infoMain.getContentPane());
+		content.getChildren().add(infoMain.getContentPane());
+		AnchorPane.setTopAnchor(infoMain.getContentPane(),10.0);
 		infoMain.getController().setCenterController(this);
 	}
 
 	public void addInfoModifyPane() {
-		clearContent();
+		content.getChildren().clear();
 		infoModify = new MemberInfoModifyPane();
-		mainClient.getBorderPane().setCenter(infoModify.getPane());
+		AnchorPane.setTopAnchor((infoModify.getPane()), 10.0);
+		//(infoModify.getPane());
 		infoModify.getController().setCenterController(this);
 	}
 
 	public void addCreditChangePane() {
-		clearContent();
+		content.getChildren().clear();
 		creditMain = new MemberCreditChangePane();
-		mainClient.getBorderPane().setCenter(creditMain.getPane());
+		content.getChildren().add(creditMain.getPane());
 		creditMain.getController().setCenterController(this);
+		//addCreditChangeRecord();
+	}
+	
+	public void addCreditChangeRecord(){
+		creditMain.getController().init();
 	}
 
 	public void addSearchHotelPane() {
-		clearContent();
+		content.getChildren().clear();
 		searchMain = new MemberSearchHotelPane();
-		mainClient.getBorderPane().setCenter(searchMain.getPane());
+		content.getChildren().add(searchMain.getPane());
 		searchMain.getController().setCenterController(this);
 	}
 	
 	private ObservableList<MyorderModel> orderData = FXCollections.observableArrayList();
 	
 	public void addOrderMainPane() {
-		clearContent();
+		content.getChildren().clear();
 		orderMain = new MemberOrderMainPane();
-		mainClient.getBorderPane().setCenter(orderMain.getPane());
+		content.getChildren().add(orderMain.getPane());
 		orderMain.getController().setCenterController(this);
 		
-	}
-
-	/**
-	 * remove all the children nodes of the main border pane, except the
-	 * nav-bar.
-	 */
-	public void clearContent() {
-		int childrenAmount = mainClient.getBorderPane().getChildren().size();
-		if (childrenAmount > 1) {
-			for (int i = 1; i < childrenAmount; i++) {
-				mainClient.getBorderPane().getChildren().remove(i);
-			}
-		}
 	}
 	
 	public ObservableList<MyorderModel> getMyOrderData(){
@@ -127,6 +125,10 @@ public class ClientCenterController extends Application {
 	
 	public ObservableList<CreditModel> getCreditData(){
     	ObservableList<CreditModel> orderData = FXCollections.observableArrayList();
+    	
+    	orderData.add(new CreditModel("2016-10-09","20:00","于速八酒店的订单001按时完成，增加信用值233"));
+    	orderData.add(new CreditModel("2016-10-09","20:00","略略略略略"));
+    	orderData.add(new CreditModel("2016-10-09","20:00","于速八酒店的订单001按时完成，增加信用值233"));
     	
 		return orderData;
     }

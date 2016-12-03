@@ -28,7 +28,7 @@ public class MemberCreditChangePane {
             loader.setBuilderFactory(new JavaFXBuilderFactory());
             //javafx.scene.Parent root = (javafx.scene.Parent) loader.load(location.openStream());
             loader.load();
-            controller = (MemberCreditChangeController)loader.getController();
+            controller = loader.getController();
 			creditLayout = loader.getRoot();
 
         } catch (IOException e) {
