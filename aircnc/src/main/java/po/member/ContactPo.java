@@ -1,6 +1,7 @@
 package po.member;
 
 import utils.info.member.ContactInfo;
+import static utils.crpyto.Cryptor.*;
 
 /**
  * Po of contact.<br>
@@ -64,5 +65,29 @@ public class ContactPo extends ContactInfo {
 	 */
 	public int getCid() {
 		return cid;
+	}
+
+	public String getEncryptEmail() {
+		return encrypt(this.email);
+	}
+
+	public void setEncryptEmail(String encryptEmail) {
+		this.email = decrypt(encryptEmail);
+	}
+
+	public String getEncryptFixedPhone() {
+		return encrypt(this.fixedPhone);
+	}
+
+	public void setEncryptFixedPhone(String encryptFixedPhone) {
+		this.email = decrypt(encryptFixedPhone);
+	}
+
+	public String getEncryptMobilePhone() {
+		return encrypt(this.mobilePhone);
+	}
+
+	public void setEncryptMobilePhone(String encryptMobilePhone) {
+		this.email = decrypt(encryptMobilePhone);
 	}
 }

@@ -10,7 +10,7 @@
 			<generator class="assigned" />
 		</id>
 		<!-- name -->
-		<property column="name" generated="never" lazy="false" name="name"
+		<property column="name" generated="never" lazy="false" name="encryptName"
 			type="string" />
 		<!-- credit -->
 		<property column="credit" generated="never" lazy="false"
@@ -38,6 +38,6 @@
 		<key column="e_id" />
 		<!-- enterprise -->
 		<property column="enterprise" generated="never" lazy="false"
-			name="enterprise" not-null="true" type="string" />
+			name="encryptEnterprise" not-null="true" type="string" />
 	</joined-subclass>
 </hibernate-mapping>

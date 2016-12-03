@@ -4,15 +4,55 @@ import java.lang.reflect.Method;
 
 import utils.proxy.AuthenticatePolicy.Client;
 
+/**
+ * Proxy of service or dao which offer authentication controll.<br>
+ * <b>Use it as follow:</b><br>
+ * <ul>
+ * <li>Extends this class.</li>
+ * <li>Override constructor of which parameters include a Client identifier,
+ * then call super constructor. For example: <br>
+ * <blockquote>
+ * <code> public FooServiceProxy(Client clientId, OtherParams other){<br>
+ * <blockquote>super(clientId);</blockquote>
+ * }</code></blockquote></li>
+ * <li>add {@code @AuthenticatePolicy(...)} annotation on methods which need
+ * authentication controll.</li>
+ * <li>call {@code checkAuthenticatoin()} at methods very begin.</li>
+ * </ul>
+ * Then authentication check will be done automatically according to given auth
+ * policy in annotion and given client identifier in constructor's parameters.
+ * {@link IllegalStateException} will be thrown if attemp to make a non-granted
+ * operation.<br>
+ * 
+ * @author ClevelandAlto
+ * @see utils.proxy.AuthenticatePolicy
+ * @see utils.proxy.AuthenticatePolicy.Client
+ */
 public abstract class AccessSecureProxy {
 
+	/**
+	 * Current client identifier<br>
+	 */
 	private Client currentClientId;
 
+	/**
+	 * Default constructor defines current client.<br>
+	 * 
+	 * @param clientId
+	 *            client identifier <br>
+	 */
 	protected AccessSecureProxy(Client clientId) {
 		this.currentClientId = clientId;
 	}
 
-	public void checkAuthentication() {
+	/**
+	 * Check authentication according to annotation and {@code currentClientId}
+	 * <br>
+	 * 
+	 * @throws IllegalStateException
+	 *             when non-granted operation is attempted.<br>
+	 */
+	protected void checkAuthentication() {
 		AuthenticatePolicy auth = getAuthPolicy();
 		if (auth == null)
 			return;
@@ -25,7 +65,12 @@ public abstract class AccessSecureProxy {
 		throw new IllegalStateException("No Authentication Operation");
 	}
 
-	public AuthenticatePolicy getAuthPolicy() {
+	/**
+	 * Get currently called method annotation of {@code AuthenticatePolicy}.<br>
+	 * 
+	 * @return {@code AuthenticatePolicy} annotation on currently call method
+	 */
+	protected AuthenticatePolicy getAuthPolicy() {
 		StackTraceElement[] stack = new Throwable().getStackTrace();
 		Method method = null;
 		try {

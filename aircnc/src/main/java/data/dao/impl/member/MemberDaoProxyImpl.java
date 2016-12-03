@@ -5,7 +5,6 @@ import utils.proxy.AuthenticatePolicy.Client;
 
 public class MemberDaoProxyImpl extends MemberDaoProxy {
 
-
 	protected MemberDaoProxyImpl(Client clientId) {
 		super(clientId);
 	}

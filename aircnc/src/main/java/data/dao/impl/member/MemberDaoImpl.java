@@ -9,7 +9,6 @@ import po.member.MemberPoBuilder;
 /**
  * Implemention of MemberDao.<br>
  * 
- * @see MemberDao
  * @author ClevelandAlto
  *
  */
@@ -25,7 +24,7 @@ public class MemberDaoImpl implements MemberDao {
 			return false;
 
 		return execute(session -> {
-			// save associated ContactPo first
+			// save associated ContactPo firstly
 			session.save(po.getContact());
 			// save MemberPo
 			session.save(po);
@@ -36,14 +35,18 @@ public class MemberDaoImpl implements MemberDao {
 
 	@Override
 	public boolean deleteMember(final String id) {
+		int numId = parseId(id);
+
 		return execute(session -> {
 			Boolean flag = Boolean.FALSE;// for performance
 
-			MemberPo deleted = (MemberPo) session.get(MemberPo.class, parseId(id));
-			if (flag = Boolean.valueOf((deleted != null)))// check existence
+			MemberPo delMem = (MemberPo) session.get(MemberPo.class, numId);
+			if (flag = Boolean.valueOf((delMem != null)))// check existence
 			{
-				session.delete(deleted);
-				session.delete(deleted.getContact());
+				// delete member po firstly
+				session.delete(delMem);
+				// then delete associated contact po
+				session.delete(delMem.getContact());
 			}
 
 			return flag;
@@ -68,22 +71,24 @@ public class MemberDaoImpl implements MemberDao {
 
 	@Override
 	public MemberPo findMember(final String idString) {
+		int numId = parseId(idString);
 		return execute(session -> {
-			return (MemberPo) session.get(MemberPo.class, parseId(idString));
+			return (MemberPo) session.get(MemberPo.class, numId);
 		});
 	}
 
 	@Override
 	public boolean existsMember(final String idString) {
+		int numId = parseId(idString);
 		return execute(session -> {
-			return (MemberPo) session.get(MemberPo.class, parseId(idString)) != null;
+			return (MemberPo) session.get(MemberPo.class, numId) != null;
 		});
 	}
 
 	/* parse an id string. if invalid, throw IAE. */
 	private static final int parseId(final String id) {
 		if (!MemberPo.checkID(id))
-			throw new IllegalArgumentException("Wrong ID");
+			throw new IllegalArgumentException("MemberDaoImpl.parseId - Wrong ID");
 
 		return Integer.parseInt(id);
 	}

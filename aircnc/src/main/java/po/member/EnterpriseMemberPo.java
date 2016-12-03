@@ -1,5 +1,8 @@
 package po.member;
 
+import static utils.crpyto.Cryptor.decrypt;
+import static utils.crpyto.Cryptor.encrypt;
+
 import java.time.LocalDate;
 
 /**
@@ -37,4 +40,11 @@ public class EnterpriseMemberPo extends MemberPo {
 		return null;
 	}
 
+	public String getEncryptEnterprise() {
+		return encrypt(enterprise);
+	}
+
+	public void setEncryptEnterprise(String encryptEnterprise) {
+		this.enterprise = decrypt(encryptEnterprise);
+	}
 }

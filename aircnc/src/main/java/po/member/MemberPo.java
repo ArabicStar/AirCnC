@@ -1,5 +1,6 @@
 package po.member;
 
+import static utils.crpyto.Cryptor.*;
 import java.time.LocalDate;
 
 import org.apache.commons.lang.StringUtils;
@@ -104,4 +105,12 @@ public abstract class MemberPo extends MemberInfo {
 	public abstract MemberPo setBirthday(LocalDate birthday);
 
 	public abstract MemberPo setEnterprise(String enterprise);
+
+	public String getEncryptName() {
+		return encrypt(this.name);
+	}
+
+	public void setEncryptName(String encryptName) {
+		this.name = decrypt(encryptName);
+	}
 }

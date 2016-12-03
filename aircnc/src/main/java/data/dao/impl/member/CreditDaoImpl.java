@@ -1,13 +1,5 @@
 package data.dao.impl.member;
 
-import data.dao.member.CreditDao;
-import data.dao.member.MemberDao;
-import po.member.MemberPo;
-import po.member.MemberPoBuilder;
-import po.member.credit.CreditChangePo;
-import service.query.CreditChangeQueryService;
-import vo.member.credit.CreditChangeVo;
-
 import static data.hibernate.Hibernator.execute;
 
 import java.util.List;
@@ -16,42 +8,48 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 
+import data.dao.member.CreditDao;
+import data.dao.query.CreditQueryDao;
+import po.member.MemberPo;
+import po.member.MemberPoBuilder;
+import po.member.credit.CreditChangePo;
+
 /**
- * Implemention of CreditDao.<br>
+ * Implemention of <b>CreditDao</b> and <b>CreditQueryDao</b>.<br>
  * 
  * @author ClevelandAlto
  *
  */
-public class CreditDaoImpl implements CreditDao, CreditChangeQueryService {
+public class CreditDaoImpl implements CreditDao, CreditQueryDao {
 	@Override
-	public MemberPo changeCredit(CreditChangePo aChange) {
-		if (aChange == null)
+	public MemberPo changeCredit(final CreditChangePo changePo) {
+		if (changePo == null)
 			return null;
 
 		return execute(session -> {
-			MemberPo mem = session.get(MemberPo.class, parseId(aChange.getMemberId()));
+			// retrive member po
+			MemberPo mem = session.get(MemberPo.class, parseId(changePo.getMemberId()));
 			// existence check
 			if (mem == null)
 				return null;
 
 			// consistency check
-			if (mem.getCredit() != aChange.getBeforeCredit())
+			if (mem.getCredit() != changePo.getBeforeCredit())
 				// return invalid MemberPo instance to mark
 				return MemberPoBuilder.invalidInfo();
 
 			// update member credit value
-			mem.setCredit(aChange.getAfterCredit());
+			mem.setCredit(changePo.getAfterCredit());
 			// add credit change record
-			session.save(aChange);
+			session.save(changePo);
 			return mem;
 		});
 	}
 
 	@Override
-	public List<CreditChangeVo> searchByMemberId(String memberId) {
+	public List<CreditChangePo> searchByMemberId(final String memberId) {
 		if (!MemberPo.checkID(memberId))
-			throw new IllegalArgumentException(
-					"MemberCreditDaoImpl.searchByMemberId : null or invalid member id string");
+			throw new IllegalArgumentException("CreditDaoImpl.searchByMemberId : null or invalid member id string");
 
 		int numMemId = parseId(memberId);
 
@@ -62,20 +60,21 @@ public class CreditDaoImpl implements CreditDao, CreditChangeQueryService {
 				return null;
 
 			Criteria criteria = session.createCriteria(CreditChangePo.class);
-			Criterion c1 = Restrictions.eq("numMemId", numMemId);
-			criteria.add(c1);
+			// by member id
+			Criterion memIdCriterion = Restrictions.eq("numMemId", numMemId);
+			criteria.add(memIdCriterion);
 
 			@SuppressWarnings("unchecked")
-			List<CreditChangeVo> l = criteria.list();
+			List<CreditChangePo> list = criteria.list();
 
-			return l;
+			return list;
 		});
 	}
 
 	/* parse an id string. if invalid, throw IAE. */
 	private static final int parseId(final String id) {
 		if (!MemberPo.checkID(id))
-			throw new IllegalArgumentException("Wrong ID");
+			throw new IllegalArgumentException("CreditDaoImpl.parseId - Wrong ID");
 
 		return Integer.parseInt(id);
 	}
