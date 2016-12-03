@@ -10,6 +10,9 @@ import java.time.LocalDate;
  */
 public class EnterpriseMemberVo extends MemberVo {
 
+	/**
+	 * Default constructor, defines the type.
+	 */
 	EnterpriseMemberVo() {
 		super(Type.BUSINESS);
 	}

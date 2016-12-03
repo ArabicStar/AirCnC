@@ -1,7 +1,7 @@
 package po.member;
 
-import static utils.crpyto.Cryptor.decrypt;
-import static utils.crpyto.Cryptor.encrypt;
+import static utils.crypto.Cryptor.decrypt;
+import static utils.crypto.Cryptor.encrypt;
 
 import java.time.LocalDate;
 
@@ -40,10 +40,24 @@ public class EnterpriseMemberPo extends MemberPo {
 		return null;
 	}
 
+	/**
+	 * Get encrypted enterprise string. Automatically encrypt {@code enterprise}
+	 * field. Just for hibernate. Make client requirement happy.<br>
+	 * 
+	 * @return encrypted enterprise string.
+	 */
 	public String getEncryptEnterprise() {
 		return encrypt(enterprise);
 	}
 
+	/**
+	 * Set encrypted enterprise string. Automatically decrypt
+	 * {@code encryptEnterprise} field. Just for hibernate. Make client
+	 * requirement happy.<br>
+	 * 
+	 * @param encryptEnterprise
+	 *            encrpyted enterprise string
+	 */
 	public void setEncryptEnterprise(String encryptEnterprise) {
 		this.enterprise = decrypt(encryptEnterprise);
 	}

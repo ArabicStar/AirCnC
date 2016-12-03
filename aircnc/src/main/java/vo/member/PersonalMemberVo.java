@@ -4,6 +4,9 @@ import java.time.LocalDate;
 
 public class PersonalMemberVo extends MemberVo {
 
+	/**
+	 * Default constructor, defines the type.
+	 */
 	PersonalMemberVo() {
 		super(Type.PERSONAL);
 	}

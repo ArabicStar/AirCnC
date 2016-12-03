@@ -28,15 +28,11 @@ public class ContactPoBuilder extends ContactInfoBuilder {
 		return this;
 	}
 
-	public int getCid() {
-		return cid;
-	}
-
 	@Override
 	public ContactInfo getContactInfo() {
 		if (!isReady())
 			throw new IllegalStateException("ContactPoBuilder - Lack Of Info");
-		
-		return new ContactPo().setEmail(email).setFixedPhone(fixedPhone).setMobilePhone(mobilePhone);
+
+		return new ContactPo().setCid(cid).setEmail(email).setFixedPhone(fixedPhone).setMobilePhone(mobilePhone);
 	}
 }

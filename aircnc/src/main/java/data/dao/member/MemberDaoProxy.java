@@ -7,16 +7,36 @@ import utils.proxy.AuthenticatePolicy;
 import utils.proxy.AuthenticatePolicy.Client;
 
 public abstract class MemberDaoProxy extends AccessSecureProxy implements CreditDao, MemberDao {
+	/**
+	 * Actual credit dao handler
+	 */
 	private CreditDao creditDao;
+	/**
+	 * Actuak member dao handler
+	 */
 	private MemberDao memberDao;
 
+	/**
+	 * 'Default constructor, defines client identifier.<br>
+	 * 
+	 * @param clientId
+	 */
 	protected MemberDaoProxy(Client clientId) {
 		super(clientId);
 	}
 
+	/**
+	 * Load actual member dao, auth to cilents of user and market
+	 */
 	@AuthenticatePolicy({ Client.USER, Client.MARKET })
 	public abstract void loadMemberDao();
 
+	/**
+	 * Load a spefic member dao, for convinience of pontential change.<br>
+	 * 
+	 * @param memberDao
+	 *            a specific member dao implemention
+	 */
 	@AuthenticatePolicy({ Client.USER, Client.MARKET })
 	public void loadMemberDao(MemberDao memberDao) {
 		checkAuthentication();
@@ -25,6 +45,10 @@ public abstract class MemberDaoProxy extends AccessSecureProxy implements Credit
 
 	}
 
+	/**
+	 * Load actual credit dao, auth to clients of user, hotel and market, plus
+	 * server.<br>
+	 */
 	@AuthenticatePolicy({ Client.USER, Client.HOTEL, Client.SERVER, Client.MARKET })
 	public abstract void loadCreditDao();
 
@@ -36,7 +60,6 @@ public abstract class MemberDaoProxy extends AccessSecureProxy implements Credit
 	}
 
 	@Override
-
 	@AuthenticatePolicy({ Client.USER })
 	public boolean addMember(MemberPo po) {
 		checkAuthentication();
@@ -44,6 +67,7 @@ public abstract class MemberDaoProxy extends AccessSecureProxy implements Credit
 		return memberDao.addMember(po);
 	}
 
+	/* As follow are proxy methods. */
 	@Override
 	@AuthenticatePolicy({ Client.MANAGE })
 	public boolean deleteMember(String id) {

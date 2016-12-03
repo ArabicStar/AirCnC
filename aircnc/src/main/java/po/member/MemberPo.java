@@ -1,6 +1,7 @@
 package po.member;
 
-import static utils.crpyto.Cryptor.*;
+import static utils.crypto.Cryptor.*;
+
 import java.time.LocalDate;
 
 import org.apache.commons.lang.StringUtils;
@@ -106,10 +107,23 @@ public abstract class MemberPo extends MemberInfo {
 
 	public abstract MemberPo setEnterprise(String enterprise);
 
+	/**
+	 * Get encrypted name string. Automatically encrypt {@code name} field. Just
+	 * for hibernate. Make client requirement happy.<br>
+	 * 
+	 * @return encrypted name string.
+	 */
 	public String getEncryptName() {
 		return encrypt(this.name);
 	}
 
+	/**
+	 * Set encrypted name string. Automatically decrypt {@code encryptName}
+	 * field. Just for hibernate. Make client requirement happy.<br>
+	 * 
+	 * @param encryptName
+	 *            encrpyted name string
+	 */
 	public void setEncryptName(String encryptName) {
 		this.name = decrypt(encryptName);
 	}

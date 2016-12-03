@@ -11,6 +11,14 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 
+/**
+ * Helper for crypto.<br>
+ * Use AES algorithm
+ * 
+ * @author highill
+ * @see <a>http://www.iteye.com/topic/1122076/</a>
+ *
+ */
 public abstract class Cryptor {
 
 	private static KeyGenerator keygen;
