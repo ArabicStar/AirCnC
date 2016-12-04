@@ -17,6 +17,7 @@ import javafx.scene.control.Toggle;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import presentation.member.CenterController;
+import presentation.member.accessor.RegisterMainAccessor;
 
 
 
@@ -49,6 +50,8 @@ public class MemberRegisterMainController implements Initializable{
 	private ToggleGroup memberType;
 	
 	private CenterController controller;
+	
+	private RegisterMainAccessor accessor;
 	
 	/**
 	 * Initializes the controller class. This method is automatically called
@@ -111,7 +114,14 @@ public class MemberRegisterMainController implements Initializable{
 	 * @param centerController
 	 */
 	public void setCenterController(CenterController centerController) {
-		// TODO Auto-generated method stub
 		this.controller=centerController;
+	}
+	
+	/**
+	 * set the accessor
+	 * @param accessor
+	 */
+	public void setAccessor(RegisterMainAccessor accessor) {
+		this.accessor=accessor;
 	}
 }

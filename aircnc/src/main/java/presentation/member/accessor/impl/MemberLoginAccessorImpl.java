@@ -20,10 +20,12 @@ public class MemberLoginAccessorImpl implements MemberLoginAccessor{
 		return passwordHash;
 	}
 	
+	@Override
 	public void setDeliveredId(String id){
 		this.id = id;
 	}
 	
+	@Override
 	public void setDeliveredPassword(String password){
 		this.passwordHash = password.hashCode();
 	}

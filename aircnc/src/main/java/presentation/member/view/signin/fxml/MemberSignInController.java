@@ -12,6 +12,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import presentation.member.CenterController;
+import presentation.member.accessor.MemberLoginAccessor;
+import presentation.member.utils.PlainDialog;
 
 /**
  * this is the controller of sign in pane.
@@ -35,7 +37,7 @@ public class MemberSignInController implements Initializable{
 	
 	private CenterController controller;
 	
-	private Stage stage;
+	private MemberLoginAccessor accessor;
 	
 	/**
      * Initializes the controller class. This method is automatically called
@@ -57,21 +59,26 @@ public class MemberSignInController implements Initializable{
 	 */
 	@FXML
 	public void handleConfirm(){
-		System.out.println(username.getText());
-		System.out.println(password.getText());
-		//按下登陆键，验证正确性，正确则跳只memberMainPane，错误跳出对话框
 		if(username.getText().length()!=0&&password.getText().length()!=0){
-			//验证正确性
-			controller.initializeClient();
+			accessor.setDeliveredId(username.getText());
+			accessor.setDeliveredPassword(password.getText());
+			
+			//use valid to mark whether it is correct
+			boolean valid = true;
+			
+			if(valid)
+				controller.initializeClient();
+			else{
+				PlainDialog alert = new PlainDialog(AlertType.INFORMATION,
+						"登录失败","错误的用户名或密码！");
+				alert.showDialog();
+			}
+				
 
 		}else{
-			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("登录失败");
-			alert.setHeaderText(null);
-			alert.setContentText("请输入你的用户名和密码！");
-
-			alert.showAndWait();
-			
+			PlainDialog alert = new PlainDialog(AlertType.INFORMATION,
+					"登录失败","请输入你的用户名和密码");
+			alert.showDialog();			
 		}		
 		
 	}
@@ -97,10 +104,10 @@ public class MemberSignInController implements Initializable{
 	
 	/**
 	 * set the stage
-	 * @param primaryStage
-	 */
-	public void setStage(Stage primaryStage){
-		this.stage = primaryStage;
+	 * @param accessor
+	 */	
+	public void setAccessor(MemberLoginAccessor accessor){
+		this.accessor = accessor;
 	}
 
 

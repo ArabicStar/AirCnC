@@ -2,7 +2,7 @@ package presentation.member.accessor;
 
 import vo.member.MemberVo;
 
-public interface RegisterPersonInfoAccessor {
+public interface RegisterPersonAccessor {
 	
 	public MemberVo getPersonMemberVo();
 	

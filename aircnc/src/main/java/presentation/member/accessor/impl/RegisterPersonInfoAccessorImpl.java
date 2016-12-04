@@ -1,11 +1,11 @@
 package presentation.member.accessor.impl;
 
-import presentation.member.accessor.RegisterPersonInfoAccessor;
+import presentation.member.accessor.RegisterPersonAccessor;
 import vo.member.ContactVoBuilder;
 import vo.member.MemberVo;
 import vo.member.MemberVoBuilder;
 
-public class RegisterPersonInfoAccessorImpl implements RegisterPersonInfoAccessor{
+public class RegisterPersonInfoAccessorImpl implements RegisterPersonAccessor{
 private String username;
 	
 	private String email;
