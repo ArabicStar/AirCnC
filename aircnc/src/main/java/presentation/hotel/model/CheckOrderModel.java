@@ -13,6 +13,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
+import presentation.hotel.utils.ButtonName;
 import vo.order.OrderVo;
 
 public class CheckOrderModel {
@@ -22,7 +23,7 @@ public class CheckOrderModel {
 	private final StringProperty checkinTime;
 	private final StringProperty status;
 	private final StringProperty totalPrice;
-	private final ObjectProperty<Button> operation;
+	private final ObjectProperty<ButtonName> operation;
 	
 	private Button check;
 
@@ -51,7 +52,7 @@ public class CheckOrderModel {
 		this.checkinTime = new SimpleStringProperty(transformTime(order.getEntryTime()));
 		this.status = new SimpleStringProperty(order.getStatus().toString());
 		this.totalPrice = new SimpleStringProperty(String.valueOf(order.getPrice()) + "元");
-		this.operation = new SimpleObjectProperty<Button>(check);
+		this.operation = new SimpleObjectProperty<ButtonName>();
 
 	}
 
@@ -63,7 +64,7 @@ public class CheckOrderModel {
 		this.checkinTime = new SimpleStringProperty(s4);
 		this.status = new SimpleStringProperty(s5);
 		this.totalPrice = new SimpleStringProperty(s6);
-		this.operation = new SimpleObjectProperty<Button>(check);
+		this.operation = new SimpleObjectProperty<ButtonName>();
 	}
 	
 	public void initialButton(){
@@ -175,15 +176,15 @@ public class CheckOrderModel {
 		return totalPrice;
 	}
 
-	public Button getOperation() {
-		return operation.get();
-	}
+    public ButtonName getOperation() {
+        return operation.get();
+    }
 
-	public void setOperation(Button newButtons) {
-		this.operation.set(newButtons);
-	}
+    public void setOperation(ButtonName name) {
+        this.operation.set(name);
+    }
 
-	public ObjectProperty<Button> operationProperty() {
-		return operation;
-	}
+    public ObjectProperty<ButtonName> operationProperty() {
+        return operation;
+    }
 }

@@ -8,6 +8,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import presentation.hotel.model.OrderModel;
 import presentation.hotel.view.HotelMainPane;
+import presentation.hotel.view.abnormalOrder.AbnormalOrderPane;
 import presentation.hotel.view.checkInLive.CheckInLivePane;
 import presentation.hotel.view.checkOut.CheckOutPane;
 import presentation.hotel.view.hotelInfo.HotelInfoController;
@@ -30,6 +31,7 @@ public class HotelCenterController extends Application{
 	private CheckInLivePane checkInPane;
 	private CheckOutPane checkOutPane;
 	private OrderBrowsePane browsePane;
+	private AbnormalOrderPane abnormalPane;
 	
 	
 	private final static int Client_Width = 1024;
@@ -65,6 +67,14 @@ public class HotelCenterController extends Application{
 		mainClient.getBorderPane().setCenter(orderExecutePane.getPane());
 		orderExecutePane.getController().setCenterController(this);	
 		orderExecutePane.getController().test();
+	}
+	
+	public void addAbnormalOrderPane() {
+		clearContent();
+		abnormalPane = new AbnormalOrderPane();
+		mainClient.getBorderPane().setCenter(abnormalPane.getPane());
+		abnormalPane.getController().setCenterController(this);	
+		abnormalPane.getController().test();
 	}
 	
 	public void addOrderBrowsePane() {
