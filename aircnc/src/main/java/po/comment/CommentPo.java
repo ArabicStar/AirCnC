@@ -1,4 +1,4 @@
-package po.hotel;
+package po.comment;
 
 import utils.info.hotel.CommentInfo;
 

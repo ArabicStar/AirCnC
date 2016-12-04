@@ -3,8 +3,7 @@ package presentation.market;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.scene.layout.BorderPane;
-import presentation.hotel.HotelCenterController;
+import javafx.stage.StageStyle;
 import presentation.market.view.signin.MarketSignInPane;
 
 /**
@@ -30,24 +29,28 @@ public class CenterController extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		this.primaryStage = primaryStage;
 		
-		//TODO:测试用代码，回头记得把注释去掉
-//		primaryStage.initStyle(StageStyle.UNDECORATED);
+		primaryStage.initStyle(StageStyle.UNDECORATED);
 		primaryStage.setTitle("AirCnC");
 		primaryStage.setResizable(false);
 		
 		// show the pane of sign in
 		signIn = new MarketSignInPane();
 		scene = new Scene(signIn.getBorderPane(), Login_Width, Login_Height);
-//		scene = new Scene(new BorderPane(), Login_Width, Login_Height);
 		primaryStage.setScene(scene);
 		
 		primaryStage.show();
-//		signIn.getController().setCenterController(this);
+		signIn.getController().setCenterController(this);
 	}
 	
 	public void initializeClient() {
 		primaryStage.close();
 		// TODO:生成新的界面
+		MarketCenterController client = new MarketCenterController();
+		try {
+			client.start(new Stage());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

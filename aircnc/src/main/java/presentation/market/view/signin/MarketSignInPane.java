@@ -25,21 +25,14 @@ public class MarketSignInPane {
 	public void init() {
         try {
             // Load sign in overview.
-        	System.out.println(0);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("MarketSignIn.fxml"));
-            System.out.println(1);
             loader.setBuilderFactory(new JavaFXBuilderFactory());
-            System.out.println(2);
             //javafx.scene.Parent root = (javafx.scene.Parent) loader.load(location.openStream());
             rootLayout = (BorderPane) loader.load();
-            System.out.println(3);
             controller = (MarketSignInController)loader.getController();
-            System.out.println(4);
 			signInLayout = loader.getRoot();
-			System.out.println(5);
 
         } catch (IOException e) {
-        	System.out.println("加载失败");
             e.printStackTrace();
         }
     }
@@ -54,7 +47,7 @@ public class MarketSignInPane {
     
     public BorderPane getBorderPane() {
     	if(rootLayout == null) {
-    		System.out.println("都是骗人的!");
+    		System.out.println("Null BorderPane is returned; some mistakes may happen in Unicode.");
     	}
         return rootLayout;
     }
