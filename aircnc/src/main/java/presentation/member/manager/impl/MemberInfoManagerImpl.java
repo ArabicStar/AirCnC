@@ -25,7 +25,9 @@ public class MemberInfoManagerImpl implements UserInfoManager{
 		return false;
 	}
 
-
+	/**
+	 * wrap into the MemberInfoModel
+	 */
 	@Override
 	public MemberInfoModel getMemberInfo() {
 		memberInfo = new MemberInfoModel(user);

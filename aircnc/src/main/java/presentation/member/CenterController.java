@@ -71,6 +71,7 @@ public class CenterController extends Application {
 		signIn = new MemberSignInPane();
 		start.getBorderPane().setCenter(signIn.getPane());
 		signIn.getController().setCenterController(this);
+		signIn.getController().setStage(primaryStage);
 	}
 
 	/**
