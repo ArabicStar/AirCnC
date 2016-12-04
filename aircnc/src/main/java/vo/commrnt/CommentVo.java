@@ -1,6 +1,6 @@
-package vo.hotel;
+package vo.commrnt;
 
-import utils.info.hotel.CommentInfo;
+import utils.info.comment.CommentInfo;
 
 public class CommentVo extends CommentInfo{
 

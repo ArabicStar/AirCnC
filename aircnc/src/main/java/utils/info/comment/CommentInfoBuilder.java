@@ -1,4 +1,4 @@
-package utils.info.hotel;
+package utils.info.comment;
 
 
 public abstract class CommentInfoBuilder extends CommentInfoTemplate{

@@ -1,8 +1,8 @@
 package po.comment;
 
-import utils.info.hotel.CommentInfo;
-import utils.info.hotel.CommentInfoBuilder;
-import vo.hotel.CommentVo;
+import utils.info.comment.CommentInfo;
+import utils.info.comment.CommentInfoBuilder;
+import vo.commrnt.CommentVo;
 
 public class CommentPoBuilder extends CommentInfoBuilder{
 

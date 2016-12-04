@@ -1,6 +1,6 @@
 package po.comment;
 
-import utils.info.hotel.CommentInfo;
+import utils.info.comment.CommentInfo;
 
 public class CommentPo extends CommentInfo{
 

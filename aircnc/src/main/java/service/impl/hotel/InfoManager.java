@@ -4,7 +4,7 @@ import java.util.List;
 
 import service.hotel.HotelInfoService;
 import utils.info.hotel.HotelInfo;
-import vo.hotel.CommentVo;
+import vo.commrnt.CommentVo;
 
 public class InfoManager implements HotelInfoService{
 

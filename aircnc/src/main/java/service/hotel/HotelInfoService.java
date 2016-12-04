@@ -3,7 +3,7 @@ package service.hotel;
 import java.util.List;
 
 import utils.info.hotel.HotelInfo;
-import vo.hotel.CommentVo;
+import vo.commrnt.CommentVo;
 
 public interface HotelInfoService {
 	public HotelInfo getHotelInfo(String id);
