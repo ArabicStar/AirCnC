@@ -3,18 +3,22 @@ package presentation.hotel.view.orderBrowse.fxml;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.util.Callback;
 import presentation.hotel.HotelCenterController;
 import presentation.hotel.model.CheckOrderModel;
-import utils.info.order.OrderStatus;
+import presentation.hotel.utils.ButtonName;
+import presentation.hotel.utils.CheckButtonCell;
 import vo.order.OrderVo;
 
 public class OrderBrowseController implements Initializable{
@@ -60,7 +64,7 @@ public class OrderBrowseController implements Initializable{
 	private TableColumn<CheckOrderModel,String> totalPrice;
 	
 	@FXML
-	private TableColumn<CheckOrderModel,Button> operation;
+	private TableColumn<CheckOrderModel,ButtonName> operation;
 
 	
 	public void setCenterController(HotelCenterController controller){
@@ -92,8 +96,24 @@ public class OrderBrowseController implements Initializable{
 		status.setCellValueFactory(cellData -> cellData.getValue().statusProperty());
 		totalPrice.setCellValueFactory(cellData -> cellData.getValue().totalPriceProperty());
 		operation.setSortable(false);
-		operation.setCellValueFactory(cellData -> cellData.getValue().operationProperty());
+		
+		operation.setCellValueFactory(
+                new Callback<TableColumn.CellDataFeatures<CheckOrderModel, ButtonName>, 
+                ObservableValue<ButtonName>>() {
 
+            public ObservableValue<ButtonName> call(TableColumn.CellDataFeatures<CheckOrderModel, ButtonName> p) {
+            	return new SimpleObjectProperty<ButtonName>(p.getValue().getOperation());
+            }
+        });
+		
+
+		operation.setCellFactory(
+                new Callback<TableColumn<CheckOrderModel, ButtonName>, TableCell<CheckOrderModel, ButtonName>>() {
+
+            public TableCell<CheckOrderModel, ButtonName> call(TableColumn<CheckOrderModel, ButtonName> p) {
+                return new CheckButtonCell(ButtonName.CHECK);
+            }    
+        });
 	}
 
 }

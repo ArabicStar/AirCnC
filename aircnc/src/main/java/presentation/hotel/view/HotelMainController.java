@@ -40,38 +40,32 @@ public class HotelMainController implements Initializable{
 	
 	@FXML
 	private void handleHotelInfo(){
-		hotelInfo.setText("d");
 		controller.addHotelInfoMainPane();
 	}
 	
 	@FXML
 	private void handleOrderExecute(){
-		orderExecute.setText("d");
 		controller.addOrderExecutePane();
 	}
 	
 	@FXML
 	private void handleOrderBrowse(){
-		orderBrowse.setText("l");
 		controller.addOrderBrowsePane();
 	}
 	
 	@FXML
 	private void handleCheckInLive(){
-		checkInLive.setText("要");
 		controller.addCheckInLivePane();
 	}
 	
 	@FXML
 	private void handleCheckOut(){
-		checkOut.setText("到");
 		controller.addCheckOutPane();
 	}
 	
 	@FXML
 	private void handleAbnormalOrder(){
-		abnormalOrder.setText("了");
-//		controller.addOrderMainPane();
+		controller.addAbnormalOrderPane();
 	}
 	
 	@FXML
