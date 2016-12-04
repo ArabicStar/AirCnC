@@ -8,6 +8,12 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import presentation.member.accessor.MemberLoginAccessor;
+import presentation.member.accessor.RegisterEnterpriseAccessor;
+import presentation.member.accessor.RegisterMainAccessor;
+import presentation.member.accessor.RegisterPersonAccessor;
+import presentation.member.accessor.impl.MemberLoginAccessorImpl;
+import presentation.member.accessor.impl.RegisterMainAccessorImpl;
 import presentation.member.manager.UserInfoManager;
 import presentation.member.view.signin.MemberRegisterEnterprisePane;
 
@@ -29,7 +35,10 @@ public class CenterController extends Application {
 	private MemberRegisterPersonPane registerPerson;
 	private MemberRegisterEnterprisePane registerBusiness;
 	
-	private UserInfoManager memberInfoManager;
+	private MemberLoginAccessor loginAccessor;
+	private RegisterMainAccessor registerMainAccessor;
+	private RegisterPersonAccessor registerPersonAccessor;
+	private RegisterEnterpriseAccessor registerEnterpriseAccessor;
 	
 	private Scene scene;
 
@@ -67,20 +76,24 @@ public class CenterController extends Application {
 	 * add the pane of sign in (MemberSignInPane)
 	 */
 	public void addSignInPane() {
+		loginAccessor = new MemberLoginAccessorImpl();
 		start.getBorderPane().getChildren().clear();
 		signIn = new MemberSignInPane();
 		start.getBorderPane().setCenter(signIn.getPane());
 		signIn.getController().setCenterController(this);
+		signIn.getController().setAccessor(loginAccessor);
 	}
 
 	/**
 	 * add the pane of register (MemberRegisterMainPane)
 	 */
 	public void addRegisterPane() {
+		registerMainAccessor = new RegisterMainAccessorImpl();
 		start.getBorderPane().getChildren().clear();
 		registerMain = new MemberRegisterMainPane();
 		registerMain.getController().setCenterController(this);
 		start.getBorderPane().setCenter(registerMain.getPane());
+		registerMain.getController().setAccessor(registerMainAccessor);
 	}
 
 	/**

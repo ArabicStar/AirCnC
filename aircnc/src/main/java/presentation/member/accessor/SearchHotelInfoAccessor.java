@@ -1,6 +1,6 @@
 package presentation.member.accessor;
 
-public interface searchOrder {
+public interface SearchHotelInfoAccessor{
 	
 	public String getRequest();
 }

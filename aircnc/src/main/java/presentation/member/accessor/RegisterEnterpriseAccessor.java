@@ -1,6 +1,6 @@
 package presentation.member.accessor;
 
-public interface registerEnterprise {
+public interface RegisterEnterpriseAccessor {
 	
 	public String getEnterprise();
 }
