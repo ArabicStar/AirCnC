@@ -8,7 +8,6 @@ import org.hibernate.Transaction;
 
 public interface Hibernator {
 	public static <R> R execute(HibernateOperation<R> op) {
-		//System.out.println(1);
 		// normal
 		R result = null;
 		Session session = getSession();

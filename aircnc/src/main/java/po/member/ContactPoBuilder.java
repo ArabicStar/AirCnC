@@ -35,4 +35,15 @@ public class ContactPoBuilder extends ContactInfoBuilder {
 
 		return new ContactPo().setCid(cid).setEmail(email).setFixedPhone(fixedPhone).setMobilePhone(mobilePhone);
 	}
+
+	public static final void updatePo(final ContactPo from, ContactPo to) {
+		if (from == null || to == null || from == to)
+			return;
+
+		if (from.getCid() != to.getCid())
+			throw new IllegalArgumentException("ContactrPoBuilder.updatePo - Different identifier");
+
+		to.setEmail(from.getEmail()).setFixedPhone(from.getFixedPhone()).setMobilePhone(from.getMobilePhone());
+
+	}
 }

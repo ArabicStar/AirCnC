@@ -9,6 +9,7 @@ import static org.junit.Assert.assertEquals;
 import java.time.LocalDate;
 
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import data.dao.impl.member.MemberDaoImpl;
@@ -26,7 +27,7 @@ public class MemberAccountServiceTest {
 	private int idx = 3;
 	private String registeredId;
 
-	//@Before
+	@Before
 	public void setUp() throws Exception {
 		dao = new MemberDaoImpl();
 		acc = new MemberAccountManager(dao);

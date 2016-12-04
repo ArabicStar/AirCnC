@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-12-1 19:57:11 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+	<class name="po.order.OrderPo" table="order_db">
+		<id name="orderId" type="string">
+			<column name="ORDERID" />
+			<generator class="assigned" />
+		</id>
+		<!-- hotelId -->
+		<property column="HOTELID" generated="never" lazy="false"
+			name="hotelId" type="integer" />
+		<!-- orderStatus -->
+		<property name="status">
+			<column name="ORDERSTATUS" length="20" not-null="true" />
+			<type name="org.hibernate.type.EnumType">
+				<param name="enumClass">utils.info.order.OrderStatus</param>
+				<param name="type">12</param>
+			</type>
+		</property>
+		<!-- roomType -->
+		<property column="ROOMTYPE" generated="never" lazy="false"
+			name="roomType" type="string" />
+		<!-- stayDays -->
+		<property column="STAYDAYS" generated="never" lazy="false"
+			name="stayDays" type="integer" />
+		<!-- userId -->
+		<property column="USERID" generated="never" lazy="false"
+			name="userId" type="integer" />
+		<!-- entryTime -->
+		<property column="ENTRYTIME" generated="never" lazy="false"
+			name="entryTime" />
+		<!-- lastTime -->
+		<property column="LASTTIME" generated="never" lazy="false"
+			name="lastTime" />
+		<!-- peopleNumber -->
+		<property column="PEOPLENUMBER" generated="never" lazy="false"
+			name="peopleNumber" type="integer" />
+		<!-- price -->
+		<property column="PRICE" generated="never" lazy="false" name="price"
+			type="double" />
+		<!-- hasChildren -->
+		<property column="HASCHILDREN" generated="never" lazy="false"
+			name="hasChildren" type="boolean" />
+		<!-- hotelName -->
+		<property column="HOTELNAME" generated="never" lazy="false"
+			name="hotelName" type="string" />
+		<!-- roomNumber -->
+		<property column="ROOMNUMBER" generated="never" lazy="false"
+			name="roomNumber" type="integer" />
+		<!-- isReviewed -->
+		<property column="ISREVIEWED" generated="never" lazy="false"
+			name="isReviewed" type="boolean" />
+		<!-- userName -->
+		<property column="USERNAME" generated="never" lazy="false"
+			name="userName" type="string" />
+	</class>
+</hibernate-mapping>

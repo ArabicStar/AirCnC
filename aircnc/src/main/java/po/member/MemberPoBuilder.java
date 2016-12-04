@@ -117,7 +117,7 @@ public class MemberPoBuilder extends MemberInfoBuilder {
 					.setContact(contact).setBirthday(birthday);
 	}
 
-	public static final void updatePo(MemberPo from, MemberPo to) {
+	public static final void updatePo(final MemberPo from, MemberPo to) {
 		if (from == null || to == null || from == to)
 			return;
 
@@ -125,7 +125,7 @@ public class MemberPoBuilder extends MemberInfoBuilder {
 			throw new IllegalArgumentException("MemberPoBuilder.updatePo - Different identifier or type");
 
 		to.setName(from.getName()).setPasswordHash(from.getPasswordHash()).setCredit(from.getCredit())
-				.setBirthday(from.getBirthday()).setEnterprise(from.getEnterprise())
-				.setContact(new ContactPoBuilder(from.getContact()).getContactInfo());
+				.setBirthday(from.getBirthday()).setEnterprise(from.getEnterprise());
+		ContactPoBuilder.updatePo(from.getContact(), to.getContact());
 	}
 }
