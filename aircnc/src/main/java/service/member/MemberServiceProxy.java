@@ -200,4 +200,11 @@ public abstract class MemberServiceProxy extends AccessSecureProxy
 
 		return accountService.existsMember(id);
 	}
+
+	@Override
+	public boolean updatePassword(int oldPwdHash, int newPwdHash) {
+		checkAuthentication();
+
+		return infoService.updatePassword(oldPwdHash, newPwdHash);
+	}
 }

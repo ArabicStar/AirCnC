@@ -4,6 +4,8 @@ import data.dao.member.MemberDaoProxy;
 import utils.proxy.AuthenticatePolicy.Client;
 
 public class MemberDaoProxyImpl extends MemberDaoProxy {
+	private MemberDaoImpl mdi;
+	private CreditDaoImpl cdi;
 
 	protected MemberDaoProxyImpl(Client clientId) {
 		super(clientId);
@@ -11,12 +13,26 @@ public class MemberDaoProxyImpl extends MemberDaoProxy {
 
 	@Override
 	public void loadMemberDao() {
-		loadMemberDao(new MemberDaoImpl());
+		if (mdi == null)
+			mdi = new MemberDaoImpl();
+
+		loadMemberDao(mdi);
 	}
 
 	@Override
 	public void loadCreditDao() {
-		loadCreditDao(new CreditDaoImpl());
+		if (cdi == null)
+			cdi = new CreditDaoImpl();
+
+		loadCreditDao(cdi);
+	}
+
+	@Override
+	public void loadCreditQueryDao() {
+		if (cdi == null)
+			cdi = new CreditDaoImpl();
+
+		loadCreditQueryDao(cdi);
 	}
 
 }

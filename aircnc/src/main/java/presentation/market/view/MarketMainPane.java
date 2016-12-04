@@ -40,4 +40,16 @@ public class MarketMainPane {
             e.printStackTrace();
         }
 	}
+
+	public Stage getPrimaryStage() {
+		return primaryStage;
+	}
+
+	public BorderPane getBorderPane() {
+		return rootLayout;
+	}
+
+	public MarketMainController getController() {
+		return controller;
+	}
 }

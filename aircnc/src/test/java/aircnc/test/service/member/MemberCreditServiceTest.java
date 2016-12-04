@@ -12,7 +12,6 @@ import org.junit.Test;
 
 import data.dao.impl.member.CreditDaoImpl;
 import data.dao.impl.member.MemberDaoImpl;
-import data.dao.member.CreditDao;
 import data.dao.member.MemberDao;
 import po.member.MemberPo;
 import service.impl.member.MemberCreditManager;
@@ -25,13 +24,13 @@ public class MemberCreditServiceTest {
 
 	public MemberCreditService cs;
 	public MemberDao memberDao;
-	public CreditDao creditDao;
+	public CreditDaoImpl creditDao;
 
 	@Before
 	public void setUp() throws Exception {
 		memberDao = new MemberDaoImpl();
 		creditDao = new CreditDaoImpl();
-		cs = new MemberCreditManager(memberDao, creditDao);
+		cs = new MemberCreditManager(memberDao, creditDao, creditDao);
 		prepareTestStatistic(memberDao);
 	}
 

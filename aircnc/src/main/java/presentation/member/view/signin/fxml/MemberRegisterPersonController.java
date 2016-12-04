@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import presentation.member.CenterController;
+import presentation.member.accessor.RegisterPersonAccessor;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Button;
 
@@ -44,6 +45,8 @@ public class MemberRegisterPersonController implements Initializable{
 	
 	private CenterController controller;
 	
+	private RegisterPersonAccessor accessor;
+	
 	/**
 	 * Initializes the controller class. This method is automatically called
      * after the fxml file has been loaded.
@@ -77,6 +80,15 @@ public class MemberRegisterPersonController implements Initializable{
 	public void setCenterController(CenterController centerController) {
 		// TODO Auto-generated method stub
 		this.controller=centerController;
+	}
+	
+	/**
+	 * set the accessor
+	 * @param accessor
+	 */
+	public void setAccessor(RegisterPersonAccessor accessor) {
+		// TODO Auto-generated method stub
+		this.accessor=accessor;
 	}
 	
 }
