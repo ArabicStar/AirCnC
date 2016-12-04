@@ -1,6 +1,7 @@
 package aircnc.test.po;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +22,7 @@ public class OrderPoTest {
 		LocalDateTime entryTime = LocalDateTime.now();
 		orderPo = new OrderPoBuilder().setEntryTime(entryTime).setHasChildren(false)
         		.setHotelId(1000).setHotelName("乐天玛特").setLastTime(entryTime)
-        		.setOrderId("201634").setPeopleNumber(3).setPrice(200)
+        		.setOrderId("201636").setPeopleNumber(3).setPrice(200)
         		.setIsReviewed(true).setRoomNumber(1).setRoomType("标准间")
         		.setStayDays(2).setUserId(20808121).setStatus(OrderStatus.EXECUTED)
         		.getOrderInfo().setUserName("南京大学渣");
@@ -43,11 +44,21 @@ public class OrderPoTest {
 		orderDao.updateOrder(orderPo);
 		
 	}
-
+	
 	@Test
 	public void OrderPoTest3() {
-		orderDao.deleteOrderPo("201634");
+		List<OrderPo> list = orderDao.getOrders(1000);
+		for(OrderPo orderPo : list) {
+			System.out.println(orderPo.getEntryTime());
+		}
 	}
+
+	@Test
+	public void OrderPoTest4() {
+		orderDao.deleteOrderPo("201636");
+	}
+	
+
 	
 
 }

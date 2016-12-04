@@ -5,6 +5,8 @@ import static data.hibernate.Hibernator.execute;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Query;
+
 import data.dao.order.OrderDao;
 import po.order.OrderPo;
 
@@ -31,8 +33,14 @@ public class OrderDaoImpl implements OrderDao{
 
 	public List<OrderPo> getOrders(int hotelId) {
 		List<OrderPo> orderList = new ArrayList<OrderPo>();
-
-		return orderList;
+		String hql = "from OrderPo where HOTELID = ?";
+		
+		return execute(session -> {
+			Query query = session.createQuery(hql);
+			query.setString(0, Integer.toString(hotelId));
+			List<OrderPo> list = query.list();
+			return list;
+		});
 	}
 
 	public boolean updateOrder(OrderPo orderPo) {
