@@ -17,7 +17,9 @@ import javafx.scene.control.Toggle;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import presentation.member.CenterController;
-import presentation.member.accessor.RegisterMainAccessor;
+import presentation.member.accessor.RegisterEnterpriseAccessor;
+import presentation.member.accessor.RegisterPersonAccessor;
+import presentation.member.utils.PlainDialog;
 
 
 
@@ -51,7 +53,8 @@ public class MemberRegisterMainController implements Initializable{
 	
 	private CenterController controller;
 	
-	private RegisterMainAccessor accessor;
+	private RegisterPersonAccessor accessorPerson;
+	private RegisterEnterpriseAccessor accessorEnterprise;
 	
 	/**
 	 * Initializes the controller class. This method is automatically called
@@ -79,32 +82,27 @@ public class MemberRegisterMainController implements Initializable{
 		if(username.getText().length()!=0&&password.getText().length()!=0){
 			if(password.getText().equals(confirmPassword.getText())){
 				if(personal.isSelected()){
+					accessorPerson.setUsername(username.getText());
+					accessorPerson.setPassword(password.getText());
 					controller.addRegisterPersonPane();
 				}else if(business.isSelected()){
+					accessorEnterprise.setUsername(username.getText());
+					accessorEnterprise.setPassword(password.getText());
 					controller.addRegisterBusinessPane();
 				}else{
-					Alert alert = new Alert(AlertType.INFORMATION);
-					alert.setTitle("注册失败");
-					alert.setHeaderText(null);
-					alert.setContentText("请选择注册的类型！");
-
-					alert.showAndWait();
+					PlainDialog alert = new PlainDialog(AlertType.INFORMATION,
+							"注册失败","请选择注册的类型");
+					alert.showDialog();
 				}
 			}else{
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("注册失败");
-				alert.setHeaderText(null);
-				alert.setContentText("请输入相同的密码！");
-
-				alert.showAndWait();
+				PlainDialog alert = new PlainDialog(AlertType.INFORMATION,
+						"注册失败","请输入相同的密码");
+				alert.showDialog();
 			}
 		}else{
-			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("注册失败");
-			alert.setHeaderText(null);
-			alert.setContentText("请输入你的用户名和密码！");
-
-			alert.showAndWait();
+			PlainDialog alert = new PlainDialog(AlertType.INFORMATION,
+					"注册失败","请输入你的用户名和密码");
+			alert.showDialog();
 			
 		}
 	}
@@ -118,10 +116,18 @@ public class MemberRegisterMainController implements Initializable{
 	}
 	
 	/**
-	 * set the accessor
+	 * set the accessor of personal user
 	 * @param accessor
 	 */
-	public void setAccessor(RegisterMainAccessor accessor) {
-		this.accessor=accessor;
+	public void setPersonAccessor(RegisterPersonAccessor accessor) {
+		this.accessorPerson=accessor;
+	}
+	
+	/**
+	 * set the accessor of business user
+	 * @param accessor
+	 */
+	public void setEnterPriseAccessor(RegisterEnterpriseAccessor accessor) {
+		this.accessorEnterprise=accessor;
 	}
 }

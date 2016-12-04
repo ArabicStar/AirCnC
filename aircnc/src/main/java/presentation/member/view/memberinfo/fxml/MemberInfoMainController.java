@@ -87,5 +87,7 @@ public class MemberInfoMainController implements Initializable{
 		mobi.setText(model.getMobi());
 		email.setText(model.getEmail());
 		credit.setText(String.valueOf(model.getCredit()));
+		typeIndex.setText(model.getType());
+		typeContent.setText(model.getTypeContent());
 	}
 }

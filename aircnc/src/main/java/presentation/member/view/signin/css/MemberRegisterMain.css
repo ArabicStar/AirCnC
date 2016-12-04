@@ -2,7 +2,7 @@
 
 
 .root{
-	-fx-background-image: url("../../../../../resources/images/member/register/login_BG.png");
+	-fx-background-image: url("../../../../../resources/images/member/register/register_BG.png");
 	-fx-font-family:"DengXian Light","Microsoft Yahei","Pingfang SC","Helvetica Neue";
 	-fx--webkit-font-smoothing:antialiased;
 	-fx-moz-osx-font-smoothing: grayscale;

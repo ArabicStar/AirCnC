@@ -45,7 +45,7 @@
             <HBox spacing="40.0" styleClass="info-index">
                <children>
                   <Label fx:id="typeIndex" styleClass="info-index" text="Label" />
-                  <Label fx:id="typeContent" text="未填写" />
+                  <Label fx:id="typeContent" styleClass="info-content" text="未填写" />
                </children>
             </HBox>
          </children>

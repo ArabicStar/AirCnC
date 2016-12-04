@@ -19,6 +19,7 @@ import utils.info.order.OrderStatus;
 import vo.member.ContactVoBuilder;
 import vo.member.MemberVo;
 import vo.member.MemberVoBuilder;
+import presentation.member.accessor.impl.InfoModifyContentAccessor;
 import presentation.member.manager.UserInfoManager;
 import presentation.member.manager.impl.MemberInfoManagerImpl;
 import presentation.member.model.CreditModel;
@@ -44,6 +45,8 @@ public class ClientCenterController extends Application {
 	private MemberOrderMainPane orderMain;
 	
 	private UserInfoManager memberInfoManager;
+	
+	private InfoModifyContentAccessor memberInfoAccessor;
 
 	private AnchorPane rootLayout;
 	private BorderPane mainPane;
@@ -87,10 +90,13 @@ public class ClientCenterController extends Application {
 
 	public void addInfoModifyPane() {
 		content.getChildren().clear();
+		memberInfoAccessor = new InfoModifyContentAccessor();
 		infoModify = new MemberInfoModifyPane();
 		AnchorPane.setTopAnchor((infoModify.getPane()), 10.0);
 		//(infoModify.getPane());
 		infoModify.getController().setCenterController(this);
+		infoModify.getController().setAccessor(memberInfoAccessor);
+		infoModify.getController().setManager(memberInfoManager);
 	}
 
 	public void addCreditChangePane() {
@@ -146,5 +152,9 @@ public class ClientCenterController extends Application {
     	
 		return orderData;
     }
+	
+	public void setMemberInfoManager(UserInfoManager manager){
+		this.memberInfoManager = manager;
+	}
 
 }

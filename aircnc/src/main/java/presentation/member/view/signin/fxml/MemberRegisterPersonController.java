@@ -1,15 +1,18 @@
 package presentation.member.view.signin.fxml;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
-import javafx.collections.FXCollections;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 import presentation.member.CenterController;
 import presentation.member.accessor.RegisterPersonAccessor;
-import javafx.scene.control.ChoiceBox;
+import presentation.member.utils.PlainDialog;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Button;
 
 /**
@@ -26,19 +29,19 @@ public class MemberRegisterPersonController implements Initializable{
 	private Label year;
 	
 	@FXML
-	private ChoiceBox<Integer> chooseYear;
+	private ComboBox<Integer> chooseYear;
 	
 	@FXML 
 	private Label month;
 	
 	@FXML
-	private ChoiceBox<Integer> chooseMonth;
+	private ComboBox<Integer> chooseMonth;
 	
 	@FXML
 	private Label day;
 	
 	@FXML
-	private ChoiceBox<Integer> chooseDay;
+	private ComboBox<Integer> chooseDay;
 	
 	@FXML
 	private Button confirm;
@@ -53,11 +56,23 @@ public class MemberRegisterPersonController implements Initializable{
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		//add the content of chioces
-		chooseYear.setItems(FXCollections.observableArrayList(1990,1991,1992,1993,1994,
-				1995));
-		chooseMonth.setItems(FXCollections.observableArrayList(1,2,3,4,5,6,7,8,9,10,11,12));
-		chooseDay.setItems(FXCollections.observableArrayList(1,2,3,4,5,6,7,8,9,10,11,12));
+		
+		Platform.runLater(new Runnable() {
+			  @Override public void run() {
+				  chooseYear.getItems().addAll(  
+				            1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,
+				            2002,2003,2004,2005,2006,2007,2008,2009,2010
+				        );
+					chooseMonth.getItems().addAll(  
+				            1,2,3,4,5,6,7,8,9,10,11,12  
+				        );
+					chooseDay.getItems().addAll(  
+				            1,2,3,4,5,6,7,8,9,10,
+				            11,12,13,14,15,16,17,18,19,20,
+				            21,22,23,24,25,26,27,28,29,30
+				        );
+			  }
+		});	
 		//use "new Separator" to create subitems.
 	}
 	
@@ -69,8 +84,14 @@ public class MemberRegisterPersonController implements Initializable{
 	 */
 	@FXML
 	public void handleConfirm(){
-		//将数据传入逻辑层，跳转至memberSignInPane
-		controller.addSignInPane();
+		if(chooseYear.getValue()!=null && chooseMonth.getValue()!=null && chooseDay.getValue()!=null){
+			accessor.setBirthday(LocalDate.of(chooseYear.getValue(), chooseMonth.getValue(), chooseDay.getValue()));
+			controller.addSignInPane();
+		}else{
+			PlainDialog alert = new PlainDialog(AlertType.INFORMATION,
+					"注册失败","请输入你的完整的生日信息");
+			alert.showDialog();
+		}
 	}
 	
 	/**

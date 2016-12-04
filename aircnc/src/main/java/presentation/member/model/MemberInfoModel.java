@@ -19,6 +19,7 @@ public class MemberInfoModel {
 	private final StringProperty email;
 	private final IntegerProperty credit;
 	private final StringProperty type;
+	private final StringProperty typeContent;
 	
 	/**
 	 * Default constructor.
@@ -34,14 +35,16 @@ public class MemberInfoModel {
 		this.email = new SimpleStringProperty(vo.getContact().getEmail());
 		this.credit = new SimpleIntegerProperty(vo.getCredit());
 		switch(vo.getType()){
-		case "PERSONAL" : 
-			this.type = new SimpleStringProperty(String.valueOf(vo.getBirthday()));
+		case "personal" : 
+			this.type = new SimpleStringProperty("生日");
+			this.typeContent = new SimpleStringProperty(String.valueOf(vo.getBirthday()));
 			break;
-		case "BUSINESS" : 
-			this.type = new SimpleStringProperty(String.valueOf(vo.getEnterprise()));
+		case "business" : 
+			this.type = new SimpleStringProperty("企业名称");
+			this.typeContent = new SimpleStringProperty(String.valueOf(vo.getEnterprise()));
 			break;
-		default: 
-			this.type = new SimpleStringProperty("");
+		default: this.type = new SimpleStringProperty("");
+			this.typeContent = new SimpleStringProperty("");
 		}
 		
 	}
@@ -116,5 +119,17 @@ public class MemberInfoModel {
 
     public StringProperty typeProperty() {
         return type;
+    }
+    
+    public String getTypeContent() {
+        return typeContent.get();
+    }
+
+    public void setTypeContent(String content) {
+        this.typeContent.set(content);
+    }
+
+    public StringProperty typeContentProperty() {
+        return typeContent;
     }
 }

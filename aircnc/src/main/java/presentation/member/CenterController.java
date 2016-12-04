@@ -10,11 +10,10 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import presentation.member.accessor.MemberLoginAccessor;
 import presentation.member.accessor.RegisterEnterpriseAccessor;
-import presentation.member.accessor.RegisterMainAccessor;
 import presentation.member.accessor.RegisterPersonAccessor;
 import presentation.member.accessor.impl.MemberLoginAccessorImpl;
-import presentation.member.accessor.impl.RegisterMainAccessorImpl;
-import presentation.member.manager.UserInfoManager;
+import presentation.member.accessor.impl.RegisterEnterpriseAccessorImpl;
+import presentation.member.accessor.impl.RegisterPersonAccessorImpl;
 import presentation.member.view.signin.MemberRegisterEnterprisePane;
 
 /**
@@ -36,7 +35,6 @@ public class CenterController extends Application {
 	private MemberRegisterEnterprisePane registerBusiness;
 	
 	private MemberLoginAccessor loginAccessor;
-	private RegisterMainAccessor registerMainAccessor;
 	private RegisterPersonAccessor registerPersonAccessor;
 	private RegisterEnterpriseAccessor registerEnterpriseAccessor;
 	
@@ -88,12 +86,14 @@ public class CenterController extends Application {
 	 * add the pane of register (MemberRegisterMainPane)
 	 */
 	public void addRegisterPane() {
-		registerMainAccessor = new RegisterMainAccessorImpl();
+		registerPersonAccessor = new RegisterPersonAccessorImpl();
+		registerEnterpriseAccessor = new RegisterEnterpriseAccessorImpl();
 		start.getBorderPane().getChildren().clear();
 		registerMain = new MemberRegisterMainPane();
 		registerMain.getController().setCenterController(this);
 		start.getBorderPane().setCenter(registerMain.getPane());
-		registerMain.getController().setAccessor(registerMainAccessor);
+		registerMain.getController().setPersonAccessor(registerPersonAccessor);
+		registerMain.getController().setEnterPriseAccessor(registerEnterpriseAccessor);
 	}
 
 	/**
@@ -104,6 +104,7 @@ public class CenterController extends Application {
 		registerPerson = new MemberRegisterPersonPane();
 		registerPerson.getController().setCenterController(this);
 		start.getBorderPane().setCenter(registerPerson.getPane());
+		registerPerson.getController().setAccessor(registerPersonAccessor);
 	}
 
 	/**
@@ -114,6 +115,7 @@ public class CenterController extends Application {
 		registerBusiness = new MemberRegisterEnterprisePane();
 		registerBusiness.getController().setCenterController(this);
 		start.getBorderPane().setCenter(registerBusiness.getPane());
+		registerBusiness.getController().setAccessor(registerEnterpriseAccessor);
 	}
 
 	/**

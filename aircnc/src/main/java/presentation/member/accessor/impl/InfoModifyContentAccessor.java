@@ -5,6 +5,11 @@ import vo.member.ContactVoBuilder;
 import vo.member.MemberVo;
 import vo.member.MemberVoBuilder;
 
+/**
+ * the content accessor of info modify of member info
+ * @author paranoia
+ *
+ */
 public class InfoModifyContentAccessor implements InfoModifyAccessor{
 	
 	private String username;
@@ -28,24 +33,35 @@ public class InfoModifyContentAccessor implements InfoModifyAccessor{
 		return vo;
 	}
 	
+	@Override
 	public void setMemberVo(MemberVo vo){
 		this.vo = vo;
 	}
 	
+	@Override
 	public void setName(String name){
 		this.username = name;
 	}
 	
+	@Override
 	public void setMobi(String mobi){
 		this.mobi = mobi;
 	}
 	
+	@Override
 	public void setTele(String tele){
 		this.tele = tele;
 	}
 	
-	public void setPasswordHash(String password){
+	@Override
+	public void setPassword(String password){
 		this.passwordHash = password.hashCode();
+	}
+
+	@Override
+	public void setEmail(String email) {
+		this.email = email;
+		
 	}
 
 }

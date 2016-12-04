@@ -6,7 +6,10 @@ import java.util.ResourceBundle;
 import javafx.fxml.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import presentation.member.CenterController;
+import presentation.member.accessor.RegisterEnterpriseAccessor;
+import presentation.member.utils.PlainDialog;
 
 /**
  * the controller of business register pane.
@@ -22,6 +25,8 @@ public class MemberRegisterEnterpriseController implements Initializable{
 	private Button confirm;
 	
 	private CenterController controller;
+	
+	private RegisterEnterpriseAccessor accessor;
 
 	/**
 	 * Initializes the controller class. This method is automatically called
@@ -41,8 +46,14 @@ public class MemberRegisterEnterpriseController implements Initializable{
 	 */
 	@FXML
 	public void handleConfirm(){
-		//这里将键入的数据传入逻辑层，跳转至memberSignInPane。
-		controller.addSignInPane();
+		if(enterprise.getText().length()>0){
+			accessor.setEnterprise(enterprise.getText());
+			controller.addSignInPane();
+		}else{
+			PlainDialog alert = new PlainDialog(AlertType.INFORMATION,
+					"注册失败","请输入你的企业名称");
+			alert.showDialog();
+		}
 		
 	}
 	
@@ -51,6 +62,14 @@ public class MemberRegisterEnterpriseController implements Initializable{
 	 * @param centerController
 	 */
 	public void setCenterController(CenterController centerController){
-		this.controller=centerController;
+		this.controller = centerController;
+	}
+	
+	/**
+	 * set the accessor
+	 * @param accessor
+	 */
+	public void setAccessor(RegisterEnterpriseAccessor accessor){
+		this.accessor = accessor;
 	}
 }

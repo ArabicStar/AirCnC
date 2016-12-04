@@ -8,6 +8,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import presentation.member.ClientCenterController;
+import presentation.member.accessor.InfoModifyAccessor;
+import presentation.member.manager.UserInfoManager;
 
 public class MemberInfoModifyController implements Initializable{
 	
@@ -30,6 +32,10 @@ public class MemberInfoModifyController implements Initializable{
 	private Button confirm;
 	
 	private ClientCenterController controller;
+	
+	private InfoModifyAccessor accessor;
+	
+	private UserInfoManager manager;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -47,8 +53,28 @@ public class MemberInfoModifyController implements Initializable{
 		
 	}
 	
+	/**
+	 * set the controller
+	 * @param controller
+	 */
 	public void setCenterController(ClientCenterController controller){
 		this.controller=controller;
+	}
+	
+	/**
+	 * set the accessor
+	 * @param controller
+	 */
+	public void setAccessor(InfoModifyAccessor accessor){
+		this.accessor = accessor;
+	}
+	
+	/**
+	 * set the controller
+	 * @param controller
+	 */
+	public void setManager(UserInfoManager manager){
+		this.manager = manager;
 	}
 	
 }
