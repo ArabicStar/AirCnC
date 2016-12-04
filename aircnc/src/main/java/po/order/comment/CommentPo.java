@@ -1,6 +1,6 @@
-package po.comment;
+package po.order.comment;
 
-import utils.info.comment.CommentInfo;
+import utils.info.order.comment.CommentInfo;
 
 public class CommentPo extends CommentInfo{
 

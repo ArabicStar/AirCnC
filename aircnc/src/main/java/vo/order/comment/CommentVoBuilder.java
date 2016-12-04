@@ -1,7 +1,7 @@
-package vo.commrnt;
+package vo.order.comment;
 
-import utils.info.comment.CommentInfo;
-import utils.info.comment.CommentInfoBuilder;
+import utils.info.order.comment.CommentInfo;
+import utils.info.order.comment.CommentInfoBuilder;
 
 public class CommentVoBuilder extends CommentInfoBuilder{
 

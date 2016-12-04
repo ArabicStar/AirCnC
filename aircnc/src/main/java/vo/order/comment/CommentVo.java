@@ -1,6 +1,6 @@
-package vo.commrnt;
+package vo.order.comment;
 
-import utils.info.comment.CommentInfo;
+import utils.info.order.comment.CommentInfo;
 
 public class CommentVo extends CommentInfo{
 

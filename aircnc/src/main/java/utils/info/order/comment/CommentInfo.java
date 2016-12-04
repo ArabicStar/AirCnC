@@ -1,4 +1,4 @@
-package utils.info.comment;
+package utils.info.order.comment;
 
 public class CommentInfo extends CommentInfoTemplate{
 	protected boolean isValid;

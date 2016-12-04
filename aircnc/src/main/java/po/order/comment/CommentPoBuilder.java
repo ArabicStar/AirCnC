@@ -1,8 +1,8 @@
-package po.comment;
+package po.order.comment;
 
-import utils.info.comment.CommentInfo;
-import utils.info.comment.CommentInfoBuilder;
-import vo.commrnt.CommentVo;
+import utils.info.order.comment.CommentInfo;
+import utils.info.order.comment.CommentInfoBuilder;
+import vo.order.comment.CommentVo;
 
 public class CommentPoBuilder extends CommentInfoBuilder{
 
