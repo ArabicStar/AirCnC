@@ -1,12 +1,15 @@
 package data.dao.member;
 
+import java.util.List;
+
+import data.dao.query.CreditQueryDao;
 import po.member.MemberPo;
 import po.member.credit.CreditChangePo;
 import utils.proxy.AccessSecureProxy;
 import utils.proxy.AuthenticatePolicy;
 import utils.proxy.AuthenticatePolicy.Client;
 
-public abstract class MemberDaoProxy extends AccessSecureProxy implements CreditDao, MemberDao {
+public abstract class MemberDaoProxy extends AccessSecureProxy implements CreditDao, MemberDao, CreditQueryDao {
 	/**
 	 * Actual credit dao handler
 	 */
@@ -15,6 +18,7 @@ public abstract class MemberDaoProxy extends AccessSecureProxy implements Credit
 	 * Actuak member dao handler
 	 */
 	private MemberDao memberDao;
+	private CreditQueryDao creditQueryDao;
 
 	/**
 	 * 'Default constructor, defines client identifier.<br>
@@ -57,6 +61,16 @@ public abstract class MemberDaoProxy extends AccessSecureProxy implements Credit
 		checkAuthentication();
 
 		this.creditDao = creditDao;
+	}
+
+	@AuthenticatePolicy({ Client.USER, Client.HOTEL, Client.SERVER, Client.MARKET })
+	public abstract void loadCreditQueryDao();
+
+	@AuthenticatePolicy({ Client.USER, Client.HOTEL, Client.SERVER, Client.MARKET })
+	public void loadCreditQueryDao(CreditQueryDao creditQueryDao) {
+		checkAuthentication();
+
+		this.creditQueryDao = creditQueryDao;
 	}
 
 	@Override
@@ -106,5 +120,13 @@ public abstract class MemberDaoProxy extends AccessSecureProxy implements Credit
 		checkAuthentication();
 
 		return creditDao.changeCredit(aChange);
+	}
+
+	@Override
+	@AuthenticatePolicy({ Client.USER })
+	public List<CreditChangePo> searchByMemberId(String memberId) {
+		checkAuthentication();
+
+		return creditQueryDao.searchByMemberId(memberId);
 	}
 }

@@ -24,7 +24,7 @@ public class MemberServiceProxyImpl extends MemberServiceProxy {
 
 	@Override
 	public void loadCreditService() {
-		loadCreditService(new MemberCreditManager(dao, dao));
+		loadCreditService(new MemberCreditManager(dao, dao,dao));
 	}
 
 }

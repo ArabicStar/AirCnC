@@ -10,23 +10,23 @@ import org.hibernate.Query;
 import data.dao.order.OrderDao;
 import po.order.OrderPo;
 
-public class OrderDaoImpl implements OrderDao{
-	
+public class OrderDaoImpl implements OrderDao {
+
 	private static OrderDaoImpl orderDataServiceImpl;
-	
-	public static OrderDaoImpl getInstance(){
-		if(orderDataServiceImpl == null){
+
+	public static OrderDaoImpl getInstance() {
+		if (orderDataServiceImpl == null) {
 			orderDataServiceImpl = new OrderDaoImpl();
 		}
 		return orderDataServiceImpl;
 	}
-	
-	public OrderDaoImpl(){
+
+	public OrderDaoImpl() {
 
 	}
 
 	public OrderPo getOrder(String orderId) {
-		return  execute(session -> {
+		return execute(session -> {
 			return (OrderPo) session.get(OrderPo.class, orderId);
 		});
 	}
@@ -34,10 +34,11 @@ public class OrderDaoImpl implements OrderDao{
 	public List<OrderPo> getOrders(int hotelId) {
 		List<OrderPo> orderList = new ArrayList<OrderPo>();
 		String hql = "from OrderPo where HOTELID = ?";
-		
+
 		return execute(session -> {
 			Query query = session.createQuery(hql);
 			query.setString(0, Integer.toString(hotelId));
+			@SuppressWarnings("unchecked")
 			List<OrderPo> list = query.list();
 			return list;
 		});
@@ -47,7 +48,7 @@ public class OrderDaoImpl implements OrderDao{
 		if (orderPo == null) {
 			return false;
 		}
-		if(!existsOrder(orderPo.getOrderId())) {
+		if (!existsOrder(orderPo.getOrderId())) {
 			return false;
 		}
 
@@ -55,7 +56,7 @@ public class OrderDaoImpl implements OrderDao{
 			session.update(orderPo);
 			return true;
 		});
-		
+
 	}
 
 	public boolean addOrderPo(OrderPo orderPo) {
@@ -72,7 +73,7 @@ public class OrderDaoImpl implements OrderDao{
 			return true;
 		});
 	}
-	
+
 	public boolean existsOrder(String orderId) {
 		return execute(session -> {
 			return (OrderPo) session.get(OrderPo.class, orderId) != null;
@@ -81,7 +82,7 @@ public class OrderDaoImpl implements OrderDao{
 
 	public boolean deleteOrderPo(String orderId) {
 		// The order that exists can be deleted
-		if(!existsOrder(orderId)) {
+		if (!existsOrder(orderId)) {
 			return false;
 		}
 		OrderPo deleted = getOrder(orderId);

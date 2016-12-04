@@ -2,6 +2,7 @@ package vo.member.credit;
 
 import utils.info.member.MemberInfo;
 import utils.info.member.credit.ActionType;
+import utils.info.member.credit.CreditChangeInfo;
 import utils.info.member.credit.CreditChangeInfoBuilder;
 
 public class CreditChangeVoBuilder extends CreditChangeInfoBuilder {
@@ -16,6 +17,10 @@ public class CreditChangeVoBuilder extends CreditChangeInfoBuilder {
 	 */
 	public CreditChangeVoBuilder(MemberInfo member, ActionType actionType) {
 		super(member, actionType);
+	}
+
+	public CreditChangeVoBuilder(CreditChangeInfo info) {
+		super(info);
 	}
 
 	@Override

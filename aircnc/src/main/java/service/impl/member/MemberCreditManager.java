@@ -1,31 +1,41 @@
 package service.impl.member;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import data.dao.member.CreditDao;
 import data.dao.member.MemberDao;
+import data.dao.query.CreditQueryDao;
 import po.member.MemberPo;
 import po.member.credit.CreditChangePo;
 import po.member.credit.CreditChangePoBuilder;
 import service.member.CreditStrategy;
 import service.member.MemberCreditService;
+import service.query.CreditChangeQueryService;
+import utils.info.member.MemberInfoTemplate;
 import utils.info.member.credit.ActionType;
 import utils.info.order.OrderStatus;
 import vo.member.MemberVo;
 import vo.member.MemberVoBuilder;
+import vo.member.credit.CreditChangeVo;
+import vo.member.credit.CreditChangeVoBuilder;
 import vo.order.OrderVo;
 
-public class MemberCreditManager implements MemberCreditService {
+public class MemberCreditManager implements MemberCreditService, CreditChangeQueryService {
+	private CreditQueryDao dao;
 	private MemberDao memberDao;
 	private CreditDao creditDao;
 	private CreditStrategy strategy;
 
-	public MemberCreditManager(MemberDao memberDao, CreditDao creditDao) {
+	public MemberCreditManager(MemberDao memberDao, CreditDao creditDao, CreditQueryDao creditQuery) {
 		this.memberDao = memberDao;
 		this.creditDao = creditDao;
 		this.strategy = new SimpleCreditStrategyAdapter();
 	}
 
-	public MemberCreditManager(MemberDao memberDao, CreditDao creditDao, CreditStrategy strategy) {
-		this(memberDao, creditDao);
+	public MemberCreditManager(MemberDao memberDao, CreditDao creditDao, CreditQueryDao creditQuery,
+			CreditStrategy strategy) {
+		this(memberDao, creditDao, creditQuery);
 		this.strategy = strategy;
 	}
 
@@ -133,6 +143,19 @@ public class MemberCreditManager implements MemberCreditService {
 				.setCreditChange(strategy.getAppealRecovery(order)).getCreditChangeInfo();
 
 		return new MemberVoBuilder(creditDao.changeCredit(po)).getMemberInfo();
+	}
+
+	@Override
+	public List<CreditChangeVo> searchByMemberId(String memberId) {
+		if (!MemberInfoTemplate.checkID(memberId))
+			throw new IllegalArgumentException("CreditChangeQueryServiceImpl.searchByMemberId - Invalid Member Id");
+
+		List<CreditChangePo> poList = dao.searchByMemberId(memberId);
+		if (poList == null)
+			return null;
+
+		return poList.stream().map(po -> new CreditChangeVoBuilder(po).getCreditChangeInfo())
+				.collect(Collectors.toList());
 	}
 
 	private MemberPo getMember(String id) {

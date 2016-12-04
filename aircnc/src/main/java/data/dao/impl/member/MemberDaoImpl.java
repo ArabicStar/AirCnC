@@ -57,14 +57,14 @@ public class MemberDaoImpl implements MemberDao {
 	public boolean updateMember(final MemberPo po) {
 		if (po == null)
 			return false;
-
+		
 		return execute(session -> {
 			Boolean flag = Boolean.FALSE;
 
 			MemberPo mem = session.get(MemberPo.class, parseId(po.getId()));
 			if (flag = Boolean.valueOf(mem != null))
 				MemberPoBuilder.updatePo(po, mem);
-
+			
 			return flag;
 		});
 	}

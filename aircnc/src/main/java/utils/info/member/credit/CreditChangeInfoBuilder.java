@@ -38,6 +38,16 @@ public abstract class CreditChangeInfoBuilder extends CreditChangeInfoTemplate {
 		this.actionType = actionType;
 	}
 
+	public CreditChangeInfoBuilder(CreditChangeInfo info) {
+		this.memberId = info.getMemberId();
+		this.actionType = info.getActionType();
+		this.beforeCredit = info.getBeforeCredit();
+		this.afterCredit = info.getAfterCredit();
+		this.timeInstant = info.getTimeInstant();
+		this.money = info.getMoney();
+		this.orderId = info.getOrderId();
+	}
+
 	/**
 	 * Set amount of money.<br>
 	 * 

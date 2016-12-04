@@ -8,14 +8,14 @@ import po.member.MemberPo;
 import po.member.MemberPoBuilder;
 import service.member.MemberAccountService;
 import service.member.MemberInfoService;
-import service.query.MemberQueryService;
+import service.query.MemberInfoQueryService;
 import utils.info.member.MemberInfo;
 import vo.hotel.HotelVo;
 import vo.member.MemberVoBuilder;
 import vo.member.credit.CreditChangeVo;
 import vo.order.OrderVo;
 
-public class MemberInfoManager implements MemberInfoService, MemberQueryService {
+public class MemberInfoManager implements MemberInfoService, MemberInfoQueryService {
 	private MemberDao memberDao;
 	private HotelDao hotelDao;
 
@@ -67,12 +67,12 @@ public class MemberInfoManager implements MemberInfoService, MemberQueryService 
 	@Override
 	public boolean updateInfo(MemberInfo modifiedInfo) {
 		if (!accountService.isLogined())
-			throw new IllegalStateException("No Member Login");
+			throw new IllegalStateException("MemberInfoServiceImpl.updateInfo - No Member is Logined");
 
 		MemberPo po = (MemberPo) accountService.getCurrentAccount();
 
 		if (!modifiedInfo.getId().equals(po.getId()))
-			throw new IllegalArgumentException("Incorresponding Member Info");
+			throw new IllegalArgumentException("MemberInfoServiceImpl.updateInfo - Incorresponding Member Info");
 
 		return memberDao
 				.updateMember(new MemberPoBuilder(modifiedInfo).setPasswordHash(po.getPasswordHash()).getMemberInfo());
@@ -81,6 +81,19 @@ public class MemberInfoManager implements MemberInfoService, MemberQueryService 
 	@Override
 	public MemberInfo searchById(String id) {
 		return getMemberInfo(id);
+	}
+
+	@Override
+	public boolean updatePassword(int oldPwdHash, int newPwdHash) {
+		if (!accountService.isLogined())
+			throw new IllegalStateException("MemberInfoServiceImpl.updatePassword - No Member is Logined");
+
+		MemberPo po = (MemberPo) accountService.getCurrentAccount();
+
+		if (po.getPasswordHash() != oldPwdHash)
+			return false;
+
+		return memberDao.updateMember(new MemberPoBuilder(po).setPasswordHash(newPwdHash).getMemberInfo());
 	}
 
 }
