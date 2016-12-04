@@ -54,5 +54,10 @@ public class HotelVo extends HotelInfo{
 		return this;
 	}
 	
+	HotelVo setEquipment(String equipment){
+		this.equipment = equipment;
+		return this;
+	}
+	
 	
 }

@@ -43,6 +43,11 @@ public class HotelInfoTemplate {
 	 * grade double 0~5.0 <br>
 	 */
 	protected double grade;
+	
+	/**
+	 * equipment String 0~5.0 <br>
+	 */
+	protected String equipment;
 
 
 	/**
@@ -54,6 +59,17 @@ public class HotelInfoTemplate {
 	 */
 	public static final boolean checkHotelName(String name) {
 		return name != null && name.length() != 0 && !name.contains("\\s");
+	}
+	
+	/**
+	 * Check id int. <br>
+	 * 
+	 * @param id
+	 *            id int
+	 * @return if given id is a valid id int <br>
+	 */
+	public static final boolean checkID(int id) {
+		return id>0;
 	}
 	
 	/**

@@ -17,7 +17,7 @@ public class HotelVoBuilder extends HotelInfoBuilder{
 		INVALID_HOTEL_VO.invalidate();
 	}
 	
-	public static final HotelVo getInvalidInfo() {
+	public static final HotelVo invalidInfo() {
 		return INVALID_HOTEL_VO;
 	}
 	
@@ -45,7 +45,7 @@ public class HotelVoBuilder extends HotelInfoBuilder{
 			throw new IllegalArgumentException("Invalid HotelInfo Instance");
 
 		return new HotelVo().setID(id).setName(name).setScope(scope).setLocation(location)
-				.setIntro(introduction).setStar(star).setGrade(grade);
+				.setIntro(introduction).setStar(star).setGrade(grade).setEquipment(equipment);
 	}
 	
 	@Override
@@ -84,6 +84,12 @@ public class HotelVoBuilder extends HotelInfoBuilder{
 	@Override
 	public HotelVoBuilder setGrade(Double grade) {
 		super.setGrade(grade);
+		return this;
+	}
+	
+	@Override
+	public HotelVoBuilder setEquipment(String equipment) {
+		super.setEquipment(equipment);
 		return this;
 	}
 

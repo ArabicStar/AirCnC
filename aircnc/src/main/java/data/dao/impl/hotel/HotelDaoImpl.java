@@ -10,18 +10,18 @@ public class HotelDaoImpl implements HotelDao{
 
 	
 	@Override
-	public HotelPo findHotel(final String idString) {
+	public HotelPo findHotel(final int id) {
 		return execute(session -> {
-			return (HotelPo) session.get(HotelPo.class, Integer.parseInt(idString));
+			return (HotelPo) session.get(HotelPo.class,id);
 		});
 	}
 
 	@Override
-	public boolean deleteHotel(final String idString) {
+	public boolean deleteHotel(final int id) {
 		return execute(session -> {
 			Boolean flag = Boolean.FALSE;// for performance
 
-			HotelPo deleted = (HotelPo) session.get(HotelPo.class, Integer.parseInt(idString));
+			HotelPo deleted = (HotelPo) session.get(HotelPo.class, id);
 			if (flag = Boolean.valueOf((deleted != null)))// check existence
 				session.delete(deleted);
 
@@ -37,7 +37,7 @@ public class HotelDaoImpl implements HotelDao{
 		return execute(session -> {
 			Boolean flag = Boolean.FALSE;
 
-			HotelPo mem = session.get(HotelPo.class, Integer.parseInt(po.getStringId()));
+			HotelPo mem = session.get(HotelPo.class, po.getId());
 			if (flag = Boolean.valueOf(mem != null))
 				HotelPoBuilder.updatePo(po, mem);
 
@@ -51,7 +51,7 @@ public class HotelDaoImpl implements HotelDao{
 			return false;
 
 		// should not exist yet
-		if (existHotel(po.getStringId()))
+		if (existHotel(po.getId()))
 			return false;
 
 		return execute(session -> {
@@ -63,9 +63,9 @@ public class HotelDaoImpl implements HotelDao{
 	}
 
 	@Override
-	public boolean existHotel(final String idString) {
+	public boolean existHotel(final int id) {
 		return execute(session -> {
-			return (HotelPo) session.get(HotelPo.class, Integer.parseInt(idString)) != null;
+			return (HotelPo) session.get(HotelPo.class,id) != null;
 		});
 	}
 

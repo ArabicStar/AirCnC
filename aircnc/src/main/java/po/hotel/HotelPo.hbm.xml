@@ -27,6 +27,10 @@
 		<property column="GRADE" generated="never" lazy="false" name="grade"
 			type="double" />
 			
+		<!-- equipment -->
+		<property column="EQUIPMENT" generated="never" lazy="false" name="equipment"
+			type="string" />
+			
 		<!-- scope -->
 		<property column="SCOPE" generated="never" lazy="false" name="scope"
 			type="string" />

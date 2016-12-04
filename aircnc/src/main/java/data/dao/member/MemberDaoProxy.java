@@ -28,7 +28,7 @@ public abstract class MemberDaoProxy extends AccessSecureProxy implements Credit
 	/**
 	 * Load actual member dao, auth to cilents of user and market
 	 */
-	@AuthenticatePolicy({ Client.USER, Client.MARKET })
+	@AuthenticatePolicy({ Client.USER, Client.MARKET ,Client.MANAGE})
 	public abstract void loadMemberDao();
 
 	/**
@@ -37,7 +37,7 @@ public abstract class MemberDaoProxy extends AccessSecureProxy implements Credit
 	 * @param memberDao
 	 *            a specific member dao implemention
 	 */
-	@AuthenticatePolicy({ Client.USER, Client.MARKET })
+	@AuthenticatePolicy({ Client.USER, Client.MARKET,Client.MANAGE })
 	public void loadMemberDao(MemberDao memberDao) {
 		checkAuthentication();
 
@@ -77,7 +77,7 @@ public abstract class MemberDaoProxy extends AccessSecureProxy implements Credit
 	}
 
 	@Override
-	@AuthenticatePolicy({ Client.USER })
+	@AuthenticatePolicy({ Client.USER ,Client.MANAGE})
 	public boolean updateMember(MemberPo po) {
 		checkAuthentication();
 
@@ -85,7 +85,7 @@ public abstract class MemberDaoProxy extends AccessSecureProxy implements Credit
 	}
 
 	@Override
-	@AuthenticatePolicy({ Client.USER, Client.MARKET })
+	@AuthenticatePolicy({ Client.USER, Client.MARKET ,Client.MANAGE})
 	public MemberPo findMember(String id) {
 		checkAuthentication();
 

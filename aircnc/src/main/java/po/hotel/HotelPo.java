@@ -18,12 +18,6 @@ public class HotelPo extends HotelInfo{
 		return null;
 	}
 	
-	public String getStringId(){
-		if(isValid())
-			return Integer.toString(id);
-		return null;
-	}
-	
 	public int getPasswordHash() {
 		if (isValid())
 			return this.passwordHash;
@@ -79,6 +73,11 @@ public class HotelPo extends HotelInfo{
 	
 	public HotelPo setGrade(double grade){
 		this.grade = grade;
+		return this;
+	}
+	
+	public HotelPo setEquipment(String equipment){
+		this.equipment = equipment;
 		return this;
 	}
 	
