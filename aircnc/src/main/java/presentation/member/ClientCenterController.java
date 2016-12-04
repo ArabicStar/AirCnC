@@ -1,5 +1,7 @@
 package presentation.member;
 
+import java.time.LocalDate;
+
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,10 +10,17 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import po.order.OrderPoBuilder;
 import presentation.member.view.memberinfo.MemberInfoMainPane;
 import presentation.member.view.memberinfo.MemberInfoModifyPane;
 import presentation.member.view.myorder.MemberOrderMainPane;
 import presentation.member.view.searchhotel.MemberSearchHotelPane;
+import utils.info.order.OrderStatus;
+import vo.member.ContactVoBuilder;
+import vo.member.MemberVo;
+import vo.member.MemberVoBuilder;
+import presentation.member.manager.UserInfoManager;
+import presentation.member.manager.impl.MemberInfoManagerImpl;
 import presentation.member.model.CreditModel;
 import presentation.member.model.MyorderModel;
 import presentation.member.view.MemberMainPane;
@@ -33,6 +42,8 @@ public class ClientCenterController extends Application {
 	private MemberCreditChangePane creditMain;
 	private MemberSearchHotelPane searchMain;
 	private MemberOrderMainPane orderMain;
+	
+	private UserInfoManager memberInfoManager;
 
 	private AnchorPane rootLayout;
 	private BorderPane mainPane;
@@ -64,11 +75,14 @@ public class ClientCenterController extends Application {
 	}
 
 	public void addInfoMainPane() {
+		memberInfoManager = MemberTest.getUserData();
 		content.getChildren().clear();
 		infoMain = new MemberInfoMainPane();
 		content.getChildren().add(infoMain.getContentPane());
 		AnchorPane.setTopAnchor(infoMain.getContentPane(),10.0);
 		infoMain.getController().setCenterController(this);
+		infoMain.getController().setManager(memberInfoManager);
+		
 	}
 
 	public void addInfoModifyPane() {

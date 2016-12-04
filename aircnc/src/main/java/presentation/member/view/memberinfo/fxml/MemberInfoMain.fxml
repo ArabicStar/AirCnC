@@ -15,37 +15,37 @@
             <HBox layoutX="303.0" layoutY="186.0" spacing="40.0">
                <children>
                   <Label layoutX="345.0" layoutY="258.0" styleClass="info-index" text="用户名" />
-                  <Label fx:id="username" layoutX="436.0" layoutY="267.0" styleClass="info-content" text="littlewatch" />
-               </children>
-            </HBox>
-            <HBox layoutX="313.0" layoutY="196.0" spacing="40.0">
-               <children>
-                  <Label layoutX="345.0" layoutY="258.0" styleClass="info-index" text="名称" />
-                  <Label fx:id="name" layoutX="436.0" layoutY="267.0" styleClass="info-content" text="小手表" />
+                  <Label fx:id="username" layoutX="436.0" layoutY="267.0" styleClass="info-content" text="未填写" />
                </children>
             </HBox>
             <HBox layoutX="323.0" layoutY="206.0" spacing="40.0">
                <children>
                   <Label layoutX="345.0" layoutY="258.0" styleClass="info-index" text="固定电话" />
-                  <Label fx:id="tele" layoutX="436.0" layoutY="267.0" styleClass="info-content" text="23333333" />
+                  <Label fx:id="tele" layoutX="436.0" layoutY="267.0" styleClass="info-content" text="未填写" />
                </children>
             </HBox>
             <HBox layoutX="333.0" layoutY="216.0" spacing="40.0">
                <children>
                   <Label layoutX="345.0" layoutY="258.0" styleClass="info-index" text="手机" />
-                  <Label fx:id="mobi" layoutX="436.0" layoutY="267.0" styleClass="info-content" text="1382333333" />
+                  <Label fx:id="mobi" layoutX="436.0" layoutY="267.0" styleClass="info-content" text="未填写" />
                </children>
             </HBox>
             <HBox layoutX="306.0" layoutY="232.0" spacing="40.0">
                <children>
                   <Label layoutX="345.0" layoutY="258.0" styleClass="info-index" text="邮箱" />
-                  <Label fx:id="email" layoutX="436.0" layoutY="267.0" styleClass="info-content" text="bishi@bilibili.com" />
+                  <Label fx:id="email" layoutX="436.0" layoutY="267.0" styleClass="info-content" text="未填写" />
                </children>
             </HBox>
             <HBox layoutX="310.0" layoutY="273.0" spacing="40.0">
                <children>
                   <Label layoutX="345.0" layoutY="258.0" styleClass="info-index" text="信用值" />
-                  <Label fx:id="credit" layoutX="436.0" layoutY="267.0" styleClass="info-content" text="233" />
+                  <Label fx:id="credit" layoutX="436.0" layoutY="267.0" styleClass="info-content" text="未填写" />
+               </children>
+            </HBox>
+            <HBox spacing="40.0" styleClass="info-index">
+               <children>
+                  <Label fx:id="typeIndex" styleClass="info-index" text="Label" />
+                  <Label fx:id="typeContent" text="未填写" />
                </children>
             </HBox>
          </children>

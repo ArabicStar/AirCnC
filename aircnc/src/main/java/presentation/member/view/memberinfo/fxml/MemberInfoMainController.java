@@ -10,6 +10,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import presentation.member.CenterController;
 import presentation.member.ClientCenterController;
+import presentation.member.manager.UserInfoManager;
+import presentation.member.model.MemberInfoModel;
 
 public class MemberInfoMainController implements Initializable{
 	
@@ -18,9 +20,6 @@ public class MemberInfoMainController implements Initializable{
 	
 	@FXML
 	private Label username;
-	
-	@FXML
-	private Label name;
 	
 	@FXML
 	private Label tele;
@@ -34,20 +33,21 @@ public class MemberInfoMainController implements Initializable{
 	@FXML
 	private Label credit;
 	
+	@FXML
+	private Label typeIndex;
+	
+	@FXML
+	private Label typeContent;
+	
 	private ClientCenterController controller;
 	
-	private String memberName;
+	private UserInfoManager manager;
 	
-	private String memberUsername;
+	private MemberInfoModel model;
 	
-	private String memberTele;
-	
-	private String memberMobi;
-	
-	private String memberEmail;
-	
-	private int memberCredit;
-
+	/**
+	 * initialize the pane.
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		Platform.runLater(new Runnable() {
@@ -71,36 +71,21 @@ public class MemberInfoMainController implements Initializable{
 		this.controller=centerController;
 	}
 	
-	public void setUsername(String username){
-		this.memberUsername = username;
-	}
-	
-	public void setName(String name){
-		this.memberName = name;
-	}
-	
-	public void setTele(String tele){
-		this.memberTele = tele;
-	}
-	
-	public void setMobi(String mobi){
-		this.memberMobi = mobi;
-	}
-	
-	public void setEmail(String email){
-		this.memberEmail = email;
-	}
-	
-	public void setCredit(int credit){
-		this.memberCredit = credit;
+	/**
+	 * set the member info manager
+	 * aiming to fetch the member info model
+	 * @param manager
+	 */
+	public void setManager(UserInfoManager manager){
+		this.manager = manager;
 	}
 	
 	private void initMemberInfo(){
-		username.setText(memberUsername);
-		name.setText(memberName);
-		tele.setText(memberTele);
-		mobi.setText(memberMobi);
-		email.setText(memberEmail);
-		credit.setText(String.valueOf(memberCredit));
+		model = manager.getMemberInfo();
+		username.setText(model.getUsername());
+		tele.setText(model.getTele());
+		mobi.setText(model.getMobi());
+		email.setText(model.getEmail());
+		credit.setText(String.valueOf(model.getCredit()));
 	}
 }

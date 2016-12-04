@@ -18,6 +18,7 @@ public class MemberInfoModel {
 	private final StringProperty mobi;
 	private final StringProperty email;
 	private final IntegerProperty credit;
+	private final StringProperty type;
 	
 	/**
 	 * Default constructor.
@@ -27,12 +28,21 @@ public class MemberInfoModel {
 	}
 	
 	public MemberInfoModel(MemberVo vo){
-		
 		this.username = new SimpleStringProperty(vo.getName());
 		this.tele = new SimpleStringProperty(vo.getContact().getFixedPhone());
 		this.mobi = new SimpleStringProperty(vo.getContact().getMobilePhone());
 		this.email = new SimpleStringProperty(vo.getContact().getEmail());
 		this.credit = new SimpleIntegerProperty(vo.getCredit());
+		switch(vo.getType()){
+		case "PERSONAL" : 
+			this.type = new SimpleStringProperty(String.valueOf(vo.getBirthday()));
+			break;
+		case "BUSINESS" : 
+			this.type = new SimpleStringProperty(String.valueOf(vo.getEnterprise()));
+			break;
+		default: 
+			this.type = new SimpleStringProperty("");
+		}
 		
 	}
 	
@@ -94,5 +104,17 @@ public class MemberInfoModel {
 
     public IntegerProperty creditProperty() {
         return credit;
+    }
+    
+    public String getType() {
+        return type.get();
+    }
+
+    public void setType(String type) {
+        this.type.set(type);
+    }
+
+    public StringProperty typeProperty() {
+        return type;
     }
 }

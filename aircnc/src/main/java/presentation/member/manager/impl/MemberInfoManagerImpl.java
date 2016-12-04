@@ -1,6 +1,7 @@
 package presentation.member.manager.impl;
 
-import presentation.member.manager.MemberInfoManager;
+import presentation.member.manager.UserInfoManager;
+import presentation.member.model.MemberInfoModel;
 import vo.member.MemberVo;
 
 /**
@@ -10,9 +11,10 @@ import vo.member.MemberVo;
  * @author paranoia
  *
  */
-public class MemberInfoManagerImpl implements MemberInfoManager{
+public class MemberInfoManagerImpl implements UserInfoManager{
 	
 	private MemberVo user;
+	private MemberInfoModel memberInfo;
 	
 	@Override
 	public boolean setUser(MemberVo vo){
@@ -22,35 +24,11 @@ public class MemberInfoManagerImpl implements MemberInfoManager{
 		}
 		return false;
 	}
-	
-	
-	@Override
-	public String getUsername(){
-		return user.getName();
-	}
-	
-	@Override
-	public String getTele(){
-		return user.getContact().getMobilePhone();
-	}
-	
-	@Override
-	public String getMobi(){
-		return user.getContact().getMobilePhone();
-	}
-	
-	@Override
-	public String getEmail(){
-		return user.getContact().getEmail();
-	}
-	
-	@Override
-	public int getCredit(){
-		return user.getCredit();
-	}
+
 
 	@Override
-	public MemberVo getMemberVo() {
-		return user;
+	public MemberInfoModel getMemberInfo() {
+		memberInfo = new MemberInfoModel(user);
+		return memberInfo;
 	}
 }

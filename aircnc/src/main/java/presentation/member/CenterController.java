@@ -1,16 +1,14 @@
 package presentation.member;
 
 import presentation.member.view.signin.MemberStartPane;
-import presentation.member.view.signin.fxml.MemberSignInController;
 import presentation.member.view.signin.MemberSignInPane;
 import presentation.member.view.signin.MemberRegisterMainPane;
 import presentation.member.view.signin.MemberRegisterPersonPane;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import presentation.member.view.MemberMainPane;
+import presentation.member.manager.UserInfoManager;
 import presentation.member.view.signin.MemberRegisterEnterprisePane;
 
 /**
@@ -30,11 +28,9 @@ public class CenterController extends Application {
 	private MemberRegisterMainPane registerMain;
 	private MemberRegisterPersonPane registerPerson;
 	private MemberRegisterEnterprisePane registerBusiness;
-
-	private MemberMainPane mainclient;
-
-	private BorderPane rootLayout;
-
+	
+	private UserInfoManager memberInfoManager;
+	
 	private Scene scene;
 
 	private final static int Login_Width = 550;
@@ -59,7 +55,6 @@ public class CenterController extends Application {
 
 		// show the pane of sign in.
 		start = new MemberStartPane(primaryStage);
-		rootLayout = start.getBorderPane();
 		scene = new Scene(start.getBorderPane(), Login_Width, Login_Height);
 		primaryStage.setScene(scene);
 
