@@ -60,8 +60,6 @@ public class MemberOrderMainController implements Initializable{
 	@FXML
 	private TableColumn<MyorderModel,OrderStatus> operation;
 	
-	private OrderStatus status;
-	
 	private MyOrderManager manager;
 	
 	/**
@@ -107,8 +105,6 @@ public class MemberOrderMainController implements Initializable{
                 ObservableValue<OrderStatus>>() {
 
             public ObservableValue<OrderStatus> call(TableColumn.CellDataFeatures<MyorderModel, OrderStatus> p) {
-                status=p.getValue().getOperation();
-                System.out.println(status);
             	return new SimpleObjectProperty<OrderStatus>(p.getValue().getOperation());
             }
         });
@@ -118,8 +114,7 @@ public class MemberOrderMainController implements Initializable{
                 new Callback<TableColumn<MyorderModel,OrderStatus>, TableCell<MyorderModel, OrderStatus>>() {
 
             public TableCell<MyorderModel,OrderStatus> call(TableColumn<MyorderModel, OrderStatus> p) {
-                if(status!=null) return new FunctionButtons(status);
-                return new FunctionButtons(OrderStatus.UNEXECUTED);
+                return new FunctionButtons();
             }       
         });
 	}

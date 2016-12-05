@@ -46,7 +46,6 @@ public class ClientCenterController extends Application {
 	private InfoModifyContentAccessor memberInfoAccessor;
 
 	private AnchorPane rootLayout;
-	private BorderPane mainPane;
 	private AnchorPane content;
 
 	private final static int Client_Width = 1024;
@@ -63,8 +62,7 @@ public class ClientCenterController extends Application {
 		mainClient = new MemberMainPane(primaryStage);
 		mainClient.getController().setCenterController(this);
 		rootLayout = mainClient.getAnchorPane();
-		mainPane = (BorderPane) rootLayout.getChildren().get(0);
-		content = (AnchorPane) mainPane.getChildren().get(1);
+		content = (AnchorPane)rootLayout.getChildren().get(1);
 		scene = new Scene(mainClient.getAnchorPane(), Client_Width, Client_Height);
 		primaryStage.setScene(scene);
 

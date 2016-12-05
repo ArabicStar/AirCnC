@@ -6,12 +6,12 @@ import java.net.URL;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Node;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.AnchorPane;
 import presentation.member.view.memberinfo.fxml.MemberInfoModifyController;
 
 public class MemberInfoModifyPane {
 	
-	private Pane infoLayout;
+	private AnchorPane infoLayout;
 	private MemberInfoModifyController controller;
 
 

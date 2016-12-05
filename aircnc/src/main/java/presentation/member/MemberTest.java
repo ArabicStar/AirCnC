@@ -48,7 +48,13 @@ public class MemberTest {
         		.setIsReviewed(true).setRoomNumber(1).setRoomType("标准间")
         		.setStayDays(2).setUserId(20808121).setStatus(OrderStatus.ABNORMAL).setUserName("南京大学渣")
         		.getOrderInfo();
-		list.add(vo1); list.add(vo2);
+		OrderVo vo3 =  new OrderVoBuilder().setEntryTime(LocalDateTime.now()).setHasChildren(false)
+        		.setHotelId(1000).setHotelName("速八酒店").setLastTime(LocalDateTime.now())
+        		.setOrderId("201636").setPeopleNumber(3).setPrice(200)
+        		.setIsReviewed(true).setRoomNumber(1).setRoomType("标准间")
+        		.setStayDays(2).setUserId(20808121).setStatus(OrderStatus.UNEXECUTED).setUserName("南京大学渣")
+        		.getOrderInfo();
+		list.add(vo1); list.add(vo2); list.add(vo3);
 		manager.setOrderList(list);
 		return manager;
 	}

@@ -2,7 +2,8 @@
 .root{
 	-fx-font-family:"DengXian Light","Pingfang SC","Microsoft Yahei","Helvetica Neue";
 	-fx-background-size: 1024px 768px;
-	-fx-background-image: url("Main_BG.png");
+	/*-fx-background-image: url("../../../../../images/member/Main_BG.png");*/
+	-fx-background-color: #fff;
 }
 
 .hbox{
@@ -12,7 +13,7 @@
 }
 
 .nav-vbox{
-	
+	-fx-background-image: url("../../../../../images/member/Main_BG.png");
 }
 
 .label{

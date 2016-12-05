@@ -21,13 +21,20 @@ import utils.info.order.OrderStatus;
  */
 public class FunctionButtons extends TableCell<MyorderModel, OrderStatus>{
 	
-	final Button[] cellButton;
-	final HBox buttons;
+	Button[] cellButton;
+	HBox buttons;
+	OrderStatus status;
     
-    public FunctionButtons(OrderStatus status){
+    public FunctionButtons(){
+    	status = OrderStatus.EXECUTED;
+    	createFunctionButtons(status);
+    }
+    
+    public void createFunctionButtons(OrderStatus status){
+    	this.status = status;
     	buttons = new HBox();
     	switch(status){
-    	case UNEXECUTED:
+    	case UNEXECUTED: 
     		cellButton = new Button[]{ 
     				createButtons(FunctionButtonType.CHECK) , createButtons(FunctionButtonType.CANCEL) 
     				};    		
@@ -59,7 +66,6 @@ public class FunctionButtons extends TableCell<MyorderModel, OrderStatus>{
     	}
     	
     	buttons.setStyle("-fx-spacing:3px; -fx-padding: 5 0 0 0;");
-    	
     }
     
     
@@ -93,16 +99,27 @@ public class FunctionButtons extends TableCell<MyorderModel, OrderStatus>{
 
              @Override
              public void handle(ActionEvent t) {
-            	 Alert alert = new Alert(AlertType.CONFIRMATION);
-            	 alert.setTitle("确认信息");
-            	 alert.setHeaderText("请进行确认");
-            	 alert.setContentText("你确定吗？");
-            	 
-            	 Optional<ButtonType> result = alert.showAndWait();
-            	 if (result.get() == ButtonType.OK){
-            	     // 
-            	 } else {
-            	     // 
+            	 switch(type){
+            	 case CHECK: 
+            		PlainDialog alert = new PlainDialog(AlertType.INFORMATION,
+         			"查看订单","让我等会写一下这个东西，不对，让万总写一下");
+         			alert.showDialog();
+            		 break;
+            	 case REVIEW: 
+             		PlainDialog alert2 = new PlainDialog(AlertType.INFORMATION,
+          			"订单评价","等我写出来。。");
+          			alert2.showDialog();
+             		 break;
+            	 case CANCEL: 
+              		PlainDialog alert3 = new PlainDialog(AlertType.INFORMATION,
+           			"取消订单","你确定取消该订单吗？");
+           			alert3.showDialog();
+              		 break;
+            	 case APPEAL: 
+              		PlainDialog alert4 = new PlainDialog(AlertType.INFORMATION,
+           			"订单申诉","等我写出来。。");
+           			alert4.showDialog();
+              		 break;
             	 }
              }
          });
@@ -118,6 +135,8 @@ public class FunctionButtons extends TableCell<MyorderModel, OrderStatus>{
     protected void updateItem(OrderStatus status, boolean empty) {
         super.updateItem(status, empty);
         if(!empty){
+        		this.status = status;
+        		createFunctionButtons(status);
         		setGraphic(buttons);
         }
     }
