@@ -9,27 +9,18 @@ import javafx.scene.control.Label;
 import presentation.market.MarketCenterController;
 
 public class MarketMainController implements Initializable {
+	private static int count = 0;
 
 	@FXML
-	private Label hotelInfo;
+	private Label websitePromotionStrategy;
 
 	@FXML
-	private Label orderExecute;
+	private Label abnormalOrderBrowse;
 
 	@FXML
-	private Label orderBrowse;
+	private Label creditTopup;
 
-	@FXML
-	private Label checkInLive;
 
-	@FXML
-	private Label checkOut;
-
-	@FXML
-	private Label abnormalOrder;
-
-	@FXML
-	private Label hotelPromotion;
 
 	private MarketCenterController controller;
 
@@ -44,23 +35,24 @@ public class MarketMainController implements Initializable {
 	 * @param centerController
 	 */
 	public void setCenterController(MarketCenterController centerController) {
-		// TODO Auto-generated method stub
 		this.controller = centerController;
 	}
 	
 	
 	@FXML
-	private void handleHotelInfo(){
+	private void handleWebsitePromotionStrategy(){
+		count++;
+		websitePromotionStrategy.setText(Integer.toBinaryString(count));
+		this.controller.addWebsitePromotionStrategyPane();
+	}
+	
+	@FXML
+	private void handleAbnormalOrderBrowse(){
 		// TODO
 	}
 	
 	@FXML
-	private void handleOrderExecute(){
-		// TODO
-	}
-	
-	@FXML
-	private void handleOrderBrowse(){
+	private void handleCreditTopup(){
 		// TODO
 	}
 

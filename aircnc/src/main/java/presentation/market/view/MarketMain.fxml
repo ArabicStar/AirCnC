@@ -9,11 +9,11 @@
    <left>
       <Pane prefHeight="768" prefWidth="247.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox alignment="CENTER" layoutY="271" prefHeight="400.0" prefWidth="247.0">
+            <VBox alignment="CENTER" layoutY="274.0" prefHeight="201.0" prefWidth="247.0">
                <children>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="121.0" styleClass="hbox">
                      <children>
-                        <Label fx:id="hotelInfo" contentDisplay="CENTER" onMouseClicked="#handleHotelInfo" text="网站营销策略" textAlignment="CENTER" />
+                        <Label fx:id="websitePromotionStrategy" contentDisplay="CENTER" onMouseClicked="#handleWebsitePromotionStrategy" text="网站营销策略" textAlignment="CENTER" />
                      </children>
                      <padding>
                         <Insets right="30.0" />
@@ -21,7 +21,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="121.0" styleClass="hbox">
                      <children>
-                        <Label fx:id="orderExecute" onMouseClicked="#handleOrderExecute" text="异常订单浏览" textAlignment="CENTER" />
+                        <Label fx:id="abnormalOrderBrowse" onMouseClicked="#handleAbnormalOrderBrowse" text="异常订单浏览" textAlignment="CENTER" />
                      </children>
                      <VBox.margin>
                         <Insets />
@@ -32,7 +32,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="121.0" styleClass="hbox">
                      <children>
-                        <Label fx:id="orderBrowse" onMouseClicked="#handleOrderBrowse" text="信用充值" textAlignment="CENTER" />
+                        <Label fx:id="creditTopup" onMouseClicked="#handleCreditTopup" text="信用充值" textAlignment="CENTER" />
                      </children>
                      <padding>
                         <Insets right="30.0" />

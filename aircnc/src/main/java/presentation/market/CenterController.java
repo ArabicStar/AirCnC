@@ -44,7 +44,7 @@ public class CenterController extends Application{
 	
 	public void initializeClient() {
 		primaryStage.close();
-		// TODO:生成新的界面
+		// change to the new view of market
 		MarketCenterController client = new MarketCenterController();
 		try {
 			client.start(new Stage());
