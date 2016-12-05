@@ -13,6 +13,7 @@ import vo.member.MemberVo;
  *
  */
 public class MemberInfoModel {
+	private final StringProperty id;
 	private final StringProperty username;
 	private final StringProperty tele;
 	private final StringProperty mobi;
@@ -29,6 +30,7 @@ public class MemberInfoModel {
 	}
 	
 	public MemberInfoModel(MemberVo vo){
+		this.id = new SimpleStringProperty(vo.getId());
 		this.username = new SimpleStringProperty(vo.getName());
 		this.tele = new SimpleStringProperty(vo.getContact().getFixedPhone());
 		this.mobi = new SimpleStringProperty(vo.getContact().getMobilePhone());
@@ -48,6 +50,18 @@ public class MemberInfoModel {
 		}
 		
 	}
+	
+	public String getID() {
+        return id.get();
+    }
+
+    public void setId(String newId) {
+        this.id.set(newId);
+    }
+
+    public StringProperty idProperty() {
+        return id;
+    }
 	
 	public String getUsername() {
         return username.get();

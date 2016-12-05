@@ -16,6 +16,9 @@ import presentation.member.model.MemberInfoModel;
 public class MemberInfoMainController implements Initializable{
 	
 	@FXML
+	private Label id;
+	
+	@FXML
 	private Button modify;
 	
 	@FXML
@@ -82,6 +85,7 @@ public class MemberInfoMainController implements Initializable{
 	
 	private void initMemberInfo(){
 		model = manager.getMemberInfo();
+		id.setText(model.getID());
 		username.setText(model.getUsername());
 		tele.setText(model.getTele());
 		mobi.setText(model.getMobi());

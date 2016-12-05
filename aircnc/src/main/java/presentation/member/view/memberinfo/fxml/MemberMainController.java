@@ -41,25 +41,21 @@ public class MemberMainController implements Initializable{
 	
 	@FXML
 	private void HandleMemberInfo(){
-		memberInfo.setText("你蠢不蠢");
 		controller.addInfoMainPane();
 	}
 	
 	@FXML
 	private void HandleSearchHotel(){
-		searchHotel.setText("Boooooom");
 		controller.addSearchHotelPane();
 	}
 	
 	@FXML
 	private void HandleMyOrder(){
-		myOrder.setText("哈哈哈哈");
 		controller.addOrderMainPane();
 	}
 	
 	@FXML
 	private void HandleCreditChange(){
-		creditChange.setText("新世界");
 		controller.addCreditChangePane();
 	}
 	

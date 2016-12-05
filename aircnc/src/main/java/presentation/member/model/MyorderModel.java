@@ -1,6 +1,7 @@
 package presentation.member.model;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 
 import javafx.beans.property.StringProperty;
 import presentation.member.utils.FunctionButtons;
@@ -40,29 +41,33 @@ public class MyorderModel {
      * @param state
      * @param timeAndSum
      * @param totalPrice
+     * @param operation
      */
-    public MyorderModel(String s1,String s2,String s3,String s4,String s5) {
-        this.hotelName = new SimpleStringProperty(s1);
-        
-        //process the checkinTime
-        this.checkinTime = new SimpleStringProperty(s2);
-        
-        this.state = new SimpleStringProperty(s3);
-        this.timeAndSum = new SimpleStringProperty(s4);
-        this.totalPrice = new SimpleStringProperty(s5);
-        this.operation = new SimpleObjectProperty<OrderStatus>(OrderStatus.ABNORMAL);
-    }
-    
     public MyorderModel(OrderVo order) {
         this.hotelName = new SimpleStringProperty(order.getHotelName());
         
         //process the checkinTime
         this.checkinTime = new SimpleStringProperty(transformTime(order.getEntryTime()));
         
-        this.state = new SimpleStringProperty(String.valueOf(order.getStatus()));
+        String state;
+        switch(order.getStatus()){
+        case ABNORMAL: 
+        	state = "异常";  break;
+        case EXECUTED: 
+        	state = "已执行";  break;
+        case UNEXECUTED: 
+        	state = "未执行";  break;
+        case REPEALED: 
+        	state = "撤销";  break;
+        default: 
+        	state = "";  break;
+        }
+        
+        this.state = new SimpleStringProperty(state);
         this.timeAndSum = new SimpleStringProperty(order.getStayDays()+"晚/"+order.getRoomNumber()+"间");
         this.totalPrice = new SimpleStringProperty(String.valueOf(order.getPrice())+"元");
         this.operation = new SimpleObjectProperty<OrderStatus>(order.getStatus());
+        
         
     }
     

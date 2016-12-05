@@ -10,16 +10,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import po.order.OrderPoBuilder;
 import presentation.member.view.memberinfo.MemberInfoMainPane;
 import presentation.member.view.memberinfo.MemberInfoModifyPane;
 import presentation.member.view.myorder.MemberOrderMainPane;
 import presentation.member.view.searchhotel.MemberSearchHotelPane;
-import utils.info.order.OrderStatus;
-import vo.member.ContactVoBuilder;
-import vo.member.MemberVo;
-import vo.member.MemberVoBuilder;
 import presentation.member.accessor.impl.InfoModifyContentAccessor;
+import presentation.member.manager.MyOrderManager;
 import presentation.member.manager.UserInfoManager;
 import presentation.member.manager.impl.MemberInfoManagerImpl;
 import presentation.member.model.CreditModel;
@@ -45,6 +41,7 @@ public class ClientCenterController extends Application {
 	private MemberOrderMainPane orderMain;
 	
 	private UserInfoManager memberInfoManager;
+	private MyOrderManager myOrderManager;
 	
 	private InfoModifyContentAccessor memberInfoAccessor;
 
@@ -92,6 +89,7 @@ public class ClientCenterController extends Application {
 		content.getChildren().clear();
 		memberInfoAccessor = new InfoModifyContentAccessor();
 		infoModify = new MemberInfoModifyPane();
+		content.getChildren().add(infoModify.getPane());
 		AnchorPane.setTopAnchor((infoModify.getPane()), 10.0);
 		//(infoModify.getPane());
 		infoModify.getController().setCenterController(this);
@@ -118,30 +116,15 @@ public class ClientCenterController extends Application {
 		searchMain.getController().setCenterController(this);
 	}
 	
-	private ObservableList<MyorderModel> orderData = FXCollections.observableArrayList();
-	
 	public void addOrderMainPane() {
+		myOrderManager = MemberTest.getMyOrderData();
 		content.getChildren().clear();
 		orderMain = new MemberOrderMainPane();
 		content.getChildren().add(orderMain.getPane());
 		orderMain.getController().setCenterController(this);
-		
+		orderMain.getController().setManager(myOrderManager);
 	}
 	
-	public ObservableList<MyorderModel> getMyOrderData(){
-    	ObservableList<MyorderModel> orderData = FXCollections.observableArrayList();
-    	orderData.add(new MyorderModel("速吧酒店","2016-10-09","异常","5晚/1间","290元"));
-		orderData.add(new MyorderModel("速吧酒店","2016-10-09","异常","5晚/1间","290元"));
-		orderData.add(new MyorderModel("速吧酒店","2016-10-09","异常","5晚/1间","290元"));
-		orderData.add(new MyorderModel("速吧酒店","2016-10-09","异常","5晚/1间","290元"));
-		orderData.add(new MyorderModel("速吧酒店","2016-10-09","异常","5晚/1间","290元"));
-		orderData.add(new MyorderModel("速吧酒店","2016-10-09","异常","5晚/1间","290元"));
-		orderData.add(new MyorderModel("速吧酒店","2016-10-09","异常","5晚/1间","290元"));
-		orderData.add(new MyorderModel("速吧酒店","2016-10-09","异常","5晚/1间","290元"));
-		orderData.add(new MyorderModel("速吧酒店","2016-10-09","异常","5晚/1间","290元"));
-		orderData.add(new MyorderModel("速吧酒店","2016-10-09","异常","5晚/1间","290元"));
-		return orderData;
-    }
 	
 	public ObservableList<CreditModel> getCreditData(){
     	ObservableList<CreditModel> orderData = FXCollections.observableArrayList();

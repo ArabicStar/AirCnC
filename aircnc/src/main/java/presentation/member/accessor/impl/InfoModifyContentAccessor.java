@@ -1,6 +1,7 @@
 package presentation.member.accessor.impl;
 
 import presentation.member.accessor.InfoModifyAccessor;
+import presentation.member.model.MemberInfoModel;
 import vo.member.ContactVoBuilder;
 import vo.member.MemberVo;
 import vo.member.MemberVoBuilder;
@@ -22,6 +23,8 @@ public class InfoModifyContentAccessor implements InfoModifyAccessor{
 	
 	private int passwordHash;
 	
+	private MemberInfoModel model;
+	
 	private MemberVo vo;
 
 	@Override
@@ -34,8 +37,8 @@ public class InfoModifyContentAccessor implements InfoModifyAccessor{
 	}
 	
 	@Override
-	public void setMemberVo(MemberVo vo){
-		this.vo = vo;
+	public void setMemberModel(MemberInfoModel model){
+		this.model = model;
 	}
 	
 	@Override

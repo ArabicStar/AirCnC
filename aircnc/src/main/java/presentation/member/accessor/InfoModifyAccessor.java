@@ -1,5 +1,6 @@
 package presentation.member.accessor;
 
+import presentation.member.model.MemberInfoModel;
 import vo.member.MemberVo;
 
 public interface InfoModifyAccessor {
@@ -16,6 +17,6 @@ public interface InfoModifyAccessor {
 	
 	public void setTele(String tele);
 	
-	public void setMemberVo(MemberVo vo);
+	public void setMemberModel(MemberInfoModel model);
 	
 }
