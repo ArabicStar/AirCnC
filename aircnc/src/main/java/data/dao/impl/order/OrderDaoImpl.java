@@ -10,18 +10,14 @@ import org.hibernate.Query;
 import data.dao.order.OrderDao;
 import po.order.OrderPo;
 
-public class OrderDaoImpl implements OrderDao {
-
-	private static OrderDaoImpl orderDataServiceImpl;
+public enum OrderDaoImpl implements OrderDao {
+	INSTANCE;
 
 	public static OrderDaoImpl getInstance() {
-		if (orderDataServiceImpl == null) {
-			orderDataServiceImpl = new OrderDaoImpl();
-		}
-		return orderDataServiceImpl;
+		return INSTANCE;
 	}
 
-	public OrderDaoImpl() {
+	private OrderDaoImpl() {
 
 	}
 
@@ -85,8 +81,9 @@ public class OrderDaoImpl implements OrderDao {
 		if (!existsOrder(orderId)) {
 			return false;
 		}
-		OrderPo deleted = getOrder(orderId);
+		
 		return execute(session -> {
+			OrderPo deleted = session.get(OrderPo.class, orderId);
 			session.delete(deleted);
 			return true;
 		});

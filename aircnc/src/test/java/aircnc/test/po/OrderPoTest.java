@@ -18,7 +18,7 @@ public class OrderPoTest {
 	OrderPo orderPo;
 	@Before
 	public void startUp() {
-		orderDao = new OrderDaoImpl();
+		orderDao = OrderDaoImpl.getInstance();
 		LocalDateTime entryTime = LocalDateTime.now();
 		orderPo = new OrderPoBuilder().setEntryTime(entryTime).setHasChildren(false)
         		.setHotelId(1000).setHotelName("乐天玛特").setLastTime(entryTime)
