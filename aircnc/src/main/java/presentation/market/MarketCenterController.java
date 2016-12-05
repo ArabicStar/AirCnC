@@ -44,11 +44,9 @@ public class MarketCenterController extends Application {
 		clearContent();
 		websitePromotionStrategyPane = new WebsitePromotionStrategyPane();
 		mainClient.getBorderPane().setCenter(websitePromotionStrategyPane.getPane());
-		if(websitePromotionStrategyPane.getController() == null) {
-			System.out.println("NULL!!!");
-		}
 		websitePromotionStrategyPane.getController().setCenterController(this);
-		
+		// TODO:测试用代码
+		websitePromotionStrategyPane.getController().test();
 	}
 	
 	

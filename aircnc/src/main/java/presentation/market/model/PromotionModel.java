@@ -1,23 +1,28 @@
 package presentation.market.model;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class PromotionModel {
-	private String promotionDescription;
+	private StringProperty promotionDescription;
 	
 	public PromotionModel() {
 		
 	}
 	
 	public PromotionModel(String promotionDescription) {
-		this.promotionDescription = promotionDescription;
+		this.promotionDescription = new SimpleStringProperty(promotionDescription);
 	}
 
-	public String getPromotionDescription() {
+	public StringProperty getPromotionDescription() {
 		return promotionDescription;
 	}
 
-	public void setPromotionDescription(String promotionDescription) {
+	public void setPromotionDescription(StringProperty promotionDescription) {
 		this.promotionDescription = promotionDescription;
 	}
+
+
 	
 
 }
