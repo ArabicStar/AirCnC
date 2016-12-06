@@ -3,17 +3,23 @@ package presentation.market.view.websitepromotionstrategy.fxml;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Cell;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.control.TableView;
+import javafx.util.Callback;
 import presentation.market.MarketCenterController;
+import presentation.market.model.OrderModel;
 import presentation.market.model.PromotionModel;
+import presentation.market.utils.ButtonCell;
 import presentation.market.utils.ButtonName;
+import presentation.market.utils.PromotionButtonCell;
 
 public class WebsitePromotionStrategyController implements Initializable{
 
@@ -44,9 +50,29 @@ public class WebsitePromotionStrategyController implements Initializable{
 		promotionData.add(new PromotionModel("一律七折"));
 		promotionData.add(new PromotionModel("唱小星星可以减50元"));
 		promotionData.add(new PromotionModel("生日当天减100元"));
-		promotionData.add(new PromotionModel("1235326u4596476hfiuhjihfiufhiwuoqhfoewqhofhwioeqhhi富含温泉哦好服务器而范围"));
+		promotionData.add(new PromotionModel("送一份冰淇淋"));
 		promotionTable.setItems(promotionData);
 		description.setCellValueFactory(cellData -> cellData.getValue().getPromotionDescription());
+		
+		operation.setSortable(false);
+		
+		operation.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<PromotionModel,ButtonName>, 
+				ObservableValue<ButtonName>>() {
+			
+			@Override
+			public ObservableValue<ButtonName> call(CellDataFeatures<PromotionModel, ButtonName> p) {
+				return new SimpleObjectProperty<ButtonName>(p.getValue().getOperation());
+			}
+		});
+		
+		operation.setCellFactory(
+				new Callback<TableColumn<PromotionModel, ButtonName>, 
+				TableCell<PromotionModel,ButtonName>>() {
+			public TableCell<PromotionModel, ButtonName> call(TableColumn<PromotionModel, ButtonName> p) {
+				return new PromotionButtonCell(ButtonName.EDIT);
+			}
+		});
 	}
 	
 

@@ -2,8 +2,6 @@ package presentation.market.utils;
 
 import java.util.Optional;
 
-import javax.persistence.criteria.CriteriaBuilder.Case;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
