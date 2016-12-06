@@ -1,4 +1,6 @@
-/target/
+/aircnc/target/
+/aircnc-server/target/
+/aircnc-user-client/target/
 .classpath
 .project
 .settings

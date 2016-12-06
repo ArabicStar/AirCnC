@@ -1,13 +1,10 @@
 package presentation.member;
 
-import java.time.LocalDate;
-
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import presentation.member.view.memberinfo.MemberInfoMainPane;
@@ -17,9 +14,7 @@ import presentation.member.view.searchhotel.MemberSearchHotelPane;
 import presentation.member.accessor.impl.InfoModifyContentAccessor;
 import presentation.member.manager.MyOrderManager;
 import presentation.member.manager.UserInfoManager;
-import presentation.member.manager.impl.MemberInfoManagerImpl;
 import presentation.member.model.CreditModel;
-import presentation.member.model.MyorderModel;
 import presentation.member.view.MemberMainPane;
 import presentation.member.view.creditchange.MemberCreditChangePane;
 
