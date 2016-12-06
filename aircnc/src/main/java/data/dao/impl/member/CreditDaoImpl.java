@@ -20,7 +20,9 @@ import po.member.credit.CreditChangePo;
  * @author ClevelandAlto
  *
  */
-public class CreditDaoImpl implements CreditDao, CreditQueryDao {
+public enum CreditDaoImpl implements CreditDao, CreditQueryDao {
+	INSTANCE;
+
 	@Override
 	public MemberPo changeCredit(final CreditChangePo changePo) {
 		if (changePo == null)

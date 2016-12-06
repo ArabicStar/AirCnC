@@ -29,8 +29,8 @@ public class MemberAccountServiceTest {
 
 	@Before
 	public void setUp() throws Exception {
-		dao = new MemberDaoImpl();
-		acc = new MemberAccountManager(dao);
+		dao = MemberDaoImpl.INSTANCE;
+		acc= MemberAccountManager.launch(dao);
 		prepareTestStatistic(dao);
 	}
 
@@ -70,7 +70,6 @@ public class MemberAccountServiceTest {
 		assertEquals(true, res1);
 		assertEquals(false, res2);
 	}
-
 
 	@After
 	public void tearDown() {

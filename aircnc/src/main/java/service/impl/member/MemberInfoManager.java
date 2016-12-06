@@ -40,8 +40,8 @@ public class MemberInfoManager implements MemberInfoService, MemberInfoQueryServ
 
 	@Override
 	public List<HotelVo> getMemberHistoryHotel(String id) {
-		if (!memberDao.existsMember(id))
-			return null;
+		// if (!memberDao.existsMember(id))
+		// return null;
 
 		// TODO need modified
 		List<OrderVo> historyOrders = null;
@@ -57,8 +57,8 @@ public class MemberInfoManager implements MemberInfoService, MemberInfoQueryServ
 
 	@Override
 	public List<CreditChangeVo> getMemberCreditChange(String id) {
-		if (!memberDao.existsMember(id))
-			return null;
+		// if (!memberDao.existsMember(id))
+		// return null;
 
 		// TODO need modified
 		return null;

@@ -1,6 +1,9 @@
 package utils.proxy;
 
 import java.lang.reflect.Method;
+import java.rmi.Remote;
+
+import com.sun.swing.internal.plaf.metal.resources.metal;
 
 import utils.proxy.AuthenticatePolicy.Client;
 
@@ -72,13 +75,14 @@ public abstract class AccessSecureProxy {
 	 */
 	protected AuthenticatePolicy getAuthPolicy() {
 		StackTraceElement[] stack = new Throwable().getStackTrace();
-		Method method = null;
-		try {
-			method = this.getClass().getMethod(stack[2].getMethodName());
-		} catch (NoSuchMethodException e) {
-		} catch (SecurityException e) {
-			e.printStackTrace();
-		}
-		return method.getAnnotation(AuthenticatePolicy.class);
+		String methodName = stack[2].getMethodName();
+
+		Method[] ms = this.getClass().getMethods();
+
+		for (Method m : ms)
+			if (m.getName().equals(methodName))
+				return m.getAnnotation(AuthenticatePolicy.class);
+
+		return null;
 	}
 }

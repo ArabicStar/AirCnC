@@ -1,11 +1,16 @@
 package data.dao.member;
 
+import java.rmi.Remote;
+
 import po.member.MemberPo;
 
 /**
  * Dao of member.<br>
  * Offer standard CRUD methods, plus a existence checker for convinience.<br>
- * However, implemention of {@code existsMember(String id)} performs similar as
+ * <br>
+ * 
+ * <b>Tips:</b><br>
+ * Implemention of {@code existsMember(String id)} performs similar as
  * {@code findMember(String id)} - get a po from database then check if is null
  * or not. It means it causes a database query. So if you will call
  * {@code findMember(String id)} shortly after, then check returned po is null
@@ -15,7 +20,7 @@ import po.member.MemberPo;
  * @author ClevelandAlto
  *
  */
-public interface MemberDao {
+public interface MemberDao extends Remote {
 	/**
 	 * Add a new member by given po.<br>
 	 * 

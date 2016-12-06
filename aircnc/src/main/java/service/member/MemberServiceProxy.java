@@ -2,7 +2,6 @@ package service.member;
 
 import java.util.List;
 
-import data.dao.member.MemberDaoProxy;
 import utils.info.member.MemberInfo;
 import utils.proxy.AccessSecureProxy;
 import utils.proxy.AuthenticatePolicy;
@@ -13,21 +12,34 @@ import vo.member.MemberVoBuilder;
 import vo.member.credit.CreditChangeVo;
 import vo.order.OrderVo;
 
-public abstract class MemberServiceProxy extends AccessSecureProxy
+public class MemberServiceProxy extends AccessSecureProxy
 		implements MemberAccountService, MemberCreditService, MemberInfoService {
+	private static MemberServiceProxy instance;
+
+	public static final MemberServiceProxy launch(Client clientId) {
+		if (instance != null)
+			throw new IllegalArgumentException(
+					"MemberServiceProxy.launch - MemberServiceProxy instance has existed already.");
+
+		instance = new MemberServiceProxy(clientId);
+		return getInstance();
+	}
+
+	public static final MemberServiceProxy getInstance() {
+		if (instance == null)
+			throw new IllegalArgumentException(
+					"MemberServiceProxy.getInstance- MemberServiceProxy instance has not been launcher yet.");
+
+		return instance;
+	}
 
 	private MemberAccountService accountService;
 	private MemberInfoService infoService;
 	private MemberCreditService creditService;
-	protected MemberDaoProxy dao;
 
-	protected MemberServiceProxy(Client clientId, MemberDaoProxy dao) {
+	private MemberServiceProxy(Client clientId) {
 		super(clientId);
-		this.dao = dao;
 	}
-
-	@AuthenticatePolicy({ Client.USER })
-	public abstract void loadAccountService();
 
 	@AuthenticatePolicy({ Client.USER })
 	public void loadAccountService(MemberAccountService accountService) {
@@ -37,18 +49,11 @@ public abstract class MemberServiceProxy extends AccessSecureProxy
 	}
 
 	@AuthenticatePolicy({ Client.USER })
-	// FIXME:depend on other service module
-	public abstract void loadInfoService();
-
-	@AuthenticatePolicy({ Client.USER })
 	public void loadInfoService(MemberInfoService infoService) {
 		checkAuthentication();
 
 		this.infoService = infoService;
 	}
-
-	@AuthenticatePolicy({ Client.USER, Client.HOTEL, Client.MARKET })
-	public abstract void loadCreditService();
 
 	@AuthenticatePolicy({ Client.USER, Client.HOTEL, Client.MARKET })
 	public void loadCreditService(MemberCreditService creditService) {

@@ -44,7 +44,15 @@ public abstract class ContactInfoBuilder extends ContactInfoTemplate {
 	 * @return this instance<br>
 	 */
 	public ContactInfoBuilder setEmail(String email) {
-		this.email = email == null ? BLANK : (checkEmail(email) ? email : BLANK);
+		if (email == null || email.length() == 0) {
+			this.email = BLANK;
+			return this;
+		}
+
+		if (!checkEmail(mobilePhone))
+			throw new IllegalArgumentException("ContactInfoBuilder.setemail - Invalid Email String");
+
+		this.email = email;
 		return this;
 	}
 
@@ -56,7 +64,15 @@ public abstract class ContactInfoBuilder extends ContactInfoTemplate {
 	 * @return this instance <br>
 	 */
 	public ContactInfoBuilder setFixedPhone(String fixedPhone) {
-		this.fixedPhone = fixedPhone == null ? BLANK : (checkFixedPhone(fixedPhone) ? fixedPhone : BLANK);
+		if (fixedPhone == null || fixedPhone.length() == 0) {
+			this.fixedPhone = BLANK;
+			return this;
+		}
+
+		if (!checkFixedPhone(mobilePhone))
+			throw new IllegalArgumentException("ContactInfoBuilder.setFixedPhone - Invalid Fixed Phone Number String");
+
+		this.fixedPhone = fixedPhone;
 		return this;
 	}
 
@@ -68,7 +84,16 @@ public abstract class ContactInfoBuilder extends ContactInfoTemplate {
 	 * @return this instance <br>
 	 */
 	public ContactInfoBuilder setMobilePhone(String mobilePhone) {
-		this.mobilePhone = mobilePhone == null ? BLANK : (checkMobilePhone(mobilePhone) ? mobilePhone : BLANK);
+		if (mobilePhone == null || mobilePhone.length() == 0) {
+			this.mobilePhone = BLANK;
+			return this;
+		}
+
+		if (!checkMobilePhone(mobilePhone))
+			throw new IllegalArgumentException(
+					"ContactInfoBuilder.setMobilePhone - Invalid Mobile Phone Number String");
+
+		this.mobilePhone = mobilePhone;
 		return this;
 	}
 

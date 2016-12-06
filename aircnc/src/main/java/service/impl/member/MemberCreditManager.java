@@ -22,6 +22,25 @@ import vo.member.credit.CreditChangeVoBuilder;
 import vo.order.OrderVo;
 
 public class MemberCreditManager implements MemberCreditService, CreditChangeQueryService {
+	private static MemberCreditService instance;
+
+	public static MemberCreditService launch(MemberDao memberDao, CreditDao creditDao, CreditQueryDao creditQuery) {
+		if (instance != null)
+			throw new IllegalArgumentException(
+					"MemberCreditManager.launch - MemberCreditService instance has existed already");
+
+		instance = new MemberCreditManager(memberDao, creditDao, creditQuery);
+		return getInstance();
+	}
+
+	public static final MemberCreditService getInstance() {
+		if (instance == null)
+			throw new IllegalArgumentException(
+					"MemberCreditManager.getInstance - MemberCreditService instance has not been launched yet");
+
+		return instance;
+	}
+
 	private CreditQueryDao dao;
 	private MemberDao memberDao;
 	private CreditDao creditDao;

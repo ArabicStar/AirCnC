@@ -2,8 +2,6 @@ package data.dao.impl.hotel;
 
 import static data.hibernate.Hibernator.execute;
 
-import org.hibernate.criterion.Restrictions;
-
 import data.dao.hotel.HotelDao;
 import po.hotel.HotelPo;
 import po.hotel.HotelPoBuilder;
@@ -12,18 +10,18 @@ public class HotelDaoImpl implements HotelDao{
 
 	
 	@Override
-	public HotelPo findHotel(final int id) {
+	public HotelPo findHotel(final String idString) {
 		return execute(session -> {
-			return (HotelPo) session.get(HotelPo.class,id);
+			return (HotelPo) session.get(HotelPo.class, Integer.parseInt(idString));
 		});
 	}
 
 	@Override
-	public boolean deleteHotel(final int id) {
+	public boolean deleteHotel(final String idString) {
 		return execute(session -> {
 			Boolean flag = Boolean.FALSE;// for performance
 
-			HotelPo deleted = (HotelPo) session.get(HotelPo.class, id);
+			HotelPo deleted = (HotelPo) session.get(HotelPo.class, Integer.parseInt(idString));
 			if (flag = Boolean.valueOf((deleted != null)))// check existence
 				session.delete(deleted);
 
@@ -39,7 +37,7 @@ public class HotelDaoImpl implements HotelDao{
 		return execute(session -> {
 			Boolean flag = Boolean.FALSE;
 
-			HotelPo mem = session.get(HotelPo.class, po.getId());
+			HotelPo mem = session.get(HotelPo.class, Integer.parseInt(po.getStringId()));
 			if (flag = Boolean.valueOf(mem != null))
 				HotelPoBuilder.updatePo(po, mem);
 
@@ -53,7 +51,7 @@ public class HotelDaoImpl implements HotelDao{
 			return false;
 
 		// should not exist yet
-		if (existName(po.getName()))
+		if (existHotel(po.getStringId()))
 			return false;
 
 		return execute(session -> {
@@ -64,18 +62,10 @@ public class HotelDaoImpl implements HotelDao{
 		});
 	}
 
-
 	@Override
-	public boolean existName(String name) {
+	public boolean existHotel(final String idString) {
 		return execute(session -> {
-			return session.createCriteria(HotelPo.class).add(Restrictions.eq("NAME",name)).list().isEmpty();
-		});
-	}
-
-	@Override
-	public HotelPo findHotel(String name) {
-		return (HotelPo) execute(session -> {
-			return session.createCriteria(HotelPo.class).add(Restrictions.eq("NAME",name)).list().get(0);
+			return (HotelPo) session.get(HotelPo.class, Integer.parseInt(idString)) != null;
 		});
 	}
 

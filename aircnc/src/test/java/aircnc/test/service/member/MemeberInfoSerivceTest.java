@@ -26,8 +26,8 @@ public class MemeberInfoSerivceTest {
 
 	@Before
 	public void setUp() throws Exception {
-		dao = new MemberDaoImpl();
-		account = new MemberAccountManager(dao);
+		dao = MemberDaoImpl.INSTANCE;
+		account = MemberAccountManager.launch(dao);
 		info = new MemberInfoManager(account, dao, null);
 		prepareTestStatistic(dao);
 	}

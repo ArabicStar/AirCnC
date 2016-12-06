@@ -28,8 +28,8 @@ public class MemberCreditServiceTest {
 
 	@Before
 	public void setUp() throws Exception {
-		memberDao = new MemberDaoImpl();
-		creditDao = new CreditDaoImpl();
+		memberDao = MemberDaoImpl.INSTANCE;
+		creditDao = CreditDaoImpl.INSTANCE;
 		cs = new MemberCreditManager(memberDao, creditDao, creditDao);
 		prepareTestStatistic(memberDao);
 	}

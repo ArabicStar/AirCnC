@@ -38,14 +38,13 @@ public abstract class HotelInfo extends HotelInfoTemplate{
 	 * @param type
 	 */
 	protected HotelInfo() {
-		id = 0;
+		id = 1;
 		name = BLANK;
 		scope = BLANK;
 		location = BLANK;
 		introduction = BLANK;
 		star = 1;
 		grade = 0.0;
-		equipment = BLANK;
 		isValid = true;
 	}
 
@@ -85,12 +84,6 @@ public abstract class HotelInfo extends HotelInfoTemplate{
 		if(isValid())
 			return grade;
 		return Double.MIN_VALUE;
-	}
-	
-	public String getEquipment(){
-		if(isValid())
-			return equipment;
-		return null;
 	}
 
 	public boolean isValid() {
