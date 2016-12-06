@@ -53,9 +53,9 @@ public class HotelTest {
 
 			if (!(flag = session.contains(po))) {
 				session.save(po);
+				HotelPo po2 = (HotelPo) session.createCriteria(HotelPo.class).add(Restrictions.eq("name",po.getName())).list().get(0);;
+				System.out.println(po.getName()==po2.getName());
 				session.delete(po);
-				boolean exist = !session.createCriteria(HotelPo.class).add(Restrictions.eq("name",po.getName())).list().isEmpty();
-				System.out.println(exist);
 			}
 
 			ts.commit();

@@ -37,8 +37,6 @@ public class HotelCenterController extends Application{
 	private final static int Client_Width = 1024;
 	private final static int Client_Height = 768;
 	
-	private HotelVo hotel;
-	
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {

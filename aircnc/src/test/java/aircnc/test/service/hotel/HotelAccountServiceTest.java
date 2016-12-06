@@ -1,18 +1,11 @@
 package aircnc.test.service.hotel;
 
-import static aircnc.test.service.hotel.DataPrepareHelper.dumpTestStatistic;
-import static aircnc.test.service.hotel.DataPrepareHelper.prepareTestStatistic;
 import static org.junit.Assert.assertEquals;
-
-import java.time.LocalDate;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
 import data.dao.hotel.HotelDao;
 import data.dao.impl.hotel.HotelDaoImpl;
-import po.hotel.HotelPoBuilder;
 import service.hotel.HotelAccountService;
 import service.impl.hotel.HotelAccountManager;
 import utils.info.hotel.HotelInfo;
@@ -24,27 +17,28 @@ public class HotelAccountServiceTest {
 	private HotelDao dao;
 
 	private String registeredName;
+	private int id;
 
-	@Before
-	public void setUp() throws Exception {
-		dao = new HotelDaoImpl();
-		acc = new HotelAccountManager(dao);
-		prepareTestStatistic(dao);
-	}
-
-	@Test
-	public void testRegister() {
-		HotelVoBuilder b = new HotelVoBuilder().setName("新酒店").setStar(4);
-		HotelInfo v = acc.register(b, "12345678".hashCode());
-		registeredName = v.getName();
-		assertEquals(true, acc.existsHotel(registeredName));
-	}
-
+//	@Before
+//	public void setUp() throws Exception {
+//		dao = new HotelDaoImpl();
+//		acc = new HotelAccountManager(dao);
+//	}
+//
+//	@Test
+//	public void testRegister() {
+//		HotelVoBuilder b = new HotelVoBuilder().setName("新酒店").setStar(4);
+//		HotelInfo v = acc.register(b, "12345678".hashCode());
+//		registeredName = v.getName();
+//		assertEquals(true, acc.existsHotel(registeredName));
+//	}
+//
 //	@Test
 //	public void testLogin() {
 //		HotelInfo v = acc.login("新酒店", "12345678".hashCode());
-//		assertEquals(testName(idx), v.getName());
-//		assertEquals(testName(idx), acc.getCurrentAccount().getName());
+//		id = v.getId();
+//		assertEquals("新酒店", v.getName());
+//		assertEquals("新酒店", acc.getCurrentAccount().getName());
 //		assertEquals(true, acc.isLogined());
 //	}
 //
@@ -58,9 +52,8 @@ public class HotelAccountServiceTest {
 //	public void testExistsHotel() {
 //		boolean res1 = false, res2 = false;
 //		try {
-//			res1 = acc.existsHotel(testID(idx));
-//			res2 = acc.existsHotel("12345678");
-//			res2 = acc.existsHotel("1234578");
+//			res1 = acc.existsHotel("新酒店");
+//			res2 = acc.existsHotel("垃圾酒店");
 //		} catch (Exception e) {
 //		}
 //		assertEquals(true, res1);
@@ -70,9 +63,8 @@ public class HotelAccountServiceTest {
 //
 //	@After
 //	public void tearDown() {
-//		dumpTestStatistic(dao);
 //		try {
-//			dao.deleteHotel(registeredId);
+//			dao.deleteHotel(id);
 //		} catch (Exception e) {
 //		}
 //	}

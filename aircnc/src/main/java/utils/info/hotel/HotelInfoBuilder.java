@@ -4,7 +4,7 @@ public abstract class HotelInfoBuilder extends HotelInfoTemplate {
 
 	public HotelInfoBuilder(HotelInfo info) {
 		this.setID(info.getId()).setName(info.getName()).setScope(info.getScope()).setLocation(info.getLocation())
-				.setStar(info.getStar()).setGrade(info.getGrade());
+				.setStar(info.getStar()).setGrade(info.getGrade()).setEquipment(info.getEquipment());
 	}
 
 	public HotelInfoBuilder() {
@@ -48,9 +48,15 @@ public abstract class HotelInfoBuilder extends HotelInfoTemplate {
 			this.grade = grade;
 		return this;
 	}
+	
+	public HotelInfoBuilder setEquipment(String equipment) {
+		if (equipment != null)
+			this.location = equipment;
+		return this;
+	}
 
 	public boolean isReady() {
-		return id > 0 && name != null && scope != null && location != null && introduction != null;
+		return name != null&& star>0;
 	}
 
 	public abstract HotelInfo getHotelInfo();

@@ -31,7 +31,7 @@ public class HotelInfoManager implements HotelInfoService{
 	
 	@Override
 	public HotelInfo getHotelInfo(String name) {
-		return new HotelVoBuilder(hotelDao.findHotel(name)).getHotelInfo();
+		return new HotelVoBuilder(hotelDao.findHotelByName(name)).getHotelInfo();
 	}
 
 	@Override

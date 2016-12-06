@@ -46,7 +46,7 @@ public class HotelAccountManager implements HotelAccountService{
 	@Override
 	public HotelInfo login(String name, int passwordHash) {
 
-		HotelPo hotelAccount = dao.findHotel(name);
+		HotelPo hotelAccount = dao.findHotelByName(name);
 
 		if (hotelAccount == null)// not exist
 			return null;
@@ -91,7 +91,7 @@ public class HotelAccountManager implements HotelAccountService{
 
 	@Override
 	public void refreshCurrentAccount() {
-		currentAccount = dao.findHotel(currentAccount.getId());
+		currentAccount = dao.findHotelById(currentAccount.getId());
 	}
 
 }

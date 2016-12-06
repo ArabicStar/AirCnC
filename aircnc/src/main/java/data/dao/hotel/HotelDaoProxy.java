@@ -1,60 +1,90 @@
 package data.dao.hotel;
 
+import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
+import static utils.exception.StaticExceptionFactory.packedRmiEx;
+import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
+
+import java.rmi.RemoteException;
+
+import data.dao.rmi.hotel.RemoteHotelDao;
 import po.hotel.HotelPo;
 import utils.proxy.AccessSecureProxy;
 import utils.proxy.AuthenticatePolicy;
 import utils.proxy.AuthenticatePolicy.Client;
 
-public abstract class HotelDaoProxy extends AccessSecureProxy implements HotelDao {
+public class HotelDaoProxy extends AccessSecureProxy implements HotelDao {
+	/**
+	 * Singleton instance
+	 */
+	private static HotelDaoProxy instance;
+
+	public static final HotelDaoProxy launch(Client clientId) {
+		if (instance != null)
+			throw duplicateSingletonEx();
+
+		return instance = new HotelDaoProxy(clientId);
+	}
+
+	public static final HotelDaoProxy getInstance() {
+		if (instance == null)
+			throw singletonNotExistsEx();
+
+		return instance;
+	}
+	
 	/**
 	 * Actual hotel dao handler
 	 */
-	private HotelDao hotelDao;
+	private RemoteHotelDao hotelDao;
 	
 	/**
 	 * 'Default constructor, defines client identifier.<br>
 	 * 
 	 * @param clientId
 	 */
-	protected HotelDaoProxy(Client clientId) {
+	private HotelDaoProxy(Client clientId) {
 		super(clientId);
 		// TODO Auto-generated constructor stub
 	}
 	
 	/**
-	 * Load actual hotel dao, auth to cilents of hotel and market
+	 * Load a spefic hotel dao, auth to clients of hotel and manage, plus
+	 * server.<br>
 	 */
 	@AuthenticatePolicy({ Client.HOTEL, Client.MANAGE})
-	public abstract void loadHotelDao();
-	
-	/**
-	 * Load a spefic member dao, for convinience of pontential change.<br>
-	 * 
-	 * @param memberDao
-	 *            a specific member dao implemention
-	 */
-	@AuthenticatePolicy({ Client.HOTEL, Client.MANAGE })
-	public void loadHotelDao(HotelDao hotelDao) {
+	public void loadRemoteHotelDao(RemoteHotelDao hotelDao){
 		checkAuthentication();
 
 		this.hotelDao = hotelDao;
-
 	}
+
 
 	@Override
 	@AuthenticatePolicy({ Client.HOTEL,Client.MANAGE })
-	public HotelPo findHotel(int id) {
+	public HotelPo findHotelById(int id) {
 		checkAuthentication();
 		
-		return hotelDao.findHotel(id);
+		try {
+			return hotelDao.findHotelById(id);
+		} catch (RemoteException e) {
+			// e.printStackTrace();
+			throw packedRmiEx(e);
+		}
+		
 	}
 	
 	@Override
 	@AuthenticatePolicy({ Client.HOTEL,Client.MANAGE })
-	public HotelPo findHotel(String name) {
+	public HotelPo findHotelByName(String name) {
 		checkAuthentication();
 		
-		return hotelDao.findHotel(name);
+		try {
+			return hotelDao.findHotelByName(name);
+		} catch (RemoteException e) {
+			// e.printStackTrace();
+			throw packedRmiEx(e);
+		}
+		
 	}
 
 	@Override
@@ -62,7 +92,13 @@ public abstract class HotelDaoProxy extends AccessSecureProxy implements HotelDa
 	public boolean deleteHotel(int id) {
 		checkAuthentication();
 		
-		return hotelDao.deleteHotel(id);
+		try {
+			return hotelDao.deleteHotel(id);
+		} catch (RemoteException e) {
+			// e.printStackTrace();
+			throw packedRmiEx(e);
+		}
+		
 	}
 
 	@Override
@@ -70,7 +106,13 @@ public abstract class HotelDaoProxy extends AccessSecureProxy implements HotelDa
 	public boolean updateHotel(HotelPo po) {
 		checkAuthentication();
 		
-		return hotelDao.updateHotel(po);
+		try {
+			return hotelDao.updateHotel(po);
+		} catch (RemoteException e) {
+			// e.printStackTrace();
+			throw packedRmiEx(e);
+		}
+		
 	}
 
 	@Override
@@ -78,7 +120,13 @@ public abstract class HotelDaoProxy extends AccessSecureProxy implements HotelDa
 	public boolean addHotel(HotelPo po) {
 		checkAuthentication();
 		
-		return hotelDao.addHotel(po);
+		try {
+			return hotelDao.addHotel(po);
+		} catch (RemoteException e) {
+			// e.printStackTrace();
+			throw packedRmiEx(e);
+		}
+		
 	}
 
 	
@@ -87,7 +135,13 @@ public abstract class HotelDaoProxy extends AccessSecureProxy implements HotelDa
 	public boolean existName(String name) {
 		checkAuthentication();
 		
-		return hotelDao.existName(name);
+		try {
+			return hotelDao.existName(name);
+		} catch (RemoteException e) {
+			// e.printStackTrace();
+			throw packedRmiEx(e);
+		}
+		
 	}
 
 }

@@ -1,9 +1,6 @@
 package po.hotel;
 
 import java.util.Set;
-
-import po.member.ContactPoBuilder;
-import po.member.MemberPo;
 import utils.info.hotel.HotelInfo;
 import utils.info.hotel.HotelInfoBuilder;
 

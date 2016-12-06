@@ -11,7 +11,7 @@ public interface HotelDao {
 	 * @return a HotelPo<br>
 	 *         if not exist, return null<br>
 	 */
-	public HotelPo findHotel(final int id);
+	public HotelPo findHotelById(final int id);
 	
 	/**
 	 * Find a hotel by name.<br>
@@ -20,7 +20,7 @@ public interface HotelDao {
 	 * @return a HotelPo<br>
 	 *         if not exist, return null<br>
 	 */
-	public HotelPo findHotel(final String name);
+	public HotelPo findHotelByName(final String name);
 
 	/**
 	 * Delete a hotel by id.<br>
