@@ -8,7 +8,7 @@ import vo.order.OrderVo;
 import vo.order.comment.CommentVo;
 
 public interface HotelInfoService {
-	public HotelInfo getHotelInfo(int id);
+	public HotelInfo getHotelInfo(String name);
 
 	public List<OrderVo> getHotelOrder(int id);
 	

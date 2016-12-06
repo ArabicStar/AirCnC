@@ -12,6 +12,15 @@ public interface HotelDao {
 	 *         if not exist, return null<br>
 	 */
 	public HotelPo findHotel(final int id);
+	
+	/**
+	 * Find a hotel by name.<br>
+	 * 
+	 * @param name
+	 * @return a HotelPo<br>
+	 *         if not exist, return null<br>
+	 */
+	public HotelPo findHotel(final String name);
 
 	/**
 	 * Delete a hotel by id.<br>
@@ -43,11 +52,12 @@ public interface HotelDao {
 	 */
 	public boolean addHotel(final HotelPo po);
 	
+	
 	/**
 	 * Query an hotel exists or not
 	 * 
-	 * @param id
-	 * @return whether given id exists or not<br>
+	 * @param name
+	 * @return whether given name exists or not<br>
 	 */
-	public boolean existHotel(final int id);
+	public boolean existName(final String name);
 }

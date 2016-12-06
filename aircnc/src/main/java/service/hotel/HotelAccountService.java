@@ -19,15 +19,15 @@ public interface HotelAccountService {
 	/**
 	 * Login a hotel account
 	 * 
-	 * @param id
-	 *            hotel id<br>
+	 * @param string
+	 *            hotel name string<br>
 	 * @param passwordHash
 	 *            password hashcode<br>
 	 * @return If succeed, return vo of logined hotel<br>
 	 *         If password wrong, return invalid hotel vo<br>
 	 *         If account not exists yet, return null
 	 */
-	public HotelInfo login(final int id, final int passwordHash);
+	public HotelInfo login(final String name, final int passwordHash);
 
 	/**
 	 * Logout an hotel account<br>
@@ -66,5 +66,5 @@ public interface HotelAccountService {
 	 *            An id
 	 * @return appointed id exists or not
 	 */
-	public boolean existsHotel(final int id);
+	public boolean existsHotel(final String name);
 }

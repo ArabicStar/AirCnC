@@ -17,7 +17,7 @@ public class RoomPoBuilder extends RoomInfoBuilder {
 			setRoomNum(info.getRoomNum()).setPrice(info.getPrice());
 	}
 	
-	protected RoomPoBuilder(String type){
+	public RoomPoBuilder(String type){
 		super(type);
 	}
 	

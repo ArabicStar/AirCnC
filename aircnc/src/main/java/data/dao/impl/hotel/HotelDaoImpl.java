@@ -2,6 +2,8 @@ package data.dao.impl.hotel;
 
 import static data.hibernate.Hibernator.execute;
 
+import org.hibernate.criterion.Restrictions;
+
 import data.dao.hotel.HotelDao;
 import po.hotel.HotelPo;
 import po.hotel.HotelPoBuilder;
@@ -51,7 +53,7 @@ public class HotelDaoImpl implements HotelDao{
 			return false;
 
 		// should not exist yet
-		if (existHotel(po.getId()))
+		if (existName(po.getName()))
 			return false;
 
 		return execute(session -> {
@@ -62,10 +64,18 @@ public class HotelDaoImpl implements HotelDao{
 		});
 	}
 
+
 	@Override
-	public boolean existHotel(final int id) {
+	public boolean existName(String name) {
 		return execute(session -> {
-			return (HotelPo) session.get(HotelPo.class,id) != null;
+			return session.createCriteria(HotelPo.class).add(Restrictions.eq("NAME",name)).list().isEmpty();
+		});
+	}
+
+	@Override
+	public HotelPo findHotel(String name) {
+		return (HotelPo) execute(session -> {
+			return session.createCriteria(HotelPo.class).add(Restrictions.eq("NAME",name)).list().get(0);
 		});
 	}
 

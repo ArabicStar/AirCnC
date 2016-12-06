@@ -44,11 +44,9 @@ public class HotelAccountManager implements HotelAccountService{
 
 
 	@Override
-	public HotelInfo login(int id, int passwordHash) {
-		if (!HotelInfo.checkID(id))
-			return null;
+	public HotelInfo login(String name, int passwordHash) {
 
-		HotelPo hotelAccount = dao.findHotel(id);
+		HotelPo hotelAccount = dao.findHotel(name);
 
 		if (hotelAccount == null)// not exist
 			return null;
@@ -82,11 +80,9 @@ public class HotelAccountManager implements HotelAccountService{
 	}
 
 	@Override
-	public boolean existsHotel(int id) {
-		if (!HotelInfo.checkID(id))
-			return false;
+	public boolean existsHotel(String name) {
 
-		return dao.existHotel(id);
+		return dao.existName(name);
 	}
 
 	private static boolean checkPassword(HotelPo po, int passwordHash) {

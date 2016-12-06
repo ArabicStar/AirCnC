@@ -30,15 +30,13 @@ public class HotelInfoManager implements HotelInfoService{
 	}
 	
 	@Override
-	public HotelInfo getHotelInfo(int id) {
-		return new HotelVoBuilder(hotelDao.findHotel(id)).getHotelInfo();
+	public HotelInfo getHotelInfo(String name) {
+		return new HotelVoBuilder(hotelDao.findHotel(name)).getHotelInfo();
 	}
 
 	@Override
 	public List<OrderVo> getHotelOrder(int id) {
-		if(!hotelDao.existHotel(id)){
-			return null;
-		}
+		
 		// TODO Auto-generated method stub
 		return null;
 	}

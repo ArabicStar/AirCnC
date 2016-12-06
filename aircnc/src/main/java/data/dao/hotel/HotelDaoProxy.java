@@ -48,6 +48,14 @@ public abstract class HotelDaoProxy extends AccessSecureProxy implements HotelDa
 		
 		return hotelDao.findHotel(id);
 	}
+	
+	@Override
+	@AuthenticatePolicy({ Client.HOTEL,Client.MANAGE })
+	public HotelPo findHotel(String name) {
+		checkAuthentication();
+		
+		return hotelDao.findHotel(name);
+	}
 
 	@Override
 	@AuthenticatePolicy({ Client.MANAGE })
@@ -73,12 +81,13 @@ public abstract class HotelDaoProxy extends AccessSecureProxy implements HotelDa
 		return hotelDao.addHotel(po);
 	}
 
+	
 	@Override
 	@AuthenticatePolicy({ Client.HOTEL})
-	public boolean existHotel(int id) {
+	public boolean existName(String name) {
 		checkAuthentication();
 		
-		return hotelDao.existHotel(id);
+		return hotelDao.existName(name);
 	}
 
 }

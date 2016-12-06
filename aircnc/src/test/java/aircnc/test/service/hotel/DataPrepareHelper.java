@@ -1,20 +1,19 @@
-package po.hotel;
-
-
-import static data.hibernate.HibernateSessionFactory.getSession;
+package aircnc.test.service.hotel;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
+import data.dao.hotel.HotelDao;
+import javafx.util.converter.LocalDateStringConverter;
+import po.hotel.HotelPo;
+import po.hotel.HotelPoBuilder;
+import po.hotel.RoomPo;
+import po.hotel.RoomPoBuilder;
 
-
-public class HotelTest {
+public class DataPrepareHelper {
+	/* test data */
 	private static final List<HotelPo> testData = new ArrayList<>();
 	private static final int[] testStar = new int[] { 1, 2, 3, 4, 5 };
 	private static final double[] testGrade = new double[] { 5, 4, 3, 4, 5 };
@@ -25,9 +24,9 @@ public class HotelTest {
 	private static final int testPass = "12345678".hashCode();
 	private static final String[] testType = new String[]{"couple","double"};
 	private static final int[] testPnum = new int[] {10,2};
-	private static final int[] testRnum = new int[] {100,20 };
- 	public static void main(String args[]){
- 		int i = 0;
+	private static final int[] testRnum = new int[] {100,20};
+	static {
+		int i = 0;
 		HotelPoBuilder b = new HotelPoBuilder().setName(testName[i]).setGrade(testGrade[i]).
 				setIntro(testIntro[i]).setPasswordHash(testPass).setScope(testScope[i])
 				.setLocation(testLocation[i]).setStar(testStar[i]);
@@ -41,38 +40,24 @@ public class HotelTest {
  		
  		b.setRooms(rooms);
  		
- 		HotelPo po = b.getHotelInfo();
- 		
- 		boolean flag = false;
-		Session session = getSession();
+ 		testData.add(b.getHotelInfo());
+	}
+	/* test data */
 
-		Transaction ts = null;
-		try {
-			// normal
-			ts = session.beginTransaction();
+	public static final void prepareTestStatistic(HotelDao dao) {
+		testData.forEach(dao::addHotel);
+	}
 
-			if (!(flag = session.contains(po))) {
-				session.save(po);
-				session.delete(po);
-				boolean exist = !session.createCriteria(HotelPo.class).add(Restrictions.eq("name",po.getName())).list().isEmpty();
-				System.out.println(exist);
-			}
+	public static final void dumpTestStatistic(HotelDao dao) {
+		testData.forEach(d -> dao.deleteHotel(d.getId()));
+	}
 
-			ts.commit();
 
-		} catch (HibernateException he) {
-			// exception
-			he.printStackTrace();
+	public static final String testName(int i) {
+		return testName[i];
+	}
 
-			if (ts != null)
-				ts.rollback();
-
-		} finally {
-			// close
-			session.close();
-		}
- 		
-		
-		
+	public static final HotelPo testData(int i) {
+		return testData.get(i);
 	}
 }
