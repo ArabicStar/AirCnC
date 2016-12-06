@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<AnchorPane prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #000;" stylesheets="@../css/MemberMain.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.member.view.memberinfo.fxml.MemberMainController">
+<AnchorPane prefHeight="768.0" prefWidth="1024.0" stylesheets="@../css/MemberMain.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.member.view.memberinfo.fxml.MemberMainController">
    <children>
       <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="477.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -14,9 +15,9 @@
                <children>
                   <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="110.0">
                      <children>
-                        <HBox prefHeight="110.0" prefWidth="100.0" styleClass="portrait-border">
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="portrait-border">
                            <children>
-                              <HBox prefHeight="100.0" prefWidth="100.0" styleClass="portrait-hbox" />
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="portrait-hbox" />
                            </children>
                         </HBox>
                      </children>
@@ -89,6 +90,13 @@
             <Insets right="300.0" />
          </padding>
       </AnchorPane>
-      <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="247.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="247.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="212.0" layoutY="171.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../resources/images/member/credit-down.png" />
+               </image>
+            </ImageView>
+         </children></AnchorPane>
    </children>
 </AnchorPane>

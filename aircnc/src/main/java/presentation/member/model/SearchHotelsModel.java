@@ -14,7 +14,7 @@ import vo.hotel.HotelVo;
 import vo.member.MemberVo;
 
 /**
- * the model of credit change
+ * the model of hotel searched
  * aiming to wrap the HotelVo into the presentation manager.
  * @author paranoia
  *

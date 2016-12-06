@@ -10,7 +10,7 @@ import javafx.beans.property.SimpleStringProperty;
 import vo.order.OrderVo;
 
 /**
- * the model of credit change
+ * the model of order of user
  * aiming to wrap the OrderVo into the presentation manager.
  * @author paranoia
  *

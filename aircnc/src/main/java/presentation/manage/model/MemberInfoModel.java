@@ -1,4 +1,4 @@
-package presentation.member.model;
+package presentation.manage.model;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -7,7 +7,7 @@ import javafx.beans.property.StringProperty;
 import vo.member.MemberVo;
 
 /**
- * the model of member
+ * the model of credit change
  * aiming to wrap the MemberVo into the presentation manager.
  * @author paranoia
  *
@@ -147,3 +147,4 @@ public class MemberInfoModel {
         return typeContent;
     }
 }
+
