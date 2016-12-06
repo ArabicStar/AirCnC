@@ -69,7 +69,7 @@ public abstract class ContactInfoBuilder extends ContactInfoTemplate {
 			return this;
 		}
 
-		if (!checkFixedPhone(mobilePhone))
+		if (!checkFixedPhone(fixedPhone))
 			throw new IllegalArgumentException("ContactInfoBuilder.setFixedPhone - Invalid Fixed Phone Number String");
 
 		this.fixedPhone = fixedPhone;
