@@ -1,5 +1,8 @@
 package service.impl.member;
 
+import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
+import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
+
 import java.util.Random;
 
 import data.dao.member.MemberDao;
@@ -15,17 +18,15 @@ public final class MemberAccountManager implements MemberAccountService {
 
 	public static MemberAccountService launch(MemberDao dao) {
 		if (instance != null)
-			throw new IllegalArgumentException(
-					"MemberAccountManager.launch - MemberAccountService instance has existed already");
+			throw duplicateSingletonEx();
 
 		instance = new MemberAccountManager(dao);
 		return instance;
 	}
 
-	public static final MemberAccountService getInstance() {
+	public static MemberAccountService getInstance() {
 		if (instance == null)
-			throw new IllegalArgumentException(
-					"MemberAccountManager.getInstance - MemberAccountService instance has not been launcher yet");
+			throw singletonNotExistsEx();
 
 		return instance;
 	}

@@ -13,17 +13,17 @@ import utils.proxy.AccessSecureProxy;
 import utils.proxy.AuthenticatePolicy;
 import utils.proxy.AuthenticatePolicy.Client;
 
-public class QueryDaoProxy extends AccessSecureProxy implements CreditQueryDao {
+public final class QueryDaoProxy extends AccessSecureProxy implements CreditQueryDao {
 	private static QueryDaoProxy instance;
 
-	public static final QueryDaoProxy launch(Client clientId) {
+	public static QueryDaoProxy launch(Client clientId) {
 		if (instance != null)
 			throw duplicateSingletonEx();
 
 		return instance = new QueryDaoProxy(clientId);
 	}
 
-	public static final QueryDaoProxy getInstance() {
+	public static QueryDaoProxy getInstance() {
 		if (instance == null)
 			throw singletonNotExistsEx();
 
@@ -50,6 +50,18 @@ public class QueryDaoProxy extends AccessSecureProxy implements CreditQueryDao {
 
 		try {
 			return remoteCreditQueryDao.searchByMemberId(memberId);
+		} catch (RemoteException re) {
+			// e.printStackTrace();
+			throw packedRmiEx(re);
+		}
+	}
+
+	@Override
+	public int getMemberCredit(String memberId) {
+		checkAuthentication();
+
+		try {
+			return remoteCreditQueryDao.getMemberCredit(memberId);
 		} catch (RemoteException re) {
 			// e.printStackTrace();
 			throw packedRmiEx(re);

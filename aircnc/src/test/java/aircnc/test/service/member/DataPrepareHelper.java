@@ -3,10 +3,19 @@ package aircnc.test.service.member;
 import java.util.ArrayList;
 import java.util.List;
 
+import data.dao.impl.member.CreditDaoImpl;
+import data.dao.impl.member.MemberDaoImpl;
+import data.dao.member.CreditDao;
 import data.dao.member.MemberDao;
 import javafx.util.converter.LocalDateStringConverter;
 import po.member.MemberPo;
 import po.member.MemberPoBuilder;
+import service.impl.member.MemberAccountManager;
+import service.impl.member.MemberCreditManager;
+import service.impl.member.MemberInfoManager;
+import service.member.MemberAccountService;
+import service.member.MemberCreditService;
+import service.member.MemberInfoService;
 import utils.info.member.ContactInfo;
 import vo.member.ContactVoBuilder;
 
@@ -33,12 +42,18 @@ public class DataPrepareHelper {
 	}
 	/* test data */
 
-	public static final void prepareTestStatistic(MemberDao dao) {
-		testData.forEach(dao::addMember);
+	public static final MemberDao memberDao = MemberDaoImpl.INSTANCE;
+	public static final CreditDao creditDao = CreditDaoImpl.INSTANCE;
+	public static final MemberAccountService accountService = MemberAccountManager.launch(memberDao);
+	public static final MemberCreditService creditService = MemberCreditManager.launch(memberDao, creditDao);
+	public static final MemberInfoService infoService = new MemberInfoManager(accountService, memberDao, null);
+
+	public static final void prepareTestStatistic() {
+		testData.forEach(memberDao::addMember);
 	}
 
-	public static final void dumpTestStatistic(MemberDao dao) {
-		testData.forEach(d -> dao.deleteMember(d.getId()));
+	public static final void dumpTestStatistic() {
+		testData.forEach(d -> memberDao.deleteMember(d.getId()));
 	}
 
 	public static final String testID(int i) {

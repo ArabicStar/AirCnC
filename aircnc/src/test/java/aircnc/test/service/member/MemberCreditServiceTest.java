@@ -10,33 +10,23 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import data.dao.impl.member.CreditDaoImpl;
-import data.dao.impl.member.MemberDaoImpl;
-import data.dao.member.MemberDao;
 import po.member.MemberPo;
-import service.impl.member.MemberCreditManager;
 import service.member.MemberCreditService;
 import utils.info.order.OrderStatus;
 import vo.member.MemberVo;
 import vo.order.OrderVo;
 
 public class MemberCreditServiceTest {
-
-	public MemberCreditService cs;
-	public MemberDao memberDao;
-	public CreditDaoImpl creditDao;
+	public MemberCreditService cs = DataPrepareHelper.creditService;
 
 	@Before
 	public void setUp() throws Exception {
-		memberDao = MemberDaoImpl.INSTANCE;
-		creditDao = CreditDaoImpl.INSTANCE;
-		cs = new MemberCreditManager(memberDao, creditDao, creditDao);
-		prepareTestStatistic(memberDao);
+		prepareTestStatistic();
 	}
 
 	@After
 	public void tearDown() throws Exception {
-		dumpTestStatistic(memberDao);
+		dumpTestStatistic();
 	}
 
 	@Test

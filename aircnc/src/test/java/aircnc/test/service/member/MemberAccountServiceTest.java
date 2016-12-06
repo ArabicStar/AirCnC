@@ -9,29 +9,21 @@ import static org.junit.Assert.assertEquals;
 import java.time.LocalDate;
 
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
-import data.dao.impl.member.MemberDaoImpl;
-import data.dao.member.MemberDao;
-import service.impl.member.MemberAccountManager;
 import service.member.MemberAccountService;
 import utils.info.member.MemberInfo;
 import vo.member.ContactVoBuilder;
 import vo.member.MemberVoBuilder;
 
 public class MemberAccountServiceTest {
-	private MemberAccountService acc;
-	private MemberDao dao;
+	private MemberAccountService acc = DataPrepareHelper.accountService;
 
-	private int idx = 3;
+	private static final int idx = 3;
 	private String registeredId;
 
-	@Before
-	public void setUp() throws Exception {
-		dao = MemberDaoImpl.INSTANCE;
-		acc= MemberAccountManager.launch(dao);
-		prepareTestStatistic(dao);
+	public MemberAccountServiceTest() {
+		prepareTestStatistic();
 	}
 
 	@Test
@@ -73,9 +65,9 @@ public class MemberAccountServiceTest {
 
 	@After
 	public void tearDown() {
-		dumpTestStatistic(dao);
+		dumpTestStatistic();
 		try {
-			dao.deleteMember(registeredId);
+			DataPrepareHelper.memberDao.deleteMember(registeredId);
 		} catch (Exception e) {
 		}
 	}

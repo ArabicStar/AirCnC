@@ -10,26 +10,18 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import data.dao.impl.member.MemberDaoImpl;
-import data.dao.member.MemberDao;
-import service.impl.member.MemberAccountManager;
-import service.impl.member.MemberInfoManager;
 import service.member.MemberAccountService;
 import service.member.MemberInfoService;
 import utils.info.member.MemberInfo;
 import vo.member.MemberVoBuilder;
 
 public class MemeberInfoSerivceTest {
-	private MemberInfoService info;
-	private MemberAccountService account;
-	private MemberDao dao;
+	private MemberAccountService account = DataPrepareHelper.accountService;
+	private MemberInfoService info = DataPrepareHelper.infoService;
 
 	@Before
 	public void setUp() throws Exception {
-		dao = MemberDaoImpl.INSTANCE;
-		account = MemberAccountManager.launch(dao);
-		info = new MemberInfoManager(account, dao, null);
-		prepareTestStatistic(dao);
+		prepareTestStatistic();
 	}
 
 	@Test
@@ -53,6 +45,6 @@ public class MemeberInfoSerivceTest {
 
 	@After
 	public void tearDown() {
-		dumpTestStatistic(dao);
+		dumpTestStatistic();
 	}
 }

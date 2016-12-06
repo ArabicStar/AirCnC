@@ -1,60 +1,51 @@
 package service.impl.member;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
+import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
 import data.dao.member.CreditDao;
 import data.dao.member.MemberDao;
-import data.dao.query.CreditQueryDao;
 import po.member.MemberPo;
 import po.member.credit.CreditChangePo;
 import po.member.credit.CreditChangePoBuilder;
 import service.member.CreditStrategy;
 import service.member.MemberCreditService;
-import service.query.CreditChangeQueryService;
-import utils.info.member.MemberInfoTemplate;
 import utils.info.member.credit.ActionType;
 import utils.info.order.OrderStatus;
 import vo.member.MemberVo;
 import vo.member.MemberVoBuilder;
-import vo.member.credit.CreditChangeVo;
-import vo.member.credit.CreditChangeVoBuilder;
 import vo.order.OrderVo;
 
-public class MemberCreditManager implements MemberCreditService, CreditChangeQueryService {
+public final class MemberCreditManager implements MemberCreditService {
 	private static MemberCreditService instance;
 
-	public static MemberCreditService launch(MemberDao memberDao, CreditDao creditDao, CreditQueryDao creditQuery) {
+	public static MemberCreditService launch(MemberDao memberDao, CreditDao creditDao) {
 		if (instance != null)
-			throw new IllegalArgumentException(
-					"MemberCreditManager.launch - MemberCreditService instance has existed already");
+			throw duplicateSingletonEx();
 
-		instance = new MemberCreditManager(memberDao, creditDao, creditQuery);
+		instance = new MemberCreditManager(memberDao, creditDao);
 		return getInstance();
 	}
 
-	public static final MemberCreditService getInstance() {
+	public static  MemberCreditService getInstance() {
 		if (instance == null)
-			throw new IllegalArgumentException(
-					"MemberCreditManager.getInstance - MemberCreditService instance has not been launched yet");
+			throw singletonNotExistsEx();
 
 		return instance;
 	}
 
-	private CreditQueryDao dao;
 	private MemberDao memberDao;
 	private CreditDao creditDao;
 	private CreditStrategy strategy;
 
-	public MemberCreditManager(MemberDao memberDao, CreditDao creditDao, CreditQueryDao creditQuery) {
+	private MemberCreditManager(MemberDao memberDao, CreditDao creditDao) {
 		this.memberDao = memberDao;
 		this.creditDao = creditDao;
 		this.strategy = new SimpleCreditStrategyAdapter();
 	}
 
-	public MemberCreditManager(MemberDao memberDao, CreditDao creditDao, CreditQueryDao creditQuery,
-			CreditStrategy strategy) {
-		this(memberDao, creditDao, creditQuery);
+	public MemberCreditManager(MemberDao memberDao, CreditDao creditDao, CreditStrategy strategy) {
+		this(memberDao, creditDao);
 		this.strategy = strategy;
 	}
 
@@ -162,19 +153,6 @@ public class MemberCreditManager implements MemberCreditService, CreditChangeQue
 				.setCreditChange(strategy.getAppealRecovery(order)).getCreditChangeInfo();
 
 		return new MemberVoBuilder(creditDao.changeCredit(po)).getMemberInfo();
-	}
-
-	@Override
-	public List<CreditChangeVo> searchByMemberId(String memberId) {
-		if (!MemberInfoTemplate.checkID(memberId))
-			throw new IllegalArgumentException("CreditChangeQueryServiceImpl.searchByMemberId - Invalid Member Id");
-
-		List<CreditChangePo> poList = dao.searchByMemberId(memberId);
-		if (poList == null)
-			return null;
-
-		return poList.stream().map(po -> new CreditChangeVoBuilder(po).getCreditChangeInfo())
-				.collect(Collectors.toList());
 	}
 
 	private MemberPo getMember(String id) {

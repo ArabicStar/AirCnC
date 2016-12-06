@@ -14,5 +14,7 @@ import po.member.credit.CreditChangePo;
  *
  */
 public interface RemoteCreditQueryDao extends Remote {
+	public int getMemberCredit(String memberId) throws RemoteException;
+
 	public List<CreditChangePo> searchByMemberId(String memberId) throws RemoteException;
 }

@@ -1,5 +1,6 @@
 package service.member;
 
+import static utils.exception.StaticExceptionFactory.*;
 import java.util.List;
 
 import utils.info.member.MemberInfo;
@@ -12,23 +13,20 @@ import vo.member.MemberVoBuilder;
 import vo.member.credit.CreditChangeVo;
 import vo.order.OrderVo;
 
-public class MemberServiceProxy extends AccessSecureProxy
+public final class MemberServiceProxy extends AccessSecureProxy
 		implements MemberAccountService, MemberCreditService, MemberInfoService {
 	private static MemberServiceProxy instance;
 
-	public static final MemberServiceProxy launch(Client clientId) {
+	public static MemberServiceProxy launch(Client clientId) {
 		if (instance != null)
-			throw new IllegalArgumentException(
-					"MemberServiceProxy.launch - MemberServiceProxy instance has existed already.");
+			throw duplicateSingletonEx();
 
-		instance = new MemberServiceProxy(clientId);
-		return getInstance();
+		return instance = new MemberServiceProxy(clientId);
 	}
 
-	public static final MemberServiceProxy getInstance() {
+	public static MemberServiceProxy getInstance() {
 		if (instance == null)
-			throw new IllegalArgumentException(
-					"MemberServiceProxy.getInstance- MemberServiceProxy instance has not been launcher yet.");
+			throw singletonNotExistsEx();
 
 		return instance;
 	}

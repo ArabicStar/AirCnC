@@ -1,7 +1,7 @@
 package data.dao.impl.member;
 
 import static data.hibernate.Hibernator.execute;
-
+import static utils.exception.StaticExceptionFactory.*;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -28,9 +28,11 @@ public enum CreditDaoImpl implements CreditDao, CreditQueryDao {
 		if (changePo == null)
 			return null;
 
+		int numMemId = parseId(changePo.getMemberId());
+
 		return execute(session -> {
 			// retrive member po
-			MemberPo mem = session.get(MemberPo.class, parseId(changePo.getMemberId()));
+			MemberPo mem = session.get(MemberPo.class, numMemId);
 			// existence check
 			if (mem == null)
 				return null;
@@ -50,9 +52,6 @@ public enum CreditDaoImpl implements CreditDao, CreditQueryDao {
 
 	@Override
 	public List<CreditChangePo> searchByMemberId(final String memberId) {
-		if (!MemberPo.checkID(memberId))
-			throw new IllegalArgumentException("CreditDaoImpl.searchByMemberId : null or invalid member id string");
-
 		int numMemId = parseId(memberId);
 
 		return execute(session -> {
@@ -73,10 +72,23 @@ public enum CreditDaoImpl implements CreditDao, CreditQueryDao {
 		});
 	}
 
+	@Override
+	public int getMemberCredit(String memberId) {
+		int numMemId = parseId(memberId);
+
+		return execute(session -> {
+			MemberPo po;
+			if ((po = session.get(MemberPo.class, numMemId)) == null)
+				return MemberPo.WRONG_CREDIT;
+
+			return po.getCredit();
+		});
+	}
+
 	/* parse an id string. if invalid, throw IAE. */
 	private static final int parseId(final String id) {
 		if (!MemberPo.checkID(id))
-			throw new IllegalArgumentException("CreditDaoImpl.parseId - Wrong ID");
+			throw illegalArgEx("member id");
 
 		return Integer.parseInt(id);
 	}
