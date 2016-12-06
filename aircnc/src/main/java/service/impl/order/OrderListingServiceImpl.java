@@ -31,9 +31,8 @@ public class OrderListingServiceImpl implements OrderListingService {
 	 */
 	public OrderListingServiceImpl(int hotelId) {
 		this.hotelId = hotelId;
-		this.orderDao = OrderDaoImpl.getInstance();
+		this.orderDao = OrderDaoImpl.INSTANCE;
 		this.memberDao = MemberDaoImpl.INSTANCE;
-		this.hotelOrderList = orderDao.getOrders(hotelId);
 	}
 
 	/**

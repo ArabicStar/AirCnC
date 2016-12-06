@@ -4,7 +4,6 @@ import java.util.List;
 
 import utils.info.hotel.HotelInfo;
 import vo.hotel.HotelVo;
-import vo.hotel.RoomVo;
 import vo.order.OrderVo;
 import vo.order.comment.CommentVo;
 
@@ -18,8 +17,4 @@ public interface HotelInfoService {
 	public List<HotelVo> getHotelPromotion(int id);
 
 	public boolean updateInfo(HotelInfo modifiedInfo);
-	
-	public List<RoomVo> getRooms(String name);
-	
-	public double getCheapestPrice(String name);
 }

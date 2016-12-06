@@ -1,5 +1,7 @@
 package po.order;
 
+import static utils.exception.StaticExceptionFactory.inconsistentStatusEx;
+
 import java.time.LocalDateTime;
 
 import utils.info.order.OrderInfoBuilder;
@@ -9,11 +11,10 @@ public class OrderPoBuilder extends OrderInfoBuilder {
 
 	@Override
 	public OrderPo getOrderInfo() {
-		return new OrderPo().setOrderId(orderId).setEntryTime(entryTime).setHasChildren(hasChildren)
-				.setHotelId(hotelId).setHotelName(hotelName).setLastTime(lastTime)
-				.setPeopleNumber(peopleNumber).setPrice(price)
-				.setIsReviewed(isReviewed).setRoomNumber(roomNumber).setRoomType(roomType)
-				.setStatus(status).setStayDays(stayDays).setUserId(userId).setUserName(userName);
+		return new OrderPo().setOrderId(orderId).setEntryTime(entryTime).setHasChildren(hasChildren).setHotelId(hotelId)
+				.setHotelName(hotelName).setLastTime(lastTime).setPeopleNumber(peopleNumber).setPrice(price)
+				.setIsReviewed(isReviewed).setRoomNumber(roomNumber).setRoomType(roomType).setStatus(status)
+				.setStayDays(stayDays).setUserId(userId).setUserName(userName);
 	}
 
 	@Override
@@ -105,6 +106,18 @@ public class OrderPoBuilder extends OrderInfoBuilder {
 	public OrderPoBuilder setUserName(String userName) {
 		this.userName = userName;
 		return this;
+	}
+
+	public static void updatePo(OrderPo from, OrderPo to) {
+		if (from == null || to == null || from == to)
+			return;
+
+		if (!from.getOrderId().equals(to.getOrderId()))
+			throw inconsistentStatusEx();
+
+		// TODO I'm not sure which fields are allowed to be updated and which
+		// have to keep immutable, so fix this
+		to.setStatus(from.getStatus());
 	}
 
 }

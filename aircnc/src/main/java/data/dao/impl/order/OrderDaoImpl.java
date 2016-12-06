@@ -1,72 +1,61 @@
 package data.dao.impl.order;
 
 import static data.hibernate.Hibernator.execute;
+import static utils.exception.StaticExceptionFactory.illegalArgEx;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Query;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 
 import data.dao.order.OrderDao;
+import data.dao.query.OrderQueryDao;
 import po.order.OrderPo;
+import po.order.OrderPoBuilder;
+import utils.info.hotel.HotelInfoTemplate;
+import utils.info.member.MemberInfoTemplate;
+import utils.info.order.OrderStatus;
 
-public enum OrderDaoImpl implements OrderDao {
+public enum OrderDaoImpl implements OrderDao, OrderQueryDao {
 	INSTANCE;
 
-	public static OrderDaoImpl getInstance() {
-		return INSTANCE;
-	}
-
-	private OrderDaoImpl() {
-
-	}
-
 	public OrderPo getOrder(String orderId) {
+		if (!OrderPo.checkOrderId(orderId))
+			throw illegalArgEx("Order Id String");
+
 		return execute(session -> {
 			return (OrderPo) session.get(OrderPo.class, orderId);
 		});
 	}
 
-	public List<OrderPo> getOrders(int hotelId) {
-		List<OrderPo> orderList = new ArrayList<OrderPo>();
-		String hql = "from OrderPo where HOTELID = ?";
-
-		return execute(session -> {
-			Query query = session.createQuery(hql);
-			query.setString(0, Integer.toString(hotelId));
-			@SuppressWarnings("unchecked")
-			List<OrderPo> list = query.list();
-			return list;
-		});
-	}
-
 	public boolean updateOrder(OrderPo orderPo) {
-		if (orderPo == null) {
+		if (orderPo == null)
 			return false;
-		}
-		if (!existsOrder(orderPo.getOrderId())) {
-			return false;
-		}
 
 		return execute(session -> {
-			session.update(orderPo);
-			return true;
+			Boolean flag = Boolean.FALSE;
+
+			OrderPo old = session.get(OrderPo.class, orderPo.getOrderId());
+			if (flag = Boolean.valueOf(old != null))
+				OrderPoBuilder.updatePo(orderPo, old);
+
+			return flag;
 		});
 
 	}
 
-	public boolean addOrderPo(OrderPo orderPo) {
-		if (orderPo == null) {
+	public boolean addOrder(OrderPo newPo) {
+		if (newPo == null)
 			return false;
-		}
-		// should not exist yet
-		if (existsOrder(orderPo.getOrderId())) {
-			return false;
-		}
+
 		return execute(session -> {
-			// save OrderPo
-			session.save(orderPo);
-			return true;
+			Boolean flag = Boolean.FALSE;
+
+			if (flag = Boolean.valueOf(session.get(OrderPo.class, newPo.getOrderId()) == null))
+				session.save(newPo);
+
+			return flag;
 		});
 	}
 
@@ -76,16 +65,71 @@ public enum OrderDaoImpl implements OrderDao {
 		});
 	}
 
-	public boolean deleteOrderPo(String orderId) {
+	public boolean deleteOrder(String orderId) {
 		// The order that exists can be deleted
 		if (!existsOrder(orderId)) {
 			return false;
 		}
-		
+
 		return execute(session -> {
-			OrderPo deleted = session.get(OrderPo.class, orderId);
-			session.delete(deleted);
-			return true;
+			Boolean flag = Boolean.FALSE;
+
+			OrderPo toDelete = session.get(OrderPo.class, orderId);
+			if (flag = Boolean.valueOf(toDelete != null))
+				session.delete(toDelete);
+
+			return flag;
+		});
+	}
+
+	@Override
+	public List<OrderPo> searchByMember(String memberId) {
+		if (!MemberInfoTemplate.checkID(memberId))
+			throw illegalArgEx("Member id");
+
+		return execute(session -> {
+			final Criteria criteria = session.createCriteria(OrderPo.class);
+			final Criterion memIdCond = Restrictions.eq("USERID", memberId);
+
+			criteria.add(memIdCond);
+
+			@SuppressWarnings("unchecked")
+			List<OrderPo> list = criteria.list();
+
+			return list;
+		});
+	}
+
+	@Override
+	public List<OrderPo> searchByHotel(int hotelId) {
+		if (!HotelInfoTemplate.checkID(hotelId))
+			throw illegalArgEx("Hotel id");
+
+		return execute(session -> {
+			final Criteria criteria = session.createCriteria(OrderPo.class);
+			final Criterion hotelIdCond = Restrictions.eq("HOTELID", hotelId);
+
+			criteria.add(hotelIdCond);
+
+			@SuppressWarnings("unchecked")
+			List<OrderPo> list = criteria.list();
+
+			return list;
+		});
+	}
+
+	@Override
+	public List<OrderPo> searchByStatus(OrderStatus status) {
+		return execute(session -> {
+			final Criteria criteria = session.createCriteria(OrderPo.class);
+			final Criterion statusCond = Restrictions.eq("ORDERSTATUS", status);
+
+			criteria.add(statusCond);
+
+			@SuppressWarnings("unchecked")
+			List<OrderPo> list = criteria.list();
+
+			return list;
 		});
 	}
 

@@ -1,5 +1,6 @@
 package po.member;
 
+import static utils.exception.StaticExceptionFactory.*;
 import utils.info.member.ContactInfo;
 import utils.info.member.MemberInfo;
 import utils.info.member.MemberInfoBuilder;
@@ -44,7 +45,7 @@ public class MemberPoBuilder extends MemberInfoBuilder {
 	public MemberPoBuilder(MemberInfo info) {
 		this(info.getType());
 		if (!info.isValid())
-			throw new IllegalArgumentException("MemberPoBuilder - Invalid MemberInfo Instance");
+			throw illegalArgEx("MemberInfo");
 
 		setId(info.getId()).setContactInfo(info.getContact()).setBirthday(info.getBirthday())
 				.setEnterprise(info.getEnterprise());
@@ -72,7 +73,7 @@ public class MemberPoBuilder extends MemberInfoBuilder {
 			// insert blank space to avoid injection attack
 			this.name = name.replaceAll("(.{1})", "$1 ");
 		else
-			throw new IllegalArgumentException("MemberPoBuilder - Wrong name");
+			throw illegalArgEx("Member's name");
 
 		return this;
 	}
@@ -107,7 +108,7 @@ public class MemberPoBuilder extends MemberInfoBuilder {
 	@Override
 	public MemberPo getMemberInfo() {
 		if (!isReady() && passwordHash != Integer.MIN_VALUE)
-			throw new IllegalStateException("MemberPoBuilder - Lack Of Info");
+			throw builderNotReadyEx();
 
 		if (type == Type.BUSINESS)
 			return new EnterpriseMemberPo().setId(id).setName(name).setPasswordHash(passwordHash).setCredit(credit)
@@ -122,7 +123,7 @@ public class MemberPoBuilder extends MemberInfoBuilder {
 			return;
 
 		if (!from.getId().equals(to.getId()) || !from.getType().equals(to.getType()))
-			throw new IllegalArgumentException("MemberPoBuilder.updatePo - Different identifier or type");
+			throw inconsistentStatusEx();
 
 		to.setName(from.getName()).setPasswordHash(from.getPasswordHash()).setCredit(from.getCredit())
 				.setBirthday(from.getBirthday()).setEnterprise(from.getEnterprise());
