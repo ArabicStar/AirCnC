@@ -49,7 +49,7 @@ public abstract class ContactInfoBuilder extends ContactInfoTemplate {
 			return this;
 		}
 
-		if (!checkEmail(mobilePhone))
+		if (!checkEmail(email))
 			throw new IllegalArgumentException("ContactInfoBuilder.setemail - Invalid Email String");
 
 		this.email = email;
