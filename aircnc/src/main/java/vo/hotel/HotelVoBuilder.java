@@ -5,6 +5,7 @@ import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 
+import po.hotel.HotelPo;
 import utils.info.hotel.HotelInfo;
 import utils.info.hotel.HotelInfoBuilder;
 
@@ -22,7 +23,8 @@ public class HotelVoBuilder extends HotelInfoBuilder{
 	}
 	
 	public HotelVoBuilder(HotelInfo info){
-		super(info);
+		this.setID(info.getId()).setName(info.getName()).setScope(info.getScope()).setLocation(info.getLocation())
+		.setStar(info.getStar()).setGrade(info.getGrade()).setEquipment(info.getEquipment());
 		String name = StringUtils.deleteWhitespace(info.getName());
 		setName(name);
 	}
@@ -50,8 +52,10 @@ public class HotelVoBuilder extends HotelInfoBuilder{
 			throw new IllegalArgumentException("Invalid HotelInfo Instance");
 
 		return new HotelVo().setID(id).setName(name).setScope(scope).setLocation(location)
-				.setIntro(introduction).setStar(star).setGrade(grade).setEquipment(equipment);
+				.setIntro(introduction).setStar(star).setGrade(grade).setEquipment(equipment)
+				.setRooms(rooms);
 	}
+
 	
 	@Override
 	public HotelVoBuilder setScope(String scope) {

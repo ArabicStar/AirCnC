@@ -48,6 +48,8 @@ public class HotelInfoTemplate {
 	 * equipment String 0~5.0 <br>
 	 */
 	protected String equipment;
+	
+	
 
 
 	/**

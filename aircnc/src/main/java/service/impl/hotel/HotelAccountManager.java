@@ -45,7 +45,7 @@ public class HotelAccountManager implements HotelAccountService{
 
 	@Override
 	public HotelInfo login(String name, int passwordHash) {
-
+		System.out.println(name);
 		HotelPo hotelAccount = dao.findHotelByName(name);
 
 		if (hotelAccount == null)// not exist

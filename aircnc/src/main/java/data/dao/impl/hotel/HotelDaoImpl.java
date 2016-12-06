@@ -2,6 +2,8 @@ package data.dao.impl.hotel;
 
 import static data.hibernate.Hibernator.execute;
 
+import java.util.List;
+
 import org.hibernate.criterion.Restrictions;
 
 import data.dao.hotel.HotelDao;
@@ -19,15 +21,15 @@ public class HotelDaoImpl implements HotelDao{
 	}
 
 	@Override
-	public boolean deleteHotel(final int id) {
+	public boolean deleteHotel(final String name) {
 		return execute(session -> {
-			Boolean flag = Boolean.FALSE;// for performance
-
-			HotelPo deleted = (HotelPo) session.get(HotelPo.class, id);
-			if (flag = Boolean.valueOf((deleted != null)))// check existence
-				session.delete(deleted);
-
-			return flag;
+			List hotels =  session.createCriteria(HotelPo.class).add(Restrictions.eq("name",name)).list();
+			if(hotels.size()==0){
+				return false;
+			}else{
+				session.delete(hotels.get(0));
+				return true;
+			}
 		});
 	}
 
@@ -75,7 +77,12 @@ public class HotelDaoImpl implements HotelDao{
 	@Override
 	public HotelPo findHotelByName(String name) {
 		return (HotelPo) execute(session -> {
-			return session.createCriteria(HotelPo.class).add(Restrictions.eq("name",name)).list().get(0);
+			List hotels =  session.createCriteria(HotelPo.class).add(Restrictions.eq("name",name)).list();
+			if(hotels.size()==0){
+				return null;
+			}else{
+				return hotels.get(0);
+			}
 		});
 	}
 

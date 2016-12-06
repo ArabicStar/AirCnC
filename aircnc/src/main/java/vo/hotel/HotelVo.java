@@ -14,6 +14,12 @@ public class HotelVo extends HotelInfo{
 		return null;
 	}
 	
+	Set<RoomVo> getRooms(){
+		if(isValid())
+			return this.rooms;
+		return null;
+	}
+	
 	HotelVo setRooms(Set<RoomVo> rooms){
 		this.rooms = rooms;
 		return this;

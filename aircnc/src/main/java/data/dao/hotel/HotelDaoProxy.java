@@ -89,11 +89,11 @@ public class HotelDaoProxy extends AccessSecureProxy implements HotelDao {
 
 	@Override
 	@AuthenticatePolicy({ Client.MANAGE })
-	public boolean deleteHotel(int id) {
+	public boolean deleteHotel(String name) {
 		checkAuthentication();
 		
 		try {
-			return hotelDao.deleteHotel(id);
+			return hotelDao.deleteHotel(name);
 		} catch (RemoteException e) {
 			// e.printStackTrace();
 			throw packedRmiEx(e);

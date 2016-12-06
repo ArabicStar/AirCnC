@@ -11,7 +11,7 @@ public class RoomVoBuilder extends RoomInfoBuilder{
 		INVALID_ROOM_VO.invalidate();
 	}
 	
-	protected RoomVoBuilder(RoomInfo info) {
+	public RoomVoBuilder(RoomInfo info) {
 		super(info.getType());
 		this.setName(info.getName()).setPeopleNum(info.getPeopleNum()).setRoomNum(info.getRoomNum());
 	}
@@ -38,7 +38,7 @@ public class RoomVoBuilder extends RoomInfoBuilder{
 	}
 
 	@Override
-	public RoomInfo getRoomInfo() {
+	public RoomVo getRoomInfo() {
 		if (!isReady())
 			return null;
 

@@ -13,6 +13,9 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
+import data.dao.hotel.HotelDao;
+import data.dao.impl.hotel.HotelDaoImpl;
+
 
 public class HotelTest {
 	private static final List<HotelPo> testData = new ArrayList<>();
@@ -43,34 +46,11 @@ public class HotelTest {
  		
  		HotelPo po = b.getHotelInfo();
  		
- 		boolean flag = false;
-		Session session = getSession();
-
-		Transaction ts = null;
-		try {
-			// normal
-			ts = session.beginTransaction();
-
-			if (!(flag = session.contains(po))) {
-				session.save(po);
-				HotelPo po2 = (HotelPo) session.createCriteria(HotelPo.class).add(Restrictions.eq("name",po.getName())).list().get(0);;
-				System.out.println(po.getName()==po2.getName());
-				session.delete(po);
-			}
-
-			ts.commit();
-
-		} catch (HibernateException he) {
-			// exception
-			he.printStackTrace();
-
-			if (ts != null)
-				ts.rollback();
-
-		} finally {
-			// close
-			session.close();
-		}
+ 		HotelDao dao = new HotelDaoImpl();
+// 		HotelPo po2 = dao.findHotelByName("newHotel");
+// 		if(po2==null){
+// 			System.out.println("aaaa");
+// 		}
  		
 		
 		

@@ -16,56 +16,63 @@ public class HotelAccountServiceTest {
 	private HotelAccountService acc;
 	private HotelDao dao;
 
-	private String registeredName;
-	private int id;
+	private String name = "prepareHotel";
 
-//	@Before
-//	public void setUp() throws Exception {
-//		dao = new HotelDaoImpl();
-//		acc = new HotelAccountManager(dao);
-//	}
-//
-//	@Test
-//	public void testRegister() {
-//		HotelVoBuilder b = new HotelVoBuilder().setName("新酒店").setStar(4);
-//		HotelInfo v = acc.register(b, "12345678".hashCode());
-//		registeredName = v.getName();
-//		assertEquals(true, acc.existsHotel(registeredName));
-//	}
-//
-//	@Test
-//	public void testLogin() {
-//		HotelInfo v = acc.login("新酒店", "12345678".hashCode());
-//		id = v.getId();
-//		assertEquals("新酒店", v.getName());
-//		assertEquals("新酒店", acc.getCurrentAccount().getName());
-//		assertEquals(true, acc.isLogined());
-//	}
-//
-//	@Test
-//	public void testLogout() {
-//		assertEquals(true, acc.logout());
-//		assertEquals(false, acc.isLogined());
-//	}
-//
-//	@Test
-//	public void testExistsHotel() {
-//		boolean res1 = false, res2 = false;
-//		try {
-//			res1 = acc.existsHotel("新酒店");
-//			res2 = acc.existsHotel("垃圾酒店");
-//		} catch (Exception e) {
-//		}
-//		assertEquals(true, res1);
-//		assertEquals(false, res2);
-//	}
-//
-//
-//	@After
-//	public void tearDown() {
-//		try {
-//			dao.deleteHotel(id);
-//		} catch (Exception e) {
-//		}
-//	}
+	@Before
+	public void setUp() throws Exception {
+		dao = new HotelDaoImpl();
+		acc = new HotelAccountManager(dao);
+		HotelVoBuilder b = new HotelVoBuilder().setName(name).setStar(4);
+		HotelInfo v = acc.register(b, "12345678".hashCode());
+	}
+
+	@Test
+	public void testRegister() {
+		HotelVoBuilder b = new HotelVoBuilder().setName("newHotel").setStar(4);
+		HotelInfo v = acc.register(b, "12345678".hashCode());
+		String registeredName = v.getName();
+		
+		assertEquals(true, acc.existsHotel(registeredName));
+		dao.deleteHotel(registeredName);
+	}
+
+	@Test
+	public void testLogin() {
+		HotelInfo v2 = null;
+		try {
+			v2 = acc.login("prepareHotel", "12345678".hashCode());	
+
+		} catch (Exception e) {
+		}
+		assertEquals("prepareHotel", v2.getName());
+		assertEquals("prepareHotel", acc.getCurrentAccount().getName());
+		assertEquals(true, acc.isLogined());
+	}
+
+	@Test
+	public void testLogout() {
+		assertEquals(true, acc.logout());
+		assertEquals(false, acc.isLogined());
+	}
+
+	@Test
+	public void testExistsHotel() {
+		boolean res1 = false, res2 = false;
+		try {
+			res1 = acc.existsHotel("prepareHotel");
+			res2 = acc.existsHotel("oldHotel");
+		} catch (Exception e) {
+		}
+		assertEquals(true, res1);
+		assertEquals(false, res2);
+	}
+
+
+	@After
+	public void tearDown() {
+		try {
+			dao.deleteHotel(name);
+		} catch (Exception e) {
+		}
+	}
 }
