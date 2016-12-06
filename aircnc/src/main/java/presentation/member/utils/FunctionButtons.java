@@ -1,13 +1,10 @@
 package presentation.member.utils;
 
-import java.util.Optional;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableCell;
 import javafx.scene.layout.HBox;
 import presentation.member.model.MyorderModel;
@@ -49,16 +46,15 @@ public class FunctionButtons extends TableCell<MyorderModel, OrderStatus>{
     				createButtons(FunctionButtonType.CHECK) , createButtons(FunctionButtonType.APPEAL) 
     				}; 
     		break;
-    	case REPEALED:
+    	case REPEALED:  case APPEALING:   case REVIEWED:
     		cellButton = new Button[]{ 
     				createButtons(FunctionButtonType.CHECK) 
     				}; 
-    		break;
+    		break;    		
     	default:
     		cellButton = new Button[]{ 
     				createButtons(null)
-    				}; 
-    		
+    				};     		
     	}
     	
     	for(Button b:cellButton){

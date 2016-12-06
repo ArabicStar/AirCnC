@@ -112,7 +112,6 @@ public class MemberOrderMainController implements Initializable{
 
 		operation.setCellFactory(
                 new Callback<TableColumn<MyorderModel,OrderStatus>, TableCell<MyorderModel, OrderStatus>>() {
-
             public TableCell<MyorderModel,OrderStatus> call(TableColumn<MyorderModel, OrderStatus> p) {
                 return new FunctionButtons();
             }       

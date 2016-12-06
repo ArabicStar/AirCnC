@@ -55,6 +55,7 @@ public class MemberCreditChangeController implements Initializable{
 		Platform.runLater(new Runnable() {
 			  @Override public void run() {
 				  creditTable.setItems(controller.getCreditData());
+				  creditTable.setFocusTraversable(false);
 			  }
 			});
 		init();

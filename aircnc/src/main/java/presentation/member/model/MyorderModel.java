@@ -1,10 +1,8 @@
 package presentation.member.model;
 
 import java.time.LocalDateTime;
-import java.util.Comparator;
 
 import javafx.beans.property.StringProperty;
-import presentation.member.utils.FunctionButtons;
 import utils.info.order.OrderStatus;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -59,6 +57,10 @@ public class MyorderModel {
         	state = "未执行";  break;
         case REPEALED: 
         	state = "撤销";  break;
+        case REVIEWED: 
+        	state = "已评价";  break;
+        case APPEALING: 
+        	state = "申诉中";  break;
         default: 
         	state = "";  break;
         }

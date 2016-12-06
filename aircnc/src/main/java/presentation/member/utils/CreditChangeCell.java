@@ -19,8 +19,8 @@ public class CreditChangeCell extends TableCell<CreditModel, Integer> {
 
 	final HBox change;
 	final Label num;
-	final ImageView state;
-	final Image image;
+	ImageView state;
+	Image image;
 
 	/**
 	 * create the creditChangeCell
@@ -30,17 +30,17 @@ public class CreditChangeCell extends TableCell<CreditModel, Integer> {
 	public CreditChangeCell(int changeNum) {
 
 		if (changeNum > 0) {
-			image = new Image("../../../../../images/member/credit-up.png");
+			//image = new Image("../../../../../images/member/credit-up.png");
 			//"../../../../../../resources/images/member/credit-up.png"
 			num = new Label("+" + String.valueOf(changeNum));
 		} else {
 			num = new Label(String.valueOf(changeNum));
-			image = new Image("../../../../../images/member/credit-down.png");
+			//image = new Image("../../../../../images/member/credit-down.png");
 		}
 
-		state = new ImageView(image);
+		//state = new ImageView(image);
 		change = new HBox();
-		change.getChildren().add(state);
+		//change.getChildren().add(state);
 		change.getChildren().add(num);
 	}
 

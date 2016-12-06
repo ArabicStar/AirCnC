@@ -1,14 +1,20 @@
 package service.market;
 
-import vo.market.MarketVo;
+import java.util.List;
+
+import vo.order.OrderVo;
 
 public interface MarketService {
 
 	/**
-	 * @param marketId
-	 * @return	获取营销数据
+	 * @return	获取异常订单
 	 */
-	public MarketVo getMarket(String marketId);
-
+	public List<OrderVo> getAbnormalOrder();
+	
+	/**
+	 * @param  id
+	 * @return	获取促销策略
+	 */
+	//public List<PromotionVo> getMarketPromotion(String id);
 
 }

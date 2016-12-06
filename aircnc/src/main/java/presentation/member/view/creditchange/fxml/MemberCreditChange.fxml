@@ -39,10 +39,5 @@
                </styleClass></TableColumn>
         </columns>
       </TableView>
-      <ImageView fitHeight="53.0" fitWidth="24.0" layoutX="615.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../../../../../../../../../Downloads/credit-up.png" />
-         </image>
-      </ImageView>
    </children>
 </Pane>
