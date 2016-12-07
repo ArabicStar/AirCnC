@@ -1,5 +1,11 @@
 package presentation.manage.manager;
 
-public interface MarketManageInfoManager {
+import presentation.manage.model.MarketManageModel;
+import vo.market.MarketVo;
 
+public interface MarketManageInfoManager {
+	
+	public boolean setMarket(MarketVo vo);
+	
+	public MarketManageModel getMarketInfo();
 }

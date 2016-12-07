@@ -12,7 +12,7 @@
       <Label layoutX="70.0" layoutY="45.0" styleClass="title" text="信用记录变化情况" />
       <TableView fx:id="creditTable" layoutX="39.0" layoutY="138.0" prefHeight="500.0" prefWidth="710.0">
         <columns>
-          <TableColumn fx:id="date" prefWidth="75.0">
+          <TableColumn fx:id="time" prefWidth="75.0">
                <styleClass>
                   <String fx:value="table-row-cell" />
                   <String fx:value="date-row" />
@@ -22,7 +22,7 @@
                   <String fx:value="table-row-cell" />
                   <String fx:value="symbol-row" />
                </styleClass></TableColumn>
-          <TableColumn fx:id="time" prefWidth="75.0">
+          <TableColumn fx:id="date" prefWidth="75.0">
                <styleClass>
                   <String fx:value="table-row-cell" />
                   <String fx:value="time-row" />

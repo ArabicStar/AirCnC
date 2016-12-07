@@ -1,8 +1,6 @@
 package presentation.member;
 
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -12,9 +10,9 @@ import presentation.member.view.memberinfo.MemberInfoModifyPane;
 import presentation.member.view.myorder.MemberOrderMainPane;
 import presentation.member.view.searchhotel.MemberSearchHotelPane;
 import presentation.member.accessor.impl.InfoModifyContentAccessor;
+import presentation.member.manager.CreditChangeManager;
 import presentation.member.manager.MyOrderManager;
 import presentation.member.manager.UserInfoManager;
-import presentation.member.model.CreditModel;
 import presentation.member.view.MemberMainPane;
 import presentation.member.view.creditchange.MemberCreditChangePane;
 
@@ -37,8 +35,11 @@ public class ClientCenterController extends Application {
 	
 	private UserInfoManager memberInfoManager;
 	private MyOrderManager myOrderManager;
+	private CreditChangeManager creditManager;
 	
 	private InfoModifyContentAccessor memberInfoAccessor;
+	
+	private MemberTest test;
 
 	private AnchorPane rootLayout;
 	private AnchorPane content;
@@ -64,11 +65,13 @@ public class ClientCenterController extends Application {
 		// addSignInPane();
 
 		primaryStage.show();
+		
+		test = new MemberTest();
 
 	}
 
 	public void addInfoMainPane() {
-		memberInfoManager = MemberTest.getUserData();
+		memberInfoManager = test.getUserData();
 		content.getChildren().clear();
 		infoMain = new MemberInfoMainPane();
 		content.getChildren().add(infoMain.getContentPane());
@@ -91,10 +94,13 @@ public class ClientCenterController extends Application {
 	}
 
 	public void addCreditChangePane() {
+		creditManager = test.getCreditData();
 		content.getChildren().clear();
 		creditMain = new MemberCreditChangePane();
 		content.getChildren().add(creditMain.getPane());
+		AnchorPane.setTopAnchor(creditMain.getPane(), 10.0);
 		creditMain.getController().setCenterController(this);
+		creditMain.getController().setManager(creditManager);
 		//addCreditChangeRecord();
 	}
 	
@@ -110,24 +116,13 @@ public class ClientCenterController extends Application {
 	}
 	
 	public void addOrderMainPane() {
-		myOrderManager = MemberTest.getMyOrderData();
+		myOrderManager = test.getMyOrderData();
 		content.getChildren().clear();
 		orderMain = new MemberOrderMainPane();
 		content.getChildren().add(orderMain.getPane());
 		orderMain.getController().setCenterController(this);
 		orderMain.getController().setManager(myOrderManager);
 	}
-	
-	
-	public ObservableList<CreditModel> getCreditData(){
-    	ObservableList<CreditModel> orderData = FXCollections.observableArrayList();
-    	
-    	orderData.add(new CreditModel("2016-10-09","20:00","于速八酒店的订单001按时完成，增加信用值233"));
-    	orderData.add(new CreditModel("2016-10-09","20:00","略略略略略"));
-    	orderData.add(new CreditModel("2016-10-09","20:00","于速八酒店的订单001按时完成，增加信用值233"));
-    	
-		return orderData;
-    }
 	
 	public void setMemberInfoManager(UserInfoManager manager){
 		this.memberInfoManager = manager;

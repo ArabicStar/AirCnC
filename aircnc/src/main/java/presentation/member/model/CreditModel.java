@@ -19,7 +19,7 @@ public class CreditModel {
 	private final StringProperty date;
 	private final StringProperty time;
 	private final ObjectProperty<Boolean> symbol;
-	private final ObjectProperty<CreditChangeVo> description;
+	private final StringProperty description;
 	private final ObjectProperty<Integer> creditChange;
 
 	/**
@@ -38,16 +38,6 @@ public class CreditModel {
 	 * @param description
 	 * @param creditChange
 	 */
-	public CreditModel(String s1, String s2, String s3) {
-		
-		this.date = new SimpleStringProperty(s1);
-		this.symbol = new SimpleObjectProperty<Boolean>(true);
-		this.time = new SimpleStringProperty(s2);
-		this.description = new SimpleObjectProperty<CreditChangeVo>(null);
-		this.creditChange = new SimpleObjectProperty<Integer>(233);
-
-	}
-
 	public CreditModel(CreditChangeVo change) {
 
 		// process the concrete date
@@ -58,7 +48,7 @@ public class CreditModel {
 		// process the concrete time
 		this.time = new SimpleStringProperty(transformTime(change.getTimeInstant()));
 
-		this.description = new SimpleObjectProperty<CreditChangeVo>(change);
+		this.description = new SimpleStringProperty(change.getFormatString());
 		
 		//这里要完善
 		this.creditChange = new SimpleObjectProperty<Integer>(233);
@@ -129,15 +119,15 @@ public class CreditModel {
 		return time;
 	}
 	
-	public CreditChangeVo getDescription() {
+	public String getDescription() {
 		return description.get();
 	}
 
-	public void setDescription(CreditChangeVo newChange) {
+	public void setDescription(String newChange) {
 		this.description.set(newChange);
 	}
 
-	public ObjectProperty<CreditChangeVo> descriptionProperty() {
+	public StringProperty descriptionProperty() {
 		return description;
 	}
 	

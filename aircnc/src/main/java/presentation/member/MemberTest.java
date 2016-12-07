@@ -5,14 +5,19 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import presentation.member.manager.CreditChangeManager;
 import presentation.member.manager.MyOrderManager;
 import presentation.member.manager.UserInfoManager;
+import presentation.member.manager.impl.CreditChangeManagerImpl;
 import presentation.member.manager.impl.MemberInfoManagerImpl;
 import presentation.member.manager.impl.MyOrderManagerImpl;
+import utils.info.member.credit.ActionType;
 import utils.info.order.OrderStatus;
 import vo.member.ContactVoBuilder;
 import vo.member.MemberVo;
 import vo.member.MemberVoBuilder;
+import vo.member.credit.CreditChangeVo;
+import vo.member.credit.CreditChangeVoBuilder;
 import vo.order.OrderVo;
 import vo.order.OrderVoBuilder;
 
@@ -23,19 +28,28 @@ import vo.order.OrderVoBuilder;
  */
 public class MemberTest {
 	
-	public static UserInfoManager getUserData(){
-		UserInfoManager memberInfoManager = new MemberInfoManagerImpl();
+	UserInfoManager memberInfoManager;
+	MyOrderManager myOrderManager;
+	CreditChangeManager creditManager;
+	
+	MemberVo memberVo;
+	
+	public MemberTest(){
 		MemberVoBuilder builder =  new MemberVoBuilder("PERSONAL").setId("00002222").setName("hhh").setBirthday(LocalDate.parse("1998-04-17"))
 				.setContactInfo(new ContactVoBuilder().setEmail("12345@qq.com").setFixedPhone("0511-12344444")
 						.setMobilePhone("13822222222").getContactInfo()).setCredit(0);
-		MemberVo vo = builder.getMemberInfo();
-		memberInfoManager.setUser(vo);
+		memberVo = builder.getMemberInfo();
+	}
+	
+	public UserInfoManager getUserData(){
+		memberInfoManager = new MemberInfoManagerImpl();
+		memberInfoManager.setUser(memberVo);
 		return memberInfoManager;
 	}
 	
-	public static MyOrderManager getMyOrderData(){
+	public MyOrderManager getMyOrderData(){
 		List<OrderVo> list = new ArrayList<OrderVo>();
-		MyOrderManager manager = new MyOrderManagerImpl();
+		myOrderManager = new MyOrderManagerImpl();
 		OrderVo vo1 =  new OrderVoBuilder().setEntryTime(LocalDateTime.now()).setHasChildren(false)
         		.setHotelId(1000).setHotelName("乐天玛特").setLastTime(LocalDateTime.now())
         		.setOrderId("201636").setPeopleNumber(3).setPrice(200)
@@ -55,8 +69,22 @@ public class MemberTest {
         		.setStayDays(2).setUserId(20808121).setStatus(OrderStatus.UNEXECUTED).setUserName("南京大学渣")
         		.getOrderInfo();
 		list.add(vo1); list.add(vo2); list.add(vo3);
-		manager.setOrderList(list);
-		return manager;
+		myOrderManager.setOrderList(list);
+		return myOrderManager;
+	}
+	
+	public CreditChangeManager getCreditData(){
+		List<CreditChangeVo> list = new ArrayList<CreditChangeVo>();
+		creditManager = new CreditChangeManagerImpl();
+		CreditChangeVo vo1 = new CreditChangeVoBuilder(memberVo, ActionType.CHARGE)
+				.setCreditChange(23300).setMoney(233).getCreditChangeInfo();
+		CreditChangeVo vo2 = new CreditChangeVoBuilder(memberVo, ActionType.ORDER_APPEAL)
+				.setCreditChange(23300).setOrderId("6666").getCreditChangeInfo();
+		CreditChangeVo vo3 = new CreditChangeVoBuilder(memberVo, ActionType.ORDER_OVERDUE)
+				.setCreditChange(23300).setOrderId("66666").getCreditChangeInfo();
+		list.add(vo1);  list.add(vo2);  list.add(vo3);
+		creditManager.setCreditChanges(list);
+		return creditManager;
 	}
 	
 }

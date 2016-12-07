@@ -91,7 +91,6 @@ public class MemberOrderMainController implements Initializable{
 		orderTable.setItems(manager.getOrderList());
 		
 		
-		System.out.println(manager.getOrderList().size());
 		hotelName.setCellValueFactory(cellData -> cellData.getValue().hotelNameProperty());
 		checkInTime.setCellValueFactory(cellData -> cellData.getValue().checkInTimeProperty());
 		state.setCellValueFactory(cellData -> cellData.getValue().stateProperty());

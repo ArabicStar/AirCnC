@@ -13,6 +13,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.util.Callback;
 import presentation.member.ClientCenterController;
+import presentation.member.manager.CreditChangeManager;
 import presentation.member.model.CreditModel;
 import presentation.member.utils.CreditChangeCell;
 import vo.member.credit.CreditChangeVo;
@@ -25,6 +26,8 @@ import vo.member.credit.CreditChangeVo;
 public class MemberCreditChangeController implements Initializable{
 	
 	private ClientCenterController controller;
+	
+	private CreditChangeManager manager;
 	
 	@FXML
 	private TableView<CreditModel> creditTable;
@@ -39,7 +42,7 @@ public class MemberCreditChangeController implements Initializable{
 	private TableColumn<CreditModel,String> time;
 	
 	@FXML
-	private TableColumn<CreditModel,CreditChangeVo> description;
+	private TableColumn<CreditModel,String> description;
 	
 	@FXML
 	private TableColumn<CreditModel,Integer> change;
@@ -49,12 +52,16 @@ public class MemberCreditChangeController implements Initializable{
 	public void setCenterController(ClientCenterController controller){
 		this.controller=controller;
 	}
+	
+	public void setManager(CreditChangeManager manager){
+		this.manager = manager;
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources){
 		Platform.runLater(new Runnable() {
 			  @Override public void run() {
-				  creditTable.setItems(controller.getCreditData());
+				  creditTable.setItems(manager.getCreditList());
 				  creditTable.setFocusTraversable(false);
 			  }
 			});

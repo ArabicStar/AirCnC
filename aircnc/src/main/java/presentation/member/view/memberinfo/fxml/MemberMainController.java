@@ -42,21 +42,37 @@ public class MemberMainController implements Initializable{
 	@FXML
 	private void HandleMemberInfo(){
 		controller.addInfoMainPane();
+		memberInfo.setDisable(true);
+		searchHotel.setDisable(false);
+		myOrder.setDisable(false);
+		creditChange.setDisable(false);
 	}
 	
 	@FXML
 	private void HandleSearchHotel(){
 		controller.addSearchHotelPane();
+		memberInfo.setDisable(false);
+		searchHotel.setDisable(true);
+		myOrder.setDisable(false);
+		creditChange.setDisable(false);
 	}
 	
 	@FXML
 	private void HandleMyOrder(){
 		controller.addOrderMainPane();
+		memberInfo.setDisable(false);
+		searchHotel.setDisable(false);
+		myOrder.setDisable(true);
+		creditChange.setDisable(false);
 	}
 	
 	@FXML
 	private void HandleCreditChange(){
 		controller.addCreditChangePane();
+		memberInfo.setDisable(false);
+		searchHotel.setDisable(false);
+		myOrder.setDisable(false);
+		creditChange.setDisable(true);
 	}
 	
 	/**

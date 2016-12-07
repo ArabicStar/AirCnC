@@ -97,8 +97,7 @@ public class FunctionButtons extends TableCell<MyorderModel, OrderStatus>{
              public void handle(ActionEvent t) {
             	 switch(type){
             	 case CHECK: 
-            		PlainDialog alert = new PlainDialog(AlertType.INFORMATION,
-         			"查看订单","让我等会写一下这个东西，不对，让万总写一下");
+            		 TextAreaDialog alert = new TextAreaDialog("让我等会写一下这个东西，不对，让万总写一下");
          			alert.showDialog();
             		 break;
             	 case REVIEW: 
