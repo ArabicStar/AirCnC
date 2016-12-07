@@ -5,6 +5,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import presentation.hotel.accessor.HotelLoginAccessor;
+import presentation.hotel.accessor.impl.HotelLoginAccessorImpl;
 import presentation.hotel.view.signIn.HotelSignInPane;
 
 /**
@@ -18,6 +20,8 @@ public class CenterController extends Application{
 	private Scene scene;
 	
 	private HotelSignInPane signIn;
+	
+	private HotelLoginAccessor loginAccessor;
 	
 	private final static int Login_Width = 550;
 	private final static int Login_Height = 385;
@@ -36,6 +40,8 @@ public class CenterController extends Application{
 		primaryStage.setTitle("AirCnC");
 		primaryStage.setResizable(false);
 		
+		loginAccessor = new HotelLoginAccessorImpl();
+		
 		// show the pane of sign in.
 		signIn = new HotelSignInPane();
 		scene = new Scene(signIn.getBorderPane(), Login_Width, Login_Height);
@@ -43,6 +49,7 @@ public class CenterController extends Application{
 		
 		primaryStage.show();
 		signIn.getController().setCenterController(this);
+		signIn.getController().setAccessor(loginAccessor);
 		
 	}
 	

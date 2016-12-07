@@ -2,18 +2,20 @@ package presentation.hotel.view.signIn;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import presentation.hotel.CenterController;
+import presentation.hotel.accessor.HotelLoginAccessor;
+import presentation.member.utils.PlainDialog;
 
 public class HotelSignInController implements Initializable{
 
 	@FXML
-    private TextField username;
+    private TextField name;
 
 	@FXML
     private PasswordField password;
@@ -23,15 +25,16 @@ public class HotelSignInController implements Initializable{
 	
 	private CenterController controller;
 	
+	private HotelLoginAccessor accessor;
+	
 	/**
      * Initializes the controller class. This method is automatically called
      * after the fxml file has been loaded.
      */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-//		username.setText("admin1");
-		password.setText("123456");
-		
+		name.setText("");
+		password.setText("");
 		
 	}
 	
@@ -43,8 +46,27 @@ public class HotelSignInController implements Initializable{
 	 */
 	@FXML
 	public void handleConfirm(){
-		//按下登陆键，验证正确性，正确则跳只hotelMainPane，错误跳出对话框
-		controller.initializeClient();
+		if(name.getText().length()!=0&&password.getText().length()!=0){
+			accessor.setDeliveredId(name.getText());
+			accessor.setDeliveredPassword(password.getText());
+			
+			//use valid to mark whether it is correct
+			boolean valid = true;
+			
+			if(valid)
+				controller.initializeClient();
+			else{
+				PlainDialog alert = new PlainDialog(AlertType.INFORMATION,
+						"登录失败","错误的用户名或密码！");
+				alert.showDialog();
+			}
+				
+
+		}else{
+			PlainDialog alert = new PlainDialog(AlertType.INFORMATION,
+					"登录失败","请输入你的用户名和密码");
+			alert.showDialog();			
+		}
 	}
 	
 	/**
@@ -53,6 +75,14 @@ public class HotelSignInController implements Initializable{
 	 */
 	public void setCenterController(CenterController controller){
 		this.controller=controller;
+	}
+	
+	/**
+	 * set the stage
+	 * @param accessor
+	 */	
+	public void setAccessor(HotelLoginAccessor accessor){
+		this.accessor = accessor;
 	}
 
 }
