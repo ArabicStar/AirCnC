@@ -13,6 +13,7 @@ import presentation.member.accessor.InfoModifyAccessor;
 import presentation.member.accessor.impl.InfoModifyAccessorImpl;
 import presentation.member.manager.CreditChangeManager;
 import presentation.member.manager.MyOrderManager;
+import presentation.member.manager.SearchHotelManager;
 import presentation.member.manager.UserInfoManager;
 import presentation.member.view.MemberMainPane;
 import presentation.member.view.creditchange.MemberCreditChangePane;
@@ -37,6 +38,7 @@ public class ClientCenterController extends Application {
 	private UserInfoManager memberInfoManager;
 	private MyOrderManager myOrderManager;
 	private CreditChangeManager creditManager;
+	private SearchHotelManager searchManager;
 	
 	private InfoModifyAccessor memberInfoAccessor;
 	
@@ -110,10 +112,12 @@ public class ClientCenterController extends Application {
 	}
 
 	public void addSearchHotelPane() {
+		searchManager = test.getSearchedData();
 		content.getChildren().clear();
 		searchMain = new MemberSearchHotelPane();
 		content.getChildren().add(searchMain.getPane());
 		searchMain.getController().setCenterController(this);
+		searchMain.getController().setManager(searchManager);
 	}
 	
 	public void addOrderMainPane() {

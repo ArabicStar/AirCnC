@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import presentation.member.ClientCenterController;
+import presentation.member.manager.SearchHotelManager;
 
 /**
  * the controller of hotel search (main).
@@ -27,6 +28,7 @@ public class MemberSearchHotelController implements Initializable{
 	private Label supreme;
 	
 	private ClientCenterController controller;
+	private SearchHotelManager manager;
 	
 	public void setCenterController(ClientCenterController controller){
 		this.controller=controller;
@@ -41,6 +43,10 @@ public class MemberSearchHotelController implements Initializable{
 	@FXML
 	public void handleSupreme(){
 		
+	}
+	
+	public void setManager(SearchHotelManager manager){
+		this.manager = manager;
 	}
 	
 }

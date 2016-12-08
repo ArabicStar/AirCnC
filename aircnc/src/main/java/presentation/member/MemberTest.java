@@ -7,12 +7,16 @@ import java.util.List;
 
 import presentation.member.manager.CreditChangeManager;
 import presentation.member.manager.MyOrderManager;
+import presentation.member.manager.SearchHotelManager;
 import presentation.member.manager.UserInfoManager;
 import presentation.member.manager.impl.CreditChangeManagerImpl;
 import presentation.member.manager.impl.MemberInfoManagerImpl;
 import presentation.member.manager.impl.MyOrderManagerImpl;
+import presentation.member.manager.impl.SearchHotelManagerImpl;
 import utils.info.member.credit.ActionType;
 import utils.info.order.OrderStatus;
+import vo.hotel.HotelVo;
+import vo.hotel.HotelVoBuilder;
 import vo.member.ContactVoBuilder;
 import vo.member.MemberVo;
 import vo.member.MemberVoBuilder;
@@ -31,6 +35,7 @@ public class MemberTest {
 	UserInfoManager memberInfoManager;
 	MyOrderManager myOrderManager;
 	CreditChangeManager creditManager;
+	SearchHotelManager searchManager;
 	
 	MemberVo memberVo;
 	
@@ -85,6 +90,20 @@ public class MemberTest {
 		list.add(vo1);  list.add(vo2);  list.add(vo3);
 		creditManager.setCreditChanges(list);
 		return creditManager;
+	}
+	
+	public SearchHotelManager getSearchedData(){
+		List<HotelVo> list = new ArrayList<HotelVo>();
+		searchManager = new SearchHotelManagerImpl();
+		HotelVo vo1 = new HotelVoBuilder().setID(00002222).setName("速八酒店").setGrade(4.5)
+				.setScope("市中心").setLocation("新街口").setStar(4).getHotelInfo();
+		HotelVo vo2 = new HotelVoBuilder().setID(00002222).setName("如家酒店").setGrade(4.5)
+				.setScope("市中心").setLocation("新街口").setStar(4).getHotelInfo();
+		HotelVo vo3 = new HotelVoBuilder().setID(00002222).setName("布丁酒店").setGrade(4.5)
+				.setScope("市中心").setLocation("新街口").setStar(4).getHotelInfo();
+		list.add(vo1);  list.add(vo2);  list.add(vo3);
+		searchManager.setHotel(list);
+		return searchManager;
 	}
 	
 }
