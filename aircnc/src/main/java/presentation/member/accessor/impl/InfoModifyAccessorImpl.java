@@ -11,7 +11,7 @@ import vo.member.MemberVoBuilder;
  * @author paranoia
  *
  */
-public class InfoModifyContentAccessor implements InfoModifyAccessor{
+public class InfoModifyAccessorImpl implements InfoModifyAccessor{
 	
 	private String username;
 	

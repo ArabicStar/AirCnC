@@ -29,9 +29,35 @@ public class SearchHotelsModel {
 	private final BooleanProperty reserve;
 	private final ObjectProperty<MemberVo> historyOrder;
 	
+	private final IntegerProperty execute;
+	private final IntegerProperty unexecute;
+	private final IntegerProperty abnormal;
+	private final IntegerProperty repeal;
+		
+	/**
+     * Default constructor.
+     */
+    public SearchHotelsModel() {
+        this(null);
+    }
+    
 	//姑且没有PromotionVo
 	//private final ObjectProperty<PromotionVo> promotion;
-	
+    /**
+     * Constructor with some initial data.
+     * 
+     * @param hotelName
+     * @param hotelGrade
+     * @param htoelScope
+     * @param hotelLocation
+     * @param lowestPrice
+     * @param reverse
+     * @param historyOrder
+     * @param execute
+     * @param unexecute
+     * @param abnormal
+     * @param repeal
+     */
 	public SearchHotelsModel(HotelVo vo){
 		
 		this.hotelName = new SimpleStringProperty(vo.getName());
@@ -45,6 +71,11 @@ public class SearchHotelsModel {
 		this.reserve = new SimpleBooleanProperty(true);
 		
 		this.historyOrder = new SimpleObjectProperty<MemberVo>();
+		
+		this.execute = new SimpleIntegerProperty(0);
+		this.unexecute = new SimpleIntegerProperty(1);
+		this.abnormal = new SimpleIntegerProperty(0);
+		this.repeal = new SimpleIntegerProperty(0);
 		
 		//this.promotion = new SimpleObjectProperty<HotelPromotionCell>();
 		
@@ -132,5 +163,53 @@ public class SearchHotelsModel {
 
     public ObjectProperty<MemberVo> historyOrderProperty() {
         return historyOrder;
+    }
+    
+    public int getExecuteOrderNum() {
+        return execute.get();
+    }
+
+    public void setExecuteOrderNum(int i) {
+        this.execute.set(i);
+    }
+
+    public IntegerProperty executeOrderProperty() {
+        return execute;
+    }
+    
+    public int getUnexecuteOrderNum() {
+        return unexecute.get();
+    }
+
+    public void setUnexecuteOrderNum(int i) {
+        this.unexecute.set(i);
+    }
+
+    public IntegerProperty unexecuteOrderProperty() {
+        return unexecute;
+    }
+    
+    public int getAbnormalOrderNum() {
+        return abnormal.get();
+    }
+
+    public void setAbnormalOrderNum(int i) {
+        this.abnormal.set(i);
+    }
+
+    public IntegerProperty abnormalOrderProperty() {
+        return abnormal;
+    }
+    
+    public int getRepealOrderNum() {
+        return repeal.get();
+    }
+
+    public void setRepealOrderNum(int i) {
+        this.repeal.set(i);
+    }
+
+    public IntegerProperty repealOrderProperty() {
+        return repeal;
     }
 }

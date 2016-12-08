@@ -13,6 +13,7 @@ import vo.member.MemberVo;
  *
  */
 public class MemberInfoModel {
+	
 	private final StringProperty id;
 	private final StringProperty username;
 	private final StringProperty tele;

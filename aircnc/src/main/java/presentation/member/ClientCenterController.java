@@ -9,7 +9,8 @@ import presentation.member.view.memberinfo.MemberInfoMainPane;
 import presentation.member.view.memberinfo.MemberInfoModifyPane;
 import presentation.member.view.myorder.MemberOrderMainPane;
 import presentation.member.view.searchhotel.MemberSearchHotelPane;
-import presentation.member.accessor.impl.InfoModifyContentAccessor;
+import presentation.member.accessor.InfoModifyAccessor;
+import presentation.member.accessor.impl.InfoModifyAccessorImpl;
 import presentation.member.manager.CreditChangeManager;
 import presentation.member.manager.MyOrderManager;
 import presentation.member.manager.UserInfoManager;
@@ -37,7 +38,7 @@ public class ClientCenterController extends Application {
 	private MyOrderManager myOrderManager;
 	private CreditChangeManager creditManager;
 	
-	private InfoModifyContentAccessor memberInfoAccessor;
+	private InfoModifyAccessor memberInfoAccessor;
 	
 	private MemberTest test;
 
@@ -83,7 +84,7 @@ public class ClientCenterController extends Application {
 
 	public void addInfoModifyPane() {
 		content.getChildren().clear();
-		memberInfoAccessor = new InfoModifyContentAccessor();
+		memberInfoAccessor = new InfoModifyAccessorImpl();
 		infoModify = new MemberInfoModifyPane();
 		content.getChildren().add(infoModify.getPane());
 		AnchorPane.setTopAnchor((infoModify.getPane()), 10.0);
