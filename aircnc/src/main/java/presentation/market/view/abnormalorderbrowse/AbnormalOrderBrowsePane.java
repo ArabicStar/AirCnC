@@ -1,4 +1,4 @@
-package presentation.market.view.websitepromotionstrategy;
+package presentation.market.view.abnormalorderbrowse;
 
 import java.io.IOException;
 import java.net.URL;
@@ -6,40 +6,39 @@ import java.net.URL;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.layout.Pane;
-import presentation.market.view.websitepromotionstrategy.fxml.WebsitePromotionStrategyController;
+import presentation.market.view.abnormalorderbrowse.fxml.AbnormalOrderBrowseController;
 
-public class WebsitePromotionStrategyPane {
+public class AbnormalOrderBrowsePane {
 	private Pane orderLayout;
-	private WebsitePromotionStrategyController controller;
+	private AbnormalOrderBrowseController controller;
 	
-	public WebsitePromotionStrategyPane() {
+	public AbnormalOrderBrowsePane() {
 		init();
 	}
-
+	
 	public void init() {
 		try {
 			// Load sign in overview.
 			FXMLLoader loader = new FXMLLoader();
-			URL location = getClass().getResource("fxml/WebsitePromotionStrategy.fxml");
+			URL location = getClass().getResource("fxml/AbnormalOrderBrowse.fxml");
 			loader.setLocation(location);
 			loader.setBuilderFactory(new JavaFXBuilderFactory());
 			// javafx.scene.Parent root = (javafx.scene.Parent)
 			// loader.load(location.openStream());
 			loader.load();
-			controller = (WebsitePromotionStrategyController) loader.getController();
+			controller = (AbnormalOrderBrowseController) loader.getController();
 			orderLayout = loader.getRoot();
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public WebsitePromotionStrategyController getController() {
-		return this.controller;
-	}
 
+	public AbnormalOrderBrowseController getController() {
+		return controller;
+	}
+	
 	public Pane getPane() {
 		return orderLayout;
 	}
-
 }

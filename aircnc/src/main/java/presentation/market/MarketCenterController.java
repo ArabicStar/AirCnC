@@ -6,15 +6,19 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import presentation.market.view.MarketMainPane;
+import presentation.market.view.abnormalorderbrowse.AbnormalOrderBrowsePane;
 import presentation.market.view.websitepromotionstrategy.WebsitePromotionStrategyPane;
 
 public class MarketCenterController extends Application {
+	@SuppressWarnings("unused")
 	private Stage primaryStage;
 	private Scene scene;
+	@SuppressWarnings("unused")
 	private BorderPane rootLayout;
 
 	private MarketMainPane mainClient;
 	private WebsitePromotionStrategyPane websitePromotionStrategyPane;
+	private AbnormalOrderBrowsePane abnormalOrderBrowsePane;
 
 	private final static int Client_Width = 1024;
 	private final static int Client_Height = 768;
@@ -38,7 +42,7 @@ public class MarketCenterController extends Application {
 	}
 	
 	/**
-	 * 添加网站营销策略
+	 * 添加网站营销策略界面
 	 */
 	public void addWebsitePromotionStrategyPane() {
 		clearContent();
@@ -47,6 +51,17 @@ public class MarketCenterController extends Application {
 		websitePromotionStrategyPane.getController().setCenterController(this);
 		// TODO:测试用代码
 		websitePromotionStrategyPane.getController().test();
+	}
+	
+	/**
+	 * 添加浏览异常订单界面
+	 */
+	public void addAbnormalOrderBrowsePane() {
+		clearContent();
+		abnormalOrderBrowsePane = new AbnormalOrderBrowsePane();
+		mainClient.getBorderPane().setCenter(abnormalOrderBrowsePane.getPane());
+		abnormalOrderBrowsePane.getController().setCenterController(this);
+		abnormalOrderBrowsePane.getController().test();
 	}
 	
 	

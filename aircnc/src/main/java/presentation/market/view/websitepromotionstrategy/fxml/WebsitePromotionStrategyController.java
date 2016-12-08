@@ -15,14 +15,13 @@ import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.util.Callback;
 import presentation.market.MarketCenterController;
-import presentation.market.model.OrderModel;
 import presentation.market.model.PromotionModel;
-import presentation.market.utils.ButtonCell;
 import presentation.market.utils.ButtonName;
 import presentation.market.utils.PromotionButtonCell;
 
 public class WebsitePromotionStrategyController implements Initializable{
 
+	@SuppressWarnings("unused")
 	private MarketCenterController controller;
 	
 	@FXML

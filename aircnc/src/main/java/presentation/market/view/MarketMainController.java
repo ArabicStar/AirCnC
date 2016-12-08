@@ -10,6 +10,8 @@ import presentation.market.MarketCenterController;
 
 public class MarketMainController implements Initializable {
 	private static int count = 0;
+	
+	private static int count1 = 0;
 
 	@FXML
 	private Label websitePromotionStrategy;
@@ -48,7 +50,9 @@ public class MarketMainController implements Initializable {
 	
 	@FXML
 	private void handleAbnormalOrderBrowse(){
-		// TODO
+		count1++;
+		abnormalOrderBrowse.setText(Integer.toBinaryString(count1));
+		this.controller.addAbnormalOrderBrowsePane();
 	}
 	
 	@FXML
