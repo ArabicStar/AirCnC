@@ -16,6 +16,7 @@ import presentation.hotel.view.hotelInfo.HotelInfoMainPane;
 import presentation.hotel.view.hotelInfo.HotelInfoModifyPane;
 import presentation.hotel.view.orderBrowse.OrderBrowsePane;
 import presentation.hotel.view.orderExecute.OrderExecutePane;
+import service.impl.hotel.HotelInfoManager;
 import vo.hotel.HotelVo;
 
 
@@ -32,6 +33,8 @@ public class HotelCenterController extends Application{
 	private CheckOutPane checkOutPane;
 	private OrderBrowsePane browsePane;
 	private AbnormalOrderPane abnormalPane;
+	
+	private HotelInfoManager hotelInfoManager;
 	
 	
 	private final static int Client_Width = 1024;
@@ -104,6 +107,7 @@ public class HotelCenterController extends Application{
 	}
 	
 	public void addHotelInfoMainPane() {
+//		hotelInfoMange = 
 		clearContent();
 		infoMainPane = new HotelInfoMainPane();
 		mainClient.getBorderPane().setCenter(infoMainPane.getBorderPane());

@@ -46,7 +46,7 @@
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="40.0">
                <children>
                   <Label styleClass="info-index" text="设施" />
-                  <Label fx:id="equipment" styleClass="info-content" text="Label" />
+                  <FlowPane fx:id="equipment" hgap="20.0" prefHeight="100.0" prefWidth="414.0" vgap="10.0" />
                </children>
             </HBox>
          </children>
