@@ -10,7 +10,7 @@
 }
 
 .confirm{
-	-fx-margin: 10 0 0 0;
+	-fx-margin: 0 0 0 0;
 	-fx-pref-width: 225px;
 	-fx-pref-height: 45px;
 	-fx-font-size: 23px;
@@ -21,6 +21,19 @@
 
 .confirm:hover{
 	-fx-background-color: #47447d;
+}
+
+.back{
+	-fx-font-size: 10pt;
+	-fx-background-color: transparent;
+	-fx-text-fill: #4f4e84;
+	-fx-border-color: #4f4e84;
+	-fx-border-radius: 3px;
+}
+
+.back:hover{
+	-fx-background-color: #4f4e84;
+	-fx-text-fill: #fff;
 }
 
 .choice{
@@ -48,7 +61,7 @@
 	-fx-border-color:#a0a0a0;
 	-fx-background-color: transparent;
 	-fx-text-fill:#a0a0a0;
-	-fx-padding: 10 0 6 0;
+	-fx-padding: 6 0 6 0;
 	letter-spacing: 1pt;
-	-fx-font-size: 10pt;
+	-fx-font-size: 15pt;
 }

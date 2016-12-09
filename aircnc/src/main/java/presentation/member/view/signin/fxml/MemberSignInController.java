@@ -45,8 +45,8 @@ public class MemberSignInController implements Initializable{
      */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		username.setText("");
-		password.setText("");
+		username.setPromptText("用户名");
+		password.setPromptText("密码");
 		
 		
 	}

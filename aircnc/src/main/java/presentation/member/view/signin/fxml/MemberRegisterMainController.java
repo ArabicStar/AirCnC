@@ -49,6 +49,9 @@ public class MemberRegisterMainController implements Initializable{
 	@FXML
 	private Button next;
 	
+	@FXML
+	private Button back;
+	
 	private ToggleGroup memberType;
 	
 	private CenterController controller;
@@ -64,7 +67,17 @@ public class MemberRegisterMainController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		memberType = new ToggleGroup();
 		personal.setToggleGroup(memberType);
-		business.setToggleGroup(memberType);	
+		business.setToggleGroup(memberType);
+		
+		username.setPromptText("用户名");
+		password.setPromptText("密码");
+		confirmPassword.setPromptText("确认密码");
+		
+		next.setDisable(true);
+		//监听键入,输入的除去空格后有内容则恢复按钮
+		username.textProperty().addListener((observable, oldValue, newValue) -> {
+		    next.setDisable(newValue.trim().isEmpty());
+		});
 	}
 	
 	/**
@@ -105,6 +118,15 @@ public class MemberRegisterMainController implements Initializable{
 			alert.showDialog();
 			
 		}
+	}
+	
+	/**
+	 * handle the button action (Next)
+	 * jump to the login in pane.
+	 */
+	@FXML
+	public void handleBack(){
+		
 	}
 	
 	/**

@@ -70,6 +70,7 @@ public class MemberSearchHotelGeneralController implements Initializable{
 		});	
 	}
 	
+	@FXML
 	public void handleReverse(){
 		
 	}

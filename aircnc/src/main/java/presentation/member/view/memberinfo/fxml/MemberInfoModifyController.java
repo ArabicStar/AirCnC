@@ -14,6 +14,7 @@ import presentation.member.ClientCenterController;
 import presentation.member.accessor.InfoModifyAccessor;
 import presentation.member.manager.UserInfoManager;
 import presentation.member.model.MemberInfoModel;
+import presentation.member.utils.ModifyPasswordDialog;
 import presentation.member.utils.PlainDialog;
 
 public class MemberInfoModifyController implements Initializable{
@@ -38,6 +39,9 @@ public class MemberInfoModifyController implements Initializable{
 	
 	@FXML
 	private Button confirm;
+	
+	@FXML
+	private Button modifyPassword;
 	
 	private ClientCenterController controller;
 	
@@ -87,6 +91,12 @@ public class MemberInfoModifyController implements Initializable{
 			alert.showDialog();
 		}
 			
+	}
+	
+	@FXML
+	public void handleModifyPassword(){
+		//这里逻辑处理一下
+		ModifyPasswordDialog modifyPassword = new ModifyPasswordDialog();
 	}
 	
 	/**

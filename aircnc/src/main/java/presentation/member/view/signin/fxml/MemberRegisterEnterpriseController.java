@@ -3,6 +3,7 @@ package presentation.member.view.signin.fxml;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.application.Platform;
 import javafx.fxml.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -34,8 +35,17 @@ public class MemberRegisterEnterpriseController implements Initializable{
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		enterprise.setText("企业名称");
-		//监听键入
+		enterprise.setPromptText("企业名称");
+		confirm.setDisable(true);
+		Platform.runLater(new Runnable() {
+			  @Override public void run() {
+				  confirm.requestFocus();
+					//监听键入,输入的除去空格后有内容则恢复按钮
+					enterprise.textProperty().addListener((observable, oldValue, newValue) -> {
+					    confirm.setDisable(newValue.trim().isEmpty());
+					});
+			  }
+		});
 	}
 	
 	/**
@@ -46,14 +56,8 @@ public class MemberRegisterEnterpriseController implements Initializable{
 	 */
 	@FXML
 	public void handleConfirm(){
-		if(enterprise.getText().length()>0){
 			accessor.setEnterprise(enterprise.getText());
 			controller.addSignInPane();
-		}else{
-			PlainDialog alert = new PlainDialog(AlertType.INFORMATION,
-					"注册失败","请输入你的企业名称");
-			alert.showDialog();
-		}
 		
 	}
 	
