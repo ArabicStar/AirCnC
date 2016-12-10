@@ -137,11 +137,43 @@ public final class MemberServiceProxy extends AccessSecureProxy
 	}
 
 	@Override
+	@AuthenticatePolicy({ Client.USER })
+	public boolean updateBasicInfo(MemberInfo modifiedInfo) {
+		checkAuthentication();
+	
+		return infoService.updateBasicInfo(modifiedInfo);
+	}
+
+	@Override
+	@AuthenticatePolicy({ Client.MANAGE })
+	public boolean updateAdvancedInfo(MemberInfo modifiedInfo) {
+		checkAuthentication();
+	
+		return infoService.updateAdvancedInfo(modifiedInfo);
+	}
+
+	@Override
+	@AuthenticatePolicy({ Client.USER })
+	public boolean updatePassword(int oldPwdHash, int newPwdHash) {
+		checkAuthentication();
+	
+		return infoService.updatePassword(oldPwdHash, newPwdHash);
+	}
+
+	@Override
 	@AuthenticatePolicy({ Client.USER, Client.MARKET })
 	public List<OrderVo> getMemberAllOrders(String id) {
 		checkAuthentication();
 
 		return infoService.getMemberAllOrders(id);
+	}
+
+	@Override
+	@AuthenticatePolicy({ Client.USER })
+	public List<OrderVo> getMemberOrdersByStatus(String id, OrderStatus status) {
+		checkAuthentication();
+	
+		return infoService.getMemberOrdersByStatus(id, status);
 	}
 
 	@Override
@@ -158,14 +190,6 @@ public final class MemberServiceProxy extends AccessSecureProxy
 		checkAuthentication();
 
 		return getMemberCreditChange(id);
-	}
-
-	@Override
-	@AuthenticatePolicy({ Client.USER })
-	public boolean updateInfo(MemberInfo modifiedInfo) {
-		checkAuthentication();
-
-		return infoService.updateInfo(modifiedInfo);
 	}
 
 	@Override
@@ -214,21 +238,5 @@ public final class MemberServiceProxy extends AccessSecureProxy
 		checkAuthentication();
 
 		return recoverByAppeal(order);
-	}
-
-	@Override
-	@AuthenticatePolicy({ Client.USER })
-	public boolean updatePassword(int oldPwdHash, int newPwdHash) {
-		checkAuthentication();
-
-		return infoService.updatePassword(oldPwdHash, newPwdHash);
-	}
-
-	@Override
-	@AuthenticatePolicy({ Client.USER })
-	public List<OrderVo> getMemberOrdersByStatus(String id, OrderStatus status) {
-		checkAuthentication();
-
-		return infoService.getMemberOrdersByStatus(id, status);
 	}
 }

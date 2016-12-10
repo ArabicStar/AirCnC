@@ -33,14 +33,37 @@ public class MemeberInfoSerivceTest {
 	}
 
 	@Test
-	public void testUpdateInfo() {
+	public void testUpdateBasicInfo() {
 		MemberInfo v = info.getMemberInfo(testID(3));
 		account.login(v.getId(), "12345678".hashCode());
 		MemberInfo v1 = new MemberVoBuilder(v).setName("BC").getMemberInfo();
-		boolean result = info.updateInfo(v1);
+		boolean result = info.updateBasicInfo(v1);
 		assertEquals(true, result);
 		v = info.getMemberInfo(testID(3));
 		assertEquals("BC", v.getName());
+	}
+
+	@Test
+	public void testUpdateAdvancedInfo() {
+		MemberInfo v = info.getMemberInfo(testID(3));
+		// account.login(v.getId(), "12345678".hashCode());
+		MemberInfo v1 = new MemberVoBuilder(v).setEnterprise("Apple Inc.").getMemberInfo();
+		boolean result = info.updateAdvancedInfo(v1);
+		assertEquals(true, result);
+		v = info.getMemberInfo(testID(3));
+		assertEquals("Apple Inc.", v.getEnterprise());
+	}
+
+	@Test
+	public void testUpdatePassword() {
+		MemberInfo v = info.getMemberInfo(testID(3));
+		account.login(v.getId(), "12345678".hashCode());
+		// MemberInfo v1 = new MemberVoBuilder(v).setEnterprise("Apple
+		// Inc.").getMemberInfo();
+		boolean result = info.updatePassword("12345678".hashCode(), "123456789".hashCode());
+		assertEquals(true, result);
+		account.logout();
+		assertEquals(true, null != account.login(v.getId(), "123456789".hashCode()));
 	}
 
 	@After

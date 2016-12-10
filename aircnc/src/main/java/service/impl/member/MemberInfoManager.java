@@ -21,13 +21,46 @@ import vo.member.MemberVoBuilder;
 import vo.member.credit.CreditChangeVo;
 import vo.order.OrderVo;
 
+/**
+ * Implemention of MemberInfoService and MemberQueryService.<br>
+ * Singleton.<br>
+ * 
+ * @see service.member.MemberInfoService
+ * @see service.query.MemberQueryService
+ * @author ClevelandAlto
+ *
+ */
 public final class MemberInfoManager implements MemberInfoService, MemberQueryService {
 	/****** singleton ******/
-	private static MemberInfoService instance;
+	private static MemberInfoManager instance;
 
-	public static MemberInfoService launch(MemberDao memberDao, MemberAccountService accountService,
-			CreditQueryService creditQueryService, OrderQueryService orderQueryService,
-			HotelQueryService hotelQueryService) {
+	/**
+	 * Singleton instance initializer.<br>
+	 * Parameters are daos or services depended on in some methods. They are
+	 * alternative, <b>null</b> is allowed. In that case, when call methods
+	 * which need the null dependency, {@code IllegalStateException} will be
+	 * thrown to notify a unsupported operation is attempted.<br>
+	 * Specific dependencies of each methods will be explained in methods'
+	 * comments.<br>
+	 * 
+	 * @param memberDao
+	 *            dao member
+	 * @param accountService
+	 *            account service
+	 * @param creditQueryService
+	 *            credit query service
+	 * @param orderQueryService
+	 *            order query service
+	 * @param hotelQueryService
+	 *            hotel query service
+	 * @return initialized instance
+	 * 
+	 * @throws IllegalStateException
+	 *             singleton has existed already <br>
+	 */
+	public static MemberInfoManager launch(final MemberDao memberDao, final MemberAccountService accountService,
+			final CreditQueryService creditQueryService, final OrderQueryService orderQueryService,
+			final HotelQueryService hotelQueryService) {
 		if (instance != null)
 			throw duplicateSingletonEx();
 
@@ -35,7 +68,14 @@ public final class MemberInfoManager implements MemberInfoService, MemberQuerySe
 				hotelQueryService);
 	}
 
-	public static MemberInfoService getInstance() {
+	/**
+	 * Get singleton instance.<br>
+	 * 
+	 * @return singleton instance
+	 * @throws IllegalStateException
+	 *             if singleton doesn't exist yet <br>
+	 */
+	public static MemberInfoManager getInstance() {
 		if (instance == null)
 			throw singletonNotExistsEx();
 
@@ -72,24 +112,72 @@ public final class MemberInfoManager implements MemberInfoService, MemberQuerySe
 		if (!MemberInfo.checkID(id))
 			throw illegalArgEx("Member id");
 
-		return new MemberVoBuilder(memberDao.findMember(id)).getMemberInfo();
+		final MemberPo po = memberDao.findMember(id);
+
+		return po == null ? null : new MemberVoBuilder(memberDao.findMember(id)).getMemberInfo();
 	}
 
+	/* MemberQueryService */
+
 	@Override
-	public boolean updateInfo(MemberInfo modifiedInfo) {
+	public boolean updateBasicInfo(MemberInfo modifiedInfo) {
 		if (accountService == null || memberDao == null)
-			throw unsupportedOpEx("update member info");
+			throw unsupportedOpEx("update member basic info");
+
+		if (modifiedInfo == null || !modifiedInfo.isValid())
+			throw illegalArgEx("null or invalid member info");
 
 		if (!accountService.isLogined())
 			throw illegalStateException("Not logged in yet");
 
 		MemberPo po = (MemberPo) accountService.getCurrentAccount();
 
-		if (!modifiedInfo.getId().equals(po.getId()))
+		if (po == null)
+			return false;
+
+		int comp = MemberVoBuilder.compareMemberInfo(modifiedInfo, po);
+
+		// different member with currently logged in account: denied
+		if (comp == -1)
 			throw inconsistentStatusEx();
 
-		return memberDao
-				.updateMember(new MemberPoBuilder(modifiedInfo).setPasswordHash(po.getPasswordHash()).getMemberInfo());
+		// modify advanced info: denied
+		if ((comp & 2) != 0)
+			throw unsupportedOpEx("update advanced member info");
+
+		// no modification: return
+		if ((comp & 1) == 0)
+			return true;
+
+		return updateInfo(new MemberPoBuilder(modifiedInfo).setPasswordHash(po.getPasswordHash()).getMemberInfo());
+	}
+
+	/* MemberQueryService */
+
+	@Override
+	public boolean updateAdvancedInfo(MemberInfo modifiedInfo) {
+		if (memberDao == null)
+			throw unsupportedOpEx("update member advanced info");
+
+		if (modifiedInfo == null || !modifiedInfo.isValid())
+			throw illegalArgEx("null or invalid member info");
+
+		final MemberPo po = memberDao.findMember(modifiedInfo.getId());
+
+		if (po == null)// not exist
+			return false;
+
+		int comp = MemberVoBuilder.compareMemberInfo(modifiedInfo, po);
+
+		// modify basic info: denied
+		if ((comp & 1) != 0)
+			throw unsupportedOpEx("update basic member info");
+
+		// no modification: return
+		if ((comp & 2) == 0)
+			return true;
+
+		return updateInfo(new MemberPoBuilder(modifiedInfo).setPasswordHash(po.getPasswordHash()).getMemberInfo());
 	}
 
 	@Override
@@ -105,7 +193,11 @@ public final class MemberInfoManager implements MemberInfoService, MemberQuerySe
 		if (po.getPasswordHash() != oldPwdHash)
 			return false;
 
-		return memberDao.updateMember(new MemberPoBuilder(po).setPasswordHash(newPwdHash).getMemberInfo());
+		return updateInfo(new MemberPoBuilder(po).setPasswordHash(newPwdHash).getMemberInfo());
+	}
+
+	private boolean updateInfo(MemberPo modifiedInfo) {
+		return memberDao.updateMember(modifiedInfo);
 	}
 
 	/* Buffered member order query service */
@@ -203,5 +295,4 @@ public final class MemberInfoManager implements MemberInfoService, MemberQuerySe
 	public MemberInfo searchById(String id) {
 		return getMemberInfo(id);
 	}
-	/* MemberQueryService */
 }
