@@ -4,6 +4,7 @@ import static utils.exception.StaticExceptionFactory.*;
 import java.util.List;
 
 import utils.info.member.MemberInfo;
+import utils.info.order.OrderStatus;
 import utils.proxy.AccessSecureProxy;
 import utils.proxy.AuthenticatePolicy;
 import utils.proxy.AuthenticatePolicy.Client;
@@ -39,6 +40,11 @@ public final class MemberServiceProxy extends AccessSecureProxy
 		super(clientId);
 	}
 
+	/*
+	 ***************************
+	 * Actual manager loader
+	 ***************************
+	 */
 	@AuthenticatePolicy({ Client.USER })
 	public void loadAccountService(MemberAccountService accountService) {
 		checkAuthentication();
@@ -59,6 +65,68 @@ public final class MemberServiceProxy extends AccessSecureProxy
 
 		this.creditService = creditService;
 	}
+	/* Actual manager loader */
+
+	/*
+	 ********************************************
+	 * MemberAccountService method proxy
+	 ********************************************
+	 */
+	@Override
+	@AuthenticatePolicy({ Client.USER })
+	public MemberInfo register(MemberVoBuilder newMember, int passwordHash) {
+		checkAuthentication();
+
+		return accountService.register(newMember, passwordHash);
+	}
+
+	@Override
+	@AuthenticatePolicy({ Client.USER })
+	public MemberInfo login(String id, int passwordHash) {
+		checkAuthentication();
+
+		return accountService.login(id, passwordHash);
+	}
+
+	@Override
+	@AuthenticatePolicy({ Client.USER })
+	public boolean logout() {
+		checkAuthentication();
+
+		return accountService.logout();
+	}
+
+	@Override
+	@AuthenticatePolicy({ Client.USER })
+	public boolean isLogined() {
+		checkAuthentication();
+
+		return accountService.isLogined();
+	}
+
+	@Override
+	@AuthenticatePolicy({ Client.USER })
+	public void refreshCurrentAccount() {
+		checkAuthentication();
+
+		accountService.refreshCurrentAccount();
+	}
+
+	@Override
+	@AuthenticatePolicy({ Client.USER })
+	public MemberInfo getCurrentAccount() {
+		checkAuthentication();
+
+		return accountService.getCurrentAccount();
+	}
+
+	@Override
+	@AuthenticatePolicy({ Client.USER })
+	public boolean existsMember(String id) {
+		checkAuthentication();
+
+		return accountService.existsMember(id);
+	}
 
 	@Override
 	@AuthenticatePolicy({ Client.USER, Client.MARKET })
@@ -70,18 +138,18 @@ public final class MemberServiceProxy extends AccessSecureProxy
 
 	@Override
 	@AuthenticatePolicy({ Client.USER, Client.MARKET })
-	public List<OrderVo> getMemberOrder(String id) {
+	public List<OrderVo> getMemberAllOrders(String id) {
 		checkAuthentication();
 
-		return infoService.getMemberOrder(id);
+		return infoService.getMemberAllOrders(id);
 	}
 
 	@Override
 	@AuthenticatePolicy({ Client.USER })
-	public List<HotelVo> getMemberHistoryHotel(String id) {
+	public List<HotelVo> getMemberHistoryHotels(String id) {
 		checkAuthentication();
 
-		return infoService.getMemberHistoryHotel(id);
+		return infoService.getMemberHistoryHotels(id);
 	}
 
 	@Override
@@ -150,64 +218,17 @@ public final class MemberServiceProxy extends AccessSecureProxy
 
 	@Override
 	@AuthenticatePolicy({ Client.USER })
-	public MemberInfo register(MemberVoBuilder newMember, int passwordHash) {
-		checkAuthentication();
-
-		return accountService.register(newMember, passwordHash);
-	}
-
-	@Override
-	@AuthenticatePolicy({ Client.USER })
-	public MemberInfo login(String id, int passwordHash) {
-		checkAuthentication();
-
-		return accountService.login(id, passwordHash);
-	}
-
-	@Override
-	@AuthenticatePolicy({ Client.USER })
-	public boolean logout() {
-		checkAuthentication();
-
-		return accountService.logout();
-	}
-
-	@Override
-	@AuthenticatePolicy({ Client.USER })
-	public boolean isLogined() {
-		checkAuthentication();
-
-		return accountService.isLogined();
-	}
-
-	@Override
-	@AuthenticatePolicy({ Client.USER })
-	public void refreshCurrentAccount() {
-		checkAuthentication();
-
-		accountService.refreshCurrentAccount();
-	}
-
-	@Override
-	@AuthenticatePolicy({ Client.USER })
-	public MemberInfo getCurrentAccount() {
-		checkAuthentication();
-
-		return accountService.getCurrentAccount();
-	}
-
-	@Override
-	@AuthenticatePolicy({ Client.USER })
-	public boolean existsMember(String id) {
-		checkAuthentication();
-
-		return accountService.existsMember(id);
-	}
-
-	@Override
 	public boolean updatePassword(int oldPwdHash, int newPwdHash) {
 		checkAuthentication();
 
 		return infoService.updatePassword(oldPwdHash, newPwdHash);
+	}
+
+	@Override
+	@AuthenticatePolicy({ Client.USER })
+	public List<OrderVo> getMemberOrdersByStatus(String id, OrderStatus status) {
+		checkAuthentication();
+
+		return infoService.getMemberOrdersByStatus(id, status);
 	}
 }

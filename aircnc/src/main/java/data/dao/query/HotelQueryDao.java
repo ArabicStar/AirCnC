@@ -1,6 +1,10 @@
 package data.dao.query;
 
-public interface HotelQueryDao {
+import po.hotel.HotelPo;
 
-	
+public interface HotelQueryDao {
+	public HotelPo searchById(int hotelId);
+
+	public HotelPo searchByName(String name);
+
 }

@@ -7,15 +7,20 @@ import data.dao.impl.member.CreditDaoImpl;
 import data.dao.impl.member.MemberDaoImpl;
 import data.dao.member.CreditDao;
 import data.dao.member.MemberDao;
+import data.dao.query.CreditQueryDao;
 import javafx.util.converter.LocalDateStringConverter;
 import po.member.MemberPo;
 import po.member.MemberPoBuilder;
 import service.impl.member.MemberAccountManager;
 import service.impl.member.MemberCreditManager;
 import service.impl.member.MemberInfoManager;
+import service.impl.query.CreditQueryManager;
 import service.member.MemberAccountService;
 import service.member.MemberCreditService;
 import service.member.MemberInfoService;
+import service.query.CreditQueryService;
+import service.query.HotelQueryService;
+import service.query.OrderQueryService;
 import utils.info.member.ContactInfo;
 import vo.member.ContactVoBuilder;
 
@@ -46,7 +51,12 @@ public class DataPrepareHelper {
 	public static final CreditDao creditDao = CreditDaoImpl.INSTANCE;
 	public static final MemberAccountService accountService = MemberAccountManager.launch(memberDao);
 	public static final MemberCreditService creditService = MemberCreditManager.launch(memberDao, creditDao);
-	public static final MemberInfoService infoService = new MemberInfoManager(accountService, memberDao, null);
+	private static final CreditQueryDao creditQueryDao = CreditDaoImpl.INSTANCE;
+	private static final CreditQueryService creditQueryService = CreditQueryManager.launch(creditQueryDao);
+	private static final OrderQueryService orderQueryService = null;
+	private static final HotelQueryService hotelQueryService = null;
+	public static final MemberInfoService infoService = MemberInfoManager.launch(memberDao, accountService,
+			creditQueryService, orderQueryService, hotelQueryService);
 
 	public static final void prepareTestStatistic() {
 		testData.forEach(memberDao::addMember);

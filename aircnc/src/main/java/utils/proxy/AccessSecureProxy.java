@@ -3,8 +3,6 @@ package utils.proxy;
 import java.lang.reflect.Method;
 import java.rmi.Remote;
 
-import com.sun.swing.internal.plaf.metal.resources.metal;
-
 import utils.proxy.AuthenticatePolicy.Client;
 
 /**

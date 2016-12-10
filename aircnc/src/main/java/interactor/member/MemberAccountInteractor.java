@@ -16,7 +16,6 @@ package interactor.member;
  *
  */
 public interface MemberAccountInteractor {
-	
 	public void register();
 
 	public void login();
@@ -24,5 +23,4 @@ public interface MemberAccountInteractor {
 	public void logout();
 
 	public void refreshCurrentAccount();
-	
 }

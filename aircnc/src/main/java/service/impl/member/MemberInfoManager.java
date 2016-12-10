@@ -1,92 +1,104 @@
 package service.impl.member;
 
+import static utils.exception.StaticExceptionFactory.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import data.dao.hotel.HotelDao;
 import data.dao.member.MemberDao;
 import po.member.MemberPo;
 import po.member.MemberPoBuilder;
 import service.member.MemberAccountService;
 import service.member.MemberInfoService;
-import service.query.MemberInfoQueryService;
+import service.query.CreditQueryService;
+import service.query.HotelQueryService;
+import service.query.MemberQueryService;
+import service.query.OrderQueryService;
 import utils.info.member.MemberInfo;
+import utils.info.order.OrderStatus;
 import vo.hotel.HotelVo;
+import vo.member.MemberVo;
 import vo.member.MemberVoBuilder;
 import vo.member.credit.CreditChangeVo;
 import vo.order.OrderVo;
 
-public class MemberInfoManager implements MemberInfoService, MemberInfoQueryService {
-	private MemberDao memberDao;
-	private HotelDao hotelDao;
+public final class MemberInfoManager implements MemberInfoService, MemberQueryService {
+	/****** singleton ******/
+	private static MemberInfoService instance;
 
-	private MemberAccountService accountService;
+	public static MemberInfoService launch(MemberDao memberDao, MemberAccountService accountService,
+			CreditQueryService creditQueryService, OrderQueryService orderQueryService,
+			HotelQueryService hotelQueryService) {
+		if (instance != null)
+			throw duplicateSingletonEx();
 
-	public MemberInfoManager(MemberAccountService accountService, MemberDao memberDao, HotelDao hotelDao) {
-		this.memberDao = memberDao;
-		this.hotelDao = hotelDao;
-		this.accountService = accountService;
+		return instance = new MemberInfoManager(memberDao, accountService, creditQueryService, orderQueryService,
+				hotelQueryService);
 	}
 
+	public static MemberInfoService getInstance() {
+		if (instance == null)
+			throw singletonNotExistsEx();
+
+		return instance;
+	}
+
+	private MemberDao memberDao;
+
+	private MemberAccountService accountService;
+	private CreditQueryService creditQueryService;
+	private OrderQueryService orderQueryService;
+	private HotelQueryService hotelQueryService;
+
+	private MemberInfoManager(MemberDao memberDao, MemberAccountService accountService,
+			CreditQueryService creditQueryService, OrderQueryService orderQueryService,
+			HotelQueryService hotelQueryService) {
+		this.memberDao = memberDao;
+		this.accountService = accountService;
+		this.creditQueryService = creditQueryService;
+		this.orderQueryService = orderQueryService;
+		this.hotelQueryService = hotelQueryService;
+	}
+
+	/*
+	 ******************************************************
+	 * As follow are MemberInfoService Implementions
+	 ******************************************************
+	 */
 	@Override
-	public MemberInfo getMemberInfo(String id) {
+	public MemberInfo getMemberInfo(final String id) {
+		if (memberDao == null)
+			throw unsupportedOpEx("get member info");
+
+		if (!MemberInfo.checkID(id))
+			throw illegalArgEx("Member id");
+
 		return new MemberVoBuilder(memberDao.findMember(id)).getMemberInfo();
 	}
 
 	@Override
-	public List<OrderVo> getMemberOrder(String id) {
-		// TODO need implemented
-		return null;
-	}
-
-	@Override
-	public List<HotelVo> getMemberHistoryHotel(String id) {
-		// if (!memberDao.existsMember(id))
-		// return null;
-
-		// TODO need modified
-		List<OrderVo> historyOrders = null;
-		List<HotelVo> historyHotels = null;// =
-		// historyOrders.parallelStream().map(OrderVo::getHotel).distinct()
-		// .map(Integer::valueOf).map(i -> hotelDao.getHotel(i))
-		// .map(hp -> new HotelVo(hp.getHotelName(), hp.getHotelName(),
-		// hp.getScope()))
-		// .collect(Collectors.toList());
-
-		return historyHotels;
-	}
-
-	@Override
-	public List<CreditChangeVo> getMemberCreditChange(String id) {
-		// if (!memberDao.existsMember(id))
-		// return null;
-
-		// TODO need modified
-		return null;
-	}
-
-	@Override
 	public boolean updateInfo(MemberInfo modifiedInfo) {
+		if (accountService == null || memberDao == null)
+			throw unsupportedOpEx("update member info");
+
 		if (!accountService.isLogined())
-			throw new IllegalStateException("MemberInfoServiceImpl.updateInfo - No Member is Logined");
+			throw illegalStateException("Not logged in yet");
 
 		MemberPo po = (MemberPo) accountService.getCurrentAccount();
 
 		if (!modifiedInfo.getId().equals(po.getId()))
-			throw new IllegalArgumentException("MemberInfoServiceImpl.updateInfo - Incorresponding Member Info");
+			throw inconsistentStatusEx();
 
 		return memberDao
 				.updateMember(new MemberPoBuilder(modifiedInfo).setPasswordHash(po.getPasswordHash()).getMemberInfo());
 	}
 
 	@Override
-	public MemberInfo searchById(String id) {
-		return getMemberInfo(id);
-	}
-
-	@Override
 	public boolean updatePassword(int oldPwdHash, int newPwdHash) {
+		if (accountService == null || memberDao == null)
+			throw unsupportedOpEx("update password");
+
 		if (!accountService.isLogined())
-			throw new IllegalStateException("MemberInfoServiceImpl.updatePassword - No Member is Logined");
+			throw illegalStateException("Not logged in yet");
 
 		MemberPo po = (MemberPo) accountService.getCurrentAccount();
 
@@ -96,4 +108,100 @@ public class MemberInfoManager implements MemberInfoService, MemberInfoQueryServ
 		return memberDao.updateMember(new MemberPoBuilder(po).setPasswordHash(newPwdHash).getMemberInfo());
 	}
 
+	/* Buffered member order query service */
+	private String bufferedId = null;
+	private List<OrderVo> bufferedOrderList;
+	private boolean dirtyBuffer = false;
+
+	@Override
+	public List<OrderVo> getMemberAllOrders(final String id) {
+		if (orderQueryService == null)
+			throw unsupportedOpEx("get member orders");
+
+		if (!MemberInfo.checkID(id))
+			throw illegalArgEx("Member id");
+
+		/* different id from buffered one */
+		if (bufferedId == null || !bufferedId.equals(id)) {
+			// get
+			List<OrderVo> res = orderQueryService.getMemberOrders(id);
+
+			// given id not exists, return
+			if (res == null)
+				return null;
+
+			// exists, refresh buffer
+			bufferedId = id;
+			bufferedOrderList = res;
+			dirtyBuffer = false;
+
+			return bufferedOrderList;
+		}
+
+		/* same id with buffered one */
+		// reverse buffer dirty indicator
+		if (dirtyBuffer = !dirtyBuffer)
+			return bufferedOrderList;// return buffered list
+		else
+			// refresh buffer, same id with buffer assure existence of given id,
+			// not need to check again
+			return bufferedOrderList = orderQueryService.getMemberOrders(id);
+	}
+
+	@Override
+	public List<OrderVo> getMemberOrdersByStatus(String id, OrderStatus status) {
+		if (orderQueryService == null)
+			throw unsupportedOpEx("get member orders by status");
+
+		return bufferedOrderList.stream().filter(o -> o.getStatus() == status).collect(Collectors.toList());
+	}
+
+	@Override
+	public List<HotelVo> getMemberHistoryHotels(String id) {
+		if (orderQueryService == null)
+			throw unsupportedOpEx("get member history hotels");
+
+		if (!MemberInfo.checkID(id))
+			throw illegalArgEx("Member id");
+
+		/* different id from buffered one */
+		if (bufferedId == null || !bufferedId.equals(id)) {
+			// get
+			List<OrderVo> res = orderQueryService.getMemberOrders(id);
+
+			// given id not exists, return
+			if (res == null)
+				return null;
+
+			// exists, refresh buffer
+			bufferedId = id;
+			bufferedOrderList = res;
+			dirtyBuffer = false;
+		}
+
+		return bufferedOrderList.stream().map(o -> hotelQueryService.findById(o.getHotelId()))
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public List<CreditChangeVo> getMemberCreditChange(String id) {
+		if (creditQueryService == null)
+			throw unsupportedOpEx("get member credit change");
+		if (!MemberVo.checkID(id))
+			throw illegalArgEx("Member Id");
+
+		return creditQueryService.searchByMemberId(id);
+	}
+	/* MemberInfoService */
+
+	/*
+	 ********************************************************
+	 * As follow are MemberQueryService implementions
+	 ********************************************************
+	 */
+	@Override
+	public MemberInfo searchById(String id) {
+		return getMemberInfo(id);
+	}
+	/* MemberQueryService */
 }

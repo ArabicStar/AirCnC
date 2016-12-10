@@ -2,6 +2,6 @@ package service.query;
 
 import utils.info.member.MemberInfo;
 
-public interface MemberInfoQueryService {
+public interface MemberQueryService {
 	public MemberInfo searchById(String id);
 }
