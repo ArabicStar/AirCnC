@@ -9,7 +9,7 @@
    <left>
       <Pane prefHeight="768" prefWidth="247.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox alignment="CENTER" layoutY="274.0" prefHeight="201.0" prefWidth="247.0">
+            <VBox alignment="CENTER" layoutY="274.0" prefHeight="268.0" prefWidth="247.0">
                <children>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="121.0" styleClass="hbox">
                      <children>
@@ -33,6 +33,14 @@
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="121.0" styleClass="hbox">
                      <children>
                         <Label fx:id="creditTopup" onMouseClicked="#handleCreditTopup" text="信用充值" textAlignment="CENTER" />
+                     </children>
+                     <padding>
+                        <Insets right="30.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="121.0" styleClass="hbox">
+                     <children>
+                        <Label fx:id="myOrder" onMouseClicked="#handleMyOrder" text="我的订单" textAlignment="CENTER"/>
                      </children>
                      <padding>
                         <Insets right="30.0" />

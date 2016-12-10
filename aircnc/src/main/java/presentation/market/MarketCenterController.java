@@ -8,6 +8,7 @@ import javafx.stage.StageStyle;
 import presentation.market.view.MarketMainPane;
 import presentation.market.view.abnormalorderbrowse.AbnormalOrderBrowsePane;
 import presentation.market.view.credittopup.CreditTopUpPane;
+import presentation.market.view.myorder.MyOrderPane;
 import presentation.market.view.websitepromotionstrategy.WebsitePromotionStrategyPane;
 
 public class MarketCenterController extends Application {
@@ -21,6 +22,7 @@ public class MarketCenterController extends Application {
 	private WebsitePromotionStrategyPane websitePromotionStrategyPane;
 	private AbnormalOrderBrowsePane abnormalOrderBrowsePane;
 	private CreditTopUpPane creditTopUpPane;
+	private MyOrderPane myOrderPane;
 
 	private final static int Client_Width = 1024;
 	private final static int Client_Height = 768;
@@ -74,6 +76,16 @@ public class MarketCenterController extends Application {
 		creditTopUpPane = new CreditTopUpPane();
 		mainClient.getBorderPane().setCenter(creditTopUpPane.getPane());
 		creditTopUpPane.getController().setCenterController(this);		
+	}
+	
+	/**
+	 * 添加我的订单界面
+	 */
+	public void addMyOrderPane() {
+		clearContent();
+		myOrderPane = new MyOrderPane();
+		mainClient.getBorderPane().setCenter(myOrderPane.getPane());
+		myOrderPane.getController().setCenterController(this);
 	}
 	
 	

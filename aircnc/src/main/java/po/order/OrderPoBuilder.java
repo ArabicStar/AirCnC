@@ -1,6 +1,7 @@
 package po.order;
 
 import static utils.exception.StaticExceptionFactory.inconsistentStatusEx;
+import static utils.exception.StaticExceptionFactory.unsupportedOpEx;
 
 import java.time.LocalDateTime;
 
@@ -108,6 +109,11 @@ public class OrderPoBuilder extends OrderInfoBuilder {
 		return this;
 	}
 
+	/**
+	 * 
+	 * @param from the po you want
+	 * @param to the po you have
+	 */
 	public static void updatePo(OrderPo from, OrderPo to) {
 		if (from == null || to == null || from == to) {
 			return;
@@ -117,8 +123,18 @@ public class OrderPoBuilder extends OrderInfoBuilder {
 		if (!from.getOrderId().equals(to.getOrderId())) {
 			throw inconsistentStatusEx();
 		}
+		
+		if(from.getLastTime().isBefore(to.getLastTime())) {
+			throw unsupportedOpEx("Couldn't advance the last entry time");
+		}
+		
+		if(!from.isIsReviewed() && to.isIsReviewed()) {
+			throw unsupportedOpEx("Couldn't make the reviewed order unreviewed");
+		}
 
 		to.setStatus(from.getStatus());
+		to.setLastTime(from.getLastTime());
+		to.setIsReviewed(from.isIsReviewed());
 	}
 
 }

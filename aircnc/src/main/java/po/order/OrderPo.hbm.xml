@@ -21,10 +21,10 @@
 		</property>
 		<!-- roomType -->
 		<property column="ROOMTYPE" generated="never" lazy="false"
-			name="roomType" type="string" />
+			name="roomType" type="string" update="false"/>
 		<!-- stayDays -->
 		<property column="STAYDAYS" generated="never" lazy="false"
-			name="stayDays" type="integer" />
+			name="stayDays" type="integer" update="false"/>
 		<!-- userId -->
 		<property column="USERID" generated="never" lazy="false"
 			name="userId" type="integer" update="false"/>
@@ -36,19 +36,19 @@
 			name="lastTime" />
 		<!-- peopleNumber -->
 		<property column="PEOPLENUMBER" generated="never" lazy="false"
-			name="peopleNumber" type="integer" />
+			name="peopleNumber" type="integer" update="false"/>
 		<!-- price -->
 		<property column="PRICE" generated="never" lazy="false" name="price"
-			type="double" />
+			type="double" update="false"/>
 		<!-- hasChildren -->
 		<property column="HASCHILDREN" generated="never" lazy="false"
-			name="hasChildren" type="boolean" />
+			name="hasChildren" type="boolean" update="false"/>
 		<!-- hotelName -->
 		<property column="HOTELNAME" generated="never" lazy="false"
 			name="hotelName" type="string" update="false"/>
 		<!-- roomNumber -->
 		<property column="ROOMNUMBER" generated="never" lazy="false"
-			name="roomNumber" type="integer" />
+			name="roomNumber" type="integer" update="false"/>
 		<!-- isReviewed -->
 		<property column="ISREVIEWED" generated="never" lazy="false"
 			name="isReviewed" type="boolean" />

@@ -14,6 +14,8 @@ public class MarketMainController implements Initializable {
 	private static int count1 = 0;
 	
 	private static int count2 = 0;
+	
+	private static int count3 = 0;
 
 	@FXML
 	private Label websitePromotionStrategy;
@@ -24,6 +26,8 @@ public class MarketMainController implements Initializable {
 	@FXML
 	private Label creditTopup;
 
+	@FXML
+	private Label myOrder;
 
 
 	private MarketCenterController controller;
@@ -62,6 +66,13 @@ public class MarketMainController implements Initializable {
 		count2++;
 		creditTopup.setText(Integer.toBinaryString(count2));
 		this.controller.addCreditTopUpPane();
+	}
+	
+	@FXML
+	private void handleMyOrder() {
+		count3++;
+		myOrder.setText(Integer.toBinaryString(count3));
+		this.controller.addMyOrderPane();
 	}
 
 }
