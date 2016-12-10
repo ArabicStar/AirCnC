@@ -1,11 +1,13 @@
 package aircnc.test.po;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.time.LocalDateTime;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.internal.runners.statements.Fail;
 
 import data.dao.impl.order.OrderDaoImpl;
 import data.dao.order.OrderDao;
@@ -24,7 +26,7 @@ public class OrderPoTest {
 		LocalDateTime entryTime = LocalDateTime.now();
 		orderPo = new OrderPoBuilder().setEntryTime(entryTime).setHasChildren(false).setHotelId(1000)
 				.setHotelName("乐天玛特").setLastTime(entryTime).setOrderId("2016121010001234").setPeopleNumber(3).setPrice(200)
-				.setIsReviewed(true).setRoomNumber(1).setRoomType("标准间").setStayDays(2).setUserId(20808121)
+				.setIsReviewed(false).setRoomNumber(1).setRoomType("标准间").setStayDays(2).setUserId(20808121)
 				.setStatus(OrderStatus.EXECUTED).getOrderInfo().setUserName("南京大学渣");
 	}
 
@@ -40,22 +42,25 @@ public class OrderPoTest {
 
 	@Test
 	public void OrderPoTest2() {
-		orderPo.setLastTime(HotelDate.delayTime(orderPo.getLastTime(), 1, 1, 1));
-		orderDao.updateOrder(orderPo);
+		OrderPo newOrder = orderDao.getOrder("2016121010001234");
+		newOrder.setLastTime(HotelDate.delayTime(newOrder.getLastTime(), 1, 1, 1));
+		orderDao.updateOrder(newOrder);
 
 	}
 
 	@Test
 	public void OrderPoTest3() {
-		orderPo.setHotelId(234235);
-		orderDao.updateOrder(orderPo);
-		OrderPo orderPo = orderDao.getOrder("2016121010001234");
-		assertEquals("乐天玛特", orderPo.getHotelName());
+		OrderPo newOrder = orderDao.getOrder("2016121010001234");
+		newOrder.setIsReviewed(true);
+		newOrder.setLastTime(HotelDate.delayTime(newOrder.getLastTime(), 3, 5, 6));
+		orderDao.updateOrder(newOrder);
+//		OrderPo orderPo = orderDao.getOrder("2016121010001234");
+//		assertEquals("乐天玛特", orderPo.getHotelName());
 	}
 
-//	@Test
-//	public void OrderPoTest4() {
-//		orderDao.deleteOrder("2016121010001234");
-//	}
+	@Test
+	public void OrderPoTest4() {
+		orderDao.deleteOrder("2016121010001234");
+	}
 
 }
