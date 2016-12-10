@@ -30,15 +30,17 @@ public enum OrderDaoImpl implements OrderDao, OrderQueryDao {
 	}
 
 	public boolean updateOrder(OrderPo orderPo) {
-		if (orderPo == null)
+		if (orderPo == null) {
 			return false;
-
+		}
+			
 		return execute(session -> {
 			Boolean flag = Boolean.FALSE;
 
 			OrderPo old = session.get(OrderPo.class, orderPo.getOrderId());
-			if (flag = Boolean.valueOf(old != null))
+			if (flag = Boolean.valueOf(old != null)) {
 				OrderPoBuilder.updatePo(orderPo, old);
+			}
 
 			return flag;
 		});
@@ -46,15 +48,17 @@ public enum OrderDaoImpl implements OrderDao, OrderQueryDao {
 	}
 
 	public boolean addOrder(OrderPo newPo) {
-		if (newPo == null)
+		if (newPo == null) {
 			return false;
+		}
+
 
 		return execute(session -> {
 			Boolean flag = Boolean.FALSE;
 
-			if (flag = Boolean.valueOf(session.get(OrderPo.class, newPo.getOrderId()) == null))
+			if (flag = Boolean.valueOf(session.get(OrderPo.class, newPo.getOrderId()) == null)) {
 				session.save(newPo);
-
+			}
 			return flag;
 		});
 	}
@@ -75,9 +79,9 @@ public enum OrderDaoImpl implements OrderDao, OrderQueryDao {
 			Boolean flag = Boolean.FALSE;
 
 			OrderPo toDelete = session.get(OrderPo.class, orderId);
-			if (flag = Boolean.valueOf(toDelete != null))
+			if (flag = Boolean.valueOf(toDelete != null)) {
 				session.delete(toDelete);
-
+			}
 			return flag;
 		});
 	}

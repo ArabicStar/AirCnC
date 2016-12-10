@@ -10,7 +10,7 @@
 		</id>
 		<!-- hotelId -->
 		<property column="HOTELID" generated="never" lazy="false"
-			name="hotelId" type="integer" />
+			name="hotelId" type="integer" update="false" />
 		<!-- orderStatus -->
 		<property name="status">
 			<column name="ORDERSTATUS" length="20" not-null="true" />
@@ -27,10 +27,10 @@
 			name="stayDays" type="integer" />
 		<!-- userId -->
 		<property column="USERID" generated="never" lazy="false"
-			name="userId" type="integer" />
+			name="userId" type="integer" update="false"/>
 		<!-- entryTime -->
 		<property column="ENTRYTIME" generated="never" lazy="false"
-			name="entryTime" />
+			name="entryTime" update="false"/>
 		<!-- lastTime -->
 		<property column="LASTTIME" generated="never" lazy="false"
 			name="lastTime" />
@@ -45,7 +45,7 @@
 			name="hasChildren" type="boolean" />
 		<!-- hotelName -->
 		<property column="HOTELNAME" generated="never" lazy="false"
-			name="hotelName" type="string" />
+			name="hotelName" type="string" update="false"/>
 		<!-- roomNumber -->
 		<property column="ROOMNUMBER" generated="never" lazy="false"
 			name="roomNumber" type="integer" />
@@ -54,6 +54,6 @@
 			name="isReviewed" type="boolean" />
 		<!-- userName -->
 		<property column="USERNAME" generated="never" lazy="false"
-			name="userName" type="string" />
+			name="userName" type="string" update="false"/>
 	</class>
 </hibernate-mapping>

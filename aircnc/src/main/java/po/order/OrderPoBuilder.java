@@ -109,14 +109,15 @@ public class OrderPoBuilder extends OrderInfoBuilder {
 	}
 
 	public static void updatePo(OrderPo from, OrderPo to) {
-		if (from == null || to == null || from == to)
+		if (from == null || to == null || from == to) {
 			return;
+		}
+			
 
-		if (!from.getOrderId().equals(to.getOrderId()))
+		if (!from.getOrderId().equals(to.getOrderId())) {
 			throw inconsistentStatusEx();
+		}
 
-		// TODO I'm not sure which fields are allowed to be updated and which
-		// have to keep immutable, so fix this
 		to.setStatus(from.getStatus());
 	}
 
