@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import presentation.market.view.MarketMainPane;
 import presentation.market.view.abnormalorderbrowse.AbnormalOrderBrowsePane;
+import presentation.market.view.credittopup.CreditTopUpPane;
 import presentation.market.view.websitepromotionstrategy.WebsitePromotionStrategyPane;
 
 public class MarketCenterController extends Application {
@@ -19,6 +20,7 @@ public class MarketCenterController extends Application {
 	private MarketMainPane mainClient;
 	private WebsitePromotionStrategyPane websitePromotionStrategyPane;
 	private AbnormalOrderBrowsePane abnormalOrderBrowsePane;
+	private CreditTopUpPane creditTopUpPane;
 
 	private final static int Client_Width = 1024;
 	private final static int Client_Height = 768;
@@ -64,6 +66,16 @@ public class MarketCenterController extends Application {
 		abnormalOrderBrowsePane.getController().test();
 	}
 	
+	/**
+	 * 添加信用充值界面
+	 */
+	public void addCreditTopUpPane() {
+		clearContent();
+		creditTopUpPane = new CreditTopUpPane();
+		mainClient.getBorderPane().setCenter(creditTopUpPane.getPane());
+		creditTopUpPane.getController().setCenterController(this);		
+	}
+	
 	
 	/**
 	 * remove all the children nodes of the main border pane, except the
@@ -77,5 +89,5 @@ public class MarketCenterController extends Application {
 			}
 		}
 	}
-
+	
 }

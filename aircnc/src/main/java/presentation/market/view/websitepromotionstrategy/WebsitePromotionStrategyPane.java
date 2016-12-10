@@ -23,8 +23,6 @@ public class WebsitePromotionStrategyPane {
 			URL location = getClass().getResource("fxml/WebsitePromotionStrategy.fxml");
 			loader.setLocation(location);
 			loader.setBuilderFactory(new JavaFXBuilderFactory());
-			// javafx.scene.Parent root = (javafx.scene.Parent)
-			// loader.load(location.openStream());
 			loader.load();
 			controller = (WebsitePromotionStrategyController) loader.getController();
 			orderLayout = loader.getRoot();

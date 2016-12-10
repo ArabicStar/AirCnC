@@ -27,7 +27,6 @@ public class MarketSignInPane {
             // Load sign in overview.
             FXMLLoader loader = new FXMLLoader(getClass().getResource("MarketSignIn.fxml"));
             loader.setBuilderFactory(new JavaFXBuilderFactory());
-            //javafx.scene.Parent root = (javafx.scene.Parent) loader.load(location.openStream());
             rootLayout = (BorderPane) loader.load();
             controller = (MarketSignInController)loader.getController();
 			signInLayout = loader.getRoot();
@@ -46,9 +45,6 @@ public class MarketSignInPane {
     }
     
     public BorderPane getBorderPane() {
-    	if(rootLayout == null) {
-    		System.out.println("Null BorderPane is returned; some mistakes may happen in Unicode.");
-    	}
         return rootLayout;
     }
 	
