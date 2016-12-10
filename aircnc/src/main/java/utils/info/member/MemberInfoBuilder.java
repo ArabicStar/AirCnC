@@ -170,4 +170,31 @@ public abstract class MemberInfoBuilder extends MemberInfoTemplate {
 	 *             not ready for building <br>
 	 */
 	public abstract MemberInfo getMemberInfo();
+
+	public static int compareMemberInfo(final MemberInfo i1, final MemberInfo i2) {
+		// different member
+		if (!i1.getId().equals(i2.getId()) || !i1.getType().equals(i2.getType()))
+			return -1;
+
+		int flag = 0;
+		// basic info
+		if (!i1.getContact().equals(i2.getContact()) || !i1.getName().equals(i2.getName()))
+			flag = flag | 1;
+
+		// type info
+		switch (i1.getType()) {
+		case "business":
+			if (!i1.getEnterprise().equals(i2.getEnterprise()))
+				flag = flag | 2;
+			break;
+		case "personal":
+			if (!i1.getBirthday().equals(i2.getBirthday()))
+				flag = flag | 2;
+			break;
+		default:
+			break;
+		}
+
+		return flag;
+	}
 }

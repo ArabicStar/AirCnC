@@ -19,7 +19,9 @@ public interface MemberInfoService {
 
 	public List<CreditChangeVo> getMemberCreditChange(String id);
 
-	public boolean updateInfo(MemberInfo modifiedInfo);
+	public boolean updateBasicInfo(MemberInfo modifiedInfo);
+
+	public boolean updateAdvancedInfo(MemberInfo modifiedInfo);
 
 	public boolean updatePassword(int oldPwdHash, int newPwdHash);
 }

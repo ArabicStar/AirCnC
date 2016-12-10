@@ -48,4 +48,19 @@ public abstract class ContactInfo extends ContactInfoTemplate {
 	public String getFixedPhone() {
 		return fixedPhone;
 	}
+
+	@Override
+	public boolean equals(final Object o) {
+		if (o == null || !(o instanceof ContactInfo))
+			return false;
+
+		ContactInfo i = (ContactInfo) o;
+		return email.equals(i.getEmail()) && mobilePhone.equals(i.getMobilePhone())
+				&& fixedPhone.equals(i.getFixedPhone());
+	}
+
+	@Override
+	public int hashCode() {
+		return email.hashCode() + fixedPhone.hashCode() + mobilePhone.hashCode();
+	}
 }
