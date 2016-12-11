@@ -3,6 +3,7 @@ package presentation.member.view.signin.fxml;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javafx.application.Platform;
@@ -15,6 +16,7 @@ import presentation.member.accessor.RegisterPersonAccessor;
 import presentation.member.utils.PlainDialog;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 
 /**
  * the controller of personal register pane.
@@ -57,6 +59,7 @@ public class MemberRegisterPersonController implements Initializable{
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		confirm.setDisable(true);
 		chooseMonth.setDisable(true);
 		chooseDay.setDisable(true);
 		Platform.runLater(new Runnable() {
@@ -93,6 +96,10 @@ public class MemberRegisterPersonController implements Initializable{
 						   }
 					   }
 					});
+				  
+				  chooseDay.valueProperty().addListener((observable, oldValue, newValue) -> {
+					   confirm.setDisable(newValue==null);
+					});
 
 			  }
 		});	
@@ -108,8 +115,16 @@ public class MemberRegisterPersonController implements Initializable{
 	@FXML
 	public void handleConfirm(){
 		if(chooseYear.getValue()!=null && chooseMonth.getValue()!=null && chooseDay.getValue()!=null){
-			accessor.setBirthday(LocalDate.of(chooseYear.getValue(), chooseMonth.getValue(), chooseDay.getValue()));
-			controller.addSignInPane();
+			PlainDialog alert = new PlainDialog(AlertType.CONFIRMATION,
+					"请进行确认","填写的生日将不可更改，确认不再修改吗");
+			Optional<ButtonType> result = alert.showDialog();
+			
+			//这里还要修改
+			result.ifPresent(usernamePassword -> {
+				accessor.setBirthday(LocalDate.of(chooseYear.getValue(), chooseMonth.getValue(), chooseDay.getValue()));
+				controller.addSignInPane();
+				System.out.print("我把数据传过去了");
+			});
 		}else{
 			PlainDialog alert = new PlainDialog(AlertType.INFORMATION,
 					"注册失败","请输入你的完整的生日信息");

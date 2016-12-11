@@ -1,7 +1,10 @@
 package presentation.member.utils;
 
+import java.util.Optional;
+
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.stage.StageStyle;
 
 public class PlainDialog {
@@ -18,7 +21,8 @@ public class PlainDialog {
 		alert.initStyle(StageStyle.UNDECORATED);
 	}
 	
-	public void showDialog(){
-		alert.showAndWait();
+	public Optional<ButtonType> showDialog(){
+		Optional<ButtonType> result = alert.showAndWait();
+		return result;
 	}
 }
