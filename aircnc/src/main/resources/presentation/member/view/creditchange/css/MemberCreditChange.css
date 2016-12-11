@@ -1,0 +1,71 @@
+.root{
+	-fx-font-family:"DengXian Light","Pingfang SC","Microsoft Yahei","Helvetica Neue";
+	/*-fx-background-image:url("main_BG.png");
+	-fx-background-size: 1024px 768px;*/
+}
+
+.title{
+	-fx-font-size: 60px;
+}
+
+.split-line{
+	-fx-fill:#4f4e84;
+}
+
+.label{
+	-fx-text-fill:#000000;
+}
+
+.table-view {
+    -fx-base: #fff;
+    -fx-control-inner-background: #fff;
+    -fx-background-color: #fff;
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+    -fx-padding: 5;
+}
+
+.column-header-background {
+    -fx-background-color: transparent;
+}
+
+.column-header .filler {
+    -fx-background-color: transparent;
+}
+
+.column-header {
+    -fx-border-width: 20px 0 0 0;
+    -fx-border-color: #4f4e84;
+}
+
+.column-header .label {
+    -fx-padding: 0 0 25px 0;
+	-fx-background-color: transparent;
+    -fx-text-fill: gray;
+    -fx-alignment: center;
+}
+
+.table-cell{
+    -fx-alignment: center;
+    -fx-pref-height: 45px;
+	/*-fx-margin: 10px 0px 10px 0px*/
+}
+
+.table-row-cell{
+    -fx-background-color: transparent;
+}
+
+.date-row{
+    -fx-font-size:10px;
+    -fx-text-fill: #999999;
+}
+
+.time-row{
+    -fx-font-size:12px;
+    -fx-text-fill: #999999;
+}
+
+.description-row .table-cell{
+    -fx-alignment: left;
+}
+

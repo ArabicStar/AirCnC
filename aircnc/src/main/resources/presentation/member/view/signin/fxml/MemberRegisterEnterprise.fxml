@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="385.0" prefWidth="550.0" stylesheets="@../css/MemberRegisterEnterprise.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.member.view.signin.fxml.MemberRegisterEnterpriseController">
+   <children>
+      <VBox layoutX="163.0" layoutY="201.0" spacing="30.0">
+         <children>
+            <TextField fx:id="enterprise" alignment="CENTER" focusTraversable="false" promptText="企业名称" styleClass="textfield" />
+            <Button fx:id="confirm" layoutX="163.0" layoutY="268.0" mnemonicParsing="false" onAction="#handleConfirm" text="确认提交" />
+         </children>
+      </VBox>
+   </children>
+</Pane>

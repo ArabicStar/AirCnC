@@ -1,0 +1,48 @@
+
+.pane{
+	-fx-background-image: url("../../../../images/market/register/login_BG.png");
+	-fx-font-family:"DengXian Light","Microsoft Yahei","Pingfang SC","Helvetica Neue";
+	-fx--webkit-font-smoothing:antialiased;
+	-fx-moz-osx-font-smoothing: grayscale;
+	-fx-background: transparent;
+}
+
+.confirm{
+	-fx-pref-width: 225px;
+	-fx-pref-height: 45px;
+	-fx-font-size: 23px;
+	-fx-background-color: #4f4e84;
+	-fx-text-fill:#ffffff;
+	-fx-border-radius:0 0 0 0;
+}
+
+.confirm:hover{
+	-fx-background-color: #47447d;
+}
+
+
+.textfield{
+	-fx-pref-width: 225px;
+	-fx-font-family:"DengXian Light","Microsoft Yahei","Pingfang SC","Helvetica Neue";
+	-fx-alignment:center;
+	-fx-border-width:0px 0px 1px 0px;
+	-fx-border-color:#a0a0a0;
+	-fx-background-color: transparent;
+	-fx-text-fill:#a0a0a0;
+	-fx-padding: 6 0 6 0;
+	letter-spacing: 1pt;
+	-fx-font-size: 15pt;
+}
+
+.passwordfield{
+	-fx-pref-width: 225px;
+	-fx-font-family:"DengXian Light","Microsoft Yahei","Pingfang SC","Helvetica Neue";
+	-fx-alignment:center;
+	-fx-border-width:0px 0px 1px 0px;
+	-fx-border-color:#a0a0a0;
+	-fx-background-color: transparent;
+	-fx-text-fill:#a0a0a0;
+	-fx-padding: 10 0 6 0;
+	letter-spacing: 1pt;
+	-fx-font-size: 10pt;
+}

@@ -1,0 +1,38 @@
+
+.root{
+	-fx-font-family:"DengXian Light","Pingfang SC","Microsoft Yahei","Helvetica Neue";
+	/*-fx-background-image:url("main_BG.png");
+	-fx-background-size: 1024px 768px;*/
+}
+
+.title{
+	-fx-font-size: 60px;
+}
+
+.split-line{
+	-fx-fill:#4f4e84;
+}
+
+.info-index{
+	-fx-font-size: 30px;
+}
+
+.info-content{
+	-fx-font-size: 30px;
+}
+
+.label{
+	-fx-text-fill:#000000;
+}
+
+.modify{
+	-fx-font-size: 30px;
+}
+
+.id-index{
+	-fx-font-size: 30px;
+}
+
+.id-content{
+	-fx-font-size: 30px;
+}

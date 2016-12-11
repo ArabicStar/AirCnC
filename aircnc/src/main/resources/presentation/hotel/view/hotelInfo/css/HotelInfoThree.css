@@ -1,0 +1,36 @@
+.root{
+	-fx-font-family:"DengXian Light","Pingfang SC","Microsoft Yahei","Helvetica Neue";
+	/*-fx-background-image:url("main_BG.png");
+	-fx-background-size: 1024px 768px;*/
+}
+
+
+.info-index{
+	-fx-text-fill: #a4a4a4;
+	-fx-font-size: 24 px;
+}
+
+.info-content{
+	-fx-font-size: 20 px;
+}
+
+.modify{
+	-fx-font-size: 30px;
+	-fx-border-color:#575793;
+	-fx-text-fill: #575793;
+	-fx-background-color:transparent;
+}
+
+.page{
+	-fx-text-fill: #575793;
+	-fx-border-color:#575793;
+	-fx-border-radius:20px,20px,20px,20px;
+	-fx-background-color:transparent;
+}
+
+.page-now{
+	-fx-text-fill: #ffffff;
+	-fx-background-radius:20px,20px,20px,20px;
+	-fx-background-color:#575793;
+}
+

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.member.view.searchhotel.fxml.MemberSearchHotelGeneralController">
+   <children>
+      <Label layoutX="14.0" layoutY="16.0" prefHeight="90.0" prefWidth="90.0" />
+      <HBox layoutX="27.0" layoutY="19.0" style="-fx-background-radius: 30;" />
+      <Button fx:id="reserve" layoutX="638.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleReverse" text="预订" />
+      <HBox layoutX="121.0" layoutY="25.0" prefHeight="0.0" prefWidth="97.0" spacing="5.0">
+         <children>
+            <Label fx:id="hotelName" layoutX="121.0" layoutY="19.0" text="\%酒店名称" />
+            <Label fx:id="grade" text="\%f分" />
+         </children>
+      </HBox>
+      <HBox layoutX="121.0" layoutY="52.0">
+         <children>
+            <HBox layoutX="121.0" layoutY="52.0">
+               <children>
+                  <Label layoutX="121.0" layoutY="52.0" text="商" />
+                  <Label fx:id="scope" text="\%s" />
+               </children>
+            </HBox>
+            <HBox layoutX="183.0" layoutY="52.0">
+               <children>
+                  <Label layoutX="121.0" layoutY="52.0" text="址" />
+                  <Label fx:id="location" prefHeight="17.0" prefWidth="37.0" text="\%s" />
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+      <Label fx:id="promotion" layoutX="121.0" layoutY="81.0" text="\%促销策略" />
+      <HBox layoutX="393.0" layoutY="39.0">
+         <children>
+            <Label layoutX="393.0" layoutY="39.0" text="¥" />
+            <Label fx:id="lowestPrice" layoutX="402.0" layoutY="39.0" text="\%d" />
+         </children>
+      </HBox>
+      <HBox layoutX="408.0" layoutY="81.0">
+         <children>
+            <Label layoutX="408.0" layoutY="81.0" text="订单" />
+            <HBox>
+               <children>
+                  <Label layoutX="456.0" layoutY="81.0" text="未入住" />
+                  <Label fx:id="unexecute" text="\%d" />
+                  <Label text="已入住" />
+                  <Label fx:id="execute" text="\%d" />
+                  <Label text="异常" />
+                  <Label fx:id="abnormal" text="\%d" />
+                  <Label text="撤销" />
+                  <Label fx:id="repeal" text="\%d" />
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+   </children>
+</Pane>

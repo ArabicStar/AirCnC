@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="385.0" prefWidth="550.0" stylesheets="@../css/MemberRegisterMain.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.member.view.signin.fxml.MemberRegisterMainController">
+   <children>
+      <VBox layoutX="163.0" layoutY="140.0">
+         <children>
+            <HBox spacing="20.0" styleClass="choice">
+               <children>
+                  <RadioButton fx:id="personal" mnemonicParsing="false" text="普通会员" />
+                  <RadioButton fx:id="business" mnemonicParsing="false" text="企业会员" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+            <TextField fx:id="username" styleClass="textfield" />
+            <PasswordField fx:id="password" styleClass="passwordfield" />
+            <PasswordField fx:id="confirmPassword" styleClass="passwordfield" />
+            <Button fx:id="next" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleNext" styleClass="confirm" text="下一步">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin></Button>
+         </children>
+      </VBox>
+      <Group layoutX="86.0" layoutY="91.0" />
+      <Button layoutX="479.0" layoutY="336.0" mnemonicParsing="false" styleClass="back" text="返回" />
+   </children>
+</Pane>
