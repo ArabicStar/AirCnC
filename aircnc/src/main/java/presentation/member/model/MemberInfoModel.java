@@ -4,7 +4,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import vo.member.MemberVo;
+import utils.info.member.MemberInfo;
 
 /**
  * the model of member
@@ -30,7 +30,7 @@ public class MemberInfoModel {
 		this(null);
 	}
 	
-	public MemberInfoModel(MemberVo vo){
+	public MemberInfoModel(MemberInfo vo){
 		this.id = new SimpleStringProperty(vo.getId());
 		this.username = new SimpleStringProperty(vo.getName());
 		this.tele = new SimpleStringProperty(vo.getContact().getFixedPhone());

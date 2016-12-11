@@ -8,7 +8,8 @@ public abstract class ClientLauncher {
 		RmiLauncher.launch();
 		DaoLauncher.launch(clientId);
 		ServiceLauncher.launch(clientId);
-		UILauncher.launch(clientId);
+		InteractorLauncher.launch();
+		UILauncher.launch();
 	}
 
 	public static void main(String[] args) {

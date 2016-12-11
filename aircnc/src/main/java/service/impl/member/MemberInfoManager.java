@@ -127,7 +127,7 @@ public final class MemberInfoManager implements MemberInfoService, MemberQuerySe
 		if (modifiedInfo == null || !modifiedInfo.isValid())
 			throw illegalArgEx("null or invalid member info");
 
-		if (!accountService.isLogined())
+		if (!accountService.isLoggedin())
 			throw illegalStateException("Not logged in yet");
 
 		MemberPo po = (MemberPo) accountService.getCurrentAccount();
@@ -185,7 +185,7 @@ public final class MemberInfoManager implements MemberInfoService, MemberQuerySe
 		if (accountService == null || memberDao == null)
 			throw unsupportedOpEx("update password");
 
-		if (!accountService.isLogined())
+		if (!accountService.isLoggedin())
 			throw illegalStateException("Not logged in yet");
 
 		MemberPo po = (MemberPo) accountService.getCurrentAccount();

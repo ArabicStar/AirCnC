@@ -41,13 +41,13 @@ public class MemberAccountServiceTest {
 		MemberInfo v = acc.login(testID(idx), "12345678".hashCode());
 		assertEquals(testName(idx), v.getName());
 		assertEquals(testName(idx), acc.getCurrentAccount().getName());
-		assertEquals(true, acc.isLogined());
+		assertEquals(true, acc.isLoggedin());
 	}
 
 	@Test
 	public void testLogout() {
 		assertEquals(true, acc.logout());
-		assertEquals(false, acc.isLogined());
+		assertEquals(false, acc.isLoggedin());
 	}
 
 	@Test

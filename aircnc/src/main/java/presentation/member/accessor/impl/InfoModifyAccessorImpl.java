@@ -67,4 +67,9 @@ public class InfoModifyAccessorImpl implements InfoModifyAccessor{
 		
 	}
 
+	@Override
+	public int getPasswordHash() {
+		return passwordHash;
+	}
+
 }

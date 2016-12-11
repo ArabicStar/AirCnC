@@ -20,7 +20,7 @@ import po.member.MemberPo;
  * @author ClevelandAlto
  *
  */
-public interface MemberDao extends Remote {
+public interface MemberDao {
 	/**
 	 * Add a new member by given po.<br>
 	 * 

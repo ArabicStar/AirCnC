@@ -2,7 +2,6 @@ package presentation.member.utils;
 
 import java.util.Optional;
 
-import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.ButtonBar.ButtonData;

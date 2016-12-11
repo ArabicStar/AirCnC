@@ -2,7 +2,7 @@ package service.impl.member;
 
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
-
+import static utils.exception.StaticExceptionFactory.illegalStateException;
 import java.util.Random;
 
 import data.dao.member.MemberDao;
@@ -101,6 +101,9 @@ public final class MemberAccountManager implements MemberAccountService {
 
 	@Override
 	public boolean logout() {
+		if (!isLoggedin())
+			throw illegalStateException("Not login yet");
+
 		// set logout status
 		this.isLogined = false;
 		this.currentAccount = null;
@@ -108,7 +111,7 @@ public final class MemberAccountManager implements MemberAccountService {
 	}
 
 	@Override
-	public boolean isLogined() {
+	public boolean isLoggedin() {
 		return isLogined;
 	}
 
@@ -130,7 +133,7 @@ public final class MemberAccountManager implements MemberAccountService {
 	}
 
 	@Override
-	public void refreshCurrentAccount() {
-		currentAccount = dao.findMember(currentAccount.getId());
+	public MemberInfo refreshCurrentAccount() {
+		return currentAccount = dao.findMember(currentAccount.getId());
 	}
 }
