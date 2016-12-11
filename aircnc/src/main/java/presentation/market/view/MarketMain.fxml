@@ -40,7 +40,15 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="121.0" styleClass="hbox">
                      <children>
-                        <Label fx:id="myOrder" onMouseClicked="#handleMyOrder" text="我的订单" textAlignment="CENTER"/>
+                        <Label fx:id="myOrder" onMouseClicked="#handleMyOrder" text="我的订单" textAlignment="CENTER" />
+                     </children>
+                     <padding>
+                        <Insets right="30.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="121.0" styleClass="hbox">
+                     <children>
+                        <Label fx:id="searchHotel" onMouseClicked="#handleSearchHotel" text="搜索酒店" textAlignment="CENTER" />
                      </children>
                      <padding>
                         <Insets right="30.0" />

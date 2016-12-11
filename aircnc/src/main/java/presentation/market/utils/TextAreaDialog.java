@@ -8,13 +8,41 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.stage.StageStyle;
 import presentation.market.model.MyOrderModel;
+import vo.hotel.HotelVo;
 
 public class TextAreaDialog extends GridPane {
 	Dialog<String> dialog;
-	private TextArea orderDetail;
 
 	public TextAreaDialog(String content) {
+		dialog = new Dialog<String>();
+		dialog.initStyle(StageStyle.UNDECORATED);
+		dialog.setHeaderText(content);
+	}
+	
+	public TextAreaDialog(String content, HotelVo hotel) {
+		dialog = new Dialog<String>();
+		dialog.initStyle(StageStyle.UNDECORATED);
+		dialog.setHeaderText(content);
+		
+		dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK);
+		
+		GridPane grid = new GridPane();
+		grid.setHgap(10);
+		grid.setVgap(10);
+		grid.setPadding(new Insets(20, 150, 10, 10));
 
+		TextArea orderDetail = new TextArea();
+		grid.add(orderDetail, 8, 5);
+		orderDetail.setEditable(false);
+		String detail = 
+				  "装备: " + hotel.getEquipment() + "\n"
+				+ hotel.getGrade() + "\n"
+				+ hotel.getId() + "\n"
+				+ hotel.getIntroduction() + "\n"
+				;
+		orderDetail.setText(detail);
+		
+		dialog.getDialogPane().setContent(grid);
 	}
 
 	public TextAreaDialog(String content, MyOrderModel orderModel) {
@@ -39,7 +67,7 @@ public class TextAreaDialog extends GridPane {
 		grid.setVgap(10);
 		grid.setPadding(new Insets(20, 150, 10, 10));
 
-		orderDetail = new TextArea();
+		TextArea orderDetail = new TextArea();
 		
 
 		grid.add(orderDetail, 8, 5);

@@ -89,7 +89,6 @@ public class MyOrderController implements Initializable{
 		
 		
 		orderTable.setItems(orderData);
-		System.out.println("你看我应该写的没有问题" + orderTable.hashCode());
 		hotelName.setCellValueFactory(cellData -> cellData.getValue().hotelNameProperty());
 		checkInTime.setCellValueFactory(cellData -> cellData.getValue().checkInTimeProperty());
 		state.setCellValueFactory(cellData -> cellData.getValue().stateProperty());
@@ -109,7 +108,6 @@ public class MyOrderController implements Initializable{
 			
 				new Callback<TableColumn<MyOrderModel, OrderStatus>, TableCell<MyOrderModel, OrderStatus>>() {
 					public TableCell<MyOrderModel, OrderStatus> call(TableColumn<MyOrderModel, OrderStatus> p) {
-						System.out.println("猜一猜谁先动手");
 						return new FunctionButtons();
 					}
 				});

@@ -19,7 +19,6 @@ public class FunctionButtons extends TableCell<MyOrderModel, OrderStatus> {
 		status = OrderStatus.EXECUTED;
 
 		createFunctionButtons(status);
-		System.out.println("出问题了");
 
 	}
 
