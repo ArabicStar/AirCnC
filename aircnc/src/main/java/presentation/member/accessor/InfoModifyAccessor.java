@@ -19,4 +19,6 @@ public interface InfoModifyAccessor {
 	
 	public void setMemberModel(MemberInfoModel model);
 	
+	public int getPasswordHash();
+	
 }

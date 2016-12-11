@@ -1,11 +1,11 @@
 package presentation.member.manager;
 
 import presentation.member.model.MemberInfoModel;
-import vo.member.MemberVo;
+import utils.info.member.MemberInfo;
 
 public interface UserInfoManager {
 	
-	public boolean setUser(MemberVo vo);
+	public boolean setUser(MemberInfo vo);
 	
 	public MemberInfoModel getMemberInfo();
 }

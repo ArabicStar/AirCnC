@@ -27,12 +27,11 @@ public class ServiceLauncher {
 
 	private static final void launchMemberService(Client clientId) {
 		MemberDaoProxy memberDaoProxy = MemberDaoProxy.getInstance();
-		QueryDaoProxy queryDaoProxy = QueryDaoProxy.getInstance();
 
 		MemberServiceProxy proxy = MemberServiceProxy.launch(clientId);
 
 		MemberAccountService acc = MemberAccountManager.launch(memberDaoProxy);
-		MemberCreditService cre = MemberCreditManager.launch(memberDaoProxy, memberDaoProxy, queryDaoProxy);
+		MemberCreditService cre = MemberCreditManager.launch(memberDaoProxy, memberDaoProxy);
 
 		proxy.loadAccountService(acc);
 		proxy.loadCreditService(cre);

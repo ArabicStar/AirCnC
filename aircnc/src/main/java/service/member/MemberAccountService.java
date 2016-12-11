@@ -47,12 +47,12 @@ public interface MemberAccountService {
 	 * 
 	 * @return status of login
 	 */
-	public boolean isLogined();
+	public boolean isLoggedin();
 
 	/**
 	 * Refresh currently logined member account info.<br>
 	 */
-	public void refreshCurrentAccount();
+	public MemberInfo refreshCurrentAccount();
 
 	/**
 	 * Get logined member's vo<br>

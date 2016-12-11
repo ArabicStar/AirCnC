@@ -98,18 +98,18 @@ public final class MemberServiceProxy extends AccessSecureProxy
 
 	@Override
 	@AuthenticatePolicy({ Client.USER })
-	public boolean isLogined() {
+	public boolean isLoggedin() {
 		checkAuthentication();
 
-		return accountService.isLogined();
+		return accountService.isLoggedin();
 	}
 
 	@Override
 	@AuthenticatePolicy({ Client.USER })
-	public void refreshCurrentAccount() {
+	public MemberInfo refreshCurrentAccount() {
 		checkAuthentication();
 
-		accountService.refreshCurrentAccount();
+		return accountService.refreshCurrentAccount();
 	}
 
 	@Override
@@ -140,7 +140,7 @@ public final class MemberServiceProxy extends AccessSecureProxy
 	@AuthenticatePolicy({ Client.USER })
 	public boolean updateBasicInfo(MemberInfo modifiedInfo) {
 		checkAuthentication();
-	
+
 		return infoService.updateBasicInfo(modifiedInfo);
 	}
 
@@ -148,7 +148,7 @@ public final class MemberServiceProxy extends AccessSecureProxy
 	@AuthenticatePolicy({ Client.MANAGE })
 	public boolean updateAdvancedInfo(MemberInfo modifiedInfo) {
 		checkAuthentication();
-	
+
 		return infoService.updateAdvancedInfo(modifiedInfo);
 	}
 
@@ -156,7 +156,7 @@ public final class MemberServiceProxy extends AccessSecureProxy
 	@AuthenticatePolicy({ Client.USER })
 	public boolean updatePassword(int oldPwdHash, int newPwdHash) {
 		checkAuthentication();
-	
+
 		return infoService.updatePassword(oldPwdHash, newPwdHash);
 	}
 
@@ -172,7 +172,7 @@ public final class MemberServiceProxy extends AccessSecureProxy
 	@AuthenticatePolicy({ Client.USER })
 	public List<OrderVo> getMemberOrdersByStatus(String id, OrderStatus status) {
 		checkAuthentication();
-	
+
 		return infoService.getMemberOrdersByStatus(id, status);
 	}
 
