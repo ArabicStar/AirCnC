@@ -19,7 +19,6 @@ import javafx.util.Callback;
 import presentation.market.MarketCenterController;
 import presentation.market.model.MyOrderModel;
 import presentation.market.utils.FunctionButtons;
-import sun.tools.jar.resources.jar;
 import utils.info.order.OrderStatus;
 import vo.order.OrderVo;
 
@@ -90,6 +89,7 @@ public class MyOrderController implements Initializable{
 		
 		
 		orderTable.setItems(orderData);
+		System.out.println("你看我应该写的没有问题" + orderTable.hashCode());
 		hotelName.setCellValueFactory(cellData -> cellData.getValue().hotelNameProperty());
 		checkInTime.setCellValueFactory(cellData -> cellData.getValue().checkInTimeProperty());
 		state.setCellValueFactory(cellData -> cellData.getValue().stateProperty());
@@ -105,15 +105,14 @@ public class MyOrderController implements Initializable{
             }
         });
 		
-		for(int i = 0; i < orderData.size(); i++) {
-			final int j = i;
-			operation.setCellFactory(
-	                new Callback<TableColumn<MyOrderModel,OrderStatus>, TableCell<MyOrderModel, OrderStatus>>() {
-	            public TableCell<MyOrderModel,OrderStatus> call(TableColumn<MyOrderModel, OrderStatus> p) {
-	            	return new FunctionButtons(orderTable.getItems().get(j));
-	            }       
-	        });
-		}
+		operation.setCellFactory(
+			
+				new Callback<TableColumn<MyOrderModel, OrderStatus>, TableCell<MyOrderModel, OrderStatus>>() {
+					public TableCell<MyOrderModel, OrderStatus> call(TableColumn<MyOrderModel, OrderStatus> p) {
+						System.out.println("猜一猜谁先动手");
+						return new FunctionButtons();
+					}
+				});
 		
 		
 	}
