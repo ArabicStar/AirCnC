@@ -24,7 +24,7 @@
 		<property column="content" name="content" type="string" />
 		
 		<!-- checkInTime -->
-		<property column="checktime" name="checkInTime" type="date" />
+		<property column="checktime" name="checkInTime"  />
 		
 		<!-- commentTime -->
 		<property column="comtime" name="commentTime" generated="insert" 

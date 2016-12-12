@@ -1,5 +1,6 @@
 package utils.info.order.comment;
 
+import java.time.LocalDateTime;
 
 public abstract class CommentInfoBuilder extends CommentInfoTemplate{
 	public CommentInfoBuilder(CommentInfo info){
@@ -34,12 +35,12 @@ public abstract class CommentInfoBuilder extends CommentInfoTemplate{
 		return this;
 	}
 	
-	public CommentInfoBuilder setCheckInTime(String checkInTime){
+	public CommentInfoBuilder setCheckInTime(LocalDateTime checkInTime){
 		this.checkInTime = checkInTime;
 		return this;
 	}
 	
-	public CommentInfoBuilder setCommentTime(String commentTime){
+	public CommentInfoBuilder setCommentTime(LocalDateTime commentTime){
 		this.commentTime = commentTime;
 		return this;
 	}

@@ -1,13 +1,15 @@
 package utils.info.order.comment;
 
+import java.time.LocalDateTime;
+
 public class CommentInfoTemplate {
 	
 	protected String hotelId;
 	protected String memberId;
 	protected String content;
 	protected int grade;
-	protected String checkInTime;
-	protected String commentTime;
+	protected LocalDateTime checkInTime;
+	protected LocalDateTime commentTime;
 	
 	private static final int ID_BOUND = 100000000;
 	private static final String ID_PATTERN = "[0-9]{8}";

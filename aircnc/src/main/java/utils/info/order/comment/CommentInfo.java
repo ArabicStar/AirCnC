@@ -1,5 +1,7 @@
 package utils.info.order.comment;
 
+import java.time.LocalDateTime;
+
 public class CommentInfo extends CommentInfoTemplate{
 	protected boolean isValid;
 
@@ -10,8 +12,8 @@ public class CommentInfo extends CommentInfoTemplate{
 		memberId = BLANK;
 		content = BLANK;
 		this.grade = grade;
-		checkInTime = BLANK;
-		commentTime = BLANK;
+		checkInTime = null;
+		commentTime = null;
 	}
 	
 	public String getHotelId(){
@@ -38,13 +40,13 @@ public class CommentInfo extends CommentInfoTemplate{
 		return Integer.MIN_VALUE;
 	}
 	
-	public String getCheckInTime(){
+	public LocalDateTime getCheckInTime(){
 		if (isValid())
 			return checkInTime;
 		return null;
 	}
 	
-	public String getCommentTime(){
+	public LocalDateTime getCommentTime(){
 		if (isValid())
 			return commentTime;
 		return null;
