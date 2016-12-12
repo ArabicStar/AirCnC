@@ -17,7 +17,8 @@ public class OrderPoBuilder extends OrderInfoBuilder {
 		return new OrderPo().setOrderId(orderId).setEntryTime(entryTime).setHasChildren(hasChildren).setHotelId(hotelId)
 				.setHotelName(hotelName).setLastTime(lastTime).setPeopleNumber(peopleNumber).setPrice(originalPrice)
 				.setIsReviewed(isReviewed).setRoomNumber(roomNumber).setRoomType(roomType).setStatus(status)
-				.setStayDays(stayDays).setUserId(userId).setUserName(userName).setPromotions(promotions);
+				.setStayDays(stayDays).setUserId(userId).setUserName(userName).setPromotions(promotions)
+				.setDiscountPrice(discountPrice);
 	}
 
 	@Override
@@ -108,6 +109,12 @@ public class OrderPoBuilder extends OrderInfoBuilder {
 	@Override
 	public OrderPoBuilder setUserName(String userName) {
 		this.userName = userName;
+		return this;
+	}
+	
+	@Override
+	public OrderPoBuilder setDiscountPrice(double discountPrice) {
+		this.discountPrice = discountPrice;
 		return this;
 	}
 

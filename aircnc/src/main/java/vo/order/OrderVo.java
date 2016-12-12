@@ -126,5 +126,11 @@ public class OrderVo extends OrderInfo {
 		this.promotions = promotions;
 		return this;
 	}
+	
+	@Override
+	public OrderVo setDiscountPrice(double discountPrice) {
+		this.discountPrice = discountPrice;
+		return this;
+	}
 
 }

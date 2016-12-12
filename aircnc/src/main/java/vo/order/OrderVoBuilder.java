@@ -16,7 +16,7 @@ public class OrderVoBuilder extends OrderInfoBuilder {
 				.setRoomType(roomType).setStatus(status).setStayDays(stayDays)
 				.setUserId(userId).setPrice(originalPrice).setHotelId(hotelId)
 				.setHotelName(hotelName).setRoomNumber(roomNumber).setIsReviewed(isReviewed)
-				.setUserName(userName).setPromotions(promotions);
+				.setUserName(userName).setPromotions(promotions).setDiscountPrice(discountPrice);
 	}
 
 	@Override
@@ -115,4 +115,10 @@ public class OrderVoBuilder extends OrderInfoBuilder {
 		return this;
 	}
 	
+	
+	@Override
+	public OrderVoBuilder setDiscountPrice(double discountPrice) {
+		this.discountPrice = discountPrice;
+		return this;
+	}
 }

@@ -34,6 +34,8 @@ public abstract class OrderInfoTemplate {
 	protected int peopleNumber;
 	
 	protected double originalPrice;
+	
+	protected double discountPrice;
 
 	protected boolean hasChildren;
 	
@@ -68,6 +70,10 @@ public abstract class OrderInfoTemplate {
 	
 	public Set<Promotion> getPromotions() {
 		return promotions;
+	}
+	
+	public double getDiscountPrice() {
+		return discountPrice;
 	}
 
 	/**
@@ -176,4 +182,6 @@ public abstract class OrderInfoTemplate {
 	public abstract OrderInfoTemplate setUserName(String userName);
 	
 	public abstract OrderInfoTemplate setPromotions(Set<Promotion> promotions);
+	
+	public abstract OrderInfoTemplate setDiscountPrice(double discountPrice);
 }
