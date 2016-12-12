@@ -1,9 +1,11 @@
 package vo.order;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 import utils.info.order.OrderInfoBuilder;
 import utils.info.order.OrderStatus;
+import utils.promotion.Promotion;
 
 public class OrderVoBuilder extends OrderInfoBuilder {
 
@@ -12,9 +14,9 @@ public class OrderVoBuilder extends OrderInfoBuilder {
 		return new OrderVo().setEntryTime(entryTime).setHasChildren(hasChildren)
 				.setLastTime(lastTime).setOrderId(orderId).setPeopleNumber(peopleNumber)
 				.setRoomType(roomType).setStatus(status).setStayDays(stayDays)
-				.setUserId(userId).setPrice(price).setHotelId(hotelId)
+				.setUserId(userId).setPrice(originalPrice).setHotelId(hotelId)
 				.setHotelName(hotelName).setRoomNumber(roomNumber).setIsReviewed(isReviewed)
-				.setUserName(userName);
+				.setUserName(userName).setPromotions(promotions);
 	}
 
 	@Override
@@ -67,7 +69,7 @@ public class OrderVoBuilder extends OrderInfoBuilder {
 
 	@Override
 	public OrderVoBuilder setPrice(double price) {
-		this.price = price;
+		this.originalPrice = price;
 		return this;
 	}
 
@@ -104,6 +106,12 @@ public class OrderVoBuilder extends OrderInfoBuilder {
 	@Override
 	public OrderVoBuilder setUserName(String userName) {
 		this.userName = userName;
+		return this;
+	}
+
+	@Override
+	public OrderVoBuilder setPromotions(Set<Promotion> promotions) {
+		this.promotions = promotions;
 		return this;
 	}
 	

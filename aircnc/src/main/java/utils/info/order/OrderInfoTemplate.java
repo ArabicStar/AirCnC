@@ -1,10 +1,11 @@
 package utils.info.order;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+
+import utils.promotion.Promotion;
 
 @Entity
 public abstract class OrderInfoTemplate {
@@ -24,13 +25,15 @@ public abstract class OrderInfoTemplate {
 	 * 订单最晚执行时间
 	 */
 	protected LocalDateTime lastTime;
+	
+	protected Set<Promotion> promotions;
 
 	/**
 	 * 除去小孩的总人数
 	 */
 	protected int peopleNumber;
 	
-	protected double price;
+	protected double originalPrice;
 
 	protected boolean hasChildren;
 	
@@ -61,6 +64,10 @@ public abstract class OrderInfoTemplate {
 
 	public int getHotelId() {
 		return hotelId;
+	}
+	
+	public Set<Promotion> getPromotions() {
+		return promotions;
 	}
 
 	/**
@@ -126,8 +133,8 @@ public abstract class OrderInfoTemplate {
 		return peopleNumber;
 	}
 
-	public double getPrice() {
-		return price;
+	public double getOriginalPrice() {
+		return originalPrice;
 	}
 
 	public boolean isHasChildren() {
@@ -167,4 +174,6 @@ public abstract class OrderInfoTemplate {
 	public abstract OrderInfoTemplate setIsReviewed(boolean isReviewed);
 
 	public abstract OrderInfoTemplate setUserName(String userName);
+	
+	public abstract OrderInfoTemplate setPromotions(Set<Promotion> promotions);
 }

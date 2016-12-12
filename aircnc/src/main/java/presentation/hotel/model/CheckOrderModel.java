@@ -51,7 +51,7 @@ public class CheckOrderModel {
 		this.orderId = new SimpleStringProperty(String.valueOf(order.getOrderId()));
 		this.checkinTime = new SimpleStringProperty(transformTime(order.getEntryTime()));
 		this.status = new SimpleStringProperty(order.getStatus().toString());
-		this.totalPrice = new SimpleStringProperty(String.valueOf(order.getPrice()) + "元");
+		this.totalPrice = new SimpleStringProperty(String.valueOf(order.getOriginalPrice()) + "元");
 		this.operation = new SimpleObjectProperty<ButtonName>();
 
 	}

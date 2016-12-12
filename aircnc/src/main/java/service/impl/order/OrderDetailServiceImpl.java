@@ -47,7 +47,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 	public double getOrderPrice(String orderId) {
 		for (OrderPo orderPo : hotelOrderList) {
 			if (orderPo.getOrderId() == orderId) {
-				return orderPo.getPrice();
+				return orderPo.getOriginalPrice();
 			}
 		}
 		return -1;

@@ -1,11 +1,13 @@
 package vo.order;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 import po.member.MemberPo;
 import po.order.OrderPo;
 import utils.info.order.OrderInfo;
 import utils.info.order.OrderStatus;
+import utils.promotion.Promotion;
 
 /**
  * orderNo 订单编号 
@@ -85,7 +87,7 @@ public class OrderVo extends OrderInfo {
 	
 	@Override
 	public OrderVo setPrice(double price) {
-		this.price = price;
+		this.originalPrice = price;
 		return this;
 	}
 
@@ -116,6 +118,12 @@ public class OrderVo extends OrderInfo {
 	@Override
 	public OrderVo setUserName(String userName) {
 		this.userName = userName;
+		return this;
+	}
+
+	@Override
+	public OrderVo setPromotions(Set<Promotion> promotions) {
+		this.promotions = promotions;
 		return this;
 	}
 

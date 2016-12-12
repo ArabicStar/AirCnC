@@ -1,9 +1,11 @@
 package po.order;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 import utils.info.order.OrderInfo;
 import utils.info.order.OrderStatus;
+import utils.promotion.Promotion;
 
 public class OrderPo extends OrderInfo{
 
@@ -72,7 +74,7 @@ public class OrderPo extends OrderInfo{
 
 	@Override
 	public OrderPo setPrice(double price) {
-		this.price = price;
+		this.originalPrice = price;
 		return this;
 	}
 
@@ -103,6 +105,12 @@ public class OrderPo extends OrderInfo{
 	@Override
 	public OrderPo setUserName(String userName) {
 		this.userName = userName;
+		return this;
+	}
+
+	@Override
+	public OrderPo setPromotions(Set<Promotion> promotions) {
+		this.promotions = promotions;
 		return this;
 	}
 	

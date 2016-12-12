@@ -72,7 +72,7 @@ public class MyOrderModel {
         
         this.state = new SimpleStringProperty(state);
         this.timeAndSum = new SimpleStringProperty(order.getStayDays()+"晚/"+order.getRoomNumber()+"间");
-        this.totalPrice = new SimpleStringProperty(String.valueOf(order.getPrice())+"元");
+        this.totalPrice = new SimpleStringProperty(String.valueOf(order.getOriginalPrice())+"元");
         this.operation = new SimpleObjectProperty<OrderStatus>(order.getStatus());
         
         

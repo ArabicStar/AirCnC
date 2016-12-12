@@ -4,18 +4,20 @@ import static utils.exception.StaticExceptionFactory.inconsistentStatusEx;
 import static utils.exception.StaticExceptionFactory.unsupportedOpEx;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 import utils.info.order.OrderInfoBuilder;
 import utils.info.order.OrderStatus;
+import utils.promotion.Promotion;
 
 public class OrderPoBuilder extends OrderInfoBuilder {
 
 	@Override
 	public OrderPo getOrderInfo() {
 		return new OrderPo().setOrderId(orderId).setEntryTime(entryTime).setHasChildren(hasChildren).setHotelId(hotelId)
-				.setHotelName(hotelName).setLastTime(lastTime).setPeopleNumber(peopleNumber).setPrice(price)
+				.setHotelName(hotelName).setLastTime(lastTime).setPeopleNumber(peopleNumber).setPrice(originalPrice)
 				.setIsReviewed(isReviewed).setRoomNumber(roomNumber).setRoomType(roomType).setStatus(status)
-				.setStayDays(stayDays).setUserId(userId).setUserName(userName);
+				.setStayDays(stayDays).setUserId(userId).setUserName(userName).setPromotions(promotions);
 	}
 
 	@Override
@@ -69,7 +71,7 @@ public class OrderPoBuilder extends OrderInfoBuilder {
 
 	@Override
 	public OrderPoBuilder setPrice(double price) {
-		this.price = price;
+		this.originalPrice = price;
 		return this;
 	}
 
@@ -135,6 +137,12 @@ public class OrderPoBuilder extends OrderInfoBuilder {
 		to.setStatus(from.getStatus());
 		to.setLastTime(from.getLastTime());
 		to.setIsReviewed(from.isIsReviewed());
+	}
+
+	@Override
+	public OrderPoBuilder setPromotions(Set<Promotion> promotions) {
+		this.promotions = promotions;
+		return this;
 	}
 
 }
