@@ -3,14 +3,14 @@ package presentation.hotel.accessor.impl;
 import presentation.hotel.accessor.HotelLoginAccessor;
 
 public class HotelLoginAccessorImpl implements HotelLoginAccessor{
-	private String id;
+	private String name;
 	
 	private int passwordHash;
 
 	@Override
-	public String getId() {
+	public String getName() {
 		
-		return id;
+		return name;
 	}
 
 	@Override
@@ -20,8 +20,8 @@ public class HotelLoginAccessorImpl implements HotelLoginAccessor{
 	}
 	
 	@Override
-	public void setDeliveredId(String id){
-		this.id = id;
+	public void setDeliveredName(String name){
+		this.name = name;
 	}
 	
 	@Override

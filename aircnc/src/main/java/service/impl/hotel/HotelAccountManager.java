@@ -90,8 +90,8 @@ public class HotelAccountManager implements HotelAccountService{
 	}
 
 	@Override
-	public void refreshCurrentAccount() {
-		currentAccount = dao.findHotelById(currentAccount.getId());
+	public HotelInfo refreshCurrentAccount() {
+		return currentAccount = dao.findHotelById(currentAccount.getId());
 	}
 
 }

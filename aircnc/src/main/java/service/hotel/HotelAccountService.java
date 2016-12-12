@@ -45,8 +45,9 @@ public interface HotelAccountService {
 
 	/**
 	 * Refresh currently logined hotel account info.<br>
+	 * @return 
 	 */
-	public void refreshCurrentAccount();
+	public HotelInfo refreshCurrentAccount();
 
 	/**
 	 * Get logined hotel's vo<br>

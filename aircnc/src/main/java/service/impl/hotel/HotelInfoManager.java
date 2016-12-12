@@ -96,4 +96,9 @@ public class HotelInfoManager implements HotelInfoService {
 		// return cheapest;
 	}
 
+	public void setHotel(HotelInfo info) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -47,7 +47,7 @@ public class HotelSignInController implements Initializable{
 	@FXML
 	public void handleConfirm(){
 		if(name.getText().length()!=0&&password.getText().length()!=0){
-			accessor.setDeliveredId(name.getText());
+			accessor.setDeliveredName(name.getText());
 			accessor.setDeliveredPassword(password.getText());
 			
 			//use valid to mark whether it is correct
