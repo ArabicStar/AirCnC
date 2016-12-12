@@ -1,4 +1,4 @@
-package utils.restriction;
+package utils.condition;
 
 public abstract class Bound<T extends Comparable<T>> {
 	protected T from;
@@ -19,7 +19,7 @@ public abstract class Bound<T extends Comparable<T>> {
 		return from;
 	}
 
-	public void setFrom(T from) {
+	public void from(T from) {
 		this.from = from;
 	}
 
@@ -27,7 +27,7 @@ public abstract class Bound<T extends Comparable<T>> {
 		return to;
 	}
 
-	public void setTo(T to) {
+	public void to(T to) {
 		this.to = to;
 	}
 
@@ -35,7 +35,7 @@ public abstract class Bound<T extends Comparable<T>> {
 		return isInclusive;
 	}
 
-	public void setInclusive(boolean isInclusive) {
+	public void include(boolean isInclusive) {
 		this.isInclusive = isInclusive;
 	}
 

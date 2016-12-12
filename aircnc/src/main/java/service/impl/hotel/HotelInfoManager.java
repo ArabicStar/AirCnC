@@ -2,6 +2,7 @@ package service.impl.hotel;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import data.dao.hotel.HotelDao;
 import data.dao.member.MemberDao;
@@ -76,20 +77,23 @@ public class HotelInfoManager implements HotelInfoService {
 
 	@Override
 	public List<RoomVo> getRooms(String name) {
-		List<RoomVo> rooms = null;
-		for (RoomPo po : hotelDao.findHotelByName(name).getRooms()) {
-			rooms.add(new RoomVoBuilder(po).getRoomInfo());
-		}
-		return rooms;
+		return hotelDao.findHotelByName(name).getRooms().stream().map(r -> new RoomVoBuilder(r).getRoomInfo())
+				.collect(Collectors.toList());
+		// List<RoomVo> rooms = null;
+		// for (RoomPo po : hotelDao.findHotelByName(name).getRooms()) {
+		// rooms.add(new RoomVoBuilder(po).getRoomInfo());
+		// }
+		// return rooms;
 	}
 
 	@Override
 	public double getCheapestPrice(String name) {
-		double cheapest = Double.MAX_VALUE;
-		for (RoomPo po : hotelDao.findHotelByName(name).getRooms()) {
-			cheapest = po.getPrice() > cheapest ? cheapest : po.getPrice();
-		}
-		return cheapest;
+		return hotelDao.findHotelByName(name).getRooms().stream().mapToDouble(RoomPo::getPrice).min().getAsDouble();
+		// double cheapest = Double.MAX_VALUE;
+		// for (RoomPo po : hotelDao.findHotelByName(name).getRooms()) {
+		// cheapest = po.getPrice() > cheapest ? cheapest : po.getPrice();
+		// }
+		// return cheapest;
 	}
 
 }

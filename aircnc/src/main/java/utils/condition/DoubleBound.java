@@ -1,4 +1,4 @@
-package utils.restriction;
+package utils.condition;
 
 public class DoubleBound extends Bound<Double> {
 

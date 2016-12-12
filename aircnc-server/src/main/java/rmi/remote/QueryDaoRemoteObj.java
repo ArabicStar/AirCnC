@@ -29,7 +29,7 @@ public class QueryDaoRemoteObj extends UnicastRemoteObject implements RemoteCred
 		final CreditQueryDao creditQuery = CreditDaoImpl.INSTANCE;
 
 		obj = new QueryDaoRemoteObj(creditQuery);
-		
+
 		RemoteHelper.bindRemoteObj("RemoteQueryDao", obj);
 	}
 	/* Singleton */
@@ -44,6 +44,11 @@ public class QueryDaoRemoteObj extends UnicastRemoteObject implements RemoteCred
 	@Override
 	public List<CreditChangePo> searchByMemberId(String memberId) throws RemoteException {
 		return creditQuery.searchByMemberId(memberId);
+	}
+
+	@Override
+	public int getMemberCredit(String memberId) throws RemoteException {
+		return creditQuery.getMemberCredit(memberId);
 	}
 
 }

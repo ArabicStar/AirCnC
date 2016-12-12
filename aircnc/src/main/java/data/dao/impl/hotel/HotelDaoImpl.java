@@ -4,29 +4,33 @@ import static data.hibernate.Hibernator.execute;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 
 import data.dao.hotel.HotelDao;
+import data.dao.query.HotelQueryDao;
 import po.hotel.HotelPo;
 import po.hotel.HotelPoBuilder;
 
-public class HotelDaoImpl implements HotelDao{
+public class HotelDaoImpl implements HotelDao, HotelQueryDao {
 
-	
 	@Override
 	public HotelPo findHotelById(final int id) {
 		return execute(session -> {
-			return (HotelPo) session.get(HotelPo.class,id);
+			return (HotelPo) session.get(HotelPo.class, id);
 		});
 	}
 
 	@Override
 	public boolean deleteHotel(final String name) {
 		return execute(session -> {
-			List hotels =  session.createCriteria(HotelPo.class).add(Restrictions.eq("name",name)).list();
-			if(hotels.size()==0){
+			@SuppressWarnings("unchecked")
+			List<HotelPo> hotels = (List<HotelPo>) session.createCriteria(HotelPo.class)
+					.add(Restrictions.eq("name", name)).list();
+			if (hotels.size() == 0) {
 				return false;
-			}else{
+			} else {
 				session.delete(hotels.get(0));
 				return true;
 			}
@@ -66,27 +70,44 @@ public class HotelDaoImpl implements HotelDao{
 		});
 	}
 
-
 	@Override
 	public boolean existName(String name) {
 		return execute(session -> {
-			return !session.createCriteria(HotelPo.class).add(Restrictions.eq("name",name)).list().isEmpty();
+			return !session.createCriteria(HotelPo.class).add(Restrictions.eq("name", name)).list().isEmpty();
 		});
 	}
 
 	@Override
 	public HotelPo findHotelByName(String name) {
-		return (HotelPo) execute(session -> {
-			List hotels =  session.createCriteria(HotelPo.class).add(Restrictions.eq("name",name)).list();
-			if(hotels.size()==0){
+		return execute(session -> {
+			@SuppressWarnings("unchecked")
+			List<HotelPo> hotels = (List<HotelPo>) session.createCriteria(HotelPo.class)
+					.add(Restrictions.eq("name", name)).list();
+			if (hotels.size() == 0) {
 				return null;
-			}else{
+			} else {
 				return hotels.get(0);
 			}
 		});
 	}
 
+	@Override
+	public HotelPo searchById(int hotelId) {
+		return findHotelById(hotelId);
+	}
 
-	
+	@Override
+	public HotelPo searchByName(String name) {
+		return findHotelByName(name);
+	}
+
+	@Override
+	public List<HotelPo> searchByCriteria(DetachedCriteria dc) {
+		return execute(session -> {
+			@SuppressWarnings("unchecked")
+			List<HotelPo> list = (List<HotelPo>) dc.getExecutableCriteria(session).list();
+			return list;
+		});
+	}
 
 }
