@@ -118,6 +118,7 @@ public class ClientCenterController extends Application {
 		content.getChildren().add(searchMain.getPane());
 		searchMain.getController().setCenterController(this);
 		searchMain.getController().setManager(searchManager);
+		searchMain.getController().setRootLayout(content);
 	}
 	
 	public void addOrderMainPane() {

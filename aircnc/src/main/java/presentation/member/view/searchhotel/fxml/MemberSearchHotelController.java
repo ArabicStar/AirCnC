@@ -7,8 +7,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import presentation.member.ClientCenterController;
+import presentation.member.accessor.SupremeSearchAccessor;
+import presentation.member.accessor.impl.InfoModifyAccessorImpl;
+import presentation.member.accessor.impl.SupremeSearchAccessorImpl;
 import presentation.member.manager.SearchHotelManager;
+import presentation.member.view.memberinfo.MemberInfoModifyPane;
+import presentation.member.view.searchhotel.SupremeSearchPane;
 
 /**
  * the controller of hotel search (main).
@@ -29,6 +36,10 @@ public class MemberSearchHotelController implements Initializable{
 	
 	private ClientCenterController controller;
 	private SearchHotelManager manager;
+	private SupremeSearchAccessor supremeSearchAccessor;
+	
+	private SupremeSearchPane supremeSearchPane;
+	private AnchorPane rootLayout;
 	
 	public void setCenterController(ClientCenterController controller){
 		this.controller=controller;
@@ -42,11 +53,29 @@ public class MemberSearchHotelController implements Initializable{
 	
 	@FXML
 	public void handleSupreme(){
-		
+		addSupremeSearch();
+	}
+	
+	public void setRootLayout(AnchorPane pane){
+		this.rootLayout = pane;
 	}
 	
 	public void setManager(SearchHotelManager manager){
 		this.manager = manager;
+	}
+	
+	public void addSupremeSearch(){
+		supremeSearchAccessor = new SupremeSearchAccessorImpl();
+		supremeSearchPane = new SupremeSearchPane();
+		rootLayout.getChildren().add(supremeSearchPane.getPane());
+		AnchorPane.setTopAnchor(supremeSearchPane.getPane(), 100.0);
+		//(infoModify.getPane());
+		supremeSearchPane.getController().setController(this);
+		supremeSearchPane.getController().setAccessor(supremeSearchAccessor);
+	}
+	
+	public void removeSupremeSearch(){
+		rootLayout.getChildren().remove(rootLayout.getChildren().size()-1);
 	}
 	
 }

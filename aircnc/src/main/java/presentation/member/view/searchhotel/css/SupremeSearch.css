@@ -1,7 +1,10 @@
 .root{
-	-fx-background-color: #fff;
 	-fx-font-family:"Pingfang SC","DengXian Light","Microsoft Yahei","Helvetica Neue";
 	-fx-font-size: 15px;
+}
+
+.bg{
+	-fx-background-color: #fff;
 }
 
 .label{

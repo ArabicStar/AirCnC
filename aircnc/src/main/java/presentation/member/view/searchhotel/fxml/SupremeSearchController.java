@@ -9,6 +9,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import presentation.member.accessor.SupremeSearchAccessor;
 
 public class SupremeSearchController implements Initializable{
 	
@@ -22,10 +23,10 @@ public class SupremeSearchController implements Initializable{
 	private ComboBox<Integer> day;
 	
 	@FXML
-	private Label LowPrice;
+	private TextField LowPrice;
 	
 	@FXML 
-	private Label HighPrice;
+	private TextField HighPrice;
 	
 	@FXML 
 	private ComboBox<String> RoomType;
@@ -42,6 +43,9 @@ public class SupremeSearchController implements Initializable{
 	@FXML
 	private ComboBox<Integer> star;
 	
+	private MemberSearchHotelController controller;
+	private SupremeSearchAccessor accessor;
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
@@ -49,11 +53,18 @@ public class SupremeSearchController implements Initializable{
 	}
 	
 	public void close(){
-		
+		controller.removeSupremeSearch();
 	}
 	
 	public void HandleSearch(){
 		
 	}
-
+	
+	public void setController(MemberSearchHotelController controller){
+		this.controller = controller;
+	}
+	
+	public void setAccessor(SupremeSearchAccessor accessor){
+		this.accessor = accessor;
+	}
 }

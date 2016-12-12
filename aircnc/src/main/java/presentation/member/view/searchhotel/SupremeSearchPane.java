@@ -6,22 +6,25 @@ import java.net.URL;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Node;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.Reflection;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import presentation.member.view.searchhotel.fxml.MemberSearchHotelController;
+import javafx.scene.paint.Color;
+import presentation.member.view.searchhotel.fxml.SupremeSearchController;
 
 /**
  * the pane of hotel search
  * @author paranoia
  *
  */
-public class MemberSearchHotelPane {
+public class SupremeSearchPane {
 	
 	private AnchorPane searchLayout;
-	private MemberSearchHotelController controller;
+	private SupremeSearchController controller;
 
 
-	public MemberSearchHotelPane(){
+	public SupremeSearchPane(){
 		init();
 	}
 
@@ -29,23 +32,32 @@ public class MemberSearchHotelPane {
         try {
             // Load sign in overview.
             FXMLLoader loader = new FXMLLoader();
-            URL location = getClass().getResource("fxml/MemberSearchHotel.fxml");
+            URL location = getClass().getResource("fxml/SupremeSearch.fxml");
             loader.setLocation(location);
             loader.setBuilderFactory(new JavaFXBuilderFactory());
-            //javafx.scene.Parent root = (javafx.scene.Parent) loader.load(location.openStream());
             loader.load();
-            controller = (MemberSearchHotelController)loader.getController();
+            controller = (SupremeSearchController)loader.getController();
             searchLayout = loader.getRoot();
+            
+            DropShadow ds = new DropShadow();
+            
+            ds.setOffsetY(5.0);
+            ds.setOffsetX(5.0);
+            ds.setColor(Color.GRAY);
+            
+            searchLayout.setEffect(ds);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public MemberSearchHotelController getController(){
+    public SupremeSearchController getController(){
     	return this.controller;
     }
     
     public Node getPane(){
     	return searchLayout;
     }
+    
 }
