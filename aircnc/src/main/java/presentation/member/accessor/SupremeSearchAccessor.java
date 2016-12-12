@@ -18,7 +18,7 @@ public interface SupremeSearchAccessor {
 	
 	public void setEmpty(boolean empty);
 	
-	public void setGrade(int grade);
+	public void setGrade(double grade);
 	
 	public void setStar(int star);
 }

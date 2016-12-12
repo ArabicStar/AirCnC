@@ -74,7 +74,7 @@
                   </HBox>
                </children>
             </VBox>
-            <Button layoutX="550.0" layoutY="391.0" mnemonicParsing="false" onAction="#HandleSearch" text="搜索" />
+            <Button fx:id="search" layoutX="550.0" layoutY="391.0" mnemonicParsing="false" onAction="#HandleSearch" text="搜索" />
          </children>
       </AnchorPane>
    </children>

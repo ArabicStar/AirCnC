@@ -11,7 +11,7 @@ public class SupremeSearchAccessorImpl implements SupremeSearchAccessor{
 	private int highPrice;
 	private String roomType;
 	private boolean empty;
-	private int grade;
+	private double grade;
 	private int star;
 	
 	@Override
@@ -50,7 +50,7 @@ public class SupremeSearchAccessorImpl implements SupremeSearchAccessor{
 	}
 
 	@Override
-	public void setGrade(int grade) {
+	public void setGrade(double grade) {
 		this.grade = grade;
 	}
 
