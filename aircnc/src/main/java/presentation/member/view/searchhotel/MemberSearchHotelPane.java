@@ -6,18 +6,12 @@ import java.net.URL;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Node;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import presentation.member.view.searchhotel.fxml.MemberSearchHotelController;
 
-/**
- * the pane of hotel search
- * @author paranoia
- *
- */
 public class MemberSearchHotelPane {
 	
-	private AnchorPane searchLayout;
+	private Pane searchLayout;
 	private MemberSearchHotelController controller;
 
 
@@ -36,6 +30,7 @@ public class MemberSearchHotelPane {
             loader.load();
             controller = (MemberSearchHotelController)loader.getController();
             searchLayout = loader.getRoot();
+
         } catch (IOException e) {
             e.printStackTrace();
         }

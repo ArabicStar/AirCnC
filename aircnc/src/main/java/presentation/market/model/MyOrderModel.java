@@ -48,10 +48,10 @@ public class MyOrderModel {
         this.hotelName = new SimpleStringProperty(order.getHotelName());
         this.stayDays = order.getStayDays();
         this.leaveTime = order.getEntryTime().plusDays(stayDays);
-        this.isReviewed = new SimpleBooleanProperty(order.isIsReviewed());
+        this.isReviewed = new SimpleBooleanProperty(order.isReviewed());
         //process the checkinTime
         this.checkinTime = new SimpleStringProperty(transformTime(order.getEntryTime()));
-        this.hasChildren = new SimpleBooleanProperty(order.isHasChildren());
+        this.hasChildren = new SimpleBooleanProperty(order.getHasChildren());
         String state;
         switch(order.getStatus()){
         case ABNORMAL: 
