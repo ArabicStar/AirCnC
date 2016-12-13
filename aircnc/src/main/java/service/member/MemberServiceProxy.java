@@ -1,10 +1,11 @@
 package service.member;
 
-import static utils.exception.StaticExceptionFactory.*;
+import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
+import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
+
 import java.util.List;
 
 import utils.info.member.MemberInfo;
-import utils.info.order.OrderStatus;
 import utils.proxy.AccessSecureProxy;
 import utils.proxy.AuthenticatePolicy;
 import utils.proxy.AuthenticatePolicy.Client;
@@ -13,6 +14,7 @@ import vo.member.MemberVo;
 import vo.member.MemberVoBuilder;
 import vo.member.credit.CreditChangeVo;
 import vo.order.OrderVo;
+import utils.info.order.OrderStatus;
 
 public final class MemberServiceProxy extends AccessSecureProxy
 		implements MemberAccountService, MemberCreditService, MemberInfoService {

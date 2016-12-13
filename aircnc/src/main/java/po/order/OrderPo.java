@@ -54,7 +54,7 @@ public class OrderPo extends OrderInfo {
 		return this;
 	}
 
-	public OrderPo setPrice(double price) {
+	public OrderPo setOriginalPrice(double price) {
 		this.originalPrice = price;
 		return this;
 	}

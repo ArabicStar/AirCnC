@@ -13,7 +13,6 @@ import utils.promotion.Promotion;
  * 
  */
 public class OrderVo extends OrderInfo {
-
 	OrderVo setOrderId(String orderId) {
 		this.orderId = orderId;
 		return this;
@@ -59,8 +58,8 @@ public class OrderVo extends OrderInfo {
 		return this;
 	}
 
-	OrderVo setPrice(double price) {
-		this.originalPrice = price;
+	OrderVo setOriginalPrice(double originalPrice) {
+		this.originalPrice = originalPrice;
 		return this;
 	}
 

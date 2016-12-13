@@ -1,6 +1,10 @@
 package utils.info.member;
 
+import static utils.exception.StaticExceptionFactory.illegalArgEx;
+
 import java.time.LocalDate;
+
+import org.apache.commons.lang.StringUtils;
 
 /**
  * Abstract of builder for MemberInfo, assisting to assure immutable object.
@@ -42,8 +46,13 @@ public abstract class MemberInfoBuilder extends MemberInfoTemplate {
 	 */
 	public MemberInfoBuilder(MemberInfo info) {
 		this(info.getType());
-		this.setId(info.getId()).setName(info.getName()).setContactInfo(info.getContact()).setCredit(info.getCredit())
-				.setEnterprise(info.getEnterprise()).setBirthday(info.getBirthday());
+		if (!info.isValid())
+			throw illegalArgEx("MemberInfo");
+
+		this.setId(info.getId()).setCredit(info.getCredit()).setContactInfo(info.getContact())
+				.setBirthday(info.getBirthday()).setEnterprise(info.getEnterprise());
+		String name = StringUtils.deleteWhitespace(info.getName());
+		this.setName(name);
 	}
 
 	/**

@@ -7,6 +7,17 @@ import java.util.Set;
 import utils.promotion.Promotion;
 
 public abstract class OrderInfoBuilder extends OrderInfoTemplate {
+	public OrderInfoBuilder() {
+	}
+
+	public OrderInfoBuilder(OrderInfo info) {
+		this.setOrderId(orderId).setRoomType(info.getRoomType()).setStayDays(info.getStayDays())
+				.setUserId(info.getUserId()).setStatus(info.getStatus()).setEntryTime(info.getEntryTime())
+				.setLastTime(info.getLastTime()).setPromotions(info.getPromotions())
+				.setPeopleNumber(info.getPeopleNumber()).setOriginalPrice(info.getOriginalPrice())
+				.setDiscountPrice(info.getDiscountPrice()).setHasChildren(info.getHasChildren())
+				.setHotelId(info.getHotelId()).setRoomNumber(info.getRoomNumber()).setReviewed(info.isReviewed());
+	}
 
 	/**
 	 * @param orderId

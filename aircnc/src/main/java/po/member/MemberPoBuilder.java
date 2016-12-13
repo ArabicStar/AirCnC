@@ -43,14 +43,7 @@ public class MemberPoBuilder extends MemberInfoBuilder {
 	}
 
 	public MemberPoBuilder(MemberInfo info) {
-		this(info.getType());
-		if (!info.isValid())
-			throw illegalArgEx("MemberInfo");
-
-		setId(info.getId()).setContactInfo(info.getContact()).setBirthday(info.getBirthday())
-				.setEnterprise(info.getEnterprise());
-		String name = StringUtils.deleteWhitespace(info.getName());
-		setName(name);
+		super(info);
 
 		if (info instanceof MemberPo)
 			setPasswordHash(((MemberPo) info).getPasswordHash());

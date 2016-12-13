@@ -6,19 +6,26 @@ import static utils.exception.StaticExceptionFactory.unsupportedOpEx;
 import java.time.LocalDateTime;
 import java.util.Set;
 
+import utils.info.order.OrderInfo;
 import utils.info.order.OrderInfoBuilder;
 import utils.info.order.OrderStatus;
 import utils.promotion.Promotion;
 
 public class OrderPoBuilder extends OrderInfoBuilder {
+	public OrderPoBuilder() {
+	}
+
+	public OrderPoBuilder(OrderInfo info) {
+		super(info);
+	}
 
 	@Override
 	public OrderPo getOrderInfo() {
 		return new OrderPo().setOrderId(orderId).setEntryTime(entryTime).setHasChildren(hasChildren).setHotelId(hotelId)
-				.setHotelName(hotelName).setLastTime(lastTime).setPeopleNumber(peopleNumber).setPrice(originalPrice)
-				.setIsReviewed(isReviewed).setRoomNumber(roomNumber).setRoomType(roomType).setStatus(status)
-				.setStayDays(stayDays).setUserId(userId).setUserName(userName).setPromotions(promotions)
-				.setDiscountPrice(discountPrice);
+				.setHotelName(hotelName).setLastTime(lastTime).setPeopleNumber(peopleNumber)
+				.setOriginalPrice(originalPrice).setIsReviewed(isReviewed).setRoomNumber(roomNumber)
+				.setRoomType(roomType).setStatus(status).setStayDays(stayDays).setUserId(userId).setUserName(userName)
+				.setPromotions(promotions).setDiscountPrice(discountPrice);
 	}
 
 	@Override
@@ -138,13 +145,13 @@ public class OrderPoBuilder extends OrderInfoBuilder {
 			throw unsupportedOpEx("Couldn't advance the last entry time");
 		}
 
-		if (!from.isIsReviewed() && to.isIsReviewed()) {
+		if (!from.isReviewed() && to.isReviewed()) {
 			throw unsupportedOpEx("Couldn't make the reviewed order unreviewed");
 		}
 
 		to.setStatus(from.getStatus());
 		to.setLastTime(from.getLastTime());
-		to.setIsReviewed(from.isIsReviewed());
+		to.setIsReviewed(from.isReviewed());
 	}
 
 	@Override

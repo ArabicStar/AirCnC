@@ -66,11 +66,11 @@ public abstract class OrderInfo extends OrderInfoTemplate {
 		return originalPrice;
 	}
 
-	public boolean isHasChildren() {
+	public boolean getHasChildren() {
 		return hasChildren;
 	}
 
-	public boolean isIsReviewed() {
+	public boolean isReviewed() {
 		return isReviewed;
 	}
 }

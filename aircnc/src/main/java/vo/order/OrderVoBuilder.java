@@ -3,17 +3,24 @@ package vo.order;
 import java.time.LocalDateTime;
 import java.util.Set;
 
+import utils.info.order.OrderInfo;
 import utils.info.order.OrderInfoBuilder;
 import utils.info.order.OrderStatus;
 import utils.promotion.Promotion;
 
 public class OrderVoBuilder extends OrderInfoBuilder {
+	public OrderVoBuilder() {
+	}
+
+	public OrderVoBuilder(OrderInfo info) {
+		super(info);
+	}
 
 	@Override
 	public OrderVo getOrderInfo() {
 		return new OrderVo().setEntryTime(entryTime).setHasChildren(hasChildren).setLastTime(lastTime)
 				.setOrderId(orderId).setPeopleNumber(peopleNumber).setRoomType(roomType).setStatus(status)
-				.setStayDays(stayDays).setUserId(userId).setPrice(originalPrice).setHotelId(hotelId)
+				.setStayDays(stayDays).setUserId(userId).setOriginalPrice(originalPrice).setHotelId(hotelId)
 				.setHotelName(hotelName).setRoomNumber(roomNumber).setIsReviewed(isReviewed).setUserName(userName)
 				.setPromotions(promotions).setDiscountPrice(discountPrice);
 	}
