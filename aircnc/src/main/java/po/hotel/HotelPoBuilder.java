@@ -39,9 +39,10 @@ public class HotelPoBuilder extends HotelInfoBuilder {
 
 	@Override
 	public HotelPoBuilder setName(String name) {
-		if (checkHotelName(name))
+		if (checkHotelName(name)){
 			// insert blank space to avoid injection attack
 			this.name = name.replaceAll("(.{1})", "$1 ");
+		}
 		else
 			throw new IllegalArgumentException("Wrong hotel name");
 

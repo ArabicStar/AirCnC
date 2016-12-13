@@ -11,7 +11,8 @@
 }
 
 .info-content{
-	-fx-font-size: 20 px;
+	-fx-font-size: 24 px;
+	-fx-text-fill: #000000;
 }
 
 .price{

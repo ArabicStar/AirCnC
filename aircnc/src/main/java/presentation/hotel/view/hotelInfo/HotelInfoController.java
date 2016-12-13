@@ -22,11 +22,10 @@ public class HotelInfoController {
 	
 	public void addHotelInfoOnePane() {
 		clearContent();
-		if(onePane==null){
-			onePane = new HotelInfoOnePane();
-		}
+		onePane = new HotelInfoOnePane();
 		infoMainPane.getBorderPane().setCenter(onePane.getPane());
 		onePane.getController().setInfoMainController(this);	
+		onePane.getController().setManager(infoMainPane.getController().getManager());
 	}
 	
 	public void addHotelInfoTwoPane() {

@@ -1,12 +1,10 @@
 package presentation.hotel;
 
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import presentation.hotel.model.OrderModel;
+import presentation.hotel.manager.InfoManager;
 import presentation.hotel.view.HotelMainPane;
 import presentation.hotel.view.abnormalOrder.AbnormalOrderPane;
 import presentation.hotel.view.checkInLive.CheckInLivePane;
@@ -16,8 +14,6 @@ import presentation.hotel.view.hotelInfo.HotelInfoMainPane;
 import presentation.hotel.view.hotelInfo.HotelInfoModifyPane;
 import presentation.hotel.view.orderBrowse.OrderBrowsePane;
 import presentation.hotel.view.orderExecute.OrderExecutePane;
-import service.impl.hotel.HotelInfoManager;
-import vo.hotel.HotelVo;
 
 
 public class HotelCenterController extends Application{
@@ -34,7 +30,9 @@ public class HotelCenterController extends Application{
 	private OrderBrowsePane browsePane;
 	private AbnormalOrderPane abnormalPane;
 	
-	private HotelInfoManager hotelInfoManager;
+	private InfoManager hotelInfoManager;
+	
+	private HotelTest test;
 	
 	
 	private final static int Client_Width = 1024;
@@ -58,6 +56,7 @@ public class HotelCenterController extends Application{
 
 		// addSignInPane();
 
+		test = new HotelTest();
 		primaryStage.show();
 		
 	}
@@ -107,11 +106,12 @@ public class HotelCenterController extends Application{
 	}
 	
 	public void addHotelInfoMainPane() {
-//		hotelInfoMange = 
+		hotelInfoManager = test.getHotelData();
 		clearContent();
 		infoMainPane = new HotelInfoMainPane();
 		mainClient.getBorderPane().setCenter(infoMainPane.getBorderPane());
 		infoMainPane.getController().setCenterController(this);	
+		infoMainPane.getController().setManager(hotelInfoManager);
 		HotelInfoController infoController = new HotelInfoController(infoMainPane,this);
 	}
 	

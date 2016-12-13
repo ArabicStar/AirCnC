@@ -51,7 +51,7 @@ public abstract class HotelInfoBuilder extends HotelInfoTemplate {
 	
 	public HotelInfoBuilder setEquipment(String equipment) {
 		if (equipment != null)
-			this.location = equipment;
+			this.equipment = equipment;
 		return this;
 	}
 

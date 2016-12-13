@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
@@ -8,18 +9,18 @@
    <children>
       <VBox layoutX="49.0" layoutY="27.0" prefHeight="461.0" prefWidth="687.0">
          <children>
-            <HBox prefHeight="100.0" prefWidth="200.0" spacing="80.0">
+            <HBox prefHeight="100.0" spacing="80.0">
                <children>
-                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="40.0">
+                  <HBox spacing="40.0">
                      <children>
                         <Label styleClass="info-index" text="所属商圈" />
-                        <Label fx:id="scope" styleClass="info-content" text="Label" />
+                        <Label fx:id="scope" styleClass="info-content" />
                      </children>
                   </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="40.0">
+                  <HBox spacing="40.0">
                      <children>
                         <Label styleClass="info-index" text="地址" />
-                        <Label fx:id="location" styleClass="info-content" text="Label" />
+                        <Label fx:id="location" styleClass="info-content" />
                      </children>
                   </HBox>
                </children>
@@ -27,7 +28,7 @@
             <HBox prefHeight="36.0" prefWidth="687.0" spacing="40.0">
                <children>
                   <Label styleClass="info-index" text="星级" />
-                  <Label fx:id="star" styleClass="info-content" text="Label" />
+                  <Label fx:id="star" styleClass="info-content" />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="40.0">
@@ -36,7 +37,7 @@
                   <Label fx:id="introduction" styleClass="info-content" text="Label" />
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" spacing="40.0">
+            <HBox prefHeight="200.0" prefWidth="200.0" spacing="40.0">
                <children>
                   <Label styleClass="info-index" text="拥有房型" />
                   <Label fx:id="roomType" styleClass="info-content" text="类型" />
@@ -46,7 +47,10 @@
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="40.0">
                <children>
                   <Label styleClass="info-index" text="设施" />
-                  <FlowPane fx:id="equipment" hgap="20.0" prefHeight="100.0" prefWidth="414.0" vgap="10.0" />
+                  <FlowPane fx:id="equipment" hgap="20.0" prefHeight="100.0" prefWidth="414.0" vgap="10.0">
+                     <HBox.margin>
+                        <Insets top="20.0" />
+                     </HBox.margin></FlowPane>
                </children>
             </HBox>
          </children>

@@ -46,6 +46,10 @@ public class HotelInfoMainController implements Initializable{
 		this.controller=controller;
 	}
 	
+	public InfoManager getManager(){
+		return manager;
+	}
+	
 	/**
 	 * set the hotel info manager
 	 * aiming to fetch the hotel info model
@@ -59,7 +63,7 @@ public class HotelInfoMainController implements Initializable{
 		model = manager.getHotelInfo();
 		id.setText(model.getId());
 		name.setText(model.getName());
-		hotelImage.setImage(new Image("../../../../../resources/images/hotel/star/hotel-"+model.getStar()));
+		hotelImage.setImage(new Image(this.getClass().getResource("")+"../images/hotel-"+model.getStar()+".png"));
 		
 	}
 	
