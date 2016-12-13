@@ -1,23 +1,26 @@
 package utils.promotion;
 
 import utils.info.order.OrderInfo;
+import vo.order.OrderVoBuilder;
 
 public class PercentApplier extends Applier {
 
-	public PercentApplier() {
+	private double discount;
+
+	public PercentApplier(double discount) {
 		super(How.PERCENT);
+		this.discount = discount;
 	}
 
 	@Override
-	public OrderInfo applyTo(OrderInfo Info) {
-		// TODO 自动生成的方法存根
-		return null;
+	public OrderInfo applyTo(OrderInfo info) {
+		double discountPrice = info.getDiscountPrice() - (1.0 - discount) * info.getOriginalPrice();
+		return new OrderVoBuilder(info).setDiscountPrice(discountPrice).getOrderInfo();
 	}
 
 	@Override
 	public String how() {
-		// TODO 自动生成的方法存根
-		return null;
+		return String.format(how.getFormatString(), discount * 100.0);
 	}
 
 }
