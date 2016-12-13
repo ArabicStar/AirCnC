@@ -8,9 +8,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import presentation.member.CenterController;
 import presentation.member.ClientCenterController;
 import presentation.member.manager.UserInfoManager;
+import presentation.member.manager.impl.MemberInfoManagerImpl;
 import presentation.member.model.MemberInfoModel;
 
 public class MemberInfoMainController implements Initializable{
@@ -57,7 +57,8 @@ public class MemberInfoMainController implements Initializable{
 			  @Override public void run() {
 				  initMemberInfo();
 			  }
-		});		
+		});
+		manager = MemberInfoManagerImpl.getInstance();
 	}
 	
 	@FXML
@@ -72,15 +73,6 @@ public class MemberInfoMainController implements Initializable{
 	public void setCenterController(ClientCenterController centerController) {
 		// TODO Auto-generated method stub
 		this.controller=centerController;
-	}
-	
-	/**
-	 * set the member info manager
-	 * aiming to fetch the member info model
-	 * @param manager
-	 */
-	public void setManager(UserInfoManager manager){
-		this.manager = manager;
 	}
 	
 	private void initMemberInfo(){

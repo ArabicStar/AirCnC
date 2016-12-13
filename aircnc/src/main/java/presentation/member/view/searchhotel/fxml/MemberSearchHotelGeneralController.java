@@ -2,11 +2,9 @@ package presentation.member.view.searchhotel.fxml;
 
 
 import java.net.URL;
-import java.util.Iterator;
 import java.util.ResourceBundle;
 
 import javafx.application.Platform;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -76,6 +74,7 @@ public class MemberSearchHotelGeneralController implements Initializable{
 	}
 	
 	public void initHotelInfo(){
+		
 		hotelName.setText(model.getHotelName());
 		grade.setText(String.valueOf(model.getHotelGrade()));
 		scope.setText(model.getHotelScope());

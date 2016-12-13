@@ -1,8 +1,13 @@
 package presentation.member.accessor.impl;
 
+import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
+import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
+
 import presentation.member.accessor.SearchHotelInfoAccessor;
 
 public class SearchHotelInfoAccessorImpl implements SearchHotelInfoAccessor{
+	
+	private static SearchHotelInfoAccessor instance;
 	
 	private String scope;
 	private String name;
@@ -16,6 +21,19 @@ public class SearchHotelInfoAccessorImpl implements SearchHotelInfoAccessor{
 	private double grade;
 	private int star;
 	
+	public static final SearchHotelInfoAccessor launch() {
+		if (instance != null)
+			throw duplicateSingletonEx();
+
+		return instance = new SearchHotelInfoAccessorImpl();
+	}
+	
+	public static final SearchHotelInfoAccessor getInstance(){
+		if (instance == null)
+			throw singletonNotExistsEx();
+
+		return instance;
+	}
 
 	@Override
 	public void setScope(String scope) {

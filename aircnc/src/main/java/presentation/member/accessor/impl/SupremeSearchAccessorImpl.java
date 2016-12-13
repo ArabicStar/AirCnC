@@ -1,8 +1,13 @@
 package presentation.member.accessor.impl;
 
+import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
+import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
+
 import presentation.member.accessor.SupremeSearchAccessor;
 
 public class SupremeSearchAccessorImpl implements SupremeSearchAccessor{
+	
+	private static SupremeSearchAccessor instance;
 	
 	private int year;
 	private int month;
@@ -13,6 +18,20 @@ public class SupremeSearchAccessorImpl implements SupremeSearchAccessor{
 	private boolean empty;
 	private double grade;
 	private int star;
+	
+	public static final SupremeSearchAccessor launch() {
+		if (instance != null)
+			throw duplicateSingletonEx();
+
+		return instance = new SupremeSearchAccessorImpl();
+	}
+	
+	public static final SupremeSearchAccessor getInstance(){
+		if (instance == null)
+			throw singletonNotExistsEx();
+
+		return instance;
+	}
 	
 	@Override
 	public void setYear(int year) {

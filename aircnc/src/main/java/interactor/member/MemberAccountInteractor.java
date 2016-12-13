@@ -22,7 +22,7 @@ import presentation.member.manager.UserInfoManager;
 public interface MemberAccountInteractor {
 	public void register(final RegisterAccessor acs, UserInfoManager man);
 
-	public void login(final MemberLoginAccessor acs, UserInfoManager man);
+	public void login();
 
 	public void logout();
 

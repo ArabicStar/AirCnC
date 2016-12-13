@@ -1,7 +1,9 @@
 package presentation.member.accessor.impl;
 
+import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
+import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
+
 import presentation.member.accessor.InfoModifyAccessor;
-import presentation.member.model.MemberInfoModel;
 import vo.member.ContactVoBuilder;
 import vo.member.MemberVo;
 import vo.member.MemberVoBuilder;
@@ -11,7 +13,9 @@ import vo.member.MemberVoBuilder;
  * @author paranoia
  *
  */
-public class InfoModifyAccessorImpl implements InfoModifyAccessor{
+public final class InfoModifyAccessorImpl implements InfoModifyAccessor{
+	
+	private static InfoModifyAccessor instance;
 	
 	private String username;
 	
@@ -23,9 +27,21 @@ public class InfoModifyAccessorImpl implements InfoModifyAccessor{
 	
 	private int passwordHash;
 	
-	private MemberInfoModel model;
-	
 	private MemberVo vo;
+	
+	public static final InfoModifyAccessor launch() {
+		if (instance != null)
+			throw duplicateSingletonEx();
+
+		return instance = new InfoModifyAccessorImpl();
+	}
+	
+	public static final InfoModifyAccessor getInstance(){
+		if (instance == null)
+			throw singletonNotExistsEx();
+
+		return instance;
+	}
 
 	@Override
 	public MemberVo getModifiedMemberVo() {
@@ -34,11 +50,6 @@ public class InfoModifyAccessorImpl implements InfoModifyAccessor{
 						.setFixedPhone(tele).getContactInfo());
 		vo = builder.getMemberInfo();
 		return vo;
-	}
-	
-	@Override
-	public void setMemberModel(MemberInfoModel model){
-		this.model = model;
 	}
 	
 	@Override

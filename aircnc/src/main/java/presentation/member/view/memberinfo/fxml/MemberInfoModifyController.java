@@ -12,7 +12,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import presentation.member.ClientCenterController;
 import presentation.member.accessor.InfoModifyAccessor;
+import presentation.member.accessor.impl.InfoModifyAccessorImpl;
 import presentation.member.manager.UserInfoManager;
+import presentation.member.manager.impl.MemberInfoManagerImpl;
 import presentation.member.model.MemberInfoModel;
 import presentation.member.utils.ModifyPasswordDialog;
 import presentation.member.utils.PlainDialog;
@@ -64,6 +66,9 @@ public class MemberInfoModifyController implements Initializable{
 			  }
 		});	
 		
+		accessor = InfoModifyAccessorImpl.getInstance();
+		manager = MemberInfoManagerImpl.getInstance();
+		
 	}
 	
 	@FXML
@@ -105,22 +110,6 @@ public class MemberInfoModifyController implements Initializable{
 	 */
 	public void setCenterController(ClientCenterController controller){
 		this.controller=controller;
-	}
-	
-	/**
-	 * set the accessor
-	 * @param controller
-	 */
-	public void setAccessor(InfoModifyAccessor accessor){
-		this.accessor = accessor;
-	}
-	
-	/**
-	 * set the controller
-	 * @param controller
-	 */
-	public void setManager(UserInfoManager manager){
-		this.manager = manager;
 	}
 	
 }

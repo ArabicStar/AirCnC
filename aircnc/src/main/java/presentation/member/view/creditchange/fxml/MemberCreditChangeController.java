@@ -14,9 +14,9 @@ import javafx.scene.control.TableView;
 import javafx.util.Callback;
 import presentation.member.ClientCenterController;
 import presentation.member.manager.CreditChangeManager;
+import presentation.member.manager.impl.CreditChangeManagerImpl;
 import presentation.member.model.CreditModel;
 import presentation.member.utils.CreditChangeCell;
-import vo.member.credit.CreditChangeVo;
 
 /**
  * the controller of 
@@ -52,10 +52,6 @@ public class MemberCreditChangeController implements Initializable{
 	public void setCenterController(ClientCenterController controller){
 		this.controller=controller;
 	}
-	
-	public void setManager(CreditChangeManager manager){
-		this.manager = manager;
-	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources){
@@ -65,6 +61,9 @@ public class MemberCreditChangeController implements Initializable{
 				  creditTable.setFocusTraversable(false);
 			  }
 			});
+		
+		manager = CreditChangeManagerImpl.getInstance();
+		
 		init();
 	}
 	

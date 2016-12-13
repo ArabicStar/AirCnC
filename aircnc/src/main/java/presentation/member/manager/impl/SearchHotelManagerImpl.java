@@ -1,5 +1,8 @@
 package presentation.member.manager.impl;
 
+import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
+import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -18,7 +21,23 @@ import vo.hotel.HotelVo;
  */
 public class SearchHotelManagerImpl implements SearchHotelManager{
 	
+	private static SearchHotelManager instance;
+	
 	private List<HotelVo> hotels;
+	
+	public static final SearchHotelManager launch() {
+		if (instance != null)
+			throw duplicateSingletonEx();
+
+		return instance = new SearchHotelManagerImpl();
+	}
+	
+	public static final SearchHotelManager getInstance(){
+		if (instance == null)
+			throw singletonNotExistsEx();
+
+		return instance;
+	}
 	
 	private ObservableList<SearchHotelsModel> searchHotelsData;
 	@Override

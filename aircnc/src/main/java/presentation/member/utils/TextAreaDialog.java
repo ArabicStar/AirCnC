@@ -14,13 +14,15 @@ import javafx.stage.StageStyle;
 
 public class TextAreaDialog extends GridPane {
 	
-	Dialog<String> dialog;
+	private Dialog<String> dialog;
+	private TextArea textContent;
 	
 	public TextAreaDialog(String content) {
 		// Create the custom dialog.
 		dialog = new Dialog<String>();
 		dialog.initStyle(StageStyle.UNDECORATED);
 		dialog.setHeaderText(content);
+		textContent = new TextArea();
 
 		// Set the icon (must be included in the project).
 		//dialog.setGraphic(new ImageView(this.getClass().getResource("login.png").toString()));
@@ -34,41 +36,35 @@ public class TextAreaDialog extends GridPane {
 		grid.setHgap(10);
 		grid.setVgap(10);
 		grid.setPadding(new Insets(20, 150, 10, 10));
-
-		TextArea username = new TextArea();
 		
-		grid.add(username, 8, 5);
+		textContent.setPrefColumnCount(20);
+		textContent.setPrefRowCount(5);
+		
+		grid.add(textContent,1,1);
 
 		// Enable/Disable login button depending on whether a username was entered.
 		Node loginButton = dialog.getDialogPane().lookupButton(loginButtonType);
 		loginButton.setDisable(true);
 
 		// Do some validation (using the Java 8 lambda syntax).
-		username.textProperty().addListener((observable, oldValue, newValue) -> {
+		textContent.textProperty().addListener((observable, oldValue, newValue) -> {
 		    loginButton.setDisable(newValue.trim().isEmpty());
 		});
 
 		dialog.getDialogPane().setContent(grid);
 
-		// Request focus on the username field by default.
-		Platform.runLater(() -> username.requestFocus());
+		Platform.runLater(() -> textContent.requestFocus());
 
 		// Convert the result to a username-password-pair when the login button is clicked.
 		dialog.setResultConverter(dialogButton -> {
 		    if (dialogButton == loginButtonType) {
-		        return new String(username.getText());
+		        return new String(textContent.getText());
 		    }
 		    return null;
 		});
-
-		Optional<String> result = dialog.showAndWait();
-
-		result.ifPresent(usernamePassword -> {
-		    System.out.println("Username=" + usernamePassword.toString());
-		});
 	}
 	
-	public void showDialog(){
-		dialog.showAndWait();
+	public Optional<String> showDialog(){
+		return dialog.showAndWait();
 	}
 }

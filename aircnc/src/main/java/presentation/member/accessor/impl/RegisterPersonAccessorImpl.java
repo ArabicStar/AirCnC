@@ -1,28 +1,46 @@
 package presentation.member.accessor.impl;
 
+import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
+import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
+
 import java.time.LocalDate;
 
 import presentation.member.accessor.RegisterPersonAccessor;
 import vo.member.ContactVoBuilder;
-import vo.member.MemberVo;
 import vo.member.MemberVoBuilder;
 
 /**
- * 这个类还没写密码的传输
  * 
+ * the accessor of register info
  * @author paranoia
  *
  */
 public class RegisterPersonAccessorImpl implements RegisterPersonAccessor {
-
+	
+	private static RegisterPersonAccessor instance;
+	
 	private String username;
 
 	private int passwordHash;
 
-	private MemberVoBuilder builder;;
+	private MemberVoBuilder builder;
 
 	private LocalDate birthday;
 
+	public static final RegisterPersonAccessor launch() {
+		if (instance != null)
+			throw duplicateSingletonEx();
+
+		return instance = new RegisterPersonAccessorImpl();
+	}
+	
+	public static final RegisterPersonAccessor getInstance(){
+		if (instance == null)
+			throw singletonNotExistsEx();
+
+		return instance;
+	}
+	
 	@Override
 	public void setUsername(String name) {
 		this.username = name;

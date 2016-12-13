@@ -60,10 +60,6 @@ public class MemberSearchHotelController implements Initializable{
 		this.rootLayout = pane;
 	}
 	
-	public void setManager(SearchHotelManager manager){
-		this.manager = manager;
-	}
-	
 	public void addSupremeSearch(){
 		supremeSearchAccessor = new SupremeSearchAccessorImpl();
 		supremeSearchPane = new SupremeSearchPane();

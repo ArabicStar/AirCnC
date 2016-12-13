@@ -3,14 +3,10 @@ package presentation.member.view.memberinfo.fxml;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 import presentation.member.ClientCenterController;
-import javafx.scene.input.MouseEvent; 
 
 /**
  * the controller of member main pane.

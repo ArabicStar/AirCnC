@@ -1,5 +1,8 @@
 package presentation.member.manager.impl;
 
+import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
+import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -18,7 +21,23 @@ import vo.member.credit.CreditChangeVo;
  */
 public class CreditChangeManagerImpl implements CreditChangeManager{
 	
+	private static CreditChangeManager instance;
+	
 	private List<CreditChangeVo> changes;
+	
+	public static final CreditChangeManager launch() {
+		if (instance != null)
+			throw duplicateSingletonEx();
+
+		return instance = new CreditChangeManagerImpl();
+	}
+	
+	public static final CreditChangeManager getInstance(){
+		if (instance == null)
+			throw singletonNotExistsEx();
+
+		return instance;
+	}
 	
 	private ObservableList<CreditModel> creditChangesData;
 	@Override

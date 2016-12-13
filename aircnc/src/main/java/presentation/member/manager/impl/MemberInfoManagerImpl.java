@@ -1,5 +1,8 @@
 package presentation.member.manager.impl;
 
+import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
+import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
+
 import presentation.member.manager.UserInfoManager;
 import presentation.member.model.MemberInfoModel;
 import utils.info.member.MemberInfo;
@@ -12,10 +15,26 @@ import utils.info.member.MemberInfo;
  *
  */
 public class MemberInfoManagerImpl implements UserInfoManager {
-
+	
+	private static UserInfoManager instance;
+	
 	private MemberInfo user;
 	private MemberInfoModel memberInfo;
 
+	public static final UserInfoManager launch() {
+		if (instance != null)
+			throw duplicateSingletonEx();
+
+		return instance = new MemberInfoManagerImpl();
+	}
+	
+	public static final UserInfoManager getInstance(){
+		if (instance == null)
+			throw singletonNotExistsEx();
+
+		return instance;
+	}
+	
 	@Override
 	public boolean setUser(MemberInfo vo) {
 		if (vo != null) {

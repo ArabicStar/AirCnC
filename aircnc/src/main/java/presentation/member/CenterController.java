@@ -37,10 +37,6 @@ public class CenterController extends Application {
 	private MemberRegisterPersonPane registerPerson;
 	private MemberRegisterEnterprisePane registerBusiness;
 	
-	private MemberLoginAccessor loginAccessor;
-	private RegisterPersonAccessor registerPersonAccessor;
-	private RegisterEnterpriseAccessor registerEnterpriseAccessor;
-	
 	private Scene scene;
 
 	private final static int Login_Width = 550;
@@ -77,30 +73,26 @@ public class CenterController extends Application {
 	 * add the pane of sign in (MemberSignInPane)
 	 */
 	public void addSignInPane() {
+		MemberLoginAccessorImpl.launch();
 		URL location = getClass().getResource("/images/member/register/login_BG.png");
 		start.getBorderPane().setStyle("-fx-background-image: url("+location+");");
-		loginAccessor = new MemberLoginAccessorImpl();
 		start.getBorderPane().getChildren().clear();
 		signIn = new MemberSignInPane();
 		start.getBorderPane().setCenter(signIn.getPane());
 		signIn.getController().setCenterController(this);
-		signIn.getController().setAccessor(loginAccessor);
 	}
 
 	/**
 	 * add the pane of register (MemberRegisterMainPane)
 	 */
 	public void addRegisterPane() {
+		RegisterPersonAccessorImpl.launch();
+		RegisterEnterpriseAccessorImpl.launch();
 		URL location = getClass().getResource("../../images/member/register/register_BG.png");
 		start.getBorderPane().setStyle("-fx-background-image: url("+location+");");
-		registerPersonAccessor = new RegisterPersonAccessorImpl();
-		registerEnterpriseAccessor = new RegisterEnterpriseAccessorImpl();
 		start.getBorderPane().getChildren().clear();
 		registerMain = new MemberRegisterMainPane();
 		registerMain.getController().setCenterController(this);
-		start.getBorderPane().setCenter(registerMain.getPane());
-		registerMain.getController().setPersonAccessor(registerPersonAccessor);
-		registerMain.getController().setEnterPriseAccessor(registerEnterpriseAccessor);
 	}
 
 	/**
@@ -111,7 +103,6 @@ public class CenterController extends Application {
 		registerPerson = new MemberRegisterPersonPane();
 		registerPerson.getController().setCenterController(this);
 		start.getBorderPane().setCenter(registerPerson.getPane());
-		registerPerson.getController().setAccessor(registerPersonAccessor);
 	}
 
 	/**
@@ -122,7 +113,6 @@ public class CenterController extends Application {
 		registerBusiness = new MemberRegisterEnterprisePane();
 		registerBusiness.getController().setCenterController(this);
 		start.getBorderPane().setCenter(registerBusiness.getPane());
-		registerBusiness.getController().setAccessor(registerEnterpriseAccessor);
 	}
 
 	/**

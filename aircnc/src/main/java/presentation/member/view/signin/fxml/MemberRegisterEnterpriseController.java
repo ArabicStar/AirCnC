@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import presentation.member.CenterController;
 import presentation.member.accessor.RegisterEnterpriseAccessor;
+import presentation.member.accessor.impl.RegisterEnterpriseAccessorImpl;
 
 /**
  * the controller of business register pane.
@@ -44,6 +45,7 @@ public class MemberRegisterEnterpriseController implements Initializable {
 				confirm.setDisable(newValue.trim().isEmpty());
 			});
 		});
+		accessor = RegisterEnterpriseAccessorImpl.getInstance();
 	}
 
 	/**
@@ -63,14 +65,5 @@ public class MemberRegisterEnterpriseController implements Initializable {
 	 */
 	public void setCenterController(CenterController centerController) {
 		this.controller = centerController;
-	}
-
-	/**
-	 * set the accessor
-	 * 
-	 * @param accessor
-	 */
-	public void setAccessor(RegisterEnterpriseAccessor accessor) {
-		this.accessor = accessor;
 	}
 }

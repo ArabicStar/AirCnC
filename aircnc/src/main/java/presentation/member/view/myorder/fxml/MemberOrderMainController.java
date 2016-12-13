@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -12,9 +13,11 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.util.Callback;
 import presentation.member.ClientCenterController;
 import presentation.member.manager.MyOrderManager;
+import presentation.member.manager.impl.MyOrderManagerImpl;
 import presentation.member.model.MyorderModel;
 import presentation.member.utils.FunctionButtons;
 import utils.info.order.OrderStatus;
@@ -69,18 +72,12 @@ public class MemberOrderMainController implements Initializable{
 	public void setCenterController(ClientCenterController controller){
 		this.controller=controller;
 	}
-	
-	/**
-	 * set the manager
-	 * @param manager
-	 */
-	public void setManager(MyOrderManager manager){
-		this.manager=manager;
-	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		orderTable.setEditable(false);
+		
+		manager = MyOrderManagerImpl.getInstance();
 	}
 
 	/**
@@ -116,6 +113,39 @@ public class MemberOrderMainController implements Initializable{
             }       
         });
 	}
+	
+	/**
+	 * when user deliver a comment or an appeal,
+	 * update the ObservableList
+	 * @param isSelectCol
+	 */
+//	private void updateObservableListProperties(TableColumn<MyorderModel,OrderStatus> operation, TableColumn<MyorderModel,String> state){
+//
+//		operation.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<MyorderModel,OrderSatatus>>() {
+//
+//			@Override
+//			public void handle(CellEditEvent<MyorderModel,OrderSatatus> event) {
+//				String newState;
+//				switch(event.getNewValue()){
+//		        case ABNORMAL: 
+//		        	newState = "异常";  break;
+//		        case EXECUTED: 
+//		        	newState = "已执行";  break;
+//		        case UNEXECUTED: 
+//		        	newState = "未执行";  break;
+//		        case REPEALED: 
+//		        	newState = "撤销";  break;
+//		        case REVIEWED: 
+//		        	newState = "已评价";  break;
+//		        case APPEALING: 
+//		        	newState = "申诉中";  break;
+//		        default: 
+//		        	newState = "";  break;
+//		        }
+//				event.getTableView().getItems().get(event.getTablePosition().getRow()).setAmount(event.getNewValue());
+//			}
+//		});
+//	}   
 	
 	
 	

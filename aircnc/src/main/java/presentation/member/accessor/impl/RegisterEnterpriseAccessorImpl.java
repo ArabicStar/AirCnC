@@ -1,11 +1,16 @@
 package presentation.member.accessor.impl;
 
+import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
+import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
+
 import presentation.member.accessor.RegisterEnterpriseAccessor;
 import vo.member.ContactVoBuilder;
 import vo.member.MemberVoBuilder;
 
 public class RegisterEnterpriseAccessorImpl implements RegisterEnterpriseAccessor {
-
+	
+	private static RegisterEnterpriseAccessor instance;
+	
 	private String username;
 
 	private int passwordHash;
@@ -13,7 +18,21 @@ public class RegisterEnterpriseAccessorImpl implements RegisterEnterpriseAccesso
 	private String enterprise;
 
 	private MemberVoBuilder builder;
+	
+	public static final RegisterEnterpriseAccessor launch() {
+		if (instance != null)
+			throw duplicateSingletonEx();
 
+		return instance = new RegisterEnterpriseAccessorImpl();
+	}
+	
+	public static final RegisterEnterpriseAccessor getInstance(){
+		if (instance == null)
+			throw singletonNotExistsEx();
+
+		return instance;
+	}
+	
 	@Override
 	public void setUsername(String name) {
 		this.username = name;

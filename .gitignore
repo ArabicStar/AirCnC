@@ -1,8 +1,10 @@
 /aircnc/target/
 /aircnc-server/target/
 /aircnc-user-client/target/
+/aircnc-hotel-client/target/
 .classpath
 .project
 .settings
 *.prefs
 *.jar
+.class

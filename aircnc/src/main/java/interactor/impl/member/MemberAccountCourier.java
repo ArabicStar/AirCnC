@@ -11,7 +11,9 @@ import interactor.member.MemberAccountInteractor;
 import interactor.utils.Title;
 import presentation.member.accessor.MemberLoginAccessor;
 import presentation.member.accessor.RegisterAccessor;
+import presentation.member.accessor.impl.MemberLoginAccessorImpl;
 import presentation.member.manager.UserInfoManager;
+import presentation.member.manager.impl.MemberInfoManagerImpl;
 import service.member.MemberAccountService;
 import utils.info.member.MemberInfo;
 
@@ -56,10 +58,11 @@ public final class MemberAccountCourier implements MemberAccountInteractor {
 
 	@Override
 	@Title("Login")
-	public void login(MemberLoginAccessor acs, UserInfoManager man) {
+	public void login() {
 		String title = getTitle();
 		MemberInfo info = execute(title, () -> {
-			MemberInfo tmp = handler.login(acs.getId(), acs.getPasswordHash());
+			MemberInfo tmp = handler.login(MemberLoginAccessorImpl.getInstance().getId()
+					, MemberLoginAccessorImpl.getInstance().getPasswordHash());
 
 			if (tmp == null)
 				alertFail(title, "Wrong or not exist id");
@@ -70,7 +73,7 @@ public final class MemberAccountCourier implements MemberAccountInteractor {
 			return tmp;
 		});
 
-		man.setUser(info);
+		MemberInfoManagerImpl.getInstance().setUser(info);
 	}
 
 	@Override

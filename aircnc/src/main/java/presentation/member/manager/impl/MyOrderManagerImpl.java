@@ -1,5 +1,8 @@
 package presentation.member.manager.impl;
 
+import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
+import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -18,9 +21,25 @@ import vo.order.OrderVo;
  */
 public class MyOrderManagerImpl implements MyOrderManager{
 	
+	private static MyOrderManager instance;
+	
 	private List<OrderVo> orders;
 	
 	private ObservableList<MyorderModel> orderData;
+	
+	public static final MyOrderManager launch() {
+		if (instance != null)
+			throw duplicateSingletonEx();
+
+		return instance = new MyOrderManagerImpl();
+	}
+	
+	public static final MyOrderManager getInstance(){
+		if (instance == null)
+			throw singletonNotExistsEx();
+
+		return instance;
+	}
 	
 	@Override
 	public boolean setOrderList(List<OrderVo> list) {

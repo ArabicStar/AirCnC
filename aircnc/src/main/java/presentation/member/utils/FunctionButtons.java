@@ -1,6 +1,8 @@
 package presentation.member.utils;
 
 
+import java.util.Optional;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert.AlertType;
@@ -50,10 +52,10 @@ public class FunctionButtons extends TableCell<MyorderModel, OrderStatus>{
     		cellButton = new Button[]{ 
     				createButtons(FunctionButtonType.CHECK) 
     				}; 
-    		break;    		
+    		break;
     	default:
     		cellButton = new Button[]{ 
-    				createButtons(null)
+    				createButtons(FunctionButtonType.CHECK)
     				};     		
     	}
     	
@@ -97,13 +99,17 @@ public class FunctionButtons extends TableCell<MyorderModel, OrderStatus>{
              public void handle(ActionEvent t) {
             	 switch(type){
             	 case CHECK: 
-            		 TextAreaDialog alert = new TextAreaDialog("让我等会写一下这个东西，不对，让万总写一下");
-         			alert.showDialog();
+            		 PlainDialog alert1 = new PlainDialog(AlertType.INFORMATION,
+                   			"订单评价","等万总写出来。。");
+            		 alert1.showDialog();
             		 break;
             	 case REVIEW: 
-             		PlainDialog alert2 = new PlainDialog(AlertType.INFORMATION,
-          			"订单评价","等我写出来。。");
-          			alert2.showDialog();
+             		TextAreaDialog alert2 = new TextAreaDialog("订单评价");
+             		Optional<String> result = alert2.showDialog();
+             		result.ifPresent(usernamePassword -> {
+            		    System.out.println("他写下的评价是：" + usernamePassword.toString());
+            		    
+            		});
              		 break;
             	 case CANCEL: 
               		PlainDialog alert3 = new PlainDialog(AlertType.INFORMATION,
@@ -111,10 +117,12 @@ public class FunctionButtons extends TableCell<MyorderModel, OrderStatus>{
            			alert3.showDialog();
               		 break;
             	 case APPEAL: 
-              		PlainDialog alert4 = new PlainDialog(AlertType.INFORMATION,
-           			"订单申诉","等我写出来。。");
-           			alert4.showDialog();
-              		 break;
+            		TextAreaDialog alert4 = new TextAreaDialog("申诉该订单");
+           			Optional<String> result2 = alert4.showDialog();
+             		result2.ifPresent(usernamePassword -> {
+            		    System.out.println("他写下的评价是：" + usernamePassword.toString());
+            		});
+           			break;
             	 }
              }
          });

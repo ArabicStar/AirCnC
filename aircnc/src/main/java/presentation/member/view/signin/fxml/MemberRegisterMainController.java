@@ -4,11 +4,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -18,6 +15,8 @@ import javafx.scene.control.ToggleGroup;
 import presentation.member.CenterController;
 import presentation.member.accessor.RegisterEnterpriseAccessor;
 import presentation.member.accessor.RegisterPersonAccessor;
+import presentation.member.accessor.impl.RegisterEnterpriseAccessorImpl;
+import presentation.member.accessor.impl.RegisterPersonAccessorImpl;
 import presentation.member.utils.PlainDialog;
 
 
@@ -77,6 +76,9 @@ public class MemberRegisterMainController implements Initializable{
 		username.textProperty().addListener((observable, oldValue, newValue) -> {
 		    next.setDisable(newValue.trim().isEmpty());
 		});
+		
+		accessorPerson = RegisterPersonAccessorImpl.getInstance();
+		accessorEnterprise = RegisterEnterpriseAccessorImpl.getInstance();
 	}
 	
 	/**
@@ -134,21 +136,5 @@ public class MemberRegisterMainController implements Initializable{
 	 */
 	public void setCenterController(CenterController centerController) {
 		this.controller=centerController;
-	}
-	
-	/**
-	 * set the accessor of personal user
-	 * @param accessor
-	 */
-	public void setPersonAccessor(RegisterPersonAccessor accessor) {
-		this.accessorPerson=accessor;
-	}
-	
-	/**
-	 * set the accessor of business user
-	 * @param accessor
-	 */
-	public void setEnterPriseAccessor(RegisterEnterpriseAccessor accessor) {
-		this.accessorEnterprise=accessor;
 	}
 }

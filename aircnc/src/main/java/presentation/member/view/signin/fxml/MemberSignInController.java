@@ -3,6 +3,8 @@ package presentation.member.view.signin.fxml;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import interactor.impl.member.MemberAccountCourier;
+import interactor.member.MemberAccountInteractor;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert.AlertType;
@@ -11,6 +13,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import presentation.member.CenterController;
 import presentation.member.accessor.MemberLoginAccessor;
+import presentation.member.accessor.impl.MemberLoginAccessorImpl;
 import presentation.member.utils.PlainDialog;
 
 /**
@@ -36,6 +39,7 @@ public class MemberSignInController implements Initializable{
 	private CenterController controller;
 	
 	private MemberLoginAccessor accessor;
+	private MemberAccountInteractor interactor;
 	
 	/**
      * Initializes the controller class. This method is automatically called
@@ -45,6 +49,8 @@ public class MemberSignInController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		username.setPromptText("用户名");
 		password.setPromptText("密码");
+		
+		accessor = MemberLoginAccessorImpl.getInstance();
 	}
 	
 	/**
@@ -58,7 +64,8 @@ public class MemberSignInController implements Initializable{
 		if(username.getText().length()!=0&&password.getText().length()!=0){
 			accessor.setDeliveredId(username.getText());
 			accessor.setDeliveredPassword(password.getText());
-			
+			interactor = MemberAccountCourier.getInstance();
+			//interactor.register(accessor, manager);
 			//use valid to mark whether it is correct
 			boolean valid = true;
 			
@@ -96,14 +103,6 @@ public class MemberSignInController implements Initializable{
 	 */
 	public void setCenterController(CenterController controller){
 		this.controller=controller;
-	}
-	
-	/**
-	 * set the stage
-	 * @param accessor
-	 */	
-	public void setAccessor(MemberLoginAccessor accessor){
-		this.accessor = accessor;
 	}
 
 

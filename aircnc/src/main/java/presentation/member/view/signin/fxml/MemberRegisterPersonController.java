@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import presentation.member.CenterController;
 import presentation.member.accessor.RegisterPersonAccessor;
+import presentation.member.accessor.impl.RegisterPersonAccessorImpl;
 import presentation.member.utils.PlainDialog;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Button;
@@ -104,6 +105,8 @@ public class MemberRegisterPersonController implements Initializable{
 			  }
 		});	
 		//use "new Separator" to create subitems.
+		
+		accessor = RegisterPersonAccessorImpl.getInstance();
 	}
 	
 	/**
@@ -139,15 +142,6 @@ public class MemberRegisterPersonController implements Initializable{
 	public void setCenterController(CenterController centerController) {
 		// TODO Auto-generated method stub
 		this.controller=centerController;
-	}
-	
-	/**
-	 * set the accessor
-	 * @param accessor
-	 */
-	public void setAccessor(RegisterPersonAccessor accessor) {
-		// TODO Auto-generated method stub
-		this.accessor=accessor;
 	}
 	
 }
