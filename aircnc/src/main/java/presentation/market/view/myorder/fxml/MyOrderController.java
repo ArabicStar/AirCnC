@@ -21,108 +21,101 @@ import presentation.market.model.MyOrderModel;
 import presentation.market.utils.FunctionButtons;
 import utils.info.order.OrderStatus;
 import vo.order.OrderVo;
+import vo.order.OrderVoBuilder;
 
-public class MyOrderController implements Initializable{
-	
+public class MyOrderController implements Initializable {
+
 	@SuppressWarnings("unused")
 	private MarketCenterController controller;
-	
+
 	@FXML
 	private CheckBox unfinished;
-	
+
 	@FXML
 	private CheckBox finished;
-	
+
 	@FXML
 	private CheckBox exception;
-	
+
 	@FXML
 	private CheckBox cancelled;
-	
+
 	@FXML
 	private Button query;
-	
+
 	@FXML
 	private TableView<MyOrderModel> orderTable;
-	
+
 	@FXML
 	private TableColumn<MyOrderModel, String> hotelName;
-	
+
 	@FXML
-    private TableColumn<MyOrderModel, String> checkInTime;
-	
+	private TableColumn<MyOrderModel, String> checkInTime;
+
 	@FXML
-	private TableColumn<MyOrderModel,String> state;
-	
+	private TableColumn<MyOrderModel, String> state;
+
 	@FXML
-	private TableColumn<MyOrderModel,String> timeAndSum;
-	
+	private TableColumn<MyOrderModel, String> timeAndSum;
+
 	@FXML
-	private TableColumn<MyOrderModel,String> totalPrice;
-	
+	private TableColumn<MyOrderModel, String> totalPrice;
+
 	@FXML
-	private TableColumn<MyOrderModel,OrderStatus> operation;
-	
+	private TableColumn<MyOrderModel, OrderStatus> operation;
+
 	@FXML
 	private void handleQuery() {
 		LocalDateTime entryTime = LocalDateTime.now();
-		
-		OrderVo order = new OrderVo();
-		order.setEntryTime(entryTime).setHasChildren(false).setHotelId(1000)
-		.setHotelName("乐天玛特").setLastTime(entryTime).setOrderId("2016121010001234").setPeopleNumber(3).setPrice(200)
-		.setIsReviewed(false).setRoomNumber(1).setRoomType("标准间").setStayDays(2).setUserId(20808121)
-		.setStatus(OrderStatus.EXECUTED).setUserName("南京大学渣");
+
+		OrderVo order = new OrderVoBuilder().setEntryTime(entryTime).setHasChildren(false).setHotelId(1000)
+				.setHotelName("乐天玛特").setLastTime(entryTime).setOrderId("2016121010001234").setPeopleNumber(3)
+				.setOriginalPrice(200).setReviewed(false).setRoomNumber(1).setRoomType("标准间").setStayDays(2)
+				.setUserId(20808121).setStatus(OrderStatus.EXECUTED).setUserName("南京大学渣").getOrderInfo();
 		MyOrderModel orderModel = new MyOrderModel(order);
 
-		
-		OrderVo order1 = new OrderVo();
-		order1.setEntryTime(entryTime).setHasChildren(true).setHotelId(2412)
-		.setHotelName("百祥速8").setLastTime(entryTime).setOrderId("2016122501011234").setPeopleNumber(3).setPrice(1400)
-		.setIsReviewed(false).setRoomNumber(1).setRoomType("三人间").setStayDays(7).setUserId(208032121)
-		.setStatus(OrderStatus.UNEXECUTED).setUserName("南京大学渣");
+		OrderVo order1 = new OrderVoBuilder().setEntryTime(entryTime).setHasChildren(true).setHotelId(2412)
+				.setHotelName("百祥速8").setLastTime(entryTime).setOrderId("2016122501011234").setPeopleNumber(3)
+				.setOriginalPrice(1400).setReviewed(false).setRoomNumber(1).setRoomType("三人间").setStayDays(7)
+				.setUserId(208032121).setStatus(OrderStatus.UNEXECUTED).setUserName("南京大学渣").getOrderInfo();
 		MyOrderModel orderModel1 = new MyOrderModel(order1);
-		
+
 		ObservableList<MyOrderModel> orderData = FXCollections.observableArrayList();
 		orderData.add(orderModel);
 		orderData.add(orderModel1);
-		
-		
-		
+
 		orderTable.setItems(orderData);
 		hotelName.setCellValueFactory(cellData -> cellData.getValue().hotelNameProperty());
 		checkInTime.setCellValueFactory(cellData -> cellData.getValue().checkInTimeProperty());
 		state.setCellValueFactory(cellData -> cellData.getValue().stateProperty());
 		timeAndSum.setCellValueFactory(cellData -> cellData.getValue().timeAndSumProperty());
 		totalPrice.setCellValueFactory(cellData -> cellData.getValue().totalPriceProperty());
-		
-		operation.setCellValueFactory(
-                new Callback<TableColumn.CellDataFeatures<MyOrderModel, OrderStatus>, 
-                ObservableValue<OrderStatus>>() {
 
-            public ObservableValue<OrderStatus> call(TableColumn.CellDataFeatures<MyOrderModel, OrderStatus> p) {
-            	return new SimpleObjectProperty<OrderStatus>(p.getValue().getOperation());
-            }
-        });
-		
+		operation.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<MyOrderModel, OrderStatus>, ObservableValue<OrderStatus>>() {
+
+					public ObservableValue<OrderStatus> call(
+							TableColumn.CellDataFeatures<MyOrderModel, OrderStatus> p) {
+						return new SimpleObjectProperty<OrderStatus>(p.getValue().getOperation());
+					}
+				});
+
 		operation.setCellFactory(
-			
+
 				new Callback<TableColumn<MyOrderModel, OrderStatus>, TableCell<MyOrderModel, OrderStatus>>() {
 					public TableCell<MyOrderModel, OrderStatus> call(TableColumn<MyOrderModel, OrderStatus> p) {
 						return new FunctionButtons();
 					}
 				});
-		
-		
+
 	}
-	
-	
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 	public void setCenterController(MarketCenterController controller) {
 		this.controller = controller;
 	}

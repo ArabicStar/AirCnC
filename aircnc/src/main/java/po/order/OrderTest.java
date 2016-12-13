@@ -10,44 +10,41 @@ import org.hibernate.Transaction;
 import utils.info.order.OrderStatus;
 
 public class OrderTest {
-	public static void main(String[]args){  
-		 
-        Session session = getSession();
-        
-        Transaction ts = null; 
-        try{  
-            //开启session  
-            //开启事务  
-            ts=session.beginTransaction();  
-            
-            LocalDateTime entryTime = LocalDateTime.now();
-            
-            OrderPo po2 = new OrderPoBuilder().setEntryTime(entryTime).setHasChildren(false)
-            		.setHotelId(1000).setHotelName("乐天玛特").setLastTime(entryTime)
-            		.setOrderId("201634").setPeopleNumber(3).setPrice(200)
-            		.setIsReviewed(true).setRoomNumber(1).setRoomType("标准间")
-            		.setStayDays(2).setUserId(20808121).setStatus(OrderStatus.EXECUTED)
-            		.getOrderInfo().setUserName("南京大学渣");
-            
-            
-            //保存User对象  
-//            session.save(po2);
-//            session.delete(po2);
-              
-            //提交事务  
-            ts.commit();  
-              
-        }catch(Exception e){  
-            e.printStackTrace();  
-            //回滚事务  
-            session.getTransaction().rollback();  
-        }finally{  
-            if(session != null){  
-                if(session.isOpen()){  
-                    //关闭session  
-                    session.close();  
-                }  
-            }  
-        }  
-    }
+	public static void main(String[] args) {
+
+		Session session = getSession();
+
+		Transaction ts = null;
+		try {
+			// 开启session
+			// 开启事务
+			ts = session.beginTransaction();
+
+			LocalDateTime entryTime = LocalDateTime.now();
+
+			OrderPo po2 = new OrderPoBuilder().setEntryTime(entryTime).setHasChildren(false).setHotelId(1000)
+					.setLastTime(entryTime).setOrderId("201634").setPeopleNumber(3).setOriginalPrice(200)
+					.setReviewed(true).setRoomNumber(1).setRoomType("标准间").setStayDays(2).setUserId(20808121)
+					.setStatus(OrderStatus.EXECUTED).getOrderInfo();// .setUserName("南京大学渣").setHotelName("乐天玛特");
+
+			// 保存User对象
+			// session.save(po2);
+			// session.delete(po2);
+
+			// 提交事务
+			ts.commit();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			// 回滚事务
+			session.getTransaction().rollback();
+		} finally {
+			if (session != null) {
+				if (session.isOpen()) {
+					// 关闭session
+					session.close();
+				}
+			}
+		}
+	}
 }

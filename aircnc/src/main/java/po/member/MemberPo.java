@@ -1,6 +1,7 @@
 package po.member;
 
-import static utils.crypto.Cryptor.*;
+import static utils.crypto.Cryptor.decrypt;
+import static utils.crypto.Cryptor.encrypt;
 
 import java.time.LocalDate;
 

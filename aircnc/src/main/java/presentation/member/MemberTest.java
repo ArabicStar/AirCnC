@@ -27,83 +27,86 @@ import vo.order.OrderVoBuilder;
 
 /**
  * 这是一个迟早要删掉的类，我就不用英文勒，这里就模拟的是member的逻辑层
+ * 
  * @author paranoia
  *
  */
 public class MemberTest {
-	
+
 	UserInfoManager memberInfoManager;
 	MyOrderManager myOrderManager;
 	CreditChangeManager creditManager;
 	SearchHotelManager searchManager;
-	
+
 	MemberVo memberVo;
-	
-	public MemberTest(){
-		MemberVoBuilder builder =  new MemberVoBuilder("PERSONAL").setId("00002222").setName("hhh").setBirthday(LocalDate.parse("1998-04-17"))
+
+	public MemberTest() {
+		MemberVoBuilder builder = new MemberVoBuilder("PERSONAL").setId("00002222").setName("hhh")
+				.setBirthday(LocalDate.parse("1998-04-17"))
 				.setContactInfo(new ContactVoBuilder().setEmail("12345@qq.com").setFixedPhone("0511-12344444")
-						.setMobilePhone("13822222222").getContactInfo()).setCredit(0);
+						.setMobilePhone("13822222222").getContactInfo())
+				.setCredit(0);
 		memberVo = builder.getMemberInfo();
 	}
-	
-	public UserInfoManager getUserData(){
+
+	public UserInfoManager getUserData() {
 		memberInfoManager = new MemberInfoManagerImpl();
 		memberInfoManager.setUser(memberVo);
 		return memberInfoManager;
 	}
-	
-	public MyOrderManager getMyOrderData(){
+
+	public MyOrderManager getMyOrderData() {
 		List<OrderVo> list = new ArrayList<OrderVo>();
 		myOrderManager = new MyOrderManagerImpl();
-		OrderVo vo1 =  new OrderVoBuilder().setEntryTime(LocalDateTime.now()).setHasChildren(false)
-        		.setHotelId(1000).setHotelName("乐天玛特").setLastTime(LocalDateTime.now())
-        		.setOrderId("201636").setPeopleNumber(3).setPrice(200)
-        		.setIsReviewed(true).setRoomNumber(1).setRoomType("标准间")
-        		.setStayDays(2).setUserId(20808121).setStatus(OrderStatus.EXECUTED).setUserName("南京大学渣")
-        		.getOrderInfo();
-		OrderVo vo2 =  new OrderVoBuilder().setEntryTime(LocalDateTime.now()).setHasChildren(false)
-        		.setHotelId(1000).setHotelName("速八酒店").setLastTime(LocalDateTime.now())
-        		.setOrderId("201636").setPeopleNumber(3).setPrice(200)
-        		.setIsReviewed(true).setRoomNumber(1).setRoomType("标准间")
-        		.setStayDays(2).setUserId(20808121).setStatus(OrderStatus.ABNORMAL).setUserName("南京大学渣")
-        		.getOrderInfo();
-		OrderVo vo3 =  new OrderVoBuilder().setEntryTime(LocalDateTime.now()).setHasChildren(false)
-        		.setHotelId(1000).setHotelName("速八酒店").setLastTime(LocalDateTime.now())
-        		.setOrderId("201636").setPeopleNumber(3).setPrice(200)
-        		.setIsReviewed(true).setRoomNumber(1).setRoomType("标准间")
-        		.setStayDays(2).setUserId(20808121).setStatus(OrderStatus.UNEXECUTED).setUserName("南京大学渣")
-        		.getOrderInfo();
-		list.add(vo1); list.add(vo2); list.add(vo3);
+		OrderVo vo1 = new OrderVoBuilder().setEntryTime(LocalDateTime.now()).setHasChildren(false).setHotelId(1000)
+				.setHotelName("乐天玛特").setLastTime(LocalDateTime.now()).setOrderId("201636").setPeopleNumber(3)
+				.setOriginalPrice(200).setReviewed(true).setRoomNumber(1).setRoomType("标准间").setStayDays(2).setUserId(20808121)
+				.setStatus(OrderStatus.EXECUTED).setUserName("南京大学渣").getOrderInfo();
+		OrderVo vo2 = new OrderVoBuilder().setEntryTime(LocalDateTime.now()).setHasChildren(false).setHotelId(1000)
+				.setHotelName("速八酒店").setLastTime(LocalDateTime.now()).setOrderId("201636").setPeopleNumber(3)
+				.setOriginalPrice(200).setReviewed(true).setRoomNumber(1).setRoomType("标准间").setStayDays(2).setUserId(20808121)
+				.setStatus(OrderStatus.ABNORMAL).setUserName("南京大学渣").getOrderInfo();
+		OrderVo vo3 = new OrderVoBuilder().setEntryTime(LocalDateTime.now()).setHasChildren(false).setHotelId(1000)
+				.setHotelName("速八酒店").setLastTime(LocalDateTime.now()).setOrderId("201636").setPeopleNumber(3)
+				.setOriginalPrice(200).setReviewed(true).setRoomNumber(1).setRoomType("标准间").setStayDays(2).setUserId(20808121)
+				.setStatus(OrderStatus.UNEXECUTED).setUserName("南京大学渣").getOrderInfo();
+		list.add(vo1);
+		list.add(vo2);
+		list.add(vo3);
 		myOrderManager.setOrderList(list);
 		return myOrderManager;
 	}
-	
-	public CreditChangeManager getCreditData(){
+
+	public CreditChangeManager getCreditData() {
 		List<CreditChangeVo> list = new ArrayList<CreditChangeVo>();
 		creditManager = new CreditChangeManagerImpl();
-		CreditChangeVo vo1 = new CreditChangeVoBuilder(memberVo, ActionType.CHARGE)
-				.setCreditChange(23300).setMoney(233).getCreditChangeInfo();
-		CreditChangeVo vo2 = new CreditChangeVoBuilder(memberVo, ActionType.ORDER_APPEAL)
-				.setCreditChange(23300).setOrderId("6666").getCreditChangeInfo();
-		CreditChangeVo vo3 = new CreditChangeVoBuilder(memberVo, ActionType.ORDER_OVERDUE)
-				.setCreditChange(23300).setOrderId("66666").getCreditChangeInfo();
-		list.add(vo1);  list.add(vo2);  list.add(vo3);
+		CreditChangeVo vo1 = new CreditChangeVoBuilder(memberVo, ActionType.CHARGE).setCreditChange(23300).setMoney(233)
+				.getCreditChangeInfo();
+		CreditChangeVo vo2 = new CreditChangeVoBuilder(memberVo, ActionType.ORDER_APPEAL).setCreditChange(23300)
+				.setOrderId("6666").getCreditChangeInfo();
+		CreditChangeVo vo3 = new CreditChangeVoBuilder(memberVo, ActionType.ORDER_OVERDUE).setCreditChange(23300)
+				.setOrderId("66666").getCreditChangeInfo();
+		list.add(vo1);
+		list.add(vo2);
+		list.add(vo3);
 		creditManager.setCreditChanges(list);
 		return creditManager;
 	}
-	
-	public SearchHotelManager getSearchedData(){
+
+	public SearchHotelManager getSearchedData() {
 		List<HotelVo> list = new ArrayList<HotelVo>();
 		searchManager = new SearchHotelManagerImpl();
-		HotelVo vo1 = new HotelVoBuilder().setID(00002222).setName("速八酒店").setGrade(4.5)
-				.setScope("市中心").setLocation("新街口").setStar(4).getHotelInfo();
-		HotelVo vo2 = new HotelVoBuilder().setID(00002222).setName("如家酒店").setGrade(4.5)
-				.setScope("市中心").setLocation("新街口").setStar(4).getHotelInfo();
-		HotelVo vo3 = new HotelVoBuilder().setID(00002222).setName("布丁酒店").setGrade(4.5)
-				.setScope("市中心").setLocation("新街口").setStar(4).getHotelInfo();
-		list.add(vo1);  list.add(vo2);  list.add(vo3);
+		HotelVo vo1 = new HotelVoBuilder().setID(00002222).setName("速八酒店").setGrade(4.5).setScope("市中心")
+				.setLocation("新街口").setStar(4).getHotelInfo();
+		HotelVo vo2 = new HotelVoBuilder().setID(00002222).setName("如家酒店").setGrade(4.5).setScope("市中心")
+				.setLocation("新街口").setStar(4).getHotelInfo();
+		HotelVo vo3 = new HotelVoBuilder().setID(00002222).setName("布丁酒店").setGrade(4.5).setScope("市中心")
+				.setLocation("新街口").setStar(4).getHotelInfo();
+		list.add(vo1);
+		list.add(vo2);
+		list.add(vo3);
 		searchManager.setHotel(list);
 		return searchManager;
 	}
-	
+
 }

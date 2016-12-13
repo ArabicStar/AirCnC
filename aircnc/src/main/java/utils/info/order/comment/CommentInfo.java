@@ -1,5 +1,6 @@
 package utils.info.order.comment;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class CommentInfo extends CommentInfoTemplate{
@@ -40,7 +41,7 @@ public class CommentInfo extends CommentInfoTemplate{
 		return Integer.MIN_VALUE;
 	}
 	
-	public LocalDateTime getCheckInTime(){
+	public LocalDate getCheckInTime(){
 		if (isValid())
 			return checkInTime;
 		return null;

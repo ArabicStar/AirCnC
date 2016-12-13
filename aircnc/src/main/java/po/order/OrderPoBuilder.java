@@ -71,8 +71,8 @@ public class OrderPoBuilder extends OrderInfoBuilder {
 	}
 
 	@Override
-	public OrderPoBuilder setPrice(double price) {
-		this.originalPrice = price;
+	public OrderPoBuilder setOriginalPrice(double originalPrice) {
+		this.originalPrice = originalPrice;
 		return this;
 	}
 
@@ -101,7 +101,7 @@ public class OrderPoBuilder extends OrderInfoBuilder {
 	}
 
 	@Override
-	public OrderPoBuilder setIsReviewed(boolean isReviewed) {
+	public OrderPoBuilder setReviewed(boolean isReviewed) {
 		this.isReviewed = isReviewed;
 		return this;
 	}
@@ -111,7 +111,7 @@ public class OrderPoBuilder extends OrderInfoBuilder {
 		this.userName = userName;
 		return this;
 	}
-	
+
 	@Override
 	public OrderPoBuilder setDiscountPrice(double discountPrice) {
 		this.discountPrice = discountPrice;
@@ -120,24 +120,25 @@ public class OrderPoBuilder extends OrderInfoBuilder {
 
 	/**
 	 * 
-	 * @param from the po you want
-	 * @param to the po you have
+	 * @param from
+	 *            the po you want
+	 * @param to
+	 *            the po you have
 	 */
 	public static void updatePo(OrderPo from, OrderPo to) {
 		if (from == null || to == null || from == to) {
 			return;
 		}
-			
 
 		if (!from.getOrderId().equals(to.getOrderId())) {
 			throw inconsistentStatusEx();
 		}
-		
-		if(from.getLastTime().isBefore(to.getLastTime())) {
+
+		if (from.getLastTime().isBefore(to.getLastTime())) {
 			throw unsupportedOpEx("Couldn't advance the last entry time");
 		}
-		
-		if(!from.isIsReviewed() && to.isIsReviewed()) {
+
+		if (!from.isIsReviewed() && to.isIsReviewed()) {
 			throw unsupportedOpEx("Couldn't make the reviewed order unreviewed");
 		}
 
@@ -147,7 +148,7 @@ public class OrderPoBuilder extends OrderInfoBuilder {
 	}
 
 	@Override
-	public OrderPoBuilder setPromotions(Set<Promotion> promotions) {
+	public OrderPoBuilder setPromotions(Set<Promotion<?>> promotions) {
 		this.promotions = promotions;
 		return this;
 	}

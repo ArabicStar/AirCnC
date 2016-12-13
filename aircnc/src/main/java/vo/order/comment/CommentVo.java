@@ -1,5 +1,6 @@
 package vo.order.comment;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import utils.info.order.comment.CommentInfo;
@@ -25,7 +26,7 @@ public class CommentVo extends CommentInfo{
 		return this;
 	}
 	
-	CommentVo setCheckInTime(LocalDateTime checkInTime){
+	CommentVo setCheckInTime(LocalDate checkInTime){
 		this.checkInTime = checkInTime;
 		return this;
 	}

@@ -1,5 +1,6 @@
 package utils.info.order.comment;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class CommentInfoTemplate {
@@ -8,7 +9,7 @@ public class CommentInfoTemplate {
 	protected String memberId;
 	protected String content;
 	protected int grade;
-	protected LocalDateTime checkInTime;
+	protected LocalDate checkInTime;
 	protected LocalDateTime commentTime;
 	
 	private static final int ID_BOUND = 100000000;

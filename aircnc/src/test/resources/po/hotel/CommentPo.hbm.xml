@@ -5,7 +5,7 @@
 <!-- CommentPo mapping xml -->
 <hibernate-mapping>
 	<class name="po.hotel.CommentPo" table="rooms">
-	
+
 		<!-- key column, auto generated -->
 		<id name="cid" column="cid" type="integer">
 			<generator class="native" />
@@ -13,22 +13,24 @@
 
 		<!-- hotelId -->
 		<property column="hid" name="hotelId" type="integer" />
-		
+
 		<!-- memberId -->
 		<property column="mid" name="memberId" type="integer" />
-		
+
 		<!-- grade -->
-		<property column="grade" name="grade" type="integer" nuo-null="true"/>
-		
+		<property column="grade" name="grade" type="integer"
+			not-null="true" />
+
 		<!-- content -->
 		<property column="content" name="content" type="string" />
-		
+
 		<!-- checkInTime -->
 		<property column="checktime" name="checkInTime" type="date" />
-		
+
 		<!-- commentTime -->
-		<property column="comtime" name="commentTime" generated="insert" 
-			not-null="true" sql-stamp="timestamp" default="CURRENT_TIMESTAMP"/>
-		
+		<property column="comtime" name="commentTime" generated="insert"
+			not-null="true">
+			<column name="comtime" sql-type="timestamp" default="CURRENT_TIMESTAMP" />
+		</property>
 	</class>
 </hibernate-mapping>

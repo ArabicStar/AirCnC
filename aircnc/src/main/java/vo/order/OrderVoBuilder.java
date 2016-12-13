@@ -11,114 +11,112 @@ public class OrderVoBuilder extends OrderInfoBuilder {
 
 	@Override
 	public OrderVo getOrderInfo() {
-		return new OrderVo().setEntryTime(entryTime).setHasChildren(hasChildren)
-				.setLastTime(lastTime).setOrderId(orderId).setPeopleNumber(peopleNumber)
-				.setRoomType(roomType).setStatus(status).setStayDays(stayDays)
-				.setUserId(userId).setPrice(originalPrice).setHotelId(hotelId)
-				.setHotelName(hotelName).setRoomNumber(roomNumber).setIsReviewed(isReviewed)
-				.setUserName(userName).setPromotions(promotions).setDiscountPrice(discountPrice);
+		return new OrderVo().setEntryTime(entryTime).setHasChildren(hasChildren).setLastTime(lastTime)
+				.setOrderId(orderId).setPeopleNumber(peopleNumber).setRoomType(roomType).setStatus(status)
+				.setStayDays(stayDays).setUserId(userId).setPrice(originalPrice).setHotelId(hotelId)
+				.setHotelName(hotelName).setRoomNumber(roomNumber).setIsReviewed(isReviewed).setUserName(userName)
+				.setPromotions(promotions).setDiscountPrice(discountPrice);
 	}
 
 	@Override
 	public OrderVoBuilder setOrderId(String orderId) {
-		this.orderId = orderId;
+		super.setOrderId(orderId);
 		return this;
 	}
 
 	@Override
 	public OrderVoBuilder setRoomType(String roomType) {
-		this.roomType = roomType;
+		super.setRoomType(roomType);
 		return this;
 	}
 
 	@Override
 	public OrderVoBuilder setStayDays(int stayDays) {
-		this.stayDays = stayDays;
+		super.setStayDays(stayDays);
 		return this;
 	}
 
 	@Override
 	public OrderVoBuilder setUserId(int userId) {
-		this.userId = userId;
+		super.setUserId(userId);
 		return this;
 	}
 
 	@Override
 	public OrderVoBuilder setStatus(OrderStatus status) {
-		this.status = status;
+		super.setStatus(status);
 		return this;
 	}
 
 	@Override
 	public OrderVoBuilder setEntryTime(LocalDateTime entryTime) {
-		this.entryTime = entryTime;
+		super.setEntryTime(entryTime);
 		return this;
 	}
 
 	@Override
 	public OrderVoBuilder setLastTime(LocalDateTime lastTime) {
-		this.lastTime = lastTime;
+		super.setLastTime(lastTime);
 		return this;
 	}
 
 	@Override
 	public OrderVoBuilder setPeopleNumber(int peopleNumber) {
-		this.peopleNumber = peopleNumber;
+		super.setPeopleNumber(peopleNumber);
 		return this;
 	}
 
 	@Override
-	public OrderVoBuilder setPrice(double price) {
-		this.originalPrice = price;
+	public OrderVoBuilder setOriginalPrice(double price) {
+		super.setOriginalPrice(price);
 		return this;
 	}
 
 	@Override
 	public OrderVoBuilder setHasChildren(boolean hasChildren) {
-		this.hasChildren = hasChildren;
+		super.setHasChildren(hasChildren);
 		return this;
 	}
 
 	@Override
 	public OrderVoBuilder setHotelId(int hotelId) {
-		this.hotelId = hotelId;
+		super.setHotelId(hotelId);
 		return this;
 	}
 
 	@Override
 	public OrderVoBuilder setHotelName(String hotelName) {
-		this.hotelName = hotelName;
+		super.setHotelName(hotelName);
 		return this;
 	}
 
 	@Override
 	public OrderVoBuilder setRoomNumber(int roomNumber) {
-		this.roomNumber = roomNumber;
+		super.setRoomNumber(roomNumber);
 		return this;
 	}
 
 	@Override
-	public OrderVoBuilder setIsReviewed(boolean isReviewed) {
-		this.isReviewed = isReviewed;
+	public OrderVoBuilder setReviewed(boolean isReviewed) {
+		super.setReviewed(isReviewed);
 		return this;
 	}
 
 	@Override
 	public OrderVoBuilder setUserName(String userName) {
-		this.userName = userName;
+		super.setUserName(userName);
 		return this;
 	}
 
 	@Override
-	public OrderVoBuilder setPromotions(Set<Promotion> promotions) {
-		this.promotions = promotions;
+	public OrderVoBuilder setPromotions(Set<Promotion<?>> promotions) {
+		super.setPromotions(promotions);
 		return this;
 	}
-	
-	
+
 	@Override
 	public OrderVoBuilder setDiscountPrice(double discountPrice) {
-		this.discountPrice = discountPrice;
+		super.setDiscountPrice(discountPrice);
 		return this;
 	}
 }

@@ -14,7 +14,7 @@ import po.member.MemberPo;
 import service.member.MemberCreditService;
 import utils.info.order.OrderStatus;
 import vo.member.MemberVo;
-import vo.order.OrderVo;
+import vo.order.OrderVoBuilder;
 
 public class MemberCreditServiceTest {
 	public MemberCreditService cs = DataPrepareHelper.creditService;
@@ -52,8 +52,8 @@ public class MemberCreditServiceTest {
 			toTest = testData(i);
 			beforeCre = toTest.getCredit();
 			price = (i + 1) * 100;
-			res = cs.gainByOrderExecution(new OrderVo().setUserId(toTest.getNumId()).setOrderId("12345678")
-					.setPrice(price).setStatus(OrderStatus.UNEXECUTED));
+			res = cs.gainByOrderExecution(new OrderVoBuilder().setUserId(toTest.getNumId()).setOrderId("12345678")
+					.setOriginalPrice(price).setStatus(OrderStatus.UNEXECUTED).getOrderInfo());
 			assertEquals(price + beforeCre, res.getCredit());
 		}
 	}
@@ -67,8 +67,8 @@ public class MemberCreditServiceTest {
 			toTest = testData(i);
 			beforeCre = toTest.getCredit();
 			price = (i + 1) * 100;
-			res = cs.reduceByOverdue(new OrderVo().setUserId(toTest.getNumId()).setOrderId("12345678").setPrice(price)
-					.setStatus(OrderStatus.UNEXECUTED));
+			res = cs.reduceByOverdue(new OrderVoBuilder().setUserId(toTest.getNumId()).setOrderId("12345678").setOriginalPrice(price)
+					.setStatus(OrderStatus.UNEXECUTED).getOrderInfo());
 			assertEquals(beforeCre - price, res.getCredit());
 		}
 	}
@@ -82,8 +82,8 @@ public class MemberCreditServiceTest {
 			toTest = testData(i);
 			beforeCre = toTest.getCredit();
 			price = (i + 1) * 100;
-			res = cs.reduceByCancel(new OrderVo().setUserId(toTest.getNumId()).setOrderId("12345678").setPrice(price)
-					.setStatus(OrderStatus.UNEXECUTED));
+			res = cs.reduceByCancel(new OrderVoBuilder().setUserId(toTest.getNumId()).setOrderId("12345678").setOriginalPrice(price)
+					.setStatus(OrderStatus.UNEXECUTED).getOrderInfo());
 			assertEquals(beforeCre - (int) (price * 0.5), res.getCredit());
 		}
 	}
@@ -97,8 +97,8 @@ public class MemberCreditServiceTest {
 			toTest = testData(i);
 			beforeCre = toTest.getCredit();
 			price = (i + 1) * 100;
-			res = cs.recoverByDelay(new OrderVo().setUserId(toTest.getNumId()).setOrderId("12345678").setPrice(price)
-					.setStatus(OrderStatus.ABNORMAL));
+			res = cs.recoverByDelay(new OrderVoBuilder().setUserId(toTest.getNumId()).setOrderId("12345678").setOriginalPrice(price)
+					.setStatus(OrderStatus.ABNORMAL).getOrderInfo());
 			assertEquals(beforeCre + (int) (price * 0.5), res.getCredit());
 		}
 	}
@@ -112,8 +112,8 @@ public class MemberCreditServiceTest {
 			toTest = testData(i);
 			beforeCre = toTest.getCredit();
 			price = (i + 1) * 100;
-			res = cs.recoverByAppeal(new OrderVo().setUserId(toTest.getNumId()).setOrderId("12345678").setPrice(price)
-					.setStatus(OrderStatus.ABNORMAL));
+			res = cs.recoverByAppeal(new OrderVoBuilder().setUserId(toTest.getNumId()).setOrderId("12345678").setOriginalPrice(price)
+					.setStatus(OrderStatus.ABNORMAL).getOrderInfo());
 			assertEquals(beforeCre + (int) (price), res.getCredit());
 		}
 	}
