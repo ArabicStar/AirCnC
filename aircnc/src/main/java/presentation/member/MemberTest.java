@@ -108,13 +108,8 @@ public class MemberTest {
 		searchManager.setHotel(list);
 		return searchManager;
 	}
-<<<<<<< HEAD
 	
 	public void ChangeOrder(){
 		
 	}
-	
-=======
-
->>>>>>> origin/master
 }
