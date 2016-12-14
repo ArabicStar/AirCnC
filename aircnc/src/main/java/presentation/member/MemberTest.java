@@ -5,10 +5,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import presentation.member.manager.CreditChangeManager;
-import presentation.member.manager.MyOrderManager;
-import presentation.member.manager.SearchHotelManager;
-import presentation.member.manager.UserInfoManager;
 import presentation.member.manager.impl.CreditChangeManagerImpl;
 import presentation.member.manager.impl.MemberInfoManagerImpl;
 import presentation.member.manager.impl.MyOrderManagerImpl;
@@ -33,11 +29,6 @@ import vo.order.OrderVoBuilder;
  */
 public class MemberTest {
 
-	UserInfoManager memberInfoManager;
-	MyOrderManager myOrderManager;
-	CreditChangeManager creditManager;
-	SearchHotelManager searchManager;
-
 	MemberVo memberVo;
 
 	public MemberTest() {
@@ -49,15 +40,12 @@ public class MemberTest {
 		memberVo = builder.getMemberInfo();
 	}
 
-	public UserInfoManager getUserData() {
-		memberInfoManager = new MemberInfoManagerImpl();
-		memberInfoManager.setUser(memberVo);
-		return memberInfoManager;
+	public void getUserData() {
+		MemberInfoManagerImpl.getInstance().setUser(memberVo);
 	}
 
-	public MyOrderManager getMyOrderData() {
+	public void getMyOrderData() {
 		List<OrderVo> list = new ArrayList<OrderVo>();
-		myOrderManager = new MyOrderManagerImpl();
 		OrderVo vo1 = new OrderVoBuilder().setEntryTime(LocalDateTime.now()).setHasChildren(false).setHotelId(1000)
 				.setHotelName("乐天玛特").setLastTime(LocalDateTime.now()).setOrderId("201636").setPeopleNumber(3)
 				.setOriginalPrice(200).setReviewed(true).setRoomNumber(1).setRoomType("标准间").setStayDays(2).setUserId(20808121)
@@ -73,13 +61,11 @@ public class MemberTest {
 		list.add(vo1);
 		list.add(vo2);
 		list.add(vo3);
-		myOrderManager.setOrderList(list);
-		return myOrderManager;
+		MyOrderManagerImpl.getInstance().setOrderList(list);
 	}
 
-	public CreditChangeManager getCreditData() {
+	public void getCreditData() {
 		List<CreditChangeVo> list = new ArrayList<CreditChangeVo>();
-		creditManager = new CreditChangeManagerImpl();
 		CreditChangeVo vo1 = new CreditChangeVoBuilder(memberVo, ActionType.CHARGE).setCreditChange(23300).setMoney(233)
 				.getCreditChangeInfo();
 		CreditChangeVo vo2 = new CreditChangeVoBuilder(memberVo, ActionType.ORDER_APPEAL).setCreditChange(23300)
@@ -89,13 +75,11 @@ public class MemberTest {
 		list.add(vo1);
 		list.add(vo2);
 		list.add(vo3);
-		creditManager.setCreditChanges(list);
-		return creditManager;
+		CreditChangeManagerImpl.getInstance().setCreditChanges(list);
 	}
 
-	public SearchHotelManager getSearchedData() {
+	public void getSearchedData() {
 		List<HotelVo> list = new ArrayList<HotelVo>();
-		searchManager = new SearchHotelManagerImpl();
 		HotelVo vo1 = new HotelVoBuilder().setID(00002222).setName("速八酒店").setGrade(4.5).setScope("市中心")
 				.setLocation("新街口").setStar(4).getHotelInfo();
 		HotelVo vo2 = new HotelVoBuilder().setID(00002222).setName("如家酒店").setGrade(4.5).setScope("市中心")
@@ -105,8 +89,7 @@ public class MemberTest {
 		list.add(vo1);
 		list.add(vo2);
 		list.add(vo3);
-		searchManager.setHotel(list);
-		return searchManager;
+		SearchHotelManagerImpl.getInstance().setHotel(list);
 	}
 	
 	public void ChangeOrder(){

@@ -69,7 +69,8 @@ public class CenterController extends Application {
 	 * add the pane of sign in (MemberSignInPane)
 	 */
 	public void addSignInPane() {
-		MemberLoginAccessorImpl.launch();
+		if(!MemberLoginAccessorImpl.isLaunched())
+			MemberLoginAccessorImpl.launch();
 		URL location = getClass().getResource("/images/member/register/login_BG.png");
 		start.getBorderPane().setStyle("-fx-background-image: url("+location+");");
 		start.getBorderPane().getChildren().clear();
@@ -82,7 +83,8 @@ public class CenterController extends Application {
 	 * add the pane of register (MemberRegisterMainPane)
 	 */
 	public void addRegisterPane() {
-		RegisterAccessorImpl.launch();
+		if(!RegisterAccessorImpl.isLaunched())
+			RegisterAccessorImpl.launch();
 		URL location = getClass().getResource("../../images/member/register/register_BG.png");
 		start.getBorderPane().setStyle("-fx-background-image: url("+location+");");
 		start.getBorderPane().getChildren().clear();

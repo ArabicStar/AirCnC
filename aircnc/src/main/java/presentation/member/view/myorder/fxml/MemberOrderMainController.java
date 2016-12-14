@@ -5,7 +5,6 @@ import java.util.ResourceBundle;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -13,18 +12,17 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.util.Callback;
 import presentation.member.ClientCenterController;
 import presentation.member.manager.MyOrderManager;
 import presentation.member.manager.impl.MyOrderManagerImpl;
 import presentation.member.model.MyorderModel;
-import presentation.member.utils.FunctionButtons;
+import presentation.member.utils.cell.FunctionButtons;
 import utils.info.order.OrderStatus;
-import vo.order.OrderVo;
 
 public class MemberOrderMainController implements Initializable{
 	
+	@SuppressWarnings("unused")
 	private ClientCenterController controller;
 	
 	@FXML

@@ -1,4 +1,4 @@
-package presentation.member.utils;
+package presentation.member.utils.cell;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;

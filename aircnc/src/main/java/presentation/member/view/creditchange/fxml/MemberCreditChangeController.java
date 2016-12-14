@@ -16,7 +16,7 @@ import presentation.member.ClientCenterController;
 import presentation.member.manager.CreditChangeManager;
 import presentation.member.manager.impl.CreditChangeManagerImpl;
 import presentation.member.model.CreditModel;
-import presentation.member.utils.CreditChangeCell;
+import presentation.member.utils.cell.CreditChangeCell;
 
 /**
  * the controller of 

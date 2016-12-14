@@ -1,4 +1,4 @@
-package presentation.member.utils;
+package presentation.member.utils.cell;
 
 
 import java.util.Optional;
@@ -10,6 +10,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.layout.HBox;
 import presentation.member.model.MyorderModel;
+import presentation.member.utils.dialog.PlainDialog;
+import presentation.member.utils.dialog.TextAreaDialog;
 import utils.info.order.OrderStatus;
 
 /**

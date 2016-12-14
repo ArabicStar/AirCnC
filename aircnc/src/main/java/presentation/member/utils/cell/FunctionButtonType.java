@@ -1,4 +1,4 @@
-package presentation.member.utils;
+package presentation.member.utils.cell;
 
 public enum FunctionButtonType {
 	CHECK,

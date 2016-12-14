@@ -8,7 +8,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.Button;
 import presentation.hotel.utils.ButtonName;
-import presentation.member.utils.FunctionButtons;
+import presentation.member.utils.cell.FunctionButtons;
 import utils.info.order.OrderStatus;
 import vo.order.OrderVo;
 

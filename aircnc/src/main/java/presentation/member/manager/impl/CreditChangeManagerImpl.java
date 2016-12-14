@@ -39,6 +39,13 @@ public class CreditChangeManagerImpl implements CreditChangeManager{
 		return instance;
 	}
 	
+	public static boolean isLaunched(){
+		if(instance == null)
+			return false;
+		else
+			return true;
+	}
+	
 	private ObservableList<CreditModel> creditChangesData;
 	@Override
 	public boolean setCreditChanges(List<CreditChangeVo> list) {
