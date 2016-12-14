@@ -116,7 +116,7 @@ public class OrderVoBuilder extends OrderInfoBuilder {
 	}
 
 	@Override
-	public OrderVoBuilder setPromotions(Set<Promotion<?>> promotions) {
+	public OrderVoBuilder setPromotions(Set<Promotion> promotions) {
 		super.setPromotions(promotions);
 		return this;
 	}

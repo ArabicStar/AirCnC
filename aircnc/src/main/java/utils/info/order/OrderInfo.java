@@ -22,7 +22,7 @@ public abstract class OrderInfo extends OrderInfoTemplate {
 		return hotelId;
 	}
 
-	public Set<Promotion<?>> getPromotions() {
+	public Set<Promotion> getPromotions() {
 		return promotions;
 	}
 

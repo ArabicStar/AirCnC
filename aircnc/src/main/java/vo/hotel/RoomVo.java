@@ -30,10 +30,5 @@ public class RoomVo extends RoomInfo{
 		return this;
 	}
 	
-	RoomVo setPrice(double price){
-		this.price = price;
-		return this;
-	}
-	
 	
 }

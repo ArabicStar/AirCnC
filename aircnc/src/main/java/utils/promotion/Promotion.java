@@ -1,13 +1,20 @@
 package utils.promotion;
 
 import utils.info.order.OrderInfo;
+import utils.promotion.applier.Applier;
+import utils.promotion.trigger.Trigger;
 
-public abstract class Promotion<T extends Trigger> {
+public class Promotion {
 	private Applier applier;
-	private T trigger;
+	private Trigger trigger;
 
-	public boolean canApplyTo(OrderInfo order) {
-		return trigger.test(order);
+	public Promotion(Applier applier, Trigger trigger) {
+		this.applier = applier;
+		this.trigger = trigger;
+	}
+
+	public boolean canApplyTo(OrderInfo order, OrderRelatedInfoHelper helper) {
+		return trigger.test(order, helper);
 	}
 
 	public OrderInfo applyTo(OrderInfo order) {

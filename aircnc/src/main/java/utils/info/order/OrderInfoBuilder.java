@@ -86,7 +86,7 @@ public abstract class OrderInfoBuilder extends OrderInfoTemplate {
 	 * @param promotions
 	 *            要设置的 promotions
 	 */
-	public OrderInfoBuilder setPromotions(Set<Promotion<?>> promotions) {
+	public OrderInfoBuilder setPromotions(Set<Promotion> promotions) {
 		this.promotions = new HashSet<>(promotions);
 		return this;
 	}

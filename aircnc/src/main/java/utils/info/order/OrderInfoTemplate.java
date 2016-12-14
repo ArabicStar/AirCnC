@@ -26,7 +26,7 @@ public abstract class OrderInfoTemplate {
 	 */
 	protected LocalDateTime lastTime;
 
-	protected Set<Promotion<?>> promotions;
+	protected Set<Promotion> promotions;
 
 	/**
 	 * 除去小孩的总人数

@@ -15,10 +15,6 @@ import presentation.member.manager.CreditChangeManager;
 import presentation.member.manager.MyOrderManager;
 import presentation.member.manager.SearchHotelManager;
 import presentation.member.manager.UserInfoManager;
-import presentation.member.manager.impl.CreditChangeManagerImpl;
-import presentation.member.manager.impl.MemberInfoManagerImpl;
-import presentation.member.manager.impl.MyOrderManagerImpl;
-import presentation.member.manager.impl.SearchHotelManagerImpl;
 import presentation.member.view.MemberMainPane;
 import presentation.member.view.creditchange.MemberCreditChangePane;
 
@@ -38,6 +34,15 @@ public class ClientCenterController extends Application {
 	private MemberCreditChangePane creditMain;
 	private MemberSearchHotelPane searchMain;
 	private MemberOrderMainPane orderMain;
+	
+	private UserInfoManager memberInfoManager;
+	private MyOrderManager myOrderManager;
+	private CreditChangeManager creditManager;
+	private SearchHotelManager searchManager;
+	
+	private InfoModifyAccessor memberInfoAccessor;
+	
+	private MemberTest test;
 
 	private AnchorPane rootLayout;
 	private AnchorPane content;
@@ -63,54 +68,70 @@ public class ClientCenterController extends Application {
 		// addSignInPane();
 
 		primaryStage.show();
+		
+		test = new MemberTest();
 
 	}
 
 	public void addInfoMainPane() {
-		MemberInfoManagerImpl.launch();
+		memberInfoManager = test.getUserData();
 		content.getChildren().clear();
 		infoMain = new MemberInfoMainPane();
 		content.getChildren().add(infoMain.getContentPane());
 		AnchorPane.setTopAnchor(infoMain.getContentPane(),10.0);
 		infoMain.getController().setCenterController(this);
+		infoMain.getController().setManager(memberInfoManager);
 		
 	}
 
 	public void addInfoModifyPane() {
-		InfoModifyAccessorImpl.launch();
 		content.getChildren().clear();
+		memberInfoAccessor = new InfoModifyAccessorImpl();
 		infoModify = new MemberInfoModifyPane();
 		content.getChildren().add(infoModify.getPane());
 		AnchorPane.setTopAnchor((infoModify.getPane()), 10.0);
 		//(infoModify.getPane());
 		infoModify.getController().setCenterController(this);
+		infoModify.getController().setAccessor(memberInfoAccessor);
+		infoModify.getController().setManager(memberInfoManager);
 	}
 
 	public void addCreditChangePane() {
-		CreditChangeManagerImpl.launch();
+		creditManager = test.getCreditData();
 		content.getChildren().clear();
 		creditMain = new MemberCreditChangePane();
 		content.getChildren().add(creditMain.getPane());
 		AnchorPane.setTopAnchor(creditMain.getPane(), 10.0);
 		creditMain.getController().setCenterController(this);
+		creditMain.getController().setManager(creditManager);
 		//addCreditChangeRecord();
+	}
+	
+	public void addCreditChangeRecord(){
+		creditMain.getController().init();
 	}
 
 	public void addSearchHotelPane() {
-		SearchHotelManagerImpl.launch();
+		searchManager = test.getSearchedData();
 		content.getChildren().clear();
 		searchMain = new MemberSearchHotelPane();
 		content.getChildren().add(searchMain.getPane());
 		searchMain.getController().setCenterController(this);
+		searchMain.getController().setManager(searchManager);
 		searchMain.getController().setRootLayout(content);
 	}
 	
 	public void addOrderMainPane() {
-		MyOrderManagerImpl.launch();
+		myOrderManager = test.getMyOrderData();
 		content.getChildren().clear();
 		orderMain = new MemberOrderMainPane();
 		content.getChildren().add(orderMain.getPane());
 		orderMain.getController().setCenterController(this);
+		orderMain.getController().setManager(myOrderManager);
+	}
+	
+	public void setMemberInfoManager(UserInfoManager manager){
+		this.memberInfoManager = manager;
 	}
 
 }

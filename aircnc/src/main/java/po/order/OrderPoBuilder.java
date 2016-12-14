@@ -155,7 +155,7 @@ public class OrderPoBuilder extends OrderInfoBuilder {
 	}
 
 	@Override
-	public OrderPoBuilder setPromotions(Set<Promotion<?>> promotions) {
+	public OrderPoBuilder setPromotions(Set<Promotion> promotions) {
 		this.promotions = promotions;
 		return this;
 	}

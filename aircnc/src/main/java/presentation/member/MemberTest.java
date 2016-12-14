@@ -108,8 +108,5 @@ public class MemberTest {
 		searchManager.setHotel(list);
 		return searchManager;
 	}
-	
-	public void ChangeOrder(){
-		
-	}
+
 }

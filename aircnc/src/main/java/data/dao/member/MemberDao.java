@@ -1,7 +1,5 @@
 package data.dao.member;
 
-import java.rmi.Remote;
-
 import po.member.MemberPo;
 
 /**

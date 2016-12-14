@@ -84,7 +84,7 @@ public class OrderPo extends OrderInfo {
 		return this;
 	}
 
-	public OrderPo setPromotions(Set<Promotion<?>> promotions) {
+	public OrderPo setPromotions(Set<Promotion> promotions) {
 		this.promotions = promotions;
 		return this;
 	}
