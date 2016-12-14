@@ -13,6 +13,15 @@
          <children>
             <VBox alignment="CENTER" prefHeight="450.0" styleClass="nav-vbox" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
+                  <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="110.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="portrait-border">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="portrait-hbox" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
                   <HBox alignment="CENTER" prefHeight="57.0">
                      <children>
                         <Label fx:id="memberInfo" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#HandleMemberInfo" prefHeight="57.0" prefWidth="247.0" text="个人中心">
@@ -74,16 +83,6 @@
                         <String fx:value="hbox" />
                      </styleClass>
                   </HBox>
-               </children>
-            </VBox>
-            <VBox alignment="CENTER" prefHeight="200.0" spacing="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="110.0">
-                     <children>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="portrait-hbox" />
-                     </children>
-                  </HBox>
-                  <Button mnemonicParsing="false" text="注销" />
                </children>
             </VBox>
          </children>

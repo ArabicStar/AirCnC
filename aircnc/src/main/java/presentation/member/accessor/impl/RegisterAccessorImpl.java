@@ -39,13 +39,6 @@ public class RegisterAccessorImpl implements RegisterAccessor{
 
 		return instance;
 	}
-	
-	public static boolean isLaunched(){
-		if(instance == null)
-			return false;
-		else
-			return true;
-	}
 
 	@Override
 	public MemberVoBuilder getNewAccountInfo() {

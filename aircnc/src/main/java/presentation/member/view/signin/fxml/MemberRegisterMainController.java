@@ -15,7 +15,7 @@ import javafx.scene.control.ToggleGroup;
 import presentation.member.CenterController;
 import presentation.member.accessor.RegisterAccessor;
 import presentation.member.accessor.impl.RegisterAccessorImpl;
-import presentation.member.utils.dialog.PlainDialog;
+import presentation.member.utils.PlainDialog;
 
 
 

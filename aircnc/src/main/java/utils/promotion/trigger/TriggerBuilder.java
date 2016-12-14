@@ -2,14 +2,13 @@ package utils.promotion.trigger;
 
 import static utils.exception.StaticExceptionFactory.illegalArgEx;
 
+import utils.parameter.ParametersList;
 import utils.promotion.trigger.hotel.HotelTrigger;
 import utils.promotion.trigger.hotel.HotelWhen;
 import utils.promotion.trigger.website.WebsiteTrigger;
 import utils.promotion.trigger.website.WebsiteWhen;
 
 import static utils.exception.StaticExceptionFactory.*;
-
-import utils.property.ParametersList;
 
 public class TriggerBuilder {
 	private ParametersList parameters;

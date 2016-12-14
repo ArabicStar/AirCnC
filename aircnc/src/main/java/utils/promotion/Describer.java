@@ -1,6 +1,6 @@
 package utils.promotion;
 
-import utils.property.ParametersList;
+import utils.parameter.ParametersList;
 
 @FunctionalInterface
 public interface Describer {

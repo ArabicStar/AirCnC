@@ -34,7 +34,7 @@ public class HotelVoBuilder extends HotelInfoBuilder{
 		// TODO Auto-generated constructor stub
 	}
 	
-	HotelVoBuilder setRooms(Set<RoomVo> rooms){
+	public HotelVoBuilder setRooms(Set<RoomVo> rooms){
 		this.rooms = rooms;
 		return this;
 	}

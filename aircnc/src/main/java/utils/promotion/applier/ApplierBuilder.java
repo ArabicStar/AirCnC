@@ -3,7 +3,7 @@ package utils.promotion.applier;
 import static utils.exception.StaticExceptionFactory.illegalArgEx;
 import static utils.exception.StaticExceptionFactory.illegalStateException;
 
-import utils.property.ParametersList;
+import utils.parameter.ParametersList;
 
 public class ApplierBuilder {
 	private ParametersList parameters;

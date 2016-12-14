@@ -1,7 +1,7 @@
 package utils.promotion.applier;
 
 import utils.info.order.OrderInfo;
-import utils.property.ParametersList;
+import utils.parameter.ParametersList;
 
 public class Applier {
 	private ParametersList params;

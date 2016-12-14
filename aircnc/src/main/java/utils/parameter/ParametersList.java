@@ -1,4 +1,4 @@
-package utils.property;
+package utils.parameter;
 
 import java.util.ArrayList;
 import java.util.List;

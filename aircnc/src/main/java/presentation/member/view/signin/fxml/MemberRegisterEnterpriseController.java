@@ -3,7 +3,6 @@ package presentation.member.view.signin.fxml;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import interactor.impl.member.MemberAccountCourier;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -56,7 +55,6 @@ public class MemberRegisterEnterpriseController implements Initializable {
 	@FXML
 	public void handleConfirm() {
 		accessor.setEnterprise(enterprise.getText());
-		MemberAccountCourier.getInstance().register();
 		controller.addSignInPane();
 	}
 

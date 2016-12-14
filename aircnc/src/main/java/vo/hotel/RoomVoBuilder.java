@@ -13,17 +13,17 @@ public class RoomVoBuilder extends RoomInfoBuilder{
 	
 	public RoomVoBuilder(RoomInfo info) {
 		super(info.getType());
-		this.setName(info.getName()).setPeopleNum(info.getPeopleNum()).setRoomNum(info.getRoomNum());
+		this.setName(info.getName()).setPeopleNum(info.getPeopleNum()).setRoomNum(info.getRoomNum()).setPrice(info.getPrice());
 	}
 	
-	protected RoomVoBuilder(String type){
+	public RoomVoBuilder(String type){
 		super(type);
 	}
 
 	@Override
 	public RoomVoBuilder setName(String name) {
 		if (checkName(name))
-			this.name = name;
+			super.setName(name);
 		return this;
 	}
 	
@@ -36,16 +36,19 @@ public class RoomVoBuilder extends RoomInfoBuilder{
 		super.setRoomNum(roomNum);
 		return this;
 	}
+	
+	public RoomVoBuilder setPrice(double price){
+		super.setPrice(price);
+		return this;
+	}
 
 	@Override
 	public RoomVo getRoomInfo() {
 		if (!isReady())
 			return null;
 
-		if (type == Type.OTHER)
-			return new RoomVo(Type.OTHER).setName(name).setPeopleNum(numOfPeople).setRoomNum(numOfRoom);
-		else
-			return new RoomVo(type).setRoomNum(numOfRoom);
+		return new RoomVo(Type.OTHER).setName(name).setPeopleNum(numOfPeople).setRoomNum(numOfRoom).setPrice(price);
+
 	}
 
 }

@@ -1,7 +1,7 @@
 package utils.promotion.applier;
 
+import utils.parameter.ParametersList;
 import utils.promotion.Describer;
-import utils.property.ParametersList;
 import vo.order.OrderVoBuilder;
 
 public abstract class ApplierTemplates {

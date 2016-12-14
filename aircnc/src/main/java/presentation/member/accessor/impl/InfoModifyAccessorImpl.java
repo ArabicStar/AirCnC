@@ -42,14 +42,7 @@ public final class InfoModifyAccessorImpl implements InfoModifyAccessor{
 
 		return instance;
 	}
-	
-	public static boolean isLaunched(){
-		if(instance == null)
-			return false;
-		else
-			return true;
-	}
-	
+
 	@Override
 	public MemberVo getModifiedMemberVo() {
 		MemberVoBuilder builder = new MemberVoBuilder(vo.getType().toString()).setName(username)

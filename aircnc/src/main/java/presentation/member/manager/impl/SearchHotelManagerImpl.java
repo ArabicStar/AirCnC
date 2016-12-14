@@ -39,13 +39,6 @@ public class SearchHotelManagerImpl implements SearchHotelManager{
 		return instance;
 	}
 	
-	public static boolean isLaunched(){
-		if(instance == null)
-			return false;
-		else
-			return true;
-	}
-	
 	private ObservableList<SearchHotelsModel> searchHotelsData;
 	@Override
 	public boolean setHotel(List<HotelVo> list) {

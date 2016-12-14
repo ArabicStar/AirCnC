@@ -1,8 +1,8 @@
 package utils.promotion.applier;
 
 import utils.info.order.OrderInfo;
+import utils.parameter.ParametersList;
 import utils.promotion.Describer;
-import utils.property.ParametersList;
 
 public enum How {
 	CONST, //

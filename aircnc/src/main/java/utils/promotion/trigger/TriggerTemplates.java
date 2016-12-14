@@ -8,10 +8,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
 
+import utils.parameter.ParametersList;
 import utils.promotion.Describer;
 import utils.promotion.trigger.hotel.HotelWhen;
 import utils.promotion.trigger.website.WebsiteWhen;
-import utils.property.ParametersList;
 
 public final class TriggerTemplates {
 	private TriggerTemplates() {

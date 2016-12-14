@@ -1,4 +1,4 @@
-package presentation.member.utils.cell;
+package presentation.member.utils;
 
 import java.util.List;
 

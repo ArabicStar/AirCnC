@@ -41,13 +41,6 @@ public class MyOrderManagerImpl implements MyOrderManager{
 		return instance;
 	}
 	
-	public static boolean isLaunched(){
-		if(instance == null)
-			return false;
-		else
-			return true;
-	}
-	
 	@Override
 	public boolean setOrderList(List<OrderVo> list) {
 		if(list!=null){

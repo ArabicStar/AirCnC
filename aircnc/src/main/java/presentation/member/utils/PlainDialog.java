@@ -1,4 +1,4 @@
-package presentation.member.utils.dialog;
+package presentation.member.utils;
 
 import java.util.Optional;
 

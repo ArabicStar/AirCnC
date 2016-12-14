@@ -27,12 +27,8 @@
 
 .portrait-hbox{
 	-fx-background-image: url("../../../../../images/member/member-portrait.png");
-	-fx-background-size: 100px 100px;
-	-fx-background-repeat: stretch;
-	-fx-border-radius: 50px;
-	-fx-background-radius: 50px;
-	-fx-border-color: #4f4e84;
-	-fx-border-width: 2px;
+	-fx-background-size: 97px 97px;
+	-fx-background-repeat: no-repeat;
 	/*-fx-background-radius: 50px;
 	-fx-border-color: #4f4e84;
 	-fx-border-width: 3px;
@@ -40,8 +36,8 @@
 }
 
 .portrait-border{
-	/*-fx-border-radius: 50px;
+	-fx-border-radius: 50px;
 	-fx-background-radius: 50px;
 	-fx-border-color: #4f4e84;
-	-fx-border-width: 2px;*/
+	-fx-border-width: 2px;
 }

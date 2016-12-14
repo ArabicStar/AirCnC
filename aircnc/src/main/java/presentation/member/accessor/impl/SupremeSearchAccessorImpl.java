@@ -33,13 +33,6 @@ public class SupremeSearchAccessorImpl implements SupremeSearchAccessor{
 		return instance;
 	}
 	
-	public static boolean isLaunched(){
-		if(instance == null)
-			return false;
-		else
-			return true;
-	}
-	
 	@Override
 	public void setYear(int year) {
 		this.year = year;

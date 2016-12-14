@@ -1,9 +1,9 @@
 package utils.promotion.trigger.website;
 
 import utils.info.order.OrderInfo;
+import utils.parameter.ParametersList;
 import utils.promotion.OrderRelatedInfoHelper;
 import utils.promotion.trigger.Trigger;
-import utils.property.ParametersList;
 
 public class WebsiteTrigger implements Trigger {
 

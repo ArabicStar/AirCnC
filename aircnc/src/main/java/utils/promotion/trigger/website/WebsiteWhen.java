@@ -1,11 +1,11 @@
 package utils.promotion.trigger.website;
 
 import utils.info.order.OrderInfo;
+import utils.parameter.ParametersList;
 import utils.promotion.Describer;
 import utils.promotion.OrderRelatedInfoHelper;
 import utils.promotion.trigger.Criterion;
 import utils.promotion.trigger.TriggerTemplates;
-import utils.property.ParametersList;
 
 public enum WebsiteWhen {
 	LEVEL, //

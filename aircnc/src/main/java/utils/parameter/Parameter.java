@@ -1,4 +1,4 @@
-package utils.property;
+package utils.parameter;
 
 import static utils.exception.StaticExceptionFactory.*;
 import java.lang.reflect.ParameterizedType;

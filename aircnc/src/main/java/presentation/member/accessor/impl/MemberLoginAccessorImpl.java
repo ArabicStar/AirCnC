@@ -27,13 +27,6 @@ public class MemberLoginAccessorImpl implements MemberLoginAccessor{
 		return instance;
 	}
 	
-	public static boolean isLaunched(){
-		if(instance == null)
-			return false;
-		else
-			return true;
-	}
-	
 	@Override
 	public String getId() {
 		

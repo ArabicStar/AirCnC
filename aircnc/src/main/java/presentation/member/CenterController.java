@@ -11,12 +11,8 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import presentation.member.accessor.MemberLoginAccessor;
-import presentation.member.accessor.RegisterEnterpriseAccessor;
-import presentation.member.accessor.RegisterPersonAccessor;
 import presentation.member.accessor.impl.MemberLoginAccessorImpl;
-import presentation.member.accessor.impl.RegisterEnterpriseAccessorImpl;
-import presentation.member.accessor.impl.RegisterPersonAccessorImpl;
+import presentation.member.accessor.impl.RegisterAccessorImpl;
 import presentation.member.view.signin.MemberRegisterEnterprisePane;
 
 /**
@@ -36,10 +32,6 @@ public class CenterController extends Application {
 	private MemberRegisterMainPane registerMain;
 	private MemberRegisterPersonPane registerPerson;
 	private MemberRegisterEnterprisePane registerBusiness;
-	
-	private MemberLoginAccessor loginAccessor;
-	private RegisterPersonAccessor registerPersonAccessor;
-	private RegisterEnterpriseAccessor registerEnterpriseAccessor;
 	
 	private Scene scene;
 
@@ -77,34 +69,25 @@ public class CenterController extends Application {
 	 * add the pane of sign in (MemberSignInPane)
 	 */
 	public void addSignInPane() {
-		if(!MemberLoginAccessorImpl.isLaunched())
-			MemberLoginAccessorImpl.launch();
+		MemberLoginAccessorImpl.launch();
 		URL location = getClass().getResource("/images/member/register/login_BG.png");
 		start.getBorderPane().setStyle("-fx-background-image: url("+location+");");
-		loginAccessor = new MemberLoginAccessorImpl();
 		start.getBorderPane().getChildren().clear();
 		signIn = new MemberSignInPane();
 		start.getBorderPane().setCenter(signIn.getPane());
 		signIn.getController().setCenterController(this);
-		signIn.getController().setAccessor(loginAccessor);
 	}
 
 	/**
 	 * add the pane of register (MemberRegisterMainPane)
 	 */
 	public void addRegisterPane() {
-		if(!RegisterAccessorImpl.isLaunched())
-			RegisterAccessorImpl.launch();
+		RegisterAccessorImpl.launch();
 		URL location = getClass().getResource("../../images/member/register/register_BG.png");
 		start.getBorderPane().setStyle("-fx-background-image: url("+location+");");
-		registerPersonAccessor = new RegisterPersonAccessorImpl();
-		registerEnterpriseAccessor = new RegisterEnterpriseAccessorImpl();
 		start.getBorderPane().getChildren().clear();
 		registerMain = new MemberRegisterMainPane();
 		registerMain.getController().setCenterController(this);
-		start.getBorderPane().setCenter(registerMain.getPane());
-		registerMain.getController().setPersonAccessor(registerPersonAccessor);
-		registerMain.getController().setEnterPriseAccessor(registerEnterpriseAccessor);
 	}
 
 	/**
@@ -115,7 +98,6 @@ public class CenterController extends Application {
 		registerPerson = new MemberRegisterPersonPane();
 		registerPerson.getController().setCenterController(this);
 		start.getBorderPane().setCenter(registerPerson.getPane());
-		registerPerson.getController().setAccessor(registerPersonAccessor);
 	}
 
 	/**
@@ -126,7 +108,6 @@ public class CenterController extends Application {
 		registerBusiness = new MemberRegisterEnterprisePane();
 		registerBusiness.getController().setCenterController(this);
 		start.getBorderPane().setCenter(registerBusiness.getPane());
-		registerBusiness.getController().setAccessor(registerEnterpriseAccessor);
 	}
 
 	/**

@@ -1,4 +1,4 @@
-package presentation.member.utils.cell;
+package presentation.member.utils;
 
 import javafx.scene.control.TableCell;
 import presentation.member.model.CreditModel;
