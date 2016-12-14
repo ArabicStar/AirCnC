@@ -1,9 +1,5 @@
 package interactor.member;
 
-import presentation.member.accessor.MemberLoginAccessor;
-import presentation.member.accessor.RegisterAccessor;
-import presentation.member.manager.UserInfoManager;
-
 /**
  * A mediate layer for interactive between UI and logic layer about member
  * account.<br>
@@ -20,11 +16,11 @@ import presentation.member.manager.UserInfoManager;
  *
  */
 public interface MemberAccountInteractor {
-	public void register(final RegisterAccessor acs, UserInfoManager man);
+	public void register();
 
 	public void login();
 
 	public void logout();
 
-	public void refreshCurrentAccount(UserInfoManager man);
+	public void refreshCurrentAccount();
 }

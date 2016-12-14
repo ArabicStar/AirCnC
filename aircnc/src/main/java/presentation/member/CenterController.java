@@ -11,12 +11,8 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import presentation.member.accessor.MemberLoginAccessor;
-import presentation.member.accessor.RegisterEnterpriseAccessor;
-import presentation.member.accessor.RegisterPersonAccessor;
 import presentation.member.accessor.impl.MemberLoginAccessorImpl;
-import presentation.member.accessor.impl.RegisterEnterpriseAccessorImpl;
-import presentation.member.accessor.impl.RegisterPersonAccessorImpl;
+import presentation.member.accessor.impl.RegisterAccessorImpl;
 import presentation.member.view.signin.MemberRegisterEnterprisePane;
 
 /**
@@ -86,8 +82,7 @@ public class CenterController extends Application {
 	 * add the pane of register (MemberRegisterMainPane)
 	 */
 	public void addRegisterPane() {
-		RegisterPersonAccessorImpl.launch();
-		RegisterEnterpriseAccessorImpl.launch();
+		RegisterAccessorImpl.launch();
 		URL location = getClass().getResource("../../images/member/register/register_BG.png");
 		start.getBorderPane().setStyle("-fx-background-image: url("+location+");");
 		start.getBorderPane().getChildren().clear();

@@ -1,24 +1,17 @@
 package interactor.member;
 
-import presentation.member.accessor.InfoModifyAccessor;
-import presentation.member.accessor.SearchOrderInfoAccessor;
-import presentation.member.manager.CreditChangeManager;
-import presentation.member.manager.MyOrderManager;
-import presentation.member.manager.SearchHotelManager;
-import presentation.member.manager.UserInfoManager;
-
 public interface MemberInfoInteractor {
-	public void getMemberInfo(final UserInfoManager man);
+	public void getMemberInfo();
 
-	public void getMemberAllOrders(final MyOrderManager man);
+	public void getMemberAllOrders();
 
-	public void getMemberOrdersByStatus(final SearchOrderInfoAccessor acs, MyOrderManager man);
+	public void getMemberOrdersByStatus();
 
-	public void getMemberHistoryHotel(final SearchHotelManager man);
+	public void getMemberHistoryHotel();
 
-	public void getMemberCreditChange(final CreditChangeManager man);
+	public void getMemberCreditChange();
 
-	public void updatePassword(final InfoModifyAccessor acs);
+	public void updatePassword();
 
-	public void updateInfo(final InfoModifyAccessor acs, UserInfoManager man);
+	public void updateInfo();
 }

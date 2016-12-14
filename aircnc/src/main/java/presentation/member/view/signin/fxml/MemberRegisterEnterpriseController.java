@@ -9,8 +9,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import presentation.member.CenterController;
-import presentation.member.accessor.RegisterEnterpriseAccessor;
-import presentation.member.accessor.impl.RegisterEnterpriseAccessorImpl;
+import presentation.member.accessor.RegisterAccessor;
+import presentation.member.accessor.impl.RegisterAccessorImpl;
 
 /**
  * the controller of business register pane.
@@ -28,7 +28,7 @@ public class MemberRegisterEnterpriseController implements Initializable {
 
 	private CenterController controller;
 
-	private RegisterEnterpriseAccessor accessor;
+	private RegisterAccessor accessor;
 
 	/**
 	 * Initializes the controller class. This method is automatically called
@@ -45,7 +45,7 @@ public class MemberRegisterEnterpriseController implements Initializable {
 				confirm.setDisable(newValue.trim().isEmpty());
 			});
 		});
-		accessor = RegisterEnterpriseAccessorImpl.getInstance();
+		accessor = RegisterAccessorImpl.getInstance();
 	}
 
 	/**

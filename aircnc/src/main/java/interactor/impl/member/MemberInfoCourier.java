@@ -12,12 +12,12 @@ import java.util.stream.Collectors;
 
 import interactor.member.MemberInfoInteractor;
 import interactor.utils.Title;
-import presentation.member.accessor.InfoModifyAccessor;
-import presentation.member.accessor.SearchOrderInfoAccessor;
-import presentation.member.manager.CreditChangeManager;
-import presentation.member.manager.MyOrderManager;
-import presentation.member.manager.SearchHotelManager;
-import presentation.member.manager.UserInfoManager;
+import presentation.member.accessor.impl.InfoModifyAccessorImpl;
+import presentation.member.accessor.impl.SearchOrderInfoAccessorImpl;
+import presentation.member.manager.impl.CreditChangeManagerImpl;
+import presentation.member.manager.impl.MemberInfoManagerImpl;
+import presentation.member.manager.impl.MyOrderManagerImpl;
+import presentation.member.manager.impl.SearchHotelManagerImpl;
 import service.member.MemberAccountService;
 import service.member.MemberInfoService;
 import utils.info.member.MemberInfo;
@@ -55,7 +55,7 @@ public final class MemberInfoCourier implements MemberInfoInteractor {
 
 	@Override
 	@Title("Get Member Info")
-	public void getMemberInfo(UserInfoManager man) {
+	public void getMemberInfo() {
 		String title = getTitle();
 
 		MemberInfo info = execute(title, () -> {
@@ -67,12 +67,12 @@ public final class MemberInfoCourier implements MemberInfoInteractor {
 			return null;
 		});
 
-		man.setUser(info);
+		MemberInfoManagerImpl.getInstance().setUser(info);
 	}
 
 	@Override
 	@Title("Get Orders")
-	public void getMemberAllOrders(MyOrderManager man) {
+	public void getMemberAllOrders() {
 		String title = getTitle();
 
 		List<OrderVo> list = execute(title, () -> {
@@ -84,18 +84,18 @@ public final class MemberInfoCourier implements MemberInfoInteractor {
 			return null;
 		});
 
-		man.setOrderList(list);
+		MyOrderManagerImpl.getInstance().setOrderList(list);
 	}
 
 	@Override
 	@Title("Get Orders by Status")
-	public void getMemberOrdersByStatus(SearchOrderInfoAccessor acs, MyOrderManager man) {
+	public void getMemberOrdersByStatus() {
 		String title = getTitle();
 
 		List<OrderVo> list = execute(title, () -> {
 			String id = getCurrentId();
 			if (id != null)
-				return acs.getStatus().stream().map(status -> handler.getMemberOrdersByStatus(id, status))
+				return SearchOrderInfoAccessorImpl.getInstance().getStatus().stream().map(status -> handler.getMemberOrdersByStatus(id, status))
 						.collect(Collectors.reducing((l1, l2) -> {
 							l1.addAll(l2);
 							return l1;
@@ -105,12 +105,12 @@ public final class MemberInfoCourier implements MemberInfoInteractor {
 			return null;
 		});
 
-		man.setOrderList(list);
+		MyOrderManagerImpl.getInstance().setOrderList(list);
 	}
 
 	@Override
 	@Title("Get History Hotels")
-	public void getMemberHistoryHotel(SearchHotelManager man) {
+	public void getMemberHistoryHotel() {
 		String title = getTitle();
 
 		List<HotelVo> list = execute(title, () -> {
@@ -122,13 +122,13 @@ public final class MemberInfoCourier implements MemberInfoInteractor {
 			return null;
 		});
 
-		man.setHotel(list);
+		SearchHotelManagerImpl.getInstance().setHotel(list);
 
 	}
 
 	@Override
 	@Title("Get Credit Changes")
-	public void getMemberCreditChange(CreditChangeManager man) {
+	public void getMemberCreditChange() {
 		String title = getTitle();
 
 		List<CreditChangeVo> list = execute(title, () -> {
@@ -140,18 +140,19 @@ public final class MemberInfoCourier implements MemberInfoInteractor {
 			return null;
 		});
 
-		man.setCreditChanges(list);
+		CreditChangeManagerImpl.getInstance().setCreditChanges(list);
 	}
 
 	@Override
-	public void updatePassword(InfoModifyAccessor acs) {
+	public void updatePassword() {
 		String title = getTitle();
 
 		execute(title, () -> {
 			String id = getCurrentId();
 			if (id != null)
 
-				if (!handler.updatePassword(acs.getPasswordHash(), acs.getPasswordHash()))
+				if (!handler.updatePassword(InfoModifyAccessorImpl.getInstance().getPasswordHash()
+						, InfoModifyAccessorImpl.getInstance().getPasswordHash()))
 					alertFail(title, "Wrong password");
 				else
 					alertSuccess(title, "Update password succeed");
@@ -160,9 +161,9 @@ public final class MemberInfoCourier implements MemberInfoInteractor {
 	}
 
 	@Override
-	public void updateInfo(InfoModifyAccessor acs, UserInfoManager man) {
+	public void updateInfo() {
 		String title = getTitle();
-		MemberInfo modified = acs.getModifiedMemberVo();
+		MemberInfo modified = InfoModifyAccessorImpl.getInstance().getModifiedMemberVo();
 
 		boolean res = execute(title, () -> {
 			String id = getCurrentId();
@@ -173,7 +174,7 @@ public final class MemberInfoCourier implements MemberInfoInteractor {
 			return null;
 		});
 
-		man.setUser(res ? modified : null);
+		MemberInfoManagerImpl.getInstance().setUser(res ? modified : null);
 	}
 
 	private String getCurrentId() {

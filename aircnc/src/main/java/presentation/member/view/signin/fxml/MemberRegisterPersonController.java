@@ -12,8 +12,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import presentation.member.CenterController;
-import presentation.member.accessor.RegisterPersonAccessor;
-import presentation.member.accessor.impl.RegisterPersonAccessorImpl;
+import presentation.member.accessor.RegisterAccessor;
+import presentation.member.accessor.impl.RegisterAccessorImpl;
 import presentation.member.utils.PlainDialog;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Button;
@@ -52,7 +52,7 @@ public class MemberRegisterPersonController implements Initializable{
 	
 	private CenterController controller;
 	
-	private RegisterPersonAccessor accessor;
+	private RegisterAccessor accessor;
 	
 	/**
 	 * Initializes the controller class. This method is automatically called
@@ -106,7 +106,7 @@ public class MemberRegisterPersonController implements Initializable{
 		});	
 		//use "new Separator" to create subitems.
 		
-		accessor = RegisterPersonAccessorImpl.getInstance();
+		accessor = RegisterAccessorImpl.getInstance();
 	}
 	
 	/**

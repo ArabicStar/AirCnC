@@ -13,10 +13,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import presentation.member.CenterController;
-import presentation.member.accessor.RegisterEnterpriseAccessor;
-import presentation.member.accessor.RegisterPersonAccessor;
-import presentation.member.accessor.impl.RegisterEnterpriseAccessorImpl;
-import presentation.member.accessor.impl.RegisterPersonAccessorImpl;
+import presentation.member.accessor.RegisterAccessor;
+import presentation.member.accessor.impl.RegisterAccessorImpl;
 import presentation.member.utils.PlainDialog;
 
 
@@ -54,8 +52,7 @@ public class MemberRegisterMainController implements Initializable{
 	
 	private CenterController controller;
 	
-	private RegisterPersonAccessor accessorPerson;
-	private RegisterEnterpriseAccessor accessorEnterprise;
+	private RegisterAccessor accessor;
 	
 	/**
 	 * Initializes the controller class. This method is automatically called
@@ -77,8 +74,7 @@ public class MemberRegisterMainController implements Initializable{
 		    next.setDisable(newValue.trim().isEmpty());
 		});
 		
-		accessorPerson = RegisterPersonAccessorImpl.getInstance();
-		accessorEnterprise = RegisterEnterpriseAccessorImpl.getInstance();
+		accessor = RegisterAccessorImpl.getInstance();
 	}
 	
 	/**
@@ -96,12 +92,14 @@ public class MemberRegisterMainController implements Initializable{
 		if(username.getText().length()!=0&&password.getText().length()!=0){
 			if(password.getText().equals(confirmPassword.getText())){
 				if(personal.isSelected()){
-					accessorPerson.setUsername(username.getText());
-					accessorPerson.setPassword(password.getText());
+					accessor.setUsername(username.getText());
+					accessor.setPassword(password.getText());
+					accessor.setType("personal");
 					controller.addRegisterPersonPane();
 				}else if(business.isSelected()){
-					accessorEnterprise.setUsername(username.getText());
-					accessorEnterprise.setPassword(password.getText());
+					accessor.setUsername(username.getText());
+					accessor.setPassword(password.getText());
+					accessor.setType("business");
 					controller.addRegisterBusinessPane();
 				}else{
 					PlainDialog alert = new PlainDialog(AlertType.INFORMATION,

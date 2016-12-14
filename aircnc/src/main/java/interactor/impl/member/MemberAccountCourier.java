@@ -9,10 +9,8 @@ import static utils.exception.StaticExceptionFactory.unknownEx;
 
 import interactor.member.MemberAccountInteractor;
 import interactor.utils.Title;
-import presentation.member.accessor.MemberLoginAccessor;
-import presentation.member.accessor.RegisterAccessor;
 import presentation.member.accessor.impl.MemberLoginAccessorImpl;
-import presentation.member.manager.UserInfoManager;
+import presentation.member.accessor.impl.RegisterAccessorImpl;
 import presentation.member.manager.impl.MemberInfoManagerImpl;
 import service.member.MemberAccountService;
 import utils.info.member.MemberInfo;
@@ -44,16 +42,17 @@ public final class MemberAccountCourier implements MemberAccountInteractor {
 
 	@Override
 	@Title("Register")
-	public void register(RegisterAccessor acs, UserInfoManager man) {
+	public void register() {
 		String title = getTitle();
 		MemberInfo info = execute(title, () -> {
-			MemberInfo tmp = handler.register(acs.getNewAccountInfo(), acs.getPasswordHash());
+			MemberInfo tmp = handler.register(RegisterAccessorImpl.getInstance().getNewAccountInfo()
+					, RegisterAccessorImpl.getInstance().getPasswordHash());
 			if (tmp == null)
 				throw unknownEx();
 			return tmp;
 		});
 
-		man.setUser(info);
+	 MemberInfoManagerImpl.getInstance().setUser(info);
 	}
 
 	@Override
@@ -86,7 +85,7 @@ public final class MemberAccountCourier implements MemberAccountInteractor {
 
 	@Override
 	@Title("Refresh Account")
-	public void refreshCurrentAccount(UserInfoManager man) {
+	public void refreshCurrentAccount() {
 		execute(getTitle(), () -> {
 			return handler.refreshCurrentAccount();
 		});
