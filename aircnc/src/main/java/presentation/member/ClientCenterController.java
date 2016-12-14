@@ -1,4 +1,6 @@
-package presentation.member;
+﻿package presentation.member;
+
+import java.util.Optional;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -9,12 +11,13 @@ import presentation.member.view.memberinfo.MemberInfoMainPane;
 import presentation.member.view.memberinfo.MemberInfoModifyPane;
 import presentation.member.view.myorder.MemberOrderMainPane;
 import presentation.member.view.searchhotel.MemberSearchHotelPane;
-import presentation.member.accessor.InfoModifyAccessor;
 import presentation.member.accessor.impl.InfoModifyAccessorImpl;
-import presentation.member.manager.CreditChangeManager;
-import presentation.member.manager.MyOrderManager;
-import presentation.member.manager.SearchHotelManager;
-import presentation.member.manager.UserInfoManager;
+import presentation.member.accessor.impl.SearchHotelInfoAccessorImpl;
+import presentation.member.manager.impl.CreditChangeManagerImpl;
+import presentation.member.manager.impl.MemberInfoManagerImpl;
+import presentation.member.manager.impl.MyOrderManagerImpl;
+import presentation.member.manager.impl.SearchHotelManagerImpl;
+import presentation.member.utils.dialog.TextFieldDialog;
 import presentation.member.view.MemberMainPane;
 import presentation.member.view.creditchange.MemberCreditChangePane;
 
@@ -46,6 +49,8 @@ public class ClientCenterController extends Application {
 
 	private AnchorPane rootLayout;
 	private AnchorPane content;
+	
+	private MemberTest test;
 
 	private final static int Client_Width = 1024;
 	private final static int Client_Height = 768;
@@ -74,22 +79,26 @@ public class ClientCenterController extends Application {
 	}
 
 	public void addInfoMainPane() {
-		memberInfoManager = test.getUserData();
+		if(!MemberInfoManagerImpl.isLaunched())
+			MemberInfoManagerImpl.launch();
+		test.getUserData();
 		content.getChildren().clear();
 		infoMain = new MemberInfoMainPane();
 		content.getChildren().add(infoMain.getContentPane());
-		AnchorPane.setTopAnchor(infoMain.getContentPane(),10.0);
+		AnchorPane.setTopAnchor(infoMain.getContentPane(),0.0);
 		infoMain.getController().setCenterController(this);
 		infoMain.getController().setManager(memberInfoManager);
 		
 	}
 
 	public void addInfoModifyPane() {
+		if(!InfoModifyAccessorImpl.isLaunched())
+			InfoModifyAccessorImpl.launch();
 		content.getChildren().clear();
 		memberInfoAccessor = new InfoModifyAccessorImpl();
 		infoModify = new MemberInfoModifyPane();
 		content.getChildren().add(infoModify.getPane());
-		AnchorPane.setTopAnchor((infoModify.getPane()), 10.0);
+		AnchorPane.setTopAnchor((infoModify.getPane()), 0.0);
 		//(infoModify.getPane());
 		infoModify.getController().setCenterController(this);
 		infoModify.getController().setAccessor(memberInfoAccessor);
@@ -97,11 +106,13 @@ public class ClientCenterController extends Application {
 	}
 
 	public void addCreditChangePane() {
-		creditManager = test.getCreditData();
+		if(!CreditChangeManagerImpl.isLaunched())
+			CreditChangeManagerImpl.launch();
+		test.getCreditData();
 		content.getChildren().clear();
 		creditMain = new MemberCreditChangePane();
 		content.getChildren().add(creditMain.getPane());
-		AnchorPane.setTopAnchor(creditMain.getPane(), 10.0);
+		AnchorPane.setTopAnchor(creditMain.getPane(), 0.0);
 		creditMain.getController().setCenterController(this);
 		creditMain.getController().setManager(creditManager);
 		//addCreditChangeRecord();
@@ -112,17 +123,34 @@ public class ClientCenterController extends Application {
 	}
 
 	public void addSearchHotelPane() {
-		searchManager = test.getSearchedData();
+		if(!SearchHotelManagerImpl.isLaunched())
+			SearchHotelManagerImpl.launch();
+		test.getSearchedData();
 		content.getChildren().clear();
-		searchMain = new MemberSearchHotelPane();
-		content.getChildren().add(searchMain.getPane());
-		searchMain.getController().setCenterController(this);
-		searchMain.getController().setManager(searchManager);
-		searchMain.getController().setRootLayout(content);
+		if(!SearchHotelManagerImpl.isLaunched())
+			SearchHotelManagerImpl.launch();
+		if(!SearchHotelInfoAccessorImpl.isLaunched())
+			SearchHotelInfoAccessorImpl.launch();
+		TextFieldDialog dialog = new TextFieldDialog("搜索酒店","商圈：");
+		
+		Optional<String> result = dialog.showDialog();
+		
+		if(result.isPresent()){
+			SearchHotelInfoAccessorImpl.getInstance().setScope(result.get());
+			test.getSearchedData();
+			searchMain = new MemberSearchHotelPane();
+			content.getChildren().add(searchMain.getPane());
+			searchMain.getController().setCenterController(this);
+			searchMain.getController().setRootLayout(content);			
+		}else{
+			mainClient.getController().setSearchHotelDisable(false);
+		}
 	}
 	
 	public void addOrderMainPane() {
-		myOrderManager = test.getMyOrderData();
+		if(!MyOrderManagerImpl.isLaunched())
+			MyOrderManagerImpl.launch();
+		test.getMyOrderData();
 		content.getChildren().clear();
 		orderMain = new MemberOrderMainPane();
 		content.getChildren().add(orderMain.getPane());

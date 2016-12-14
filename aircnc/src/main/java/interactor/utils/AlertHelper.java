@@ -1,7 +1,7 @@
 package interactor.utils;
 
 import javafx.scene.control.Alert.AlertType;
-import presentation.member.utils.PlainDialog;
+import presentation.member.utils.dialog.PlainDialog;
 
 public final class AlertHelper {
 	private AlertHelper() {

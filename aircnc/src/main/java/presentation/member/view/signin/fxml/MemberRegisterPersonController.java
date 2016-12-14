@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import interactor.impl.member.MemberAccountCourier;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,7 +15,7 @@ import javafx.scene.control.Alert.AlertType;
 import presentation.member.CenterController;
 import presentation.member.accessor.RegisterAccessor;
 import presentation.member.accessor.impl.RegisterAccessorImpl;
-import presentation.member.utils.PlainDialog;
+import presentation.member.utils.dialog.PlainDialog;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -125,8 +126,8 @@ public class MemberRegisterPersonController implements Initializable{
 			//这里还要修改
 			result.ifPresent(usernamePassword -> {
 				accessor.setBirthday(LocalDate.of(chooseYear.getValue(), chooseMonth.getValue(), chooseDay.getValue()));
+				MemberAccountCourier.getInstance().register();
 				controller.addSignInPane();
-				System.out.print("我把数据传过去了");
 			});
 		}else{
 			PlainDialog alert = new PlainDialog(AlertType.INFORMATION,

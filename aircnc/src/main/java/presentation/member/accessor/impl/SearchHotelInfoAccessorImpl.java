@@ -34,6 +34,13 @@ public class SearchHotelInfoAccessorImpl implements SearchHotelInfoAccessor{
 
 		return instance;
 	}
+	
+	public static boolean isLaunched(){
+		if(instance == null)
+			return false;
+		else
+			return true;
+	}
 
 	@Override
 	public void setScope(String scope) {
