@@ -14,43 +14,60 @@
                   <HBox spacing="40.0">
                      <children>
                         <Label styleClass="info-index" text="所属商圈" />
-                        <Label fx:id="scope" styleClass="info-content" />
+                        <Label fx:id="scope" styleClass="info-content">
+                           <HBox.margin>
+                              <Insets top="5.0" />
+                           </HBox.margin></Label>
                      </children>
                   </HBox>
                   <HBox spacing="40.0">
                      <children>
                         <Label styleClass="info-index" text="地址" />
-                        <Label fx:id="location" styleClass="info-content" />
+                        <Label fx:id="location" styleClass="info-content">
+                           <HBox.margin>
+                              <Insets top="5.0" />
+                           </HBox.margin></Label>
                      </children>
                   </HBox>
                </children>
             </HBox>
-            <HBox prefHeight="36.0" prefWidth="687.0" spacing="40.0">
+            <HBox prefHeight="100.0" prefWidth="687.0" spacing="40.0">
                <children>
                   <Label styleClass="info-index" text="星级" />
-                  <Label fx:id="star" styleClass="info-content" />
+                  <Pane fx:id="star" prefHeight="200.0" prefWidth="200.0" />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="40.0">
                <children>
                   <Label styleClass="info-index" text="简介" />
-                  <Label fx:id="introduction" styleClass="info-content" text="Label" />
+                  <Label fx:id="introduction" styleClass="info-content" text="Label">
+                     <HBox.margin>
+                        <Insets top="5.0" />
+                     </HBox.margin></Label>
                </children>
             </HBox>
             <HBox prefHeight="200.0" prefWidth="200.0" spacing="40.0">
                <children>
                   <Label styleClass="info-index" text="拥有房型" />
-                  <Label fx:id="roomType" styleClass="info-content" text="类型" />
-                  <Label fx:id="roomPrice" styleClass="price" text="价格" />
+                  <ScrollPane hbarPolicy="NEVER" pannable="true" prefHeight="162.0" prefWidth="289.0" styleClass="scollpane">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="293.0" styleClass="scollpane">
+                           <children>
+                              <Label fx:id="roomType" styleClass="info-content" text="类型" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0" />
+                              <Label fx:id="roomPrice" styleClass="price" text="价格" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0" />
+                           </children>
+                        </AnchorPane>
+                    </content>
+                     <HBox.margin>
+                        <Insets bottom="10.0" />
+                     </HBox.margin>
+                  </ScrollPane>
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="40.0">
                <children>
                   <Label styleClass="info-index" text="设施" />
-                  <FlowPane fx:id="equipment" hgap="20.0" prefHeight="100.0" prefWidth="414.0" vgap="10.0">
-                     <HBox.margin>
-                        <Insets top="20.0" />
-                     </HBox.margin></FlowPane>
+                  <FlowPane fx:id="equipment" hgap="20.0" prefHeight="100.0" prefWidth="414.0" vgap="10.0" />
                </children>
             </HBox>
          </children>

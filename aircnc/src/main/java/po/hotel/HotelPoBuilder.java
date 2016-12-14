@@ -121,9 +121,20 @@ public class HotelPoBuilder extends HotelInfoBuilder {
 		if (from.getId() != to.getId() || !from.getName().equals(to.getName()))
 			throw new IllegalArgumentException("HotelPoBuilder.updatePo - Different identifier or name");
 
-		to.setPasswordHash(from.getPasswordHash()).setScope(from.getScope()).setLocation(from.getLocation())
-				.setIntroduction(from.getIntroduction()).setStar(from.getStar()).setGrade(from.getGrade())
-				.setRooms(from.getRooms()).setEquipment(from.getEquipment());
+		if(to.getScope() != ""){
+			to.setScope(from.getScope()).setLocation(from.getLocation())
+			.setIntroduction(from.getIntroduction()).setEquipment(from.getEquipment());
+		}
+		
+		if(to.getPasswordHash()!= Integer.MIN_VALUE){
+			to.setPasswordHash(from.getPasswordHash());
+		}
+		
+		if(to.getRooms()!=null){
+			to.setRooms(from.getRooms());
+		}
+//		.setStar(from.getStar()).setGrade(from.getGrade())
+//				.setRooms(from.getRooms()).setEquipment(from.getEquipment());
 	}
 
 }

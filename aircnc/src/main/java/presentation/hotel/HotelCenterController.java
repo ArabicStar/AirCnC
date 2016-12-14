@@ -99,10 +99,12 @@ public class HotelCenterController extends Application{
 	}
 	
 	public void addHotelModifyPane() {
+		hotelInfoManager = test.getHotelData();
 		clearContent();
 		modifyPane = new HotelInfoModifyPane();
 		mainClient.getBorderPane().setCenter(modifyPane.getPane());
 		modifyPane.getController().setCenterController(this);
+		modifyPane.getController().setManager(hotelInfoManager);
 	}
 	
 	public void addHotelInfoMainPane() {

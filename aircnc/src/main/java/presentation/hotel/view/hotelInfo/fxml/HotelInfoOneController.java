@@ -3,12 +3,16 @@ package presentation.hotel.view.hotelInfo.fxml;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import org.controlsfx.control.Rating;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
 import presentation.hotel.manager.InfoManager;
 import presentation.hotel.model.HotelInfoModel;
 import presentation.hotel.view.hotelInfo.HotelInfoController;
@@ -22,7 +26,7 @@ public class HotelInfoOneController implements Initializable{
 	private Label location;
 	
 	@FXML
-	private Label star;
+	private Pane star;
 	
 	@FXML
 	private Label introduction;
@@ -53,6 +57,7 @@ public class HotelInfoOneController implements Initializable{
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
 		Platform.runLater(new Runnable() {
 			  @Override public void run() {
 				  initHotelInfo();
@@ -90,11 +95,10 @@ public class HotelInfoOneController implements Initializable{
 	}
 	
 	private void initHotelInfo(){
-		String style = "-fx-background-color: #585697;-fx-text-fill: #fff; -fx-font-size: 10pt; -fx-border-radius: 5; -fx-background-radius: 20";
+		String style = "-fx-background-color: #585697;-fx-border-color: #585697;-fx-border-width:5px;-fx-text-fill: #fff; -fx-font-size: 20px; -fx-border-radius: 5; -fx-background-radius: 5;";
 		model = manager.getHotelInfo();
 		this.scope.setText(model.getScope());
 		this.location.setText(model.getLocation());
-		this.star.setText(model.getStar());
 		this.roomPrice.setText(model.getRoomPrice());
 		this.roomType.setText(model.getRoomName());
 		this.introduction.setText(model.getIntro());
@@ -104,6 +108,11 @@ public class HotelInfoOneController implements Initializable{
 			l.setStyle(style);
 			equipment.getChildren().add(l);
 		}
+		
+		Rating rating = new Rating();
+		rating.setRating(Double.parseDouble(model.getStar()));
+		rating.setDisable(true);;
+		this.star.getChildren().add(rating);
 		
 		
 	}

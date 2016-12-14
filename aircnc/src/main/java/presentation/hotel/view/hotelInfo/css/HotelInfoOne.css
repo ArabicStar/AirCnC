@@ -6,12 +6,12 @@
 
 
 .info-index{
-	-fx-text-fill: #a4a4a4;
+	-fx-text-fill: #808080;
 	-fx-font-size: 24 px;
 }
 
 .info-content{
-	-fx-font-size: 24 px;
+	-fx-font-size: 20 px;
 	-fx-text-fill: #000000;
 }
 
@@ -38,5 +38,9 @@
 	-fx-text-fill: #ffffff;
 	-fx-background-radius:20px,20px,20px,20px;
 	-fx-background-color:#575793;
+}
+
+.scollpane{
+	-fx-background-color:#ffffff;
 }
 
