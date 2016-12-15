@@ -3,10 +3,11 @@ package vo.hotel;
 import java.util.Set;
 
 import utils.info.hotel.HotelInfo;
+import utils.info.hotel.Room;
 
 public class HotelVo extends HotelInfo {
 
-	private Set<RoomVo> rooms;
+	private Set<Room> rooms;
 
 	public String getName() {
 		if (isValid())
@@ -14,13 +15,7 @@ public class HotelVo extends HotelInfo {
 		return null;
 	}
 
-	Set<RoomVo> getRooms() {
-		if (isValid())
-			return this.rooms;
-		return null;
-	}
-
-	HotelVo setRooms(Set<RoomVo> rooms) {
+	HotelVo setRooms(Set<Room> rooms) {
 		this.rooms = rooms;
 		return this;
 	}
@@ -67,7 +62,7 @@ public class HotelVo extends HotelInfo {
 
 	public String getStringRoomName() {
 		String type = "";
-		for (RoomVo vo : rooms) {
+		for (Room vo : rooms) {
 			if (type == "") {
 				type = vo.getName();
 			} else {
@@ -79,7 +74,7 @@ public class HotelVo extends HotelInfo {
 
 	public String getStringRoomPrice() {
 		String price = "";
-		for (RoomVo vo : rooms) {
+		for (Room vo : rooms) {
 			if (price == "") {
 				price = Double.toString(vo.getPrice()) + "元";
 			} else {

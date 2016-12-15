@@ -3,8 +3,8 @@ package service.hotel;
 import java.util.List;
 
 import utils.info.hotel.HotelInfo;
+import utils.info.hotel.Room;
 import vo.hotel.HotelVo;
-import vo.hotel.RoomVo;
 import vo.order.OrderVo;
 import vo.order.comment.CommentVo;
 
@@ -19,7 +19,7 @@ public interface HotelInfoService {
 
 	public boolean updateInfo(HotelInfo modifiedInfo);
 	
-	public List<RoomVo> getRooms(String name);
+	public List<Room> getRooms(String name);
 	
 	public double getCheapestPrice(String name);
 }

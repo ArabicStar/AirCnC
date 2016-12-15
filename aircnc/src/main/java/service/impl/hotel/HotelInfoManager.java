@@ -9,16 +9,13 @@ import data.dao.member.MemberDao;
 import data.dao.promotion.PromotionDao;
 import po.hotel.HotelPo;
 import po.hotel.HotelPoBuilder;
-import po.hotel.RoomPo;
-import po.hotel.RoomPoBuilder;
 import service.hotel.HotelAccountService;
 import service.hotel.HotelInfoService;
 import utils.info.hotel.HotelInfo;
-import utils.info.hotel.RoomInfo;
+import utils.info.hotel.Room;
+import utils.info.hotel.RoomBuilder;
 import vo.hotel.HotelVo;
 import vo.hotel.HotelVoBuilder;
-import vo.hotel.RoomVo;
-import vo.hotel.RoomVoBuilder;
 import vo.order.OrderVo;
 import vo.order.comment.CommentVo;
 
@@ -76,8 +73,8 @@ public class HotelInfoManager implements HotelInfoService {
 	}
 
 	@Override
-	public List<RoomVo> getRooms(String name) {
-		return hotelDao.findHotelByName(name).getRooms().stream().map(r -> new RoomVoBuilder(r).getRoomInfo())
+	public List<Room> getRooms(String name) {
+		return hotelDao.findHotelByName(name).getRooms().stream().map(r -> new RoomBuilder(r).getRoomInfo())
 				.collect(Collectors.toList());
 		// List<RoomVo> rooms = null;
 		// for (RoomPo po : hotelDao.findHotelByName(name).getRooms()) {
@@ -88,7 +85,7 @@ public class HotelInfoManager implements HotelInfoService {
 
 	@Override
 	public double getCheapestPrice(String name) {
-		return hotelDao.findHotelByName(name).getRooms().stream().mapToDouble(RoomPo::getPrice).min().getAsDouble();
+		return hotelDao.findHotelByName(name).getRooms().stream().mapToDouble(Room::getPrice).min().getAsDouble();
 		// double cheapest = Double.MAX_VALUE;
 		// for (RoomPo po : hotelDao.findHotelByName(name).getRooms()) {
 		// cheapest = po.getPrice() > cheapest ? cheapest : po.getPrice();

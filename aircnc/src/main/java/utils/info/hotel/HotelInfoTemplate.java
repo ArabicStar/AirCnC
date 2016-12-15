@@ -1,5 +1,7 @@
 package utils.info.hotel;
 
+import java.util.Set;
+
 /**
  * Abstract of hotel info object.<br>
  * Define fields contained in HotelInfo, and checker for them.<br>
@@ -13,6 +15,11 @@ public class HotelInfoTemplate {
 	 * id int <br>
 	 */
 	protected int id;
+	
+	/**
+	 * rooms set <br>
+	 */
+	protected Set<Room> rooms;
 	
 	/**
 	 * name string <br>

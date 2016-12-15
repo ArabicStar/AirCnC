@@ -5,10 +5,10 @@ import java.util.Set;
 import org.apache.commons.lang.StringUtils;
 
 import utils.info.hotel.HotelInfo;
+import utils.info.hotel.Room;
 
 public class HotelPo extends HotelInfo{
 	protected int passwordHash;
-	protected Set<RoomPo> rooms;
 	
 	
 	@Override
@@ -24,18 +24,12 @@ public class HotelPo extends HotelInfo{
 		return Integer.MIN_VALUE;
 	}
 	
-	public Set<RoomPo> getRooms(){
-		if (isValid())
-			return this.rooms;
-		return null;
-	}
-	
 	public HotelPo setPasswordHash(int passwordHash) {
 		this.passwordHash = passwordHash;
 		return this;
 	}
 	
-	public HotelPo setRooms(Set<RoomPo> rooms){
+	public HotelPo setRooms(Set<Room> rooms){
 		this.rooms = rooms;
 		return this;
 	}

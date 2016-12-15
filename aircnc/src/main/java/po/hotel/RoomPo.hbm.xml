@@ -4,7 +4,7 @@
 <!-- Generated 2016-11-22 11:00:34 by Hibernate Tools 3.5.0.Final -->
 <!-- RoomPo mapping xml -->
 <hibernate-mapping>
-	<class name="po.hotel.RoomPo" table="rooms">
+	<class name="utils.info.hotel.Room" table="rooms">
 
 		<!-- key column, auto generated -->
 		<id column="ID" name="id" type="integer">

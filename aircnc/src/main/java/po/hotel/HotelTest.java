@@ -15,6 +15,8 @@ import org.hibernate.criterion.Restrictions;
 
 import data.dao.hotel.HotelDao;
 import data.dao.impl.hotel.HotelDaoImpl;
+import utils.info.hotel.Room;
+import utils.info.hotel.RoomBuilder;
 
 
 public class HotelTest {
@@ -26,7 +28,7 @@ public class HotelTest {
 	private static final String[] testLocation= new String[] { "newnewnew", "仙林", "新街口","鼓楼", "啊" };
 	private static final String[] testIntro = new String[] { "zzzzz", "buibuibui", "biubiubiu","uibuibuib", "kokookoko" };
 	private static final int testPass = "12345678".hashCode();
-	private static final String[] testType = new String[]{"couple","double"};
+	private static final String[] testType = new String[]{"单人间","double"};
 	private static final int[] testPnum = new int[] {10,2};
 	private static final int[] testRnum = new int[] {100,20 };
  	public static void main(String args[]){
@@ -36,9 +38,9 @@ public class HotelTest {
 				.setLocation(testLocation[i]).setStar(testStar[i]);
 //		b.setID(1);
 		
-		Set<RoomPo> rooms = new HashSet<RoomPo>();
+		Set<Room> rooms = new HashSet<Room>();
  		for(int j = 0;j<2;j++){
- 			RoomPoBuilder r = new RoomPoBuilder(testType[j]).setPeopleNum(testPnum[j]).setRoomNum(testRnum[j]);
+ 			RoomBuilder r = new RoomBuilder(testType[j]).setPrice(300).setRoomNum(testRnum[j]);
  			rooms.add(r.getRoomInfo());
  		}
  		
@@ -47,12 +49,7 @@ public class HotelTest {
  		HotelPo po = b.getHotelInfo();
  		
  		HotelDao dao = new HotelDaoImpl();
-// 		HotelPo po2 = dao.findHotelByName("newHotel");
-// 		if(po2==null){
-// 			System.out.println("aaaa");
-// 		}
- 		
-		
+ 		System.out.println(dao.addHotel(po));		
 		
 	}
 }

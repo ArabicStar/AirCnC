@@ -8,9 +8,10 @@ import org.apache.commons.lang.StringUtils;
 import po.hotel.HotelPo;
 import utils.info.hotel.HotelInfo;
 import utils.info.hotel.HotelInfoBuilder;
+import utils.info.hotel.Room;
 
 public class HotelVoBuilder extends HotelInfoBuilder{
-	private Set<RoomVo> rooms;
+	
 
 	private static final HotelVo INVALID_HOTEL_VO;
 	static {
@@ -34,11 +35,6 @@ public class HotelVoBuilder extends HotelInfoBuilder{
 		// TODO Auto-generated constructor stub
 	}
 	
-	public HotelVoBuilder setRooms(Set<RoomVo> rooms){
-		this.rooms = rooms;
-		return this;
-	}
-	
 	@Override
 	public HotelVoBuilder setName(String name) {
 		if (checkHotelName(name))
@@ -60,6 +56,12 @@ public class HotelVoBuilder extends HotelInfoBuilder{
 	@Override
 	public HotelVoBuilder setScope(String scope) {
 		super.setScope(scope);
+		return this;
+	}
+	
+	@Override
+	public HotelVoBuilder setRooms(Set<Room> rooms) {
+		super.setRooms(rooms);
 		return this;
 	}
 	

@@ -6,8 +6,9 @@ import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 import java.util.Set;
 
 import presentation.hotel.accessor.InfoModifyAccessor;
+import utils.info.hotel.Room;
 import vo.hotel.HotelVo;
-import vo.hotel.RoomVo;
+import vo.hotel.HotelVoBuilder;
 
 public class InfoModifyAccessorImpl implements InfoModifyAccessor {
 
@@ -21,23 +22,21 @@ public class InfoModifyAccessorImpl implements InfoModifyAccessor {
 	
 	private String equipment;
 	
-	private Set<RoomVo> rooms;
+	private int password;
 
-	private HotelVo hotel;
-
-	public static final InfoModifyAccessor launch() {
-		if (instance != null)
-			throw duplicateSingletonEx();
-
-		return instance = new InfoModifyAccessorImpl();
-	}
-
-	public static final InfoModifyAccessor getInstance() {
-		if (instance == null)
-			throw singletonNotExistsEx();
-
-		return instance;
-	}
+//	public static final InfoModifyAccessor launch() {
+//		if (instance != null)
+//			throw duplicateSingletonEx();
+//
+//		return instance = new InfoModifyAccessorImpl();
+//	}
+//
+//	public static final InfoModifyAccessor getInstance() {
+//		if (instance == null)
+//			throw singletonNotExistsEx();
+//
+//		return instance;
+//	}
 
 	@Override
 	public void setScope(String scope) {
@@ -64,15 +63,23 @@ public class InfoModifyAccessorImpl implements InfoModifyAccessor {
 	}
 
 	@Override
-	public HotelVo getModifyHotelVo() {
-		// TODO Auto-generated method stub
-		return null;
+	public HotelVo getModifyHotelInfo() {
+		HotelVoBuilder builder = new HotelVoBuilder().setIntro(introduction).setEquipment(equipment).
+				setLocation(location).setScope(scope);
+		
+		return builder.getHotelInfo();
+	}
+
+
+	@Override
+	public void setPassword(String password) {
+		this.password = password.hashCode();
+		
 	}
 
 	@Override
-	public void setRooms(Set<RoomVo> rooms) {
-		this.rooms = rooms;
-
+	public int getPasswordHash() {		
+		return password;
 	}
 
 }

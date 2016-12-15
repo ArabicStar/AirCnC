@@ -7,9 +7,9 @@ package utils.info.hotel;
  * @author jqwu
  * 
  */
-public abstract class RoomInfoTemplate {
+public abstract class RoomTemplate {
 	public enum Type {
-		SINGLE, DOUBLE, TRIPLE, OTHER;
+		单人间, 双人间, 三人间, 其它;
 	}
 
 	/**

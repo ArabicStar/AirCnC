@@ -6,10 +6,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.scene.control.Button;
 import presentation.hotel.utils.ButtonName;
-import presentation.member.utils.FunctionButtons;
-import utils.info.order.OrderStatus;
 import vo.order.OrderVo;
 
 public class OrderModel {

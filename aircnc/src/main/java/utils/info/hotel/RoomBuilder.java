@@ -1,5 +1,7 @@
 package utils.info.hotel;
 
+import utils.info.hotel.RoomTemplate.Type;
+
 /**
  * Abstract of builder for RoomInfo, assisting to assure immutable object.
  * <br>
@@ -13,16 +15,22 @@ package utils.info.hotel;
  * </ul>
  * 
  * @author jqwu
- * @see utils.info.hotel.RoomInfo
+ * @see utils.info.hotel.Room
  */
-public abstract class RoomInfoBuilder extends RoomInfoTemplate{
+public class RoomBuilder extends RoomTemplate{
+	private static final Room INVALID_ROOM;
+	static {
+		INVALID_ROOM = new Room(null);
+		INVALID_ROOM.invalidate();
+	}
+	
 	
 	/**
 	 * Initialize a builder by given RoomInfo, all information will be kept.. <br>
 	 * 
 	 * @param type
 	 */
-	protected RoomInfoBuilder(RoomInfo info){
+	public RoomBuilder(Room info){
 		this(info.getType());
 		this.setName(info.getName()).setPeopleNum(info.getPeopleNum()).setRoomNum(info.getRoomNum());
 	}
@@ -32,11 +40,20 @@ public abstract class RoomInfoBuilder extends RoomInfoTemplate{
 	 * 
 	 * @param type
 	 */
-	protected RoomInfoBuilder(String type){
-		if (type == null)
+	public RoomBuilder(String name){
+		if (name == null)
 			throw new IllegalArgumentException();
 
-		this.setName(type);
+		this.setName(name);
+	}
+	
+	/**
+	 * Get an invalid RoomPo instance.
+	 * 
+	 * @return Invalid RoomPo instance
+	 */
+	public static final Room getInvalidInfo() {
+		return INVALID_ROOM;
 	}
 	
 	/**
@@ -46,16 +63,16 @@ public abstract class RoomInfoBuilder extends RoomInfoTemplate{
 	 *            name string <br>
 	 * @return this instance <br>
 	 */
-	public RoomInfoBuilder setName(String name){
+	public RoomBuilder setName(String name){
 		
-		this.name = name.toLowerCase();
+		this.name = name;
 		try{
-			type = Type.valueOf(name.toUpperCase());
+			type = Type.valueOf(name);
 		}catch (IllegalArgumentException e){
-			type = Type.OTHER;
+			type = Type.其它;
 		}
 		
-		if(type!=Type.OTHER){
+		if(type!=Type.其它){
 			numOfPeople = type.ordinal()+1;
 		}
 		return this;
@@ -69,21 +86,21 @@ public abstract class RoomInfoBuilder extends RoomInfoTemplate{
 	 *            peopleNum int <br>
 	 * @return this instance <br>
 	 */
-	protected RoomInfoBuilder setPeopleNum(int peopleNum){
+	public RoomBuilder setPeopleNum(int peopleNum){
 		if(checkPeopleNum(peopleNum)){
 			this.numOfPeople = peopleNum;
 		}
 		return this;
 	}
 	
-	protected RoomInfoBuilder setRoomNum(int roomNum){
+	public RoomBuilder setRoomNum(int roomNum){
 		if(checkRoomNum(roomNum)){
 			this.numOfRoom = roomNum;
 		}
 		return this;
 	}
 	
-	protected RoomInfoBuilder setPrice(double price){
+	public RoomBuilder setPrice(double price){
 		this.price = price;
 		return this;
 	}
@@ -92,6 +109,12 @@ public abstract class RoomInfoBuilder extends RoomInfoTemplate{
 		return (name != null);
 	}
 
-	public abstract RoomInfo getRoomInfo();
+	public Room getRoomInfo(){
+		if (isReady())
+			return new Room(type).setName(name).setPeopleNum(numOfPeople).setRoomNum(numOfRoom).setPrice(price);
+		
+
+		return new RoomBuilder("single").getRoomInfo();
+	}
 
 }

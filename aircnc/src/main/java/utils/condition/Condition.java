@@ -3,7 +3,7 @@ package utils.condition;
 import java.time.LocalDate;
 import java.util.Set;
 
-import utils.info.hotel.RoomInfoTemplate.Type;
+import utils.info.hotel.RoomTemplate.Type;
 
 public class Condition {
 	private double rankGreaterThan;

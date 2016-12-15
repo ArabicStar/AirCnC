@@ -3,23 +3,19 @@ package presentation.hotel.view.hotelInfo.fxml;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import org.controlsfx.control.Rating;
-
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import presentation.hotel.HotelCenterController;
 import presentation.hotel.accessor.InfoModifyAccessor;
 import presentation.hotel.manager.InfoManager;
 import presentation.hotel.model.HotelInfoModel;
-import presentation.hotel.view.hotelInfo.HotelInfoController;
-import presentation.member.ClientCenterController;
-import presentation.member.utils.PlainDialog;
+import presentation.member.utils.dialog.PlainDialog;
 
 public class HotelInfoModifyController implements Initializable{
 	@FXML

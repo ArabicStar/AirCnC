@@ -1,12 +1,13 @@
 package po.hotel;
 
 import java.util.Set;
+
 import utils.info.hotel.HotelInfo;
 import utils.info.hotel.HotelInfoBuilder;
+import utils.info.hotel.Room;
 
 public class HotelPoBuilder extends HotelInfoBuilder {
 	private int passwordHash = Integer.MIN_VALUE;
-	private Set<RoomPo> rooms = null;
 
 	private static final HotelPo INVALID_HOTEL_PO;
 	static {
@@ -67,7 +68,7 @@ public class HotelPoBuilder extends HotelInfoBuilder {
 		return this;
 	}
 
-	public HotelPoBuilder setRooms(Set<RoomPo> rooms) {
+	public HotelPoBuilder setRooms(Set<Room> rooms) {
 		this.rooms = rooms;
 		return this;
 	}
@@ -113,7 +114,12 @@ public class HotelPoBuilder extends HotelInfoBuilder {
 		super.setEquipment(equipment);
 		return this;
 	}
-
+	
+	/**
+	 * 
+	 * @param from modified hotel information
+	 * @param to 
+	 */
 	public static final void updatePo(HotelPo from, HotelPo to) {
 		if (from == null || to == null || from == to)
 			return;
@@ -121,20 +127,18 @@ public class HotelPoBuilder extends HotelInfoBuilder {
 		if (from.getId() != to.getId() || !from.getName().equals(to.getName()))
 			throw new IllegalArgumentException("HotelPoBuilder.updatePo - Different identifier or name");
 
-		if(to.getScope() != ""){
+		if(from.getScope() != ""){
 			to.setScope(from.getScope()).setLocation(from.getLocation())
 			.setIntroduction(from.getIntroduction()).setEquipment(from.getEquipment());
 		}
 		
-		if(to.getPasswordHash()!= Integer.MIN_VALUE){
+		if(from.getPasswordHash()!= Integer.MIN_VALUE){
 			to.setPasswordHash(from.getPasswordHash());
 		}
 		
-		if(to.getRooms()!=null){
+		if(from.getRooms()!=null){
 			to.setRooms(from.getRooms());
 		}
-//		.setStar(from.getStar()).setGrade(from.getGrade())
-//				.setRooms(from.getRooms()).setEquipment(from.getEquipment());
 	}
 
 }

@@ -1,6 +1,7 @@
 package utils.info.hotel;
 
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -43,6 +44,7 @@ public abstract class HotelInfo extends HotelInfoTemplate{
 		scope = BLANK;
 		location = BLANK;
 		introduction = BLANK;
+		rooms = null;
 		star = 1;
 		grade = 0.0;
 		equipment = BLANK;
@@ -72,6 +74,12 @@ public abstract class HotelInfo extends HotelInfoTemplate{
 	public String getIntroduction() {
 		if (isValid())
 			return introduction;
+		return null;
+	}
+	
+	public Set<Room> getRooms() {
+		if (isValid())
+			return rooms;
 		return null;
 	}
 

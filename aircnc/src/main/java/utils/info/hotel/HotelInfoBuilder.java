@@ -1,5 +1,7 @@
 package utils.info.hotel;
 
+import java.util.Set;
+
 public abstract class HotelInfoBuilder extends HotelInfoTemplate {
 
 	public HotelInfoBuilder(HotelInfo info) {
@@ -52,6 +54,12 @@ public abstract class HotelInfoBuilder extends HotelInfoTemplate {
 	public HotelInfoBuilder setEquipment(String equipment) {
 		if (equipment != null)
 			this.equipment = equipment;
+		return this;
+	}
+	
+	public HotelInfoBuilder setRooms(Set<Room> rooms) {
+		if (rooms != null)
+			this.rooms = rooms;
 		return this;
 	}
 

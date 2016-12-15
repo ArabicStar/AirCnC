@@ -7,7 +7,7 @@ import java.util.Set;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 
-import utils.info.hotel.RoomInfoTemplate.Type;
+import utils.info.hotel.RoomTemplate.Type;
 
 public class ConditionBuilder {
 	private double rankGreaterThan;

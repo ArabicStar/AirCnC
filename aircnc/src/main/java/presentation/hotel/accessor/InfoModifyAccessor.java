@@ -2,8 +2,8 @@ package presentation.hotel.accessor;
 
 import java.util.Set;
 
+import utils.info.hotel.Room;
 import vo.hotel.HotelVo;
-import vo.hotel.RoomVo;
 
 public interface InfoModifyAccessor {
 	
@@ -16,8 +16,10 @@ public interface InfoModifyAccessor {
 	
 	public void setEquip(String equip);
 	
-	public HotelVo getModifyHotelVo();
+	public HotelVo getModifyHotelInfo();
 	
-	public void setRooms(Set<RoomVo> rooms);
+	public void setPassword(String password);
+	
+	public int getPasswordHash();
 
 }
