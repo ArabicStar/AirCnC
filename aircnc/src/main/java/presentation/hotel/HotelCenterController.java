@@ -14,6 +14,7 @@ import presentation.hotel.view.hotelInfo.HotelInfoMainPane;
 import presentation.hotel.view.hotelInfo.HotelInfoModifyPane;
 import presentation.hotel.view.orderBrowse.OrderBrowsePane;
 import presentation.hotel.view.orderExecute.OrderExecutePane;
+import presentation.hotel.accessor.impl.InfoModifyAccessorImpl;
 
 
 public class HotelCenterController extends Application{
@@ -57,8 +58,14 @@ public class HotelCenterController extends Application{
 		// addSignInPane();
 
 		test = new HotelTest();
+		initialize();
 		primaryStage.show();
 		
+	}
+	
+	public void initialize(){
+		if(!InfoModifyAccessorImpl.isLaunched())
+			InfoModifyAccessorImpl.launch();
 	}
 	
 	public void addOrderExecutePane() {
@@ -105,9 +112,11 @@ public class HotelCenterController extends Application{
 		mainClient.getBorderPane().setCenter(modifyPane.getPane());
 		modifyPane.getController().setCenterController(this);
 		modifyPane.getController().setManager(hotelInfoManager);
+		modifyPane.getController().setRootLayout(rootLayout);
 	}
 	
 	public void addHotelInfoMainPane() {
+		
 		hotelInfoManager = test.getHotelData();
 		clearContent();
 		infoMainPane = new HotelInfoMainPane();

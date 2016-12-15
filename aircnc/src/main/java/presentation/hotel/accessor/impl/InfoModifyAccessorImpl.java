@@ -24,19 +24,26 @@ public class InfoModifyAccessorImpl implements InfoModifyAccessor {
 	
 	private int password;
 
-//	public static final InfoModifyAccessor launch() {
-//		if (instance != null)
-//			throw duplicateSingletonEx();
-//
-//		return instance = new InfoModifyAccessorImpl();
-//	}
-//
-//	public static final InfoModifyAccessor getInstance() {
-//		if (instance == null)
-//			throw singletonNotExistsEx();
-//
-//		return instance;
-//	}
+	public static final InfoModifyAccessor launch() {
+		if (instance != null)
+			throw duplicateSingletonEx();
+
+		return instance = new InfoModifyAccessorImpl();
+	}
+
+	public static final InfoModifyAccessor getInstance() {
+		if (instance == null)
+			throw singletonNotExistsEx();
+
+		return instance;
+	}
+	
+	public static boolean isLaunched(){
+		if(instance == null)
+			return false;
+		else
+			return true;
+	}
 
 	@Override
 	public void setScope(String scope) {

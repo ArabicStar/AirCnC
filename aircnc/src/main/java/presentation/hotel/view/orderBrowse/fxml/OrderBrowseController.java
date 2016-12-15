@@ -17,8 +17,8 @@ import javafx.scene.control.TableView;
 import javafx.util.Callback;
 import presentation.hotel.HotelCenterController;
 import presentation.hotel.model.CheckOrderModel;
-import presentation.hotel.utils.ButtonName;
-import presentation.hotel.utils.CheckButtonCell;
+import presentation.hotel.utils.cell.ButtonName;
+import presentation.hotel.utils.cell.CheckButtonCell;
 import vo.order.OrderVo;
 
 public class OrderBrowseController implements Initializable{

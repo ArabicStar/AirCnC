@@ -16,8 +16,8 @@ import javafx.scene.control.TableView;
 import javafx.util.Callback;
 import presentation.hotel.HotelCenterController;
 import presentation.hotel.model.OrderModel;
-import presentation.hotel.utils.ButtonCell;
-import presentation.hotel.utils.ButtonName;
+import presentation.hotel.utils.cell.ButtonCell;
+import presentation.hotel.utils.cell.ButtonName;
 import vo.order.OrderVo;
 
 public class AbnormalOrderController implements Initializable{

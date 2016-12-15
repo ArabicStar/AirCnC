@@ -1,4 +1,4 @@
-package presentation.hotel.utils;
+package presentation.hotel.utils.cell;
 
 import java.util.Optional;
 

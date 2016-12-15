@@ -11,10 +11,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import presentation.hotel.HotelCenterController;
 import presentation.hotel.accessor.InfoModifyAccessor;
 import presentation.hotel.manager.InfoManager;
 import presentation.hotel.model.HotelInfoModel;
+import presentation.hotel.view.hotelInfo.ModifyRoomPane;
+import presentation.member.utils.dialog.ModifyPasswordDialog;
 import presentation.member.utils.dialog.PlainDialog;
 
 public class HotelInfoModifyController implements Initializable{
@@ -40,6 +44,9 @@ public class HotelInfoModifyController implements Initializable{
 	private Button modifyRoom;
 	
 	@FXML
+	private Button password;
+	
+	@FXML
 	private TextArea equipment;
 	
 	private HotelCenterController controller;
@@ -49,6 +56,11 @@ public class HotelInfoModifyController implements Initializable{
 	InfoModifyAccessor accessor;
 	
 	private HotelInfoModel model;
+	
+	private ModifyRoomPane addRoomPane;
+	
+	private Pane rootLayout;
+	private Pane addRoomLayout;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -93,6 +105,14 @@ public class HotelInfoModifyController implements Initializable{
 	
 	@FXML
 	public void handleRoomModify(){
+		addModifyRoom();
+	}
+	
+	@FXML
+	public void handlePasswordModify(){
+		//这里逻辑处理一下
+		@SuppressWarnings("unused")
+		ModifyPasswordDialog modifyPassword = new ModifyPasswordDialog();
 		
 	}
 	
@@ -117,6 +137,26 @@ public class HotelInfoModifyController implements Initializable{
 		this.introduction.setText(model.getIntro());
 		this.equipment.setText(model.getEquip());
 		
+	}
+	
+	public void setRootLayout(Pane pane){
+		this.rootLayout = pane;
+	}
+	
+	public void setRoomLayout(Pane pane){
+		this.addRoomLayout = pane;
+	}
+	
+	public void addModifyRoom(){
+		addRoomPane = new ModifyRoomPane();
+		rootLayout.getChildren().add(addRoomPane.getPane());
+		AnchorPane.setTopAnchor(addRoomPane.getPane(), 100.0);
+		//(infoModify.getPane());
+		addRoomPane.getController().setController(this);
+	}
+	
+	public void removeSupremeSearch(){
+		rootLayout.getChildren().remove(rootLayout.getChildren().size()-1);
 	}
 	
 }

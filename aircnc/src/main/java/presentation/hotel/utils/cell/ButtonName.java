@@ -1,4 +1,4 @@
-package presentation.hotel.utils;
+package presentation.hotel.utils.cell;
 
 public enum ButtonName {
 	EXECUTE,

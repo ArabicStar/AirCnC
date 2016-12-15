@@ -27,6 +27,7 @@
    <bottom>
       <HBox alignment="TOP_RIGHT" prefHeight="137.0" prefWidth="777.0" spacing="50.0" BorderPane.alignment="CENTER">
          <children>
+            <Button fx:id="password" mnemonicParsing="false" onAction="#handlePasswordModify" styleClass="modify" text="修改密码" />
             <Button fx:id="back" mnemonicParsing="false" onAction="#handleBack" styleClass="modify" text="返回" />
             <Button fx:id="confirm" mnemonicParsing="false" onAction="#handleConfirm" onMouseClicked="#handleConfirm" styleClass="modify" text="保存" />
          </children>

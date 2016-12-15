@@ -1,8 +1,5 @@
 package presentation.hotel.accessor;
 
-import java.util.Set;
-
-import utils.info.hotel.Room;
 import vo.hotel.HotelVo;
 
 public interface InfoModifyAccessor {
