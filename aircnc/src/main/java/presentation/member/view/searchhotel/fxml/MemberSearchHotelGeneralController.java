@@ -9,9 +9,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import presentation.member.ClientCenterController;
 import presentation.member.manager.SearchHotelManager;
+import presentation.member.manager.impl.SearchHotelManagerImpl;
 import presentation.member.model.SearchHotelsModel;
 
 /**
@@ -20,6 +22,9 @@ import presentation.member.model.SearchHotelsModel;
  *
  */
 public class MemberSearchHotelGeneralController implements Initializable{
+	
+	@FXML
+	private ImageView portrait;
 	
 	@FXML
 	private Label hotelName;
@@ -34,7 +39,7 @@ public class MemberSearchHotelGeneralController implements Initializable{
 	private Label location;
 	
 	@FXML
-	private HBox promotion;
+	private Label promotion;
 	
 	@FXML
 	private Label lowestPrice;
@@ -55,7 +60,7 @@ public class MemberSearchHotelGeneralController implements Initializable{
 	private Label repeal;
 	
 	private SearchHotelManager manager;
-	private ClientCenterController controller;
+	private MemberSearchHotelController controller;
 	
 	private SearchHotelsModel model;
 
@@ -66,6 +71,7 @@ public class MemberSearchHotelGeneralController implements Initializable{
 				  initHotelInfo();
 			  }
 		});	
+		manager = SearchHotelManagerImpl.getInstance();
 	}
 	
 	@FXML
@@ -74,7 +80,7 @@ public class MemberSearchHotelGeneralController implements Initializable{
 	}
 	
 	public void initHotelInfo(){
-		
+		//model = manager.getHotelList();
 		hotelName.setText(model.getHotelName());
 		grade.setText(String.valueOf(model.getHotelGrade()));
 		scope.setText(model.getHotelScope());
@@ -91,15 +97,11 @@ public class MemberSearchHotelGeneralController implements Initializable{
 	 * set the main controller
 	 * @param controller
 	 */
-	public void setCenterController(ClientCenterController controller){
+	public void setController(MemberSearchHotelController controller){
 		this.controller = controller;
 	}
 	
-	/**
-	 * set the main manager
-	 * @param controller
-	 */
-	public void setManager(SearchHotelManager manager){
-		this.manager = manager;
+	public void setHotelModel(SearchHotelsModel model){
+		this.model = model;
 	}
 }

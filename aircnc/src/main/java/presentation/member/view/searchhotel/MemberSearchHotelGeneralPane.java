@@ -11,6 +11,8 @@ import javafx.scene.effect.Reflection;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import presentation.member.model.SearchHotelsModel;
+import presentation.member.view.searchhotel.fxml.MemberSearchHotelGeneralController;
 import presentation.member.view.searchhotel.fxml.SupremeSearchController;
 
 /**
@@ -18,13 +20,14 @@ import presentation.member.view.searchhotel.fxml.SupremeSearchController;
  * @author paranoia
  *
  */
-public class SupremeSearchPane {
+public class MemberSearchHotelGeneralPane {
 	
 	private AnchorPane searchLayout;
-	private SupremeSearchController controller;
+	private MemberSearchHotelGeneralController controller;
+	private SearchHotelsModel model;
 
-
-	public SupremeSearchPane(){
+	public MemberSearchHotelGeneralPane(SearchHotelsModel model){
+		this.model = model;
 		init();
 	}
 
@@ -32,27 +35,20 @@ public class SupremeSearchPane {
         try {
             // Load sign in overview.
             FXMLLoader loader = new FXMLLoader();
-            URL location = getClass().getResource("fxml/SupremeSearch.fxml");
+            URL location = getClass().getResource("fxml/MemberHotelGeneral.fxml");
             loader.setLocation(location);
             loader.setBuilderFactory(new JavaFXBuilderFactory());
             loader.load();
-            controller = (SupremeSearchController)loader.getController();
+            controller = (MemberSearchHotelGeneralController)loader.getController();
+            controller.setHotelModel(model);
             searchLayout = loader.getRoot();
-            
-            DropShadow ds = new DropShadow();
-            
-            ds.setOffsetY(5.0);
-            ds.setOffsetX(5.0);
-            ds.setColor(Color.GRAY);
-            
-            searchLayout.setEffect(ds);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public SupremeSearchController getController(){
+    public MemberSearchHotelGeneralController getController(){
     	return this.controller;
     }
     

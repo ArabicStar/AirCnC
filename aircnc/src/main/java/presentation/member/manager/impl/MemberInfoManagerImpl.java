@@ -35,6 +35,13 @@ public class MemberInfoManagerImpl implements UserInfoManager {
 		return instance;
 	}
 	
+	public static boolean isLaunched(){
+		if(instance == null)
+			return false;
+		else
+			return true;
+	}
+	
 	@Override
 	public boolean setUser(MemberInfo vo) {
 		if (vo != null) {

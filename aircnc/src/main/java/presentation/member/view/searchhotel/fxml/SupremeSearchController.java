@@ -14,7 +14,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert.AlertType;
 import presentation.member.accessor.SupremeSearchAccessor;
-import presentation.member.utils.PlainDialog;
+import presentation.member.accessor.impl.SupremeSearchAccessorImpl;
+import presentation.member.utils.dialog.PlainDialog;
 
 public class SupremeSearchController implements Initializable{
 	
@@ -148,7 +149,8 @@ public class SupremeSearchController implements Initializable{
 					onlyEmpty.setToggleGroup(isEmpty);
 			  }
 			  
-		});	
+		});
+		accessor = SupremeSearchAccessorImpl.getInstance();
 		
 	}
 	
@@ -229,9 +231,5 @@ public class SupremeSearchController implements Initializable{
 	
 	public void setController(MemberSearchHotelController controller){
 		this.controller = controller;
-	}
-	
-	public void setAccessor(SupremeSearchAccessor accessor){
-		this.accessor = accessor;
 	}
 }

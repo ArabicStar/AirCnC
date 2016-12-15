@@ -14,7 +14,7 @@ import javafx.scene.control.TextField;
 import presentation.member.CenterController;
 import presentation.member.accessor.MemberLoginAccessor;
 import presentation.member.accessor.impl.MemberLoginAccessorImpl;
-import presentation.member.utils.PlainDialog;
+import presentation.member.utils.dialog.PlainDialog;
 
 /**
  * this is the controller of sign in pane.
@@ -64,8 +64,11 @@ public class MemberSignInController implements Initializable{
 		if(username.getText().length()!=0&&password.getText().length()!=0){
 			accessor.setDeliveredId(username.getText());
 			accessor.setDeliveredPassword(password.getText());
-			interactor = MemberAccountCourier.getInstance();
-			//interactor.register(accessor, manager);
+			//下面是逻辑相连后的代码（没开服务器就会报错，暂时注释）
+			//<<<<<<<<<<<<<<<<<<
+//			interactor = MemberAccountCourier.getInstance();
+//			interactor.login();
+			//<<<<<<<<<<<<<<<<<<
 			//use valid to mark whether it is correct
 			boolean valid = true;
 			
