@@ -83,7 +83,7 @@
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="portrait-hbox" />
                      </children>
                   </HBox>
-                  <Button mnemonicParsing="false" text="注销" />
+                  <Button fx:id="logout" mnemonicParsing="false" onAction="#HandleLogout" styleClass="logout" text="注销" />
                </children>
             </VBox>
          </children>

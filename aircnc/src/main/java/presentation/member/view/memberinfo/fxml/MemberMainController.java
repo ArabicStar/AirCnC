@@ -1,12 +1,17 @@
 package presentation.member.view.memberinfo.fxml;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 import presentation.member.ClientCenterController;
+import presentation.member.utils.dialog.PlainDialog;
 
 /**
  * the controller of member main pane.
@@ -27,6 +32,9 @@ public class MemberMainController implements Initializable{
 	@FXML
 	private Label creditChange;
 	
+	@FXML
+	private Button logout;
+	
 	private ClientCenterController controller;
 
 	@Override
@@ -34,6 +42,17 @@ public class MemberMainController implements Initializable{
 		
 	}
 	
+	@FXML
+	private void HandleLogout(){
+		PlainDialog alert = new PlainDialog(AlertType.CONFIRMATION,
+				"注销确认","确认登出吗？");
+		
+		Optional<ButtonType> result = alert.showDialog();		
+		if(result.get() == ButtonType.OK){
+			controller.initializeLogin();
+			
+		}
+	}
 	
 	@FXML
 	private void HandleMemberInfo(){

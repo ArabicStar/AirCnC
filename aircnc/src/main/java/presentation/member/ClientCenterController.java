@@ -138,5 +138,16 @@ public class ClientCenterController extends Application {
 		content.getChildren().add(orderMain.getPane());
 		orderMain.getController().setCenterController(this);
 	}
+	
+	public void initializeLogin(){
+		primaryStage.close();
+		CenterController login = new CenterController();
+		try {
+			login.start(new Stage());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 }

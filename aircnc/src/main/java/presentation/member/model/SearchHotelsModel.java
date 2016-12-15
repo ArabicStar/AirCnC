@@ -21,6 +21,8 @@ import vo.member.MemberVo;
  */
 public class SearchHotelsModel {
 	
+	private final IntegerProperty star;
+	
 	private final StringProperty hotelName;
 	private final DoubleProperty hotelGrade;
 	private final StringProperty hotelScope;
@@ -60,6 +62,7 @@ public class SearchHotelsModel {
      */
 	public SearchHotelsModel(HotelVo vo){
 		
+		this.star = new SimpleIntegerProperty(vo.getStar());
 		this.hotelName = new SimpleStringProperty(vo.getName());
 		this.hotelGrade = new SimpleDoubleProperty(vo.getGrade());
 		this.hotelScope = new SimpleStringProperty(vo.getScope());
@@ -80,6 +83,18 @@ public class SearchHotelsModel {
 		//this.promotion = new SimpleObjectProperty<HotelPromotionCell>();
 		
 	}
+	
+	public int getStar() {
+        return star.get();
+    }
+
+    public void setStar(int i) {
+        this.star.set(i);
+    }
+
+    public IntegerProperty starProperty() {
+        return star;
+    }
 	
 	public String getHotelName() {
         return hotelName.get();

@@ -4,11 +4,13 @@ package presentation.member.view.searchhotel.fxml;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import presentation.member.ClientCenterController;
@@ -81,6 +83,9 @@ public class MemberSearchHotelGeneralController implements Initializable{
 	
 	public void initHotelInfo(){
 		//model = manager.getHotelList();
+		URL loc = getClass().getResource("/images/member/hotel-"+model.getStar()+".png");
+		Image image = new Image(loc.toString()); 
+		portrait.setImage(image);
 		hotelName.setText(model.getHotelName());
 		grade.setText(String.valueOf(model.getHotelGrade()));
 		scope.setText(model.getHotelScope());

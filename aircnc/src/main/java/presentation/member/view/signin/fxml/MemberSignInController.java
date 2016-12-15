@@ -3,7 +3,6 @@ package presentation.member.view.signin.fxml;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import interactor.impl.member.MemberAccountCourier;
 import interactor.member.MemberAccountInteractor;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
