@@ -11,15 +11,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import presentation.member.ClientCenterController;
-import presentation.member.accessor.SupremeSearchAccessor;
-import presentation.member.accessor.impl.InfoModifyAccessorImpl;
 import presentation.member.accessor.impl.SupremeSearchAccessorImpl;
 import presentation.member.manager.SearchHotelManager;
 import presentation.member.manager.impl.SearchHotelManagerImpl;
 import presentation.member.model.SearchHotelsModel;
-import presentation.member.view.memberinfo.MemberInfoModifyPane;
 import presentation.member.view.searchhotel.MemberSearchHotelGeneralPane;
 import presentation.member.view.searchhotel.SupremeSearchPane;
 

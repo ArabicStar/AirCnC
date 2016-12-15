@@ -1,7 +1,9 @@
 package presentation.member.view.myorder.fxml;
 
 import java.net.URL;
+import java.util.HashSet;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
@@ -14,6 +16,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.util.Callback;
 import presentation.member.ClientCenterController;
+import presentation.member.accessor.SearchOrderInfoAccessor;
+import presentation.member.accessor.impl.SearchOrderInfoAccessorImpl;
 import presentation.member.manager.MyOrderManager;
 import presentation.member.manager.impl.MyOrderManagerImpl;
 import presentation.member.model.MyorderModel;
@@ -62,7 +66,7 @@ public class MemberOrderMainController implements Initializable{
 	private TableColumn<MyorderModel,OrderStatus> operation;
 	
 	private MyOrderManager manager;
-	
+	private SearchOrderInfoAccessor accessor;
 	/**
 	 * set the controller
 	 * @param controller
@@ -76,13 +80,38 @@ public class MemberOrderMainController implements Initializable{
 		orderTable.setEditable(false);
 		
 		manager = MyOrderManagerImpl.getInstance();
+		accessor = SearchOrderInfoAccessorImpl.getInstance();
 	}
 
 	/**
-	 * add the content to the tableview
+	 * 1.deliver the search requirement to the logic layer.
+	 * 2.get the searched results.
+	 * 3.add the content to the tableview
 	 */
 	@FXML
 	public void handleQuery(){
+		
+		Set<OrderStatus> states = new HashSet<OrderStatus>();		
+		if(finished.isSelected()){
+			states.add(OrderStatus.EXECUTED);
+			states.add(OrderStatus.REVIEWED);
+		}
+		
+		if(unfinished.isSelected()){
+			states.add(OrderStatus.UNEXECUTED);
+		}
+		
+		if(exception.isSelected()){
+			states.add(OrderStatus.ABNORMAL);
+			states.add(OrderStatus.APPEALING);
+		}
+		
+		if(cancelled.isSelected()){
+			states.add(OrderStatus.REPEALED);
+		}
+		
+		accessor.setSearchTarget(states);
+		
 		orderTable.setItems(manager.getOrderList());
 		
 		

@@ -13,6 +13,7 @@ import presentation.member.view.myorder.MemberOrderMainPane;
 import presentation.member.view.searchhotel.MemberSearchHotelPane;
 import presentation.member.accessor.impl.InfoModifyAccessorImpl;
 import presentation.member.accessor.impl.SearchHotelInfoAccessorImpl;
+import presentation.member.accessor.impl.SearchOrderInfoAccessorImpl;
 import presentation.member.manager.impl.CreditChangeManagerImpl;
 import presentation.member.manager.impl.MemberInfoManagerImpl;
 import presentation.member.manager.impl.MyOrderManagerImpl;
@@ -132,6 +133,8 @@ public class ClientCenterController extends Application {
 	public void addOrderMainPane() {
 		if(!MyOrderManagerImpl.isLaunched())
 			MyOrderManagerImpl.launch();
+		if(!SearchOrderInfoAccessorImpl.isLaunched())
+			SearchOrderInfoAccessorImpl.launch();
 		test.getMyOrderData();
 		content.getChildren().clear();
 		orderMain = new MemberOrderMainPane();

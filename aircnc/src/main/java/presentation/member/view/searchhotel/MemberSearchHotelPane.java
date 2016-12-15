@@ -7,7 +7,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import presentation.member.view.searchhotel.fxml.MemberSearchHotelController;
 
 public class MemberSearchHotelPane {

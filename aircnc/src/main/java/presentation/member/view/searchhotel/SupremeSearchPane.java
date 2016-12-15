@@ -7,9 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Node;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.Reflection;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import presentation.member.view.searchhotel.fxml.SupremeSearchController;
 

@@ -61,6 +61,7 @@ public class SupremeSearchController implements Initializable{
 	 * contains:
 	 * 1.initialize the value.
 	 * 2.time selection logic
+	 * set the time of checking in today as default
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -159,6 +160,10 @@ public class SupremeSearchController implements Initializable{
 		controller.removeSupremeSearch();
 	}
 	
+	/**
+	 * deliver the search requirement to the logic layer.
+	 * contains: time of checking in, price range, room type, grade, star
+	 */
 	@FXML
 	public void HandleSearch(){
 		if(checkGrade()&&checkPrice()){

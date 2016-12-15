@@ -12,8 +12,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import presentation.member.ClientCenterController;
 import presentation.member.manager.SearchHotelManager;
 import presentation.member.manager.impl.SearchHotelManagerImpl;
 import presentation.member.model.SearchHotelsModel;
@@ -61,7 +59,6 @@ public class MemberSearchHotelGeneralController implements Initializable{
 	@FXML
 	private Label repeal;
 	
-	private SearchHotelManager manager;
 	private MemberSearchHotelController controller;
 	
 	private SearchHotelsModel model;
@@ -73,7 +70,6 @@ public class MemberSearchHotelGeneralController implements Initializable{
 				  initHotelInfo();
 			  }
 		});	
-		manager = SearchHotelManagerImpl.getInstance();
 	}
 	
 	@FXML
@@ -81,6 +77,15 @@ public class MemberSearchHotelGeneralController implements Initializable{
 		
 	}
 	
+	/**
+	 * initialize the hotel information
+	 * @param portrait
+	 * @param hotelName
+	 * @param grade
+	 * @param location
+	 * @param lowestPrice
+	 * @param orders
+	 */
 	public void initHotelInfo(){
 		//model = manager.getHotelList();
 		URL loc = getClass().getResource("/images/member/hotel-"+model.getStar()+".png");
@@ -106,6 +111,10 @@ public class MemberSearchHotelGeneralController implements Initializable{
 		this.controller = controller;
 	}
 	
+	/**
+	 * this model contains all the information presented.
+	 * @param model
+	 */
 	public void setHotelModel(SearchHotelsModel model){
 		this.model = model;
 	}

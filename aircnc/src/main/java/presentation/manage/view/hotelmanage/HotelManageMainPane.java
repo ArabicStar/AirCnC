@@ -1,5 +1,5 @@
 package presentation.manage.view.hotelmanage;
 
-public class MemberManageMainPane {
+public class HotelManageMainPane {
 
 }
