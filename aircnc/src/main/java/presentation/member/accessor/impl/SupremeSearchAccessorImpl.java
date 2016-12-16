@@ -3,7 +3,14 @@ package presentation.member.accessor.impl;
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
+
 import presentation.member.accessor.SupremeSearchAccessor;
+import utils.condition.Condition;
+import utils.condition.ConditionBuilder;
+import utils.info.hotel.RoomTemplate.Type;
 
 public class SupremeSearchAccessorImpl implements SupremeSearchAccessor{
 	
@@ -14,10 +21,11 @@ public class SupremeSearchAccessorImpl implements SupremeSearchAccessor{
 	private int day;
 	private int lowPrice;
 	private int highPrice;
-	private String roomType;
+	private Set<Type> roomType;
 	private boolean empty;
 	private double grade;
-	private int star;
+	private int lowStar;
+	private int highStar;
 	
 	public static final SupremeSearchAccessor launch() {
 		if (instance != null)
@@ -31,6 +39,20 @@ public class SupremeSearchAccessorImpl implements SupremeSearchAccessor{
 			throw singletonNotExistsEx();
 
 		return instance;
+	}
+	
+	@Override
+	public Condition getCondition() {
+		
+		ConditionBuilder builder = new ConditionBuilder();
+		builder.rankGreaterThan(grade);
+		builder.starBetween(lowStar, highStar);
+		builder.roomNeed(roomType);
+		builder.avaliable(empty);
+		builder.since(LocalDate.of(year,month,day));
+		builder.priceBetween(lowPrice, highPrice);
+		
+		return builder.buildCondition();
 	}
 	
 	public static boolean isLaunched(){
@@ -67,7 +89,27 @@ public class SupremeSearchAccessorImpl implements SupremeSearchAccessor{
 
 	@Override
 	public void setRoomType(String type) {
-		this.roomType = type;
+		this.roomType = new HashSet<Type>();
+		switch(type){
+		case "所有":
+			roomType.add(Type.单人间);
+			roomType.add(Type.双人间);
+			roomType.add(Type.三人间);
+			roomType.add(Type.其它);
+			break;
+		case "单人间":
+			roomType.add(Type.单人间);
+			break;
+		case "双人间":
+			roomType.add(Type.双人间);
+			break;
+		case "三人间":
+			roomType.add(Type.三人间);
+			break;
+		case "其他":
+			roomType.add(Type.其它);
+			break;
+		}
 	}
 
 	@Override
@@ -81,8 +123,9 @@ public class SupremeSearchAccessorImpl implements SupremeSearchAccessor{
 	}
 
 	@Override
-	public void setStar(int star) {
-		this.star = star;
+	public void setStarRange(int low, int high) {
+		this.lowStar = low;
+		this.highStar = high;
 	}
 
 }

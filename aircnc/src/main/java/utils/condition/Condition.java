@@ -8,6 +8,7 @@ import utils.info.hotel.RoomTemplate.Type;
 public class Condition {
 	private double rankGreaterThan;
 	private IntegerBound starBound;
+	private DoubleBound priceBound;
 	private String scopeLike;
 	private String nameLike;
 	private Set<Type> roomTypes;
@@ -20,6 +21,14 @@ public class Condition {
 
 	public int getStarTo() {
 		return starBound.getTo();
+	}
+	
+	public double getPriceFrom() {
+		return priceBound.getFrom();
+	}
+	
+	public double getPriceTo() {
+		return priceBound.getTo();
 	}
 
 	public double getRankGreaterThan() {
@@ -76,6 +85,15 @@ public class Condition {
 	 */
 	Condition setStarBound(IntegerBound starBound) {
 		this.starBound = starBound;
+		return this;
+	}
+	
+	/**
+	 * @param priceBound
+	 *            the priceBound to set
+	 */
+	Condition setPriceBound(DoubleBound priceBound) {
+		this.priceBound = priceBound;
 		return this;
 	}
 

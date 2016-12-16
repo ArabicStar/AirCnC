@@ -9,7 +9,8 @@ import po.market.MarketPo;
  * @author paranoia
  *
  */
-public class MarketDaoImpl implements MarketDao{
+public enum MarketDaoImpl implements MarketDao{
+	INSTANCE;
 
 	@Override
 	public boolean addMarket(final MarketPo po) {
@@ -37,6 +38,7 @@ public class MarketDaoImpl implements MarketDao{
 
 			MarketPo deleted = (MarketPo) session.get(MarketPo.class, parseId(id));
 			if (flag = Boolean.valueOf((deleted != null)))// check existence
+				
 				session.delete(deleted);
 
 			return flag;
@@ -81,60 +83,5 @@ public class MarketDaoImpl implements MarketDao{
 		return Integer.parseInt(id);
 	}
 
-
-	/*private ArrayList<MarketPo> marketData;
-
-	private MarketDataHelper marketDataHelper;
-
-	private DataFactory dataFactory;
-
-	private static MarketDaoImpl marketDataServiceImpl;
-
-	public static MarketDaoImpl getInstance(){
-		if(marketDataServiceImpl == null){
-			marketDataServiceImpl = new MarketDaoImpl();
-		}
-		return marketDataServiceImpl;
-	}
-
-	public MarketDaoImpl(){
-		if(marketData == null){
-			dataFactory = new DataFactoryImpl();
-			marketDataHelper = dataFactory.getMarketDataHelper();
-			marketData = marketDataHelper.getMarketData();
-		}
-	}
-
-
-	@Override
-	public MarketPo getMarket(String marketId) {
-		Iterator<MarketPo> iterator = marketData.iterator();
-		while(iterator.hasNext()){
-			MarketPo entry = iterator.next();
-			MarketPo marketPo = entry;
-			if(marketPo.getId().equals(marketId)){
-				return marketPo;
-			}
-		}
-		return null;
-	}
-
-	@Override
-	public boolean updateMarket(MarketPo marketPo) {
-		String marketId = marketPo.getId();
-		Iterator<MarketPo> iterator = marketData.iterator();
-		while(iterator.hasNext()){
-			MarketPo entry = iterator.next();
-			MarketPo market = entry;
-			if(market.getId().equals(marketId)){
-				marketData.add(marketPo);
-				marketDataHelper.updateMarketData(marketData);
-				return true;
-			}
-		}
-
-		return false;
-
-	}*/
 
 }

@@ -1,25 +1,19 @@
 package presentation.member.accessor.impl;
 
+import static utils.exception.StaticExceptionFactory.accessorNotReadyEx;
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
 import presentation.member.accessor.SearchHotelInfoAccessor;
+import utils.condition.Condition;
+import utils.condition.ConditionBuilder;
 
 public class SearchHotelInfoAccessorImpl implements SearchHotelInfoAccessor{
 	
 	private static SearchHotelInfoAccessor instance;
 	
-	private String scope;
-	private String name;
-	private int year;
-	private int month;
-	private int day;
-	private int low;
-	private int high;
-	private String type;
-	private boolean isEmpty;
-	private double grade;
-	private int star;
+	private Condition scope;
+	private String hotelName;
 	
 	public static final SearchHotelInfoAccessor launch() {
 		if (instance != null)
@@ -41,60 +35,31 @@ public class SearchHotelInfoAccessorImpl implements SearchHotelInfoAccessor{
 		else
 			return true;
 	}
+	
+	@Override
+	public String getHotelName(){
+		if(this.hotelName == null)
+			throw accessorNotReadyEx();
+		return this.hotelName;
+	}
+	
+	@Override
+	public Condition getScope(){
+		if(scope == null)
+			throw accessorNotReadyEx();
+		return scope;
+	}
 
 	@Override
 	public void setScope(String scope) {
-		this.scope = scope;
+		ConditionBuilder builder = new ConditionBuilder();
+		builder.scopeLike(scope);
+		this.scope = builder.buildCondition();
 	}
 
 	@Override
 	public void setName(String name) {
-		this.name = name;
-	}
-
-	@Override
-	public void setYear(int year) {
-		this.year = year;
-	}
-
-	@Override
-	public void setMonth(int month) {
-		this.month = month;
-	}
-
-	@Override
-	public void setDay(int day) {
-		this.day = day;
-	}
-
-	@Override
-	public void setLowPrice(int low) {
-		this.low = low;
-	}
-
-	@Override
-	public void setHighPrice(int high) {
-		this.high = high;
-	}
-
-	@Override
-	public void setRoomType(String type) {
-		this.type = type;
-	}
-
-	@Override
-	public void setIsEmpty(boolean empty) {
-		this.isEmpty = empty;
-	}
-
-	@Override
-	public void setGrade(double grade) {
-		this.grade = grade;
-	}
-
-	@Override
-	public void setStar(int star) {
-		this.star = star;
+		this.hotelName = name;
 	}
 
 }

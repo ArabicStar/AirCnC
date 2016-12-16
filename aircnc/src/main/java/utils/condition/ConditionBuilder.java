@@ -12,6 +12,7 @@ import utils.info.hotel.RoomTemplate.Type;
 public class ConditionBuilder {
 	private double rankGreaterThan;
 	private IntegerBound starBound;
+	private DoubleBound priceBound;
 	private String scopeLike;
 	private String nameLike;
 	private Set<Type> roomTypes;
@@ -21,6 +22,7 @@ public class ConditionBuilder {
 	public ConditionBuilder() {
 		rankGreaterThan = 0.0;
 		starBound = new IntegerBound(0, 5);
+		priceBound = new DoubleBound(0.0,1000.0);
 		scopeLike = "";
 		nameLike = "";
 		roomTypes = new HashSet<>();
@@ -35,6 +37,11 @@ public class ConditionBuilder {
 	public void starBetween(int from, int to) {
 		starBound.from(from);
 		starBound.to(to);
+	}
+	
+	public void priceBetween(double from, double to) {
+		priceBound.from(from);
+		priceBound.to(to);
 	}
 
 	public void scopeLike(String scopeLike) {

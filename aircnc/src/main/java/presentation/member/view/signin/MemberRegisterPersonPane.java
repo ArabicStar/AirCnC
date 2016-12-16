@@ -8,7 +8,6 @@ import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import presentation.member.view.signin.fxml.MemberRegisterPersonController;
-import presentation.member.view.signin.fxml.MemberSignInController;
 
 /**
  * the pane of register (Personal)

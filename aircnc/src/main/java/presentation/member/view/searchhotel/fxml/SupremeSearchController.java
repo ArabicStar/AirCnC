@@ -47,7 +47,10 @@ public class SupremeSearchController implements Initializable{
 	private TextField grade;
 	
 	@FXML
-	private ComboBox<String> star;
+	private ComboBox<Integer> lowStar;
+	
+	@FXML
+	private ComboBox<Integer> highStar;
 	
 	@FXML
 	private Button search;
@@ -133,9 +136,21 @@ public class SupremeSearchController implements Initializable{
 					   search.setDisable(newValue==null);
 					});
 				  RoomType.getItems().addAll(
-						  "所有","大床房","双人间","家庭间","其他");
-				  star.getItems().addAll(
-						  "所有","1","2","3","4","5","6","7");
+						  "所有", "单人间","双人间","家庭间","其他");
+				  lowStar.getItems().addAll(
+						  1,2,3,4,5,6,7);
+				  highStar.getItems().addAll(
+						  1,2,3,4,5,6,7);
+				  lowStar.valueProperty().addListener((observable, oldValue, newValue) -> {
+					  if(oldValue!=newValue){
+						   highStar.getItems().clear();
+					   } 
+					  	int rangeDown = lowStar.getValue(); 
+					  	for(int i = rangeDown; i <= 7; i++){
+					  		highStar.getItems().add(i);
+					  	}
+					});
+				  
 				  
 				//默认类型,把默认改为今天
 				  year.setValue(defaultYear);   
@@ -143,7 +158,9 @@ public class SupremeSearchController implements Initializable{
 				  day.setValue(defaultDay);
 				  RoomType.setValue("所有");
 				  all.setSelected(true);
-				  star.setValue("所有");
+				  lowStar.setValue(1);
+				  lowStar.setValue(7);
+				  
 				  
 				  isEmpty = new ToggleGroup();
 					all.setToggleGroup(isEmpty);
@@ -167,7 +184,6 @@ public class SupremeSearchController implements Initializable{
 	@FXML
 	public void HandleSearch(){
 		if(checkGrade()&&checkPrice()){
-			int starSelected = 0;
 			
 			//deliver the date
 			accessor.setYear(year.getValue());
@@ -180,18 +196,7 @@ public class SupremeSearchController implements Initializable{
 			accessor.setRoomType(RoomType.getValue());
 			accessor.setEmpty(onlyEmpty.isSelected());
 			accessor.setGrade(Double.valueOf(grade.getText()));
-			
-			switch(star.getValue()){
-			case "所有": starSelected = 0; break;
-			case "1": starSelected = 1; break;
-			case "2": starSelected = 2; break;
-			case "3": starSelected = 3; break;
-			case "4": starSelected = 4; break;
-			case "5": starSelected = 5; break;
-			case "6": starSelected = 6; break;
-			case "7": starSelected = 7; break;
-			}
-			accessor.setStar(starSelected);
+			accessor.setStarRange(lowStar.getValue(),highStar.getValue());
 			controller.removeSupremeSearch();
 		}else{
 			PlainDialog alert = new PlainDialog(AlertType.INFORMATION,

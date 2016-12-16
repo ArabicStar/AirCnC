@@ -68,8 +68,10 @@
                   </HBox>
                   <HBox spacing="30.0">
                      <children>
-                        <Label text="星级" />
-                        <ComboBox fx:id="star" prefWidth="150.0" />
+                        <Label text="星级区间" />
+                        <ComboBox fx:id="lowStar" prefWidth="100.0" />
+                        <Label text="—" />
+                        <ComboBox fx:id="highStar" prefWidth="100.0" />
                      </children>
                   </HBox>
                </children>

@@ -1,8 +1,10 @@
 package presentation.member.accessor;
 
+import utils.condition.Condition;
+
 public interface SupremeSearchAccessor {
 	//这里我等一个酒店高级query
-	
+	public Condition getCondition();
 	
 	public void setYear(int year);
 	
@@ -20,5 +22,5 @@ public interface SupremeSearchAccessor {
 	
 	public void setGrade(double grade);
 	
-	public void setStar(int star);
+	public void setStarRange(int low,int high);
 }
