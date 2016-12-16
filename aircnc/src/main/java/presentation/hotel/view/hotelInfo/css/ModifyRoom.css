@@ -1,6 +1,7 @@
 .root{
 	-fx-font-family:"Pingfang SC","DengXian Light","Microsoft Yahei","Helvetica Neue";
 	-fx-font-size: 15px;
+	-fx-background-color: #fff;
 }
 
 .bg{

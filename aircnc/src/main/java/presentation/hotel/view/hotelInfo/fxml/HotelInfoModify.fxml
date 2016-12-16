@@ -25,14 +25,14 @@
       </Pane>
    </top>
    <bottom>
-      <HBox alignment="TOP_RIGHT" prefHeight="137.0" prefWidth="777.0" spacing="50.0" BorderPane.alignment="CENTER">
+      <HBox alignment="TOP_RIGHT" prefHeight="137.0" prefWidth="652.0" spacing="50.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="password" mnemonicParsing="false" onAction="#handlePasswordModify" styleClass="modify" text="修改密码" />
             <Button fx:id="back" mnemonicParsing="false" onAction="#handleBack" styleClass="modify" text="返回" />
             <Button fx:id="confirm" mnemonicParsing="false" onAction="#handleConfirm" onMouseClicked="#handleConfirm" styleClass="modify" text="保存" />
          </children>
          <BorderPane.margin>
-            <Insets right="70.0" />
+            <Insets right="90.0" />
          </BorderPane.margin>
       </HBox>
    </bottom>
@@ -42,25 +42,25 @@
             <HBox alignment="CENTER_LEFT" layoutX="313.0" layoutY="196.0" prefHeight="50.0" prefWidth="169.0" spacing="40.0">
                <children>
                   <Label styleClass="info-index" text="所属商圈" />
-                  <TextField fx:id="scope" prefWidth="244.0" styleClass="info-content" />
+                  <TextField fx:id="scope" prefHeight="43.0" prefWidth="500.0" styleClass="info-content" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0" spacing="40.0">
                <children>
-                  <Label styleClass="info-index" text="地址" />
-                  <TextField fx:id="location" prefWidth="293.0" styleClass="info-content" />
+                  <Label styleClass="info-index" text="酒店地址" />
+                  <TextField fx:id="location" prefHeight="43.0" prefWidth="500.0" styleClass="info-content" />
                </children>
             </HBox>
             <HBox prefHeight="150.0" prefWidth="200.0" spacing="40.0">
                <children>
-                  <Label styleClass="info-index" text="简介" />
-                  <TextArea fx:id="introduction" prefHeight="100.0" prefWidth="291.0" styleClass="info-content" wrapText="true" HBox.hgrow="NEVER" />
+                  <Label styleClass="info-index" text="酒店介绍" />
+                  <TextArea fx:id="introduction" prefHeight="150.0" prefWidth="500.0" styleClass="info-content" wrapText="true" HBox.hgrow="NEVER" />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="40.0">
                <children>
-                  <Label styleClass="info-index" text="设施" />
-                  <TextArea fx:id="equipment" prefHeight="100.0" prefWidth="291.0" styleClass="info-content" wrapText="true" HBox.hgrow="NEVER" />
+                  <Label styleClass="info-index" text="酒店设施" />
+                  <TextArea fx:id="equipment" prefHeight="100.0" prefWidth="500.0" styleClass="info-content" wrapText="true" HBox.hgrow="NEVER" />
                </children>
             </HBox>
          </children>

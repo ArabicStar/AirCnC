@@ -1,5 +1,6 @@
 package presentation.hotel.accessor;
 
+import utils.info.hotel.Room;
 import vo.hotel.HotelVo;
 
 public interface InfoModifyAccessor {
@@ -18,5 +19,9 @@ public interface InfoModifyAccessor {
 	public void setPassword(String password);
 	
 	public int getPasswordHash();
+	
+	public void setRoom(String name,int peopleNum,int roomNum,double price);
+	
+	public Room getRoom();
 
 }

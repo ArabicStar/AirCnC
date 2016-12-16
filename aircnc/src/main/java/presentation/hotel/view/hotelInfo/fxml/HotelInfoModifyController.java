@@ -60,7 +60,7 @@ public class HotelInfoModifyController implements Initializable{
 	private ModifyRoomPane addRoomPane;
 	
 	private Pane rootLayout;
-	private Pane addRoomLayout;
+	private AnchorPane addRoomLayout;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -143,15 +143,16 @@ public class HotelInfoModifyController implements Initializable{
 		this.rootLayout = pane;
 	}
 	
-	public void setRoomLayout(Pane pane){
+	public void setRoomLayout(AnchorPane pane){
 		this.addRoomLayout = pane;
 	}
 	
 	public void addModifyRoom(){
 		addRoomPane = new ModifyRoomPane();
+		addRoomPane.getPane().setLayoutX(300);
+		addRoomPane.getPane().setLayoutY(150);
 		rootLayout.getChildren().add(addRoomPane.getPane());
-		AnchorPane.setTopAnchor(addRoomPane.getPane(), 100.0);
-		//(infoModify.getPane());
+		
 		addRoomPane.getController().setController(this);
 	}
 	

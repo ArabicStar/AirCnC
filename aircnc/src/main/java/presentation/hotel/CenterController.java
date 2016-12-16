@@ -21,8 +21,6 @@ public class CenterController extends Application{
 	
 	private HotelSignInPane signIn;
 	
-	private HotelLoginAccessor loginAccessor;
-	
 	private final static int Login_Width = 550;
 	private final static int Login_Height = 385;
 	
@@ -39,8 +37,7 @@ public class CenterController extends Application{
 		primaryStage.initStyle(StageStyle.UNDECORATED);
 		primaryStage.setTitle("AirCnC");
 		primaryStage.setResizable(false);
-		
-		loginAccessor = new HotelLoginAccessorImpl();
+
 		
 		// show the pane of sign in.
 		signIn = new HotelSignInPane();
@@ -49,7 +46,6 @@ public class CenterController extends Application{
 		
 		primaryStage.show();
 		signIn.getController().setCenterController(this);
-		signIn.getController().setAccessor(loginAccessor);
 		
 	}
 	

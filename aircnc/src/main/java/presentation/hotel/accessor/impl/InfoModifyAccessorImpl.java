@@ -3,10 +3,9 @@ package presentation.hotel.accessor.impl;
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
-import java.util.Set;
-
 import presentation.hotel.accessor.InfoModifyAccessor;
 import utils.info.hotel.Room;
+import utils.info.hotel.RoomBuilder;
 import vo.hotel.HotelVo;
 import vo.hotel.HotelVoBuilder;
 
@@ -23,6 +22,8 @@ public class InfoModifyAccessorImpl implements InfoModifyAccessor {
 	private String equipment;
 	
 	private int password;
+	
+	private Room room;
 
 	public static final InfoModifyAccessor launch() {
 		if (instance != null)
@@ -87,6 +88,19 @@ public class InfoModifyAccessorImpl implements InfoModifyAccessor {
 	@Override
 	public int getPasswordHash() {		
 		return password;
+	}
+
+	@Override
+	public Room getRoom() {
+		return room;
+	}
+
+	@Override
+	public void setRoom(String name, int peopleNum, int roomNum, double price) {
+		RoomBuilder builder = new RoomBuilder(name).setPeopleNum(peopleNum).
+				setPrice(price).setRoomNum(roomNum);
+		room = builder.getRoomInfo();
+		
 	}
 
 }

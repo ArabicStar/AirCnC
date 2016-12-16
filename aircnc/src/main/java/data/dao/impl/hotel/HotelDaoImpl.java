@@ -13,8 +13,9 @@ import data.dao.query.HotelQueryDao;
 import po.hotel.HotelPo;
 import po.hotel.HotelPoBuilder;
 
-public class HotelDaoImpl implements HotelDao, HotelQueryDao {
-
+public enum HotelDaoImpl implements HotelDao, HotelQueryDao {
+	INSTANCE;
+	
 	@Override
 	public HotelPo findHotelById(final int id) {
 		return execute(session -> {

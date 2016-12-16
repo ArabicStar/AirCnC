@@ -1,9 +1,11 @@
 package vo.hotel;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import utils.info.hotel.HotelInfo;
 import utils.info.hotel.Room;
+import utils.info.hotel.RoomBuilder;
 
 public class HotelVo extends HotelInfo {
 
@@ -82,6 +84,10 @@ public class HotelVo extends HotelInfo {
 			}
 		}
 		return price;
+	}
+	
+	public double getLowestPrice(){
+		return rooms.stream().mapToDouble(Room::getPrice).min().getAsDouble();
 	}
 
 }

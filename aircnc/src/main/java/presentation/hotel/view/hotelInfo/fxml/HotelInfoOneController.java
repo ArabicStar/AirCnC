@@ -95,7 +95,7 @@ public class HotelInfoOneController implements Initializable{
 	}
 	
 	private void initHotelInfo(){
-		String style = "-fx-background-color: #585697;-fx-border-color: #585697;-fx-border-width:5px;-fx-text-fill: #fff; -fx-font-size: 20px; -fx-border-radius: 5; -fx-background-radius: 5;";
+		String style = "-fx-background-color: #fff;-fx-border-color: #585697;-fx-padding:0px 5px 0px 5px;-fx-text-fill: #fff; -fx-font-size: 20px; -fx-border-radius: 5;-fx-text-fill:#585697; ";
 		model = manager.getHotelInfo();
 		this.scope.setText(model.getScope());
 		this.location.setText(model.getLocation());

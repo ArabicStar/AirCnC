@@ -11,6 +11,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import presentation.hotel.CenterController;
 import presentation.hotel.accessor.HotelLoginAccessor;
+import presentation.hotel.accessor.impl.HotelLoginAccessorImpl;
 import presentation.member.utils.dialog.PlainDialog;
 
 public class HotelSignInController implements Initializable{
@@ -48,6 +49,10 @@ public class HotelSignInController implements Initializable{
 	@FXML
 	public void handleConfirm(){
 		if(name.getText().length()!=0&&password.getText().length()!=0){
+			if(!HotelLoginAccessorImpl.isLaunched()){
+				HotelLoginAccessorImpl.launch();
+			}
+			accessor = HotelLoginAccessorImpl.getInstance();
 			accessor.setDeliveredName(name.getText());
 			accessor.setDeliveredPassword(password.getText());
 			
@@ -76,14 +81,6 @@ public class HotelSignInController implements Initializable{
 	 */
 	public void setCenterController(CenterController controller){
 		this.controller=controller;
-	}
-	
-	/**
-	 * set the stage
-	 * @param accessor
-	 */	
-	public void setAccessor(HotelLoginAccessor accessor){
-		this.accessor = accessor;
 	}
 
 }
