@@ -1,15 +1,12 @@
 package utils.promotion;
 
-import static utils.exception.StaticExceptionFactory.*;
-import java.time.LocalDate;
+import static utils.exception.StaticExceptionFactory.illegalArgEx;
 
 import utils.promotion.applier.Applier;
 import utils.promotion.applier.ApplierBuilder;
-import utils.promotion.applier.ApplierParams;
 import utils.promotion.applier.How;
 import utils.promotion.trigger.Trigger;
 import utils.promotion.trigger.TriggerBuilder;
-import utils.promotion.trigger.TriggerParams;
 import utils.promotion.trigger.hotel.HotelWhen;
 import utils.promotion.trigger.website.WebsiteWhen;
 
@@ -56,11 +53,11 @@ public class PromotionBuilder {
 		return new Promotion(applier, trigger);
 	}
 
-	private void test() {
-		LocalDate now = LocalDate.now();
-		Trigger t = PromotionBuilder.when(WebsiteWhen.DURING_PERIOD).setParam(TriggerParams.FROM, now)
-				.setParam(TriggerParams.TO, now.plusDays(1)).build();
-		Applier a = PromotionBuilder.how(How.PERCENT_OFF).setParam(ApplierParams.PERCENT, 0.3).build();
-		Promotion p = new PromotionBuilder().setApplier(a).setTrigger(t).build();
+	public static final Promotion parseString(String src) throws Exception {
+		String[] strs = src.split("@v@");
+		if (strs.length != 2)
+			throw illegalArgEx("Promotion source string");
+
+		return new Promotion(ApplierBuilder.parseString(strs[0]), TriggerBuilder.parseString(strs[1]));
 	}
 }

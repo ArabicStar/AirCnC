@@ -1,21 +1,33 @@
 package utils.parameter;
 
-import static utils.exception.StaticExceptionFactory.*;
+import static utils.crypto.BytesCharsConverter.bytes2HexString;
+import static utils.crypto.BytesCharsConverter.hexString2Bytes;
+import static utils.exception.StaticExceptionFactory.illegalArgEx;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.function.Predicate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import utils.lambda.SerializablePredicate;
 
 public class Parameter<T> {
 	private String name;
 	private Class<T> type;
 	private T value;
-	private Predicate<T> limit;
+	private SerializablePredicate<T> limit;
 
 	private Parameter(String name) {
 		if (name == null)
 			illegalArgEx("Property name");
 
 		this.name = name;
+		this.limit = o -> true;
 		this.value = null;
 	}
 
@@ -24,7 +36,7 @@ public class Parameter<T> {
 		this.type = type;
 	}
 
-	public Parameter(String name, Class<T> type, Predicate<T> precondition) {
+	public Parameter(String name, Class<T> type, SerializablePredicate<T> precondition) {
 		this(name, type);
 		this.limit = precondition;
 	}
@@ -38,7 +50,7 @@ public class Parameter<T> {
 		type = (Class<T>) types[0];
 	}
 
-	public Parameter(String name, T value, Predicate<T> limit) {
+	public Parameter(String name, T value, SerializablePredicate<T> limit) {
 		this(name, value);
 		this.limit = limit;
 	}
@@ -63,6 +75,11 @@ public class Parameter<T> {
 		return true;
 	}
 
+	private void setLimit(SerializablePredicate<T> limit) {
+		if (limit != null)
+			this.limit = limit;
+	}
+
 	public boolean nameEquals(Parameter<T> that) {
 		return this.name().equals(that.name());
 	}
@@ -83,5 +100,78 @@ public class Parameter<T> {
 
 	public boolean typeMatches(Parameter<?> thatProperty) {
 		return typeMatches(thatProperty.getClass());
+	}
+
+	@Override
+	public String toString() {
+		// basic info
+		StringBuilder sb = new StringBuilder("'").append(name).append("''").append(type.getName()).append("''");
+
+		// serialize value
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+		try (ObjectOutputStream oos = new ObjectOutputStream(baos)) {
+			oos.writeObject(value);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		byte[] b = baos.toByteArray();
+		sb.append(bytes2HexString(b)).append("''");
+		// serialize value complete
+
+		baos.reset();
+
+		// serialize limit
+		try (ObjectOutputStream oos = new ObjectOutputStream(baos)) {
+			oos.writeObject(limit);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		b = baos.toByteArray();
+		try {
+			baos.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		// serialize limit complete
+
+		return sb.append(bytes2HexString(b)).append("'").toString();
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public static Parameter<?> parseString(String src) throws Exception {
+		Pattern pt = Pattern.compile("'(.+?)'");
+		Matcher m = pt.matcher(src);
+
+		// name
+		m.find();
+		String name = m.group(1);
+
+		// type
+		m.find();
+		Class clazz = Class.forName(m.group(1));
+
+		Parameter param = new Parameter<>(name, clazz);
+
+		// value
+		m.find();
+		byte[] bs = hexString2Bytes(m.group(1));
+		try (ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(bs))) {
+			param.putValue(ois.readObject());
+		} catch (Exception e) {
+			throw e;
+		}
+
+		// limit
+		m.find();
+		bs = hexString2Bytes(m.group(1));
+		try (ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(bs))) {
+			param.setLimit((SerializablePredicate) ois.readObject());
+		} catch (Exception e) {
+			throw e;
+		}
+		return param;
 	}
 }

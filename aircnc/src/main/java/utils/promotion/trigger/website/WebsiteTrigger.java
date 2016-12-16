@@ -24,4 +24,9 @@ public class WebsiteTrigger implements Trigger {
 	public boolean test(OrderInfo order, OrderRelatedInfoHelper helper) {
 		return when.test(params, order, helper);
 	}
+
+	@Override
+	public String toString() {
+		return new StringBuilder("Website@^@").append(when.name()).append("@^@").append(params.toString()).toString();
+	}
 }

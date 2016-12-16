@@ -1,5 +1,8 @@
 package utils.crypto;
 
+import static utils.crypto.BytesCharsConverter.bytes2HexString;
+import static utils.crypto.BytesCharsConverter.hexString2Bytes;
+
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.Security;
@@ -103,40 +106,6 @@ public abstract class Cryptor {
 		// 根据密钥，对Cipher对象进行初始化，DECRYPT_MODE表示加密模式
 		c.init(Cipher.DECRYPT_MODE, deskey);
 		return c.doFinal(buff);
-	}
-
-	private static String bytes2HexString(byte[] src) {
-		if (src == null || src.length <= 0)
-			return null;
-
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < src.length; i++) {
-			int v = src[i] & 0xFF;
-			String hv = Integer.toHexString(v);
-			if (hv.length() < 2)
-				sb.append(0);
-			sb.append(hv);
-		}
-		return sb.toString();
-	}
-
-	private static byte[] hexString2Bytes(String src) {
-		if (src == null || src.length() == 0)
-			return null;
-
-		src = src.toUpperCase();
-		int len = src.length() / 2;
-		char[] hexChars = src.toCharArray();
-		byte[] bs = new byte[len];
-		for (int i = 0; i < len; i++) {
-			int pos = i * 2;
-			bs[i] = (byte) (char2Byte(hexChars[pos]) << 4 | char2Byte(hexChars[pos + 1]));
-		}
-		return bs;
-	}
-
-	private static byte char2Byte(char c) {
-		return (byte) "0123456789ABCDEF".indexOf(c);
 	}
 
 }

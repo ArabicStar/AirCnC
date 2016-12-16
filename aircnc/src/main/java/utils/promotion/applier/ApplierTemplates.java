@@ -56,7 +56,8 @@ public abstract class ApplierTemplates {
 	}
 
 	private static final Discount percentDiscount() {
-		return (params, info) -> new OrderVoBuilder(info).setDiscountPrice(info.getDiscountPrice()
+		return (params, info) -> new OrderVoBuilder(info).setDiscountPrice//
+		(info.getDiscountPrice()
 				- (1.0 - (double) params.getParameterValue(ApplierParams.AMOUNT.paramName())) * info.getOriginalPrice())
 				.getOrderInfo();
 	}

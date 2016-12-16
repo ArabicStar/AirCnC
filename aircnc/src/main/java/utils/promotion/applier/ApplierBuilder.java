@@ -22,10 +22,26 @@ public class ApplierBuilder {
 		return this;
 	}
 
+	public boolean isReady() {
+		return how != null;
+	}
+
 	public Applier build() {
-		if (how == null)
+		if (!isReady())
 			throw illegalStateException("Not set up");
 
 		return new Applier(parameters, how);
+	}
+
+	public static final Applier parseString(String src) throws Exception {
+		String[] strs = src.split("@^@");
+
+		if (strs.length != 2)
+			throw illegalArgEx("Applier source string");
+
+		How how = How.valueOf(strs[0]);
+		ParametersList list = ParametersList.parseString(strs[1]);
+
+		return new Applier(list, how);
 	}
 }

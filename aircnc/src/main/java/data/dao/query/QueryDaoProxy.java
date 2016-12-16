@@ -1,26 +1,33 @@
 package data.dao.query;
 
+import static data.dao.rmi.RmiHazarder.hazard;
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
-import static utils.exception.StaticExceptionFactory.packedRmiEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
-import java.rmi.RemoteException;
 import java.util.List;
+import java.util.Set;
+
+import org.hibernate.criterion.DetachedCriteria;
 
 import data.dao.rmi.query.RemoteCreditQueryDao;
+import data.dao.rmi.query.RemoteHotelQueryDao;
+import data.dao.rmi.query.RemoteOrderQueryDao;
+import data.dao.rmi.query.RemotePromotionQueryDao;
+import po.hotel.HotelPo;
 import po.member.credit.CreditChangePo;
-import utils.proxy.AccessSecureProxy;
-import utils.proxy.AuthenticatePolicy;
-import utils.proxy.AuthenticatePolicy.Client;
+import po.order.OrderPo;
+import po.promotion.PromotionPo;
+import utils.info.order.OrderStatus;
 
-public final class QueryDaoProxy extends AccessSecureProxy implements CreditQueryDao {
+public final class QueryDaoProxy implements CreditQueryDao, OrderQueryDao, PromotionQueryDao, HotelQueryDao {
+	/* Singleton */
 	private static QueryDaoProxy instance;
 
-	public static QueryDaoProxy launch(Client clientId) {
+	public static QueryDaoProxy launch() {
 		if (instance != null)
 			throw duplicateSingletonEx();
 
-		return instance = new QueryDaoProxy(clientId);
+		return instance = new QueryDaoProxy();
 	}
 
 	public static QueryDaoProxy getInstance() {
@@ -29,42 +36,132 @@ public final class QueryDaoProxy extends AccessSecureProxy implements CreditQuer
 
 		return instance;
 	}
+	/* Singleton */
 
-	private QueryDaoProxy(Client clientId) {
-		super(clientId);
+	private QueryDaoProxy() {
+
 	}
 
+	/*
+	 *******************************
+	 ******* CreditQueryDao*******
+	 *******************************
+	 */
 	private RemoteCreditQueryDao remoteCreditQueryDao;
 
-	@AuthenticatePolicy(Client.USER)
 	public void loadRemoteCreditQueryDao(RemoteCreditQueryDao remoteCreditQueryDao) {
-		checkAuthentication();
 
 		this.remoteCreditQueryDao = remoteCreditQueryDao;
 	}
 
 	@Override
-	@AuthenticatePolicy(Client.USER)
 	public List<CreditChangePo> searchByMemberId(String memberId) {
-		checkAuthentication();
 
-		try {
+		return hazard(() -> {
 			return remoteCreditQueryDao.searchByMemberId(memberId);
-		} catch (RemoteException re) {
-			// e.printStackTrace();
-			throw packedRmiEx(re);
-		}
+		});
 	}
 
 	@Override
 	public int getMemberCredit(String memberId) {
-		checkAuthentication();
 
-		try {
+		return hazard(() -> {
 			return remoteCreditQueryDao.getMemberCredit(memberId);
-		} catch (RemoteException re) {
-			// e.printStackTrace();
-			throw packedRmiEx(re);
-		}
+		});
+	}
+
+	/*
+	 *******************************
+	 ******* OrderQueryDao*******
+	 *******************************
+	 */
+	private RemoteOrderQueryDao remoteOrderQueryDao;
+
+	public void loadRemoteOrderQueryDao(RemoteOrderQueryDao remoteOrderQueryDao) {
+
+		this.remoteOrderQueryDao = remoteOrderQueryDao;
+	}
+
+	@Override
+	public List<OrderPo> searchByMember(String memberId) {
+
+		return hazard(() -> {
+			return remoteOrderQueryDao.searchByMember(memberId);
+		});
+	}
+
+	@Override
+	public List<OrderPo> searchByHotel(int hotelId) {
+
+		return hazard(() -> {
+			return remoteOrderQueryDao.searchByHotel(hotelId);
+		});
+	}
+
+	@Override
+	public List<OrderPo> searchByStatus(OrderStatus status) {
+
+		return hazard(() -> {
+			return remoteOrderQueryDao.searchByStatus(status);
+		});
+	}
+
+	/*
+	 ************************************
+	 ******* PromotionQueryDao*******
+	 ************************************
+	 */
+	private RemotePromotionQueryDao remotePromotionQueryDao;
+
+	public void loadRemotePromotionQueryDao(RemotePromotionQueryDao remotePromotionQueryDao) {
+		this.remotePromotionQueryDao = remotePromotionQueryDao;
+	}
+
+	@Override
+	public Set<PromotionPo> getHotelAllPromotions(int hotelId) {
+		return hazard(() -> {
+			return remotePromotionQueryDao.getHotelAllPromotions(hotelId);
+		});
+
+	}
+
+	@Override
+	public Set<PromotionPo> getWebsiteAllPromotions() {
+		return hazard(() -> {
+			return remotePromotionQueryDao.getWebsiteAllPromotions();
+		});
+
+	}
+
+	/*
+	 *******************************
+	 ******* HotelQueryDao*******
+	 *******************************
+	 */
+	private RemoteHotelQueryDao remoteHotelQueryDao;
+
+	public void loadRemoteHotelQueryDao(RemoteHotelQueryDao remoteHotelQueryDao) {
+		this.remoteHotelQueryDao = remoteHotelQueryDao;
+	}
+
+	@Override
+	public HotelPo searchById(int hotelId) {
+		return hazard(() -> {
+			return remoteHotelQueryDao.searchById(hotelId);
+		});
+	}
+
+	@Override
+	public HotelPo searchByName(String name) {
+		return hazard(() -> {
+			return remoteHotelQueryDao.searchByName(name);
+		});
+	}
+
+	@Override
+	public List<HotelPo> searchByCriteria(DetachedCriteria dc) {
+		return hazard(() -> {
+			return remoteHotelQueryDao.searchByCriteria(dc);
+		});
 	}
 }

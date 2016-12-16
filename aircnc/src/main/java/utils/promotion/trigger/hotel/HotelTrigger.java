@@ -24,4 +24,8 @@ public class HotelTrigger implements Trigger {
 		return when.test(params, order, helper);
 	}
 
+	@Override
+	public String toString() {
+		return new StringBuilder("Hotel@^@").append(when.name()).append("@^@").append(params.toString()).toString();
+	}
 }

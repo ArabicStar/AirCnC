@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-12-15 23:30:32 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+	<class name="po.promotion.WebsitePromotionPo" table="website_promotion">
+		<id name="id" column="id" type="java.lang.Long">
+			<generator class="native" />
+		</id>
+		
+		<property name="name" column="name" type="string" />
+		<property name="active" column="is_active" type="yes_no" />
+		<property name="practical" column="is_practical" type="yes_no" />
+		<property name="contentString" column="content" type="string" />
+	</class>
+</hibernate-mapping>

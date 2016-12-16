@@ -9,6 +9,7 @@ import utils.promotion.Promotion;
 
 @Entity
 public abstract class OrderInfoTemplate {
+	protected static String BLANK = "";
 	protected String orderId;
 
 	protected String roomType;

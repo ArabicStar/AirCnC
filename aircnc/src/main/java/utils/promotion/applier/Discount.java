@@ -5,5 +5,5 @@ import utils.parameter.ParametersList;
 
 @FunctionalInterface
 public interface Discount {
-	public OrderInfo makeDiscount(ParametersList params,OrderInfo order);
+	public OrderInfo makeDiscount(ParametersList params, OrderInfo order);
 }

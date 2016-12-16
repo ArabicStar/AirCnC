@@ -1,13 +1,14 @@
 package po.member;
 
-import static utils.exception.StaticExceptionFactory.*;
-import utils.info.member.ContactInfo;
-import utils.info.member.MemberInfo;
-import utils.info.member.MemberInfoBuilder;
+import static utils.exception.StaticExceptionFactory.builderNotReadyEx;
+import static utils.exception.StaticExceptionFactory.illegalArgEx;
+import static utils.exception.StaticExceptionFactory.inconsistentStatusEx;
 
 import java.time.LocalDate;
 
-import org.apache.commons.lang.StringUtils;
+import utils.info.member.ContactInfo;
+import utils.info.member.MemberInfo;
+import utils.info.member.MemberInfoBuilder;
 
 /**
  * Builder or MemberPo<br>

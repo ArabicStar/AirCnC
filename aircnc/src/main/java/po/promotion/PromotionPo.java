@@ -1,59 +1,57 @@
 package po.promotion;
 
-import java.time.LocalDateTime;
+import utils.info.promotion.PromotionInfo;
 
-public class PromotionPo {
+public abstract class PromotionPo extends PromotionInfo {
+	protected String contentString;
+
+	PromotionPo(Scope scope) {
+		super(scope);
+	}
+
 	/**
-	 * 开始
+	 * @param id
+	 *            to be set id
 	 */
-	private LocalDateTime startDate;
+	public PromotionPo setId(long id) {
+		this.id = id;
+		return this;
+	}
+
 	/**
-	 * 结束
+	 * @param name
+	 *            to be set name
 	 */
-	private LocalDateTime endDate;
+	public PromotionPo setName(String name) {
+		this.name = name;
+		return this;
+	}
+
 	/**
-	 * 折扣
+	 * @param isPractical
+	 *            to be set isPractical
 	 */
-	private double discount;
+	public PromotionPo setPractical(boolean isPractical) {
+		this.isPractical = isPractical;
+		return this;
+	}
+
 	/**
-	 * 最低消费
+	 * @param contentString
+	 *            to be set contentString
+	 * @return
 	 */
-	private double minSpent;
+	public PromotionPo setContentString(String contentString) {
+		this.contentString = contentString;
+		return this;
+	}
+
 	/**
-	 * 返回金额
+	 * @return contentString
 	 */
-	private double returnMoney;
-	
-	
-	public LocalDateTime getStartDate() {
-		return startDate;
+	@Override
+	public String getContentString() {
+		return contentString;
 	}
-	public void setStartDate(LocalDateTime startDate) {
-		this.startDate = startDate;
-	}
-	public LocalDateTime getEndDate() {
-		return endDate;
-	}
-	public void setEndDate(LocalDateTime endDate) {
-		this.endDate = endDate;
-	}
-	public double getDiscount() {
-		return discount;
-	}
-	public void setDiscount(double discount) {
-		this.discount = discount;
-	}
-	public double getMinSpent() {
-		return minSpent;
-	}
-	public void setMinSpent(double minSpent) {
-		this.minSpent = minSpent;
-	}
-	public double getReturnMoney() {
-		return returnMoney;
-	}
-	public void setReturnMoney(double returnMoney) {
-		this.returnMoney = returnMoney;
-	}
-	
+
 }

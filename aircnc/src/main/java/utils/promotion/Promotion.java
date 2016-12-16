@@ -24,4 +24,24 @@ public class Promotion {
 	public String description() {
 		return trigger.when() + applier.how();
 	}
+
+	@Override
+	public String toString() {
+		return applier.toString() + "@v@" + trigger.toString();
+	}
+
+	/**
+	 * @return applier
+	 */
+	public Applier getApplier() {
+		return applier;
+	}
+
+	/**
+	 * @return trigger
+	 */
+	public Trigger getTrigger() {
+		return trigger;
+	}
+
 }
