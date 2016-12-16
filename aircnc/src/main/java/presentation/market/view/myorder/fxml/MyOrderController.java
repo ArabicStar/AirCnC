@@ -15,10 +15,12 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import presentation.market.MarketCenterController;
 import presentation.market.model.MyOrderModel;
 import presentation.market.utils.FunctionButtons;
+import presentation.market.view.myorder.OrderDetailPane;
 import utils.info.order.OrderStatus;
 import vo.order.OrderVo;
 import vo.order.OrderVoBuilder;
@@ -63,7 +65,11 @@ public class MyOrderController implements Initializable {
 
 	@FXML
 	private TableColumn<MyOrderModel, OrderStatus> operation;
-
+	
+	private AnchorPane rootLayout;
+	
+	private OrderDetailPane orderDetailPane;
+	
 	@FXML
 	private void handleQuery() {
 		LocalDateTime entryTime = LocalDateTime.now();
@@ -99,7 +105,7 @@ public class MyOrderController implements Initializable {
 						return new SimpleObjectProperty<OrderStatus>(p.getValue().getOperation());
 					}
 				});
-
+		
 		operation.setCellFactory(
 
 				new Callback<TableColumn<MyOrderModel, OrderStatus>, TableCell<MyOrderModel, OrderStatus>>() {
@@ -107,7 +113,7 @@ public class MyOrderController implements Initializable {
 						return new FunctionButtons();
 					}
 				});
-
+//		functionButtons.setController(this);
 	}
 
 	@Override
@@ -119,5 +125,25 @@ public class MyOrderController implements Initializable {
 	public void setCenterController(MarketCenterController controller) {
 		this.controller = controller;
 	}
+	
+	public void addOrderDetail(MyOrderModel model) {
+		OrderDetailPane pane = new OrderDetailPane(model);
+		
+		if(rootLayout == null) {
+			System.out.println("空");
+		}
+		// TODO
+		rootLayout.getChildren().add(pane.getPane());
+		AnchorPane.setTopAnchor(pane.getPane(), 100.0);
+		pane.getController().setController(this);
+		
+	}
 
+	public void setRootLayout(AnchorPane pane){
+		this.rootLayout = pane;
+	}
+	
+	public void removeOrderDetail() {
+		// TODO:增加该方法
+	}
 }

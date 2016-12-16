@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.layout.HBox;
 import presentation.market.model.MyOrderModel;
+import presentation.market.view.myorder.fxml.MyOrderController;
 import utils.info.order.OrderStatus;
 
 public class FunctionButtons extends TableCell<MyOrderModel, OrderStatus> {
@@ -14,6 +15,7 @@ public class FunctionButtons extends TableCell<MyOrderModel, OrderStatus> {
 	HBox buttons;
 	OrderStatus status;
 	MyOrderModel orderModel;
+	MyOrderController controller;
 
 	public FunctionButtons() {
 		status = OrderStatus.EXECUTED;
@@ -101,9 +103,10 @@ public class FunctionButtons extends TableCell<MyOrderModel, OrderStatus> {
 				switch (type) {
 				case CHECK:
 					getOrderReady();
-					TextAreaDialog alert = new TextAreaDialog("订单详情", orderModel);
-					
-					alert.showDialog();
+//					controller = new MyOrderController();
+//					controller.addOrderDetail(orderModel);
+					LabelDialog labelDialog = new LabelDialog("", orderModel);
+					labelDialog.showDialog();
 					break;
 				case REVIEW:
 					PlainDialog alert2 = new PlainDialog(AlertType.INFORMATION, "订单评价", "等我写出来。。");
@@ -139,4 +142,9 @@ public class FunctionButtons extends TableCell<MyOrderModel, OrderStatus> {
 			setGraphic(buttons);
 		}
 	}
+	
+	public void setController(MyOrderController controller) {
+		this.controller = controller;
+	}
+	
 }

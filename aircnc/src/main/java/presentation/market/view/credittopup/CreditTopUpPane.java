@@ -23,14 +23,11 @@ public class CreditTopUpPane {
 			URL location = getClass().getResource("fxml/CreditTopUp.fxml");
 			loader.setLocation(location);
 			loader.setBuilderFactory(new JavaFXBuilderFactory());
-			System.out.println(2);
 			loader.load();
-			System.out.println(3);
 			controller = (CreditTopUpController) loader.getController();
 			orderLayout = loader.getRoot();
 
 		} catch (IOException e) {
-			System.out.println("出错了");
 			e.printStackTrace();
 		}
 	}
