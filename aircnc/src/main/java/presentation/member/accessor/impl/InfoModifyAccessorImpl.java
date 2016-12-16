@@ -1,5 +1,6 @@
 package presentation.member.accessor.impl;
 
+import static utils.exception.StaticExceptionFactory.accessorNotReadyEx;
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
@@ -52,6 +53,8 @@ public final class InfoModifyAccessorImpl implements InfoModifyAccessor{
 	
 	@Override
 	public MemberVo getModifiedMemberVo() {
+		if(vo == null)
+			throw accessorNotReadyEx();
 		MemberVoBuilder builder = new MemberVoBuilder(vo.getType().toString()).setName(username)
 				.setContactInfo(new ContactVoBuilder().setEmail(email).setMobilePhone(mobi)
 						.setFixedPhone(tele).getContactInfo());

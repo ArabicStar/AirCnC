@@ -12,6 +12,7 @@ public class StaticExceptionFactory {
 	private static final String ILLEGAL_STATE_EX_PROMPT = "Illegal state:";
 	private static final String UNSUPPORTED_OPERATION_EX_PROMPT = "Unsupported operation, may caused by null dependent objects.";
 	private static final String UNKNOWN_EXCEPTION = "Unknown Exception.";
+	private static final String ACCESSOR_NOT_READY_EX_PROMPT = "Lack info.";
 
 	public static final IllegalStateException packedRmiEx(RemoteException re) {
 		return new IllegalStateException(getPromptHead().append(RMI_EXCEPTION_PROMPT).toString(), re);
@@ -58,6 +59,10 @@ public class StaticExceptionFactory {
 	private static final String getExceptionMethodName() {
 		StackTraceElement[] stack = new Throwable().getStackTrace();
 		return stack[3].getMethodName();
+	}
+	
+	public static final IllegalStateException accessorNotReadyEx() {
+		return new IllegalStateException(getPromptHead().append(ACCESSOR_NOT_READY_EX_PROMPT).toString());
 	}
 
 	private StaticExceptionFactory() {

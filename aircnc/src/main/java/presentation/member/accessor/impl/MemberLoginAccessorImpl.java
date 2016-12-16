@@ -1,5 +1,6 @@
 package presentation.member.accessor.impl;
 
+import static utils.exception.StaticExceptionFactory.accessorNotReadyEx;
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
@@ -36,13 +37,15 @@ public class MemberLoginAccessorImpl implements MemberLoginAccessor{
 	
 	@Override
 	public String getId() {
-		
+		if(id == null)
+			throw accessorNotReadyEx();
 		return id;
 	}
 
 	@Override
 	public int getPasswordHash() {
-		// TODO Auto-generated method stub
+		if(passwordHash == 0)
+			throw accessorNotReadyEx();
 		return passwordHash;
 	}
 	

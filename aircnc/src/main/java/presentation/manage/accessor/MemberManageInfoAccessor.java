@@ -1,22 +1,22 @@
 package presentation.manage.accessor;
 
-import presentation.member.model.MemberInfoModel;
-import vo.member.MemberVo;
+import java.time.LocalDate;
+
+import presentation.manage.model.MemberManageModel;
+import vo.member.MemberVoBuilder;
 
 public interface MemberManageInfoAccessor {
 	
-public MemberVo getModifiedMemberVo();
+	public MemberVoBuilder getModifiedMemberVo();
 	
-	public void setName(String name);
+	public String getMemberId();
 	
-	public void setPassword(String password);
+	public void setId(String id);
 	
-	public void setEmail(String email);
+	public void setBirthday(LocalDate birthday);
 	
-	public void setMobi(String mobi);
+	public void setEnterprise(String enterprise);
 	
-	public void setTele(String tele);
-	
-	public void setMemberModel(MemberInfoModel model);
+	public void setMemberModel(MemberManageModel model);
 	
 }

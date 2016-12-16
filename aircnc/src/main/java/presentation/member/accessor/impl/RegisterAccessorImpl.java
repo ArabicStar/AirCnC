@@ -5,6 +5,7 @@ import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
 import java.time.LocalDate;
 
+import static utils.exception.StaticExceptionFactory.accessorNotReadyEx;
 import static utils.exception.StaticExceptionFactory.builderNotReadyEx;
 
 import presentation.member.accessor.RegisterAccessor;
@@ -49,6 +50,8 @@ public class RegisterAccessorImpl implements RegisterAccessor{
 
 	@Override
 	public MemberVoBuilder getNewAccountInfo() {
+		if(type == null)
+			throw accessorNotReadyEx();
 		switch(type){
 		case "personal":
 			builder = new MemberVoBuilder("PERSONAL").setName(username).setBirthday(birthday);
@@ -64,6 +67,8 @@ public class RegisterAccessorImpl implements RegisterAccessor{
 
 	@Override
 	public int getPasswordHash() {
+		if(passwordHash == 0)
+			throw accessorNotReadyEx();
 		return passwordHash;
 	}
 

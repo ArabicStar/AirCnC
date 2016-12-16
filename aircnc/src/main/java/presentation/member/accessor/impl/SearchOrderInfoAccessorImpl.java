@@ -1,5 +1,6 @@
 package presentation.member.accessor.impl;
 
+import static utils.exception.StaticExceptionFactory.accessorNotReadyEx;
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
@@ -37,6 +38,8 @@ public class SearchOrderInfoAccessorImpl implements SearchOrderInfoAccessor{
 	
 	@Override
 	public Set<OrderStatus> getStatus() {
+		if(status == null)
+			throw accessorNotReadyEx();
 		return status;
 	}
 

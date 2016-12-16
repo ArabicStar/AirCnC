@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import presentation.manage.view.ManageMainPane;
 
 /**
  * the whole stage. contains the connection of every pane
@@ -17,6 +18,8 @@ public class CenterController extends Application {
 	private Stage primaryStage;
 	
 	private Scene scene;
+	
+	private ManageMainPane start;
 
 	private final static int Main_Width = 1024;
 	private final static int Main_Height = 768;
@@ -39,22 +42,35 @@ public class CenterController extends Application {
 		primaryStage.setResizable(false);
 
 		// show the pane of sign in.
-		//start = new MemberStartPane(primaryStage);
-		//scene = new Scene(start.getBorderPane(), Login_Width, Login_Height);
+		start = new ManageMainPane(primaryStage);
+		scene = new Scene(start.getAnchorPane(), Main_Width, Main_Height);
 		primaryStage.setScene(scene);
 
-		addSignInPane();
+		addMemberManagePane();
 
 		primaryStage.show();
 	}
 
 	/**
-	 * add the pane of sign in (MemberSignInPane)
+	 * add the pane of member manage
 	 */
-	public void addSignInPane() {
+	public void addMemberManagePane() {
 		
 	}
-
+	
+	/**
+	 * add the pane of member manage
+	 */
+	public void addHotelManagePane() {
+		
+	}
+	
+	/**
+	 * add the pane of member manage
+	 */
+	public void addMarketManagePane() {
+		
+	}
 	
 
 }
