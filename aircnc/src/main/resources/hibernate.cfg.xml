@@ -17,6 +17,6 @@
 		<mapping resource="po/hotel/HotelPo.hbm.xml" />
 		<mapping resource="po/hotel/RoomPo.hbm.xml" />
 		<mapping resource="po/market/MarketPo.hbm.xml" />
-		<mapping resource="po/order/OrderPo.hbm.xml" />
+		<!-- <mapping resource="po/order/OrderPo.hbm.xml"/> -->
 	</session-factory>
 </hibernate-configuration>
