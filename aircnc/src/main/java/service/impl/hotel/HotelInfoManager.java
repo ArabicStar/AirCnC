@@ -1,12 +1,11 @@
 package service.impl.hotel;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import data.dao.hotel.HotelDao;
 import data.dao.member.MemberDao;
-import data.dao.promotion.PromotionDao;
+import data.dao.promotion.HotelPromotionDao;
 import po.hotel.HotelPo;
 import po.hotel.HotelPoBuilder;
 import service.hotel.HotelAccountService;
@@ -22,12 +21,12 @@ import vo.order.comment.CommentVo;
 public class HotelInfoManager implements HotelInfoService {
 	private HotelDao hotelDao;
 	private MemberDao memberDao;
-	private PromotionDao promotionDao;
+	private HotelPromotionDao promotionDao;
 
 	private HotelAccountService accountService;
 
 	public HotelInfoManager(HotelAccountService accountService, HotelDao hotelDao, MemberDao memberDao,
-			PromotionDao promotionDao) {
+			HotelPromotionDao promotionDao) {
 		this.accountService = accountService;
 		this.hotelDao = hotelDao;
 		this.memberDao = memberDao;

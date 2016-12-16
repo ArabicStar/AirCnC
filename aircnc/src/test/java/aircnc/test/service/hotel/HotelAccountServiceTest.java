@@ -20,7 +20,7 @@ public class HotelAccountServiceTest {
 
 	@Before
 	public void setUp() throws Exception {
-		dao = new HotelDaoImpl();
+		dao = HotelDaoImpl.INSTANCE;
 		acc = new HotelAccountManager(dao);
 		HotelVoBuilder b = new HotelVoBuilder().setName(name).setStar(4);
 		HotelInfo v = acc.register(b, "12345678".hashCode());
