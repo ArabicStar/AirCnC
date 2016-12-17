@@ -3,8 +3,6 @@ package data.dao.impl.hotel;
 import static data.hibernate.Hibernator.execute;
 
 import java.util.List;
-
-import org.hibernate.Criteria;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 

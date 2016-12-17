@@ -47,9 +47,7 @@ public class HotelTest {
  		b.setRooms(rooms);
  		
  		HotelPo po = b.getHotelInfo();
- 		
- 		HotelDao dao = new HotelDaoImpl();
- 		System.out.println(dao.addHotel(po));		
+ 				
 		
 	}
 }

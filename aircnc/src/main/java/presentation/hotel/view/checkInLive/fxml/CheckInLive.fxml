@@ -28,7 +28,7 @@
                   <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="42.0">
                      <children>
                         <Label styleClass="info-index" text="房间类型" />
-                        <ChoiceBox fx:id="roomType" prefHeight="40.0" prefWidth="140.0" styleClass="box" />
+                        <ComboBox fx:id="roomType" prefHeight="40.0" prefWidth="150.0" visibleRowCount="5" />
                      </children>
                   </HBox>
                </children>

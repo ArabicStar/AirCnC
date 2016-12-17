@@ -73,7 +73,6 @@ public class HotelCenterController extends Application{
 		orderExecutePane = new OrderExecutePane();
 		mainClient.getBorderPane().setCenter(orderExecutePane.getPane());
 		orderExecutePane.getController().setCenterController(this);	
-		orderExecutePane.getController().test();
 	}
 	
 	public void addAbnormalOrderPane() {
@@ -81,7 +80,6 @@ public class HotelCenterController extends Application{
 		abnormalPane = new AbnormalOrderPane();
 		mainClient.getBorderPane().setCenter(abnormalPane.getPane());
 		abnormalPane.getController().setCenterController(this);	
-		abnormalPane.getController().test();
 	}
 	
 	public void addOrderBrowsePane() {
