@@ -7,45 +7,43 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
-import presentation.member.accessor.impl.MemberCommentAccessorImpl;
-import presentation.member.view.myorder.fxml.MemberCommentController;
+import presentation.member.view.myorder.fxml.MemberAppealController;
 import vo.order.OrderVo;
 
-public class MemberCommentPane {
+public class MemberAppealPane {
 	
 	private Pane orderLayout;
-	private MemberCommentController controller;
+	private MemberAppealController controller;
 	private OrderVo vo;
 
 
-	public MemberCommentPane(OrderVo order){
+	public MemberAppealPane(OrderVo order){
 		init();
 		this.vo = order;
 	}
 
 	public void init() {
         try {
-            // Load Member Comment overview.
+            // Load Member Appeal overview.
             FXMLLoader loader = new FXMLLoader();
-            URL location = getClass().getResource("fxml/MemberComment.fxml");
+            URL location = getClass().getResource("fxml/MemberAppeal.fxml");
             loader.setLocation(location);
             loader.setBuilderFactory(new JavaFXBuilderFactory());
             loader.load();
-            controller = (MemberCommentController)loader.getController();
+            controller = (MemberAppealController)loader.getController();
             orderLayout = loader.getRoot();
             controller.setOrderVo(vo);
-        
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public MemberCommentController getController(){
+    public MemberAppealController getController(){
     	return this.controller;
     }
     
     public Node getPane(){
     	return orderLayout;
     }
-    
 }

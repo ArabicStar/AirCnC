@@ -4,24 +4,23 @@ import static utils.exception.StaticExceptionFactory.accessorNotReadyEx;
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
-import presentation.member.accessor.MemberCommentAccessor;
+import presentation.member.accessor.MemberAppealAccessor;
 
-public class MemberCommentAccessorImpl implements MemberCommentAccessor{
+public class MemberAppealAccessorImpl implements MemberAppealAccessor{
 	
-	private static MemberCommentAccessor instance;
+	private static MemberAppealAccessor instance;
 	
-	private double rate;
-	private String comment;
+	private String appeal;
 	private String id;
 	
-	public static final MemberCommentAccessor launch() {
+	public static final MemberAppealAccessor launch() {
 		if (instance != null)
 			throw duplicateSingletonEx();
 
-		return instance = new MemberCommentAccessorImpl();
+		return instance = new MemberAppealAccessorImpl();
 	}
 	
-	public static final MemberCommentAccessor getInstance(){
+	public static final MemberAppealAccessor getInstance(){
 		if (instance == null)
 			throw singletonNotExistsEx();
 
@@ -36,27 +35,15 @@ public class MemberCommentAccessorImpl implements MemberCommentAccessor{
 	}
 	
 	@Override
-	public double getRating() {
-		if(rate == 0)
+	public String getAppeal() {
+		if(appeal == null)
 			throw accessorNotReadyEx();
-		return rate;
+		return appeal;
 	}
 
 	@Override
-	public String getComment() {
-		if(comment == null)
-			throw accessorNotReadyEx();
-		return comment;
-	}
-
-	@Override
-	public void setRating(double rate) {
-		this.rate = rate;
-	}
-
-	@Override
-	public void setComment(String comment) {
-		this.comment = comment;
+	public void setAppeal(String content) {
+		this.appeal = content;
 	}
 
 	@Override

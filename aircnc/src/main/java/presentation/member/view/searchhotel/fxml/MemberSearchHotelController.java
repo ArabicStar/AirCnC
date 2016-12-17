@@ -94,7 +94,6 @@ public class MemberSearchHotelController implements Initializable{
 		supremeSearchPane = new SupremeSearchPane();
 		rootLayout.getChildren().add(supremeSearchPane.getPane());
 		AnchorPane.setTopAnchor(supremeSearchPane.getPane(), 100.0);
-		//(infoModify.getPane());
 		supremeSearchPane.getController().setController(this);
 	}
 	

@@ -14,15 +14,23 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import presentation.member.ClientCenterController;
 import presentation.member.accessor.SearchOrderInfoAccessor;
+import presentation.member.accessor.impl.MemberAppealAccessorImpl;
+import presentation.member.accessor.impl.MemberCommentAccessorImpl;
 import presentation.member.accessor.impl.SearchOrderInfoAccessorImpl;
 import presentation.member.manager.MyOrderManager;
 import presentation.member.manager.impl.MyOrderManagerImpl;
-import presentation.member.model.MyorderModel;
+import presentation.member.model.MyOrderModel;
 import presentation.member.utils.cell.FunctionButtons;
+import presentation.member.utils.dialog.PlainDialog;
+import presentation.member.view.myorder.MemberAppealPane;
+import presentation.member.view.myorder.MemberCommentPane;
 import utils.info.order.OrderStatus;
+import vo.order.OrderVo;
 
 public class MemberOrderMainController implements Initializable{
 	
@@ -45,28 +53,31 @@ public class MemberOrderMainController implements Initializable{
 	private Button query;
 	
 	@FXML
-	private TableView<MyorderModel> orderTable;
+	private TableView<MyOrderModel> orderTable;
 	
 	@FXML
-	private TableColumn<MyorderModel, String> hotelName;
+	private TableColumn<MyOrderModel, String> hotelName;
 	
 	@FXML
-    private TableColumn<MyorderModel, String> checkInTime;
+    private TableColumn<MyOrderModel, String> checkInTime;
 	
 	@FXML
-	private TableColumn<MyorderModel,String> state;
+	private TableColumn<MyOrderModel,String> state;
 	
 	@FXML
-	private TableColumn<MyorderModel,String> timeAndSum;
+	private TableColumn<MyOrderModel,String> timeAndSum;
 	
 	@FXML
-	private TableColumn<MyorderModel,String> totalPrice;
+	private TableColumn<MyOrderModel,String> totalPrice;
 	
 	@FXML
-	private TableColumn<MyorderModel,OrderStatus> operation;
+	private TableColumn<MyOrderModel,OrderVo> operation;
 	
 	private MyOrderManager manager;
 	private SearchOrderInfoAccessor accessor;
+	private AnchorPane rootLayout;
+	private MemberOrderMainController OrderController = this;
+	
 	/**
 	 * set the controller
 	 * @param controller
@@ -124,56 +135,57 @@ public class MemberOrderMainController implements Initializable{
 		operation.setSortable(false);
 		
 		operation.setCellValueFactory(
-                new Callback<TableColumn.CellDataFeatures<MyorderModel, OrderStatus>, 
-                ObservableValue<OrderStatus>>() {
+                new Callback<TableColumn.CellDataFeatures<MyOrderModel, OrderVo>, 
+                ObservableValue<OrderVo>>() {
 
-            public ObservableValue<OrderStatus> call(TableColumn.CellDataFeatures<MyorderModel, OrderStatus> p) {
-            	return new SimpleObjectProperty<OrderStatus>(p.getValue().getOperation());
+            public ObservableValue<OrderVo> call(TableColumn.CellDataFeatures<MyOrderModel, OrderVo> p) {
+            	return new SimpleObjectProperty<OrderVo>(p.getValue().getOperation());
             }
         });
 	
 
 		operation.setCellFactory(
-                new Callback<TableColumn<MyorderModel,OrderStatus>, TableCell<MyorderModel, OrderStatus>>() {
-            public TableCell<MyorderModel,OrderStatus> call(TableColumn<MyorderModel, OrderStatus> p) {
-                return new FunctionButtons();
+                new Callback<TableColumn<MyOrderModel,OrderVo>, TableCell<MyOrderModel, OrderVo>>() {
+            public TableCell<MyOrderModel,OrderVo> call(TableColumn<MyOrderModel, OrderVo> p) {
+                return new FunctionButtons(OrderController);
             }       
         });
 	}
 	
-	/**
-	 * when user deliver a comment or an appeal,
-	 * update the ObservableList
-	 * @param isSelectCol
-	 */
-//	private void updateObservableListProperties(TableColumn<MyorderModel,OrderStatus> operation, TableColumn<MyorderModel,String> state){
-//
-//		operation.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<MyorderModel,OrderSatatus>>() {
-//
-//			@Override
-//			public void handle(CellEditEvent<MyorderModel,OrderSatatus> event) {
-//				String newState;
-//				switch(event.getNewValue()){
-//		        case ABNORMAL: 
-//		        	newState = "异常";  break;
-//		        case EXECUTED: 
-//		        	newState = "已执行";  break;
-//		        case UNEXECUTED: 
-//		        	newState = "未执行";  break;
-//		        case REPEALED: 
-//		        	newState = "撤销";  break;
-//		        case REVIEWED: 
-//		        	newState = "已评价";  break;
-//		        case APPEALING: 
-//		        	newState = "申诉中";  break;
-//		        default: 
-//		        	newState = "";  break;
-//		        }
-//				event.getTableView().getItems().get(event.getTablePosition().getRow()).setAmount(event.getNewValue());
-//			}
-//		});
-//	}   
+	public void setRootLayout(AnchorPane pane){
+		this.rootLayout = pane;
+	}
 	
+	public void addCommentPane(OrderVo vo){
+		if(!MemberCommentAccessorImpl.isLaunched())
+        	MemberCommentAccessorImpl.launch();
+		MemberCommentPane comment = new MemberCommentPane(vo);
+		rootLayout.getChildren().add(comment.getPane());
+		AnchorPane.setTopAnchor(comment.getPane(), 100.0);
+		comment.getController().setController(this);
+	}
 	
+	public void removeCommentPane(){
+		rootLayout.getChildren().remove(rootLayout.getChildren().size()-1);
+	}
+	
+	public void addAppealPane(OrderVo vo){
+		if(!MemberAppealAccessorImpl.isLaunched())
+        	MemberAppealAccessorImpl.launch();
+		MemberAppealPane appeal = new MemberAppealPane(vo);
+		rootLayout.getChildren().add(appeal.getPane());
+		AnchorPane.setTopAnchor(appeal.getPane(), 100.0);
+		appeal.getController().setController(this);
+	}
+	
+	public void removeAppealPane(){
+		rootLayout.getChildren().remove(rootLayout.getChildren().size()-1);
+	}
+	
+	public void cancelOrder(OrderVo vo){
+		PlainDialog alert3 = new PlainDialog(AlertType.INFORMATION,
+       			"取消订单","你确定取消该订单吗？");
+       			alert3.showDialog();
+	}
 	
 }
