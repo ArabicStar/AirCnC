@@ -12,6 +12,7 @@ public class MemberCommentAccessorImpl implements MemberCommentAccessor{
 	
 	private double rate;
 	private String comment;
+	private String id;
 	
 	public static final MemberCommentAccessor launch() {
 		if (instance != null)
@@ -56,6 +57,18 @@ public class MemberCommentAccessorImpl implements MemberCommentAccessor{
 	@Override
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+
+	@Override
+	public String getId() {
+		if(id == null)
+			throw accessorNotReadyEx();
+		return id;
+	}
+
+	@Override
+	public void setOrderId(String id) {
+		this.id = id;
 	}
 
 }

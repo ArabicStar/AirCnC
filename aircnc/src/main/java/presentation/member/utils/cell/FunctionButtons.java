@@ -1,18 +1,16 @@
 package presentation.member.utils.cell;
 
-
-import java.util.Optional;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
 import javafx.scene.layout.HBox;
-import presentation.member.model.MyorderModel;
-import presentation.member.utils.dialog.PlainDialog;
-import presentation.member.utils.dialog.TextAreaDialog;
+import javafx.util.Callback;
+import presentation.member.model.MyOrderModel;
+import presentation.member.view.myorder.fxml.MemberOrderMainController;
 import utils.info.order.OrderStatus;
+import vo.order.OrderVo;
 
 /**
  * FunctionButtons use a hbox(button) to show the operations.
@@ -20,15 +18,22 @@ import utils.info.order.OrderStatus;
  * @author paranoia
  *
  */
-public class FunctionButtons extends TableCell<MyorderModel, OrderStatus>{
+public class FunctionButtons extends TableCell<MyOrderModel, OrderVo>{
 	
-	Button[] cellButton;
-	HBox buttons;
-	OrderStatus status;
+	private Button[] cellButton;
+	private HBox buttons;
+	private OrderStatus status;
+	private OrderVo order;
+	private MemberOrderMainController controller;
     
-    public FunctionButtons(){
+    public FunctionButtons(MemberOrderMainController controller){
     	status = OrderStatus.EXECUTED;
     	createFunctionButtons(status);
+    	setController(controller);
+    }
+    
+    public void setController(MemberOrderMainController controller){
+    	this.controller = controller;
     }
     
     public void createFunctionButtons(OrderStatus status){
@@ -101,29 +106,19 @@ public class FunctionButtons extends TableCell<MyorderModel, OrderStatus>{
              public void handle(ActionEvent t) {
             	 switch(type){
             	 case CHECK: 
-            		 PlainDialog alert1 = new PlainDialog(AlertType.INFORMATION,
-                   			"订单评价","等万总写出来。。");
-            		 alert1.showDialog();
+            		 //waiting for 订单详情
             		 break;
             	 case REVIEW: 
-             		TextAreaDialog alert2 = new TextAreaDialog("订单评价");
-             		Optional<String> result = alert2.showDialog();
-             		result.ifPresent(usernamePassword -> {
-            		    System.out.println("他写下的评价是：" + usernamePassword.toString());
-            		    
-            		});
+            		 if(order != null)
+            			 controller.addCommentPane(order);
              		 break;
             	 case CANCEL: 
-              		PlainDialog alert3 = new PlainDialog(AlertType.INFORMATION,
-           			"取消订单","你确定取消该订单吗？");
-           			alert3.showDialog();
+            		 if(order != null)
+            			 controller.cancelOrder(order);
               		 break;
             	 case APPEAL: 
-            		TextAreaDialog alert4 = new TextAreaDialog("申诉该订单");
-           			Optional<String> result2 = alert4.showDialog();
-             		result2.ifPresent(usernamePassword -> {
-            		    System.out.println("他写下的评价是：" + usernamePassword.toString());
-            		});
+            		 if(order != null)
+            			 controller.addCommentPane(order);
            			break;
             	 }
              }
@@ -137,10 +132,11 @@ public class FunctionButtons extends TableCell<MyorderModel, OrderStatus>{
      * @param status, empty
      */
     @Override
-    protected void updateItem(OrderStatus status, boolean empty) {
-        super.updateItem(status, empty);
+    protected void updateItem(OrderVo vo, boolean empty) {
+        super.updateItem(vo, empty);
         if(!empty){
-        		this.status = status;
+        		this.status = vo.getStatus();
+        		this.order = vo;
         		createFunctionButtons(status);
         		setGraphic(buttons);
         }

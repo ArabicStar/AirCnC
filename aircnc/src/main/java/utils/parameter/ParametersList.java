@@ -2,7 +2,10 @@ package utils.parameter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import utils.lambda.SerializablePredicate;
 
 public class ParametersList {
 	private List<Parameter<?>> properties;
@@ -15,11 +18,15 @@ public class ParametersList {
 		this.properties = new ArrayList<>(that.properties);
 	}
 
+	private void put(Parameter<?> param) {
+		properties.add(param);
+	}
+
 	public <T> void addParameter(String name, Class<T> type) {
 		properties.add(new Parameter<>(name, type));
 	}
 
-	public <T> void addParameter(String name, Class<T> type, Predicate<T> limit) {
+	public <T> void addParameter(String name, Class<T> type, SerializablePredicate<T> limit) {
 		properties.add(new Parameter<>(name, type, limit));
 	}
 
@@ -61,5 +68,25 @@ public class ParametersList {
 				return (Parameter<T>) p;
 
 		return null;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder("|");
+		for (Parameter<?> param : properties)
+			sb.append(param.toString()).append("|");
+
+		return sb.toString();
+	}
+
+	public static ParametersList parseString(String src) throws Exception {
+		Pattern pt = Pattern.compile("|(.+?)|");
+		Matcher m = pt.matcher(src);
+
+		ParametersList list = new ParametersList();
+		while (m.find())
+			list.put(Parameter.parseString(m.group(1)));
+
+		return list;
 	}
 }

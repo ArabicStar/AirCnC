@@ -9,7 +9,7 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import presentation.member.manager.MyOrderManager;
-import presentation.member.model.MyorderModel;
+import presentation.member.model.MyOrderModel;
 import vo.order.OrderVo;
 
 /**
@@ -25,7 +25,7 @@ public class MyOrderManagerImpl implements MyOrderManager{
 	
 	private List<OrderVo> orders;
 	
-	private ObservableList<MyorderModel> orderData;
+	private ObservableList<MyOrderModel> orderData;
 	
 	public static final MyOrderManager launch() {
 		if (instance != null)
@@ -61,11 +61,11 @@ public class MyOrderManagerImpl implements MyOrderManager{
 	 * wrap into the observablelist
 	 */
 	@Override
-	public ObservableList<MyorderModel> getOrderList() {
+	public ObservableList<MyOrderModel> getOrderList() {
 		orderData = FXCollections.observableArrayList();
 		Iterator<OrderVo> it = orders.iterator();
 		while(it.hasNext())
-			orderData.add(new MyorderModel(it.next()));
+			orderData.add(new MyOrderModel(it.next()));
 		return orderData;
 	}
 

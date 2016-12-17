@@ -41,7 +41,7 @@ public enum MemberDaoImpl implements MemberDao {
 		return execute(session -> {
 			Boolean flag = Boolean.FALSE;// for performance
 
-			MemberPo delMem = (MemberPo) session.get(MemberPo.class, parseId(id));
+			MemberPo delMem = (MemberPo) session.get(MemberPo.class, numId);
 			if (flag = Boolean.valueOf((delMem != null)))// check existence
 			{
 				// delete member po firstly
@@ -89,7 +89,7 @@ public enum MemberDaoImpl implements MemberDao {
 	/* parse an id string. if invalid, throw IAE. */
 	private static final int parseId(final String id) {
 		if (!MemberPo.checkID(id))
-			throw new IllegalArgumentException("Wrong ID");
+			throw new IllegalArgumentException("MemberDaoImpl.parseId - Wrong ID");
 
 		return Integer.parseInt(id);
 	}

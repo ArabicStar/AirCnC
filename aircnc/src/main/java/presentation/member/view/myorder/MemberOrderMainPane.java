@@ -8,17 +8,17 @@ import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import presentation.member.view.myorder.fxml.MemberOrderMainController;
+import vo.order.OrderVo;
 
 public class MemberOrderMainPane {
 	
 	private Pane orderLayout;
 	private MemberOrderMainController controller;
 
-
 	public MemberOrderMainPane(){
 		init();
 	}
-
+	
 	public void init() {
         try {
             // Load sign in overview.
@@ -30,7 +30,6 @@ public class MemberOrderMainPane {
             loader.load();
             controller = (MemberOrderMainController)loader.getController();
             orderLayout = loader.getRoot();
-
         } catch (IOException e) {
             e.printStackTrace();
         }

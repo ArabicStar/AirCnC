@@ -1,14 +1,13 @@
 package utils.promotion.trigger;
 
 import static utils.exception.StaticExceptionFactory.illegalArgEx;
+import static utils.exception.StaticExceptionFactory.illegalStateException;
 
 import utils.parameter.ParametersList;
 import utils.promotion.trigger.hotel.HotelTrigger;
 import utils.promotion.trigger.hotel.HotelWhen;
 import utils.promotion.trigger.website.WebsiteTrigger;
 import utils.promotion.trigger.website.WebsiteWhen;
-
-import static utils.exception.StaticExceptionFactory.*;
 
 public class TriggerBuilder {
 	private ParametersList parameters;
@@ -36,12 +35,37 @@ public class TriggerBuilder {
 		return this;
 	}
 
+	public boolean isReady() {
+		return !parameters.isSetUp() || (wwhen == null && hwhen == null);
+	}
+
 	public Trigger build() {
+		if (!isReady())
+			throw illegalStateException("Not set up or ambigulous state");
+
 		if (wwhen != null && hwhen == null && parameters.isSetUp())
 			return new WebsiteTrigger(wwhen, parameters);
 		else if (wwhen == null && hwhen != null && parameters.isSetUp())
 			return new HotelTrigger(hwhen, parameters);
-		else
-			throw illegalStateException("Not set up or ambigulous state");
+
+		return null;// never reach, only make complier happy
+	}
+
+	public static final Trigger parseString(String src) throws Exception {
+		String[] strs = src.split("@^@");// Don't worry, be happy
+
+		if (strs.length != 0)
+			throw illegalArgEx("Trigger source string");
+
+		ParametersList list = ParametersList.parseString(strs[2]);
+
+		switch (strs[0]) {
+		case "Website":
+			return new WebsiteTrigger(WebsiteWhen.valueOf(strs[1]), list);
+		case "Hotel":
+			return new HotelTrigger(HotelWhen.valueOf(strs[1]), list);
+		default:
+			throw illegalArgEx("Trigger source string");
+		}
 	}
 }

@@ -1,31 +1,26 @@
 package data.dao.member;
 
+import static data.dao.rmi.RmiHazarder.hazard;
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
-import static utils.exception.StaticExceptionFactory.packedRmiEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
-
-import java.rmi.RemoteException;
 
 import data.dao.rmi.member.RemoteCreditDao;
 import data.dao.rmi.member.RemoteMemberDao;
 import po.member.MemberPo;
 import po.member.credit.CreditChangePo;
-import utils.proxy.AccessSecureProxy;
-import utils.proxy.AuthenticatePolicy;
-import utils.proxy.AuthenticatePolicy.Client;
 
-public class MemberDaoProxy extends AccessSecureProxy implements CreditDao, MemberDao {
+public class MemberDaoProxy implements CreditDao, MemberDao {
 	/* singleton */
 	/**
 	 * Singleton instance
 	 */
 	private static MemberDaoProxy instance;
 
-	public static final MemberDaoProxy launch(Client clientId) {
+	public static final MemberDaoProxy launch() {
 		if (instance != null)
 			throw duplicateSingletonEx();
 
-		return instance = new MemberDaoProxy(clientId);
+		return instance = new MemberDaoProxy();
 	}
 
 	public static final MemberDaoProxy getInstance() {
@@ -37,22 +32,28 @@ public class MemberDaoProxy extends AccessSecureProxy implements CreditDao, Memb
 	/* singleton */
 
 	/**
-	 * Actual credit dao handler
-	 */
-	private RemoteCreditDao creditDao;
-	/**
-	 * Actual member dao handler
-	 */
-	private RemoteMemberDao memberDao;
-
-	/**
 	 * 'Default constructor, defines client identifier.<br>
 	 * 
 	 * @param clientId
 	 */
-	private MemberDaoProxy(Client clientId) {
-		super(clientId);
+	private MemberDaoProxy() {
 	}
+
+	/*
+	 ****************************
+	 ******* MemberDao*******
+	 ****************************
+	 */
+	/**
+	 * /*
+	 ***************************
+	 ******* MemberDao******
+	 ***************************
+	 */
+	/**
+	 * Actual member dao handler
+	 */
+	private RemoteMemberDao memberDao;
 
 	/**
 	 * Load a spefic member dao, auth to cilents of user and market.<br>
@@ -60,99 +61,72 @@ public class MemberDaoProxy extends AccessSecureProxy implements CreditDao, Memb
 	 * @param memberDao
 	 *            a specific member dao implemention
 	 */
-	@AuthenticatePolicy({ Client.USER, Client.MARKET })
-	public void loadRemoteMemberDao(RemoteMemberDao memberDao) {
-		checkAuthentication();
 
+	public void loadRemoteMemberDao(RemoteMemberDao memberDao) {
 		this.memberDao = memberDao;
 	}
+
+	@Override
+
+	public boolean addMember(MemberPo po) {
+		return hazard(() -> {
+			return memberDao.addMember(po);
+		});
+	}
+
+	/* As follow are proxy methods. */
+	@Override
+
+	public boolean deleteMember(String id) {
+		return hazard(() -> {
+			return memberDao.deleteMember(id);
+		});
+	}
+
+	@Override
+	public boolean updateMember(MemberPo po) {
+		return hazard(() -> {
+			return memberDao.updateMember(po);
+		});
+	}
+
+	@Override
+	public MemberPo findMember(String id) {
+		return hazard(() -> {
+			return memberDao.findMember(id);
+		});
+	}
+
+	@Override
+	public boolean existsMember(String id) {
+		return hazard(() -> {
+			return memberDao.existsMember(id);
+		});
+	}
+
+	/*
+	 *************************
+	 ******* CreditDao*******
+	 *************************
+	 */
+	/**
+	 * Actual credit dao handler
+	 */
+	private RemoteCreditDao creditDao;
 
 	/**
 	 * Load a spefic credit dao, auth to clients of user, hotel and market, plus
 	 * server.<br>
 	 */
-	@AuthenticatePolicy({ Client.USER, Client.HOTEL, Client.SERVER, Client.MARKET })
-	public void loadRemoteCreditDao(RemoteCreditDao creditDao) {
-		checkAuthentication();
 
+	public void loadRemoteCreditDao(RemoteCreditDao creditDao) {
 		this.creditDao = creditDao;
 	}
 
 	@Override
-	@AuthenticatePolicy({ Client.USER })
-	public boolean addMember(MemberPo po) {
-		checkAuthentication();
-
-		try {
-			return memberDao.addMember(po);
-		} catch (RemoteException e) {
-			// e.printStackTrace();
-			throw packedRmiEx(e);
-		}
-	}
-
-	/* As follow are proxy methods. */
-	@Override
-	@AuthenticatePolicy({ Client.MANAGE })
-	public boolean deleteMember(String id) {
-		checkAuthentication();
-
-		try {
-			return memberDao.deleteMember(id);
-		} catch (RemoteException e) {
-			// e.printStackTrace();
-			throw packedRmiEx(e);
-		}
-	}
-
-	@Override
-	@AuthenticatePolicy({ Client.USER })
-	public boolean updateMember(MemberPo po) {
-		checkAuthentication();
-
-		try {
-			return memberDao.updateMember(po);
-		} catch (RemoteException e) {
-			// e.printStackTrace();
-			throw packedRmiEx(e);
-		}
-	}
-
-	@Override
-	@AuthenticatePolicy({ Client.USER, Client.MARKET })
-	public MemberPo findMember(String id) {
-		checkAuthentication();
-
-		try {
-			return memberDao.findMember(id);
-		} catch (RemoteException e) {
-			// e.printStackTrace();
-			throw packedRmiEx(e);
-		}
-	}
-
-	@Override
-	@AuthenticatePolicy({ Client.USER, Client.MARKET })
-	public boolean existsMember(String id) {
-		checkAuthentication();
-
-		try {
-			return memberDao.existsMember(id);
-		} catch (RemoteException e) {
-			// e.printStackTrace();
-			throw packedRmiEx(e);
-		}
-	}
-
-	@Override
-	@AuthenticatePolicy({ Client.USER, Client.HOTEL, Client.SERVER, Client.MARKET })
 	public MemberPo changeCredit(CreditChangePo aChange) {
-		checkAuthentication();
-
-		try {
+		return hazard(() -> {
 			return creditDao.changeCredit(aChange);
-		} catch (RemoteException e) {
-			throw packedRmiEx(e);
-		}
+		});
 	}
 }

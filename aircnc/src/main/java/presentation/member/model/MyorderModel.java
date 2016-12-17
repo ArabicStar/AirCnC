@@ -7,6 +7,7 @@ import utils.info.order.OrderStatus;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import vo.member.MemberVo;
 import vo.order.OrderVo;
 
 /**
@@ -15,19 +16,19 @@ import vo.order.OrderVo;
  * @author paranoia
  *
  */
-public class MyorderModel {
+public class MyOrderModel {
 
     private final StringProperty hotelName;
     private final StringProperty checkinTime;
     private final StringProperty state;
     private final StringProperty timeAndSum;
     private final StringProperty totalPrice;
-    private final ObjectProperty<OrderStatus> operation;
+    private final ObjectProperty<OrderVo> operation;
 
     /**
      * Default constructor.
      */
-    public MyorderModel() {
+    public MyOrderModel() {
         this(null);
     }
 
@@ -41,7 +42,7 @@ public class MyorderModel {
      * @param totalPrice
      * @param operation
      */
-    public MyorderModel(OrderVo order) {
+    public MyOrderModel(OrderVo order) {
         this.hotelName = new SimpleStringProperty(order.getHotelName());
         
         //process the checkinTime
@@ -68,7 +69,7 @@ public class MyorderModel {
         this.state = new SimpleStringProperty(state);
         this.timeAndSum = new SimpleStringProperty(order.getStayDays()+"晚/"+order.getRoomNumber()+"间");
         this.totalPrice = new SimpleStringProperty(String.valueOf(order.getOriginalPrice())+"元");
-        this.operation = new SimpleObjectProperty<OrderStatus>(order.getStatus());
+        this.operation = new SimpleObjectProperty<OrderVo>(order);
         
         
     }
@@ -147,15 +148,15 @@ public class MyorderModel {
         return totalPrice;
     }
     
-    public OrderStatus getOperation() {
+    public OrderVo getOperation() {
         return operation.get();
     }
 
-    public void setOperation(OrderStatus status) {
-        this.operation.set(status);
+    public void setOperation(OrderVo vo) {
+        this.operation.set(vo);
     }
 
-    public ObjectProperty<OrderStatus> operationProperty() {
+    public ObjectProperty<OrderVo> operationProperty() {
         return operation;
     }
     

@@ -8,6 +8,22 @@ import utils.promotion.Promotion;
 
 public abstract class OrderInfoBuilder extends OrderInfoTemplate {
 	public OrderInfoBuilder() {
+		orderId = BLANK;
+		stayDays = -1;
+		userId = -1;
+		userName = BLANK;
+		status = OrderStatus.ABNORMAL;
+		entryTime = null;
+		lastTime = null;
+		promotions = new HashSet<>();
+		peopleNumber = -1;
+		originalPrice = -1;
+		discountPrice = -1;
+		hasChildren = false;
+		hotelId = -1;
+		hotelName = BLANK;
+		roomNumber = -1;
+		isReviewed = false;
 	}
 
 	public OrderInfoBuilder(OrderInfo info) {
@@ -87,7 +103,12 @@ public abstract class OrderInfoBuilder extends OrderInfoTemplate {
 	 *            要设置的 promotions
 	 */
 	public OrderInfoBuilder setPromotions(Set<Promotion> promotions) {
-		this.promotions = new HashSet<>(promotions);
+		this.promotions.addAll(promotions);
+		return this;
+	}
+
+	public OrderInfoBuilder addPromotion(Promotion promotion) {
+		this.promotions.add(promotion);
 		return this;
 	}
 

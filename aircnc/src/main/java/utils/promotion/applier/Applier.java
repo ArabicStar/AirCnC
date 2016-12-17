@@ -19,4 +19,8 @@ public class Applier {
 	public String how() {
 		return how.describe(params);
 	}
+
+	public String toString() {
+		return new StringBuilder(how.name()).append("@^@").append(params.toString()).toString();
+	}
 }
