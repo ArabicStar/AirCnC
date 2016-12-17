@@ -60,7 +60,7 @@ public interface MarketDao {
 	 * @throws IllegalArgumentException
 	 *             Id is invalid
 	 */
-	public boolean deleteMarket(String id);
+	public boolean deleteMarket(final String id);
 
 	/**
 	 * Update market by given po.<br>
@@ -80,7 +80,7 @@ public interface MarketDao {
 	 *         </ul>
 	 *         </ul>
 	 */
-	public boolean updateMarket(MarketPo po);
+	public boolean updateMarket(final MarketPo po);
 	
 	/**
 	 * Get market by given id.<br>
@@ -101,7 +101,7 @@ public interface MarketDao {
 	 * @throws IllegalArgumentException
 	 *             Id is invalid
 	 */
-	public MarketPo findMarket(String id);
+	public MarketPo findMarket(final String id);
 	
 	/**
 	 * Check if given market exists.<br>
@@ -122,5 +122,5 @@ public interface MarketDao {
 	 * @throws IllegalArgumentException
 	 *             Id is invalid
 	 */
-	public boolean existsMarket(String id);
+	public boolean existsMarket(final String id);
 }

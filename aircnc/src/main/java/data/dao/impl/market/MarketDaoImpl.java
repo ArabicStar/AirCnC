@@ -3,9 +3,11 @@ package data.dao.impl.market;
 import static data.hibernate.Hibernator.execute;
 import data.dao.market.MarketDao;
 import po.market.MarketPo;
+import po.member.MemberPo;
 
 /**
  * the implementation of MarketDao
+ * 
  * @author paranoia
  *
  */
@@ -32,7 +34,7 @@ public enum MarketDaoImpl implements MarketDao{
 	}
 
 	@Override
-	public boolean deleteMarket(String id) {
+	public boolean deleteMarket(final String id) {
 		return execute(session -> {
 			Boolean flag = Boolean.FALSE;// for performance
 
@@ -46,14 +48,14 @@ public enum MarketDaoImpl implements MarketDao{
 	}
 
 	@Override
-	public boolean updateMarket(MarketPo po) {
+	public boolean updateMarket(final MarketPo po) {
 		if(po==null){
 			return false;
 		}
 		return execute(session -> {
 			Boolean flag = Boolean.FALSE;
 			
-			MarketPo modified = (MarketPo) session.get(MarketPo.class, po.getId());
+			MarketPo modified = session.get(MarketPo.class, parseId(po.getId()));
 			if(flag = Boolean.valueOf(modified !=null))
 				session.update(modified);
 			
@@ -62,23 +64,25 @@ public enum MarketDaoImpl implements MarketDao{
 	}
 
 	@Override
-	public MarketPo findMarket(String idString) {
+	public MarketPo findMarket(final String idString) {
+		int numId = parseId(idString);
 		return execute(session -> {
-			return (MarketPo) session.get(MarketPo.class, parseId(idString));
+			return (MarketPo) session.get(MarketPo.class, numId);
 		});
 	}
 
 	@Override
-	public boolean existsMarket(String idString) {
+	public boolean existsMarket(final String idString) {
+		int numId = parseId(idString);
 		return execute(session -> {
-			return (MarketPo) session.get(MarketPo.class, parseId(idString)) != null;
+			return (MarketPo) session.get(MarketPo.class, numId) != null;
 		});
 	}
 	
 	/* parse an id string. if invalid, throw IAE. */
 	private static final int parseId(final String id) {
 		if (!MarketPo.checkID(id))
-			throw new IllegalArgumentException("Wrong ID");
+			throw new IllegalArgumentException("MarketDaoImpl.parseId - Wrong ID");
 
 		return Integer.parseInt(id);
 	}
