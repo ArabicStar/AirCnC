@@ -1,8 +1,6 @@
 package service.market;
 
 import utils.info.market.MarketInfo;
-import vo.market.MarketVo;
-import vo.market.MarketVoBuilder;
 
 /**
  * Interface for account operation<br>
@@ -11,17 +9,6 @@ import vo.market.MarketVoBuilder;
  *
  */
 public interface MarketAccountService {
-	/**
-	 * Register a new market account<br>
-	 *
-	 * @param newMarket
-	 *            market info without id<br>
-	 * @param passwordHash
-	 *            password hashcode<br>
-	 * @return If succeed, return vo of new market<br>
-	 *         Else, invalid market vo<br>
-	 */
-	public MarketInfo register(MarketVoBuilder newMarket, final int passwordHash);
 
 	/**
 	 * Login a market account

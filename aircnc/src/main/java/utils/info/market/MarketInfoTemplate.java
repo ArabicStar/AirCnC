@@ -10,7 +10,9 @@ package utils.info.market;
  */
 
 public class MarketInfoTemplate {
-
+	
+	protected static String BLANK = "";
+	
 	protected String id;
 	protected String name;
 	

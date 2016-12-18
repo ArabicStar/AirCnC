@@ -25,7 +25,8 @@ public abstract class MarketInfoBuilder extends MarketInfoTemplate{
 	 * @param type
 	 */
 	public MarketInfoBuilder() {
-		
+		id = BLANK;
+		name = BLANK;
 	}
 	/**
 	 * Initialize a builder by given MemberInfo, all information will be kept.

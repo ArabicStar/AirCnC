@@ -17,6 +17,10 @@ public class MarketVoBuilder extends MarketInfoBuilder{
 	public static final MarketVo getInvalidInfo() {
 		return INVALID_MARKET_VO;
 	}
+	
+	public MarketVoBuilder() {
+		super();
+	}
 
 	public MarketVoBuilder(MarketInfo info) {
 		super(info);

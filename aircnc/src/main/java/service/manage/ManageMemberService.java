@@ -1,5 +1,10 @@
 package service.manage;
 
-public interface ManageMemberService {
+import utils.info.member.MemberInfo;
 
+public interface ManageMemberService {
+	
+	public boolean ModifyMemberInfo(MemberInfo memberInfo);
+	
+	public MemberInfo getMemberInfo(String id);
 }

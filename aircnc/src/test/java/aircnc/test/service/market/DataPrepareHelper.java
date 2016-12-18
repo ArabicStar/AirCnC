@@ -5,14 +5,13 @@ import java.util.List;
 
 import data.dao.impl.market.MarketDaoImpl;
 import data.dao.market.MarketDao;
-import javafx.util.converter.LocalDateStringConverter;
 import po.market.MarketPo;
 import po.market.MarketPoBuilder;
 import service.impl.market.MarketAccountManager;
 import service.impl.market.MarketInfoManager;
 import service.market.MarketAccountService;
 import service.market.MarketInfoService;
-import service.query.OrderQueryService;
+import service.promotion.WebsitePromotionInfoService;
 
 public class DataPrepareHelper {
 	/* test data */
@@ -31,8 +30,8 @@ public class DataPrepareHelper {
 
 	public static final MarketDao marketDao = MarketDaoImpl.INSTANCE;
 	public static final MarketAccountService accountService = MarketAccountManager.launch(marketDao);
-	private static final OrderQueryService orderQueryService = null;
-	public static final MarketInfoService infoService = MarketInfoManager.launch(marketDao, accountService, orderQueryService);
+	private static final WebsitePromotionInfoService websitePromotionInfoService = null;
+	public static final MarketInfoService infoService = MarketInfoManager.launch(marketDao, websitePromotionInfoService);
 
 	public static final void prepareTestStatistic() {
 		testData.forEach(marketDao::addMarket);

@@ -69,6 +69,6 @@ public class MarketPoBuilder extends MarketInfoBuilder {
 		if (!isReady() && passwordHash != Integer.MIN_VALUE)
 			throw new IllegalStateException("Lack Of Info");
 
-		return new MarketPo().setName(name).setPasswordHash(passwordHash);
+		return new MarketPo().setId(id).setName(name).setPasswordHash(passwordHash);
 	}
 }
