@@ -17,7 +17,7 @@ public class CommentVo extends CommentInfo{
 		super(grade);
 	}
 	
-	CommentVo setHotelId(String id){
+	CommentVo setHotelId(int id){
 		this.hotelId = id;
 		return this;
 	}
@@ -56,6 +56,7 @@ public class CommentVo extends CommentInfo{
 		return this;
 	}
 	
+	// TODO 实时计算
 	public int getMemberLevel() {
 		return memberLevel;
 	}

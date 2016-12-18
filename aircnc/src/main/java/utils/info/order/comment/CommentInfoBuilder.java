@@ -7,7 +7,7 @@ public abstract class CommentInfoBuilder extends CommentInfoTemplate{
 	
 	public CommentInfoBuilder() {
 		// all these should be illegal
-		hotelId = "00000000";
+		hotelId = 0;
 		memberId = "00000000";
 		checkInTime = LocalDate.now();
 		commentTime = LocalDateTime.now();
@@ -35,7 +35,7 @@ public abstract class CommentInfoBuilder extends CommentInfoTemplate{
 		return this;
 	}
 	
-	public CommentInfoBuilder setHotelID(String id) {
+	public CommentInfoBuilder setHotelID(int id) {
 		if (checkID(id)) {
 			this.hotelId = id;
 		}
@@ -61,7 +61,7 @@ public abstract class CommentInfoBuilder extends CommentInfoTemplate{
 	
 	public boolean isReady() {
 //		System.out.println(id + " " + name + " " + contact + " " + type + " " + enterprise + " " + birthday);
-		return hotelId != null && memberId != null && content != null && checkInTime != null && commentTime != null;
+		return hotelId != 0 && memberId != null && content != null && checkInTime != null && commentTime != null;
 	}
 	
 	public abstract CommentInfo getCommentInfo();

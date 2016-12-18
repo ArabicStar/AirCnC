@@ -35,7 +35,7 @@ public class CommentPoBuilder extends CommentInfoBuilder{
 		return this;
 	}
 	
-	public CommentPoBuilder setHotelID(String id) {
+	public CommentPoBuilder setHotelID(int id) {
 		if (checkID(id)) {
 			this.hotelId = id;
 		}

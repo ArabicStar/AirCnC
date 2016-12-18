@@ -9,7 +9,7 @@ public class CommentInfo extends CommentInfoTemplate{
 	private static final String BLANK = "";
 	
 	protected CommentInfo() {
-		hotelId = BLANK;
+		hotelId = 0;
 		memberId = BLANK;
 		content = BLANK;
 		checkInTime = null;
@@ -18,7 +18,7 @@ public class CommentInfo extends CommentInfoTemplate{
 	}
 	
 	protected CommentInfo(int grade){
-		hotelId = BLANK;
+		hotelId = 0;
 		memberId = BLANK;
 		content = BLANK;
 		this.grade = grade;
@@ -27,12 +27,11 @@ public class CommentInfo extends CommentInfoTemplate{
 		isValid = true;
 	}
 	
-	public String getHotelId(){
+	public int getHotelId(){
 		if (isValid()) {
 			return hotelId;
 		}
-		System.out.println(isValid());
-		return null;
+		return 0;
 	}
 	
 	public String getMemberId(){

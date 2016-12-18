@@ -7,7 +7,9 @@ import utils.info.order.comment.CommentInfo;
 import utils.info.order.comment.CommentInfoBuilder;
 
 public class CommentVoBuilder extends CommentInfoBuilder {
-
+	private int memberLevel;
+	private String memberName;
+	
 	private static final CommentVo INVALID_COMMENT_VO;
 	static {
 		INVALID_COMMENT_VO = new CommentVo(1);
@@ -24,7 +26,6 @@ public class CommentVoBuilder extends CommentInfoBuilder {
 
 	public CommentVoBuilder() {
 		super();
-		System.out.println("调用");
 	}
 
 	public CommentVoBuilder setContent(String content) {
@@ -34,7 +35,7 @@ public class CommentVoBuilder extends CommentInfoBuilder {
 		return this;
 	}
 
-	public CommentVoBuilder setHotelID(String id) {
+	public CommentVoBuilder setHotelID(int id) {
 		if (checkID(id)) {
 			this.hotelId = id;
 		}
@@ -57,6 +58,16 @@ public class CommentVoBuilder extends CommentInfoBuilder {
 		this.commentTime = commentTime;
 		return this;
 	}
+	
+	public CommentVoBuilder setMemberLevel(int memberLevel) {
+		this.memberLevel = memberLevel;
+		return this;
+	}
+	
+	public CommentVoBuilder setMemberName(String memberName) {
+		this.memberName = memberName;
+		return this;
+	}
 
 	@Override
 	public CommentVo getCommentInfo() {
@@ -64,7 +75,8 @@ public class CommentVoBuilder extends CommentInfoBuilder {
 			return null;
 		} 
 		return new CommentVo(grade).setHotelId(hotelId).setMemberId(memberId).setCheckInTime(checkInTime)
-				.setCommentTime(commentTime);
+				.setContent(content).setCommentTime(commentTime).setMemberLevel(memberLevel)
+				.setMemberName(memberName);
 
 	}
 

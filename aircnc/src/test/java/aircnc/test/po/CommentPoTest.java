@@ -28,7 +28,7 @@ public class CommentPoTest {
 		System.out.println(vo.getMemberName());
 		System.out.println(vo.getMemberLevel());
 		System.out.println(vo.getGrade());
-		System.out.println(vo.getContent());
+		System.out.println("content " + vo.getContent());
 		System.out.println(vo.getCheckInTime());
 		System.out.println(vo.getCommentTime());
 	}
@@ -46,7 +46,7 @@ public class CommentPoTest {
 	public void testPoToVo() {
 		CommentPo po = new CommentPoBuilder().setCheckInTime(LocalDate.now())
 				.setCommentTime(LocalDateTime.now()).setContent("嘻嘻哈哈")
-				.setHotelID("10000001").setMemberID("12456743").getCommentInfo();
+				.setHotelID(10000000).setMemberID("12456743").getCommentInfo();
 		showInfo(po);
 //		showInfo(po.toCommentVo());
 	}

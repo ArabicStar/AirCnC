@@ -16,7 +16,7 @@ public class CommentPo extends CommentInfo {
 		super(grade);
 	}
 
-	CommentPo setHotelId(String id) {
+	CommentPo setHotelId(int id) {
 		this.hotelId = id;
 		return this;
 	}

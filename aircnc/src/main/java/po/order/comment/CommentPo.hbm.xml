@@ -4,7 +4,7 @@
 <!-- Generated 2016-11-22 16:22:46 by Hibernate Tools 3.5.0.Final -->
 <!-- CommentPo mapping xml -->
 <hibernate-mapping>
-	<class name="po.hotel.CommentPo" table="rooms">
+	<class name="po.order.comment.CommentPo" table="comments">
 
 		<!-- key column, auto generated -->
 		<id name="cid" column="cid" type="integer">

@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 public class CommentInfoTemplate {
 	
-	protected String hotelId;
+	protected int hotelId;
 	protected String memberId;
 	protected String content;
 	protected int grade;
@@ -19,6 +19,10 @@ public class CommentInfoTemplate {
 
 	public static final boolean checkID(String s) {
 		return s != null && s.matches(ID_PATTERN);
+	}
+	
+	public static final boolean checkID(int i) {
+		return i != 0;
 	}
 
 	public static final boolean checkCommentContent(String content) {
