@@ -32,7 +32,7 @@ public abstract class OrderInfoBuilder extends OrderInfoTemplate {
 				.setLastTime(info.getLastTime()).setPromotions(info.getPromotions())
 				.setPeopleNumber(info.getPeopleNumber()).setOriginalPrice(info.getOriginalPrice())
 				.setDiscountPrice(info.getDiscountPrice()).setHasChildren(info.getHasChildren())
-				.setHotelId(info.getHotelId()).setRoomNumber(info.getRoomNumber()).setReviewed(info.isReviewed());
+				.setHotelId(info.getHotelId()).setRoomNumber(info.getRoomNumber()).setReviewed(info.getReviewed());
 	}
 
 	/**

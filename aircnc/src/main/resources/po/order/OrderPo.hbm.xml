@@ -54,7 +54,7 @@
 			name="roomNumber" type="integer" update="false" />
 		<!-- isReviewed -->
 		<property column="ISREVIEWED" generated="never" lazy="false"
-			name="isReviewed" type="boolean" />
+			name="reviewed" type="yes_no" />
 		<!-- userName -->
 		<property column="USERNAME" generated="never" lazy="false"
 			name="userName" type="string" update="false" />

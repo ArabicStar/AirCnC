@@ -5,9 +5,8 @@ import javafx.scene.Node;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
-import javafx.scene.effect.Shadow;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 import javafx.stage.StageStyle;
 import presentation.market.model.MyOrderModel;
 
@@ -16,7 +15,6 @@ public class LabelDialog extends GridPane {
 	// Alert dialog;
 
 	public LabelDialog(String content) {
-		// dialog = new Dialog<String>();
 
 		dialog.initStyle(StageStyle.UNDECORATED);
 		dialog.setHeaderText(content);
@@ -25,17 +23,14 @@ public class LabelDialog extends GridPane {
 	public LabelDialog(String content, MyOrderModel orderModel) {
 		// Create the custom dialog.
 		dialog = new Dialog<String>();
-		Shadow shadow = new Shadow(0.5, Color.BURLYWOOD);
-		Node dlg = dialog.getDialogPane();
-		dlg.setEffect(shadow);
 		ButtonType btn = ButtonType.OK;
 		dialog.getDialogPane().getButtonTypes().add(btn);
 		Node ensureButton = dialog.getDialogPane().lookupButton(btn);
-		ensureButton.setStyle("-fx-background-color: #F0787A;-fx-text-fill: #fff; -fx-font-size: 10pt; -fx-border-radius: 5; -fx-background-radius: 20;");
-		// dialog.getDialogPane().getButtonTypes().remove(btn);
-		dialog.initStyle(StageStyle.TRANSPARENT);
+		ensureButton.setStyle(
+				"-fx-background-color: #F0787A;-fx-text-fill: #fff; -fx-font-size: 10pt; -fx-border-radius: 5; -fx-background-radius: 20;");
+		dialog.initStyle(StageStyle.UNDECORATED);
 		dialog.getDialogPane().setStyle("-fx-background-color: #FFFFFF;");
-
+		dialog.getDialogPane().setEffect(new DropShadow());
 		final int numberOfDetails = 11;
 
 		String[] labelNames = { "用户名", "酒店名", "订单号", "状态", "入住时间", "退房时间", "房间类型", "房间数量", "入住人数", "有无儿童", "总价" };
@@ -72,6 +67,7 @@ public class LabelDialog extends GridPane {
 			grid.add(labels[i], 1, 1 + i);
 			grid.add(properties[i], 2, 1 + i);
 		}
+		grid.add(ensureButton, 3, 14);
 		// Label cancelButton = new Label();
 		// cancelButton.setText("");
 		// cancelButton.setScaleX(10);

@@ -48,7 +48,7 @@ public class MyOrderModel {
         this.hotelName = new SimpleStringProperty(order.getHotelName());
         this.stayDays = order.getStayDays();
         this.leaveTime = order.getEntryTime().plusDays(stayDays);
-        this.isReviewed = new SimpleBooleanProperty(order.isReviewed());
+        this.isReviewed = new SimpleBooleanProperty(order.getReviewed());
         //process the checkinTime
         this.checkinTime = new SimpleStringProperty(transformTime(order.getEntryTime()));
         this.hasChildren = new SimpleBooleanProperty(order.getHasChildren());

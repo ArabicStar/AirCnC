@@ -74,7 +74,7 @@ public class OrderPo extends OrderInfo {
 		return this;
 	}
 
-	public OrderPo setIsReviewed(boolean isReviewed) {
+	public OrderPo setReviewed(boolean isReviewed) {
 		this.isReviewed = isReviewed;
 		return this;
 	}

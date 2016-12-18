@@ -47,7 +47,7 @@ public class OrderPoTest {
 	@Test
 	public void OrderPoTest3() {
 		OrderPo newOrder = orderDao.getOrder("2016121010001234");
-		newOrder.setIsReviewed(true);
+		newOrder.setReviewed(true);
 		newOrder.setLastTime(HotelDate.delayTime(newOrder.getLastTime(), 3, 5, 6));
 		orderDao.updateOrder(newOrder);
 		// OrderPo orderPo = orderDao.getOrder("2016121010001234");

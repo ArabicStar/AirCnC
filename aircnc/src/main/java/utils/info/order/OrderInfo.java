@@ -70,7 +70,7 @@ public abstract class OrderInfo extends OrderInfoTemplate {
 		return hasChildren;
 	}
 
-	public boolean isReviewed() {
+	public boolean getReviewed() {
 		return isReviewed;
 	}
 }

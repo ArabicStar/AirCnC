@@ -23,7 +23,7 @@ public class OrderPoBuilder extends OrderInfoBuilder {
 	public OrderPo getOrderInfo() {
 		return new OrderPo().setOrderId(orderId).setEntryTime(entryTime).setHasChildren(hasChildren).setHotelId(hotelId)
 				.setHotelName(hotelName).setLastTime(lastTime).setPeopleNumber(peopleNumber)
-				.setOriginalPrice(originalPrice).setIsReviewed(isReviewed).setRoomNumber(roomNumber)
+				.setOriginalPrice(originalPrice).setReviewed(isReviewed).setRoomNumber(roomNumber)
 				.setRoomType(roomType).setStatus(status).setStayDays(stayDays).setUserId(userId).setUserName(userName)
 				.setPromotions(promotions).setDiscountPrice(discountPrice);
 	}
@@ -145,13 +145,13 @@ public class OrderPoBuilder extends OrderInfoBuilder {
 			throw unsupportedOpEx("Couldn't advance the last entry time");
 		}
 
-		if (!from.isReviewed() && to.isReviewed()) {
+		if (!from.getReviewed() && to.getReviewed()) {
 			throw unsupportedOpEx("Couldn't make the reviewed order unreviewed");
 		}
 
 		to.setStatus(from.getStatus());
 		to.setLastTime(from.getLastTime());
-		to.setIsReviewed(from.isReviewed());
+		to.setReviewed(from.getReviewed());
 	}
 
 	@Override
