@@ -17,6 +17,8 @@ public class Room extends RoomTemplate {
 		price = 0;
 		isValid = true;
 	}
+	
+	Room(){}
 
 	public String getType() {
 		return type.name();

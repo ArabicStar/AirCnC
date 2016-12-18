@@ -1,5 +1,7 @@
 package aircnc.test.service.hotel;
 
+import static aircnc.test.service.member.DataPrepareHelper.testID;
+import static aircnc.test.service.member.DataPrepareHelper.testName;
 import static org.junit.Assert.assertEquals;
 
 import java.util.HashSet;
@@ -8,18 +10,22 @@ import java.util.Set;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
 import data.dao.hotel.HotelDao;
 import data.dao.impl.hotel.HotelDaoImpl;
 import service.hotel.HotelAccountService;
+import service.hotel.HotelInfoService;
 import service.impl.hotel.HotelAccountManager;
+import service.impl.hotel.HotelInfoManager;
 import utils.info.hotel.HotelInfo;
 import utils.info.hotel.Room;
 import utils.info.hotel.RoomBuilder;
+import utils.info.member.MemberInfo;
 import vo.hotel.HotelVoBuilder;
 
-
-public class HotelAccountServiceTest {
+public class HotelInfoServiceTest {
 	private HotelAccountService acc;
+	private HotelInfoService info;
 	private HotelDao dao;
 
 	private String name = "prepareHotel";
@@ -27,8 +33,10 @@ public class HotelAccountServiceTest {
 	@Before
 	public void setUp() throws Exception {
 		dao = HotelDaoImpl.INSTANCE;
-
+		
 		acc = new HotelAccountManager(dao);
+
+		info = new HotelInfoManager(acc,dao,null,null);
 		HotelVoBuilder b = new HotelVoBuilder().setName(name).setGrade(4.8)
 				.setEquipment("wifi;停车场;24小时热水;叫醒服务").setStar(7)
 				.setName("阿拉伯之星").setScope("栖霞区").setLocation("仙林大道163号")
@@ -49,48 +57,22 @@ public class HotelAccountServiceTest {
 		b.setRooms(rooms);
 		
 		HotelInfo v = acc.register(b, "12345678".hashCode());
+		acc.login(name, "12345678".hashCode());
 	}
 
 	@Test
-	public void testRegister() {
-		HotelVoBuilder b = new HotelVoBuilder().setName("newHotel").setStar(4);
-		HotelInfo v = acc.register(b, "12345678".hashCode());
-		String registeredName = v.getName();
-		
-		assertEquals(true, acc.existsHotel(registeredName));
-		dao.deleteHotel(registeredName);
+	public void testGetMemberInfo() {
+		HotelInfo v = info.getHotelInfo(name);
+		info.updateInfo(v);
+		assertEquals(name, v.getName());
 	}
-
+	
 	@Test
-	public void testLogin() {
-		HotelInfo v2 = null;
-		try {
-			v2 = acc.login("prepareHotel", "12345678".hashCode());	
-
-		} catch (Exception e) {
-		}
-		assertEquals("prepareHotel", v2.getName());
-		assertEquals("prepareHotel", acc.getCurrentAccount().getName());
-		assertEquals(true, acc.isLogined());
+	public void testCheapestRoom() {
+		double cheapest = info.getCheapestPrice(name);
+		assertEquals(245.0, cheapest,0.01);
 	}
 
-	@Test
-	public void testLogout() {
-		assertEquals(true, acc.logout());
-		assertEquals(false, acc.isLogined());
-	}
-
-	@Test
-	public void testExistsHotel() {
-		boolean res1 = false, res2 = false;
-		try {
-			res1 = acc.existsHotel("prepareHotel");
-			res2 = acc.existsHotel("oldHotel");
-		} catch (Exception e) {
-		}
-		assertEquals(true, res1);
-		assertEquals(false, res2);
-	}
 
 
 	@After
