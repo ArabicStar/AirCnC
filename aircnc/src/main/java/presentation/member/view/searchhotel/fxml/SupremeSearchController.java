@@ -149,6 +149,7 @@ public class SupremeSearchController implements Initializable{
 					  	for(int i = rangeDown; i <= 7; i++){
 					  		highStar.getItems().add(i);
 					  	}
+					  	highStar.setValue(rangeDown);
 					});
 				  
 				  
@@ -159,7 +160,7 @@ public class SupremeSearchController implements Initializable{
 				  RoomType.setValue("所有");
 				  all.setSelected(true);
 				  lowStar.setValue(1);
-				  lowStar.setValue(7);
+				  highStar.setValue(7);
 				  
 				  
 				  isEmpty = new ToggleGroup();

@@ -32,6 +32,13 @@ public class MemberManageInfoAccessorImpl implements MemberManageInfoAccessor{
 		return instance;
 	}
 	
+	public static boolean isLaunched(){
+		if(instance == null)
+			return false;
+		else
+			return true;
+	}
+	
 	@Override
 	public String getMemberId() {
 		if(id == null)

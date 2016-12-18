@@ -1,0 +1,61 @@
+
+.root{
+	-fx-font-family:"DengXian Light","Pingfang SC","Microsoft Yahei","Helvetica Neue";
+	-fx-background-size: 1024px 768px;
+	/*-fx-background-image: url("/images/member/main_BG.png");*/
+	-fx-background-color: #fff;
+}
+
+.hbox{
+	-fx-border-width: 1px 0px 1px 0px;
+	-fx-border-color: #a0a0a0;
+
+}
+
+.nav-vbox{
+	-fx-background-image: url("/images/member/main_BG.png");
+}
+
+.label{
+	-fx-text-fill:#ffffff;
+	-fx-font-size: 18px;
+}
+
+.hbox:hover{
+	-fx-background-color: #7173ab;
+}
+
+.logout{
+	-fx-background-color: transparent;
+	-fx-border-color: #fff;
+	-fx-border-width: 1.5px;
+	-fx-background-radius: 15px;
+	-fx-border-radius: 15px;
+	-fx-text-fill: #fff;
+}
+
+.logout:hover{
+	-fx-background-color: #fff;
+	-fx-text-fill: #4f4e84;
+}
+
+.portrait-hbox{
+	-fx-background-image: url("../../../../../images/member/member-portrait.png");
+	-fx-background-size: 100px 100px;
+	-fx-background-repeat: stretch;
+	-fx-border-radius: 50px;
+	-fx-background-radius: 50px;
+	-fx-border-color: #4f4e84;
+	-fx-border-width: 2px;
+	/*-fx-background-radius: 50px;
+	-fx-border-color: #4f4e84;
+	-fx-border-width: 3px;
+	-fx-border-radius: 50px;*/
+}
+
+.portrait-border{
+	/*-fx-border-radius: 50px;
+	-fx-background-radius: 50px;
+	-fx-border-color: #4f4e84;
+	-fx-border-width: 2px;*/
+}

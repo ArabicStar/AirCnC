@@ -56,6 +56,7 @@ public class MemberCommentController implements Initializable{
 		if(rates.getRating()!=0){
 			accessor.setComment(comment.getText());
 			accessor.setRating(rates.getRating());
+			accessor.setOrderId(vo.getOrderId());
 			PlainDialog alert = new PlainDialog(AlertType.INFORMATION,
 				"评价成功","感谢您的评价！");
 			alert.showDialog();

@@ -31,6 +31,13 @@ public class HotelManageInfoAccessorImpl implements HotelManageInfoAccessor{
 		return instance;
 	}
 	
+	public static boolean isLaunched(){
+		if(instance == null)
+			return false;
+		else
+			return true;
+	}
+	
 	@Override
 	public HotelVoBuilder getModifiedHotelVo() {
 		// TODO Auto-generated method stub

@@ -30,6 +30,13 @@ public class MarketManageInfoAccessorImpl implements MarketManageInfoAccessor{
 		return instance;
 	}
 	
+	public static boolean isLaunched(){
+		if(instance == null)
+			return false;
+		else
+			return true;
+	}
+	
 	@Override
 	public MarketVoBuilder getModifiedMarketVo() {
 		// TODO Auto-generated method stub
