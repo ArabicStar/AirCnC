@@ -3,9 +3,12 @@ package po.order;
 import java.time.LocalDateTime;
 import java.util.Set;
 
+import po.order.comment.CommentPo;
 import utils.info.order.OrderInfo;
 import utils.info.order.OrderStatus;
 import utils.promotion.Promotion;
+import vo.order.OrderVo;
+import vo.order.OrderVoBuilder;
 
 public class OrderPo extends OrderInfo {
 
@@ -92,6 +95,21 @@ public class OrderPo extends OrderInfo {
 	public OrderPo setDiscountPrice(double discountPrice) {
 		this.discountPrice = discountPrice;
 		return this;
+	}
+	
+	public OrderPo setComments(Set<CommentPo> comments) {
+		this.comments = comments;
+		return this;
+	}
+	
+	public OrderVo orderPo2Vo() {
+		return new OrderVoBuilder().setComments(comments).setDiscountPrice(discountPrice)
+				.setEntryTime(entryTime).setHasChildren(hasChildren).setHotelId(hotelId)
+				.setHotelName(hotelName).setLastTime(lastTime).setOrderId(orderId)
+				.setOriginalPrice(originalPrice).setPeopleNumber(peopleNumber)
+				.setReviewed(isReviewed).setRoomNumber(roomNumber).setRoomType(roomType).setStatus(status)
+				.setStayDays(stayDays).setUserId(userId).setUserName(userName)
+				.setPromotions(promotions).getOrderInfo();
 	}
 
 }

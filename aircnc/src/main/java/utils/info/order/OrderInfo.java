@@ -3,6 +3,7 @@ package utils.info.order;
 import java.time.LocalDateTime;
 import java.util.Set;
 
+import po.order.comment.CommentPo;
 import utils.promotion.Promotion;
 
 public abstract class OrderInfo extends OrderInfoTemplate {
@@ -72,5 +73,9 @@ public abstract class OrderInfo extends OrderInfoTemplate {
 
 	public boolean getReviewed() {
 		return isReviewed;
+	}
+	
+	public Set<CommentPo> getComments() {
+		return comments;
 	}
 }

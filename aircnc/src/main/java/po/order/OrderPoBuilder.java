@@ -25,7 +25,7 @@ public class OrderPoBuilder extends OrderInfoBuilder {
 				.setHotelName(hotelName).setLastTime(lastTime).setPeopleNumber(peopleNumber)
 				.setOriginalPrice(originalPrice).setReviewed(isReviewed).setRoomNumber(roomNumber)
 				.setRoomType(roomType).setStatus(status).setStayDays(stayDays).setUserId(userId).setUserName(userName)
-				.setPromotions(promotions).setDiscountPrice(discountPrice);
+				.setPromotions(promotions).setDiscountPrice(discountPrice).setComments(comments);
 	}
 
 	@Override

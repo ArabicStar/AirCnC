@@ -16,5 +16,5 @@ public interface OrderDetailService {
 	 * @param orderId
 	 * @return	获取订单价值
 	 */
-	public double getOrderPrice(String orderId);
+	public double getOrderOriginalPrice(String orderId);
 }

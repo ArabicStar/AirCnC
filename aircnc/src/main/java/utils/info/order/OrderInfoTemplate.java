@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.Entity;
 
+import po.order.comment.CommentPo;
 import utils.promotion.Promotion;
 
 @Entity
@@ -52,6 +53,8 @@ public abstract class OrderInfoTemplate {
 	protected boolean isReviewed;
 
 	protected String userName;
+	
+	protected Set<CommentPo> comments;
 
 	protected static boolean isNumber(String str) {
 		if (str.matches("[0-9]+")) {

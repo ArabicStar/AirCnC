@@ -93,7 +93,7 @@ public enum OrderDaoImpl implements OrderDao, OrderQueryDao {
 
 		return execute(session -> {
 			final Criteria criteria = session.createCriteria(OrderPo.class);
-			final Criterion memIdCond = Restrictions.eq("USERID", memberId);
+			final Criterion memIdCond = Restrictions.eq("userId", new Integer(memberId));
 
 			criteria.add(memIdCond);
 
@@ -111,7 +111,7 @@ public enum OrderDaoImpl implements OrderDao, OrderQueryDao {
 
 		return execute(session -> {
 			final Criteria criteria = session.createCriteria(OrderPo.class);
-			final Criterion hotelIdCond = Restrictions.eq("HOTELID", hotelId);
+			final Criterion hotelIdCond = Restrictions.eq("hotelId", new Integer(hotelId));
 
 			criteria.add(hotelIdCond);
 
@@ -126,7 +126,7 @@ public enum OrderDaoImpl implements OrderDao, OrderQueryDao {
 	public List<OrderPo> searchByStatus(OrderStatus status) {
 		return execute(session -> {
 			final Criteria criteria = session.createCriteria(OrderPo.class);
-			final Criterion statusCond = Restrictions.eq("ORDERSTATUS", status);
+			final Criterion statusCond = Restrictions.eq("orderStatus", status);
 
 			criteria.add(statusCond);
 

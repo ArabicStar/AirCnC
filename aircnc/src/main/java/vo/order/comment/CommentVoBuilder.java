@@ -76,7 +76,7 @@ public class CommentVoBuilder extends CommentInfoBuilder {
 		} 
 		return new CommentVo(grade).setHotelId(hotelId).setMemberId(memberId).setCheckInTime(checkInTime)
 				.setContent(content).setCommentTime(commentTime).setMemberLevel(memberLevel)
-				.setMemberName(memberName);
+				.setMemberName(memberName).setOrderId(orderId);
 
 	}
 

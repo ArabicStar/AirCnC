@@ -3,6 +3,7 @@ package vo.order;
 import java.time.LocalDateTime;
 import java.util.Set;
 
+import po.order.comment.CommentPo;
 import utils.info.order.OrderInfo;
 import utils.info.order.OrderStatus;
 import utils.promotion.Promotion;
@@ -13,6 +14,7 @@ import utils.promotion.Promotion;
  * 
  */
 public class OrderVo extends OrderInfo {
+	
 	OrderVo setOrderId(String orderId) {
 		this.orderId = orderId;
 		return this;
@@ -95,6 +97,11 @@ public class OrderVo extends OrderInfo {
 
 	OrderVo setDiscountPrice(double discountPrice) {
 		this.discountPrice = discountPrice;
+		return this;
+	}
+	
+	OrderVo setComments(Set<CommentPo> comments) {
+		this.comments = comments;
 		return this;
 	}
 

@@ -1,18 +1,11 @@
 package service.impl.order;
 
-import java.util.List;
-
 import data.dao.impl.order.OrderDaoImpl;
 import data.dao.order.OrderDao;
-import po.order.OrderPo;
 import service.order.OrderDetailService;
 
 public class OrderDetailServiceImpl implements OrderDetailService {
 
-	private int hotelId;
-	//
-	private List<OrderPo> hotelOrderList;
-	//
 	private OrderDao orderDao;
 
 	/**
@@ -22,8 +15,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 	 * @param hotelId
 	 *            酒店的Id
 	 */
-	public OrderDetailServiceImpl(int hotelId) {
-		this.hotelId = hotelId;
+	public OrderDetailServiceImpl() {
 		this.orderDao = OrderDaoImpl.INSTANCE;
 	}
 
@@ -35,30 +27,16 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 	 */
 	@Override
 	public int getOrderUser(String orderId) {
-		for (OrderPo orderPo : hotelOrderList) {
-			if (orderPo.getOrderId() == orderId) {
-				return orderPo.getUserId();
-			}
-		}
-		return -1;
+		int userId = -1;
+		userId = orderDao.getOrder(orderId).getUserId();
+		return userId;
 	}
 
 	@Override
-	public double getOrderPrice(String orderId) {
-		for (OrderPo orderPo : hotelOrderList) {
-			if (orderPo.getOrderId() == orderId) {
-				return orderPo.getOriginalPrice();
-			}
-		}
-		return -1;
-	}
-
-	public int getHotelId() {
-		return hotelId;
-	}
-
-	public void setHotelId(int hotelId) {
-		this.hotelId = hotelId;
+	public double getOrderOriginalPrice(String orderId) {
+		double price = -1;
+		price = orderDao.getOrder(orderId).getOriginalPrice();
+		return price;
 	}
 
 }

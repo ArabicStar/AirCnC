@@ -3,6 +3,7 @@ package service.impl.order;
 import java.util.List;
 
 import data.dao.impl.order.OrderDaoImpl;
+import data.dao.member.CreditDao;
 import data.dao.order.OrderDao;
 import po.order.OrderPo;
 import service.order.OrderLogicService;
@@ -15,6 +16,8 @@ public class OrderLogicServiceImpl implements OrderLogicService {
 	private List<OrderPo> hotelOrderList;
 
 	private OrderDao orderDao;
+	
+	private CreditDao creditDao;
 
 	/**
 	 * 订单逻辑操作的接口实现类

@@ -66,7 +66,7 @@ public class CommentPoBuilder extends CommentInfoBuilder{
 			return new CommentPo(0);
 		}
 		CommentPo po = new CommentPo(grade).setHotelId(hotelId).setMemberId(memberId).
-		setCheckInTime(checkInTime).setCommentTime(commentTime).setContent(content);
+		setCheckInTime(checkInTime).setCommentTime(commentTime).setContent(content).setOrderId(orderId);
 		return po;
 	}
 

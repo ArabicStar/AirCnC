@@ -23,7 +23,7 @@ public class OrderPoTest {
 		orderPo = new OrderPoBuilder().setEntryTime(entryTime).setHasChildren(false).setHotelId(1000)
 				.setLastTime(entryTime).setOrderId("2016121010001234").setPeopleNumber(3).setOriginalPrice(200)
 				.setReviewed(false).setRoomNumber(1).setRoomType("标准间").setStayDays(2).setUserId(20808121)
-				.setStatus(OrderStatus.EXECUTED).getOrderInfo();// .setUserName("南京大学渣").setHotelName("乐天玛特");
+				.setStatus(OrderStatus.EXECUTED).getOrderInfo().setUserName("南京大学渣").setHotelName("乐天玛特");
 	}
 
 	/**
@@ -54,9 +54,9 @@ public class OrderPoTest {
 		// assertEquals("乐天玛特", orderPo.getHotelName());
 	}
 
-	@Test
-	public void OrderPoTest4() {
-		orderDao.deleteOrder("2016121010001234");
-	}
-
+//	@Test
+//	public void OrderPoTest4() {
+//		orderDao.deleteOrder("2016121010001234");
+//	}
+	
 }

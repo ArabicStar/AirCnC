@@ -59,6 +59,11 @@ public abstract class CommentInfoBuilder extends CommentInfoTemplate{
 		return this;
 	}
 	
+	public CommentInfoBuilder setOrderId(String orderId) {
+		this.orderId = orderId;
+		return this;
+	}
+	
 	public boolean isReady() {
 //		System.out.println(id + " " + name + " " + contact + " " + type + " " + enterprise + " " + birthday);
 		return hotelId != 0 && memberId != null && content != null && checkInTime != null && commentTime != null;

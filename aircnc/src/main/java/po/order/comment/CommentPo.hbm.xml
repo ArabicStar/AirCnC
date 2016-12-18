@@ -7,8 +7,8 @@
 	<class name="po.order.comment.CommentPo" table="comments">
 
 		<!-- key column, auto generated -->
-		<id name="cid" column="cid" type="integer">
-			<generator class="native" />
+		<id name="orderId" column="orderId" type="integer">
+			<generator class="assigned" />
 		</id>
 
 		<!-- hotelId -->

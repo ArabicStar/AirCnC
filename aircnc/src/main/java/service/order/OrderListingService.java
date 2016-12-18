@@ -14,23 +14,23 @@ public interface OrderListingService {
 	 * @param hotelId
 	 * @return	获取酒店所有订单列表
 	 */
-	public List<OrderVo> getAllOrders(int hotelId);
+	public List<OrderVo> getAllOrders();
 	
 	/**
 	 * @param hotelId
 	 * @return	获取酒店未执行订单列表
 	 */
-	public List<OrderVo> getUnfinishedOrders(int hotelId);
+	public List<OrderVo> getUnexecutedOrders();
 	
 	/**
 	 * @param hotelId
 	 * @return	获取酒店已执行订单列表
 	 */
-	public List<OrderVo> getFinishedOrders(int hotelId);
+	public List<OrderVo> getExecutedOrders();
 	
 	/**
 	 * @param hotelId
 	 * @return	获取酒店异常订单列表
 	 */
-	public List<OrderVo> getAbnormalOrders(int hotelId);
+	public List<OrderVo> getAbnormalOrders();
 }

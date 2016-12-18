@@ -40,6 +40,11 @@ public class CommentPo extends CommentInfo {
 		this.commentTime = commentTime;
 		return this;
 	}
+	
+	CommentPo setOrderId(String orderId) {
+		this.orderId = orderId;
+		return this;
+	}
 
 	public void show() {
 		System.out.println(this.getHotelId());

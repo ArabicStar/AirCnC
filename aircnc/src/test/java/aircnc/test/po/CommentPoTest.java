@@ -48,7 +48,7 @@ public class CommentPoTest {
 				.setCommentTime(LocalDateTime.now()).setContent("嘻嘻哈哈")
 				.setHotelID(10000000).setMemberID("12456743").getCommentInfo();
 		showInfo(po);
-//		showInfo(po.toCommentVo());
+		showInfo(po.toCommentVo());
 	}
 	
 	@Test

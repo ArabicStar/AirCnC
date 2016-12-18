@@ -3,6 +3,7 @@ package vo.order;
 import java.time.LocalDateTime;
 import java.util.Set;
 
+import po.order.comment.CommentPo;
 import utils.info.order.OrderInfo;
 import utils.info.order.OrderInfoBuilder;
 import utils.info.order.OrderStatus;
@@ -22,7 +23,7 @@ public class OrderVoBuilder extends OrderInfoBuilder {
 				.setOrderId(orderId).setPeopleNumber(peopleNumber).setRoomType(roomType).setStatus(status)
 				.setStayDays(stayDays).setUserId(userId).setOriginalPrice(originalPrice).setHotelId(hotelId)
 				.setHotelName(hotelName).setRoomNumber(roomNumber).setIsReviewed(isReviewed).setUserName(userName)
-				.setPromotions(promotions).setDiscountPrice(discountPrice);
+				.setPromotions(promotions).setDiscountPrice(discountPrice).setComments(comments);
 	}
 
 	@Override
@@ -124,6 +125,12 @@ public class OrderVoBuilder extends OrderInfoBuilder {
 	@Override
 	public OrderVoBuilder setDiscountPrice(double discountPrice) {
 		super.setDiscountPrice(discountPrice);
+		return this;
+	}
+	
+	@Override
+	public OrderVoBuilder setComments(Set<CommentPo> comments) {
+		this.comments = comments;
 		return this;
 	}
 }

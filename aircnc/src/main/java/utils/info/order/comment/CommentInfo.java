@@ -73,6 +73,13 @@ public class CommentInfo extends CommentInfoTemplate{
 	public boolean isValid() {
 		return isValid;
 	}
+	
+	public String getOrderId() {
+		if (isValid()) {
+			return orderId;
+		}
+		return null;
+	}
 
 	public void invalidate() {
 		isValid = false;

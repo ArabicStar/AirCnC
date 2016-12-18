@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
+import po.order.comment.CommentPo;
 import utils.promotion.Promotion;
 
 public abstract class OrderInfoBuilder extends OrderInfoTemplate {
@@ -103,6 +104,10 @@ public abstract class OrderInfoBuilder extends OrderInfoTemplate {
 	 *            要设置的 promotions
 	 */
 	public OrderInfoBuilder setPromotions(Set<Promotion> promotions) {
+		if(promotions == null) {
+			System.err.println("Promotion is null");
+			return this;
+		}
 		this.promotions.addAll(promotions);
 		return this;
 	}
@@ -190,6 +195,11 @@ public abstract class OrderInfoBuilder extends OrderInfoTemplate {
 	 */
 	public OrderInfoBuilder setUserName(String userName) {
 		this.userName = userName;
+		return this;
+	}
+	
+	public OrderInfoBuilder setComments(Set<CommentPo> comments) {
+		this.comments = comments;
 		return this;
 	}
 
