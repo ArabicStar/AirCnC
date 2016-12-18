@@ -20,8 +20,8 @@ public class MemberCommentPane {
 
 
 	public MemberCommentPane(OrderVo order){
-		init();
 		this.vo = order;
+		init();
 	}
 
 	public void init() {

@@ -35,6 +35,8 @@ public class RoomBuilder extends RoomTemplate{
 		this.setName(info.getName()).setPeopleNum(info.getPeopleNum()).setRoomNum(info.getRoomNum());
 	}
 	
+	RoomBuilder(){}
+	
 	/**
 	 * Initialize a builder by given type. <br>
 	 * 

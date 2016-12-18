@@ -17,7 +17,7 @@ public class HotelTest {
 	
 	public HotelTest(){
 		HotelVoBuilder builder = new HotelVoBuilder().setID(2).setGrade(4.8)
-				.setEquipment("wifi;停车场;24小时热水;叫醒服务").setStar(5)
+				.setEquipment("wifi;停车场;24小时热水;叫醒服务").setStar(7)
 				.setName("阿拉伯之星").setScope("栖霞区").setLocation("仙林大道163号")
 				.setIntro("我们表面上看起来只是个学校，其实……嘿嘿嘿");
 		

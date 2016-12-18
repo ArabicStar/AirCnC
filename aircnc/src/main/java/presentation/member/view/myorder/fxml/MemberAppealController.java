@@ -41,6 +41,7 @@ public class MemberAppealController implements Initializable{
 	@FXML
 	public void handleConfirm(){
 		accessor.setAppeal(appeal.getText());
+		accessor.setOrderId(vo.getOrderId());
 		PlainDialog alert = new PlainDialog(AlertType.INFORMATION,
 			"申诉成功","已经收到您的申诉");
 		alert.showDialog();

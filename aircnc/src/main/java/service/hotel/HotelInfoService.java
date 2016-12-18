@@ -7,6 +7,7 @@ import utils.info.hotel.Room;
 import vo.hotel.HotelVo;
 import vo.order.OrderVo;
 import vo.order.comment.CommentVo;
+import vo.promotion.PromotionVo;
 
 public interface HotelInfoService {
 	public HotelInfo getHotelInfo(String name);
@@ -15,7 +16,7 @@ public interface HotelInfoService {
 	
 	public List<CommentVo> getHotelComment(int id);
 
-	public List<HotelVo> getHotelPromotion(int id);
+	public List<PromotionVo> getHotelPromotion(int id);
 
 	public boolean updateInfo(HotelInfo modifiedInfo);
 	

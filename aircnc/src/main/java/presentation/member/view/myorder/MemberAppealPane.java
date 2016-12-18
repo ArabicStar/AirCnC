@@ -20,8 +20,8 @@ public class MemberAppealPane {
 
 
 	public MemberAppealPane(OrderVo order){
-		init();
 		this.vo = order;
+		init();
 	}
 
 	public void init() {

@@ -88,13 +88,11 @@ public class MemberSearchHotelController implements Initializable{
 		list = manager.getHotelList(pageNum);
 		this.hotelNum = manager.getSearchedNum();
 		this.maxPageNum = (hotelNum-1)/4;
-		int index = 0;
 		Iterator<SearchHotelsModel> it = list.iterator();
 		while(it.hasNext()){
 			MemberSearchHotelGeneralPane newPane = new MemberSearchHotelGeneralPane(it.next());
 			searchedResult.getChildren().add(newPane.getPane());
 			newPane.getController().setController(this);
-			index+=1;
 		}
 		if(maxPageNum > 0)
 			nextButton.setDisable(false);

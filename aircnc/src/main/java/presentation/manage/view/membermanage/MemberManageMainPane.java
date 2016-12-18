@@ -23,13 +23,15 @@ public class MemberManageMainPane {
 		this.primaryStage = primaryStage;
 		initRootLayout();
 	}
-
+	
+	/**
+	 * Load member manage overview.
+	 */
 	public void initRootLayout() {
         try {
-        	// Load sign in overview.
             FXMLLoader loader = new FXMLLoader();
             //这里不对
-            URL location = getClass().getResource("ManageMain.fxml");
+            URL location = getClass().getResource("fxml/MemberManageMain.fxml");
             loader.setLocation(location);
             loader.setBuilderFactory(new JavaFXBuilderFactory());
             //javafx.scene.Parent root = (javafx.scene.Parent) loader.load(location.openStream());

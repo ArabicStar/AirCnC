@@ -17,6 +17,7 @@ import vo.hotel.HotelVo;
 import vo.hotel.HotelVoBuilder;
 import vo.order.OrderVo;
 import vo.order.comment.CommentVo;
+import vo.promotion.PromotionVo;
 
 public class HotelInfoManager implements HotelInfoService {
 	private HotelDao hotelDao;
@@ -52,7 +53,7 @@ public class HotelInfoManager implements HotelInfoService {
 	}
 
 	@Override
-	public List<HotelVo> getHotelPromotion(int id) {
+	public List<PromotionVo> getHotelPromotion(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

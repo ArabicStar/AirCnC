@@ -63,7 +63,9 @@ public enum HotelDaoImpl implements HotelDao, HotelQueryDao {
 
 		return execute(session -> {
 			// save HotelPo
+//			System.out.println(session);
 			session.save(po);
+			
 
 			return true;
 		});
