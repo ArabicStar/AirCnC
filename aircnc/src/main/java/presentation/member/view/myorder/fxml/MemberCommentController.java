@@ -1,6 +1,5 @@
 package presentation.member.view.myorder.fxml;
 
-import java.awt.Label;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -9,6 +8,7 @@ import org.controlsfx.control.Rating;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Alert.AlertType;
@@ -22,9 +22,6 @@ public class MemberCommentController implements Initializable{
 	
 	@FXML
 	private GridPane gridPane;
-	
-	@FXML
-	private Label close;
 
 	private Rating rates;
 	
@@ -42,7 +39,8 @@ public class MemberCommentController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		rates = new Rating();
 		gridPane.add(rates, 0, 1);
-		rates.setStyle("-fx-margin: 0 0 0 50px;");
+		rates.setPadding(new Insets(0, 0, 0, 80));
+		rates.setRating(0);
 		confirm.setDisable(true);
 		Platform.runLater(() -> {
 			// 监听键入,输入的除去空格后有内容则恢复按钮
@@ -55,11 +53,23 @@ public class MemberCommentController implements Initializable{
 	
 	@FXML
 	public void handleConfirm(){
-		accessor.setComment(comment.getText());
-		accessor.setRating(rates.getRating());
-		PlainDialog alert = new PlainDialog(AlertType.INFORMATION,
+		if(rates.getRating()!=0){
+			accessor.setComment(comment.getText());
+			accessor.setRating(rates.getRating());
+			PlainDialog alert = new PlainDialog(AlertType.INFORMATION,
 				"评价成功","感谢您的评价！");
-		alert.showDialog();
+			alert.showDialog();
+			controller.removeCommentPane();
+		}else{
+			PlainDialog alert = new PlainDialog(AlertType.INFORMATION,
+					"评价失败","请为酒店评分");
+			alert.showDialog();
+		}
+	}
+	
+	@FXML
+	public void handleClose(){
+		controller.removeCommentPane();
 	}
 	
 	public void setOrderVo(OrderVo vo){

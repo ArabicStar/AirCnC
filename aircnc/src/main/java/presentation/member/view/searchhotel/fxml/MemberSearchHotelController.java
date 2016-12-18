@@ -7,10 +7,12 @@ import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import presentation.member.ClientCenterController;
 import presentation.member.accessor.impl.SupremeSearchAccessorImpl;
 import presentation.member.manager.SearchHotelManager;
@@ -39,15 +41,25 @@ public class MemberSearchHotelController implements Initializable{
 	@FXML
 	private Button add;
 	
+	@FXML
+	private Button preButton;
+	
+	@FXML
+	private Button nextButton;
+	
+	@FXML
+	private VBox searchedResult;
+	
 	private ClientCenterController controller;
 	private SearchHotelManager manager;
 	
 	private SupremeSearchPane supremeSearchPane;
 	private AnchorPane rootLayout;
-	private AnchorPane searchLayout;
 	
 	private int hotelNum;
 	private ObservableList<SearchHotelsModel> list;
+	private int pageNum;
+	private int maxPageNum;
 	
 	public void setCenterController(ClientCenterController controller){
 		this.controller=controller;
@@ -58,6 +70,10 @@ public class MemberSearchHotelController implements Initializable{
 		// TODO Auto-generated method stub
 		this.manager = SearchHotelManagerImpl.getInstance();
 		this.hotelNum = 0;
+		this.pageNum = 0;
+		this.maxPageNum = 0;
+		preButton.setDisable(true);
+		nextButton.setDisable(true);
 	}
 	
 	@FXML
@@ -67,25 +83,57 @@ public class MemberSearchHotelController implements Initializable{
 	
 	@FXML
 	public void handleAddGeneralInfo(){
+		searchedResult.getChildren().clear();
 		this.hotelNum = 0;
-		list = manager.getHotelList();
+		list = manager.getHotelList(pageNum);
+		this.hotelNum = manager.getSearchedNum();
+		this.maxPageNum = (hotelNum-1)/4;
+		int index = 0;
 		Iterator<SearchHotelsModel> it = list.iterator();
 		while(it.hasNext()){
 			MemberSearchHotelGeneralPane newPane = new MemberSearchHotelGeneralPane(it.next());
-			searchLayout.getChildren().add(newPane.getPane());
-			AnchorPane.setTopAnchor(newPane.getPane(), 110.0 + (this.hotelNum)*140);
-			AnchorPane.setLeftAnchor(newPane.getPane(), 30.0);
+			searchedResult.getChildren().add(newPane.getPane());
 			newPane.getController().setController(this);
-			this.hotelNum+=1;
+			index+=1;
 		}
+		if(maxPageNum > 0)
+			nextButton.setDisable(false);
+	}
+	
+	@FXML
+	public void handlePrePage(){
+		searchedResult.getChildren().clear();
+		this.pageNum -= 1;
+		if(this.pageNum == 0)
+			preButton.setDisable(true);
+		nextButton.setDisable(false);
+		list = manager.getHotelList(pageNum);
+		Iterator<SearchHotelsModel> it = list.iterator();
+		while(it.hasNext()){
+			MemberSearchHotelGeneralPane newPane = new MemberSearchHotelGeneralPane(it.next());
+			searchedResult.getChildren().add(newPane.getPane());
+			newPane.getController().setController(this);
+		}
+	}
+	
+	@FXML
+	public void handleNextPage(){
+		searchedResult.getChildren().clear();
+		this.pageNum += 1;
+		if(this.pageNum == this.maxPageNum)
+			nextButton.setDisable(true);
+		preButton.setDisable(false);
+		list = manager.getHotelList(pageNum);
+		Iterator<SearchHotelsModel> it = list.iterator();
+		while(it.hasNext()){
+			MemberSearchHotelGeneralPane newPane = new MemberSearchHotelGeneralPane(it.next());
+			searchedResult.getChildren().add(newPane.getPane());
+			newPane.getController().setController(this);
+		}		
 	}
 	
 	public void setRootLayout(AnchorPane pane){
 		this.rootLayout = pane;
-	}
-	
-	public void setSearchLayout(AnchorPane pane){
-		this.searchLayout = pane;
 	}
 	
 	public void addSupremeSearch(){

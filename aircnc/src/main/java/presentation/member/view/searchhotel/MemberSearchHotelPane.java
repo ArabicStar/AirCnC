@@ -30,7 +30,6 @@ public class MemberSearchHotelPane {
             loader.load();
             controller = (MemberSearchHotelController)loader.getController();
             searchLayout = loader.getRoot();
-            controller.setSearchLayout(searchLayout);
 
         } catch (IOException e) {
             e.printStackTrace();

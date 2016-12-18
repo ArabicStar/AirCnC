@@ -86,9 +86,23 @@ public class MemberTest {
 				.setLocation("新街口").setStar(4).getHotelInfo();
 		HotelVo vo3 = new HotelVoBuilder().setID(00002222).setName("布丁酒店").setGrade(4.5).setScope("市中心")
 				.setLocation("新街口").setStar(4).getHotelInfo();
+		HotelVo vo4 = new HotelVoBuilder().setID(00002222).setName("布丁酒店").setGrade(4.5).setScope("市中心")
+				.setLocation("新街口").setStar(4).getHotelInfo();
+		HotelVo vo5 = new HotelVoBuilder().setID(00002222).setName("布丁酒店").setGrade(4.5).setScope("市中心")
+				.setLocation("新街口").setStar(4).getHotelInfo();
+		HotelVo vo6 = new HotelVoBuilder().setID(00002222).setName("布丁酒店").setGrade(4.5).setScope("市中心")
+				.setLocation("新街口").setStar(4).getHotelInfo();
+		HotelVo vo7 = new HotelVoBuilder().setID(00002222).setName("布丁酒店").setGrade(4.5).setScope("市中心")
+				.setLocation("新街口").setStar(4).getHotelInfo();
+		HotelVo vo8 = new HotelVoBuilder().setID(00002222).setName("布丁酒店").setGrade(4.5).setScope("市中心")
+				.setLocation("新街口").setStar(4).getHotelInfo();
+		HotelVo vo9 = new HotelVoBuilder().setID(00002222).setName("布丁酒店").setGrade(4.5).setScope("市中心")
+				.setLocation("新街口").setStar(4).getHotelInfo();
 		list.add(vo1);
 		list.add(vo2);
 		list.add(vo3);
+		list.add(vo4);
+		list.add(vo5);  list.add(vo6);  list.add(vo7);  list.add(vo8);  list.add(vo9);
 		SearchHotelManagerImpl.getInstance().setHotel(list);
 	}
 	

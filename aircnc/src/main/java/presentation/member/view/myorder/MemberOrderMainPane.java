@@ -6,6 +6,7 @@ import java.net.URL;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Node;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import presentation.member.view.myorder.fxml.MemberOrderMainController;
 import vo.order.OrderVo;

@@ -10,6 +10,8 @@ public interface SearchHotelManager {
 	
 	public boolean setHotel(List<HotelVo> list);
 	
-	public ObservableList<SearchHotelsModel> getHotelList();
+	public ObservableList<SearchHotelsModel> getHotelList(int pageNum);
+	
+	public int getSearchedNum();
 	
 }

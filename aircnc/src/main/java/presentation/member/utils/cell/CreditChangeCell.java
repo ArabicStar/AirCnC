@@ -6,7 +6,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import presentation.member.model.CreditModel;
-import utils.info.order.OrderStatus;
 
 /**
  * CreditChangeCell use a label(num) to show the num of change. use ImageView to
