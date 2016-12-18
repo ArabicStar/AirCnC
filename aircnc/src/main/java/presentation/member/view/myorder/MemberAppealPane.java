@@ -6,7 +6,9 @@ import java.net.URL;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Node;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import presentation.member.view.myorder.fxml.MemberAppealController;
 import vo.order.OrderVo;
 
@@ -30,9 +32,17 @@ public class MemberAppealPane {
             loader.setLocation(location);
             loader.setBuilderFactory(new JavaFXBuilderFactory());
             loader.load();
-            controller = (MemberAppealController)loader.getController();
+            controller = loader.getController();
             orderLayout = loader.getRoot();
             controller.setOrderVo(vo);
+            
+            DropShadow ds = new DropShadow();
+            
+            ds.setOffsetY(5.0);
+            ds.setOffsetX(5.0);
+            ds.setColor(Color.GRAY);
+            
+            orderLayout.setEffect(ds);
             
         } catch (IOException e) {
             e.printStackTrace();

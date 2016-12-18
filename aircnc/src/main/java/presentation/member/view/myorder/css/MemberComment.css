@@ -1,12 +1,18 @@
 .root{
 	-fx-font-size: 20px;
+	-fx-text-fill: #000;
+}
+
+.bg{
+	-fx-background-color: #fff;
 }
 
 .label{
 	-fx-font-size: 12px;
+	-fx-text-fill: #000;
 }
 
-.button{
+.confirm{
 	-fx-font-size: 10px;
 	-fx-background-color: #4e4f84;
 	-fx-text-fill: #fff;

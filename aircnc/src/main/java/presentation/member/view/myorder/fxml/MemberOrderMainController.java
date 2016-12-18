@@ -161,7 +161,8 @@ public class MemberOrderMainController implements Initializable{
         	MemberCommentAccessorImpl.launch();
 		MemberCommentPane comment = new MemberCommentPane(vo);
 		rootLayout.getChildren().add(comment.getPane());
-		AnchorPane.setTopAnchor(comment.getPane(), 100.0);
+		AnchorPane.setTopAnchor(comment.getPane(), 150.0);
+		AnchorPane.setLeftAnchor(comment.getPane(), 50.0);
 		comment.getController().setController(this);
 	}
 	
@@ -174,7 +175,8 @@ public class MemberOrderMainController implements Initializable{
         	MemberAppealAccessorImpl.launch();
 		MemberAppealPane appeal = new MemberAppealPane(vo);
 		rootLayout.getChildren().add(appeal.getPane());
-		AnchorPane.setTopAnchor(appeal.getPane(), 100.0);
+		AnchorPane.setTopAnchor(appeal.getPane(), 150.0);
+		AnchorPane.setLeftAnchor(appeal.getPane(), 50.0);
 		appeal.getController().setController(this);
 	}
 	

@@ -4,9 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
 import javafx.scene.layout.HBox;
-import javafx.util.Callback;
 import presentation.member.model.MyOrderModel;
 import presentation.member.view.myorder.fxml.MemberOrderMainController;
 import utils.info.order.OrderStatus;
@@ -118,7 +116,7 @@ public class FunctionButtons extends TableCell<MyOrderModel, OrderVo>{
               		 break;
             	 case APPEAL: 
             		 if(order != null)
-            			 controller.addCommentPane(order);
+            			 controller.addAppealPane(order);
            			break;
             	 }
              }

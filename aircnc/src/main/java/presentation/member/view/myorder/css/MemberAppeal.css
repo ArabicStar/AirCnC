@@ -1,6 +1,11 @@
 
 .label{
 	-fx-font-size: 12px;
+	-fx-text-fill: #000;
+}
+
+.bg{
+	-fx-background-color: #fff;
 }
 
 .button{

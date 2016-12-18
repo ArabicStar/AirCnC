@@ -3,7 +3,6 @@ package presentation.member.manager.impl;
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
-import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
@@ -13,7 +12,7 @@ import presentation.member.model.SearchHotelsModel;
 import vo.hotel.HotelVo;
 
 /**
- * the manager of member info
+ * the manager of searched hotel info
  * aiming to receive the MemberVo from the logic layer
  * and deliver the member info model to the presentation layer
  * @author paranoia
@@ -60,12 +59,24 @@ public class SearchHotelManagerImpl implements SearchHotelManager{
 	 * wrap into the observablelist
 	 */
 	@Override
-	public ObservableList<SearchHotelsModel> getHotelList() {
+	public ObservableList<SearchHotelsModel> getHotelList(int page) {
 		searchHotelsData = FXCollections.observableArrayList();
-		Iterator<HotelVo> it = hotels.iterator();
-		while(it.hasNext())
-			searchHotelsData.add(new SearchHotelsModel(it.next()));
+		
+		searchHotelsData.clear();
+		
+		for(int i = page*4; i < hotels.size() && 
+				i < (page+1)*4; ++i){
+			searchHotelsData.add(new SearchHotelsModel(hotels.get(i)));
+		}
+		
 		return searchHotelsData;
 	}
+
+	@Override
+	public int getSearchedNum() {
+		return hotels.size();
+	}
+	
+	
 
 }

@@ -13,7 +13,7 @@ import presentation.member.model.CreditModel;
 import vo.member.credit.CreditChangeVo;
 
 /**
- * the manager of member info
+ * the manager of member credit info
  * aiming to receive the MemberVo from the logic layer
  * and deliver the member info model to the presentation layer
  * @author paranoia

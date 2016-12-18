@@ -123,6 +123,7 @@ public class ClientCenterController extends Application {
 			test.getSearchedData();
 			searchMain = new MemberSearchHotelPane();
 			content.getChildren().add(searchMain.getPane());
+			AnchorPane.setTopAnchor(searchMain.getPane(), 0.0);
 			searchMain.getController().setCenterController(this);
 			searchMain.getController().setRootLayout(content);			
 		}else{
@@ -139,7 +140,9 @@ public class ClientCenterController extends Application {
 		content.getChildren().clear();
 		orderMain = new MemberOrderMainPane();
 		content.getChildren().add(orderMain.getPane());
+		AnchorPane.setTopAnchor(orderMain.getPane(), 0.0);
 		orderMain.getController().setCenterController(this);
+		orderMain.getController().setRootLayout(content);
 	}
 	
 	public void initializeLogin(){
