@@ -13,7 +13,7 @@ public class HotelInfoModel {
 	private final StringProperty name;
 	private final StringProperty location;
 	private final StringProperty scope;
-	private final StringProperty Stringro;
+	private final StringProperty intro;
 	private final StringProperty equip;
 	private final StringProperty star;
 	private final StringProperty roomName;
@@ -29,7 +29,7 @@ public class HotelInfoModel {
 		this.equip = new SimpleStringProperty(vo.getEquipment());
 		this.location = new SimpleStringProperty(vo.getLocation());
 		this.scope = new SimpleStringProperty(vo.getScope());
-		this.Stringro = new SimpleStringProperty(vo.getIntroduction());
+		this.intro = new SimpleStringProperty(vo.getIntroduction());
 		this.id = new SimpleStringProperty(Integer.toString(vo.getId()));
 		this.star = new SimpleStringProperty(Integer.toString(vo.getStar()));
 		this.grade = new SimpleStringProperty(Double.toString(vo.getGrade()));
@@ -74,15 +74,15 @@ public class HotelInfoModel {
     }
     
     public String getIntro() {
-        return Stringro.get();
+        return intro.get();
     }
 
     public void setIntro(String newIntro) {
-        this.Stringro.set(newIntro);
+        this.intro.set(newIntro);
     }
 
     public StringProperty StringroProperty() {
-        return Stringro;
+        return intro;
     }
     
     public String getLocation() {

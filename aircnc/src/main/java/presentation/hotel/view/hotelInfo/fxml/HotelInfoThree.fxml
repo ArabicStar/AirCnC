@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="603.0" prefWidth="777.0" stylesheets="@../css/HotelInfoTwo.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.hotel.view.hotelInfo.fxml.HotelInfoTwoController">
+   <children>
+      <HBox alignment="CENTER" layoutX="282.0" layoutY="509.0" prefHeight="43.0" prefWidth="193.0" spacing="40.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#handlePage1" prefHeight="30.0" prefWidth="30.0" styleClass="page" text="1" />
+            <Button mnemonicParsing="false" onAction="#handlePage2" prefHeight="30.0" prefWidth="30.0" styleClass="page" text="2" />
+            <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="page-now" text="3" />
+         </children>
+      </HBox>
+   </children>
+</Pane>

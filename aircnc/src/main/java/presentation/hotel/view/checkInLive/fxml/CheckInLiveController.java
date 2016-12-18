@@ -12,6 +12,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import presentation.hotel.HotelCenterController;
+import presentation.hotel.accessor.HotelRoomAccessor;
+import presentation.hotel.accessor.impl.HotelRoomAccessorImpl;
 import presentation.hotel.manager.HotelRoomManager;
 import presentation.hotel.manager.impl.HotelRoomManagerImpl;
 import presentation.hotel.utils.dialog.PlainDialog;
@@ -29,6 +31,8 @@ public class CheckInLiveController implements Initializable{
 	private HotelCenterController controller;
 	
 	private HotelRoomManager manager;
+	
+	private HotelRoomAccessor accessor;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -37,6 +41,10 @@ public class CheckInLiveController implements Initializable{
 		}
 		manager = HotelRoomManagerImpl.getInstance();
 		
+		if(!HotelRoomAccessorImpl.isLaunched()){
+			HotelRoomAccessorImpl.launch();
+		}
+		accessor = HotelRoomAccessorImpl.getInstance();
 		
 		Platform.runLater(new Runnable() {
 			  @Override public void run() {
@@ -48,8 +56,12 @@ public class CheckInLiveController implements Initializable{
 	@FXML
 	public void handleConfirm(){
 		if(checkText(roomNum.getText(),true)&&checkText(roomType.getValue(),false)){
+			accessor.setRoomName(roomType.getValue());
+			accessor.setRoomNum(-Integer.parseInt(roomNum.getText()));
+			
 			PlainDialog alert = new PlainDialog(AlertType.INFORMATION,
 					"线下入住成功",roomNum.getText()+"间"+roomType.getValue()+"已入住");
+			
 			alert.showDialog();
 			roomNum.setText("");
 			roomType.setValue("");

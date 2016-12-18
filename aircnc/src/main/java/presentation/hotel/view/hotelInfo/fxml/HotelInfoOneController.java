@@ -95,7 +95,7 @@ public class HotelInfoOneController implements Initializable{
 	}
 	
 	private void initHotelInfo(){
-		String style = "-fx-background-color: #fff;-fx-border-color: #585697;-fx-padding:0px 5px 0px 5px;-fx-text-fill: #fff; -fx-font-size: 20px; -fx-border-radius: 5;-fx-text-fill:#585697; ";
+		String style = "-fx-background-color: #fff;-fx-border-color: #585697;-fx-padding:5px 10px 5px 10px;-fx-text-fill: #fff; -fx-font-size: 20px; -fx-border-radius: 10;-fx-text-fill:#585697; ";
 		model = manager.getHotelInfo();
 		this.scope.setText(model.getScope());
 		this.location.setText(model.getLocation());
@@ -110,6 +110,7 @@ public class HotelInfoOneController implements Initializable{
 		}
 		
 		Rating rating = new Rating();
+		rating.setMax(Integer.parseInt(model.getStar()));
 		rating.setRating(Double.parseDouble(model.getStar()));
 		rating.setDisable(true);;
 		this.star.getChildren().add(rating);

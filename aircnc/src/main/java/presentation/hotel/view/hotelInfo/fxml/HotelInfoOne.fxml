@@ -51,7 +51,7 @@
                   <Label styleClass="info-index" text="拥有房型" />
                   <ScrollPane hbarPolicy="NEVER" pannable="true" prefHeight="162.0" prefWidth="289.0" styleClass="scollpane">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="293.0" styleClass="scollpane">
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="170.0" prefWidth="293.0" styleClass="scollpane">
                            <children>
                               <Label fx:id="roomType" styleClass="info-content" text="类型" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0" />
                               <Label fx:id="roomPrice" styleClass="price" text="价格" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0" />
@@ -67,7 +67,7 @@
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="40.0">
                <children>
                   <Label styleClass="info-index" text="设施" />
-                  <FlowPane fx:id="equipment" hgap="20.0" prefHeight="100.0" prefWidth="414.0" vgap="10.0" />
+                  <FlowPane fx:id="equipment" hgap="20.0" prefHeight="73.0" prefWidth="600.0" vgap="10.0" />
                </children>
             </HBox>
          </children>
