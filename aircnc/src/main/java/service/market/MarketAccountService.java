@@ -1,5 +1,6 @@
 package service.market;
 
+import utils.info.market.MarketInfo;
 import vo.market.MarketVo;
 import vo.market.MarketVoBuilder;
 
@@ -20,7 +21,7 @@ public interface MarketAccountService {
 	 * @return If succeed, return vo of new market<br>
 	 *         Else, invalid market vo<br>
 	 */
-	public MarketVo register(MarketVoBuilder newMarket, int passwordHash);
+	public MarketInfo register(MarketVoBuilder newMarket, final int passwordHash);
 
 	/**
 	 * Login a market account
@@ -33,7 +34,7 @@ public interface MarketAccountService {
 	 *         If password wrong, return invalid market vo<br>
 	 *         If account not exists yet, return null
 	 */
-	public MarketVo login(String id, int passwordHash);
+	public MarketInfo login(final String id, final int passwordHash);
 
 	/**
 	 * Logout a market account<br>
@@ -47,21 +48,30 @@ public interface MarketAccountService {
 	 *
 	 * @return status of login
 	 */
-	public boolean isLogined();
+	public boolean isLoggedin();
 
 	/**
-	 * Get logined market's vo<br>
-	 *
-	 * @return logined market's vo
+	 * Refresh currently logged in market account info.<br>
 	 */
-	public MarketVo getLoginedMarket();
+	public MarketInfo refreshCurrentAccount();
+
+	/**
+	 * Get logged market's vo<br>
+	 * 
+	 * @return logged market's vo
+	 */
+	public MarketInfo getCurrentAccount();
 
 	/**
 	 * Inquiry an id exists or not<br>
-	 *
+	 * <b>NOTICE</b>: This method will cause a database query. So when you are
+	 * going to get a MarketVo instance immediately, avoid to use this method.
+	 * Instead, test the MarketVo instance got is null or not to determined if
+	 * the id exists or not<br>
+	 * 
 	 * @param id
 	 *            An id
 	 * @return appointed id exists or not
 	 */
-	public boolean existsMarket(String id);
+	public boolean existsMarket(final String id);
 }

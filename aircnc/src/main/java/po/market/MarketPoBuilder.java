@@ -24,6 +24,10 @@ public class MarketPoBuilder extends MarketInfoBuilder {
 	public static final MarketInfo getInvalidInfo() {
 		return INVALID_MARKET_PO;
 	}
+	
+	public MarketPoBuilder() {
+		super();
+	}
 
 	public MarketPoBuilder(MarketInfo info) {
 		super(info);
@@ -36,7 +40,7 @@ public class MarketPoBuilder extends MarketInfoBuilder {
 	}
 
 	@Override
-	public MarketInfoBuilder setID(String id) {
+	public MarketPoBuilder setID(String id) {
 		super.setID(id);
 		return this;
 	}

@@ -1,5 +1,6 @@
 package utils.info.market;
 
+
 /**
  * Abstract of builder for MarketInfo, assisting to assure immutable object.
  * <br>
@@ -18,6 +19,14 @@ package utils.info.market;
 
 public abstract class MarketInfoBuilder extends MarketInfoTemplate{
 	
+	/**
+	 * Initialize a builder by given type. <br>
+	 * 
+	 * @param type
+	 */
+	public MarketInfoBuilder() {
+		
+	}
 	/**
 	 * Initialize a builder by given MemberInfo, all information will be kept.
 	 * <br>
@@ -61,4 +70,17 @@ public abstract class MarketInfoBuilder extends MarketInfoTemplate{
 	}
 
 	public abstract MarketInfo getMarketInfo();
+	
+	public static int compareMarketInfo(final MarketInfo i1, final MarketInfo i2) {
+		// different member
+		if (!i1.getId().equals(i2.getId()))
+			return -1;
+
+		int flag = 0;
+		// basic info
+		if (!i1.getName().equals(i2.getName()))
+			flag = flag | 1;
+
+		return flag;
+	}
 }
