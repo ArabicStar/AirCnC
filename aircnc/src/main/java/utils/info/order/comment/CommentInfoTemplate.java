@@ -26,9 +26,9 @@ public class CommentInfoTemplate {
 	}
 
 	public static final int convertID2Num(String id) {
-		if (!checkID(id))
+		if (!checkID(id)) {
 			return WRONG_ID_MARKER;
-
+		}
 		return Integer.valueOf(id);
 	}
 

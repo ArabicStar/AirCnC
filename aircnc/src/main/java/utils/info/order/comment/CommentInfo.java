@@ -8,6 +8,15 @@ public class CommentInfo extends CommentInfoTemplate{
 
 	private static final String BLANK = "";
 	
+	protected CommentInfo() {
+		hotelId = BLANK;
+		memberId = BLANK;
+		content = BLANK;
+		checkInTime = null;
+		commentTime = null;
+		isValid = true;
+	}
+	
 	protected CommentInfo(int grade){
 		hotelId = BLANK;
 		memberId = BLANK;
@@ -15,41 +24,50 @@ public class CommentInfo extends CommentInfoTemplate{
 		this.grade = grade;
 		checkInTime = null;
 		commentTime = null;
+		isValid = true;
 	}
 	
 	public String getHotelId(){
-		if (isValid())
+		if (isValid()) {
 			return hotelId;
+		}
+		System.out.println(isValid());
 		return null;
 	}
 	
 	public String getMemberId(){
-		if (isValid())
+		if (isValid()) {
 			return memberId;
+		}
 		return null;
 	}
 	
 	public String getContent(){
-		if (isValid())
+		if (isValid()) {
 			return content;
+		}
+		
 		return null;
 	}
 	
 	public int getGrade(){
-		if (isValid())
+		if (isValid()) {
 			return grade;
+		}
 		return Integer.MIN_VALUE;
 	}
 	
 	public LocalDate getCheckInTime(){
-		if (isValid())
+		if (isValid()) {
 			return checkInTime;
+		}
 		return null;
 	}
 	
 	public LocalDateTime getCommentTime(){
-		if (isValid())
+		if (isValid()) {
 			return commentTime;
+		}
 		return null;
 	}	
 	

@@ -4,37 +4,55 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import utils.info.order.comment.CommentInfo;
+import vo.order.comment.CommentVo;
+import vo.order.comment.CommentVoBuilder;
 
-public class CommentPo extends CommentInfo{
+public class CommentPo extends CommentInfo {
+	protected CommentPo() {
+		super();
+	}
 
 	protected CommentPo(int grade) {
 		super(grade);
-		// TODO Auto-generated constructor stub
 	}
-	
-	CommentPo setHotelId(String id){
+
+	CommentPo setHotelId(String id) {
 		this.hotelId = id;
 		return this;
 	}
-	
-	CommentPo setMemberId(String id){
+
+	CommentPo setMemberId(String id) {
 		this.memberId = id;
 		return this;
 	}
-	
-	CommentPo setContent(String content){
+
+	CommentPo setContent(String content) {
 		this.content = content;
 		return this;
 	}
-	
-	CommentPo setCheckInTime(LocalDate checkInTime){
+
+	CommentPo setCheckInTime(LocalDate checkInTime) {
 		this.checkInTime = checkInTime;
 		return this;
 	}
-	
-	CommentPo setCommentTime(LocalDateTime commentTime){
+
+	CommentPo setCommentTime(LocalDateTime commentTime) {
 		this.commentTime = commentTime;
 		return this;
+	}
+
+	public void show() {
+		System.out.println(this.getHotelId());
+		System.out.println(this.memberId);
+		System.out.println(this.hotelId);
+		System.out.println(this.grade);
+		System.out.println(this.content);
+	}
+
+	public CommentVo toCommentVo() {
+		CommentVo vo = new CommentVoBuilder().setCheckInTime(checkInTime).setCommentTime(commentTime)
+				.setContent(content).setHotelID(hotelId).setMemberID(memberId).getCommentInfo();
+		return vo;
 	}
 
 }

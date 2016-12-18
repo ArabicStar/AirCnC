@@ -1,8 +1,10 @@
 package po.order.comment;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import utils.info.order.comment.CommentInfo;
 import utils.info.order.comment.CommentInfoBuilder;
-import vo.order.comment.CommentVo;
 
 public class CommentPoBuilder extends CommentInfoBuilder{
 
@@ -16,19 +18,56 @@ public class CommentPoBuilder extends CommentInfoBuilder{
 		return INVALID_COMMENT_PO;
 	}
 	
+	public CommentPoBuilder() {
+		super();
+	}
+	
 	
 	public CommentPoBuilder(CommentInfo info) {
 		super(info);
 		// TODO Auto-generated constructor stub
 	}
 
+	public CommentPoBuilder setContent(String content){
+		if(checkCommentContent(content)){
+			this.content = content;
+		}
+		return this;
+	}
+	
+	public CommentPoBuilder setHotelID(String id) {
+		if (checkID(id)) {
+			this.hotelId = id;
+		}
+		return this;
+	}
+	
+	public CommentPoBuilder setMemberID(String id) {
+		if (checkID(id)) {
+			this.memberId = id;
+		}
+		return this;
+	}
+	
+	public CommentPoBuilder setCheckInTime(LocalDate checkInTime){
+		this.checkInTime = checkInTime;
+		return this;
+	}
+	
+	public CommentPoBuilder setCommentTime(LocalDateTime commentTime){
+		this.commentTime = commentTime;
+		return this;
+	}
+	
+	
 	@Override
 	public CommentPo getCommentInfo() {
-		if (!isReady())
+		if (!isReady()) {
 			return new CommentPo(0);
-
-		return new CommentPo(grade).setHotelId(hotelId).setMemberId(memberId).
-				setCheckInTime(checkInTime).setCommentTime(commentTime);
+		}
+		CommentPo po = new CommentPo(grade).setHotelId(hotelId).setMemberId(memberId).
+		setCheckInTime(checkInTime).setCommentTime(commentTime).setContent(content);
+		return po;
 	}
 
 }

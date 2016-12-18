@@ -4,6 +4,17 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public abstract class CommentInfoBuilder extends CommentInfoTemplate{
+	
+	public CommentInfoBuilder() {
+		// all these should be illegal
+		hotelId = "00000000";
+		memberId = "00000000";
+		checkInTime = LocalDate.now();
+		commentTime = LocalDateTime.now();
+		content = "";
+		grade = 0;
+	}
+	
 	public CommentInfoBuilder(CommentInfo info){
 		this(info.getGrade());
 		this.setCheckInTime(info.getCheckInTime()).setCommentTime(info.getCommentTime()).setContent(info.getContent())
@@ -11,9 +22,9 @@ public abstract class CommentInfoBuilder extends CommentInfoTemplate{
 	}
 	
 	public CommentInfoBuilder(int grade){
-		if(grade == 0)
+		if(grade == 0) {
 			throw new IllegalArgumentException();
-		
+		}
 		this.grade = grade;
 	}
 	
@@ -25,14 +36,16 @@ public abstract class CommentInfoBuilder extends CommentInfoTemplate{
 	}
 	
 	public CommentInfoBuilder setHotelID(String id) {
-		if (checkID(id))
+		if (checkID(id)) {
 			this.hotelId = id;
+		}
 		return this;
 	}
 	
 	public CommentInfoBuilder setMemberID(String id) {
-		if (checkID(id))
+		if (checkID(id)) {
 			this.memberId = id;
+		}
 		return this;
 	}
 	

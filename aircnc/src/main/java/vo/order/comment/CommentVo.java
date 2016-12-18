@@ -6,6 +6,12 @@ import java.time.LocalDateTime;
 import utils.info.order.comment.CommentInfo;
 
 public class CommentVo extends CommentInfo{
+	private int memberLevel;
+	private String memberName;
+	
+	protected CommentVo() {
+		super();
+	}
 
 	protected CommentVo(int grade) {
 		super(grade);
@@ -34,6 +40,24 @@ public class CommentVo extends CommentInfo{
 	CommentVo setCommentTime(LocalDateTime commentTime){
 		this.commentTime = commentTime;
 		return this;
+	}
+	
+	public CommentVo setMemberName(String memberName) {
+		this.memberName = memberName;
+		return this;
+	}
+	
+	public String getMemberName() {
+		return memberName;
+	}
+	
+	public CommentVo setMemberLevel(int memberLevel) {
+		this.memberLevel = memberLevel;
+		return this;
+	}
+	
+	public int getMemberLevel() {
+		return memberLevel;
 	}
 
 }
