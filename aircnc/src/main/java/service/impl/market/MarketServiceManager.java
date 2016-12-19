@@ -1,24 +1,16 @@
 package service.impl.market;
 
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
-import static utils.exception.StaticExceptionFactory.illegalArgEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 import static utils.exception.StaticExceptionFactory.unsupportedOpEx;
 
 import java.util.List;
-import java.util.stream.Collectors;
-
-import data.dao.market.MarketDao;
-import data.dao.member.CreditDao;
-import data.dao.member.MemberDao;
-import data.dao.order.OrderDao;
-import service.impl.member.MemberCreditManager;
+import data.dao.promotion.WebsitePromotionDao;
+import po.promotion.PromotionPo;
+import po.promotion.PromotionPoBuilder;
 import service.market.MarketService;
 import service.member.MemberCreditService;
-import service.order.OrderListingService;
-import service.promotion.WebsitePromotionApplicationService;
 import service.query.OrderQueryService;
-import utils.info.member.MemberInfo;
 import utils.info.order.OrderStatus;
 import vo.member.MemberVo;
 import vo.order.OrderVo;
@@ -30,11 +22,11 @@ public class MarketServiceManager implements MarketService{
 
 	public static MarketService launch(OrderQueryService OrderQueryService
 			, MemberCreditService memberCreditService
-			, WebsitePromotionApplicationService websitePromotionApplicationService) {
+			, WebsitePromotionDao websitePromotionDao) {
 		if (instance != null)
 			throw duplicateSingletonEx();
 		instance = new MarketServiceManager(OrderQueryService, memberCreditService,
-				websitePromotionApplicationService);
+				websitePromotionDao);
 		return getInstance();
 	}
 
@@ -47,13 +39,13 @@ public class MarketServiceManager implements MarketService{
 	
 	private OrderQueryService orderQueryService;
 	private MemberCreditService creditService;
-	private WebsitePromotionApplicationService promotionService;
+	private WebsitePromotionDao promotionDao;
 	
 	public MarketServiceManager(OrderQueryService orderQueryService, MemberCreditService memberCreditService
-			, WebsitePromotionApplicationService promotionService){
+			, WebsitePromotionDao promotionService){
 		this.orderQueryService = orderQueryService;
 		this.creditService = memberCreditService;
-		this.promotionService = promotionService;
+		this.promotionDao = promotionService;
 	}
 	
 	private List<OrderVo> bufferedOrderList;
@@ -74,12 +66,15 @@ public class MarketServiceManager implements MarketService{
 			return bufferedOrderList;
 		}
 	
-	private List<PromotionVo> bufferedPromotionList;
-	
 	@Override
-	public List<PromotionVo> makeMarketPromotion(String id) {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean makeMarketPromotion(PromotionVo promotion) {
+		if (promotionDao == null)
+			throw unsupportedOpEx("make promotions");
+		
+	    PromotionPo po = new PromotionPoBuilder(promotion).getPromotionInfo();
+	    
+	    //这里还没写完
+		return true;
 	}
 
 	@Override

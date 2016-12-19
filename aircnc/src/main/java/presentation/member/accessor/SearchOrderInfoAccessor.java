@@ -9,4 +9,5 @@ public interface SearchOrderInfoAccessor {
 	public Set<OrderStatus> getStatus();
 	
 	public void setSearchTarget(Set<OrderStatus> target);
+	
 }

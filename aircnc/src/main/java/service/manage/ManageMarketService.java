@@ -10,7 +10,7 @@ public interface ManageMarketService {
 	
 	public boolean ModifyMarketInfo(MarketInfo marketInfo);
 	
-	public boolean deleteMarketInfo(MarketInfo marketInfo);
+	public MarketInfo getMarketInfo(String id);
 	
 	public boolean deleteMarketInfo(String id);
 }

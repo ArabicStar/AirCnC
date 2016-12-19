@@ -39,28 +39,27 @@ public class ManageMemberManager implements ManageMemberService{
 	@Override
 	public boolean ModifyMemberInfo(MemberInfo memberInfo) {
 		if (dao == null)
-			throw unsupportedOpEx("manage member info");
+			throw unsupportedOpEx("manage member advanced info");
 
 		if (memberInfo == null || !memberInfo.isValid())
 			throw illegalArgEx("null or invalid member info");
-		
+
 		final MemberPo po = dao.findMember(memberInfo.getId());
-		
+
 		if (po == null)// not exist
 			return false;
-		
+
 		int comp = MemberVoBuilder.compareMemberInfo(memberInfo, po);
 
 		// modify basic info: denied
 		if ((comp & 1) != 0)
-			throw unsupportedOpEx("manage basic member info");
+			throw unsupportedOpEx("update basic member info");
 
 		// no modification: return
 		if ((comp & 2) == 0)
 			return true;
 
-		return dao.updateMember((new MemberPoBuilder(memberInfo)
-				.setPasswordHash(po.getPasswordHash()).getMemberInfo()));
+		return dao.updateMember((new MemberPoBuilder(memberInfo).setPasswordHash(po.getPasswordHash()).getMemberInfo()));
 	}
 
 	@Override

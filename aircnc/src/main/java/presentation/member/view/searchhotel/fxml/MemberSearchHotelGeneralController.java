@@ -12,6 +12,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import presentation.member.manager.SearchHotelManager;
 import presentation.member.manager.impl.SearchHotelManagerImpl;
 import presentation.member.model.SearchHotelsModel;
@@ -58,6 +60,9 @@ public class MemberSearchHotelGeneralController implements Initializable{
 	
 	@FXML
 	private Label repeal;
+	
+	@FXML
+	private Pane content;
 	
 	private MemberSearchHotelController controller;
 	

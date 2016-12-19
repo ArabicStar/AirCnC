@@ -3,11 +3,11 @@ package presentation.member.model;
 import java.time.LocalDateTime;
 
 import javafx.beans.property.StringProperty;
-import utils.info.order.OrderStatus;
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
-import vo.member.MemberVo;
 import vo.order.OrderVo;
 
 /**
@@ -17,10 +17,17 @@ import vo.order.OrderVo;
  *
  */
 public class MyOrderModel {
-
+	
+	private final StringProperty username;
+	private final StringProperty orderID;
     private final StringProperty hotelName;
     private final StringProperty checkinTime;
+    private final StringProperty leaveTime;
     private final StringProperty state;
+    private final IntegerProperty roomNum;
+    private final StringProperty roomType;
+    private final IntegerProperty peopleNum;
+    private final StringProperty hasChild;
     private final StringProperty timeAndSum;
     private final StringProperty totalPrice;
     private final ObjectProperty<OrderVo> operation;
@@ -43,10 +50,18 @@ public class MyOrderModel {
      * @param operation
      */
     public MyOrderModel(OrderVo order) {
+    	this.username = new SimpleStringProperty(order.getUserName());
+    	this.orderID = new SimpleStringProperty(order.getOrderId());
         this.hotelName = new SimpleStringProperty(order.getHotelName());
         
         //process the checkinTime
         this.checkinTime = new SimpleStringProperty(transformTime(order.getEntryTime()));
+        
+        this.roomNum = new SimpleIntegerProperty(order.getRoomNumber());
+        this.leaveTime = new SimpleStringProperty(transformTime(order.getEntryTime().plusDays(order.getStayDays())));
+        this.roomType = new SimpleStringProperty(order.getRoomType());
+        this.peopleNum = new SimpleIntegerProperty(order.getPeopleNumber());
+        this.hasChild = new SimpleStringProperty(order.getHasChildren() == true? "有":"无");
         
         String state;
         switch(order.getStatus()){
@@ -160,5 +175,88 @@ public class MyOrderModel {
         return operation;
     }
     
+    public String getUserName() {
+        return username.get();
+    }
+
+    public void setUserName(String newName) {
+        this.username.set(newName);
+    }
+
+    public StringProperty usernameProperty() {
+        return username;
+    }
+    
+    public String getOrderID() {
+        return orderID.get();
+    }
+
+    public void setorderID(String newID) {
+        this.orderID.set(newID);
+    }
+
+    public StringProperty orderIDProperty() {
+        return orderID;
+    }
+    
+    public String getLeaveTime() {
+        return leaveTime.get();
+    }
+
+    public void setLeaveTime(String newTime) {
+        this.leaveTime.set(newTime);
+    }
+
+    public StringProperty leaveTimeProperty() {
+        return leaveTime;
+    }
+    
+    public String getRoomType() {
+        return roomType.get();
+    }
+
+    public void setRoomType(String newType) {
+        this.roomType.set(newType);
+    }
+
+    public StringProperty roomTypeProperty() {
+        return roomType;
+    }
+    
+    public int getRoomNumber() {
+        return roomNum.get();
+    }
+
+    public void setRoomNumber(int num) {
+        this.roomNum.set(num);
+    }
+
+    public IntegerProperty roomNumberProperty() {
+        return roomNum;
+    }
+    
+    public int getPeopleNumber() {
+        return peopleNum.get();
+    }
+
+    public void setPeopleNum(int num) {
+        this.peopleNum.set(num);
+    }
+
+    public IntegerProperty peopleNumProperty() {
+        return peopleNum;
+    }
+    
+    public String hasChild() {
+        return hasChild.get();
+    }
+
+    public void setHasChild(String hasChild) {
+        this.hasChild.set(hasChild);
+    }
+
+    public StringProperty hasChildProperty() {
+        return hasChild;
+    }
 
 }

@@ -2,6 +2,7 @@ package service.impl.manage;
 
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
+import static utils.exception.StaticExceptionFactory.unsupportedOpEx;
 
 import data.dao.hotel.HotelDao;
 import po.hotel.HotelPo;
@@ -56,14 +57,23 @@ public class ManageHotelManager implements ManageHotelService{
 
 	@Override
 	public boolean ModifyHotelInfo(HotelInfo hotelInfo) {
-		// TODO Auto-generated method stub
-		return false;
+		HotelPo po = dao.findHotelById(hotelInfo.getId());
+
+		if (hotelInfo.getId() != po.getId())
+			throw new IllegalArgumentException("Incorresponding Hotel Info");
+
+		return dao
+				.updateHotel(new HotelPoBuilder(hotelInfo).setPasswordHash(po.getPasswordHash()).getHotelInfo());
 	}
 
 	@Override
-	public boolean getHotelInfo(HotelInfo hotelInfo) {
-		// TODO Auto-generated method stub
-		return false;
+	public HotelInfo getHotelInfo(String name) {
+		if (dao == null)
+			throw unsupportedOpEx("get hotel info");
+
+		final HotelPo po = dao.findHotelByName(name);
+
+		return po == null ? null : dao.findHotelByName(name);
 	}
 
 	@Override

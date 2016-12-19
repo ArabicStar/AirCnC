@@ -31,7 +31,7 @@ public enum ActionType {
 	/**
 	 * delay overdue order recover <br>
 	 */
-	ORDER_DELAY("于%s的订单%已办理延迟入住，", ChangeResultType.RECOVER, 2);
+	ORDER_DELAY("于%s的订单%s已办理延迟入住，", ChangeResultType.RECOVER, 2);
 	/**
 	 * format string
 	 */

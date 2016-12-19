@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.layout.HBox;
 import presentation.member.model.MyOrderModel;
+import presentation.member.utils.dialog.LabelDialog;
 import presentation.member.view.myorder.fxml.MemberOrderMainController;
 import utils.info.order.OrderStatus;
 import vo.order.OrderVo;
@@ -104,7 +105,10 @@ public class FunctionButtons extends TableCell<MyOrderModel, OrderVo>{
              public void handle(ActionEvent t) {
             	 switch(type){
             	 case CHECK: 
-            		 //waiting for 订单详情
+            		 if(order != null){
+            			LabelDialog details = new LabelDialog(new MyOrderModel(order));
+            			details.showDialog();
+            		 }
             		 break;
             	 case REVIEW: 
             		 if(order != null)

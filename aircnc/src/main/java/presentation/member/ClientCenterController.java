@@ -51,7 +51,7 @@ public class ClientCenterController extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		this.primaryStage = primaryStage;
 
-		// primaryStage.initStyle(StageStyle.UNDECORATED);
+		//primaryStage.initStyle(StageStyle.UNDECORATED);
 		primaryStage.setTitle("AirCnC");
 
 		// show the pane of sign in.

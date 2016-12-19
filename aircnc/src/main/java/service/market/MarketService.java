@@ -16,7 +16,7 @@ public interface MarketService {
 	 * @param  id
 	 * @return	获取促销策略
 	 */
-	public List<PromotionVo> makeMarketPromotion(String id);
+	public boolean makeMarketPromotion(PromotionVo promotion);
 	
 	public boolean creditCharge(int money, String id);
 

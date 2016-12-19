@@ -1,7 +1,9 @@
 package service.impl.manage;
 
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
+import static utils.exception.StaticExceptionFactory.illegalArgEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
+import static utils.exception.StaticExceptionFactory.unsupportedOpEx;
 
 import java.util.Random;
 
@@ -10,7 +12,6 @@ import po.market.MarketPo;
 import po.market.MarketPoBuilder;
 import service.manage.ManageMarketService;
 import utils.info.market.MarketInfo;
-import utils.info.member.MemberInfo;
 import vo.market.MarketVo;
 import vo.market.MarketVoBuilder;
 
@@ -69,15 +70,27 @@ public class ManageMarketManager implements ManageMarketService {
 	}
 
 	@Override
-	public boolean ModifyMarketInfo(MarketInfo hotelInfo) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean ModifyMarketInfo(MarketInfo marketInfo) {
+		MarketPo po = dao.findMarket(marketInfo.getId());
+
+		if (marketInfo.getId() != po.getId())
+			throw new IllegalArgumentException("Incorresponding Market Info");
+
+		return dao
+				.updateMarket(new MarketPoBuilder(marketInfo).setPasswordHash(po.getPasswordHash()).getMarketInfo());
 	}
 
 	@Override
-	public boolean deleteMarketInfo(MarketInfo hotelInfo) {
-		// TODO Auto-generated method stub
-		return false;
+	public MarketInfo getMarketInfo(String id) {
+		if (dao == null)
+			throw unsupportedOpEx("get market info");
+
+		if (!MarketInfo.checkID(id))
+			throw illegalArgEx("Market id");
+
+		final MarketPo po = dao.findMarket(id);
+
+		return po == null ? null : new MarketVoBuilder(dao.findMarket(id)).getMarketInfo();
 	}
 
 	@Override

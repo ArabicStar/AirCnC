@@ -2,6 +2,10 @@
 }
 
 .main-pane{
+	-fx-background-color: #f9f9f9;
+}
+
+.main-pane:hover{
 	-fx-background-color: #e9e9e9;
 }
 

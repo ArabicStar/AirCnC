@@ -48,6 +48,32 @@ public class CreditModel {
 		// process the concrete time
 		this.time = new SimpleStringProperty(transformTime(change.getTimeInstant()));
 
+		//this.description = new SimpleStringProperty(change.getFormatString(),change.getOrderId());
+		String des;
+//		switch(change.getActionType()){
+//		case CHARGE:
+//			des = String.format(change.getFormatString(), (float)change.getMoney()
+//					,change.getAfterCredit()-change.getAfterCredit());
+//			break;
+//		case ORDER_EXECUTION:
+//			des = String.format(change.getFormatString(),change.getOrderId());
+//			break;
+//		case ORDER_CANCEL:
+//			des = String.format(change.getFormatString(),change.getOrderId());
+//			break;
+//		case ORDER_OVERDUE:
+//			des = String.format(change.getFormatString(),change.getOrderId());
+//			break;
+//		case ORDER_APPEAL:
+//			des = String.format(change.getFormatString(),change.getOrderId());
+//			break;
+//		case ORDER_DELAY:
+//			des = String.format(change.getFormatString(),change.getOrderId());
+//			break;
+//		default:
+//			des = String.format(change.getFormatString());
+//			break;
+//		}
 		this.description = new SimpleStringProperty(change.getFormatString());
 		
 		//这里要完善
