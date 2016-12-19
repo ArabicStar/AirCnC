@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.ButtonBar.ButtonData;
@@ -16,15 +17,20 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.StageStyle;
+import presentation.market.accessor.MakeOrderAccessor;
+import presentation.market.accessor.impl.MakeOrderAccessorImpl;
 import presentation.market.model.MyOrderModel;
 import vo.hotel.HotelVo;
 
 public class TextAreaDialog extends GridPane {
 	Dialog<String> dialog;
-
+	private MakeOrderAccessor accessor;
 	public TextAreaDialog(String content, HotelVo hotelVo) {
+//		MakeOrderAccessorImpl.launch();
+		accessor = MakeOrderAccessorImpl.getIntance();
 		dialog = new Dialog<String>();
 		dialog.initStyle(StageStyle.UNDECORATED);
 		dialog.setHeaderText(content);
@@ -34,7 +40,7 @@ public class TextAreaDialog extends GridPane {
 		enterDatePickeratePicker.setShowWeekNumbers(true);
 		final DatePicker leaveDatePickeratePicker = new DatePicker(LocalDate.now().plusDays(2));
 		leaveDatePickeratePicker.setShowWeekNumbers(true);
-		
+
 		GridPane gridPane = new GridPane();
 		gridPane.setHgap(10);
 		gridPane.setVgap(10);
@@ -90,7 +96,7 @@ public class TextAreaDialog extends GridPane {
 		
 		String peopleNumber = "入住人数";
 		Label peopleNumberLabel = new Label(peopleNumber);
-		peopleNumberLabel.setStyle(peopleNumber);
+		peopleNumberLabel.setStyle(fontOfName);
 		TextField textField2 = new TextField();
 		textField2.setMaxWidth(80);
 		gridPane.add(peopleNumberLabel, 1, 6);
@@ -115,7 +121,35 @@ public class TextAreaDialog extends GridPane {
 		
 		ensureButton.setStyle(
 				"-fx-background-color: #5c5d93;-fx-text-fill: #fff; -fx-font-size: 10pt; -fx-border-radius: 5; -fx-background-radius: 20;");
-		
+		ensureButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent event) {
+
+				if(rb1.getToggleGroup().getSelectedToggle()!=null) {
+					System.out.println("非空");
+					String temp = rb1.getToggleGroup().getSelectedToggle().toString();
+					String result = temp.substring(temp.length() - 2, temp.length() - 1);
+					System.out.println(accessor == null);
+					if(result.equals("有")) {
+						accessor.setHasChildren(true);
+					}
+				} else {
+					System.out.println("空");
+				}
+				
+				System.out.println("11111111111111");
+			}
+			
+		});
+//		ensureButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+//
+//			@Override
+//			public void handle(MouseEvent event) {
+//				System.out.println("rweqtqwyq34y6q34643	5346t3q");
+//			}
+//		
+//		});
 	}
 	
 
