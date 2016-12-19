@@ -9,8 +9,9 @@
       <VBox layoutX="163.0" layoutY="201.0" spacing="30.0">
          <children>
             <TextField fx:id="enterprise" alignment="CENTER" focusTraversable="false" promptText="企业名称" styleClass="textfield" />
-            <Button fx:id="confirm" layoutX="163.0" layoutY="268.0" mnemonicParsing="false" onAction="#handleConfirm" text="确认提交" />
+            <Button fx:id="confirm" layoutX="163.0" layoutY="268.0" mnemonicParsing="false" onAction="#handleConfirm" styleClass="confirm" text="确认提交" />
          </children>
       </VBox>
+      <Button fx:id="back" layoutX="480.0" layoutY="335.0" mnemonicParsing="false" onAction="#handleBack" styleClass="back" text="返回" />
    </children>
 </Pane>

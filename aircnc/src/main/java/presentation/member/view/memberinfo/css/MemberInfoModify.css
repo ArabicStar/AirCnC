@@ -25,7 +25,22 @@
 }
 
 .modify{
-	-fx-font-size: 30px;
+	-fx-font-size: 25px;
+	-fx-background-color: #fff;
+	-fx-background-radius: 20px;
+	-fx-border-color: #4f4e84;
+	-fx-border-radius: 20px;
+	-fx-text-fill: #4f4e84;
+}
+
+.modify:hover{
+	-fx-background-color: #4f4e84;
+	-fx-text-fill: #fff;
+}
+
+.password{
+	-fx-background-color: #4f4e84;
+	-fx-text-fill: #fff;
 }
 
 .id-index{
@@ -34,4 +49,11 @@
 
 .id-content{
 	-fx-font-size: 30px;
+}
+
+.text-field{
+	-fx-background-color: #fff;
+	-fx-background-radius: 20px;
+	-fx-border-color: #4f4e84;
+	-fx-border-radius: 20px;
 }

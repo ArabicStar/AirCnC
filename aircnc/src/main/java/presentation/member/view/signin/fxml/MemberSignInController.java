@@ -3,6 +3,7 @@ package presentation.member.view.signin.fxml;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import interactor.impl.member.MemberAccountCourier;
 import interactor.member.MemberAccountInteractor;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -63,12 +64,9 @@ public class MemberSignInController implements Initializable{
 		if(username.getText().length()!=0&&password.getText().length()!=0){
 			accessor.setDeliveredId(username.getText());
 			accessor.setDeliveredPassword(password.getText());
-			//下面是逻辑相连后的代码（没开服务器就会报错，暂时注释）
-			//<<<<<<<<<<<<<<<<<<
-//			interactor = MemberAccountCourier.getInstance();
-//			interactor.login();
-			//<<<<<<<<<<<<<<<<<<
-			//use valid to mark whether it is correct
+			//下面是逻辑相连后的代码（没开服务器就会报错，暂时注释
+			interactor = MemberAccountCourier.getInstance();
+			interactor.login();
 			boolean valid = true;
 			
 			if(valid)

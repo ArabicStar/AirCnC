@@ -80,8 +80,7 @@ public class ManageHotelManager implements ManageHotelService{
 	public boolean deleteHotelInfo(int id) {
 		if (!HotelInfo.checkID(id))
 			return false;
-		//这里有问题！！！！！！！！！！！！！！！
-		return dao.deleteHotel(String.valueOf(id));
+		return dao.deleteHotel(id);
 	}
 
 }

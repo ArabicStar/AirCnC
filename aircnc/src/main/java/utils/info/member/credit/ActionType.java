@@ -61,7 +61,7 @@ public enum ActionType {
 	/**
 	 * <b>"%d"</b> string buffer
 	 */
-	private static final String INTEGER_FORMAT_TOKEN_BUFFER = "%d";
+	//private static final String INTEGER_FORMAT_TOKEN_BUFFER = "%d";
 
 	private ActionType(String format_string, ChangeResultType result, int relatedTo) {
 		this.formatString = format_string;
@@ -75,7 +75,7 @@ public enum ActionType {
 
 	public String getFormatString() {
 
-		return new StringBuilder(formatString).append(result.getVerb()).append(INTEGER_FORMAT_TOKEN_BUFFER).toString();
+		return new StringBuilder(formatString).append(result.getVerb()).toString();
 	}
 
 	/**
