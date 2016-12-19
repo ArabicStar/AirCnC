@@ -6,22 +6,23 @@ import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import service.promotion.PromotionApplicationService;
+import service.promotion.WebsitePromotionApplicationService;
 import service.promotion.WebsitePromotionInfoService;
 import utils.info.order.OrderInfo;
 import utils.promotion.OrderRelatedInfoHelper;
 import utils.promotion.Promotion;
 import vo.order.OrderVoBuilder;
 
-public class WebsitePromotionApplicationManager implements PromotionApplicationService {
+public class WebsitePromotionApplicationManager implements WebsitePromotionApplicationService {
 	/* Singleton */
 	private static WebsitePromotionApplicationManager instance;
 
-	public static WebsitePromotionApplicationManager launch() {
+	public static WebsitePromotionApplicationManager launch(WebsitePromotionInfoService infoService,
+			OrderRelatedInfoHelper helper) {
 		if (instance != null)
 			throw duplicateSingletonEx();
 
-		return instance = new WebsitePromotionApplicationManager();
+		return instance = new WebsitePromotionApplicationManager(infoService, helper);
 	}
 
 	public static WebsitePromotionApplicationManager getInstance() {
@@ -32,8 +33,14 @@ public class WebsitePromotionApplicationManager implements PromotionApplicationS
 	}
 	/* Singleton */
 
-	private WebsitePromotionApplicationManager() {
-
+	/**
+	 * @param infoService
+	 * @param helper
+	 */
+	private WebsitePromotionApplicationManager(WebsitePromotionInfoService infoService, OrderRelatedInfoHelper helper) {
+		super();
+		this.infoService = infoService;
+		this.helper = helper;
 	}
 
 	private WebsitePromotionInfoService infoService;

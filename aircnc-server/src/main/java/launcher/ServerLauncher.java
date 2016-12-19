@@ -6,6 +6,7 @@ public class ServerLauncher {
 	private static void launch(Client clientId) {
 		LoggerLauncher.launch();
 		HibernateLauncher.launch();
+		ServiceLauncher.launch();
 		RmiLauncher.launch();
 	}
 

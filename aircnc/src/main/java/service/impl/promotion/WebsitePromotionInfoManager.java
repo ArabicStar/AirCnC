@@ -5,6 +5,7 @@ import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
 import java.util.Set;
 
+import data.dao.query.PromotionQueryDao;
 import service.promotion.PromotionContainer;
 import service.promotion.WebsitePromotionInfoService;
 import vo.promotion.PromotionVo;
@@ -13,11 +14,11 @@ public class WebsitePromotionInfoManager implements WebsitePromotionInfoService 
 	/* Singleton */
 	private static WebsitePromotionInfoManager instance;
 
-	public static WebsitePromotionInfoManager launch() {
+	public static WebsitePromotionInfoManager launch(PromotionQueryDao dao) {
 		if (instance != null)
 			throw duplicateSingletonEx();
 
-		return instance = new WebsitePromotionInfoManager();
+		return instance = new WebsitePromotionInfoManager(dao);
 	}
 
 	public static WebsitePromotionInfoManager getInstance() {
@@ -28,8 +29,8 @@ public class WebsitePromotionInfoManager implements WebsitePromotionInfoService 
 	}
 	/* Singleton */
 
-	private WebsitePromotionInfoManager() {
-
+	private WebsitePromotionInfoManager(PromotionQueryDao dao) {
+		this.container = new WebsitePromotionContainer(dao);
 	}
 
 	private PromotionContainer container;

@@ -1,7 +1,9 @@
 package presentation.manage.model;
 
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import vo.member.MemberVo;
@@ -21,6 +23,7 @@ public class MemberManageModel {
 	private final IntegerProperty credit;
 	private final StringProperty type;
 	private final StringProperty typeContent;
+	private final ObjectProperty<MemberVo> operation;
 	
 	/**
 	 * Default constructor.
@@ -48,6 +51,7 @@ public class MemberManageModel {
 		default: this.type = new SimpleStringProperty("");
 			this.typeContent = new SimpleStringProperty("");
 		}
+		this.operation = new SimpleObjectProperty<MemberVo>(vo);
 		
 	}
 	
@@ -145,6 +149,18 @@ public class MemberManageModel {
 
     public StringProperty typeContentProperty() {
         return typeContent;
+    }
+    
+    public MemberVo getOperation() {
+        return operation.get();
+    }
+
+    public void setOperation(MemberVo vo) {
+        this.operation.set(vo);
+    }
+
+    public ObjectProperty<MemberVo> operationProperty() {
+        return operation;
     }
 }
 

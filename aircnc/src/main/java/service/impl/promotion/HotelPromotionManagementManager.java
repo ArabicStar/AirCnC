@@ -11,13 +11,12 @@ import data.dao.promotion.HotelPromotionDao;
 import data.dao.query.PromotionQueryDao;
 import po.promotion.HotelPromotionPo;
 import po.promotion.PromotionPoBuilder;
-import service.promotion.HotelPromotionInfoService;
 import service.promotion.HotelPromotionManagmentService;
 import vo.promotion.HotelPromotionVo;
 import vo.promotion.PromotionVo;
 import vo.promotion.PromotionVoBuilder;
 
-public class HotelPromotionManagementManager implements HotelPromotionManagmentService, HotelPromotionInfoService {
+public class HotelPromotionManagementManager implements HotelPromotionManagmentService {
 	/* Singleton */
 	private static HotelPromotionManagementManager instance;
 
@@ -44,7 +43,7 @@ public class HotelPromotionManagementManager implements HotelPromotionManagmentS
 	private HotelPromotionDao dao;
 
 	@Override
-	public boolean addPromotion(HotelPromotionVo vo) {
+	public boolean addHotelPromotion(HotelPromotionVo vo) {
 		if (vo == null || !vo.isValid())
 			throw illegalArgEx("Hotel promotion vo");
 
@@ -52,7 +51,7 @@ public class HotelPromotionManagementManager implements HotelPromotionManagmentS
 	}
 
 	@Override
-	public boolean deletePromotion(HotelPromotionVo vo) {
+	public boolean deleteHotelPromotion(HotelPromotionVo vo) {
 		if (vo == null || !vo.isValid())
 			throw illegalArgEx("Hotel promotion vo");
 
@@ -60,7 +59,7 @@ public class HotelPromotionManagementManager implements HotelPromotionManagmentS
 	}
 
 	@Override
-	public boolean updatePromotion(HotelPromotionVo vo) {
+	public boolean updateHotelPromotion(HotelPromotionVo vo) {
 		if (vo == null || !vo.isValid())
 			throw illegalArgEx("Hotel promotion vo");
 
@@ -68,18 +67,13 @@ public class HotelPromotionManagementManager implements HotelPromotionManagmentS
 	}
 
 	@Override
-	public Set<PromotionVo> getAllPromotions(int hotelId) {
+	public Set<PromotionVo> getHotelAllPromotions(int hotelId) {
 		return query.getHotelAllPromotions(hotelId).stream().map(po -> new PromotionVoBuilder(po).getPromotionInfo())
 				.collect(Collectors.toSet());
 	}
 
 	@Override
-	public Set<PromotionVo> getActivePromotion(int hotelId) {
-		return getAllPromotions(hotelId).stream().filter(po -> po.getActive()).collect(Collectors.toSet());
-	}
-
-	@Override
-	public Set<PromotionVo> getUserAvailablePromotions(int hotelId) {
-		return getAllPromotions(hotelId).stream().filter(po -> po.getPractical()).collect(Collectors.toSet());
+	public Set<PromotionVo> getHotelActivePromotion(int hotelId) {
+		return getHotelAllPromotions(hotelId).stream().filter(po -> po.getActive()).collect(Collectors.toSet());
 	}
 }

@@ -45,30 +45,21 @@ public class PromotionVoBuilder extends PromotionInfoBuilder {
 	}
 
 	public TriggerBuilder when(WebsiteWhen when) {
-		if (triggerBuilder == null)
-			triggerBuilder = PromotionBuilder.when(when);
-
-		if (scope == Scope.Website)
-			return triggerBuilder;
-		else
+		if (scope != Scope.Website)
 			return null;
+
+		return triggerBuilder = PromotionBuilder.when(when);
 	}
 
 	public TriggerBuilder when(HotelWhen when) {
-		if (triggerBuilder == null)
-			triggerBuilder = PromotionBuilder.when(when);
-
-		if (scope == Scope.Hotel)
-			return triggerBuilder;
-		else
+		if (scope != Scope.Hotel)
 			return null;
+
+		return triggerBuilder = PromotionBuilder.when(when);
 	}
 
 	public ApplierBuilder how(How how) {
-		if (applierBuilder == null)
-			applierBuilder = PromotionBuilder.how(how);
-
-		return applierBuilder;
+		return applierBuilder = PromotionBuilder.how(how);
 	}
 
 	/**

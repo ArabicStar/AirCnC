@@ -11,6 +11,7 @@ import po.member.credit.CreditChangePo;
  * @author ClevelandAlto
  *
  */
+/* final */
 public interface CreditQueryDao {
 	/**
 	 * Get credit value of given member by id string.<br>

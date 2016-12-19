@@ -33,7 +33,7 @@ public class MarketVoBuilder extends MarketInfoBuilder{
 	}
 
 
-	public MarketInfoBuilder setName(String name) {
+	public MarketVoBuilder setName(String name) {
 		if (checkUserName(name))
 			this.name = name;
 		return this;

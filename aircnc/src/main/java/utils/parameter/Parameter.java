@@ -14,21 +14,21 @@ import java.lang.reflect.Type;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import utils.lambda.SerializablePredicate;
-
 public class Parameter<T> {
 	private String name;
 	private Class<T> type;
 	private T value;
-	private SerializablePredicate<T> limit;
+	private ParameterCriteria<T> limit;
+	private boolean allowNull;
 
 	private Parameter(String name) {
 		if (name == null)
 			illegalArgEx("Property name");
 
 		this.name = name;
-		this.limit = o -> true;
+		this.limit = (list, o) -> true;
 		this.value = null;
+		this.allowNull = true;
 	}
 
 	public Parameter(String name, Class<T> type) {
@@ -36,9 +36,9 @@ public class Parameter<T> {
 		this.type = type;
 	}
 
-	public Parameter(String name, Class<T> type, SerializablePredicate<T> precondition) {
+	public Parameter(String name, Class<T> type, ParameterCriteria<T> precondition) {
 		this(name, type);
-		this.limit = precondition;
+		setLimit(precondition);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -50,9 +50,9 @@ public class Parameter<T> {
 		type = (Class<T>) types[0];
 	}
 
-	public Parameter(String name, T value, SerializablePredicate<T> limit) {
+	public Parameter(String name, T value, ParameterCriteria<T> limit) {
 		this(name, value);
-		this.limit = limit;
+		setLimit(limit);
 	}
 
 	public T value() {
@@ -67,15 +67,33 @@ public class Parameter<T> {
 		return name;
 	}
 
-	public boolean putValue(T value) {
-		if (!limit.test(value))
+	private void putValue(T value) {
+		this.value = value;
+	}
+
+	public boolean putValue(ParametersList list, T value) {
+		if (value == null && allowNull) {
+			this.value = null;
+			return true;
+		}
+
+		if (!limit.test(list, value))
 			return false;
 
 		this.value = value;
 		return true;
 	}
 
-	private void setLimit(SerializablePredicate<T> limit) {
+	public Parameter<T> setNotNull(boolean notNull) {
+		this.allowNull = !notNull;
+		return this;
+	}
+
+	public boolean getNotNull() {
+		return !allowNull;
+	}
+
+	private void setLimit(ParameterCriteria<T> limit) {
 		if (limit != null)
 			this.limit = limit;
 	}
@@ -168,7 +186,7 @@ public class Parameter<T> {
 		m.find();
 		bs = hexString2Bytes(m.group(1));
 		try (ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(bs))) {
-			param.setLimit((SerializablePredicate) ois.readObject());
+			param.setLimit((ParameterCriteria) ois.readObject());
 		} catch (Exception e) {
 			throw e;
 		}

@@ -11,10 +11,10 @@
 		</id>
 
 		<!-- email -->
-		<property column="email" name="encryptEmail" type="string" />
+		<property column="email" name="email" type="string" />
 		<!-- fixedPhone -->
-		<property column="fixed" name="encryptFixedPhone" type="string" />
+		<property column="fixed" name="fixedPhone" type="string" />
 		<!-- mobilePhone -->
-		<property column="mobile" name="encryptMobilePhone" type="string" />
+		<property column="mobile" name="mobilePhone" type="string" />
 	</class>
 </hibernate-mapping>

@@ -8,6 +8,7 @@ public class WebsitePromotionContainer extends AbstractPromotionContainer {
 	public WebsitePromotionContainer(PromotionQueryDao dao) {
 		super();
 		this.dao = dao;
+		refreshContainer();
 	}
 
 	@Override

@@ -20,6 +20,7 @@ import po.member.credit.CreditChangePo;
  * @author ClevelandAlto
  *
  */
+/* final */
 public enum CreditDaoImpl implements CreditDao, CreditQueryDao {
 	INSTANCE;
 
@@ -91,5 +92,10 @@ public enum CreditDaoImpl implements CreditDao, CreditQueryDao {
 			throw illegalArgEx("member id");
 
 		return Integer.parseInt(id);
+	}
+
+	@Override
+	public int deleteAllCredit() {
+		return execute(session -> session.createSQLQuery("delete from tablename where 1=1").executeUpdate());
 	}
 }

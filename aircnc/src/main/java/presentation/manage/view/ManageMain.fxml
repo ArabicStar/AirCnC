@@ -14,7 +14,7 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="57.0">
                      <children>
-                        <Label fx:id="memberManage" alignment="CENTER" contentDisplay="CENTER" prefHeight="57.0" prefWidth="247.0" text="客户信息管理">
+                        <Label fx:id="memberManage" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#handleMemberManage" prefHeight="57.0" prefWidth="247.0" text="客户信息管理">
                            <padding>
                               <Insets right="30.0" />
                            </padding>
@@ -30,7 +30,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="57.0">
                      <children>
-                        <Label fx:id="hotelManage" alignment="CENTER" contentDisplay="CENTER" prefHeight="75.0" prefWidth="247.0" text="酒店信息管理">
+                        <Label fx:id="hotelManage" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#handleHotelManage" prefHeight="75.0" prefWidth="247.0" text="酒店信息管理">
                            <padding>
                               <Insets right="30.0" />
                            </padding>
@@ -43,7 +43,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="57.0">
                      <children>
-                        <Label fx:id="marketManage" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="247.0" text="营销人员管理">
+                        <Label fx:id="marketManage" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#handleMarketManage" prefHeight="50.0" prefWidth="247.0" text="营销人员管理">
                            <padding>
                               <Insets right="30.0" />
                            </padding>
@@ -66,7 +66,6 @@
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="portrait-hbox" />
                      </children>
                   </HBox>
-                  <Button fx:id="logout" mnemonicParsing="false" onAction="#HandleLogout" styleClass="logout" text="注销" />
                </children>
             </VBox>
          </children>

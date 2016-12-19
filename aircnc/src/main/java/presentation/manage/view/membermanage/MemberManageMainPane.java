@@ -7,7 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import presentation.member.view.memberinfo.fxml.MemberMainController;
+import presentation.manage.view.membermanage.fxml.MemberManageMainController;
 
 /**
  * the main pane of the whole client.
@@ -17,7 +17,7 @@ import presentation.member.view.memberinfo.fxml.MemberMainController;
 public class MemberManageMainPane {
 	private Stage primaryStage;
 	private AnchorPane rootLayout;
-	private MemberMainController controller;
+	private MemberManageMainController controller;
 	
 	public MemberManageMainPane(Stage primaryStage){
 		this.primaryStage = primaryStage;
@@ -36,7 +36,7 @@ public class MemberManageMainPane {
             loader.setBuilderFactory(new JavaFXBuilderFactory());
             //javafx.scene.Parent root = (javafx.scene.Parent) loader.load(location.openStream());
             loader.load();
-            controller = (MemberMainController)loader.getController();
+            controller = loader.getController();
 			rootLayout = loader.getRoot();
 
         } catch (IOException e) {
@@ -44,7 +44,7 @@ public class MemberManageMainPane {
         }
     }
 	
-	public MemberMainController getController(){
+	public MemberManageMainController getController(){
 		return controller;
 	}
 

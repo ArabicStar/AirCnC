@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import utils.lambda.SerializablePredicate;
-
 public class ParametersList {
 	private List<Parameter<?>> properties;
 
@@ -26,8 +24,16 @@ public class ParametersList {
 		properties.add(new Parameter<>(name, type));
 	}
 
-	public <T> void addParameter(String name, Class<T> type, SerializablePredicate<T> limit) {
+	public <T> void addParameter(String name, Class<T> type, ParameterCriteria<T> limit) {
 		properties.add(new Parameter<>(name, type, limit));
+	}
+
+	public <T> void addParameter(String name, Class<T> type, ParameterCriteria<T> limit, boolean notNull) {
+		properties.add(new Parameter<>(name, type, limit).setNotNull(notNull));
+	}
+
+	public <T> void addParameter(String name, Class<T> type, boolean notNull) {
+		properties.add(new Parameter<>(name, type).setNotNull(notNull));
 	}
 
 	public <T> T getParameterValue(String name) {
@@ -42,7 +48,7 @@ public class ParametersList {
 		if (p == null)
 			return false;
 
-		return p.putValue(value);
+		return p.putValue(this, value);
 	}
 
 	public <T> boolean existParameter(String name) {

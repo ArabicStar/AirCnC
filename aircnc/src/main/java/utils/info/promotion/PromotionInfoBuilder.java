@@ -40,7 +40,7 @@ public abstract class PromotionInfoBuilder extends PromotionInfoTemplate {
 	 *            to be set name
 	 */
 	public PromotionInfoBuilder setName(String name) {
-		if (checkName(name))
+		if (!checkName(name))
 			throw illegalArgEx("Promotion name");
 
 		this.name = name;

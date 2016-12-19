@@ -10,9 +10,14 @@ public class LoggerLauncher {
 	}
 
 	public static final void launch() {
-		PropertyConfigurator.configure("log4j.properties");
+		boolean flag = true;
+		try {
+			PropertyConfigurator.configure("log4j.properties");
+		} catch (Exception e) {
+			flag = false;
+		}
 		final Logger logger = Logger.getLogger("AirCnc Client Logger");
 		Log.launchLogger(logger);
-		Log.i("Logger has been launched successfully");
+		Log.i(flag ? "Logger launched" : "Logger launch failed");
 	}
 }

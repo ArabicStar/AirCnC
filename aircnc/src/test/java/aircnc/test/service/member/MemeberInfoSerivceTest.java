@@ -6,6 +6,8 @@ import static aircnc.test.service.member.DataPrepareHelper.testID;
 import static aircnc.test.service.member.DataPrepareHelper.testName;
 import static org.junit.Assert.assertEquals;
 
+import java.util.List;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,6 +16,7 @@ import service.member.MemberAccountService;
 import service.member.MemberInfoService;
 import utils.info.member.MemberInfo;
 import vo.member.MemberVoBuilder;
+import vo.member.credit.CreditChangeVo;
 
 public class MemeberInfoSerivceTest {
 	private MemberAccountService account = DataPrepareHelper.accountService;
@@ -29,6 +32,29 @@ public class MemeberInfoSerivceTest {
 		for (int i = 0; i < 5; i++) {
 			MemberInfo v = info.getMemberInfo(testID(i));
 			assertEquals(testName(i), v.getName());
+		}
+	}
+
+	@Test
+	public void testGetMemberAllOrders() {
+
+	}
+
+	@Test
+	public void testGetMemberOrdersByStatus() {
+
+	}
+
+	@Test
+	public void testGetMemberHistoryHotels() {
+
+	}
+
+	@Test
+	public void testGetMemberCreditChange() {
+		for (int i = 0; i < 5; i++) {
+			List<CreditChangeVo> v = info.getMemberCreditChange(testID(i));
+			assertEquals(6, v.size());
 		}
 	}
 

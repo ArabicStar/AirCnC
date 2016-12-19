@@ -3,6 +3,7 @@ package launcher;
 import java.rmi.RemoteException;
 
 import rmi.remote.MemberDaoRemoteObj;
+import rmi.remote.PromotionDaoRemoteObj;
 import rmi.remote.QueryDaoRemoteObj;
 import utils.logger.Log;
 
@@ -11,8 +12,9 @@ public class RmiLauncher {
 		try {
 			MemberDaoRemoteObj.launch();
 			QueryDaoRemoteObj.launch();
+			PromotionDaoRemoteObj.launch();
 
-			Log.i("Rmi has been launched successfully.");
+			Log.i("Rmi launched");
 		} catch (RemoteException e) {
 			// Fatal error, exit forcely
 			Log.f("FATAL - Rmi bind failed, system exits", e);

@@ -106,9 +106,4 @@ public class HibernateSessionFactory {
 	public static StandardServiceRegistry getServiceRegistry() {
 		return serviceRegistry;
 	}
-//
-//	// test
-//	public static void main(String[] args) {
-//
-//	}
 }

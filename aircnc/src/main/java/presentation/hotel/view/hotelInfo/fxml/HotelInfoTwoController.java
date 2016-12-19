@@ -56,8 +56,10 @@ public class HotelInfoTwoController implements Initializable{
 	private void initPromotion(){
 		descriptionList = manager.getDescription();
 		String content = "";
+		int i = 0;
 		for(String s:descriptionList){
-			content = content+"\n"+s;
+			i++;
+			content = content+"\n"+Integer.toString(i)+". "+s;
 		}
 		description.setText(content);
 	}

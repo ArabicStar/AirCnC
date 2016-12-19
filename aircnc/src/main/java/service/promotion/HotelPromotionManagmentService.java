@@ -6,13 +6,13 @@ import vo.promotion.HotelPromotionVo;
 import vo.promotion.PromotionVo;
 
 public interface HotelPromotionManagmentService {
-	public boolean addPromotion(HotelPromotionVo vo);
+	public boolean addHotelPromotion(HotelPromotionVo vo);
 
-	public boolean deletePromotion(HotelPromotionVo vo);
+	public boolean deleteHotelPromotion(HotelPromotionVo vo);
 
-	public Set<PromotionVo> getAllPromotions(int hotelId);
+	public boolean updateHotelPromotion(HotelPromotionVo vo);
 
-	public Set<PromotionVo> getActivePromotion(int hotelId);
+	public Set<PromotionVo> getHotelAllPromotions(int hotelId);
 
-	public boolean updatePromotion(HotelPromotionVo vo);
+	public Set<PromotionVo> getHotelActivePromotion(int hotelId);
 }

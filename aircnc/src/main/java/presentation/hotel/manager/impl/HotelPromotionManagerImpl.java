@@ -4,6 +4,8 @@ import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -64,20 +66,21 @@ public class HotelPromotionManagerImpl implements HotelPromotionManager{
 	}
 	
 	private void test(){
-		
+		promotions = new ArrayList<HotelPromotionVo>();
+		LocalDateTime now = LocalDateTime.now();
 		PromotionVoBuilder builder = new PromotionVoBuilder(Scope.Hotel).setId(123).
-				setHotelId(2).setName("双十一特惠").setPractical(true);
-		builder.when(HotelWhen.BIRTHDAY).setParam(TriggerParams.BIRTHDAY,LocalDate.now());
+				setHotelId(2).setName("企业优惠").setPractical(true);
+		
+		builder.when(HotelWhen.DURING_PERIOD).setParam(TriggerParams.FROM,now.plusDays(1)).setParam(TriggerParams.TO,now.plusDays(5));
 		builder.how(How.PERCENT_OFF).setParam(ApplierParams.PERCENT, 0.8);
 		promotions.add((HotelPromotionVo) builder.getPromotionInfo());
-		
-		builder.when(HotelWhen.ENTERPRISE).setParam(TriggerParams.ENTERPRISE, "南京大学");
-		builder.how(How.CONST).setParam(ApplierParams.AMOUNT, 100);	
+
+		builder.when(HotelWhen.MULTI_ROOMS).setParam(TriggerParams.ROOM_NUM_THRESHOLD, 5);
+		builder.how(How.PERCENT_OFF).setParam(ApplierParams.PERCENT, 0.9);
 		promotions.add((HotelPromotionVo) builder.getPromotionInfo());
 		
-		builder.when(HotelWhen.MULTI_ROOMS).setParam(TriggerParams.FROM,LocalDate.now()).
-		setParam(TriggerParams.TO, LocalDate.now().plusDays(5));
-		builder.how(How.PERCENT_OFF).setParam(ApplierParams.PERCENT, 0.9);
+		builder.when(HotelWhen.ENTERPRISE).setParam(TriggerParams.ENTERPRISE,"南京大学" );
+		builder.how(How.CONST).setParam(ApplierParams.AMOUNT, 10.0);
 		promotions.add((HotelPromotionVo) builder.getPromotionInfo());
 		
 		promotions.add((HotelPromotionVo) builder.getPromotionInfo());

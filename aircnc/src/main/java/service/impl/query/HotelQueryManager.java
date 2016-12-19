@@ -1,11 +1,12 @@
 package service.impl.query;
 
-import static utils.exception.StaticExceptionFactory.*;
+import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
+import static utils.exception.StaticExceptionFactory.illegalArgEx;
+import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.hibernate.Criteria;
 import org.hibernate.criterion.DetachedCriteria;
 
 import data.dao.query.HotelQueryDao;
@@ -44,6 +45,10 @@ public final class HotelQueryManager implements HotelQueryService {
 		if (!HotelVo.checkID(hotelId))
 			throw illegalArgEx("Hotel id");
 
+		HotelPo po = queryDao.searchById(hotelId);
+		if (po == null)
+			return null;
+
 		return new HotelVoBuilder(queryDao.searchById(hotelId)).getHotelInfo();
 	}
 
@@ -52,11 +57,17 @@ public final class HotelQueryManager implements HotelQueryService {
 		if (!HotelVo.checkHotelName(name))
 			throw illegalArgEx("Hotel name");
 
+		HotelPo po = queryDao.searchByName(name);
+		if (po == null)
+			return null;
+
 		return new HotelVoBuilder(queryDao.searchByName(name)).getHotelInfo();
 	}
 
 	@Override
 	public List<HotelVo> findByCondition(Condition cond) {
+		if (cond == null)
+			return null;
 		DetachedCriteria dc = ConditionBuilder.parseCondition(DetachedCriteria.forClass(HotelPo.class), cond);
 		return queryDao.searchByCriteria(dc).stream().map(h -> new HotelVoBuilder(h).getHotelInfo())
 				.collect(Collectors.toList());

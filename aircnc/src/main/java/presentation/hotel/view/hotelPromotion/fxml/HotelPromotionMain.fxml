@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="777.0" stylesheets="@../css/HotelPromotionMain.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="47.0" layoutY="59.0" styleClass="title" text="促销策略制定" />
+      <VBox layoutX="47.0" layoutY="187.0" prefHeight="540.0" prefWidth="662.0" spacing="10.0">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label styleClass="small-title" text="生日优惠：" />
+                  <Label fx:id="birthday" alignment="TOP_LEFT" prefHeight="60.0" prefWidth="419.0" styleClass="text-content" text="Label">
+                     <HBox.margin>
+                        <Insets top="40.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Button fx:id="modifyBirth" alignment="BOTTOM_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="45.0" styleClass="modify" text="修改">
+                     <HBox.margin>
+                        <Insets left="10.0" top="40.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="sendBirth" mnemonicParsing="false" styleClass="save" text="发布">
+                     <HBox.margin>
+                        <Insets left="20.0" top="40.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox prefHeight="362.0" prefWidth="662.0">
+               <children>
+                  <VBox prefHeight="200.0" spacing="250.0">
+                     <children>
+                        <Label styleClass="small-title" text="合作企业：" />
+                        <Button fx:id="addEnter" mnemonicParsing="false" styleClass="add" text="添加企业" />
+                     </children>
+                  </VBox>
+                  <TableView fx:id="promotionTable" prefHeight="348.0">
+                    <columns>
+                      <TableColumn fx:id="description" prefWidth="380.0" resizable="false" text="企业优惠" />
+                        <TableColumn fx:id="operation" prefWidth="150.0" text="操作" />
+                    </columns>
+                     <HBox.margin>
+                        <Insets top="20.0" />
+                     </HBox.margin>
+                  </TableView>
+               </children></HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label styleClass="small-title" text="多间优惠：" />
+                  <Label fx:id="multiRooms" alignment="TOP_LEFT" prefHeight="60.0" prefWidth="419.0" styleClass="text-content" text="Label">
+                     <HBox.margin>
+                        <Insets top="40.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Button fx:id="modifyMulti" alignment="BOTTOM_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="45.0" styleClass="modify" text="修改">
+                     <HBox.margin>
+                        <Insets left="10.0" top="40.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="sendMulti" mnemonicParsing="false" styleClass="save" text="发布">
+                     <HBox.margin>
+                        <Insets left="20.0" top="40.0" />
+                     </HBox.margin>
+                  </Button>
+               </children></HBox>
+         </children>
+      </VBox>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="21.0" layoutX="47.0" layoutY="140.0" stroke="BLACK" strokeType="INSIDE" styleClass="split-line" width="662.0" />
+   </children>
+</Pane>

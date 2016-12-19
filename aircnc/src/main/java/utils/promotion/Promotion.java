@@ -22,7 +22,7 @@ public class Promotion {
 	}
 
 	public String description() {
-		return trigger.when() + applier.how();
+		return trigger.when() + " " + applier.how();
 	}
 
 	@Override

@@ -1,9 +1,7 @@
 package data.dao.impl.query;
 
 import static data.hibernate.Hibernator.execute;
-import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.illegalArgEx;
-import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
 import java.util.HashSet;
 import java.util.List;
@@ -18,24 +16,8 @@ import po.promotion.PromotionPo;
 import po.promotion.WebsitePromotionPo;
 import utils.info.hotel.HotelInfoTemplate;
 
-public class PromotionQueryDaoImpl implements PromotionQueryDao {
-	/* Singleton */
-	private static PromotionQueryDaoImpl instance;
-
-	public static PromotionQueryDaoImpl launch() {
-		if (instance != null)
-			throw duplicateSingletonEx();
-
-		return instance = new PromotionQueryDaoImpl();
-	}
-
-	public static PromotionQueryDaoImpl getInstance() {
-		if (instance == null)
-			throw singletonNotExistsEx();
-
-		return instance;
-	}
-	/* Singleton */
+public enum PromotionQueryDaoImpl implements PromotionQueryDao {
+	INSTANCE;
 
 	@Override
 	public Set<PromotionPo> getHotelAllPromotions(int hotelId) {
@@ -56,7 +38,7 @@ public class PromotionQueryDaoImpl implements PromotionQueryDao {
 	@Override
 	public Set<PromotionPo> getWebsiteAllPromotions() {
 		return execute(session -> {
-			String hql = "from PromotionPo";
+			String hql = "from WebsitePromotionPo";
 
 			@SuppressWarnings("unchecked")
 			List<WebsitePromotionPo> list = (List<WebsitePromotionPo>) session.createQuery(hql).list();

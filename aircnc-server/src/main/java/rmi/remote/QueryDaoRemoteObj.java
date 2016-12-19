@@ -1,5 +1,7 @@
 package rmi.remote;
 
+import static utils.exception.StaticExceptionFactory.*;
+
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
@@ -19,27 +21,31 @@ public class QueryDaoRemoteObj extends UnicastRemoteObject implements RemoteCred
 	/**
 	 * Singleton instance
 	 */
-	private static QueryDaoRemoteObj obj;
+	private static QueryDaoRemoteObj instance;
 
 	public static final void launch() throws RemoteException {
-		if (obj != null)
-			throw new IllegalStateException(
-					"QueryDaoRemoteObj.launch - MemberDaoRemoteObj instance has existed already");
+		if (instance != null)
+			throw duplicateSingletonEx();
 
 		final CreditQueryDao creditQuery = CreditDaoImpl.INSTANCE;
 
-		obj = new QueryDaoRemoteObj(creditQuery);
+		instance = new QueryDaoRemoteObj(creditQuery);
 
-		RemoteHelper.bindRemoteObj("RemoteQueryDao", obj);
+		RemoteHelper.bindRemoteObj("RemoteQueryDao", instance);
 	}
-	/* Singleton */
 
-	private CreditQueryDao creditQuery;
-
-	public QueryDaoRemoteObj(CreditQueryDao creditQuery) throws RemoteException {
+	private QueryDaoRemoteObj(CreditQueryDao creditQuery) throws RemoteException {
 		super();
 		this.creditQuery = creditQuery;
 	}
+	/* Singleton */
+
+	/*
+	 ********************************
+	 ******* CreditQueryDao*******
+	 ********************************
+	 */
+	private CreditQueryDao creditQuery;
 
 	@Override
 	public List<CreditChangePo> searchByMemberId(String memberId) throws RemoteException {

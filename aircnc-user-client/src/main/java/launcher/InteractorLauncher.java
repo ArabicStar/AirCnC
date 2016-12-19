@@ -16,6 +16,18 @@ public final class InteractorLauncher {
 		MemberInfoCourier.launch(proxy, proxy);
 	}
 
+	private static void launchHotelInteractor() {
+
+	}
+
+	private static void launchManageInteractor() {
+
+	}
+
+	private static void launchMarketInteractor() {
+
+	}
+
 	private InteractorLauncher() {
 	}
 }

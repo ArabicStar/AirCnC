@@ -3,6 +3,8 @@ package presentation.manage.manager.impl;
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import presentation.manage.manager.MarketManageInfoManager;
 import presentation.manage.model.MarketManageModel;
 import vo.market.MarketVo;
@@ -12,7 +14,8 @@ public class MarketManageInfoManagerImpl implements MarketManageInfoManager{
 	private static MarketManageInfoManager instance;
 	
 	private MarketVo vo;
-	private MarketManageModel marketInfo;
+	private ObservableList<MarketManageModel> marketInfo;
+	
 	
 	public static final MarketManageInfoManager launch() {
 		if (instance != null)
@@ -36,13 +39,28 @@ public class MarketManageInfoManagerImpl implements MarketManageInfoManager{
 		}
 		return false;
 	}
+	
+	public static boolean isLaunched(){
+		if(instance == null)
+			return false;
+		else
+			return true;
+	}
 
 	/**
 	 * wrap into the HotelManageModel
 	 */
 	@Override
-	public MarketManageModel getMarketInfo() {
-		marketInfo = new MarketManageModel(vo);
+	public ObservableList<MarketManageModel> getMarketInfoList() {
+		marketInfo = FXCollections.observableArrayList();
+		marketInfo.add(new MarketManageModel(vo));
 		return marketInfo;
+	}
+
+	@Override
+	public MarketManageModel getMarketInfo() {
+		if(vo == null)
+			return null;
+		return new MarketManageModel(vo);
 	}
 }

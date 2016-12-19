@@ -10,7 +10,7 @@
 			<generator class="assigned" />
 		</id>
 		<!-- name -->
-		<property column="name" generated="never" lazy="false" name="encryptName"
+		<property column="name" generated="never" lazy="false" name="name"
 			type="string" />
 		<!-- credit -->
 		<property column="credit" generated="never" lazy="false"
@@ -20,7 +20,8 @@
 			type="integer" />
 		<!-- association table -->
 		<many-to-one column="contact_id" name="contact" unique="true"
-			lazy="false" cascade="all" fetch="select" class="po.member.ContactPo" />
+			lazy="false" cascade="all" fetch="select" not-null="true"
+			class="po.member.ContactPo" />
 	</class>
 	<!-- Subclass saved in joined table PersonalMemberPo subclass -->
 	<joined-subclass extends="po.member.MemberPo" name="po.member.PersonalMemberPo"
@@ -38,6 +39,6 @@
 		<key column="e_id" />
 		<!-- enterprise -->
 		<property column="enterprise" generated="never" lazy="false"
-			name="encryptEnterprise" not-null="true" type="string" />
+			name="enterprise" not-null="true" type="string" />
 	</joined-subclass>
 </hibernate-mapping>

@@ -12,7 +12,7 @@ import utils.logger.Log;
 public enum RemoteHelper {
 	INSTANCE;
 	private static final int PORT = 8888;
-	private static final StringBuilder sb = new StringBuilder("rmi://localhost:").append(PORT).append("/");
+	private static final String URL_HEADER = new StringBuilder("rmi://localhost:").append(PORT).append("/").toString();
 	static {
 		try {
 			LocateRegistry.createRegistry(PORT);
@@ -24,7 +24,7 @@ public enum RemoteHelper {
 	}
 
 	public static final void bindRemoteObj(String objName, UnicastRemoteObject obj) {
-		String url = sb.append(objName).toString();
+		String url = new StringBuilder(URL_HEADER).append(objName).toString();
 		try {
 			Naming.bind(url, obj);
 		} catch (MalformedURLException | RemoteException | AlreadyBoundException e) {

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+"http://www.hibernate.org/dtd/hibernate-mapping">
 <!-- Generated 2016-11-25 14:49:59 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
 	<class name="po.member.credit.CreditChangePo" table="credit">
@@ -13,8 +13,14 @@
 		<!-- time stamp -->
 		<property name="timeInstant" column="timestamp" type="java.time.Instant" />
 
-		<!-- type string -->
-		<property name="typeString" column="type" type="string" />
+		<!-- type -->
+		<property name="actionType">
+			<column name="type" length="20" not-null="true" />
+			<type name="org.hibernate.type.EnumType">
+				<param name="enumClass">utils.info.member.credit.ActionType</param>
+				<param name="type">12</param>
+			</type>
+		</property>
 
 		<!-- money -->
 		<property name="money" column="money" type="integer" />
