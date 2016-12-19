@@ -11,7 +11,7 @@ public class DataPrepareHelper {
 	/* testData */
 	/* testData */
 
-	private static final PromotionQueryDao queryDao = PromotionQueryDaoImpl.launch();
+	//private static final PromotionQueryDao queryDao = PromotionQueryDaoImpl.launch();
 	// private static final WebsitePromotionDao webPromotionDao =
 	// WebsitePromotionDaoImpl.launch();
 	// public static final WebsitePromotionManagementService
