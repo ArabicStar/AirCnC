@@ -68,7 +68,16 @@ public class CommentVoBuilder extends CommentInfoBuilder {
 		this.memberName = memberName;
 		return this;
 	}
+	
+	public CommentVoBuilder setGrade(int grade) {
+		this.grade = grade;
+		return this;
+	}
 
+	public CommentVoBuilder setOrderId(String orderId) {
+		this.orderId = orderId;
+		return this;
+	}
 	@Override
 	public CommentVo getCommentInfo() {
 		if (!isReady()) {
@@ -76,7 +85,7 @@ public class CommentVoBuilder extends CommentInfoBuilder {
 		} 
 		return new CommentVo(grade).setHotelId(hotelId).setMemberId(memberId).setCheckInTime(checkInTime)
 				.setContent(content).setCommentTime(commentTime).setMemberLevel(memberLevel)
-				.setMemberName(memberName).setOrderId(orderId);
+				.setMemberName(memberName).setOrderId(orderId).setGrade(grade);
 
 	}
 

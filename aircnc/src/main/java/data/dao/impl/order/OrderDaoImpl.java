@@ -21,8 +21,9 @@ public enum OrderDaoImpl implements OrderDao, OrderQueryDao {
 	INSTANCE;
 
 	public OrderPo getOrder(String orderId) {
-		if (!OrderPo.checkOrderId(orderId))
+		if (!OrderPo.checkOrderId(orderId)) {
 			throw illegalArgEx("Order Id String");
+		}
 
 		return execute(session -> {
 			return (OrderPo) session.get(OrderPo.class, orderId);
@@ -88,9 +89,9 @@ public enum OrderDaoImpl implements OrderDao, OrderQueryDao {
 
 	@Override
 	public List<OrderPo> searchByMember(String memberId) {
-		if (!MemberInfoTemplate.checkID(memberId))
+		if (!MemberInfoTemplate.checkID(memberId)) {
 			throw illegalArgEx("Member id");
-
+		}
 		return execute(session -> {
 			final Criteria criteria = session.createCriteria(OrderPo.class);
 			final Criterion memIdCond = Restrictions.eq("userId", new Integer(memberId));

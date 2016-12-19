@@ -1,12 +1,18 @@
 package data.dao.impl.order;
 
+import static data.hibernate.Hibernator.execute;
+import static utils.exception.StaticExceptionFactory.illegalArgEx;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import data.dao.order.CommentDao;
 import data.dao.query.CommentQueryDao;
+import po.order.comment.CommentPo;
+import utils.info.order.OrderInfoTemplate;
 import vo.order.comment.CommentVo;
 
-public enum CommentDaoImpl implements CommentQueryDao{
+public enum CommentDaoImpl implements CommentQueryDao, CommentDao{
 	INSTANCE;
 	
 	/**
@@ -22,6 +28,42 @@ public enum CommentDaoImpl implements CommentQueryDao{
 		// TODO Auto-generated method stub
 		List<CommentVo> list = new ArrayList<>();
 		return list;
+	}
+
+	@Override
+	public boolean addComment(CommentPo commentPo) {
+		if (commentPo == null) {
+			return false;
+		}
+		return execute(session -> {
+			Boolean flag = Boolean.FALSE;
+			if (flag = Boolean.valueOf(session.get(CommentPo.class, commentPo.getOrderId()) == null)) {
+				session.save(commentPo);
+			}
+			return flag;
+		});
+	}
+	
+	@Override
+	public boolean deleteComment(CommentPo commentPo) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public CommentPo getCommentByOrderId(String orderId) {
+		if(!OrderInfoTemplate.checkOrderId(orderId)) {
+			throw illegalArgEx("CommentPo orderId");
+		}
+		return execute(session -> {
+			return (CommentPo) session.get(CommentPo.class, orderId);
+		});
+	}
+
+	@Override
+	public boolean updateComment(CommentPo commentPo) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

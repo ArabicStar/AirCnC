@@ -45,6 +45,11 @@ public class CommentPo extends CommentInfo {
 		this.orderId = orderId;
 		return this;
 	}
+	
+	CommentPo setGrade(int grade) {
+		this.grade = grade;
+		return this;
+	}
 
 	public void show() {
 		System.out.println(this.getHotelId());
@@ -56,7 +61,8 @@ public class CommentPo extends CommentInfo {
 
 	public CommentVo toCommentVo() {
 		CommentVo vo = new CommentVoBuilder().setCheckInTime(checkInTime).setCommentTime(commentTime)
-				.setContent(content).setHotelID(hotelId).setMemberID(memberId).getCommentInfo();
+				.setContent(content).setHotelID(hotelId).setMemberID(memberId)
+				.setGrade(grade).setOrderId(orderId).getCommentInfo();
 		return vo;
 	}
 

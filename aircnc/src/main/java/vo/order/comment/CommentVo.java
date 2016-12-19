@@ -61,6 +61,11 @@ public class CommentVo extends CommentInfo{
 		return this;
 	}
 	
+	public CommentVo setGrade(int grade) {
+		this.grade = grade;
+		return this;
+	}
+	
 	// TODO 实时计算
 	public int getMemberLevel() {
 		return memberLevel;

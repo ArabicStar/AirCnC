@@ -1,14 +1,14 @@
 package aircnc.test.po;
 
-import static org.junit.Assert.assertEquals;
-
 import java.time.LocalDate;
+import static org.junit.Assert.assertEquals;
 import java.time.LocalDateTime;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import data.dao.impl.order.CommentDaoImpl;
+import data.dao.order.CommentDao;
 import data.dao.query.CommentQueryDao;
 import po.order.comment.CommentPo;
 import po.order.comment.CommentPoBuilder;
@@ -16,10 +16,12 @@ import vo.order.comment.CommentVo;
 
 public class CommentPoTest {
 	CommentQueryDao commentQueryDao;
+	CommentDao commentDao;
 	
 	@Before
 	public void startUp() {
 		commentQueryDao = CommentDaoImpl.INSTANCE;
+		commentDao = CommentDaoImpl.INSTANCE;
 	}
 	
 	public void showInfo(CommentVo vo) {
@@ -48,15 +50,23 @@ public class CommentPoTest {
 				.setCommentTime(LocalDateTime.now()).setContent("嘻嘻哈哈")
 				.setHotelID(10000000).setMemberID("12456743").getCommentInfo();
 		showInfo(po);
-		showInfo(po.toCommentVo());
+//		showInfo(po.toCommentVo());
 	}
 	
 	@Test
 	public void testAddComment() {
-		
-		
-		assertEquals(1, 1);
+		CommentPo po = new CommentPoBuilder().setCheckInTime(LocalDate.now())
+				.setCommentTime(LocalDateTime.now()).setContent("嘻嘻哈哈").setOrderId("12340921")
+				.setHotelID(10000000).setMemberID("12456743").setGrade(4).
+				getCommentInfo();
+		commentDao.addComment(po);
 	}
 	
+	
+	@Test
+	public void testGetCommentByOrderId() {
+		CommentPo po = commentDao.getCommentByOrderId("12340921");
+		assertEquals("12456743", po.getMemberId());
+	}
 	
 }

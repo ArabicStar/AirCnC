@@ -4,18 +4,18 @@
 <!-- Generated 2016-11-22 16:22:46 by Hibernate Tools 3.5.0.Final -->
 <!-- CommentPo mapping xml -->
 <hibernate-mapping>
-	<class name="po.hotel.CommentPo" table="rooms">
+	<class name="po.order.comment.CommentPo" table="comments">
 
 		<!-- key column, auto generated -->
-		<id name="cid" column="cid" type="integer">
-			<generator class="native" />
+		<id name="orderId" column="orderId" type="string">
+			<generator class="assigned" />
 		</id>
 
 		<!-- hotelId -->
 		<property column="hid" name="hotelId" type="integer" />
 
 		<!-- memberId -->
-		<property column="mid" name="memberId" type="integer" />
+		<property column="mid" name="memberId" type="string" />
 
 		<!-- grade -->
 		<property column="grade" name="grade" type="integer"
@@ -25,12 +25,13 @@
 		<property column="content" name="content" type="string" />
 
 		<!-- checkInTime -->
-		<property column="checktime" name="checkInTime" type="date" />
+		<property column="checktime" name="checkInTime" type="java.time.LocalDate" />
 
 		<!-- commentTime -->
-		<property column="comtime" name="commentTime" generated="insert"
-			not-null="true">
+		<property name="commentTime" generated="insert"
+			type="java.time.LocalDateTime" not-null="true">
 			<column name="comtime" sql-type="timestamp" default="CURRENT_TIMESTAMP" />
 		</property>
+
 	</class>
 </hibernate-mapping>

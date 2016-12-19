@@ -7,7 +7,7 @@
 	<class name="po.order.comment.CommentPo" table="comments">
 
 		<!-- key column, auto generated -->
-		<id name="orderId" column="orderId" type="integer">
+		<id name="orderId" column="orderId" type="string">
 			<generator class="assigned" />
 		</id>
 
@@ -15,7 +15,7 @@
 		<property column="hid" name="hotelId" type="integer" />
 
 		<!-- memberId -->
-		<property column="mid" name="memberId" type="integer" />
+		<property column="mid" name="memberId" type="string" />
 
 		<!-- grade -->
 		<property column="grade" name="grade" type="integer"

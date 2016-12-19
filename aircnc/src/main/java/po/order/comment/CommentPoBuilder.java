@@ -59,6 +59,16 @@ public class CommentPoBuilder extends CommentInfoBuilder{
 		return this;
 	}
 	
+	public CommentPoBuilder setGrade(int grade){
+		this.grade = grade;
+		return this;
+	}
+	
+	public CommentPoBuilder setOrderId(String orderId) {
+		this.orderId = orderId;
+		return this;
+	}
+	
 	
 	@Override
 	public CommentPo getCommentInfo() {
@@ -66,7 +76,8 @@ public class CommentPoBuilder extends CommentInfoBuilder{
 			return new CommentPo(0);
 		}
 		CommentPo po = new CommentPo(grade).setHotelId(hotelId).setMemberId(memberId).
-		setCheckInTime(checkInTime).setCommentTime(commentTime).setContent(content).setOrderId(orderId);
+		setCheckInTime(checkInTime).setCommentTime(commentTime).setContent(content).
+		setOrderId(orderId).setGrade(grade);
 		return po;
 	}
 
