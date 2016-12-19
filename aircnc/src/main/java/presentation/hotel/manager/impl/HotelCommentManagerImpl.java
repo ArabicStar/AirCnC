@@ -68,12 +68,14 @@ public class HotelCommentManagerImpl implements HotelCommentManager{
 	public void test(){
 		comments = new ArrayList<CommentVo>();
 		CommentVoBuilder builder = new CommentVoBuilder().setMemberID("38492072").setContent("环境极差，找了几个同学一起来晚，半夜还撞鬼了。").
-				setCheckInTime(LocalDate.of(2016, 5, 30)).setCommentTime(LocalDateTime.now());
+				setCheckInTime(LocalDate.of(2016, 5, 30)).setCommentTime(LocalDateTime.now()).setHotelID(4)
+				.setMemberName("小手表").setMemberLevel(3).setGrade(3);
 		comments.add(builder.getCommentInfo());
 		builder.setContent("这边真好玩，就当我完了一晚上鬼屋了，还特别便宜，隔壁有几个男生叫了一晚上，胆子真小啊。").
-			setCheckInTime(LocalDate.of(2016, 8, 20)).setMemberID("47263544");
+			setCheckInTime(LocalDate.of(2016, 8, 20)).setMemberID("47263544").setMemberLevel(5).setGrade(5);
 		comments.add(builder.getCommentInfo());
 		builder.setContent("最近的孩子怎么这么喧嚣，大晚上不睡觉在那边瞎嚷嚷，唉，人老了就只想早睡觉啊。").setMemberID("28785733");
+		comments.add(builder.getCommentInfo());
 		comments.add(builder.getCommentInfo());
 	}
 	

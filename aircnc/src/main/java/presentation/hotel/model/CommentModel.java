@@ -1,11 +1,13 @@
 package presentation.hotel.model;
 
+import java.time.LocalDateTime;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import vo.order.comment.CommentVo;
 
 public class CommentModel {
-	private final StringProperty memberId;
+	private final StringProperty memberName;
 	private final StringProperty level;
 	private final StringProperty checkInTime;
 	private final StringProperty grade;
@@ -17,10 +19,10 @@ public class CommentModel {
 	}
 	
 	public CommentModel(CommentVo vo){
-		this.memberId = new SimpleStringProperty(vo.getMemberId());
+		this.memberName = new SimpleStringProperty(vo.getMemberName());
 		this.level = new SimpleStringProperty("Lv"+Integer.toString(vo.getMemberLevel()));
 		this.checkInTime = new SimpleStringProperty("于"+vo.getCheckInTime().toString()+"入住");
-		this.commentTime = new SimpleStringProperty(vo.getCommentTime().toString());
+		this.commentTime = new SimpleStringProperty(transformTime(vo.getCommentTime()));
 		this.grade = new SimpleStringProperty(Integer.toString(vo.getGrade()));
 		this.content = new SimpleStringProperty("    "+vo.getContent());
 	}
@@ -37,16 +39,16 @@ public class CommentModel {
         return grade;
     }
     
-    public String getMemberId() {
-        return memberId.get();
+    public String getMemberName() {
+        return memberName.get();
     }
 
-    public void setMemberId(String newMemberId) {
-        this.memberId.set(newMemberId);
+    public void setMemberName(String newMemberName) {
+        this.memberName.set(newMemberName);
     }
 
-    public StringProperty memberIdProperty() {
-        return memberId;
+    public StringProperty memberNameProperty() {
+        return memberName;
     }
     
     public String getCheckInTime() {
@@ -96,6 +98,22 @@ public class CommentModel {
     public StringProperty levelProperty() {
         return level;
     }
+    
+    /**
+	 * transform the local date time (yyyy/mm/dd HH:mm) to the new format
+	 * (yyyy-mm-dd)
+	 * 
+	 * @param date
+	 * @return new date format(String)
+	 */
+
+	private static String transformTime(LocalDateTime date) {
+
+		String result = date.getYear() + "-" + date.getMonthValue() + "-" + date.getDayOfMonth()
+		+"  "+date.getHour()+":"+date.getMinute()+":"+date.getSecond();
+
+		return result;
+	}
 	
 
 }

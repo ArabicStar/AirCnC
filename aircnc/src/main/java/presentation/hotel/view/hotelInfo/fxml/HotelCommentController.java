@@ -25,7 +25,7 @@ public class HotelCommentController implements Initializable{
 	private Label content;
 	
 	@FXML
-	private Label memberId;
+	private Label memberName;
 	
 	@FXML
 	private Label grade;
@@ -34,6 +34,8 @@ public class HotelCommentController implements Initializable{
 	private ImageView portrait;
 	
 	private CommentModel model;
+	
+	private HotelInfoThreeController controller;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -55,7 +57,7 @@ public class HotelCommentController implements Initializable{
 		commentTime.setText(model.getCommentTime());
 		content.setText(model.getContent());
 		grade.setText(model.getGrade());
-		memberId.setText(String.valueOf(model.getMemberId()));
+		memberName.setText(String.valueOf(model.getMemberName()));
 
 	}
 	
@@ -65,5 +67,13 @@ public class HotelCommentController implements Initializable{
 	 */
 	public void setCommentModel(CommentModel model){
 		this.model = model;
+	}
+	
+	/**
+	 * set the main controller
+	 * @param controller
+	 */
+	public void setController(HotelInfoThreeController controller){
+		this.controller = controller;
 	}
 }

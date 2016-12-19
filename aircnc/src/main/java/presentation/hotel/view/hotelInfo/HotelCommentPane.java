@@ -8,10 +8,11 @@ import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import presentation.hotel.model.CommentModel;
+import presentation.hotel.view.hotelInfo.fxml.HotelCommentController;
 
 public class HotelCommentPane {
-	private Pane infoThreeLayout;
-//	private MemberSearchHotelGeneralController controller;
+	private Pane layout;
+	private HotelCommentController controller;
 	private CommentModel model;
 
 	public HotelCommentPane(CommentModel model){
@@ -27,20 +28,20 @@ public class HotelCommentPane {
             loader.setLocation(location);
             loader.setBuilderFactory(new JavaFXBuilderFactory());
             loader.load();
-//            controller = (MemberSearchHotelGeneralController)loader.getController();
-//            controller.setHotelModel(model);
-//            searchLayout = loader.getRoot();
+            controller = (HotelCommentController)loader.getController();
+            controller.setCommentModel(model);
+            layout = loader.getRoot();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-//    public MemberSearchHotelGeneralController getController(){
-//    	return this.controller;
-//    }
+    public HotelCommentController getController(){
+    	return this.controller;
+    }
     
     public Node getPane(){
-    	return infoThreeLayout;
+    	return layout;
     }
 }

@@ -8,16 +8,18 @@ import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.layout.VBox;
 import presentation.hotel.manager.HotelCommentManager;
 import presentation.hotel.manager.impl.HotelCommentManagerImpl;
 import presentation.hotel.model.CommentModel;
 import presentation.hotel.view.hotelInfo.HotelCommentPane;
 import presentation.hotel.view.hotelInfo.HotelInfoController;
-import presentation.member.model.SearchHotelsModel;
-import presentation.member.view.searchhotel.MemberSearchHotelGeneralPane;
 
 public class HotelInfoThreeController implements Initializable{
 	private HotelInfoController controller;
+	
+	@FXML
+	private VBox comments;
 	
 	private HotelCommentManager manager;
 	private ObservableList<CommentModel> list;
@@ -53,11 +55,12 @@ public class HotelInfoThreeController implements Initializable{
 	
 	public void initComment(){
 		list = manager.getCommentList();
+//		System.out.println(list.get(0).getContent());
 		Iterator<CommentModel> it = list.iterator();
 		while(it.hasNext()){
 			HotelCommentPane newPane = new HotelCommentPane(it.next());
-//			searchedResult.getChildren().add(newPane.getPane());
-//			newPane.getController().setController(this);
+			comments.getChildren().add(newPane.getPane());
+			newPane.getController().setController(this);
 		}
 		
 	}

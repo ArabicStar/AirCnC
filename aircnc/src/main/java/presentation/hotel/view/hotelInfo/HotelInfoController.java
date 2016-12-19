@@ -35,6 +35,13 @@ public class HotelInfoController {
 		twoPane.getController().setInfoMainController(this);	
 	}
 	
+	public void addHotelInfoThreePane() {
+		clearContent();
+		threePane = new HotelInfoThreePane();
+		infoMainPane.getBorderPane().setCenter(threePane.getPane());
+		threePane.getController().setInfoMainController(this);	
+	}
+	
 	
 	
 	/**

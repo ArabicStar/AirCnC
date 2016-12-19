@@ -45,9 +45,9 @@ public enum HotelDaoImpl implements HotelDao, HotelQueryDao {
 		return execute(session -> {
 			Boolean flag = Boolean.FALSE;
 
-			HotelPo mem = session.get(HotelPo.class, po.getId());
-			if (flag = Boolean.valueOf(mem != null))
-				HotelPoBuilder.updatePo(po, mem);
+			HotelPo hotel = session.get(HotelPo.class, po.getId());
+			if (flag = Boolean.valueOf(hotel != null))
+				HotelPoBuilder.updatePo(po, hotel);
 
 			return flag;
 		});

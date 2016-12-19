@@ -5,20 +5,8 @@
 }
 
 
-.info-index{
-	-fx-text-fill: #a4a4a4;
-	-fx-font-size: 24 px;
-}
-
-.info-content{
-	-fx-font-size: 20 px;
-}
-
-.modify{
-	-fx-font-size: 30px;
-	-fx-border-color:#575793;
-	-fx-text-fill: #575793;
-	-fx-background-color:transparent;
+.scollpane{
+	-fx-background-color:#ffffff;
 }
 
 .page{
