@@ -29,8 +29,11 @@ public class TextAreaDialog extends GridPane {
 	Dialog<String> dialog;
 	private MakeOrderAccessor accessor;
 	public TextAreaDialog(String content, HotelVo hotelVo) {
-//		MakeOrderAccessorImpl.launch();
-		accessor = MakeOrderAccessorImpl.getIntance();
+		if(!MakeOrderAccessorImpl.isLaunch()) {
+			accessor = MakeOrderAccessorImpl.launch();
+		} else {
+			accessor = MakeOrderAccessorImpl.getIntance();
+		}
 		dialog = new Dialog<String>();
 		dialog.initStyle(StageStyle.UNDECORATED);
 		dialog.setHeaderText(content);

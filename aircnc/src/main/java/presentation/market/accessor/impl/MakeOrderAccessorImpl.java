@@ -26,16 +26,22 @@ public class MakeOrderAccessorImpl implements MakeOrderAccessor {
 
 	private OrderVo orderVo;
 
+	public static final MakeOrderAccessor launch() {
+		if(instance != null) {
+			throw duplicateSingletonEx();
+		}
+		return instance = new MakeOrderAccessorImpl();
+	}
 
 
 	public static final MakeOrderAccessor getIntance() {
 		if (instance == null) {
-			instance = new MakeOrderAccessorImpl();
+			throw singletonNotExistsEx();
 		}
 		return instance;
 	}
 
-	public boolean isLaunch() {
+	public static boolean isLaunch() {
 		if (instance == null) {
 			return false;
 		} else {
