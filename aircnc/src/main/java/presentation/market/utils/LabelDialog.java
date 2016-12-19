@@ -42,11 +42,17 @@ public class LabelDialog extends GridPane {
 			labels[i].setStyle(fontOfName);
 		}
 
-		String[] labelProperties = { orderModel.getOrderVo().getUserName(), orderModel.getHotelName(),
-				orderModel.getOrderVo().getOrderId(), orderModel.getState() + " (" + orderModel.isReviewed() + ")",
-				orderModel.getCheckInTime(), orderModel.getLeaveTime(), orderModel.getOrderVo().getRoomType(),
-				String.valueOf(orderModel.getOrderVo().getRoomNumber()),
-				String.valueOf(orderModel.getOrderVo().getPeopleNumber()), orderModel.hasChildren(),
+		String[] labelProperties = { 
+				orderModel.getHotelName(), 
+				orderModel.getUserName(),
+				orderModel.getOrderId(), 
+				orderModel.getState() + " (" + orderModel.isReviewed() + ")",
+				orderModel.getCheckInTime(), 
+				orderModel.getLeaveTime(), 
+				orderModel.getRoomType(),
+				String.valueOf(orderModel.getRoomNumber()),
+				String.valueOf(orderModel.getPeopleNumber()),
+				orderModel.hasChildren(),
 				orderModel.getTotalPrice() };
 		String fontOfProperties = "-fx-text-fill: #585993; -fx-font-size: 16pt;";
 		Label[] properties = new Label[numberOfDetails];

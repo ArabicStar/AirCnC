@@ -8,6 +8,7 @@ import java.util.List;
 
 import data.dao.order.CommentDao;
 import data.dao.query.CommentQueryDao;
+import po.order.OrderPo;
 import po.order.comment.CommentPo;
 import utils.info.order.OrderInfoTemplate;
 import vo.order.comment.CommentVo;
@@ -35,6 +36,10 @@ public enum CommentDaoImpl implements CommentQueryDao, CommentDao{
 		if (commentPo == null) {
 			return false;
 		}
+		if(!OrderInfoTemplate.checkOrderId(commentPo.getOrderId())) {
+			System.err.println("订单号长度应该大于等于16位，且长度为偶数");
+			throw illegalArgEx("CommentPo orderId");
+		}
 		return execute(session -> {
 			Boolean flag = Boolean.FALSE;
 			if (flag = Boolean.valueOf(session.get(CommentPo.class, commentPo.getOrderId()) == null)) {
@@ -53,6 +58,7 @@ public enum CommentDaoImpl implements CommentQueryDao, CommentDao{
 	@Override
 	public CommentPo getCommentByOrderId(String orderId) {
 		if(!OrderInfoTemplate.checkOrderId(orderId)) {
+			System.err.println("订单号长度应该大于等于16位，且长度为偶数");
 			throw illegalArgEx("CommentPo orderId");
 		}
 		return execute(session -> {
@@ -62,8 +68,22 @@ public enum CommentDaoImpl implements CommentQueryDao, CommentDao{
 
 	@Override
 	public boolean updateComment(CommentPo commentPo) {
-		// TODO Auto-generated method stub
-		return false;
+		if (commentPo == null) {
+			return false;
+		}
+		if(!OrderInfoTemplate.checkOrderId(commentPo.getOrderId())) {
+			System.err.println("订单号长度应该大于等于16位，且长度为偶数");
+			throw illegalArgEx("CommentPo orderId");
+		}
+		
+		return execute(session -> {
+			Boolean flag = Boolean.FALSE;
+
+			if (flag = Boolean.valueOf(session.get(OrderPo.class, commentPo.getOrderId()) == null)) {
+				session.update(commentPo);
+			}
+			return flag;
+		});
 	}
 
 }

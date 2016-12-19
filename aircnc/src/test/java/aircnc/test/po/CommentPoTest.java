@@ -1,7 +1,7 @@
 package aircnc.test.po;
 
 import java.time.LocalDate;
-import static org.junit.Assert.assertEquals;
+//import static org.junit.Assert.assertEquals;
 import java.time.LocalDateTime;
 
 import org.junit.Before;
@@ -56,7 +56,7 @@ public class CommentPoTest {
 	@Test
 	public void testAddComment() {
 		CommentPo po = new CommentPoBuilder().setCheckInTime(LocalDate.now())
-				.setCommentTime(LocalDateTime.now()).setContent("嘻嘻哈哈").setOrderId("12340921")
+				.setCommentTime(LocalDateTime.now()).setContent("嘻嘻哈哈").setOrderId("2016121900010001")
 				.setHotelID(10000000).setMemberID("12456743").setGrade(4).
 				getCommentInfo();
 		commentDao.addComment(po);
@@ -64,9 +64,23 @@ public class CommentPoTest {
 	
 	
 	@Test
-	public void testGetCommentByOrderId() {
-		CommentPo po = commentDao.getCommentByOrderId("12340921");
-		assertEquals("12456743", po.getMemberId());
+	public void testUpdateComment() {
+		CommentPo po = new CommentPoBuilder().setCheckInTime(LocalDate.now())
+				.setOrderId("2016121900010001")
+				.setHotelID(10000000).setMemberID("52256743").
+				getCommentInfo();
+		commentDao.addComment(po);
+		CommentPo po2 = new CommentPoBuilder().setCheckInTime(LocalDate.now())
+				.setCommentTime(LocalDateTime.now()).setContent("2454+4+48+8+956+哈哈哈哈哈").setOrderId("2016121900010001")
+				.setHotelID(10000000).setMemberID("12456743").setGrade(5).setCommentTime(LocalDateTime.now())
+				.getCommentInfo();
+		commentDao.updateComment(po2);
 	}
+	
+//	@Test
+//	public void testGetCommentByOrderId() {
+//		CommentPo po = commentDao.getCommentByOrderId("2016121900010001");
+//		assertEquals("12456743", po.getMemberId());
+//	}
 	
 }

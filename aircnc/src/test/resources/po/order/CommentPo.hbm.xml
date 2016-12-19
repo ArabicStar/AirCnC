@@ -12,10 +12,10 @@
 		</id>
 
 		<!-- hotelId -->
-		<property column="hid" name="hotelId" type="integer" />
+		<property column="hid" name="hotelId" type="integer" update="false"/>
 
 		<!-- memberId -->
-		<property column="mid" name="memberId" type="string" />
+		<property column="mid" name="memberId" type="string" update="false"/>
 
 		<!-- grade -->
 		<property column="grade" name="grade" type="integer"
@@ -25,7 +25,7 @@
 		<property column="content" name="content" type="string" />
 
 		<!-- checkInTime -->
-		<property column="checktime" name="checkInTime" type="java.time.LocalDate" />
+		<property column="checktime" name="checkInTime" type="java.time.LocalDate" update="false"/>
 
 		<!-- commentTime -->
 		<property name="commentTime" generated="insert"

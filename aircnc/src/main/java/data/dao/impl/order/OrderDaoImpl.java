@@ -22,6 +22,7 @@ public enum OrderDaoImpl implements OrderDao, OrderQueryDao {
 
 	public OrderPo getOrder(String orderId) {
 		if (!OrderPo.checkOrderId(orderId)) {
+			System.err.println("订单号长度应该大于等于16位，且长度为偶数");
 			throw illegalArgEx("Order Id String");
 		}
 

@@ -22,10 +22,14 @@ public class MyOrderModel {
     private final BooleanProperty isReviewed;
 	private final int stayDays;
 	private LocalDateTime leaveTime;
-	private OrderVo orderVo;
 	private final BooleanProperty hasChildren;
-
-
+	private final StringProperty userName;
+	private final StringProperty orderId;
+	private final StringProperty hotelId;
+	private final StringProperty roomType;
+	private final StringProperty roomNumber;
+	private final StringProperty peopleNumber;
+	
 	/**
      * Default constructor.
      */
@@ -44,7 +48,6 @@ public class MyOrderModel {
      * @param operation
      */
     public MyOrderModel(OrderVo order) {
-    	this.orderVo = order;
         this.hotelName = new SimpleStringProperty(order.getHotelName());
         this.stayDays = order.getStayDays();
         this.leaveTime = order.getEntryTime().plusDays(stayDays);
@@ -74,8 +77,12 @@ public class MyOrderModel {
         this.timeAndSum = new SimpleStringProperty(order.getStayDays()+"晚/"+order.getRoomNumber()+"间");
         this.totalPrice = new SimpleStringProperty(String.valueOf(order.getOriginalPrice())+"元");
         this.operation = new SimpleObjectProperty<OrderStatus>(order.getStatus());
-        
-        
+        this.userName = new SimpleStringProperty(order.getUserName());
+        this.orderId = new SimpleStringProperty(order.getOrderId());
+        this.hotelId = new SimpleStringProperty(Integer.toString(order.getHotelId()));
+        this.roomType = new SimpleStringProperty(order.getRoomType());
+        this.roomNumber = new SimpleStringProperty(Integer.toString(order.getRoomNumber()));
+        this.peopleNumber = new SimpleStringProperty(Integer.toString(order.getPeopleNumber()));
     }
     
     /**
@@ -91,7 +98,31 @@ public class MyOrderModel {
     	
 		return result;	
     }
+    
+    public String getPeopleNumber() {
+    	return this.peopleNumber.get();
+    }
+    
+    public String getRoomNumber() {
+    	return this.roomNumber.get();
+    }
+    
+    public String getRoomType(){
+    	return this.roomType.get();
+    }
+    
+    public String getHotelId() {
+    	return this.hotelId.get();
+    }
+    
+    public String getOrderId() {
+    	return this.orderId.get();
+    }
 
+    public String getUserName() {
+    	return this.userName.get();
+    }
+    
     public String getHotelName() {
         return hotelName.get();
     }
@@ -180,10 +211,6 @@ public class MyOrderModel {
 		return transformTime(leaveTime);
 	}
 
-    public OrderVo getOrderVo() {
-		return orderVo;
-	}
-    
     public String hasChildren() {
     	if(hasChildren.get()) {
     		return "有";
