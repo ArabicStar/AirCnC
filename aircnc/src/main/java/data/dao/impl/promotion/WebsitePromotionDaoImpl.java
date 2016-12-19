@@ -1,34 +1,12 @@
 package data.dao.impl.promotion;
 
 import static data.hibernate.Hibernator.execute;
-import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
-import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
 import data.dao.promotion.WebsitePromotionDao;
 import po.promotion.WebsitePromotionPo;
 
-public class WebsitePromotionDaoImpl implements WebsitePromotionDao {
-	/* Singleton */
-	private static WebsitePromotionDaoImpl instance;
-
-	public static WebsitePromotionDaoImpl launch() {
-		if (instance != null)
-			throw duplicateSingletonEx();
-
-		return instance = new WebsitePromotionDaoImpl();
-	}
-
-	public static WebsitePromotionDaoImpl getInstance() {
-		if (instance == null)
-			throw singletonNotExistsEx();
-
-		return instance;
-	}
-	/* Singleton */
-	
-	private WebsitePromotionDaoImpl() {
-
-	}
+public enum WebsitePromotionDaoImpl implements WebsitePromotionDao {
+	INSTANCE;
 
 	@Override
 	public boolean addWebsitePromotion(WebsitePromotionPo po) {

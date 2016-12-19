@@ -31,12 +31,14 @@ public class TriggerBuilder {
 	}
 
 	public <T> TriggerBuilder setParam(TriggerParams paramName, T value) {
-		parameters.putParameterValue(paramName.paramName(), value);
-		return this;
+		if (parameters.putParameterValue(paramName.paramName(), value))
+			return this;
+
+		throw illegalArgEx("Promotion trigger parameter: " + paramName + ": " + value);
 	}
 
 	public boolean isReady() {
-		return !parameters.isSetUp() || (wwhen == null && hwhen == null);
+		return parameters.isSetUp() && (wwhen == null ^ hwhen == null);
 	}
 
 	public Trigger build() {

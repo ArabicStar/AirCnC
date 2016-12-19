@@ -7,28 +7,8 @@ import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 import data.dao.promotion.HotelPromotionDao;
 import po.promotion.HotelPromotionPo;
 
-public final class HotelPromotionDaoImpl implements HotelPromotionDao {
-	/* Singleton */
-	private static HotelPromotionDaoImpl instance;
-
-	public static HotelPromotionDaoImpl launch() {
-		if (instance != null)
-			throw duplicateSingletonEx();
-
-		return instance = new HotelPromotionDaoImpl();
-	}
-
-	public static HotelPromotionDaoImpl getInstance() {
-		if (instance == null)
-			throw singletonNotExistsEx();
-
-		return instance;
-	}
-	/* Singleton */
-
-	private HotelPromotionDaoImpl() {
-
-	}
+public enum HotelPromotionDaoImpl implements HotelPromotionDao {
+	INSTANCE;
 
 	@Override
 	public boolean addHotelPromotion(HotelPromotionPo po) {

@@ -41,4 +41,11 @@ public interface CreditDao {
 	 *         </ul>
 	 */
 	public MemberPo changeCredit(final CreditChangePo changePo);
+
+	/**
+	 * For debug and test <br>
+	 * 
+	 * @return operation result
+	 */
+	public int deleteAllCredit();
 }

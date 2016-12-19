@@ -37,6 +37,9 @@ public class PromotionQueryDaoImpl implements PromotionQueryDao {
 	}
 	/* Singleton */
 
+	private PromotionQueryDaoImpl() {
+	}
+
 	@Override
 	public Set<PromotionPo> getHotelAllPromotions(int hotelId) {
 		if (!HotelInfoTemplate.checkID(hotelId))

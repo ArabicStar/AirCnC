@@ -11,7 +11,7 @@ public enum HotelWhen {
 	BIRTHDAY, //
 	MULTI_ROOMS, //
 	ENTERPRISE, //
-	PERIOD;//
+	DURING_PERIOD;//
 
 	private Describer describer;
 	private Criterion criterion;

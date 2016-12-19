@@ -29,7 +29,7 @@ public class WebsitePromotionInfoManager implements WebsitePromotionInfoService 
 	/* Singleton */
 
 	private WebsitePromotionInfoManager() {
-
+		
 	}
 
 	private PromotionContainer container;

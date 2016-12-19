@@ -59,16 +59,6 @@ public class CreditChangePo extends CreditChangeInfo {
 	}
 
 	/**
-	 * Set string of type.<br>
-	 * 
-	 * @param type
-	 *            type string
-	 */
-	public void setTypeString(String type) {
-		this.actionType = ActionType.valueOf(type);
-	}
-
-	/**
 	 * Set member id.<br>
 	 * 
 	 * @param memberId

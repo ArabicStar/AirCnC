@@ -54,4 +54,7 @@ public abstract class PromotionPo extends PromotionInfo {
 		return contentString;
 	}
 
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
 }

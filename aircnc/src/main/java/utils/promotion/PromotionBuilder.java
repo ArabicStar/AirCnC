@@ -46,8 +46,12 @@ public class PromotionBuilder {
 		return this;
 	}
 
+	public boolean isReady() {
+		return applier != null && trigger != null;
+	}
+
 	public Promotion build() {
-		if (applier != null && trigger != null)
+		if (!isReady())
 			throw illegalArgEx("Not set up");
 
 		return new Promotion(applier, trigger);

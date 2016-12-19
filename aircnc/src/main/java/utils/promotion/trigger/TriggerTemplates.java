@@ -14,11 +14,18 @@ import utils.promotion.trigger.hotel.HotelWhen;
 import utils.promotion.trigger.website.WebsiteWhen;
 
 public final class TriggerTemplates {
+	private static final String DURING_PERIOD = "DURING_PERIOD";
+	private static final String LEVEL = "LEVEL";
+	private static final String TRADE_AREA = "TRADE_AREA";
+	private static final String BIRTHDAY = "BIRTHDAY";
+	private static final String ENTERPRISE = "ENTERPRISE";
+	private static final String MULTI_ROOMS = "MULTI_ROOMS";
+
 	private TriggerTemplates() {
 	}
 
 	public static final ParametersList getParametersTemplate(WebsiteWhen when) {
-		switch (when) {
+		switch (when.name()) {
 		case DURING_PERIOD:
 			return periodProperties();
 		case LEVEL:
@@ -34,12 +41,22 @@ public final class TriggerTemplates {
 		ParametersList periodParams = new ParametersList();
 
 		// from date time, should after today
-		periodParams.addParameter(TriggerParams.FROM.paramName(), LocalDateTime.class,
-				t -> t.isAfter(LocalDateTime.now()) || t.isEqual(LocalDateTime.now()));
+		periodParams.addParameter(TriggerParams.FROM.paramName(), LocalDateTime.class, //
+				(list, from) -> {
+					LocalDateTime to = list.getParameterValue(TriggerParams.TO.paramName());
+
+					return (from.isAfter(LocalDateTime.now()) || from.isEqual(LocalDateTime.now()))
+							&& (to == null ? true : from.isBefore(to));
+
+				});
 
 		// to date time, should after start date time
-		periodParams.addParameter(TriggerParams.TO.paramName(), LocalDateTime.class,
-				t -> t.isAfter(periodParams.getParameterValue(TriggerParams.FROM.paramName())));
+		periodParams.addParameter(TriggerParams.TO.paramName(), LocalDateTime.class, //
+				(list, to) -> {
+					LocalDateTime from = list.getParameterValue(TriggerParams.FROM.paramName());
+
+					return (from == null ? true : to.isAfter(from)) && to.isAfter(LocalDateTime.now());
+				});
 
 		return periodParams;
 	}
@@ -47,7 +64,7 @@ public final class TriggerTemplates {
 	private static final ParametersList levelProperties() {
 		ParametersList levelParams = new ParametersList();
 
-		levelParams.addParameter(TriggerParams.LEVEL_THRESHOLD.paramName(), Integer.class, i -> i > 0);
+		levelParams.addParameter(TriggerParams.LEVEL_THRESHOLD.paramName(), Integer.class, (list, i) -> i > 0);
 
 		return levelParams;
 	}
@@ -61,7 +78,7 @@ public final class TriggerTemplates {
 	}
 
 	public static final Criterion getCritierionTemplate(WebsiteWhen when) {
-		switch (when) {
+		switch (when.name()) {
 		case DURING_PERIOD:
 			return periodCritierion();
 		case LEVEL:
@@ -79,8 +96,9 @@ public final class TriggerTemplates {
 			LocalDateTime from = paramList.getParameterValue(TriggerParams.FROM.paramName());
 			LocalDateTime to = paramList.getParameterValue(TriggerParams.TO.paramName());
 			LocalDateTime checkInTime = order.getEntryTime();
+
 			return (from.isBefore(checkInTime) || from.isEqual(checkInTime))
-					&& (checkInTime.isAfter(to) || checkInTime.isAfter(to));
+					&& (checkInTime.isBefore(to) || checkInTime.isEqual(to));
 		};
 	}
 
@@ -95,11 +113,11 @@ public final class TriggerTemplates {
 	}
 
 	public static final Describer getDescriber(WebsiteWhen when) {
-		switch (when) {
+		switch (when.name()) {
 		case DURING_PERIOD:
-			return periodDesciber();
+			return periodDescriber();
 		case LEVEL:
-			return levelDescriber();
+			return levelDesciber();
 		case TRADE_AREA:
 			return tradeAreaDescriber();
 		default:
@@ -107,17 +125,17 @@ public final class TriggerTemplates {
 		}
 	}
 
-	private static final Describer periodDesciber() {
+	private static final Describer levelDesciber() {
 		return pms -> new StringBuilder(pms.getParameterValue(TriggerParams.LEVEL_THRESHOLD.paramName())).append("级会员")
 				.toString();
 	}
 
-	private static final Describer levelDescriber() {
+	private static final Describer tradeAreaDescriber() {
 		return pms -> new StringBuilder("于")
 				.append((String) pms.getParameterValue(TriggerParams.TARGET_TRADE_AREA.paramName())).toString();
 	}
 
-	private static final Describer tradeAreaDescriber() {
+	private static final Describer periodDescriber() {
 		return pms -> {
 			LocalDateTime from = pms.getParameterValue("from");
 			LocalDateTime to = pms.getParameterValue("to");
@@ -130,8 +148,8 @@ public final class TriggerTemplates {
 	}
 
 	public static final ParametersList getParametersTemplate(HotelWhen when) {
-		switch (when) {
-		case PERIOD: // General used
+		switch (when.name()) {
+		case DURING_PERIOD: // General used
 			return periodProperties();
 		case BIRTHDAY:
 			return birthdayParameters();
@@ -152,7 +170,7 @@ public final class TriggerTemplates {
 		ParametersList enterpriseParams = new ParametersList();
 
 		enterpriseParams.addParameter(TriggerParams.ENTERPRISE.paramName(), String.class,
-				s -> s != null && s.length() > 0);
+				(list, s) -> s != null && s.length() > 0);
 
 		return enterpriseParams;
 	}
@@ -160,14 +178,14 @@ public final class TriggerTemplates {
 	private static final ParametersList multiRoomsParameters() {
 		ParametersList multiParams = new ParametersList();
 
-		multiParams.addParameter(TriggerParams.ROOM_NUM_THRESHOLD.paramName(), Integer.class, i -> i > 0);
+		multiParams.addParameter(TriggerParams.ROOM_NUM_THRESHOLD.paramName(), Integer.class, (list, i) -> i > 0);
 
 		return multiParams;
 	}
 
 	public static final Criterion getCritierion(HotelWhen when) {
-		switch (when) {
-		case PERIOD:// General used
+		switch (when.name()) {
+		case DURING_PERIOD:// General used
 			return periodCritierion();
 		case BIRTHDAY:
 			return birthdayCriterion();
@@ -205,9 +223,9 @@ public final class TriggerTemplates {
 	}
 
 	public static final Describer getDescriber(HotelWhen when) {
-		switch (when) {
-		case PERIOD:// General used
-			return periodDesciber();
+		switch (when.name()) {
+		case DURING_PERIOD:// General used
+			return periodDescriber();
 		case BIRTHDAY:
 			return birthdayDescriber();
 		case ENTERPRISE:
@@ -228,6 +246,6 @@ public final class TriggerTemplates {
 	}
 
 	private static final Describer multiRoomsDescriber() {
-		return params -> params.getParameterValue(TriggerParams.ROOM_NUM_THRESHOLD.paramName()) + "间及以上优惠";
+		return params -> params.getParameterValue(TriggerParams.ROOM_NUM_THRESHOLD.paramName()) + "间及以上";
 	}
 }

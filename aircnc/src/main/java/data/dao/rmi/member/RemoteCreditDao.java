@@ -15,4 +15,6 @@ import po.member.credit.CreditChangePo;
  */
 public interface RemoteCreditDao extends Remote {
 	public MemberPo changeCredit(final CreditChangePo changePo) throws RemoteException;
+
+	public int deleteAllCredit() throws RemoteException;
 }

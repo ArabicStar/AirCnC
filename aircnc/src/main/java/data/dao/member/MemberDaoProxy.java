@@ -9,6 +9,7 @@ import data.dao.rmi.member.RemoteMemberDao;
 import po.member.MemberPo;
 import po.member.credit.CreditChangePo;
 
+/*final*/
 public class MemberDaoProxy implements CreditDao, MemberDao {
 	/* singleton */
 	/**
@@ -127,6 +128,13 @@ public class MemberDaoProxy implements CreditDao, MemberDao {
 	public MemberPo changeCredit(CreditChangePo aChange) {
 		return hazard(() -> {
 			return creditDao.changeCredit(aChange);
+		});
+	}
+
+	@Override
+	public int deleteAllCredit() {
+		return hazard(() -> {
+			return creditDao.deleteAllCredit();
 		});
 	}
 }
