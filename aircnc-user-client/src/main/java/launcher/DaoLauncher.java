@@ -25,7 +25,7 @@ public class DaoLauncher {
 	}
 
 	private static final void launchMemberDao(Client clientId, RemoteHelper helper) {
-		MemberDaoProxy proxy = MemberDaoProxy.launch(clientId);
+		MemberDaoProxy proxy = MemberDaoProxy.launch();
 
 		proxy.loadRemoteMemberDao(helper.getRemoteMemberDao());
 		proxy.loadRemoteCreditDao(helper.getRemoteCreditDao());
@@ -34,7 +34,7 @@ public class DaoLauncher {
 	}
 
 	private static final void launchQueryDao(Client clientId, RemoteHelper helper) {
-		QueryDaoProxy proxy = QueryDaoProxy.launch(clientId);
+		QueryDaoProxy proxy = QueryDaoProxy.launch();
 
 		proxy.loadRemoteCreditQueryDao(helper.getRemoteCreditQueryDao());
 	

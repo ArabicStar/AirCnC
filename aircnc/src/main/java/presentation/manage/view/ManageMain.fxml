@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="768.0" prefWidth="1024.0" stylesheets="@ManageMain.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.manage.view.ManageMainPane">
+<AnchorPane prefHeight="768.0" prefWidth="1024.0" stylesheets="@ManageMain.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.manage.view.ManageMainController">
    <children>
       <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="477.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -14,7 +14,7 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="57.0">
                      <children>
-                        <Label fx:id="memberInfo" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#HandleMemberInfo" prefHeight="57.0" prefWidth="247.0" text="客户信息管理">
+                        <Label fx:id="memberManage" alignment="CENTER" contentDisplay="CENTER" prefHeight="57.0" prefWidth="247.0" text="客户信息管理">
                            <padding>
                               <Insets right="30.0" />
                            </padding>
@@ -30,7 +30,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="57.0">
                      <children>
-                        <Label fx:id="searchHotel" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#HandleSearchHotel" prefHeight="75.0" prefWidth="247.0" text="酒店信息管理">
+                        <Label fx:id="hotelManage" alignment="CENTER" contentDisplay="CENTER" prefHeight="75.0" prefWidth="247.0" text="酒店信息管理">
                            <padding>
                               <Insets right="30.0" />
                            </padding>
@@ -43,7 +43,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="57.0">
                      <children>
-                        <Label fx:id="myOrder" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#HandleMyOrder" prefHeight="50.0" prefWidth="247.0" text="营销人员管理">
+                        <Label fx:id="marketManage" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="247.0" text="营销人员管理">
                            <padding>
                               <Insets right="30.0" />
                            </padding>

@@ -11,8 +11,6 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import presentation.member.accessor.impl.MemberLoginAccessorImpl;
-import presentation.member.accessor.impl.RegisterAccessorImpl;
 import presentation.member.view.signin.MemberRegisterEnterprisePane;
 
 /**
@@ -69,8 +67,6 @@ public class CenterController extends Application {
 	 * add the pane of sign in (MemberSignInPane)
 	 */
 	public void addSignInPane() {
-		if(!MemberLoginAccessorImpl.isLaunched())
-			MemberLoginAccessorImpl.launch();
 		URL location = getClass().getResource("/images/member/register/login_BG.png");
 		start.getBorderPane().setStyle("-fx-background-image: url("+location+");");
 		start.getBorderPane().getChildren().clear();
@@ -83,12 +79,11 @@ public class CenterController extends Application {
 	 * add the pane of register (MemberRegisterMainPane)
 	 */
 	public void addRegisterPane() {
-		if(!RegisterAccessorImpl.isLaunched())
-			RegisterAccessorImpl.launch();
 		URL location = getClass().getResource("../../images/member/register/register_BG.png");
 		start.getBorderPane().setStyle("-fx-background-image: url("+location+");");
 		start.getBorderPane().getChildren().clear();
 		registerMain = new MemberRegisterMainPane();
+		start.getBorderPane().setCenter(registerMain.getPane());
 		registerMain.getController().setCenterController(this);
 	}
 

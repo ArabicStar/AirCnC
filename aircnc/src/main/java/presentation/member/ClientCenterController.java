@@ -13,10 +13,6 @@ import presentation.member.view.myorder.MemberOrderMainPane;
 import presentation.member.view.searchhotel.MemberSearchHotelPane;
 import presentation.member.accessor.impl.InfoModifyAccessorImpl;
 import presentation.member.accessor.impl.SearchHotelInfoAccessorImpl;
-import presentation.member.accessor.impl.SearchOrderInfoAccessorImpl;
-import presentation.member.manager.impl.CreditChangeManagerImpl;
-import presentation.member.manager.impl.MemberInfoManagerImpl;
-import presentation.member.manager.impl.MyOrderManagerImpl;
 import presentation.member.manager.impl.SearchHotelManagerImpl;
 import presentation.member.utils.dialog.TextFieldDialog;
 import presentation.member.view.MemberMainPane;
@@ -71,8 +67,6 @@ public class ClientCenterController extends Application {
 	}
 
 	public void addInfoMainPane() {
-		if(!MemberInfoManagerImpl.isLaunched())
-			MemberInfoManagerImpl.launch();
 		test.getUserData();
 		content.getChildren().clear();
 		infoMain = new MemberInfoMainPane();
@@ -94,8 +88,6 @@ public class ClientCenterController extends Application {
 	}
 
 	public void addCreditChangePane() {
-		if(!CreditChangeManagerImpl.isLaunched())
-			CreditChangeManagerImpl.launch();
 		test.getCreditData();
 		content.getChildren().clear();
 		creditMain = new MemberCreditChangePane();
@@ -106,8 +98,6 @@ public class ClientCenterController extends Application {
 	}
 
 	public void addSearchHotelPane() {
-		if(!SearchHotelManagerImpl.isLaunched())
-			SearchHotelManagerImpl.launch();
 		test.getSearchedData();
 		content.getChildren().clear();
 		if(!SearchHotelManagerImpl.isLaunched())
@@ -132,10 +122,6 @@ public class ClientCenterController extends Application {
 	}
 	
 	public void addOrderMainPane() {
-		if(!MyOrderManagerImpl.isLaunched())
-			MyOrderManagerImpl.launch();
-		if(!SearchOrderInfoAccessorImpl.isLaunched())
-			SearchOrderInfoAccessorImpl.launch();
 		test.getMyOrderData();
 		content.getChildren().clear();
 		orderMain = new MemberOrderMainPane();

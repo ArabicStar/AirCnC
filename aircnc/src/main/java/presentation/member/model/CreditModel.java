@@ -18,7 +18,6 @@ public class CreditModel {
 		
 	private final StringProperty date;
 	private final StringProperty time;
-	private final ObjectProperty<Boolean> symbol;
 	private final StringProperty description;
 	private final ObjectProperty<Integer> creditChange;
 
@@ -43,38 +42,41 @@ public class CreditModel {
 		// process the concrete date
 		this.date = new SimpleStringProperty(transformDate(change.getTimeInstant()));
 
-		this.symbol = new SimpleObjectProperty<Boolean>(true);
-
 		// process the concrete time
 		this.time = new SimpleStringProperty(transformTime(change.getTimeInstant()));
 
 		//this.description = new SimpleStringProperty(change.getFormatString(),change.getOrderId());
 		String des;
-//		switch(change.getActionType()){
-//		case CHARGE:
-//			des = String.format(change.getFormatString(), (float)change.getMoney()
-//					,change.getAfterCredit()-change.getAfterCredit());
-//			break;
-//		case ORDER_EXECUTION:
-//			des = String.format(change.getFormatString(),change.getOrderId());
-//			break;
-//		case ORDER_CANCEL:
-//			des = String.format(change.getFormatString(),change.getOrderId());
-//			break;
-//		case ORDER_OVERDUE:
-//			des = String.format(change.getFormatString(),change.getOrderId());
-//			break;
-//		case ORDER_APPEAL:
-//			des = String.format(change.getFormatString(),change.getOrderId());
-//			break;
-//		case ORDER_DELAY:
-//			des = String.format(change.getFormatString(),change.getOrderId());
-//			break;
-//		default:
-//			des = String.format(change.getFormatString());
-//			break;
-//		}
-		this.description = new SimpleStringProperty(change.getFormatString());
+		switch(change.getActionType()){
+		case CHARGE:
+			des = String.format(change.getFormatString(), (float)change.getMoney()
+					,change.getAfterCredit()-change.getBeforeCredit());
+			break;
+		case ORDER_EXECUTION:
+			des = String.format(change.getFormatString(),change.getOrderId(),change.getOrderId()
+					,change.getAfterCredit()-change.getBeforeCredit());
+			break;
+		case ORDER_CANCEL:
+			des = String.format(change.getFormatString(),change.getOrderId(),change.getOrderId()
+					,change.getBeforeCredit()-change.getAfterCredit());
+			break;
+		case ORDER_OVERDUE:
+			des = String.format(change.getFormatString(),change.getOrderId(),change.getOrderId()
+					,change.getBeforeCredit()-change.getAfterCredit());
+			break;
+		case ORDER_APPEAL:
+			des = String.format(change.getFormatString(),change.getOrderId(),change.getOrderId()
+					,change.getAfterCredit()-change.getBeforeCredit());
+			break;
+		case ORDER_DELAY:
+			des = String.format(change.getFormatString(),change.getOrderId(),change.getOrderId()
+					,change.getAfterCredit()-change.getBeforeCredit());
+			break;
+		default:
+			des = String.format(change.getFormatString());
+			break;
+		}
+		this.description = new SimpleStringProperty(des);
 		
 		//这里要完善
 		this.creditChange = new SimpleObjectProperty<Integer>(233);
@@ -119,18 +121,6 @@ public class CreditModel {
 
 	public StringProperty dateProperty() {
 		return date;
-	}
-
-	public boolean getSymbol() {
-		return symbol.get();
-	}
-
-	public void setSymbol(Boolean valid) {
-		this.symbol.set(valid);
-	}
-
-	public ObjectProperty<Boolean> symbolProperty() {
-		return symbol;
 	}
 
 	public String getTime() {

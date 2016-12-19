@@ -36,9 +36,6 @@ public class MemberCreditChangeController implements Initializable{
 	private TableColumn<CreditModel, String> date;
 	
 	@FXML
-    private TableColumn<CreditModel, Boolean> symbol;
-	
-	@FXML
 	private TableColumn<CreditModel,String> time;
 	
 	@FXML
@@ -69,7 +66,6 @@ public class MemberCreditChangeController implements Initializable{
 	
 	public void init(){
 		date.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
-		symbol.setCellValueFactory(cellData -> cellData.getValue().symbolProperty());
 		time.setCellValueFactory(cellData -> cellData.getValue().timeProperty());
 		description.setCellValueFactory(cellData -> cellData.getValue().descriptionProperty());
 		//change.setCellValueFactory(cellData -> cellData.getValue().creditChangeProperty());

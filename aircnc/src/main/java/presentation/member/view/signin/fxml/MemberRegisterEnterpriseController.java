@@ -1,6 +1,8 @@
 package presentation.member.view.signin.fxml;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import interactor.impl.member.MemberAccountCourier;
@@ -8,10 +10,13 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import presentation.member.CenterController;
 import presentation.member.accessor.RegisterAccessor;
 import presentation.member.accessor.impl.RegisterAccessorImpl;
+import presentation.member.utils.dialog.PlainDialog;
 
 /**
  * the controller of business register pane.
@@ -26,6 +31,9 @@ public class MemberRegisterEnterpriseController implements Initializable {
 
 	@FXML
 	private Button confirm;
+	
+	@FXML
+	private Button back;
 
 	private CenterController controller;
 
@@ -48,16 +56,31 @@ public class MemberRegisterEnterpriseController implements Initializable {
 		});
 		accessor = RegisterAccessorImpl.getInstance();
 	}
-
+	
+	@FXML
+	public void handleBack(){
+		controller.addSignInPane();
+	}
+	
 	/**
 	 * handle the button action (Confirm) check the input if input is valid,
 	 * jump to sign in pane. otherwise, pop up the error message.
 	 */
 	@FXML
 	public void handleConfirm() {
-		accessor.setEnterprise(enterprise.getText());
-		MemberAccountCourier.getInstance().register();
-		controller.addSignInPane();
+		PlainDialog alert = new PlainDialog(AlertType.CONFIRMATION,
+				"请进行确认","填写的企业将不可更改，确认不再修改吗");
+		Optional<ButtonType> result = alert.showDialog();
+		
+		//这里还要修改
+		result.ifPresent(usernamePassword -> {
+			accessor.setEnterprise(enterprise.getText());
+			MemberAccountCourier.getInstance().register();
+			controller.addSignInPane();
+			PlainDialog registerSuccess = new PlainDialog(AlertType.INFORMATION,
+					"注册成功","您的注册ID为");
+			registerSuccess.showDialog();
+		});
 	}
 
 	/**

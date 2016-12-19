@@ -51,6 +51,9 @@ public class MemberRegisterPersonController implements Initializable{
 	@FXML
 	private Button confirm;
 	
+	@FXML
+	private Button back;
+	
 	private CenterController controller;
 	
 	private RegisterAccessor accessor;
@@ -134,6 +137,11 @@ public class MemberRegisterPersonController implements Initializable{
 					"注册失败","请输入你的完整的生日信息");
 			alert.showDialog();
 		}
+	}
+	
+	@FXML
+	public void handleBack(){
+		controller.addSignInPane();
 	}
 	
 	/**

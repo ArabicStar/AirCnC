@@ -125,7 +125,7 @@ public class MemberRegisterMainController implements Initializable{
 	 */
 	@FXML
 	public void handleBack(){
-		
+		controller.addSignInPane();
 	}
 	
 	/**
