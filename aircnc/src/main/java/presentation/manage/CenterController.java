@@ -66,6 +66,7 @@ public class CenterController extends Application {
 		primaryStage.setScene(scene);
 
 		addMemberManagePane();
+		start.getController().setMemberManageDisable();
 
 		primaryStage.show();
 	}
@@ -83,6 +84,7 @@ public class CenterController extends Application {
 		content.getChildren().add(memberManage.getAnchorPane());
 		AnchorPane.setTopAnchor(memberManage.getAnchorPane(), 0.0);
 		memberManage.getController().setCenterController(this);
+		memberManage.getController().setRootLayout(content);
 	}
 	
 	/**

@@ -2,6 +2,7 @@ package presentation.manage.utils.cell;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.layout.HBox;
@@ -35,6 +36,7 @@ public class MemberManageButtonCell extends TableCell<MemberManageModel, MemberV
 		}
 
 		buttons.setStyle("-fx-spacing:3px; -fx-padding: 5 0 0 0;");
+		buttons.setAlignment(Pos.CENTER);
 	}
 
 	/**
@@ -72,11 +74,12 @@ public class MemberManageButtonCell extends TableCell<MemberManageModel, MemberV
 
 				switch (type) {
 				case CHECK:
-					
+					if(vo != null)
+						controller.addInfoPane(new MemberManageModel(vo));
 					break;
 				case MODIFY:
 					break;
-				case DELETE:
+				default:
 					break;
 				}
 

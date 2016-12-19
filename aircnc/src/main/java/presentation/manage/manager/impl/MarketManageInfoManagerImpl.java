@@ -51,9 +51,16 @@ public class MarketManageInfoManagerImpl implements MarketManageInfoManager{
 	 * wrap into the HotelManageModel
 	 */
 	@Override
-	public ObservableList<MarketManageModel> getMarketInfo() {
+	public ObservableList<MarketManageModel> getMarketInfoList() {
 		marketInfo = FXCollections.observableArrayList();
 		marketInfo.add(new MarketManageModel(vo));
 		return marketInfo;
+	}
+
+	@Override
+	public MarketManageModel getMarketInfo() {
+		if(vo == null)
+			return null;
+		return new MarketManageModel(vo);
 	}
 }

@@ -8,5 +8,7 @@ public interface MemberManageInfoManager {
 	
 	public boolean setUser(MemberVo vo);
 	
-	public ObservableList<MemberManageModel> getMemberInfo();
+	public ObservableList<MemberManageModel> getMemberInfoList();
+	
+	public MemberManageModel getMemberInfo();
 }

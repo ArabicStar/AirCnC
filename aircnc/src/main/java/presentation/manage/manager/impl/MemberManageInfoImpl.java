@@ -1,3 +1,4 @@
+
 package presentation.manage.manager.impl;
 
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
@@ -50,9 +51,17 @@ public class MemberManageInfoImpl implements MemberManageInfoManager{
 	 * wrap into the MemberInfoModel
 	 */
 	@Override
-	public ObservableList<MemberManageModel> getMemberInfo() {
+	public ObservableList<MemberManageModel> getMemberInfoList() {
 		memberInfo = FXCollections.observableArrayList();
 		memberInfo.add(new MemberManageModel(user));
 		return memberInfo;
+	}
+
+	@Override
+	public MemberManageModel getMemberInfo() {
+		if(user == null)
+			return null;
+		
+		return new MemberManageModel(user);
 	}
 }

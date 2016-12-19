@@ -18,7 +18,7 @@
       <HBox layoutX="534.0" layoutY="31.0" styleClass="search-hbox">
          <children>
             <TextField fx:id="hotelId" layoutX="305.0" layoutY="45.0" />
-            <Button fx:id="search" mnemonicParsing="false" prefHeight="27.0" prefWidth="27.0" styleClass="search" />
+            <Button fx:id="search" mnemonicParsing="false" onAction="#handleQuery" prefHeight="27.0" prefWidth="27.0" styleClass="search" />
          </children>
       </HBox>
    </children>

@@ -51,6 +51,10 @@ public class ManageMainController implements Initializable{
 		controller.addMarketManagePane();
 	}
 	
+	public void setMemberManageDisable(){
+		memberManage.setDisable(true);
+	}
+	
 	@FXML
 	public void handleLogout(){
 		

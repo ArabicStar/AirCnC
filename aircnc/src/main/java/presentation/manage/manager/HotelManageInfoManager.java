@@ -8,6 +8,8 @@ public interface HotelManageInfoManager {
 	
 	public boolean setHotel(HotelVo vo);
 	
-	public ObservableList<HotelManageModel> getHotelInfo();
+	public ObservableList<HotelManageModel> getHotelInfoList();
+	
+	public HotelManageModel getHotelInfo();
 	
 }

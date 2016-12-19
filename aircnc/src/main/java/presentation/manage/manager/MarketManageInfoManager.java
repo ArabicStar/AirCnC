@@ -8,5 +8,7 @@ public interface MarketManageInfoManager {
 	
 	public boolean setMarket(MarketVo vo);
 	
-	public ObservableList<MarketManageModel> getMarketInfo();
+	public ObservableList<MarketManageModel> getMarketInfoList();
+	
+	public MarketManageModel getMarketInfo();
 }

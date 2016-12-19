@@ -50,10 +50,18 @@ public class HotelManageInfoManagerImpl implements HotelManageInfoManager{
 	 * wrap into the HotelManageModel
 	 */
 	@Override
-	public ObservableList<HotelManageModel> getHotelInfo() {
+	public ObservableList<HotelManageModel> getHotelInfoList() {
 		hotelInfo = FXCollections.observableArrayList();
 		hotelInfo.add(new HotelManageModel(vo));
 		return hotelInfo;
+	}
+
+	@Override
+	public HotelManageModel getHotelInfo() {
+		if(vo == null)
+			return null;
+		
+		return new HotelManageModel(vo);
 	}
 
 }

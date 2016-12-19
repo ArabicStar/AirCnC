@@ -15,7 +15,9 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import presentation.manage.CenterController;
+import presentation.manage.ManageTest;
 import presentation.manage.accessor.MemberManageInfoAccessor;
 import presentation.manage.accessor.impl.MemberManageInfoAccessorImpl;
 import presentation.manage.manager.MemberManageInfoManager;
@@ -23,6 +25,8 @@ import presentation.manage.manager.impl.MemberManageInfoImpl;
 import presentation.manage.model.MemberManageModel;
 import presentation.manage.utils.cell.MemberManageButtonCell;
 import presentation.manage.utils.dialog.PlainDialog;
+import presentation.manage.view.hotelmanage.HotelManageMainPane;
+import presentation.manage.view.membermanage.MemberInfoPane;
 import vo.member.MemberVo;
 
 /**
@@ -55,6 +59,8 @@ public class MemberManageMainController implements Initializable{
 	private ObservableList<MemberManageModel> models;
 	private MemberManageMainController memController = this;
 	
+	private AnchorPane rootLayout;
+	
 	@SuppressWarnings("unused")
 	private CenterController centerController;
 	
@@ -68,8 +74,9 @@ public class MemberManageMainController implements Initializable{
 	@FXML
 	public void handleQuery(){
 		if(userId.getText().length()>0){
+			ManageTest.getUserData();
 			accessor.setId(userId.getText());
-			models = manager.getMemberInfo();
+			models = manager.getMemberInfoList();
 			
 			memberTable.setItems(models);
 			username.setCellValueFactory(cellData -> cellData.getValue().usernameProperty());
@@ -97,6 +104,22 @@ public class MemberManageMainController implements Initializable{
 			PlainDialog alert = new PlainDialog(AlertType.INFORMATION,"搜索失败","请输入搜索的ID");
 			alert.showDialog();
 		}
+	}
+	
+	public void setRootLayout(AnchorPane root){
+		this.rootLayout = root;
+	}
+	
+	public void addInfoPane(MemberManageModel model){
+		//this.rootLayout.getChildren().clear();
+		MemberInfoPane pane = new MemberInfoPane(model);
+		this.rootLayout.getChildren().add(pane.getContentPane());
+		AnchorPane.setTopAnchor(pane.getContentPane(), 0.0);
+		pane.getController().setController(this);
+	}
+	
+	public void removeInfoPane(){
+		this.rootLayout.getChildren().remove(this.rootLayout.getChildren().size()-1);
 	}
 	
 	public void setCenterController(CenterController controller){

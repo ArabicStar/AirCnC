@@ -2,6 +2,7 @@ package presentation.manage.utils.cell;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.layout.HBox;
@@ -23,6 +24,7 @@ public class MarketManageButtonCell extends TableCell<MarketManageModel, MarketV
 	private MarketManageMainController controller;
 
 	public MarketManageButtonCell(MarketManageMainController controller) {
+		this.setAlignment(Pos.CENTER);
 		this.controller = controller;
 		createButtons();
 	}
@@ -35,6 +37,7 @@ public class MarketManageButtonCell extends TableCell<MarketManageModel, MarketV
 		}
 
 		buttons.setStyle("-fx-spacing:3px; -fx-padding: 5 0 0 0;");
+		buttons.setAlignment(Pos.CENTER);
 	}
 
 	/**
