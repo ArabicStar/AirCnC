@@ -61,7 +61,7 @@ public class HotelInfoServiceTest {
 	}
 
 	@Test
-	public void testGetMemberInfo() {
+	public void testGetHotelInfo() {
 		HotelInfo v = info.getHotelInfo(name);
 		info.updateInfo(v);
 		assertEquals(name, v.getName());

@@ -1,0 +1,89 @@
+.root{
+	-fx-font-family:"DengXian Light","Pingfang SC","Microsoft Yahei","Helvetica Neue";
+	/*-fx-background-image:url("main_BG.png");
+	-fx-background-size: 1024px 768px;*/
+}
+
+
+.content{
+	-fx-font-size: 20 px;
+}
+
+.title{
+	-fx-font-size: 40px;
+	-fx-text-fill: #4f4e84;
+}
+
+.small-title{
+	-fx-font-size: 24px;
+	-fx-text-fill: #eb7b7b;
+}
+
+.text-content{
+	-fx-font-size: 20px;
+	-fx-text-fill: #4f4e84;
+}
+
+.split-line{
+	-fx-fill:#4f4e84;
+}
+
+.button{
+	-fx-text-fill: #fff;
+	-fx-font-size: 10pt; 
+	-fx-border-radius: 5; 
+	-fx-background-radius: 20;
+}
+
+.modify{
+	-fx-background-color: #585697;
+}
+
+.save{
+	-fx-background-color: #eb7b7b;
+}
+
+.table-view {
+    -fx-base: #fff;
+    -fx-control-inner-background: #fff;
+    -fx-background-color: #fff;
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+    -fx-padding: 5;
+}
+
+.column-header {
+    -fx-border-width: 0 0 2px 0;
+    -fx-border-color: #4f4e84;
+    -fx-background-color:#fff;
+}
+
+.column-header .label {
+	-fx-background-color: transparent;
+    -fx-text-fill: gray;
+    -fx-alignment: center;
+    -fx-font-size:18px;
+}
+
+.table-cell{
+    -fx-alignment: center;
+    -fx-pref-height: 45px;
+    -fx-border-width:0px 0px 1px 0px;
+	-fx-border-color:#585697;
+	/*-fx-margin: 10px 0px 10px 0px*/
+}
+
+.table-row-cell{
+    -fx-background-color: transparent;
+}
+
+.add{
+	-fx-font-size: 20px;
+	-fx-text-fill: #575793;
+	-fx-background-color:transparent;
+	-fx-border-color:#575793;
+	-fx-border-radius:0px;
+}
+
+
+

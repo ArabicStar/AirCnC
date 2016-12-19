@@ -74,25 +74,16 @@ public class HotelInfoManager implements HotelInfoService {
 
 	@Override
 	public List<Room> getRooms(String name) {
-		return null;
-//		return hotelDao.findHotelByName(name).getRooms().stream().map(r -> new RoomBuilder(r).getRoomInfo())
-//				.collect(Collectors.toList());
-		// List<RoomVo> rooms = null;
-		// for (RoomPo po : hotelDao.findHotelByName(name).getRooms()) {
-		// rooms.add(new RoomVoBuilder(po).getRoomInfo());
-		// }
-		// return rooms;
+		return hotelDao.findHotelByName(name).getRooms().stream().map(r -> new RoomBuilder(r).getRoomInfo())
+				.collect(Collectors.toList());
+
 	}
 
 	@Override
 	public double getCheapestPrice(String name) {
-		return 245.0;
-//		return hotelDao.findHotelByName(name).getRooms().stream().mapToDouble(Room::getPrice).min().getAsDouble();
-		// double cheapest = Double.MAX_VALUE;
-		// for (RoomPo po : hotelDao.findHotelByName(name).getRooms()) {
-		// cheapest = po.getPrice() > cheapest ? cheapest : po.getPrice();
-		// }
-		// return cheapest;
+
+		return hotelDao.findHotelByName(name).getRooms().stream().mapToDouble(Room::getPrice).min().getAsDouble();
+
 	}
 
 	public void setHotel(HotelInfo info) {
