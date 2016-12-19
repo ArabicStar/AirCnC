@@ -11,7 +11,7 @@ public interface RemoteHotelDao extends Remote{
 	
 	public HotelPo findHotelByName(final String name) throws RemoteException;
 
-	public boolean deleteHotel(final String name) throws RemoteException;
+	public boolean deleteHotel(final int id) throws RemoteException;
 
 	public boolean updateHotel(final HotelPo po) throws RemoteException;
 

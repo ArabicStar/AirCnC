@@ -29,7 +29,7 @@ public interface HotelDao {
 	 * @return operation result <br>
 	 *         Fail if id does not exist.<br>
 	 */
-	public boolean deleteHotel(final String name);
+	public boolean deleteHotel(final int id);
 
 	/**
 	 * Update a hotel.<br>

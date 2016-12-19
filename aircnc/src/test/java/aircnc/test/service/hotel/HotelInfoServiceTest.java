@@ -39,7 +39,7 @@ public class HotelInfoServiceTest {
 		info = new HotelInfoManager(acc,dao,null,null);
 		HotelVoBuilder b = new HotelVoBuilder().setName(name).setGrade(4.8)
 				.setEquipment("wifi;停车场;24小时热水;叫醒服务").setStar(7)
-				.setName("阿拉伯之星").setScope("栖霞区").setLocation("仙林大道163号")
+				.setName(name).setScope("栖霞区").setLocation("仙林大道163号")
 				.setIntro("我们表面上看起来只是个学校，其实……嘿嘿嘿");
 		Set<Room> rooms = new HashSet<Room>();
 		RoomBuilder roombuilder = new RoomBuilder("SIGNLE").setRoomNum(50).setPrice(245);
@@ -71,6 +71,31 @@ public class HotelInfoServiceTest {
 	public void testCheapestRoom() {
 		double cheapest = info.getCheapestPrice(name);
 		assertEquals(245.0, cheapest,0.01);
+		assertEquals(null, info.getHotelComment(13));
+		assertEquals(null, info.getHotelPromotion(13));
+		assertEquals(null, info.getHotelOrder(13));
+		assertEquals(true, info.updateInfo(info.getHotelInfo(name)));
+	}
+	
+	
+	@Test
+	public void testUpdate() {
+		
+		assertEquals(true, info.updateInfo(info.getHotelInfo(name)));
+	}
+	
+	@Test
+	public void testHotelOrder() {
+
+		assertEquals(null, info.getHotelOrder(13));
+
+	}
+	
+	@Test
+	public void testHotelPromotion() {
+		
+		assertEquals(null, info.getHotelPromotion(13));
+
 	}
 
 
@@ -78,7 +103,7 @@ public class HotelInfoServiceTest {
 	@After
 	public void tearDown() {
 		try {
-			dao.deleteHotel(name);
+//			dao.deleteHotel(name);
 		} catch (Exception e) {
 		}
 	}

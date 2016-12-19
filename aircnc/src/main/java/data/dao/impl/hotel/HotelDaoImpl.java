@@ -10,6 +10,7 @@ import data.dao.hotel.HotelDao;
 import data.dao.query.HotelQueryDao;
 import po.hotel.HotelPo;
 import po.hotel.HotelPoBuilder;
+import po.member.MemberPo;
 
 public enum HotelDaoImpl implements HotelDao, HotelQueryDao {
 	INSTANCE;
@@ -22,17 +23,17 @@ public enum HotelDaoImpl implements HotelDao, HotelQueryDao {
 	}
 
 	@Override
-	public boolean deleteHotel(final String name) {
+	public boolean deleteHotel(final int id) {
 		return execute(session -> {
-			@SuppressWarnings("unchecked")
-			List<HotelPo> hotels = (List<HotelPo>) session.createCriteria(HotelPo.class)
-					.add(Restrictions.eq("name", name)).list();
-			if (hotels.size() == 0) {
-				return false;
-			} else {
-				session.delete(hotels.get(0));
-				return true;
+			Boolean flag = Boolean.FALSE;// for performance
+
+			HotelPo delHotel = (HotelPo) session.get(HotelPo.class, id);
+			if (flag = Boolean.valueOf((delHotel != null)))// check existence
+			{
+				// delete member po firstly
+				session.delete(delHotel);
 			}
+			return flag;
 		});
 	}
 

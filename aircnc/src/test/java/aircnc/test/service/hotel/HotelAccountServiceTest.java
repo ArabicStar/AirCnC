@@ -31,7 +31,7 @@ public class HotelAccountServiceTest {
 		acc = new HotelAccountManager(dao);
 		HotelVoBuilder b = new HotelVoBuilder().setName(name).setGrade(4.8)
 				.setEquipment("wifi;停车场;24小时热水;叫醒服务").setStar(7)
-				.setName("阿拉伯之星").setScope("栖霞区").setLocation("仙林大道163号")
+				.setName(name).setScope("栖霞区").setLocation("仙林大道163号")
 				.setIntro("我们表面上看起来只是个学校，其实……嘿嘿嘿");
 		Set<Room> rooms = new HashSet<Room>();
 		RoomBuilder roombuilder = new RoomBuilder("SIGNLE").setRoomNum(50).setPrice(245);
@@ -58,16 +58,17 @@ public class HotelAccountServiceTest {
 		String registeredName = v.getName();
 		
 		assertEquals(true, acc.existsHotel(registeredName));
-		dao.deleteHotel(registeredName);
+//		dao.deleteHotel(registeredName);
 	}
 
 	@Test
 	public void testLogin() {
 		HotelInfo v2 = null;
 		try {
-			v2 = acc.login("prepareHotel", "12345678".hashCode());	
+			v2 = acc.login(name, "12345678".hashCode());	
 
 		} catch (Exception e) {
+			
 		}
 		assertEquals("prepareHotel", v2.getName());
 		assertEquals("prepareHotel", acc.getCurrentAccount().getName());
@@ -95,9 +96,9 @@ public class HotelAccountServiceTest {
 
 	@After
 	public void tearDown() {
-		try {
-			dao.deleteHotel(name);
-		} catch (Exception e) {
-		}
+//		try {
+//			dao.deleteHotel(name);
+//		} catch (Exception e) {
+//		}
 	}
 }
