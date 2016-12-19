@@ -7,12 +7,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import presentation.member.view.memberinfo.fxml.MemberMainController;
+import presentation.manage.view.marketmanage.fxml.MarketManageMainController;
 
 public class MarketManageMainPane {
 	private Stage primaryStage;
 	private AnchorPane rootLayout;
-	private MemberMainController controller;
+	private MarketManageMainController controller;
 	
 	public MarketManageMainPane(Stage primaryStage){
 		this.primaryStage = primaryStage;
@@ -29,7 +29,7 @@ public class MarketManageMainPane {
             loader.setLocation(location);
             loader.setBuilderFactory(new JavaFXBuilderFactory());
             loader.load();
-            controller = (MemberMainController)loader.getController();
+            controller = loader.getController();
 			rootLayout = loader.getRoot();
 
         } catch (IOException e) {
@@ -37,7 +37,7 @@ public class MarketManageMainPane {
         }
     }
 	
-	public MemberMainController getController(){
+	public MarketManageMainController getController(){
 		return controller;
 	}
 

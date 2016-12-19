@@ -7,13 +7,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import presentation.member.view.memberinfo.fxml.MemberMainController;
+import presentation.manage.view.hotelmanage.fxml.HotelManageMainController;
 
 public class HotelManageMainPane {
 	
 	private Stage primaryStage;
 	private AnchorPane rootLayout;
-	private MemberMainController controller;
+	private HotelManageMainController controller;
 	
 	public HotelManageMainPane(Stage primaryStage){
 		this.primaryStage = primaryStage;
@@ -30,7 +30,7 @@ public class HotelManageMainPane {
             loader.setLocation(location);
             loader.setBuilderFactory(new JavaFXBuilderFactory());
             loader.load();
-            controller = (MemberMainController)loader.getController();
+            controller = loader.getController();
 			rootLayout = loader.getRoot();
 
         } catch (IOException e) {
@@ -38,7 +38,7 @@ public class HotelManageMainPane {
         }
     }
 	
-	public MemberMainController getController(){
+	public HotelManageMainController getController(){
 		return controller;
 	}
 

@@ -3,11 +3,27 @@ package presentation.manage.view.membermanage.fxml;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert.AlertType;
+import javafx.util.Callback;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import presentation.manage.CenterController;
+import presentation.manage.accessor.MemberManageInfoAccessor;
+import presentation.manage.accessor.impl.MemberManageInfoAccessorImpl;
+import presentation.manage.manager.MemberManageInfoManager;
+import presentation.manage.manager.impl.MemberManageInfoImpl;
 import presentation.manage.model.MemberManageModel;
+import presentation.manage.utils.cell.MemberManageButtonCell;
+import presentation.manage.utils.dialog.PlainDialog;
+import vo.member.MemberVo;
 
 /**
  * the controller of member manage.
@@ -20,18 +36,71 @@ public class MemberManageMainController implements Initializable{
 	private TextField userId;
 	
 	@FXML
+	private Button search;
+	
+	@FXML
+	private TableView<MemberManageModel> memberTable;
+	
+	@FXML
 	private TableColumn<MemberManageModel, String> username;
 	
 	@FXML
     private TableColumn<MemberManageModel, String> id;
 	
 	@FXML
-	private TableColumn<MemberManageModel,Boolean> operation;
+	private TableColumn<MemberManageModel,MemberVo> operation;
+	
+	private MemberManageInfoAccessor accessor;
+	private MemberManageInfoManager manager;
+	private ObservableList<MemberManageModel> models;
+	private MemberManageMainController memController = this;
+	
+	@SuppressWarnings("unused")
+	private CenterController centerController;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
+		memberTable.setEditable(false);
+		accessor = MemberManageInfoAccessorImpl.getInstance();
+		manager = MemberManageInfoImpl.getInstance();
+	}
+	
+	@FXML
+	public void handleQuery(){
+		if(userId.getText().length()>0){
+			accessor.setId(userId.getText());
+			models = manager.getMemberInfo();
+			
+			memberTable.setItems(models);
+			username.setCellValueFactory(cellData -> cellData.getValue().usernameProperty());
+			id.setCellValueFactory(cellData -> cellData.getValue().idProperty());
+			
+			operation.setSortable(false);
+			
+			operation.setCellValueFactory(
+	                new Callback<TableColumn.CellDataFeatures<MemberManageModel, MemberVo>, 
+	                ObservableValue<MemberVo>>() {
+
+	            public ObservableValue<MemberVo> call(TableColumn.CellDataFeatures<MemberManageModel, MemberVo> p) {
+	            	return new SimpleObjectProperty<MemberVo>(p.getValue().getOperation());
+	            }
+	        });
 		
+
+			operation.setCellFactory(
+	                new Callback<TableColumn<MemberManageModel,MemberVo>, TableCell<MemberManageModel, MemberVo>>() {
+	            public TableCell<MemberManageModel,MemberVo> call(TableColumn<MemberManageModel, MemberVo> p) {
+	                return new MemberManageButtonCell(memController);
+	            }       
+	        });
+		}else{
+			PlainDialog alert = new PlainDialog(AlertType.INFORMATION,"搜索失败","请输入搜索的ID");
+			alert.showDialog();
+		}
+	}
+	
+	public void setCenterController(CenterController controller){
+		this.centerController = controller;
 	}
 	
 	

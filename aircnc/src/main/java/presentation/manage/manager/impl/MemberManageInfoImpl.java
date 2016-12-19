@@ -3,6 +3,8 @@ package presentation.manage.manager.impl;
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import presentation.manage.manager.MemberManageInfoManager;
 import presentation.manage.model.MemberManageModel;
 import vo.member.MemberVo;
@@ -12,7 +14,7 @@ public class MemberManageInfoImpl implements MemberManageInfoManager{
 	private static MemberManageInfoManager instance;
 	
 	private MemberVo user;
-	private MemberManageModel memberInfo;
+	private ObservableList<MemberManageModel> memberInfo;
 	
 	public static final MemberManageInfoManager launch() {
 		if (instance != null)
@@ -28,6 +30,13 @@ public class MemberManageInfoImpl implements MemberManageInfoManager{
 		return instance;
 	}
 	
+	public static boolean isLaunched(){
+		if(instance == null)
+			return false;
+		else
+			return true;
+	}
+	
 	@Override
 	public boolean setUser(MemberVo vo){
 		if(vo!=null){
@@ -41,8 +50,9 @@ public class MemberManageInfoImpl implements MemberManageInfoManager{
 	 * wrap into the MemberInfoModel
 	 */
 	@Override
-	public MemberManageModel getMemberInfo() {
-		memberInfo = new MemberManageModel(user);
+	public ObservableList<MemberManageModel> getMemberInfo() {
+		memberInfo = FXCollections.observableArrayList();
+		memberInfo.add(new MemberManageModel(user));
 		return memberInfo;
 	}
 }

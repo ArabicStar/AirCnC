@@ -5,9 +5,9 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.layout.HBox;
-import presentation.manage.model.MemberManageModel;
-import presentation.manage.view.membermanage.fxml.MemberManageMainController;
-import vo.member.MemberVo;
+import presentation.manage.model.MarketManageModel;
+import presentation.manage.view.marketmanage.fxml.MarketManageMainController;
+import vo.market.MarketVo;
 
 /**
  * FunctionButtons use a hbox(button) to show the operations.
@@ -15,21 +15,21 @@ import vo.member.MemberVo;
  * @author paranoia
  *
  */
-public class MemberManageButtonCell extends TableCell<MemberManageModel, MemberVo> {
+public class MarketManageButtonCell extends TableCell<MarketManageModel, MarketVo> {
 
 	private Button[] cellButton;
 	private HBox buttons;
-	private MemberVo vo;
-	private MemberManageMainController controller;
+	private MarketVo vo;
+	private MarketManageMainController controller;
 
-	public MemberManageButtonCell(MemberManageMainController controller) {
+	public MarketManageButtonCell(MarketManageMainController controller) {
 		this.controller = controller;
 		createButtons();
 	}
 
 	public void createButtons() {
 		buttons = new HBox();
-		cellButton = new Button[] { createButtons(ButtonType.CHECK), createButtons(ButtonType.MODIFY) };
+		cellButton = new Button[] { createButtons(ButtonType.MODIFY), createButtons(ButtonType.DELETE) };
 		for (Button b : cellButton) {
 			buttons.getChildren().add(b);
 		}
@@ -93,7 +93,7 @@ public class MemberManageButtonCell extends TableCell<MemberManageModel, MemberV
 	 *            empty
 	 */
 	@Override
-	protected void updateItem(MemberVo vo, boolean empty) {
+	protected void updateItem(MarketVo vo, boolean empty) {
 		super.updateItem(vo, empty);
 		if (!empty) {
 			this.vo = vo;

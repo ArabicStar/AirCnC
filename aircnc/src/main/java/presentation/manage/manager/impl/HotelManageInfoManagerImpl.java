@@ -3,6 +3,8 @@ package presentation.manage.manager.impl;
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import presentation.manage.manager.HotelManageInfoManager;
 import presentation.manage.model.HotelManageModel;
 import vo.hotel.HotelVo;
@@ -12,7 +14,7 @@ public class HotelManageInfoManagerImpl implements HotelManageInfoManager{
 	private static HotelManageInfoManager instance;
 	
 	private HotelVo vo;
-	private HotelManageModel hotelInfo;
+	private ObservableList<HotelManageModel> hotelInfo;
 	
 	public static final HotelManageInfoManager launch() {
 		if (instance != null)
@@ -36,13 +38,21 @@ public class HotelManageInfoManagerImpl implements HotelManageInfoManager{
 		}
 		return false;
 	}
+	
+	public static boolean isLaunched(){
+		if(instance == null)
+			return false;
+		else
+			return true;
+	}
 
 	/**
 	 * wrap into the HotelManageModel
 	 */
 	@Override
-	public HotelManageModel getHotelInfo() {
-		hotelInfo = new HotelManageModel(vo);
+	public ObservableList<HotelManageModel> getHotelInfo() {
+		hotelInfo = FXCollections.observableArrayList();
+		hotelInfo.add(new HotelManageModel(vo));
 		return hotelInfo;
 	}
 
