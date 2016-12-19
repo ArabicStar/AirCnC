@@ -54,9 +54,6 @@ public class OrderPoTest {
 		// assertEquals("乐天玛特", orderPo.getHotelName());
 	}
 
-//	@Test
-//	public void OrderPoTest4() {
-//		orderDao.deleteOrder("2016121010001234");
-//	}
+
 	
 }
