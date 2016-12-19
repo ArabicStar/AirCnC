@@ -35,7 +35,7 @@ public class PromotionDaoRemoteObj extends UnicastRemoteObject
 
 		instance = new PromotionDaoRemoteObj(hotelPromotionDao, websitePromotionDao);
 
-		RemoteHelper.bindRemoteObj("PromotionRemoteDao", instance);
+		RemoteHelper.bindRemoteObj("RemotePromotionDao", instance);
 	}
 	/* Singleton */
 

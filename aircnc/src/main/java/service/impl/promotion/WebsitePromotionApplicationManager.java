@@ -6,14 +6,14 @@ import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import service.promotion.PromotionApplicationService;
+import service.promotion.WebsitePromotionApplicationService;
 import service.promotion.WebsitePromotionInfoService;
 import utils.info.order.OrderInfo;
 import utils.promotion.OrderRelatedInfoHelper;
 import utils.promotion.Promotion;
 import vo.order.OrderVoBuilder;
 
-public class WebsitePromotionApplicationManager implements PromotionApplicationService {
+public class WebsitePromotionApplicationManager implements WebsitePromotionApplicationService {
 	/* Singleton */
 	private static WebsitePromotionApplicationManager instance;
 

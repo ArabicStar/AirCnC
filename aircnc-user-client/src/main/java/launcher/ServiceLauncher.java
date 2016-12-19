@@ -1,7 +1,6 @@
 package launcher;
 
 import data.dao.member.MemberDaoProxy;
-import data.dao.query.QueryDaoProxy;
 import service.impl.member.MemberAccountManager;
 import service.impl.member.MemberCreditManager;
 import service.member.MemberAccountService;

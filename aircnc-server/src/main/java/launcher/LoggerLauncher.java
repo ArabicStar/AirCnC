@@ -18,6 +18,6 @@ public class LoggerLauncher {
 		}
 		final Logger logger = Logger.getLogger("AirCnc Client Logger");
 		Log.launchLogger(logger);
-		Log.d(flag ? "Logger launched." : "Logger launch failed.");
+		Log.i(flag ? "Logger launched" : "Logger launch failed");
 	}
 }

@@ -8,6 +8,8 @@ public class HibernateLauncher {
 		// just urge JVM to load hibernate lib, and try it works or not.
 		try {
 			HibernateSessionFactory.getSessionFactory();
+			
+			Log.i("Hibernate and dao launched");
 		} catch (Exception e) {
 			Log.f("Hibernate service shut down.");
 			System.exit(-1);

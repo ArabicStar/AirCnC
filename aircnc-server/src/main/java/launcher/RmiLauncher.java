@@ -14,7 +14,7 @@ public class RmiLauncher {
 			QueryDaoRemoteObj.launch();
 			PromotionDaoRemoteObj.launch();
 
-			Log.i("Rmi has been launched successfully.");
+			Log.i("Rmi launched");
 		} catch (RemoteException e) {
 			// Fatal error, exit forcely
 			Log.f("FATAL - Rmi bind failed, system exits", e);
