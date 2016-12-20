@@ -7,6 +7,11 @@ import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
 import interactor.order.OrderInfoInteractor;
 import interactor.utils.Title;
+import po.order.OrderPo;
+import presentation.member.accessor.impl.CreditChangeOrderAccessorImpl;
+import presentation.member.accessor.impl.MemberAppealAccessorImpl;
+import presentation.member.accessor.impl.MemberCommentAccessorImpl;
+import presentation.member.accessor.impl.MemberOrderOperationAccessorImpl;
 import presentation.member.manager.impl.CreditChangeManagerImpl;
 import service.order.OrderDetailService;
 import service.order.OrderListingService;
@@ -56,13 +61,11 @@ public class OrderInfoCourier implements OrderInfoInteractor{
 			return null;
 		});
 
-		// TODO
 		CreditChangeManagerImpl.getInstance().setCauseOrder(info);
 	}
 	
-	// TODO 未实现的方法
 	private String getCurrentId() {
-		return null;
+		return CreditChangeOrderAccessorImpl.getInstance().getCauseId();
 	}
 
 	@Override
@@ -82,10 +85,7 @@ public class OrderInfoCourier implements OrderInfoInteractor{
 			alertFail(title, "Not logged in yet");
 			return null;
 		});
-
 		CreditChangeManagerImpl.getInstance().setCauseOrder(info);
-		
-		
 	}
 
 	@Override
@@ -93,21 +93,32 @@ public class OrderInfoCourier implements OrderInfoInteractor{
 		
 	}
 
+	/**
+	 * 从id拿到订单，把订单的
+	 */
 	@Override
 	public void makeComment() {
-		// TODO Auto-generated method stub
+		OrderPo orderPo = detail.getOrderInfoById(MemberCommentAccessorImpl.getInstance().getId());
+		orderPo.getComments();
+		MemberCommentAccessorImpl.getInstance().getComment();
 		
 	}
 
 	@Override
 	public void repeal() {
 		// TODO Auto-generated method stub
+//		MemberOrderOperationAccessorImpl.getInstance(). 无获取订单状态的方法
+//		MemberCommentAccessorImpl.getInstance
+//		MemberAppealAccessorImpl.getInstance()
+		// 调用credit逻辑
 		
 	}
 
 	@Override
 	public void makeAppeal() {
 		// TODO Auto-generated method stub
+		MemberOrderOperationAccessorImpl.getInstance().getAppeal();
+		MemberAppealAccessorImpl.getInstance().setAppeal("");
 		
 	}
 	

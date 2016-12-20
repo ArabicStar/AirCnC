@@ -97,19 +97,18 @@ public class OrderPo extends OrderInfo {
 		return this;
 	}
 	
-	public OrderPo setComments(Set<CommentPo> comments) {
+	public OrderPo setComments(CommentPo comments) {
 		this.comments = comments;
 		return this;
 	}
 	
+	public OrderPo setAppeal(String appeal) {
+		this.appeal = appeal;
+		return this;
+	}
+	
 	public OrderVo orderPo2Vo() {
-		return new OrderVoBuilder().setComments(comments).setDiscountPrice(discountPrice)
-				.setEntryTime(entryTime).setHasChildren(hasChildren).setHotelId(hotelId)
-				.setHotelName(hotelName).setLastTime(lastTime).setOrderId(orderId)
-				.setOriginalPrice(originalPrice).setPeopleNumber(peopleNumber)
-				.setReviewed(isReviewed).setRoomNumber(roomNumber).setRoomType(roomType).setStatus(status)
-				.setStayDays(stayDays).setUserId(userId).setUserName(userName)
-				.setPromotions(promotions).getOrderInfo();
+		return new OrderVoBuilder(this).getOrderInfo();
 	}
 
 }

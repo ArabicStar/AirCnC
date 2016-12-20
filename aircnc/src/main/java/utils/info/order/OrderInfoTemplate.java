@@ -54,7 +54,12 @@ public abstract class OrderInfoTemplate {
 
 	protected String userName;
 	
-	protected Set<CommentPo> comments;
+	protected CommentPo comments;
+	
+	/**
+	 * 申诉内容
+	 */
+	protected String appeal;
 
 	protected static boolean isNumber(String str) {
 		if (str.matches("[0-9]+")) {

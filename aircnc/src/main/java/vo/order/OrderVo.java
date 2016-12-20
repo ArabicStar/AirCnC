@@ -3,6 +3,8 @@ package vo.order;
 import java.time.LocalDateTime;
 import java.util.Set;
 
+import po.order.OrderPo;
+import po.order.OrderPoBuilder;
 import po.order.comment.CommentPo;
 import utils.info.order.OrderInfo;
 import utils.info.order.OrderStatus;
@@ -100,9 +102,18 @@ public class OrderVo extends OrderInfo {
 		return this;
 	}
 	
-	OrderVo setComments(Set<CommentPo> comments) {
+	OrderVo setComments(CommentPo comments) {
 		this.comments = comments;
 		return this;
+	}
+	
+	OrderVo setAppeal(String appeal) {
+		this.appeal = appeal;
+		return this;
+	}
+	
+	public OrderPo orderVo2Po(){
+		return new OrderPoBuilder(this).getOrderInfo();
 	}
 
 }

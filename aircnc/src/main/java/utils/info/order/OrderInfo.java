@@ -75,7 +75,11 @@ public abstract class OrderInfo extends OrderInfoTemplate {
 		return isReviewed;
 	}
 	
-	public Set<CommentPo> getComments() {
+	public CommentPo getComments() {
 		return comments;
+	}
+	
+	public String getAppeal() {
+		return appeal;
 	}
 }

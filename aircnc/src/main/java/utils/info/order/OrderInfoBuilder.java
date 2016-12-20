@@ -25,6 +25,7 @@ public abstract class OrderInfoBuilder extends OrderInfoTemplate {
 		hotelName = BLANK;
 		roomNumber = -1;
 		isReviewed = false;
+		appeal = BLANK;
 	}
 
 	public OrderInfoBuilder(OrderInfo info) {
@@ -33,7 +34,8 @@ public abstract class OrderInfoBuilder extends OrderInfoTemplate {
 				.setLastTime(info.getLastTime()).setPromotions(info.getPromotions())
 				.setPeopleNumber(info.getPeopleNumber()).setOriginalPrice(info.getOriginalPrice())
 				.setDiscountPrice(info.getDiscountPrice()).setHasChildren(info.getHasChildren())
-				.setHotelId(info.getHotelId()).setRoomNumber(info.getRoomNumber()).setReviewed(info.getReviewed());
+				.setHotelId(info.getHotelId()).setRoomNumber(info.getRoomNumber()).setReviewed(info.getReviewed())
+				.setAppeal(info.getAppeal());
 	}
 
 	/**
@@ -198,8 +200,13 @@ public abstract class OrderInfoBuilder extends OrderInfoTemplate {
 		return this;
 	}
 	
-	public OrderInfoBuilder setComments(Set<CommentPo> comments) {
+	public OrderInfoBuilder setComments(CommentPo comments) {
 		this.comments = comments;
+		return this;
+	}
+	
+	public OrderInfoBuilder setAppeal(String appeal) {
+		this.appeal = appeal;
 		return this;
 	}
 

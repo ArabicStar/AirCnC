@@ -129,8 +129,14 @@ public class OrderVoBuilder extends OrderInfoBuilder {
 	}
 	
 	@Override
-	public OrderVoBuilder setComments(Set<CommentPo> comments) {
+	public OrderVoBuilder setComments(CommentPo comments) {
 		this.comments = comments;
+		return this;
+	}
+	
+	@Override
+	public OrderVoBuilder setAppeal(String appeal) {
+		this.appeal = appeal;
 		return this;
 	}
 }
