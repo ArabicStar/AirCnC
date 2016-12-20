@@ -12,9 +12,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import presentation.member.accessor.impl.HotelNameAccessorImpl;
 import presentation.member.model.SearchHotelsModel;
 import presentation.member.view.searchhotel.fxml.MemberSearchHotelGeneralController;
 import presentation.member.view.searchhotel.hotelInfo.HotelInfoOnePane;
+import presentation.member.view.searchhotel.hotelInfo.HotelHistoryOrdersPane;
 import presentation.member.view.searchhotel.hotelInfo.HotelInfoFourPane;
 import presentation.member.view.searchhotel.hotelInfo.HotelInfoTwoPane;
 
@@ -42,6 +44,7 @@ public class HotelInfoMainController implements Initializable{
 	private AnchorPane infoMainPane;
 	private HotelInfoOnePane onePane;
 	private HotelInfoTwoPane twoPane;
+	private HotelHistoryOrdersPane threePane;
 	private HotelInfoFourPane fourPane;
 	private SearchHotelsModel model;
 
@@ -54,6 +57,7 @@ public class HotelInfoMainController implements Initializable{
 				  addHotelInfoOnePane();
 			  }
 		});
+		HotelNameAccessorImpl.getInstance().setName(model.getHotelName());
 		
 	}
 	
@@ -85,7 +89,10 @@ public class HotelInfoMainController implements Initializable{
 	
 	@FXML
 	public void addHotelInfoThreePane() {
-		
+		clearContent();
+		threePane = new HotelHistoryOrdersPane();
+		contentLayout.setCenter(threePane.getPane());
+		threePane.getController().setInfoMainController(this);
 	}
 	
 	@FXML

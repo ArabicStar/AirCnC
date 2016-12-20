@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.Calendar;
 import java.util.ResourceBundle;
 
+import interactor.impl.hotel.HotelSearchCourier;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -198,7 +199,9 @@ public class SupremeSearchController implements Initializable{
 			accessor.setEmpty(onlyEmpty.isSelected());
 			accessor.setGrade(Double.valueOf(grade.getText()));
 			accessor.setStarRange(lowStar.getValue(),highStar.getValue());
+			HotelSearchCourier.getInstance().searchByCondition();
 			controller.removeSupremeSearch();
+			controller.initResult();
 		}else{
 			PlainDialog alert = new PlainDialog(AlertType.INFORMATION,
 					"搜索失败","请输入完整有效的搜索信息");

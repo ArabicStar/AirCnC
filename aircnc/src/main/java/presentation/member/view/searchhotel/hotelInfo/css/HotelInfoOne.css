@@ -20,11 +20,16 @@
 	-fx-text-fill: #eb7b7b;
 }
 
-.modify{
-	-fx-font-size: 30px;
+.reserve{
+	-fx-font-size: 28px;
 	-fx-border-color:#575793;
 	-fx-text-fill: #575793;
 	-fx-background-color:transparent;
+}
+
+.reserve:hover{
+	-fx-background-color: #575793;
+	-fx-text-fill: #fff;
 }
 
 .page{
@@ -43,4 +48,11 @@
 .scollpane{
 	-fx-background-color:#ffffff;
 }
+
+
+.scroll-bar:vertical{
+	-fx-background-color: transparent;
+	 -fx-border-color:transparent;
+	-fx-background-radius: 0em;
+	}
 

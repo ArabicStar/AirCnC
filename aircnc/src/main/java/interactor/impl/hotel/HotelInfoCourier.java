@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 import interactor.hotel.HotelInfoInteractor;
 import interactor.utils.Title;
 import presentation.hotel.accessor.impl.SearchOrderAccessorImpl;
+import presentation.hotel.manager.impl.HotelOrderManagerImpl;
 import presentation.hotel.manager.impl.InfoManagerImpl;
 import presentation.member.accessor.impl.SearchOrderInfoAccessorImpl;
 import presentation.member.manager.impl.HotelPromotionManagerImpl;
@@ -107,7 +108,7 @@ public class HotelInfoCourier implements HotelInfoInteractor {
 			return null;
 		});
 
-		MyOrderManagerImpl.getInstance().setOrderList(list);
+		HotelOrderManagerImpl.getInstance().setOrderList(list);
 		
 	}
 
@@ -140,6 +141,32 @@ public class HotelInfoCourier implements HotelInfoInteractor {
 		// TODO Auto-generated method stub
 		
 	}
+
+
+	@Override
+	public void getHotelActivePromotions() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	@Title("Get Orders")
+	public void getHotelAllOrders() {
+		String title = getTitle();
+
+		List<OrderVo> list = execute(title, () -> {
+			int id = getCurrentId();
+			if (id != Integer.MIN_VALUE)
+				return handler.getHotelAllOrders(id);
+
+			alertFail(title, "Not logged in yet");
+			return null;
+		});
+
+		HotelOrderManagerImpl.getInstance().setOrderList(list);
+		
+	}
+	
 	
 	private String getCurrentName() {
 		HotelInfo curAcc = helper.getCurrentAccount();
@@ -149,12 +176,6 @@ public class HotelInfoCourier implements HotelInfoInteractor {
 	private int getCurrentId() {
 		HotelInfo curAcc = helper.getCurrentAccount();
 		return curAcc == null ? Integer.MIN_VALUE : curAcc.getId();
-	}
-
-	@Override
-	public void getHotelActivePromotions() {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

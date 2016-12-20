@@ -127,7 +127,7 @@ public class MemberRegisterPersonController implements Initializable{
 			Optional<ButtonType> result = alert.showDialog();
 			
 			//这里还要修改
-			result.ifPresent(usernamePassword -> {
+			result.ifPresent( ok -> {
 				accessor.setBirthday(LocalDate.of(chooseYear.getValue(), chooseMonth.getValue(), chooseDay.getValue()));
 				MemberAccountCourier.getInstance().register();
 				controller.addSignInPane();

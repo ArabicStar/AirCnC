@@ -3,6 +3,7 @@ package presentation.member.manager.impl;
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
+import java.time.LocalDateTime;
 import java.util.Iterator;
 import java.util.List;
 
@@ -80,14 +81,16 @@ public class CreditChangeManagerImpl implements CreditChangeManager{
 
 	@Override
 	public String getCauseHotelName() {
-		// TODO Auto-generated method stub
-		return null;
+		return cause == null ? null:cause.getHotelName();
 	}
 
 	@Override
 	public String getCauseTime() {
-		// TODO Auto-generated method stub
-		return null;
+		if(cause == null)
+			return null;
+		LocalDateTime date = cause.getEntryTime();
+		String result = date.getYear()+"-"+date.getMonthValue()+"-"+date.getDayOfMonth();    	
+		return result;	
 	}
 
 }

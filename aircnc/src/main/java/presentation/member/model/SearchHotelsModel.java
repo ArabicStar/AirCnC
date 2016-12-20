@@ -12,6 +12,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import vo.hotel.HotelVo;
 import vo.member.MemberVo;
+import vo.order.OrderVo;
 
 /**
  * the model of hotel searched
@@ -29,7 +30,7 @@ public class SearchHotelsModel {
 	private final StringProperty hotelLocation;
 	private final DoubleProperty lowestPrice;
 	private final BooleanProperty reserve;
-	private final ObjectProperty<MemberVo> historyOrder;
+	private final ObjectProperty<OrderVo> historyOrder;
 	
 	private final IntegerProperty execute;
 	private final IntegerProperty unexecute;
@@ -41,6 +42,7 @@ public class SearchHotelsModel {
 	private final StringProperty equip;
 	private final StringProperty roomName;
 	private final StringProperty roomPrice;
+
 		
 	/**
      * Default constructor.
@@ -79,7 +81,7 @@ public class SearchHotelsModel {
 		
 		this.reserve = new SimpleBooleanProperty(true);
 		
-		this.historyOrder = new SimpleObjectProperty<MemberVo>();
+		this.historyOrder = new SimpleObjectProperty<OrderVo>();
 		
 		this.execute = new SimpleIntegerProperty(0);
 		this.unexecute = new SimpleIntegerProperty(1);
@@ -179,15 +181,15 @@ public class SearchHotelsModel {
         return reserve;
     }
     
-    public MemberVo getHistoryOrder() {
+    public OrderVo getHistoryOrder() {
         return historyOrder.get();
     }
 
-    public void setUsername(MemberVo newVo) {
+    public void setUsername(OrderVo newVo) {
         this.historyOrder.set(newVo);
     }
 
-    public ObjectProperty<MemberVo> historyOrderProperty() {
+    public ObjectProperty<OrderVo> historyOrderProperty() {
         return historyOrder;
     }
     

@@ -12,4 +12,6 @@ public interface MemberOrderOperationAccessor {
 	public void setComment(String id, String content);
 	
 	public void setAppeal(String id, String content);
+	
+	public void setCancel(String id);
 }

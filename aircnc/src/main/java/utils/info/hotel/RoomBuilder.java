@@ -34,7 +34,7 @@ public class RoomBuilder extends RoomTemplate{
 	public RoomBuilder(Room info){
 		this(info.getType());
 		this.setName(info.getName()).setPeopleNum(info.getPeopleNum()).
-		setRoomNum(info.getRoomNum()).setHotel(info.getHotel());
+		setRoomNum(info.getRoomNum());
 	}
 	
 	RoomBuilder(){}
@@ -110,10 +110,10 @@ public class RoomBuilder extends RoomTemplate{
 		return this;
 	}
 	
-	public RoomBuilder setHotel(HotelPo hotel){
-		this.hotel = hotel;
-		return this;
-	}
+//	public RoomBuilder setHotel(HotelPo hotel){
+//		this.hotel = hotel;
+//		return this;
+//	}
 	
 	public boolean isReady() {
 		return (name != null);
@@ -122,7 +122,7 @@ public class RoomBuilder extends RoomTemplate{
 	public Room getRoomInfo(){
 		if (isReady())
 			return new Room(type).setName(name).setPeopleNum(numOfPeople).setRoomNum(numOfRoom).
-					setPrice(price).setHotel(hotel);
+					setPrice(price);
 		
 
 		return new RoomBuilder("single").getRoomInfo();

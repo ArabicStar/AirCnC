@@ -1,17 +1,21 @@
 package launcher;
 
 import javafx.application.Application;
-import presentation.hotel.accessor.impl.InfoModifyAccessorImpl;
 import presentation.member.CenterController;
+import presentation.member.accessor.impl.CreditChangeOrderAccessorImpl;
+import presentation.member.accessor.impl.HotelNameAccessorImpl;
+import presentation.member.accessor.impl.InfoModifyAccessorImpl;
 import presentation.member.accessor.impl.MemberAppealAccessorImpl;
 import presentation.member.accessor.impl.MemberCommentAccessorImpl;
 import presentation.member.accessor.impl.MemberLoginAccessorImpl;
 import presentation.member.accessor.impl.MemberOrderOperationAccessorImpl;
 import presentation.member.accessor.impl.RegisterAccessorImpl;
-import presentation.member.accessor.impl.SearchHotelInfoAccessorImpl;
 import presentation.member.accessor.impl.SearchOrderInfoAccessorImpl;
 import presentation.member.accessor.impl.SupremeSearchAccessorImpl;
 import presentation.member.manager.impl.CreditChangeManagerImpl;
+import presentation.member.manager.impl.HistoryOrderManagerImpl;
+import presentation.member.manager.impl.HotelCommentManagerImpl;
+import presentation.member.manager.impl.HotelPromotionManagerImpl;
 import presentation.member.manager.impl.MemberInfoManagerImpl;
 import presentation.member.manager.impl.MyOrderManagerImpl;
 import presentation.member.manager.impl.SearchHotelManagerImpl;
@@ -32,7 +36,7 @@ public class UILauncher {
 
 	private UILauncher() {
 	}
-	
+
 	private static final void launchMemberUI() {
 		InfoModifyAccessorImpl.launch();
 		MemberAppealAccessorImpl.launch();
@@ -40,16 +44,18 @@ public class UILauncher {
 		MemberLoginAccessorImpl.launch();
 		MemberOrderOperationAccessorImpl.launch();
 		RegisterAccessorImpl.launch();
-		SearchHotelInfoAccessorImpl.launch();
 		SearchOrderInfoAccessorImpl.launch();
 		SupremeSearchAccessorImpl.launch();
+		CreditChangeOrderAccessorImpl.launch();
+		HotelNameAccessorImpl.launch();
 		
 		CreditChangeManagerImpl.launch();
 		MemberInfoManagerImpl.launch();
 		MyOrderManagerImpl.launch();
 		SearchHotelManagerImpl.launch();
-		
-		
+		HotelCommentManagerImpl.launch();
+		HotelPromotionManagerImpl.launch();
+		HistoryOrderManagerImpl.launch();
 		
 	}
 }

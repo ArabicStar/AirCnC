@@ -41,6 +41,9 @@ public class HotelInfoOneController implements Initializable{
 	private Button page2;
 	
 	@FXML
+	private Button page4;
+	
+	@FXML
 	private Button page3;
 	
 	@FXML
@@ -67,8 +70,13 @@ public class HotelInfoOneController implements Initializable{
 	}
 	
 	@FXML
-	public void handlePage3(){
+	public void handlePage4(){
 		controller.addHotelInfoFourPane();
+	}
+	
+	@FXML
+	public void handlePage3(){
+		controller.addHotelInfoThreePane();
 	}
 	
 	public void setInfoMainController(HotelInfoMainController controller){

@@ -10,17 +10,12 @@ import utils.info.member.ContactInfoBuilder;
  *
  */
 public class ContactPoBuilder extends ContactInfoBuilder {
-	private int cid;
-
 	public ContactPoBuilder() {
 		super();
 	}
 
 	public ContactPoBuilder(ContactInfo contact) {
 		super(contact);
-
-		if (contact instanceof ContactPo)
-			this.cid = ((ContactPo) contact).getCid();
 	}
 
 	public ContactPoBuilder setCid(int cid) {

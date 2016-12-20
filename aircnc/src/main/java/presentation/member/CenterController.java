@@ -11,16 +11,18 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import presentation.hotel.accessor.impl.InfoModifyAccessorImpl;
+import presentation.member.accessor.impl.CreditChangeOrderAccessorImpl;
+import presentation.member.accessor.impl.HotelNameAccessorImpl;
+import presentation.member.accessor.impl.InfoModifyAccessorImpl;
 import presentation.member.accessor.impl.MemberAppealAccessorImpl;
 import presentation.member.accessor.impl.MemberCommentAccessorImpl;
 import presentation.member.accessor.impl.MemberLoginAccessorImpl;
 import presentation.member.accessor.impl.MemberOrderOperationAccessorImpl;
 import presentation.member.accessor.impl.RegisterAccessorImpl;
-import presentation.member.accessor.impl.SearchHotelInfoAccessorImpl;
 import presentation.member.accessor.impl.SearchOrderInfoAccessorImpl;
 import presentation.member.accessor.impl.SupremeSearchAccessorImpl;
 import presentation.member.manager.impl.CreditChangeManagerImpl;
+import presentation.member.manager.impl.HistoryOrderManagerImpl;
 import presentation.member.manager.impl.HotelCommentManagerImpl;
 import presentation.member.manager.impl.HotelPromotionManagerImpl;
 import presentation.member.manager.impl.MemberInfoManagerImpl;
@@ -50,6 +52,7 @@ public class CenterController extends Application {
 
 	private final static int Login_Width = 550;
 	private final static int Login_Height = 385;
+	private MemberTest test;
 
 	public static void main(String[] args) throws Exception {
 		launch(args);
@@ -69,9 +72,10 @@ public class CenterController extends Application {
 //		MemberLoginAccessorImpl.launch();
 //		MemberOrderOperationAccessorImpl.launch();
 //		RegisterAccessorImpl.launch();
-//		SearchHotelInfoAccessorImpl.launch();
 //		SearchOrderInfoAccessorImpl.launch();
 //		SupremeSearchAccessorImpl.launch();
+//		CreditChangeOrderAccessorImpl.launch();
+//		HotelNameAccessorImpl.launch();
 //		
 //		CreditChangeManagerImpl.launch();
 //		MemberInfoManagerImpl.launch();
@@ -79,6 +83,13 @@ public class CenterController extends Application {
 //		SearchHotelManagerImpl.launch();
 //		HotelCommentManagerImpl.launch();
 //		HotelPromotionManagerImpl.launch();
+//		HistoryOrderManagerImpl.launch();
+//		
+//		test = new MemberTest();
+//		test.getSearchedData();
+//		test.getMyOrderData();
+//		test.getCreditData();
+//		test.getUserData();
 		
 		this.primaryStage = primaryStage;
 

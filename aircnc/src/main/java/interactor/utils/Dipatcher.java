@@ -15,9 +15,9 @@ public interface Dipatcher<Handler, rType> {
 			e.printStackTrace();
 			
 			if (e.getCause() != null && e.getCause() instanceof RemoteException)
-				alertFail(title, title + "Failed - Network Error, please check you network");
+				alertFail(title, title + "网络错误！");
 			else
-				alertFail(title, title + "Internal Error");
+				alertFail(title, title + "内部错误！");
 
 			return null;
 		}

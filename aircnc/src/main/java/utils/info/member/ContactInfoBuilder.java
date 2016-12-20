@@ -26,14 +26,24 @@ public abstract class ContactInfoBuilder extends ContactInfoTemplate {
 	 *            a ContactInfo instance
 	 */
 	protected ContactInfoBuilder(ContactInfo info) {
-		this.setEmail(info.getEmail()).setFixedPhone(info.getFixedPhone()).setMobilePhone(info.getMobilePhone());
+		this.setCid(info.getCid()).setEmail(info.getEmail()).setFixedPhone(info.getFixedPhone())
+				.setMobilePhone(info.getMobilePhone());
 	}
 
 	/**
 	 * Default initialization. All field is set blank.<br>
 	 */
 	protected ContactInfoBuilder() {
+		cid = 0;
 		this.setEmail(null).setFixedPhone(null).setMobilePhone(null);
+	}
+
+	private ContactInfoBuilder setCid(int cid) {
+		if (cid < 0)
+			return this;
+
+		this.cid = cid;
+		return this;
 	}
 
 	/**
@@ -105,7 +115,7 @@ public abstract class ContactInfoBuilder extends ContactInfoTemplate {
 	 */
 	public boolean isReady() {
 		// blank contact info is allowed
-		return (email == "" || checkEmail(email)) && (fixedPhone == "" || checkFixedPhone(fixedPhone))
+		return cid >= 0 && (email == "" || checkEmail(email)) && (fixedPhone == "" || checkFixedPhone(fixedPhone))
 				&& (mobilePhone == "" || checkMobilePhone(mobilePhone));
 	}
 

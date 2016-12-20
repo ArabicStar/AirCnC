@@ -2,6 +2,7 @@ package presentation.member;
 
 import java.util.Optional;
 
+import interactor.impl.hotel.HotelSearchCourier;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -12,7 +13,7 @@ import presentation.member.view.memberinfo.MemberInfoModifyPane;
 import presentation.member.view.myorder.MemberOrderMainPane;
 import presentation.member.view.searchhotel.MemberSearchHotelPane;
 import presentation.member.accessor.impl.InfoModifyAccessorImpl;
-import presentation.member.accessor.impl.SearchHotelInfoAccessorImpl;
+import presentation.member.accessor.impl.SupremeSearchAccessorImpl;
 import presentation.member.manager.impl.SearchHotelManagerImpl;
 import presentation.member.utils.dialog.TextFieldDialog;
 import presentation.member.view.MemberMainPane;
@@ -37,8 +38,6 @@ public class ClientCenterController extends Application {
 
 	private AnchorPane rootLayout;
 	private AnchorPane content;
-	
-	private MemberTest test;
 
 	private final static int Client_Width = 1024;
 	private final static int Client_Height = 768;
@@ -47,7 +46,7 @@ public class ClientCenterController extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		this.primaryStage = primaryStage;
 
-		//primaryStage.initStyle(StageStyle.UNDECORATED);
+		primaryStage.initStyle(StageStyle.UNDECORATED);
 		primaryStage.setTitle("AirCnC");
 
 		// show the pane of sign in.
@@ -61,8 +60,6 @@ public class ClientCenterController extends Application {
 		// addSignInPane();
 
 		primaryStage.show();
-		
-		test = new MemberTest();
 
 	}
 
@@ -96,19 +93,17 @@ public class ClientCenterController extends Application {
 	}
 
 	public void addSearchHotelPane() {
-		test.getSearchedData();
 		content.getChildren().clear();
 		if(!SearchHotelManagerImpl.isLaunched())
 			SearchHotelManagerImpl.launch();
-		if(!SearchHotelInfoAccessorImpl.isLaunched())
-			SearchHotelInfoAccessorImpl.launch();
 		TextFieldDialog dialog = new TextFieldDialog("搜索酒店","商圈：");
 		
 		Optional<String> result = dialog.showDialog();
 		
 		if(result.isPresent()){
-			SearchHotelInfoAccessorImpl.getInstance().setScope(result.get());
-			test.getSearchedData();
+			SupremeSearchAccessorImpl.getInstance().setScope(result.get());
+			HotelSearchCourier.getInstance().searchByCondition();
+			SupremeSearchAccessorImpl.getInstance().setScope(null);
 			searchMain = new MemberSearchHotelPane();
 			content.getChildren().add(searchMain.getPane());
 			AnchorPane.setTopAnchor(searchMain.getPane(), 0.0);

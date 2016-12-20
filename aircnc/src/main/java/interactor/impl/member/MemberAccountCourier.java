@@ -8,6 +8,7 @@ import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 import static utils.exception.StaticExceptionFactory.unknownEx;
 
 import interactor.member.MemberAccountInteractor;
+import interactor.utils.AlertHelper;
 import interactor.utils.Title;
 import presentation.member.accessor.impl.MemberLoginAccessorImpl;
 import presentation.member.accessor.impl.RegisterAccessorImpl;
@@ -53,6 +54,10 @@ public final class MemberAccountCourier implements MemberAccountInteractor {
 			return tmp;
 		});
 
+		if (info != null)
+			AlertHelper.alertSuccess(title, String.format("注册成功！您的账号是%s。此账号将会作为登录凭据", info.getId()));
+		else
+			AlertHelper.alertFail(title, "注册失败！");
 		MemberInfoManagerImpl.getInstance().setUser(info);
 		return info != null;
 	}
@@ -66,12 +71,12 @@ public final class MemberAccountCourier implements MemberAccountInteractor {
 					MemberLoginAccessorImpl.getInstance().getPasswordHash());
 
 			if (tmp == null) {
-				alertFail(title, "Wrong or not exist id");
+				alertFail(title, "账号不存在！");
 				return null;
 			}
 
 			if (!tmp.isValid()) {
-				alertFail(title, "Wrong password");
+				alertFail(title, "密码错误！");
 				return null;
 			}
 

@@ -3,6 +3,7 @@ package presentation.member.view.creditchange.fxml;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import interactor.impl.member.MemberInfoCourier;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
@@ -54,6 +55,7 @@ public class MemberCreditChangeController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources){
 		Platform.runLater(new Runnable() {
 			  @Override public void run() {
+				  MemberInfoCourier.getInstance().getMemberCreditChange();
 				  creditTable.setItems(manager.getCreditList());
 				  creditTable.setFocusTraversable(false);
 			  }

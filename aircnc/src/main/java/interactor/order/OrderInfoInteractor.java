@@ -19,6 +19,8 @@ public interface OrderInfoInteractor {
 	
 	public void getOrderInfoById(String orderId);
 	
+	public void getOrderInfoByHotel();
+	
 	public void makeComment();
 	
 	public void makeAppeal();

@@ -24,7 +24,6 @@ public class MakeOrderAccessorImpl implements MakeOrderAccessor {
 	private int peopleNumber;
 	private boolean hasChildren;
 
-
 	public static final MakeOrderAccessor launch() {
 		if(instance != null) {
 			throw duplicateSingletonEx();
