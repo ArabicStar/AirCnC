@@ -51,6 +51,7 @@ public class DateTimePicker extends DatePicker {
 				ZoneId zone = ZoneId.systemDefault();
 				LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, zone);
 				LocalTime localTime = localDateTime.toLocalTime();
+				localTime = localTime.minusMinutes(localTime.getMinute());
 				timeValue.set(localTime);
 //				LocalDate ld = LocalDate.parse(string, formatter);
 				return LocalDate.parse(string, formatter);

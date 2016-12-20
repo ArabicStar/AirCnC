@@ -2,6 +2,7 @@ package presentation.market.utils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -99,7 +100,10 @@ public class TextAreaDialog extends GridPane {
 		Label latestExecuteTimeLabel = new Label(latestExecuteTime);
 		latestExecuteTimeLabel.setStyle(fontOfName);
 		DateTimePicker timePicker = new DateTimePicker();
-		timePicker.setDateTimeValue(LocalDateTime.now().plusDays(1));
+		LocalDateTime tempLastestDateTime = LocalDateTime.now();
+		LocalTime time = tempLastestDateTime.toLocalTime();
+		tempLastestDateTime = tempLastestDateTime.minusMinutes(time.getMinute()).plusDays(1);
+		timePicker.setDateTimeValue(tempLastestDateTime);
 		gridPane.add(latestExecuteTimeLabel, 1, 5);
 		gridPane.add(timePicker, 2, 5);
 		
