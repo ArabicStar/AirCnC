@@ -1,6 +1,7 @@
 package service.hotel;
 
 import java.util.List;
+import java.util.Set;
 
 import utils.info.hotel.HotelInfo;
 import utils.info.hotel.Room;
@@ -16,11 +17,11 @@ public interface HotelInfoService {
 	
 	public List<CommentVo> getHotelComment(int id);
 
-	public List<PromotionVo> getHotelPromotion(int id);
+	public Set<PromotionVo> getHotelActivePromotion(int id);
+	
+	public Set<PromotionVo> getHotelAllPromotions(int hotelId);
 
 	public boolean updateInfo(HotelInfo modifiedInfo);
+
 	
-	public List<Room> getRooms(String name);
-	
-	public double getCheapestPrice(String name);
 }

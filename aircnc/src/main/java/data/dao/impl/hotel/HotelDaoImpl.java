@@ -18,7 +18,7 @@ public enum HotelDaoImpl implements HotelDao, HotelQueryDao {
 	@Override
 	public HotelPo findHotelById(final int id) {
 		return execute(session -> {
-			return (HotelPo) session.get(HotelPo.class, id);
+			return session.get(HotelPo.class, id);
 		});
 	}
 

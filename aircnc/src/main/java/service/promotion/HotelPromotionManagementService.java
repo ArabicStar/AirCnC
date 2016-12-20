@@ -5,7 +5,7 @@ import java.util.Set;
 import vo.promotion.HotelPromotionVo;
 import vo.promotion.PromotionVo;
 
-public interface HotelPromotionManagmentService {
+public interface HotelPromotionManagementService {
 	public boolean addHotelPromotion(HotelPromotionVo vo);
 
 	public boolean deleteHotelPromotion(HotelPromotionVo vo);

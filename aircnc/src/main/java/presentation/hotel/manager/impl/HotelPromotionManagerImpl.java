@@ -23,8 +23,7 @@ public class HotelPromotionManagerImpl implements HotelPromotionManager{
 	private static HotelPromotionManagerImpl instance;
 	
 	private List<HotelPromotionVo> promotions;
-	
-	private List<String> descriptions;
+
 	
 	public static final HotelPromotionManager launch() {
 		if (instance != null)

@@ -11,12 +11,12 @@ import data.dao.promotion.HotelPromotionDao;
 import data.dao.query.PromotionQueryDao;
 import po.promotion.HotelPromotionPo;
 import po.promotion.PromotionPoBuilder;
-import service.promotion.HotelPromotionManagmentService;
+import service.promotion.HotelPromotionManagementService;
 import vo.promotion.HotelPromotionVo;
 import vo.promotion.PromotionVo;
 import vo.promotion.PromotionVoBuilder;
 
-public class HotelPromotionManagementManager implements HotelPromotionManagmentService {
+public class HotelPromotionManagementManager implements HotelPromotionManagementService {
 	/* Singleton */
 	private static HotelPromotionManagementManager instance;
 

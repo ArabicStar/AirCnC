@@ -24,8 +24,9 @@ public class HotelVoBuilder extends HotelInfoBuilder{
 	}
 	
 	public HotelVoBuilder(HotelInfo info){
+		System.out.println("info has rooms "+info.getRooms()!=null);
 		this.setID(info.getId()).setName(info.getName()).setScope(info.getScope()).setLocation(info.getLocation())
-		.setStar(info.getStar()).setGrade(info.getGrade()).setEquipment(info.getEquipment());
+		.setStar(info.getStar()).setGrade(info.getGrade()).setEquipment(info.getEquipment()).setRooms(info.getRooms());
 		String name = StringUtils.deleteWhitespace(info.getName());
 		setName(name);
 	}

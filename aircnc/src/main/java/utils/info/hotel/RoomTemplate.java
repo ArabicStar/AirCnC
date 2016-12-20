@@ -1,5 +1,7 @@
 package utils.info.hotel;
 
+import po.hotel.HotelPo;
+
 /**
  * Abstract of room info object.<br>
  * Define fields contained in RoomInfo, and checker for them.<br>
@@ -41,6 +43,8 @@ public abstract class RoomTemplate {
 	 * price double <br>
 	 */
 	protected double price;
+	
+	protected HotelPo hotel;
 
 	/**
 	 * check whether name is formal

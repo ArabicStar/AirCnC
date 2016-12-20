@@ -29,11 +29,12 @@ public class HotelAccountManager implements HotelAccountService{
 		if (newHotelInfo == null)
 			return null;
 
-
 		// set id and password, build po
 		HotelVo newHotelVo = newHotelInfo.getHotelInfo();
+		System.out.println(newHotelVo.getRooms()!=null);
 		HotelPo newHotelPo = new HotelPoBuilder(newHotelVo).setPasswordHash(passwordHash).getHotelInfo();
-
+		System.out.println(newHotelPo.getRooms()!=null);
+		
 		// add new hotel
 		boolean result = dao.addHotel(newHotelPo);
 		if (result)

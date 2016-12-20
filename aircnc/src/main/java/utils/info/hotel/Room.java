@@ -1,8 +1,6 @@
 package utils.info.hotel;
 
-import org.apache.commons.lang.StringUtils;
-
-import utils.info.hotel.RoomTemplate.Type;
+import po.hotel.HotelPo;
 
 public class Room extends RoomTemplate {
 	protected boolean isValid;
@@ -17,6 +15,15 @@ public class Room extends RoomTemplate {
 		price = 0;
 		isValid = true;
 	}
+	
+//	Room(Room r){
+//		this.id = r.getId();
+//		this.name = r.getName();
+//		this.numOfPeople = r.getPeopleNum();
+//		this.numOfRoom = r.getRoomNum();
+//		this.price = r.getPrice();
+//		this.type = Type.valueOf(r.getType());
+//	}
 	
 	Room(){}
 
@@ -53,6 +60,12 @@ public class Room extends RoomTemplate {
 			return price;
 		return Double.MIN_VALUE;
 	}
+	
+	public HotelPo getHotel(){
+		if(isValid())
+			return hotel;
+		return null;
+	}
 
 	public boolean isValid() {
 		return isValid;
@@ -84,6 +97,11 @@ public class Room extends RoomTemplate {
 	
 	Room setPrice(double price){
 		this.price = price;
+		return this;
+	}
+	
+	Room setHotel(HotelPo hotel){
+		this.hotel = hotel;
 		return this;
 	}
 

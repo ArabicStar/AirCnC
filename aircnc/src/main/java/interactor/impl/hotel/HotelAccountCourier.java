@@ -56,7 +56,7 @@ public class HotelAccountCourier implements HotelAccountInteractor{
 			return tmp;
 		});
 
-		man.setHotel(info);
+//		man.setHotel(info);
 		
 	}
 

@@ -1,5 +1,6 @@
 package utils.info.hotel;
 
+import po.hotel.HotelPo;
 import utils.info.hotel.RoomTemplate.Type;
 
 /**
@@ -20,7 +21,7 @@ import utils.info.hotel.RoomTemplate.Type;
 public class RoomBuilder extends RoomTemplate{
 	private static final Room INVALID_ROOM;
 	static {
-		INVALID_ROOM = new Room(null);
+		INVALID_ROOM = new Room(Type.其它);
 		INVALID_ROOM.invalidate();
 	}
 	
@@ -32,7 +33,8 @@ public class RoomBuilder extends RoomTemplate{
 	 */
 	public RoomBuilder(Room info){
 		this(info.getType());
-		this.setName(info.getName()).setPeopleNum(info.getPeopleNum()).setRoomNum(info.getRoomNum());
+		this.setName(info.getName()).setPeopleNum(info.getPeopleNum()).
+		setRoomNum(info.getRoomNum()).setHotel(info.getHotel());
 	}
 	
 	RoomBuilder(){}
@@ -77,6 +79,7 @@ public class RoomBuilder extends RoomTemplate{
 		if(type!=Type.其它){
 			numOfPeople = type.ordinal()+1;
 		}
+//		System.out.println(type.name());
 		return this;
 	}
 	
@@ -107,13 +110,19 @@ public class RoomBuilder extends RoomTemplate{
 		return this;
 	}
 	
+	public RoomBuilder setHotel(HotelPo hotel){
+		this.hotel = hotel;
+		return this;
+	}
+	
 	public boolean isReady() {
 		return (name != null);
 	}
 
 	public Room getRoomInfo(){
 		if (isReady())
-			return new Room(type).setName(name).setPeopleNum(numOfPeople).setRoomNum(numOfRoom).setPrice(price);
+			return new Room(type).setName(name).setPeopleNum(numOfPeople).setRoomNum(numOfRoom).
+					setPrice(price).setHotel(hotel);
 		
 
 		return new RoomBuilder("single").getRoomInfo();

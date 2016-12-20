@@ -1,12 +1,14 @@
 package utils.info.hotel;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public abstract class HotelInfoBuilder extends HotelInfoTemplate {
 
 	public HotelInfoBuilder(HotelInfo info) {
-		this.setID(info.getId()).setName(info.getName()).setScope(info.getScope()).setLocation(info.getLocation())
-				.setStar(info.getStar()).setGrade(info.getGrade()).setEquipment(info.getEquipment());
+		this.setID(info.getId()).setName(info.getName()).setScope(info.getScope()).
+		setLocation(info.getLocation()).setStar(info.getStar()).setGrade(info.getGrade()).
+		setEquipment(info.getEquipment()).setRooms(info.getRooms());
 	}
 
 	public HotelInfoBuilder() {
@@ -59,7 +61,7 @@ public abstract class HotelInfoBuilder extends HotelInfoTemplate {
 	
 	public HotelInfoBuilder setRooms(Set<Room> rooms) {
 		if (rooms != null)
-			this.rooms = rooms;
+			this.rooms = rooms.stream().map(r->new RoomBuilder(r).getRoomInfo()).collect(Collectors.toSet());
 		return this;
 	}
 
