@@ -26,4 +26,5 @@ public interface MakeOrderAccessor {
 	 * @return
 	 */
 	public OrderVo getMadeOrder();
+
 }

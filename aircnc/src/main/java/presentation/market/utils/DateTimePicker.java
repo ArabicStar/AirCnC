@@ -15,12 +15,6 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.DatePicker;
 import javafx.util.StringConverter;
 
-/**
- * 日期选择器
- * 
- * @author 赵乔石
- *
- */
 public class DateTimePicker extends DatePicker {
 	private ObjectProperty<LocalTime> timeValue = new SimpleObjectProperty<>();
 	/* private ObjectProperty<ZonedDateTime> dateTimeValue; */
@@ -86,6 +80,7 @@ public class DateTimePicker extends DatePicker {
 	}
 
 	public void setDateTimeValue(LocalDateTime dateTimeValue) {
+		super.setValue(dateTimeValue.toLocalDate());
 		dateTimeValueProperty().set(dateTimeValue);
 	}
 

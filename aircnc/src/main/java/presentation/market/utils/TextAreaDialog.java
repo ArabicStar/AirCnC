@@ -80,6 +80,7 @@ public class TextAreaDialog extends GridPane {
 		ObservableList<String> options = FXCollections.observableArrayList(
 				"单人间", "双人间", "三人间");
 		ComboBox<String> roomTypeBox = new ComboBox<>(options);
+		roomTypeBox.setValue(options.get(0));
 		gridPane.add(roomTypeLabel, 1, 3);
 		gridPane.add(roomTypeBox, 2, 3);
 		
@@ -89,6 +90,7 @@ public class TextAreaDialog extends GridPane {
 		Label roomNumberLabel = new Label(roomNumber);
 		roomNumberLabel.setStyle(fontOfName);
 		TextField roomNumberField = new TextField();
+		roomNumberField.setText("1");
 		roomNumberField.setMaxWidth(80);
 		gridPane.add(roomNumberLabel, 1, 4);
 		gridPane.add(roomNumberField, 2, 4);
@@ -105,6 +107,7 @@ public class TextAreaDialog extends GridPane {
 		Label peopleNumberLabel = new Label(peopleNumber);
 		peopleNumberLabel.setStyle(fontOfName);
 		TextField peopleNumberField = new TextField();
+		peopleNumberField.setText("1");
 		peopleNumberField.setMaxWidth(80);
 		gridPane.add(peopleNumberLabel, 1, 6);
 		gridPane.add(peopleNumberField, 2, 6);
@@ -148,16 +151,30 @@ public class TextAreaDialog extends GridPane {
 					}
 				}
 				
-				// enterDate and leaveDate
-				Alert timeAlert = new Alert(AlertType.ERROR);
+				// enterDate and leaveDate and latestOrderExecuteTime
+				Alert enterTimeAlert;
 				if(!enterDatePickeratePicker.getValue().isAfter(LocalDate.now())) {
-					timeAlert.setContentText("最早只能预订第二天的");
-					timeAlert.show();
+					enterTimeAlert = new Alert(AlertType.ERROR);
+					enterTimeAlert.setContentText("入住时间 最早只能预订第二天的房间！");
+					enterTimeAlert.show();
+				}
+				Alert leaveTimeAlert;
+				if(!leaveDatePickeratePicker.getValue().isAfter(enterDatePickeratePicker.getValue())) {
+					leaveTimeAlert = new Alert(AlertType.ERROR);
+					leaveTimeAlert.setContentText("离开时间 必须迟于入住时间！");
+					leaveTimeAlert.show();
+				}
+				Alert latestTimeAlert;
+				LocalDate lastestTime = timePicker.getValue();
+				if(!lastestTime.isEqual(enterDatePickeratePicker.getValue())) {
+					latestTimeAlert = new Alert(AlertType.ERROR);
+					latestTimeAlert.setContentText("最晚订单执行时间 必须与入住时间在同一天！");
+					latestTimeAlert.show();
 				}
 				
 				accessor.setEnterTime(enterDatePickeratePicker.getValue());
 				accessor.setLeaveTime(leaveDatePickeratePicker.getValue());
-				
+				accessor.setLatestExecuteTime(timePicker.getDateTimeValue());
 				
 				
 				// peopleNumber
@@ -188,6 +205,7 @@ public class TextAreaDialog extends GridPane {
 					roomNumAlert.show();
 				}
 				
+				accessor.setRoomType(roomTypeBox.getValue());
 			}
 			
 		});
@@ -199,6 +217,7 @@ public class TextAreaDialog extends GridPane {
 				System.out.println(event);
 				System.out.println("离开");
 				Alert alert = new Alert(AlertType.CONFIRMATION);
+				alert.setContentText("确认生成订单？");
 				alert.show();
 				dialog.close();
 			}
