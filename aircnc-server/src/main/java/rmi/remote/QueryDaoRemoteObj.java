@@ -5,14 +5,19 @@ import static utils.exception.StaticExceptionFactory.*;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
+import java.util.Set;
 
 import data.dao.impl.member.CreditDaoImpl;
+import data.dao.impl.query.PromotionQueryDaoImpl;
 import data.dao.query.CreditQueryDao;
+import data.dao.query.PromotionQueryDao;
 import data.dao.rmi.query.RemoteCreditQueryDao;
+import data.dao.rmi.query.RemotePromotionQueryDao;
 import po.member.credit.CreditChangePo;
+import po.promotion.PromotionPo;
 import rmi.RemoteHelper;
 
-public class QueryDaoRemoteObj extends UnicastRemoteObject implements RemoteCreditQueryDao {
+public class QueryDaoRemoteObj extends UnicastRemoteObject implements RemoteCreditQueryDao, RemotePromotionQueryDao {
 	/**
 	 * 
 	 */
@@ -28,17 +33,25 @@ public class QueryDaoRemoteObj extends UnicastRemoteObject implements RemoteCred
 			throw duplicateSingletonEx();
 
 		final CreditQueryDao creditQuery = CreditDaoImpl.INSTANCE;
+		final PromotionQueryDao promotionQuery = PromotionQueryDaoImpl.INSTANCE;
 
-		instance = new QueryDaoRemoteObj(creditQuery);
+		instance = new QueryDaoRemoteObj(creditQuery, promotionQuery);
 
 		RemoteHelper.bindRemoteObj("RemoteQueryDao", instance);
 	}
 
-	private QueryDaoRemoteObj(CreditQueryDao creditQuery) throws RemoteException {
+	/* Singleton */
+
+	/**
+	 * @param creditQuery
+	 * @param promotionQuery
+	 * @throws RemoteException
+	 */
+	private QueryDaoRemoteObj(CreditQueryDao creditQuery, PromotionQueryDao promotionQuery) throws RemoteException {
 		super();
 		this.creditQuery = creditQuery;
+		this.promotionQuery = promotionQuery;
 	}
-	/* Singleton */
 
 	/*
 	 ********************************
@@ -55,6 +68,33 @@ public class QueryDaoRemoteObj extends UnicastRemoteObject implements RemoteCred
 	@Override
 	public int getMemberCredit(String memberId) throws RemoteException {
 		return creditQuery.getMemberCredit(memberId);
+	}
+
+	/*
+	 ************************************
+	 ******* PromotionQueryDao*******
+	 ************************************
+	 */
+	private PromotionQueryDao promotionQuery;
+
+	@Override
+	public Set<PromotionPo> getHotelAllPromotions(int hotelId) throws RemoteException {
+		return promotionQuery.getHotelAllPromotions(hotelId);
+	}
+
+	@Override
+	public Set<PromotionPo> getWebsiteAllPromotions() throws RemoteException {
+		return promotionQuery.getWebsiteAllPromotions();
+	}
+
+	@Override
+	public PromotionPo getHotelPromotion(long id) throws RemoteException {
+		return promotionQuery.getHotelPromotion(id);
+	}
+
+	@Override
+	public PromotionPo getWebsitePromotion(long id) throws RemoteException {
+		return promotionQuery.getWebsitePromotion(id);
 	}
 
 }

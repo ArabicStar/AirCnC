@@ -16,6 +16,7 @@ import data.dao.rmi.promotion.RemoteWebsitePromotionApplicationService;
 import data.dao.rmi.promotion.RemoteWebsitePromotionDao;
 import data.dao.rmi.promotion.RemoteWebsitePromotionInfoService;
 import data.dao.rmi.query.RemoteCreditQueryDao;
+import data.dao.rmi.query.RemotePromotionQueryDao;
 import utils.logger.Log;
 
 public final class RemoteHelper {
@@ -44,8 +45,6 @@ public final class RemoteHelper {
 		fetchMemberDaoRemoteObj();
 		fetchQueryDaoRemoteObj();
 		fetchPromotionDaoRemoteObj();
-		fetchWebsitePromotionInfoRemoteObj();
-		fetchWebsitePromotionApplicationRemoteObj();
 	}
 
 	private void fetchQueryDaoRemoteObj() {
@@ -66,26 +65,9 @@ public final class RemoteHelper {
 		Log.d("fetch promotion dao remote obj " + (promotionDaoRemoteObj != null ? "succeed" : "failed"));
 	}
 
-	private void fetchWebsitePromotionInfoRemoteObj() {
-		websitePromotionInfoRemoteObj = findRemote("RemoteWebsitePromotionInfoService");
-
-		Log.d("fetch website promotion info remote obj "
-				+ (websitePromotionInfoRemoteObj != null ? "succeed" : "failed"));
-
-	}
-
-	private void fetchWebsitePromotionApplicationRemoteObj() {
-		websitePromotionApplicationRemoteObj = findRemote("RemoteWebsitePromotionApplicationService");
-
-		Log.d("fetch website promotion application remote obj "
-				+ (websitePromotionApplicationRemoteObj != null ? "succeed" : "failed"));
-	}
-
 	private Remote memberDaoRemoteObj;
 	private Remote queryDaoRemoteObj;
 	private Remote promotionDaoRemoteObj;
-	private Remote websitePromotionInfoRemoteObj;
-	private Remote websitePromotionApplicationRemoteObj;
 
 	public RemoteMemberDao getRemoteMemberDao() {
 		return (RemoteMemberDao) memberDaoRemoteObj;
@@ -99,12 +81,8 @@ public final class RemoteHelper {
 		return (RemoteCreditQueryDao) queryDaoRemoteObj;
 	}
 
-	public RemoteWebsitePromotionApplicationService getRemoteWebsitePromotionApplicationService() {
-		return (RemoteWebsitePromotionApplicationService) websitePromotionApplicationRemoteObj;
-	}
-
-	public RemoteWebsitePromotionInfoService getRemoteWebsitePromotionInfoService() {
-		return (RemoteWebsitePromotionInfoService) websitePromotionInfoRemoteObj;
+	public RemotePromotionQueryDao getRemotePromotionQueryDao() {
+		return (RemotePromotionQueryDao) queryDaoRemoteObj;
 	}
 
 	public RemoteHotelPromotionDao getRemoteHotelPromotionDao() {

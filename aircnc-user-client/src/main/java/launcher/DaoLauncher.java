@@ -49,6 +49,7 @@ public class DaoLauncher {
 		QueryDaoProxy proxy = QueryDaoProxy.launch();
 
 		proxy.loadRemoteCreditQueryDao(helper.getRemoteCreditQueryDao());
+		proxy.loadRemotePromotionQueryDao(helper.getRemotePromotionQueryDao());
 
 		Log.d("query dao launched");
 	}

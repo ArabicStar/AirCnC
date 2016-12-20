@@ -14,6 +14,7 @@ public final class InteractorLauncher {
 
 		MemberAccountCourier.launch(proxy);
 		MemberInfoCourier.launch(proxy, proxy);
+
 	}
 
 	private static void launchHotelInteractor() {
