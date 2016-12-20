@@ -5,6 +5,7 @@ import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
 import presentation.member.accessor.InfoModifyAccessor;
+import utils.info.member.MemberInfo;
 import vo.member.ContactVoBuilder;
 import vo.member.MemberVo;
 import vo.member.MemberVoBuilder;
@@ -91,6 +92,11 @@ public final class InfoModifyAccessorImpl implements InfoModifyAccessor{
 	@Override
 	public int getPasswordHash() {
 		return passwordHash;
+	}
+
+	@Override
+	public void setUser(MemberInfo info) {
+		this.vo = new MemberVoBuilder(info).getMemberInfo();
 	}
 
 }

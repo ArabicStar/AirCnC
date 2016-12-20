@@ -25,6 +25,7 @@ public class CreditChangeManagerImpl implements CreditChangeManager{
 	private static CreditChangeManager instance;
 	
 	private List<CreditChangeVo> changes;
+	private OrderVo cause;
 	
 	public static final CreditChangeManager launch() {
 		if (instance != null)
@@ -71,8 +72,10 @@ public class CreditChangeManagerImpl implements CreditChangeManager{
 
 	@Override
 	public boolean setCauseOrder(OrderVo vo) {
-		// TODO Auto-generated method stub
-		return false;
+		if(vo == null)
+			return false;
+		this.cause = vo;
+		return true;
 	}
 
 	@Override
