@@ -46,4 +46,14 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 		return info;
 	}
 
+	@Override
+	public boolean saveOrder(OrderPo orderPo) {
+		try {
+			orderDao.addOrder(orderPo);
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
+	}
+
 }

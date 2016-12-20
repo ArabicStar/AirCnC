@@ -5,9 +5,14 @@ import static interactor.utils.TitleGetter.getTitle;
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
+import java.time.LocalDateTime;
+
 import interactor.order.OrderInfoInteractor;
 import interactor.utils.Title;
 import po.order.OrderPo;
+import po.order.OrderPoBuilder;
+import po.order.comment.CommentPo;
+import po.order.comment.CommentPoBuilder;
 import presentation.member.accessor.impl.CreditChangeOrderAccessorImpl;
 import presentation.member.accessor.impl.MemberAppealAccessorImpl;
 import presentation.member.accessor.impl.MemberCommentAccessorImpl;
@@ -16,6 +21,7 @@ import presentation.member.manager.impl.CreditChangeManagerImpl;
 import service.order.OrderDetailService;
 import service.order.OrderListingService;
 import service.order.OrderLogicService;
+import utils.info.order.OrderStatus;
 import vo.order.OrderVo;
 
 public class OrderInfoCourier implements OrderInfoInteractor{
@@ -93,32 +99,32 @@ public class OrderInfoCourier implements OrderInfoInteractor{
 		
 	}
 
-	/**
-	 * 从id拿到订单，把订单的
-	 */
 	@Override
 	public void makeComment() {
 		OrderPo orderPo = detail.getOrderInfoById(MemberCommentAccessorImpl.getInstance().getId());
-		orderPo.getComments();
-		MemberCommentAccessorImpl.getInstance().getComment();
-		
+		CommentPo commentPo = new CommentPoBuilder(orderPo.getComments()).setContent(MemberCommentAccessorImpl.getInstance().getComment())
+				.setGrade((int)MemberCommentAccessorImpl.getInstance().getRating()).setCommentTime(LocalDateTime.now())
+				.getCommentInfo();
+		OrderPo newOrderPo = new OrderPoBuilder(orderPo).setComments(commentPo).getOrderInfo();
+		// TODO 把评价和申诉加到数据库
+		detail.saveOrder(newOrderPo);
 	}
 
 	@Override
 	public void repeal() {
-		// TODO Auto-generated method stub
-//		MemberOrderOperationAccessorImpl.getInstance(). 无获取订单状态的方法
-//		MemberCommentAccessorImpl.getInstance
-//		MemberAppealAccessorImpl.getInstance()
-		// 调用credit逻辑
-		
+		OrderPo orderPo = detail.getOrderInfoById(MemberCommentAccessorImpl.getInstance().getId());
+		OrderPo newOrderPo = new OrderPoBuilder(orderPo).setStatus(OrderStatus.REPEALED).getOrderInfo();
+		detail.saveOrder(newOrderPo);
+		// TODO 信用值更改
 	}
 
 	@Override
 	public void makeAppeal() {
-		// TODO Auto-generated method stub
-		MemberOrderOperationAccessorImpl.getInstance().getAppeal();
-		MemberAppealAccessorImpl.getInstance().setAppeal("");
+		OrderPo orderPo = detail.getOrderInfoById(MemberCommentAccessorImpl.getInstance().getId());
+		String appeal = MemberOrderOperationAccessorImpl.getInstance().getAppeal();
+		OrderPo newOrderPo = new OrderPoBuilder(orderPo).setAppeal(appeal).getOrderInfo();
+		detail.saveOrder(newOrderPo);
+//		MemberAppealAccessorImpl.getInstance().setAppeal("");
 		
 	}
 	

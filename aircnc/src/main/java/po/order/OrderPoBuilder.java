@@ -6,6 +6,7 @@ import static utils.exception.StaticExceptionFactory.unsupportedOpEx;
 import java.time.LocalDateTime;
 import java.util.Set;
 
+import po.order.comment.CommentPo;
 import utils.info.order.OrderInfo;
 import utils.info.order.OrderInfoBuilder;
 import utils.info.order.OrderStatus;
@@ -162,6 +163,11 @@ public class OrderPoBuilder extends OrderInfoBuilder {
 	
 	public OrderPoBuilder setAppeal(String appeal) {
 		this.appeal = appeal;
+		return this;
+	}
+	
+	public OrderPoBuilder setComments(CommentPo comments) {
+		this.comments = comments;
 		return this;
 	}
 

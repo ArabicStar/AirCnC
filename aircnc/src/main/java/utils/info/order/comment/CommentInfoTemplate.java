@@ -27,7 +27,7 @@ public class CommentInfoTemplate {
 	}
 
 	public static final boolean checkCommentContent(String content) {
-		return content != null && content.length() != 0;
+		return content != null;
 	}
 
 //	public static final int convertID2Num(String id) {

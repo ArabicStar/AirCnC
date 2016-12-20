@@ -70,6 +70,7 @@ public class CommentPoBuilder extends CommentInfoBuilder{
 	}
 	
 	
+	
 	@Override
 	public CommentPo getCommentInfo() {
 		if (!isReady()) {

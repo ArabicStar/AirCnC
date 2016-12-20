@@ -21,4 +21,6 @@ public interface OrderDetailService {
 	public double getOrderOriginalPrice(String orderId);
 	
 	public OrderPo getOrderInfoById(String orderId);
+	
+	public boolean saveOrder(OrderPo orderPo);
 }
