@@ -69,8 +69,10 @@ public class MemberSignInController implements Initializable {
 			interactor = MemberAccountCourier.getInstance();
 			boolean valid = interactor.login();
 
-			if (valid)
+			if (valid){
+				InfoModifyAccessorImpl.getInstance().setUser(MemberInfoManagerImpl.getInstance().getMemberVo());
 				controller.initializeClient();
+			}
 		} else {
 			new PlainDialog(AlertType.INFORMATION, "登录失败", "请输入你的用户名和密码").showDialog();
 		}

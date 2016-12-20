@@ -6,6 +6,8 @@ import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 import presentation.member.manager.UserInfoManager;
 import presentation.member.model.MemberInfoModel;
 import utils.info.member.MemberInfo;
+import vo.member.MemberVo;
+import vo.member.MemberVoBuilder;
 
 /**
  * the manager of member info aiming to receive the MemberVo from the logic
@@ -58,5 +60,10 @@ public class MemberInfoManagerImpl implements UserInfoManager {
 	public MemberInfoModel getMemberInfo() {
 		memberInfo = new MemberInfoModel(user);
 		return memberInfo;
+	}
+
+	@Override
+	public MemberVo getMemberVo() {
+		return new MemberVoBuilder(user).getMemberInfo();
 	}
 }

@@ -1,5 +1,6 @@
 package presentation.member.accessor;
 
+import utils.info.member.MemberInfo;
 import vo.member.MemberVo;
 
 public interface InfoModifyAccessor {
@@ -7,6 +8,8 @@ public interface InfoModifyAccessor {
 	public MemberVo getModifiedMemberVo();
 	
 	public int getPasswordHash();
+	
+	public void setUser(MemberInfo info);
 	
 	public void setName(String name);
 	
