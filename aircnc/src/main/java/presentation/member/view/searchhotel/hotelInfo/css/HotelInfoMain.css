@@ -1,0 +1,44 @@
+.root{
+	-fx-font-family:"DengXian Light","Pingfang SC","Microsoft Yahei","Helvetica Neue";
+	/*-fx-background-image:url("main_BG.png");
+	-fx-background-size: 1024px 768px;*/
+}
+
+.title{
+	-fx-font-size: 60px;
+	-fx-text-fill:#555693;
+}
+
+.split-line{
+	-fx-fill:#4f4e84;
+}
+
+.info-index{
+	-fx-font-size: 30px;
+}
+
+.info-content{
+	-fx-font-size: 30px;
+}
+
+.hotel-image{
+	-fx-background-radius:50px,50px,50px,50px;
+	-fx-border-color:#575793;
+	-fx-border-radius:50px,50px,50px,50px;
+	-fx-border-width: 5px;
+}
+
+.id{
+	-fx-text-fill:#555693;
+	-fx-font-size:20px;
+}
+
+.grade{
+	-fx-font-size: 36px;
+	-fx-text-fill: #eb7b7b;
+}
+
+.grade-small{
+	-fx-font-size: 20px;
+	-fx-text-fill: #eb7b7b;
+}

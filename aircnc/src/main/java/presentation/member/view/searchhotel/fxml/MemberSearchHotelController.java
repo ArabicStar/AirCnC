@@ -127,6 +127,7 @@ public class MemberSearchHotelController implements Initializable{
 			MemberSearchHotelGeneralPane newPane = new MemberSearchHotelGeneralPane(it.next());
 			searchedResult.getChildren().add(newPane.getPane());
 			newPane.getController().setController(this);
+			newPane.getController().setRootLayout(rootLayout);
 		}		
 	}
 	
@@ -135,8 +136,6 @@ public class MemberSearchHotelController implements Initializable{
 	}
 	
 	public void addSupremeSearch(){
-		if(!SupremeSearchAccessorImpl.isLaunched())
-			SupremeSearchAccessorImpl.launch();
 		supremeSearchPane = new SupremeSearchPane();
 		rootLayout.getChildren().add(supremeSearchPane.getPane());
 		AnchorPane.setTopAnchor(supremeSearchPane.getPane(), 100.0);

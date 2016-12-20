@@ -35,6 +35,12 @@ public class SearchHotelsModel {
 	private final IntegerProperty unexecute;
 	private final IntegerProperty abnormal;
 	private final IntegerProperty repeal;
+	
+	private final StringProperty id;
+	private final StringProperty intro;
+	private final StringProperty equip;
+	private final StringProperty roomName;
+	private final StringProperty roomPrice;
 		
 	/**
      * Default constructor.
@@ -80,6 +86,11 @@ public class SearchHotelsModel {
 		this.abnormal = new SimpleIntegerProperty(0);
 		this.repeal = new SimpleIntegerProperty(0);
 		
+		this.id = new SimpleStringProperty(Integer.toString(vo.getId()));
+		this.intro = new SimpleStringProperty(vo.getIntroduction());
+		this.equip = new SimpleStringProperty(vo.getEquipment());
+		this.roomPrice = new SimpleStringProperty(vo.getStringRoomPrice());
+		this.roomName = new SimpleStringProperty(vo.getStringRoomName());
 		//this.promotion = new SimpleObjectProperty<HotelPromotionCell>();
 		
 	}
@@ -226,5 +237,65 @@ public class SearchHotelsModel {
 
     public IntegerProperty repealOrderProperty() {
         return repeal;
+    }
+    
+    public String getId() {
+        return id.get();
+    }
+
+    public void setId(String newId) {
+        this.id.set(newId);
+    }
+
+    public StringProperty idProperty() {
+        return id;
+    }
+    
+    public String getIntro() {
+        return intro.get();
+    }
+
+    public void setIntro(String newIntro) {
+        this.intro.set(newIntro);
+    }
+
+    public StringProperty introProperty() {
+        return intro;
+    }
+    
+    public String getEquip() {
+        return equip.get();
+    }
+
+    public void setEquip(String newEquip) {
+        this.equip.set(newEquip);
+    }
+
+    public StringProperty equipProperty() {
+        return equip;
+    }
+    
+    public String getRoomPrice() {
+        return roomPrice.get();
+    }
+
+    public void setRoomPrice(String newName) {
+        this.roomPrice.set(newName);
+    }
+
+    public StringProperty roomPriceProperty() {
+        return roomPrice;
+    }
+    
+    public String getRoomName() {
+        return roomName.get();
+    }
+
+    public void setRoomName(String newName) {
+        this.roomName.set(newName);
+    }
+
+    public StringProperty roomNameProperty() {
+        return roomName;
     }
 }

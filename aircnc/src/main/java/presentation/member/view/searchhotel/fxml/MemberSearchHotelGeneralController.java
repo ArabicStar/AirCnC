@@ -12,11 +12,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import presentation.member.manager.SearchHotelManager;
 import presentation.member.manager.impl.SearchHotelManagerImpl;
 import presentation.member.model.SearchHotelsModel;
+import presentation.member.view.searchhotel.SupremeSearchPane;
+import presentation.member.view.searchhotel.hotelInfo.HotelInfoMainPane;
 
 /**
  * the controller of hotel general info.
@@ -64,9 +67,12 @@ public class MemberSearchHotelGeneralController implements Initializable{
 	@FXML
 	private Pane content;
 	
+	@SuppressWarnings("unused")
 	private MemberSearchHotelController controller;
 	
 	private SearchHotelsModel model;
+	private AnchorPane rootLayout;
+	private HotelInfoMainPane detailedInfo;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -79,7 +85,20 @@ public class MemberSearchHotelGeneralController implements Initializable{
 	
 	@FXML
 	public void handleReverse(){
-		
+		//万总的生成订单界面
+	}
+	
+	@FXML
+	public void handleDetailedInfo(){
+		detailedInfo = new HotelInfoMainPane(model);
+		rootLayout.getChildren().add(detailedInfo.getBorderPane());
+		AnchorPane.setTopAnchor(detailedInfo.getBorderPane(), 0.0);
+		detailedInfo.getController().setController(this);
+	}
+	
+	@FXML
+	public void removeDetailedInfo(){
+		rootLayout.getChildren().remove(rootLayout.getChildren().size()-1);
 	}
 	
 	/**
@@ -122,5 +141,9 @@ public class MemberSearchHotelGeneralController implements Initializable{
 	 */
 	public void setHotelModel(SearchHotelsModel model){
 		this.model = model;
+	}
+	
+	public void setRootLayout(AnchorPane pane){
+		this.rootLayout = pane;
 	}
 }
