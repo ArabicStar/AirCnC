@@ -42,3 +42,17 @@
 	-fx-font-size: 20px;
 	-fx-text-fill: #eb7b7b;
 }
+
+.back{
+	-fx-font-size: 20px;
+	-fx-background-color: #fff;
+	-fx-background-radius: 20px;
+	-fx-border-color: #4f4e84;
+	-fx-border-radius: 20px;
+	-fx-text-fill: #4f4e84;
+}
+
+.back:hover{
+	-fx-background-color: #4f4e84;
+	-fx-text-fill: #fff;
+}

@@ -67,7 +67,6 @@ public class ClientCenterController extends Application {
 	}
 
 	public void addInfoMainPane() {
-		test.getUserData();
 		content.getChildren().clear();
 		infoMain = new MemberInfoMainPane();
 		content.getChildren().add(infoMain.getContentPane());
@@ -88,7 +87,6 @@ public class ClientCenterController extends Application {
 	}
 
 	public void addCreditChangePane() {
-		test.getCreditData();
 		content.getChildren().clear();
 		creditMain = new MemberCreditChangePane();
 		content.getChildren().add(creditMain.getPane());
@@ -122,7 +120,6 @@ public class ClientCenterController extends Application {
 	}
 	
 	public void addOrderMainPane() {
-		test.getMyOrderData();
 		content.getChildren().clear();
 		orderMain = new MemberOrderMainPane();
 		content.getChildren().add(orderMain.getPane());

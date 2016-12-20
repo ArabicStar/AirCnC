@@ -4,9 +4,7 @@ import utils.condition.Condition;
 
 public interface SearchHotelInfoAccessor{
 	
-	//这里我要知道condition的生成方法
-	
-	public String getHotelName();
+	public Condition getHotelName();
 	
 	public Condition getScope();
 	

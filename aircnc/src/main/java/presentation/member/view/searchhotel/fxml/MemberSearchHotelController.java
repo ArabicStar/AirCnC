@@ -93,6 +93,7 @@ public class MemberSearchHotelController implements Initializable{
 			MemberSearchHotelGeneralPane newPane = new MemberSearchHotelGeneralPane(it.next());
 			searchedResult.getChildren().add(newPane.getPane());
 			newPane.getController().setController(this);
+			newPane.getController().setRootLayout(rootLayout);
 		}
 		if(maxPageNum > 0)
 			nextButton.setDisable(false);
@@ -111,6 +112,7 @@ public class MemberSearchHotelController implements Initializable{
 			MemberSearchHotelGeneralPane newPane = new MemberSearchHotelGeneralPane(it.next());
 			searchedResult.getChildren().add(newPane.getPane());
 			newPane.getController().setController(this);
+			newPane.getController().setRootLayout(rootLayout);
 		}
 	}
 	

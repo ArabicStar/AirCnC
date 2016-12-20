@@ -3,6 +3,7 @@ package presentation.member.view.memberinfo;
 import java.io.IOException;
 import java.net.URL;
 
+import interactor.impl.member.MemberInfoCourier;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Node;
@@ -35,7 +36,7 @@ public class MemberInfoMainPane {
             loader.load();
             controller = (MemberInfoMainController)loader.getController();
 			infoLayout = loader.getRoot();
-
+			MemberInfoCourier.getInstance().getMemberInfo();
         } catch (IOException e) {
             e.printStackTrace();
         }

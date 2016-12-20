@@ -3,6 +3,7 @@ package presentation.member.view.myorder;
 import java.io.IOException;
 import java.net.URL;
 
+import interactor.impl.member.MemberInfoCourier;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Node;

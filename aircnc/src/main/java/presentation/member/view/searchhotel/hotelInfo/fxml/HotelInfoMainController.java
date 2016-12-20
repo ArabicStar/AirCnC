@@ -10,6 +10,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import presentation.member.model.SearchHotelsModel;
 import presentation.member.view.searchhotel.fxml.MemberSearchHotelGeneralController;
 import presentation.member.view.searchhotel.hotelInfo.HotelInfoMainPane;
@@ -36,8 +38,9 @@ public class HotelInfoMainController implements Initializable{
 	private Button back;
 	
 	private MemberSearchHotelGeneralController controller;
+	private BorderPane contentLayout;
 	
-	private HotelInfoMainPane infoMainPane;
+	private AnchorPane infoMainPane;
 	private HotelInfoOnePane onePane;
 	private HotelInfoTwoPane twoPane;
 	private HotelInfoFourPane fourPane;
@@ -47,7 +50,9 @@ public class HotelInfoMainController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		Platform.runLater(new Runnable() {
 			  @Override public void run() {
+				  contentLayout = (BorderPane) infoMainPane.getChildren().get(0);
 				  initHotelInfo();
+				  addHotelInfoOnePane();
 			  }
 		});
 		
@@ -66,7 +71,7 @@ public class HotelInfoMainController implements Initializable{
 	public void addHotelInfoOnePane() {
 		clearContent();
 		onePane = new HotelInfoOnePane();
-		infoMainPane.getBorderPane().setCenter(onePane.getPane());
+		contentLayout.setCenter(onePane.getPane());
 		onePane.getController().setInfoMainController(this);	
 		onePane.getController().setModel(model);
 	}
@@ -75,7 +80,7 @@ public class HotelInfoMainController implements Initializable{
 	public void addHotelInfoTwoPane() {
 		clearContent();
 		twoPane = new HotelInfoTwoPane();
-		infoMainPane.getBorderPane().setCenter(twoPane.getPane());
+		contentLayout.setCenter(twoPane.getPane());
 		twoPane.getController().setInfoMainController(this);
 	}
 	
@@ -88,7 +93,7 @@ public class HotelInfoMainController implements Initializable{
 	public void addHotelInfoFourPane() {
 		clearContent();
 		fourPane = new HotelInfoFourPane();
-		infoMainPane.getBorderPane().setCenter(fourPane.getPane());
+		contentLayout.setCenter(fourPane.getPane());
 		fourPane.getController().setInfoMainController(this);	
 	}
 	
@@ -97,16 +102,20 @@ public class HotelInfoMainController implements Initializable{
 	 * nav-bar.
 	 */
 	public void clearContent() {
-		int childrenAmount = infoMainPane.getBorderPane().getChildren().size();
+		int childrenAmount = contentLayout.getChildren().size();
 		if (childrenAmount > 1) {
 			for (int i = 1; i < childrenAmount; i++) {
-				infoMainPane.getBorderPane().getChildren().remove(i);
+				contentLayout.getChildren().remove(i);
 			}
 		}
 	}
 	
 	public void setModel(SearchHotelsModel model){
 		this.model = model;
+	}
+	
+	public void setInfoMainPane(AnchorPane pane){
+		this.infoMainPane = pane;
 	}
 	
 	private void initHotelInfo(){

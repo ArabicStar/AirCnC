@@ -87,13 +87,11 @@ public class MemberInfoModifyController implements Initializable{
 			accessor.setMobi(phone.getText());
 			accessor.setEmail(email.getText());
 			accessor.setTele(tele.getText());
-			//下面是逻辑相连后的代码（没开服务器就会报错，暂时注释）
-			//<<<<<<<<<<<<<<<<<<
-			//MemberInfoCourier.getInstance().updateInfo();
-			//<<<<<<<<<<<<<<<<<<
+			MemberInfoCourier.getInstance().updateInfo();
 			PlainDialog alert = new PlainDialog(AlertType.INFORMATION,
 					"保存成功","已保存修改的信息");
 			alert.showDialog();
+			controller.addInfoMainPane();
 			}
 		}else{
 			PlainDialog alert = new PlainDialog(AlertType.INFORMATION,

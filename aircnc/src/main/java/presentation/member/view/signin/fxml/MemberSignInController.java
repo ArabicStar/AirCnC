@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 import presentation.member.CenterController;
 import presentation.member.accessor.MemberLoginAccessor;
 import presentation.member.accessor.impl.MemberLoginAccessorImpl;
+import presentation.member.manager.impl.MemberInfoManagerImpl;
 import presentation.member.utils.dialog.PlainDialog;
 
 /**
@@ -67,7 +68,7 @@ public class MemberSignInController implements Initializable{
 			//下面是逻辑相连后的代码（没开服务器就会报错，暂时注释
 			interactor = MemberAccountCourier.getInstance();
 			interactor.login();
-			boolean valid = true;
+			boolean valid = MemberInfoManagerImpl.getInstance() == null? false:true;
 			
 			if(valid)
 				controller.initializeClient();

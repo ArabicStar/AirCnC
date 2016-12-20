@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Set;
 
+import interactor.impl.member.MemberInfoCourier;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -122,6 +123,8 @@ public class MemberOrderMainController implements Initializable{
 		}
 		
 		accessor.setSearchTarget(states);
+		
+		MemberInfoCourier.getInstance().getMemberOrdersByStatus();
 		
 		orderTable.setItems(manager.getOrderList());
 		

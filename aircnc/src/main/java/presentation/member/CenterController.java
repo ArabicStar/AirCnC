@@ -11,6 +11,21 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import presentation.hotel.accessor.impl.InfoModifyAccessorImpl;
+import presentation.member.accessor.impl.MemberAppealAccessorImpl;
+import presentation.member.accessor.impl.MemberCommentAccessorImpl;
+import presentation.member.accessor.impl.MemberLoginAccessorImpl;
+import presentation.member.accessor.impl.MemberOrderOperationAccessorImpl;
+import presentation.member.accessor.impl.RegisterAccessorImpl;
+import presentation.member.accessor.impl.SearchHotelInfoAccessorImpl;
+import presentation.member.accessor.impl.SearchOrderInfoAccessorImpl;
+import presentation.member.accessor.impl.SupremeSearchAccessorImpl;
+import presentation.member.manager.impl.CreditChangeManagerImpl;
+import presentation.member.manager.impl.HotelCommentManagerImpl;
+import presentation.member.manager.impl.HotelPromotionManagerImpl;
+import presentation.member.manager.impl.MemberInfoManagerImpl;
+import presentation.member.manager.impl.MyOrderManagerImpl;
+import presentation.member.manager.impl.SearchHotelManagerImpl;
 import presentation.member.view.signin.MemberRegisterEnterprisePane;
 
 /**
@@ -47,6 +62,24 @@ public class CenterController extends Application {
 	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		
+//		InfoModifyAccessorImpl.launch();
+//		MemberAppealAccessorImpl.launch();
+//		MemberCommentAccessorImpl.launch();
+//		MemberLoginAccessorImpl.launch();
+//		MemberOrderOperationAccessorImpl.launch();
+//		RegisterAccessorImpl.launch();
+//		SearchHotelInfoAccessorImpl.launch();
+//		SearchOrderInfoAccessorImpl.launch();
+//		SupremeSearchAccessorImpl.launch();
+//		
+//		CreditChangeManagerImpl.launch();
+//		MemberInfoManagerImpl.launch();
+//		MyOrderManagerImpl.launch();
+//		SearchHotelManagerImpl.launch();
+//		HotelCommentManagerImpl.launch();
+//		HotelPromotionManagerImpl.launch();
+		
 		this.primaryStage = primaryStage;
 
 		primaryStage.initStyle(StageStyle.UNDECORATED);

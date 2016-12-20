@@ -27,7 +27,7 @@ public class SearchHotelsModel {
 	private final DoubleProperty hotelGrade;
 	private final StringProperty hotelScope;
 	private final StringProperty hotelLocation;
-	private final IntegerProperty lowestPrice;
+	private final DoubleProperty lowestPrice;
 	private final BooleanProperty reserve;
 	private final ObjectProperty<MemberVo> historyOrder;
 	
@@ -75,7 +75,7 @@ public class SearchHotelsModel {
 		this.hotelLocation = new SimpleStringProperty(vo.getLocation());
 		
 		//这条不太对，等待修改
-		this.lowestPrice = new SimpleIntegerProperty(vo.getId());
+		this.lowestPrice = new SimpleDoubleProperty(vo.getLowestPrice());
 		
 		this.reserve = new SimpleBooleanProperty(true);
 		
@@ -155,7 +155,7 @@ public class SearchHotelsModel {
         return hotelLocation;
     }
     
-    public int getLowestPrice() {
+    public double getLowestPrice() {
         return lowestPrice.get();
     }
 
@@ -163,7 +163,7 @@ public class SearchHotelsModel {
         this.lowestPrice.set(newLow);
     }
 
-    public IntegerProperty lowestPriceProperty() {
+    public DoubleProperty lowestPriceProperty() {
         return lowestPrice;
     }
     

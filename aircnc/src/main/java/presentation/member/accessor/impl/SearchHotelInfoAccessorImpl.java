@@ -13,7 +13,7 @@ public class SearchHotelInfoAccessorImpl implements SearchHotelInfoAccessor{
 	private static SearchHotelInfoAccessor instance;
 	
 	private Condition scope;
-	private String hotelName;
+	private Condition hotelName;
 	
 	public static final SearchHotelInfoAccessor launch() {
 		if (instance != null)
@@ -37,7 +37,7 @@ public class SearchHotelInfoAccessorImpl implements SearchHotelInfoAccessor{
 	}
 	
 	@Override
-	public String getHotelName(){
+	public Condition getHotelName(){
 		if(this.hotelName == null)
 			throw accessorNotReadyEx();
 		return this.hotelName;
@@ -59,7 +59,9 @@ public class SearchHotelInfoAccessorImpl implements SearchHotelInfoAccessor{
 
 	@Override
 	public void setName(String name) {
-		this.hotelName = name;
+		ConditionBuilder builder = new ConditionBuilder();
+		builder.nameLike(name);
+		this.hotelName = builder.buildCondition();
 	}
 
 }

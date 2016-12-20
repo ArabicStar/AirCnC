@@ -3,6 +3,7 @@ package presentation.member.view.creditchange;
 import java.io.IOException;
 import java.net.URL;
 
+import interactor.impl.member.MemberInfoCourier;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Node;
@@ -30,7 +31,7 @@ public class MemberCreditChangePane {
             loader.load();
             controller = loader.getController();
 			creditLayout = loader.getRoot();
-
+			MemberInfoCourier.getInstance().getMemberCreditChange();
         } catch (IOException e) {
             e.printStackTrace();
         }

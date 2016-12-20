@@ -13,12 +13,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import presentation.member.manager.SearchHotelManager;
-import presentation.member.manager.impl.SearchHotelManagerImpl;
 import presentation.member.model.SearchHotelsModel;
-import presentation.member.view.searchhotel.SupremeSearchPane;
 import presentation.member.view.searchhotel.hotelInfo.HotelInfoMainPane;
 
 /**
@@ -91,8 +87,8 @@ public class MemberSearchHotelGeneralController implements Initializable{
 	@FXML
 	public void handleDetailedInfo(){
 		detailedInfo = new HotelInfoMainPane(model);
-		rootLayout.getChildren().add(detailedInfo.getBorderPane());
-		AnchorPane.setTopAnchor(detailedInfo.getBorderPane(), 0.0);
+		rootLayout.getChildren().add(detailedInfo.getAnchorPane());
+		AnchorPane.setTopAnchor(detailedInfo.getAnchorPane(), 0.0);
 		detailedInfo.getController().setController(this);
 	}
 	

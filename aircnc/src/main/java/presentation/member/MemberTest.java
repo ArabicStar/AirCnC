@@ -3,12 +3,16 @@ package presentation.member;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import presentation.member.manager.impl.CreditChangeManagerImpl;
 import presentation.member.manager.impl.MemberInfoManagerImpl;
 import presentation.member.manager.impl.MyOrderManagerImpl;
 import presentation.member.manager.impl.SearchHotelManagerImpl;
+import utils.info.hotel.Room;
+import utils.info.hotel.RoomBuilder;
 import utils.info.member.credit.ActionType;
 import utils.info.order.OrderStatus;
 import vo.hotel.HotelVo;
@@ -80,29 +84,29 @@ public class MemberTest {
 
 	public void getSearchedData() {
 		List<HotelVo> list = new ArrayList<HotelVo>();
-		HotelVo vo1 = new HotelVoBuilder().setID(00002222).setName("速八酒店").setGrade(4.5).setScope("市中心")
-				.setLocation("新街口").setStar(4).getHotelInfo();
-		HotelVo vo2 = new HotelVoBuilder().setID(00002222).setName("如家酒店").setGrade(4.5).setScope("市中心")
-				.setLocation("新街口").setStar(4).getHotelInfo();
-		HotelVo vo3 = new HotelVoBuilder().setID(00002222).setName("布丁酒店").setGrade(4.5).setScope("市中心")
-				.setLocation("新街口").setStar(4).getHotelInfo();
-		HotelVo vo4 = new HotelVoBuilder().setID(00002222).setName("布丁酒店").setGrade(4.5).setScope("市中心")
-				.setLocation("新街口").setStar(4).getHotelInfo();
-		HotelVo vo5 = new HotelVoBuilder().setID(00002222).setName("布丁酒店").setGrade(4.5).setScope("市中心")
-				.setLocation("新街口").setStar(4).getHotelInfo();
-		HotelVo vo6 = new HotelVoBuilder().setID(00002222).setName("布丁酒店").setGrade(4.5).setScope("市中心")
-				.setLocation("新街口").setStar(4).getHotelInfo();
-		HotelVo vo7 = new HotelVoBuilder().setID(00002222).setName("布丁酒店").setGrade(4.5).setScope("市中心")
-				.setLocation("新街口").setStar(4).getHotelInfo();
-		HotelVo vo8 = new HotelVoBuilder().setID(00002222).setName("布丁酒店").setGrade(4.5).setScope("市中心")
-				.setLocation("新街口").setStar(4).getHotelInfo();
-		HotelVo vo9 = new HotelVoBuilder().setID(00002222).setName("布丁酒店").setGrade(4.5).setScope("市中心")
-				.setLocation("新街口").setStar(4).getHotelInfo();
-		list.add(vo1);
-		list.add(vo2);
-		list.add(vo3);
-		list.add(vo4);
-		list.add(vo5);  list.add(vo6);  list.add(vo7);  list.add(vo8);  list.add(vo9);
+		HotelVoBuilder builder = new HotelVoBuilder().setID(2).setGrade(4.8)
+				.setEquipment("wifi;停车场;24小时热水;叫醒服务").setStar(7)
+				.setName("阿拉伯之星").setScope("栖霞区").setLocation("仙林大道")
+				.setIntro("我们表面上看起来只是个学校，其实……嘿嘿嘿");
+		
+		Set<Room> rooms = new HashSet<Room>();
+		RoomBuilder roombuilder = new RoomBuilder("SIGNLE").setRoomNum(50).setPrice(245);
+		rooms.add(roombuilder.getRoomInfo());
+		
+		roombuilder = new RoomBuilder("DOUBLE").setRoomNum(20).setPrice(400);
+		rooms.add(roombuilder.getRoomInfo());
+		
+		roombuilder = new RoomBuilder("TRIPLE").setRoomNum(10).setPrice(588);
+		rooms.add(roombuilder.getRoomInfo());
+		
+		roombuilder = new RoomBuilder("4人开黑房").setRoomNum(10).setPeopleNum(4).setPrice(698);
+		rooms.add(roombuilder.getRoomInfo());
+		
+		builder.setRooms(rooms);
+		
+		HotelVo hotel = builder.getHotelInfo();
+		
+		list.add(hotel);
 		SearchHotelManagerImpl.getInstance().setHotel(list);
 	}
 	
