@@ -1,6 +1,8 @@
 package presentation.market.utils;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -9,6 +11,8 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -77,6 +81,7 @@ public class TextAreaDialog extends GridPane {
 		ObservableList<String> options = FXCollections.observableArrayList(
 				"单人间", "双人间", "三人间");
 		ComboBox<String> roomTypeBox = new ComboBox<>(options);
+		roomTypeBox.setValue(options.get(0));
 		gridPane.add(roomTypeLabel, 1, 3);
 		gridPane.add(roomTypeBox, 2, 3);
 		
@@ -85,25 +90,31 @@ public class TextAreaDialog extends GridPane {
 		String roomNumber = "房间数量";
 		Label roomNumberLabel = new Label(roomNumber);
 		roomNumberLabel.setStyle(fontOfName);
-		TextField textField = new TextField();
-		textField.setMaxWidth(80);
+		TextField roomNumberField = new TextField();
+		roomNumberField.setText("1");
+		roomNumberField.setMaxWidth(80);
 		gridPane.add(roomNumberLabel, 1, 4);
-		gridPane.add(textField, 2, 4);
+		gridPane.add(roomNumberField, 2, 4);
 		
 		String latestExecuteTime = "最晚订单执行时间";
 		Label latestExecuteTimeLabel = new Label(latestExecuteTime);
 		latestExecuteTimeLabel.setStyle(fontOfName);
 		DateTimePicker timePicker = new DateTimePicker();
+		LocalDateTime tempLastestDateTime = LocalDateTime.now();
+		LocalTime time = tempLastestDateTime.toLocalTime();
+		tempLastestDateTime = tempLastestDateTime.minusMinutes(time.getMinute()).plusDays(1);
+		timePicker.setDateTimeValue(tempLastestDateTime);
 		gridPane.add(latestExecuteTimeLabel, 1, 5);
 		gridPane.add(timePicker, 2, 5);
 		
 		String peopleNumber = "入住人数";
 		Label peopleNumberLabel = new Label(peopleNumber);
 		peopleNumberLabel.setStyle(fontOfName);
-		TextField textField2 = new TextField();
-		textField2.setMaxWidth(80);
+		TextField peopleNumberField = new TextField();
+		peopleNumberField.setText("1");
+		peopleNumberField.setMaxWidth(80);
 		gridPane.add(peopleNumberLabel, 1, 6);
-		gridPane.add(textField2, 2, 6);
+		gridPane.add(peopleNumberField, 2, 6);
 		
 		String hasChildren = "有无儿童";
 		Label hasChildrenLabel = new Label(hasChildren);
@@ -129,6 +140,7 @@ public class TextAreaDialog extends GridPane {
 			@Override
 			public void handle(MouseEvent event) {
 
+				// hasChildren
 				if(rb1.getToggleGroup().getSelectedToggle()!=null) {
 					System.out.println("非空");
 					String temp = rb1.getToggleGroup().getSelectedToggle().toString();
@@ -136,14 +148,83 @@ public class TextAreaDialog extends GridPane {
 					System.out.println(accessor == null);
 					if(result.equals("有")) {
 						accessor.setHasChildren(true);
+						System.out.println("有");
+					} else {
+						accessor.setHasChildren(false);
+						System.out.println("无");
 					}
-				} else {
-					System.out.println("空");
 				}
 				
-				System.out.println("11111111111111");
+				// enterDate and leaveDate and latestOrderExecuteTime
+				Alert enterTimeAlert;
+				if(!enterDatePickeratePicker.getValue().isAfter(LocalDate.now())) {
+					enterTimeAlert = new Alert(AlertType.ERROR);
+					enterTimeAlert.setContentText("入住时间 最早只能预订第二天的房间！");
+					enterTimeAlert.show();
+				}
+				Alert leaveTimeAlert;
+				if(!leaveDatePickeratePicker.getValue().isAfter(enterDatePickeratePicker.getValue())) {
+					leaveTimeAlert = new Alert(AlertType.ERROR);
+					leaveTimeAlert.setContentText("离开时间 必须迟于入住时间！");
+					leaveTimeAlert.show();
+				}
+				Alert latestTimeAlert;
+				LocalDate lastestTime = timePicker.getValue();
+				if(!lastestTime.isEqual(enterDatePickeratePicker.getValue())) {
+					latestTimeAlert = new Alert(AlertType.ERROR);
+					latestTimeAlert.setContentText("最晚订单执行时间 必须与入住时间在同一天！");
+					latestTimeAlert.show();
+				}
+				
+				accessor.setEnterTime(enterDatePickeratePicker.getValue());
+				accessor.setLeaveTime(leaveDatePickeratePicker.getValue());
+				accessor.setLatestExecuteTime(timePicker.getDateTimeValue());
+				
+				
+				// peopleNumber
+				
+				Alert peopleNumAlertlert = new Alert(AlertType.ERROR);
+				peopleNumAlertlert.setContentText("入住人数 请输入正整数(阿拉伯数字)！");
+				try {
+					int peopleNum = Integer.valueOf(peopleNumberField.getText().trim());
+					accessor.setPeopleNumber(peopleNum);
+					if(peopleNum <= 0) {
+						peopleNumAlertlert.show();
+					}
+				} catch (Exception e) {
+					
+					peopleNumAlertlert.show();
+				}
+				
+				// roomNumber
+				Alert roomNumAlert = new Alert(AlertType.ERROR);
+				roomNumAlert.setContentText("房间数量 请输入正整数(阿拉伯数字)！");
+				try {
+					int roomNum = Integer.valueOf(roomNumberField.getText().trim());
+					accessor.setRoomNumber(roomNum);
+					if(roomNum < 0) {
+						roomNumAlert.show();
+					}
+				} catch (Exception e) {
+					roomNumAlert.show();
+				}
+				
+				accessor.setRoomType(roomTypeBox.getValue());
 			}
 			
+		});
+		
+		ensureButton.setOnMousePressed(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent event) {
+				System.out.println(event);
+				System.out.println("离开");
+				Alert alert = new Alert(AlertType.CONFIRMATION);
+				alert.setContentText("确认生成订单？");
+				alert.show();
+				dialog.close();
+			}
 		});
 //		ensureButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 //

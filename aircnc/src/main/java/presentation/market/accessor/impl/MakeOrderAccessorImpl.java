@@ -24,7 +24,6 @@ public class MakeOrderAccessorImpl implements MakeOrderAccessor {
 	private int peopleNumber;
 	private boolean hasChildren;
 
-	private OrderVo orderVo;
 
 	public static final MakeOrderAccessor launch() {
 		if(instance != null) {
@@ -83,10 +82,10 @@ public class MakeOrderAccessorImpl implements MakeOrderAccessor {
 	public void setHasChildren(boolean hasChildren) {
 		this.hasChildren = hasChildren;
 	}
-
+	
 	@Override
 	public OrderVo getMadeOrder() {
-		if(orderVo == null) {
+		if(instance == null) {
 			throw accessorNotReadyEx();
 		}
 		LocalDateTime entryTime = LocalDateTime.of(enterTime, LocalTime.now());
