@@ -7,6 +7,7 @@ import static utils.exception.StaticExceptionFactory.unsupportedOpEx;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.hibernate.criterion.DetachedCriteria;
 
@@ -22,6 +23,8 @@ import service.query.OrderQueryService;
 import utils.condition.Condition;
 import utils.condition.ConditionBuilder;
 import utils.info.hotel.HotelInfo;
+import utils.info.member.MemberInfo;
+import utils.info.order.OrderStatus;
 import vo.hotel.HotelVo;
 import vo.hotel.HotelVoBuilder;
 import vo.order.OrderVo;
@@ -86,6 +89,7 @@ public class HotelInfoManager implements HotelInfoService ,HotelQueryService{
 	private OrderQueryService orderQueryService;
 	private HotelPromotionManagementService promotionManageService;
 
+
 	public HotelInfoManager(HotelDao hotelDao, HotelQueryDao hotelQueryDao,HotelAccountService accountService,
 			OrderQueryService orderQueryService,HotelPromotionManagementService promotionManagementService) {
 		this.accountService = accountService;
@@ -106,11 +110,45 @@ public class HotelInfoManager implements HotelInfoService ,HotelQueryService{
 
 		return po == null ? null : new HotelVoBuilder(po).getHotelInfo();
 	}
+	
+	/* Buffered member order query service */
+	private int bufferedId = Integer.MIN_VALUE;
+	private List<OrderVo> bufferedOrderList;
 
 	@Override
-	public List<OrderVo> getHotelOrder(int id) {
+	public List<OrderVo> getHotelAllOrders(final int id) {
+		if (orderQueryService == null)
+			throw unsupportedOpEx("get hotel orders");
 
-		return orderQueryService.getHotelOrders(id);
+		if (!HotelInfo.checkID(id))
+			throw illegalArgEx("Hotel id");
+
+		/* different id from buffered one */
+		if (bufferedId == Integer.MIN_VALUE || bufferedId!=id) {
+			// get
+			List<OrderVo> res = orderQueryService.getHotelOrders(id);
+
+			// given id not exists, return
+			if (res == null)
+				return null;
+
+			// exists, refresh buffer
+			bufferedId = id;
+			bufferedOrderList = res;
+
+			return bufferedOrderList;
+		}
+
+		return bufferedOrderList = orderQueryService.getHotelOrders(id);
+	}
+
+	@Override
+	public List<OrderVo> getHotelOrdersByStatus(int id, OrderStatus status)  {
+
+		if (orderQueryService == null)
+			throw unsupportedOpEx("get hotel orders by status");
+
+		return bufferedOrderList.stream().filter(o -> o.getStatus() == status).collect(Collectors.toList());
 	}
 
 	@Override
@@ -165,5 +203,7 @@ public class HotelInfoManager implements HotelInfoService ,HotelQueryService{
 	public Set<PromotionVo> getHotelAllPromotions(int hotelId) {
 		return promotionManageService.getHotelAllPromotions(hotelId);
 	}
+
+
 
 }
