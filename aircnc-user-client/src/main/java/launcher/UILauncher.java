@@ -1,8 +1,8 @@
 package launcher;
 
 import javafx.application.Application;
-import presentation.hotel.accessor.impl.InfoModifyAccessorImpl;
 import presentation.member.CenterController;
+import presentation.member.accessor.impl.InfoModifyAccessorImpl;
 import presentation.member.accessor.impl.MemberAppealAccessorImpl;
 import presentation.member.accessor.impl.MemberCommentAccessorImpl;
 import presentation.member.accessor.impl.MemberLoginAccessorImpl;
@@ -32,24 +32,22 @@ public class UILauncher {
 
 	private UILauncher() {
 	}
-	
+
 	private static final void launchMemberUI() {
-		InfoModifyAccessorImpl.launch();
-		MemberAppealAccessorImpl.launch();
-		MemberCommentAccessorImpl.launch();
-		MemberLoginAccessorImpl.launch();
-		MemberOrderOperationAccessorImpl.launch();
-		RegisterAccessorImpl.launch();
-		SearchHotelInfoAccessorImpl.launch();
-		SearchOrderInfoAccessorImpl.launch();
-		SupremeSearchAccessorImpl.launch();
-		
-		CreditChangeManagerImpl.launch();
-		MemberInfoManagerImpl.launch();
-		MyOrderManagerImpl.launch();
-		SearchHotelManagerImpl.launch();
-		
-		
-		
+//		InfoModifyAccessorImpl.launch();
+//		MemberAppealAccessorImpl.launch();
+//		MemberCommentAccessorImpl.launch();
+//		MemberLoginAccessorImpl.launch();
+//		MemberOrderOperationAccessorImpl.launch();
+//		RegisterAccessorImpl.launch();
+//		SearchHotelInfoAccessorImpl.launch();
+//		SearchOrderInfoAccessorImpl.launch();
+//		SupremeSearchAccessorImpl.launch();
+//
+//		CreditChangeManagerImpl.launch();
+//		MemberInfoManagerImpl.launch();
+//		MyOrderManagerImpl.launch();
+//		SearchHotelManagerImpl.launch();
+
 	}
 }

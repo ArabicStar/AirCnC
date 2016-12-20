@@ -125,7 +125,7 @@ public final class MemberInfoManager implements MemberInfoService, MemberQuerySe
 			throw unsupportedOpEx("update member basic info");
 
 		if (modifiedInfo == null || !modifiedInfo.isValid())
-			throw illegalArgEx("null or invalid member info");
+			throw illegalArgEx("null or invalid member info", modifiedInfo);
 
 		if (!accountService.isLoggedin())
 			throw illegalStateException("Not logged in yet");
@@ -197,7 +197,7 @@ public final class MemberInfoManager implements MemberInfoService, MemberQuerySe
 	}
 
 	private boolean updateInfo(MemberPo modifiedInfo) {
-		return memberDao.updateMember(modifiedInfo);
+		return memberDao.updateMember(modifiedInfo) & accountService.refreshCurrentAccount() != null;
 	}
 
 	/* Buffered member order query service */

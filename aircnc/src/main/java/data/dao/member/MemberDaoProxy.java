@@ -69,39 +69,29 @@ public class MemberDaoProxy implements CreditDao, MemberDao {
 
 	@Override
 	public boolean addMember(MemberPo po) {
-		return hazard(() -> {
-			return memberDao.addMember(po);
-		});
+		return hazard(() -> memberDao.addMember(po));
 	}
 
 	/* As follow are proxy methods. */
 	@Override
 
 	public boolean deleteMember(String id) {
-		return hazard(() -> {
-			return memberDao.deleteMember(id);
-		});
+		return hazard(() -> memberDao.deleteMember(id));
 	}
 
 	@Override
 	public boolean updateMember(MemberPo po) {
-		return hazard(() -> {
-			return memberDao.updateMember(po);
-		});
+		return hazard(() -> memberDao.updateMember(po));
 	}
 
 	@Override
 	public MemberPo findMember(String id) {
-		return hazard(() -> {
-			return memberDao.findMember(id);
-		});
+		return hazard(() -> memberDao.findMember(id));
 	}
 
 	@Override
 	public boolean existsMember(String id) {
-		return hazard(() -> {
-			return memberDao.existsMember(id);
-		});
+		return hazard(() -> memberDao.existsMember(id));
 	}
 
 	/*

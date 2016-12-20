@@ -128,4 +128,16 @@ public class SupremeSearchAccessorImpl implements SupremeSearchAccessor{
 		this.highStar = high;
 	}
 
+	@Override
+	public void setScope(String scope) {
+		// TODO 自动生成的方法存根
+		
+	}
+
+	@Override
+	public void setName(String name) {
+		// TODO 自动生成的方法存根
+		
+	}
+
 }

@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @author ClevelandAlto
  * @see utils.info.member.ContactInfoBuilder
  */
-public abstract class ContactInfo extends ContactInfoTemplate implements Serializable {
+public abstract class ContactInfo extends ContactInfoTemplate {
 
 	/**
 	 * 
@@ -23,6 +23,7 @@ public abstract class ContactInfo extends ContactInfoTemplate implements Seriali
 	 * All fields are set blank. <br>
 	 */
 	protected ContactInfo() {
+		cid = 0;
 		email = BLANK;
 		mobilePhone = BLANK;
 		fixedPhone = BLANK;
@@ -54,6 +55,10 @@ public abstract class ContactInfo extends ContactInfoTemplate implements Seriali
 	 */
 	public String getFixedPhone() {
 		return fixedPhone;
+	}
+
+	public int getCid() {
+		return cid;
 	}
 
 	@Override
