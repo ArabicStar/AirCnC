@@ -36,7 +36,7 @@ public class UILauncher {
 
 	private UILauncher() {
 	}
-	
+
 	private static final void launchMemberUI() {
 		InfoModifyAccessorImpl.launch();
 		MemberAppealAccessorImpl.launch();
@@ -56,8 +56,6 @@ public class UILauncher {
 		HotelCommentManagerImpl.launch();
 		HotelPromotionManagerImpl.launch();
 		HistoryOrderManagerImpl.launch();
-		
-		
 		
 	}
 }

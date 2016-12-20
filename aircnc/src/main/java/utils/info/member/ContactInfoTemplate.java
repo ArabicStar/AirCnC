@@ -1,5 +1,7 @@
 package utils.info.member;
 
+import java.io.Serializable;
+
 /**
  * Abstract of contact info object.<br>
  * Define fields contained in ContactInfo, and checker for them.<br>
@@ -7,7 +9,17 @@ package utils.info.member;
  * @author ClevelandAlto
  *
  */
-public abstract class ContactInfoTemplate {
+public abstract class ContactInfoTemplate implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7539698669279951909L;
+
+	/**
+	 * Identifier, no need to set mannully
+	 */
+	protected int cid;
+
 	/**
 	 * email address string
 	 */

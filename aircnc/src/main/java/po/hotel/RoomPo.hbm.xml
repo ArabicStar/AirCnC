@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping">
+<!-- Generated 2016-11-22 11:00:34 by Hibernate Tools 3.5.0.Final -->
+<!-- RoomPo mapping xml -->
+<hibernate-mapping>
+	<class name="utils.info.hotel.Room" table="rooms">
+
+		<!-- key column, auto generated -->
+		<id column="ID" name="id" type="int">
+			<generator class="native" />
+		</id>
+
+		<!-- type, the type of room -->
+		<property column="NAME" name="name" type="string" />
+
+		<!-- peopleNumber, the capacity of room -->
+		<property column="PNUM" name="peopleNum" type="integer" />
+
+		<!-- roomNumber, the amount of room -->
+		<property column="RNUM" name="roomNum" type="integer" />
+
+		<!-- price, the price of room -->
+		<property column="PRICE" name="price" type="double" />
+
+
+
+	</class>
+</hibernate-mapping>

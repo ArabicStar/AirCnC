@@ -10,6 +10,11 @@ import utils.info.member.ContactInfo;
  *
  */
 public class ContactVo extends ContactInfo {
+	ContactVo setCid(int cid) {
+		this.cid = cid;
+		return this;
+	}
+
 	ContactVo setEmail(String email) {
 		this.email = email;
 		return this;

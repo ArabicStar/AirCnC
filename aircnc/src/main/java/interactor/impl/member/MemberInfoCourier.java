@@ -95,7 +95,8 @@ public final class MemberInfoCourier implements MemberInfoInteractor {
 		List<OrderVo> list = execute(title, () -> {
 			String id = getCurrentId();
 			if (id != null)
-				return SearchOrderInfoAccessorImpl.getInstance().getStatus().stream().map(status -> handler.getMemberOrdersByStatus(id, status))
+				return SearchOrderInfoAccessorImpl.getInstance().getStatus().stream()
+						.map(status -> handler.getMemberOrdersByStatus(id, status))
 						.collect(Collectors.reducing((l1, l2) -> {
 							l1.addAll(l2);
 							return l1;
@@ -151,8 +152,8 @@ public final class MemberInfoCourier implements MemberInfoInteractor {
 			String id = getCurrentId();
 			if (id != null)
 
-				if (!handler.updatePassword(InfoModifyAccessorImpl.getInstance().getPasswordHash()
-						, InfoModifyAccessorImpl.getInstance().getPasswordHash()))
+				if (!handler.updatePassword(InfoModifyAccessorImpl.getInstance().getOldPasswordHash(),
+						InfoModifyAccessorImpl.getInstance().getNewPasswordHash()))
 					alertFail(title, "Wrong password");
 				else
 					alertSuccess(title, "Update password succeed");
@@ -168,7 +169,7 @@ public final class MemberInfoCourier implements MemberInfoInteractor {
 		boolean res = execute(title, () -> {
 			String id = getCurrentId();
 			if (id != null)
-				return handler.updateAdvancedInfo(modified);
+				return handler.updateBasicInfo(modified);
 
 			alertFail(title, "Not logged in yet");
 			return null;

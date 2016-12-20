@@ -74,17 +74,13 @@ public enum MemberDaoImpl implements MemberDao {
 	@Override
 	public MemberPo findMember(final String idString) {
 		int numId = parseId(idString);
-		return execute(session -> {
-			return (MemberPo) session.get(MemberPo.class, numId);
-		});
+		return execute(session -> (MemberPo) session.get(MemberPo.class, numId));
 	}
 
 	@Override
 	public boolean existsMember(final String idString) {
 		int numId = parseId(idString);
-		return execute(session -> {
-			return (MemberPo) session.get(MemberPo.class, numId) != null;
-		});
+		return execute(session -> (MemberPo) session.get(MemberPo.class, numId) != null);
 	}
 
 	/* parse an id string. if invalid, throw IAE. */
