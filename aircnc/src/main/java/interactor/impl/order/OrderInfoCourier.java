@@ -92,5 +92,23 @@ public class OrderInfoCourier implements OrderInfoInteractor{
 	public void execute() {
 		
 	}
+
+	@Override
+	public void makeComment() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void repeal() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void makeAppeal() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

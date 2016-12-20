@@ -19,4 +19,10 @@ public interface OrderInfoInteractor {
 	
 	public void getOrderInfoById(String orderId);
 	
+	public void makeComment();
+	
+	public void makeAppeal();
+	
+	public void repeal();
+	
 }
