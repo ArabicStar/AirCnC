@@ -21,9 +21,9 @@ import service.impl.hotel.HotelInfoManager;
  *
  */
 public interface HotelAccountInteractor {
-	public void login(final HotelLoginAccessor acs, HotelInfoManager man);
+	public boolean login();
 
-	public void logout();
+	public boolean logout();
 
-	public void refreshCurrentAccount(HotelInfoManager man);
+	public boolean refreshCurrentAccount();
 }

@@ -10,22 +10,26 @@ import interactor.hotel.HotelAccountInteractor;
 import interactor.utils.Dipatcher;
 import interactor.utils.Title;
 import presentation.hotel.accessor.HotelLoginAccessor;
+import presentation.hotel.accessor.impl.HotelLoginAccessorImpl;
+import presentation.hotel.manager.InfoManager;
+import presentation.hotel.manager.impl.InfoManagerImpl;
 import service.hotel.HotelAccountService;
 import service.impl.hotel.HotelInfoManager;
 import utils.info.hotel.HotelInfo;
 import utils.info.member.MemberInfo;
+import vo.hotel.HotelVoBuilder;
 
-public class HotelAccountCourier implements HotelAccountInteractor{
+public class HotelAccountCourier implements HotelAccountInteractor {
 	/* singleton */
 	private static HotelAccountInteractor instance;
-	
+
 	public static final HotelAccountInteractor launch(HotelAccountService handler) {
 		if (instance != null)
 			throw duplicateSingletonEx();
 
 		return instance = new HotelAccountCourier(handler);
 	}
-	
+
 	public static final HotelAccountInteractor getInstance() {
 		if (instance == null)
 			throw singletonNotExistsEx();
@@ -39,10 +43,11 @@ public class HotelAccountCourier implements HotelAccountInteractor{
 	private HotelAccountCourier(HotelAccountService handler) {
 		this.handler = handler;
 	}
-	
+
 	@Override
 	@Title("Login")
-	public void login(HotelLoginAccessor acs, HotelInfoManager man) {
+	public boolean login() {
+		HotelLoginAccessor acs = HotelLoginAccessorImpl.getInstance();
 		String title = getTitle();
 		HotelInfo info = execute(title, () -> {
 			HotelInfo tmp = handler.login(acs.getName(), acs.getPasswordHash());
@@ -56,25 +61,24 @@ public class HotelAccountCourier implements HotelAccountInteractor{
 			return tmp;
 		});
 
-//		man.setHotel(info);
-		
+		InfoManagerImpl.getInstance().setHotel(new HotelVoBuilder(info).getHotelInfo());
+		return info != null;
+
 	}
 
 	@Override
 	@Title("Log Out")
-	public void logout() {
-		// TODO Auto-generated method stub
-		execute(getTitle(), () -> {
-			return handler.logout();
-		});
+	public boolean logout() {
+		return execute(getTitle(), () -> handler.logout());
 	}
 
 	@Override
 	@Title("Refresh Account")
-	public void refreshCurrentAccount(HotelInfoManager man) {
-		execute(getTitle(), () -> {
-			return handler.refreshCurrentAccount();
-		});
+	public boolean refreshCurrentAccount() {
+		HotelInfo info = execute(getTitle(), () -> handler.refreshCurrentAccount());
+		InfoManagerImpl.getInstance().setHotel(new HotelVoBuilder(info).getHotelInfo());
+		return info != null;
+
 	}
 
 }
