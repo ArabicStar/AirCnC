@@ -1,6 +1,10 @@
 package utils.info.promotion;
 
 public abstract class PromotionInfo extends PromotionInfoTemplate {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1594812134845326912L;
 	protected boolean isActive;
 	protected boolean isValid;
 

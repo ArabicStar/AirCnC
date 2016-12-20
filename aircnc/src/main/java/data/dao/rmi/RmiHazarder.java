@@ -9,6 +9,7 @@ public final class RmiHazarder {
 		try {
 			return op.doSomething();
 		} catch (RemoteException e) {
+			e.printStackTrace();
 			throw packedRmiEx(e);
 		}
 	}

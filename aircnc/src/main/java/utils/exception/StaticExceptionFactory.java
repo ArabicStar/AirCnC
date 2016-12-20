@@ -39,6 +39,11 @@ public class StaticExceptionFactory {
 				getPromptHead().append(ILLEGAL_IDENTIFIER_EX_PROMPT).append(idName).toString());
 	}
 
+	public static final IllegalArgumentException illegalArgEx(String idName, Object value) {
+		return new IllegalArgumentException(getPromptHead().append(ILLEGAL_IDENTIFIER_EX_PROMPT).append(idName)
+				.append(": ").append(value).toString());
+	}
+
 	public static final IllegalArgumentException inconsistentStatusEx() {
 		return new IllegalArgumentException(getPromptHead().append(INCONSISTENT_STATUS_EX_PROMPT).toString());
 	}
@@ -60,7 +65,7 @@ public class StaticExceptionFactory {
 		StackTraceElement[] stack = new Throwable().getStackTrace();
 		return stack[3].getMethodName();
 	}
-	
+
 	public static final IllegalStateException accessorNotReadyEx() {
 		return new IllegalStateException(getPromptHead().append(ACCESSOR_NOT_READY_EX_PROMPT).toString());
 	}

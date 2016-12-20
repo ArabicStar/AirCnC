@@ -19,6 +19,11 @@ import utils.info.member.MemberInfo;
  *
  */
 public abstract class MemberPo extends MemberInfo {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8984994455850219389L;
 	protected int passwordHash;
 	protected int numId = Integer.MIN_VALUE;
 

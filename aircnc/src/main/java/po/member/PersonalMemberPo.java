@@ -9,6 +9,12 @@ import java.time.LocalDate;
  *
  */
 public class PersonalMemberPo extends MemberPo {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1606964798670677995L;
+
 	protected PersonalMemberPo() {
 		super(Type.PERSONAL);
 	}

@@ -100,7 +100,7 @@ public final class MarketInfoManager implements MarketInfoService{
 		if(websitePromotionInfoService == null)
 			throw unsupportedOpEx("get market promotion info");
 		
-		Set<PromotionVo> res = websitePromotionInfoService.getUserAvailablePromotions();
+		Set<PromotionVo> res = websitePromotionInfoService.getUserAvailableWebsitePromotions();
 
 		// given id not exists, return
 		if (res == null)

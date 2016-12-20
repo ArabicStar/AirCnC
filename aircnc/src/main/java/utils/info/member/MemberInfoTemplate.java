@@ -1,5 +1,6 @@
 package utils.info.member;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
@@ -9,7 +10,12 @@ import java.time.LocalDate;
  * @author ClevelandAlto
  * 
  */
-public abstract class MemberInfoTemplate {
+public abstract class MemberInfoTemplate implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3559652130983941531L;
+
 	protected enum Type {
 		PERSONAL, BUSINESS
 	}

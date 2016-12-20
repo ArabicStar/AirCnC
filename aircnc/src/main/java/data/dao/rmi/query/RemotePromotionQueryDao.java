@@ -6,8 +6,12 @@ import java.util.Set;
 
 import po.promotion.PromotionPo;
 
-public interface RemotePromotionQueryDao extends Remote{
-	public Set<PromotionPo> getHotelAllPromotions(int hotelId)throws RemoteException;
+public interface RemotePromotionQueryDao extends Remote {
+	public Set<PromotionPo> getHotelAllPromotions(int hotelId) throws RemoteException;
 
-	public Set<PromotionPo> getWebsiteAllPromotions()throws RemoteException;
+	public Set<PromotionPo> getWebsiteAllPromotions() throws RemoteException;
+
+	public PromotionPo getHotelPromotion(long id) throws RemoteException;
+
+	public PromotionPo getWebsitePromotion(long id) throws RemoteException;
 }

@@ -17,11 +17,12 @@ public class HotelPromotionApplicationManager implements HotelPromotionApplicati
 	/* Singleton */
 	private static HotelPromotionApplicationManager instance;
 
-	public static HotelPromotionApplicationManager launch() {
+	public static HotelPromotionApplicationManager launch(HotelPromotionInfoService infoService,
+			OrderRelatedInfoHelper helper) {
 		if (instance != null)
 			throw duplicateSingletonEx();
 
-		return instance = new HotelPromotionApplicationManager();
+		return instance = new HotelPromotionApplicationManager(infoService, helper);
 	}
 
 	public static HotelPromotionApplicationManager getInstance() {
@@ -32,8 +33,14 @@ public class HotelPromotionApplicationManager implements HotelPromotionApplicati
 	}
 	/* Singleton */
 
-	private HotelPromotionApplicationManager() {
-
+	/**
+	 * @param infoService
+	 * @param helper
+	 */
+	private HotelPromotionApplicationManager(HotelPromotionInfoService infoService, OrderRelatedInfoHelper helper) {
+		super();
+		this.infoService = infoService;
+		this.helper = helper;
 	}
 
 	private HotelPromotionInfoService infoService;
@@ -42,7 +49,7 @@ public class HotelPromotionApplicationManager implements HotelPromotionApplicati
 	@Override
 	public OrderInfo applyPromotion(OrderInfo info) {
 		final OrderInfo tmp = info;
-		final Set<Promotion> available = infoService.getUserAvailablePromotions(info.getHotelId()).stream()
+		final Set<Promotion> available = infoService.getUserAvailableHotelPromotions(info.getHotelId()).stream()
 				.map(vo -> vo.getPromotion()).filter(p -> p.canApplyTo(tmp, helper)).collect(Collectors.toSet());
 
 		for (Promotion promotion : available)

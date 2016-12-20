@@ -3,6 +3,10 @@ package po.promotion;
 import utils.info.promotion.PromotionInfo;
 
 public abstract class PromotionPo extends PromotionInfo {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2632127862859343261L;
 	protected String contentString;
 
 	PromotionPo(Scope scope) {

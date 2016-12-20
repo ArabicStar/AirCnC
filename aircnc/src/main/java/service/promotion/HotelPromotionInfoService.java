@@ -5,5 +5,7 @@ import java.util.Set;
 import vo.promotion.PromotionVo;
 
 public interface HotelPromotionInfoService {
-	public Set<PromotionVo> getUserAvailablePromotions(int hotelId);
+	public Set<PromotionVo> getUserAvailableHotelPromotions(int hotelId);
+
+	public PromotionVo getHotelPromotion(long id);
 }

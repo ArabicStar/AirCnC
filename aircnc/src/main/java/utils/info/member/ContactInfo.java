@@ -1,5 +1,7 @@
 package utils.info.member;
 
+import java.io.Serializable;
+
 /**
  * Abstract of contact info.<br>
  * Immutable object.<br>
@@ -9,7 +11,12 @@ package utils.info.member;
  * @author ClevelandAlto
  * @see utils.info.member.ContactInfoBuilder
  */
-public abstract class ContactInfo extends ContactInfoTemplate {
+public abstract class ContactInfo extends ContactInfoTemplate implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4820188152925515423L;
 
 	/**
 	 * Default initialization. <br>

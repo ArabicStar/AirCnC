@@ -1,6 +1,12 @@
 package utils.info.promotion;
 
-public abstract class PromotionInfoTemplate {
+import java.io.Serializable;
+
+public abstract class PromotionInfoTemplate implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2832349554224418817L;
 	protected static String BLANK = "";
 
 	public enum Scope {

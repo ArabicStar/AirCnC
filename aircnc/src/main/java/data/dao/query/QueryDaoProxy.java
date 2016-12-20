@@ -50,7 +50,6 @@ public final class QueryDaoProxy implements CreditQueryDao, OrderQueryDao, Promo
 	private RemoteCreditQueryDao remoteCreditQueryDao;
 
 	public void loadRemoteCreditQueryDao(RemoteCreditQueryDao remoteCreditQueryDao) {
-
 		this.remoteCreditQueryDao = remoteCreditQueryDao;
 	}
 
@@ -85,25 +84,17 @@ public final class QueryDaoProxy implements CreditQueryDao, OrderQueryDao, Promo
 	@Override
 	public List<OrderPo> searchByMember(String memberId) {
 
-		return hazard(() -> {
-			return remoteOrderQueryDao.searchByMember(memberId);
-		});
+		return hazard(() -> remoteOrderQueryDao.searchByMember(memberId));
 	}
 
 	@Override
 	public List<OrderPo> searchByHotel(int hotelId) {
-
-		return hazard(() -> {
-			return remoteOrderQueryDao.searchByHotel(hotelId);
-		});
+		return hazard(() -> remoteOrderQueryDao.searchByHotel(hotelId));
 	}
 
 	@Override
 	public List<OrderPo> searchByStatus(OrderStatus status) {
-
-		return hazard(() -> {
-			return remoteOrderQueryDao.searchByStatus(status);
-		});
+		return hazard(() -> remoteOrderQueryDao.searchByStatus(status));
 	}
 
 	/*
@@ -119,18 +110,23 @@ public final class QueryDaoProxy implements CreditQueryDao, OrderQueryDao, Promo
 
 	@Override
 	public Set<PromotionPo> getHotelAllPromotions(int hotelId) {
-		return hazard(() -> {
-			return remotePromotionQueryDao.getHotelAllPromotions(hotelId);
-		});
+		return hazard(() -> remotePromotionQueryDao.getHotelAllPromotions(hotelId));
 
 	}
 
 	@Override
 	public Set<PromotionPo> getWebsiteAllPromotions() {
-		return hazard(() -> {
-			return remotePromotionQueryDao.getWebsiteAllPromotions();
-		});
+		return hazard(() -> remotePromotionQueryDao.getWebsiteAllPromotions());
+	}
 
+	@Override
+	public PromotionPo getHotelPromotion(long id) {
+		return hazard(() -> remotePromotionQueryDao.getHotelPromotion(id));
+	}
+
+	@Override
+	public PromotionPo getWebsitePromotion(long id) {
+		return hazard(() -> remotePromotionQueryDao.getWebsitePromotion(id));
 	}
 
 	/*
@@ -146,22 +142,16 @@ public final class QueryDaoProxy implements CreditQueryDao, OrderQueryDao, Promo
 
 	@Override
 	public HotelPo searchById(int hotelId) {
-		return hazard(() -> {
-			return remoteHotelQueryDao.searchById(hotelId);
-		});
+		return hazard(() -> remoteHotelQueryDao.searchById(hotelId));
 	}
 
 	@Override
 	public HotelPo searchByName(String name) {
-		return hazard(() -> {
-			return remoteHotelQueryDao.searchByName(name);
-		});
+		return hazard(() -> remoteHotelQueryDao.searchByName(name));
 	}
 
 	@Override
 	public List<HotelPo> searchByCriteria(DetachedCriteria dc) {
-		return hazard(() -> {
-			return remoteHotelQueryDao.searchByCriteria(dc);
-		});
+		return hazard(() -> remoteHotelQueryDao.searchByCriteria(dc));
 	}
 }

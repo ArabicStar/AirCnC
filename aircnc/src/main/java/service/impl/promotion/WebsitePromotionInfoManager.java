@@ -41,7 +41,12 @@ public class WebsitePromotionInfoManager implements WebsitePromotionInfoService 
 	}
 
 	@Override
-	public Set<PromotionVo> getUserAvailablePromotions() {
+	public Set<PromotionVo> getUserAvailableWebsitePromotions() {
 		return container.getPractical();
+	}
+
+	@Override
+	public PromotionVo getWebsitePromotion(long id) {
+		return container.getPromotion(id);
 	}
 }

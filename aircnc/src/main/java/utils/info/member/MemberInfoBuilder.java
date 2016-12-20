@@ -164,8 +164,8 @@ public abstract class MemberInfoBuilder extends MemberInfoTemplate {
 	 * @return if all fields are valid <br>
 	 */
 	public boolean isReady() {
-		// System.out.println(id + " " + name + " " + contact + " " + type + " "
-		// + enterprise + " " + birthday);
+//		 System.err.println(id + " " + name + " " + contact + " " + type + " "
+//		 + enterprise + " " + birthday);
 		return id != null && name != null && contact != null
 				&& (type == Type.BUSINESS ? enterprise != null : birthday != null);
 	}

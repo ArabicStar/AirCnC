@@ -68,7 +68,6 @@ public class MemberDaoProxy implements CreditDao, MemberDao {
 	}
 
 	@Override
-
 	public boolean addMember(MemberPo po) {
 		return hazard(() -> {
 			return memberDao.addMember(po);

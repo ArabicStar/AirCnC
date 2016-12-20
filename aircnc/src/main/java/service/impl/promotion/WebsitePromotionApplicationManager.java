@@ -49,7 +49,7 @@ public class WebsitePromotionApplicationManager implements WebsitePromotionAppli
 	@Override
 	public OrderInfo applyPromotion(OrderInfo info) {
 		final OrderInfo tmp = info;
-		final Set<Promotion> available = infoService.getUserAvailablePromotions().stream().map(vo -> vo.getPromotion())
+		final Set<Promotion> available = infoService.getUserAvailableWebsitePromotions().stream().map(vo -> vo.getPromotion())
 				.filter(p -> p.canApplyTo(tmp, helper)).collect(Collectors.toSet());
 
 		for (Promotion promotion : available)

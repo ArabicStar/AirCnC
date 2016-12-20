@@ -231,7 +231,7 @@ public final class MemberServiceProxy extends AccessSecureProxy
 	public MemberVo recoverByDelay(OrderVo order) {
 		checkAuthentication();
 
-		return recoverByDelay(order);
+		return creditService.recoverByDelay(order);
 	}
 
 	@Override
@@ -239,6 +239,6 @@ public final class MemberServiceProxy extends AccessSecureProxy
 	public MemberVo recoverByAppeal(OrderVo order) {
 		checkAuthentication();
 
-		return recoverByAppeal(order);
+		return creditService.recoverByAppeal(order);
 	}
 }

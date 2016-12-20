@@ -15,11 +15,11 @@ public class HotelPromotionInfoManager implements HotelPromotionInfoService {
 	/* Singleton */
 	private static HotelPromotionInfoManager instance;
 
-	public static HotelPromotionInfoManager launch() {
+	public static HotelPromotionInfoManager launch(PromotionQueryDao dao) {
 		if (instance != null)
 			throw duplicateSingletonEx();
 
-		return instance = new HotelPromotionInfoManager();
+		return instance = new HotelPromotionInfoManager(dao);
 	}
 
 	public static HotelPromotionInfoManager getInstance() {
@@ -30,16 +30,25 @@ public class HotelPromotionInfoManager implements HotelPromotionInfoService {
 	}
 	/* Singleton */
 
-	private HotelPromotionInfoManager() {
-
-	}
-
 	private PromotionQueryDao dao;
 
+	/**
+	 * @param dao
+	 */
+	private HotelPromotionInfoManager(PromotionQueryDao dao) {
+		super();
+		this.dao = dao;
+	}
+
 	@Override
-	public Set<PromotionVo> getUserAvailablePromotions(int hotelId) {
+	public Set<PromotionVo> getUserAvailableHotelPromotions(int hotelId) {
 		return dao.getHotelAllPromotions(hotelId).stream().map(po -> new PromotionVoBuilder(po).getPromotionInfo())
 				.filter(vo -> vo.getPractical()).collect(Collectors.toSet());
+	}
+
+	@Override
+	public PromotionVo getHotelPromotion(long id) {
+		return new PromotionVoBuilder(dao.getHotelPromotion(id)).getPromotionInfo();
 	}
 
 }

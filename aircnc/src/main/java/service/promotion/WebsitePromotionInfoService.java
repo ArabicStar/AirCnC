@@ -5,7 +5,9 @@ import java.util.Set;
 import vo.promotion.PromotionVo;
 
 public interface WebsitePromotionInfoService {
-	public Set<PromotionVo> getUserAvailablePromotions();
+	public Set<PromotionVo> getUserAvailableWebsitePromotions();
+
+	public PromotionVo getWebsitePromotion(long id);
 
 	public void refreshBuffer();
 }

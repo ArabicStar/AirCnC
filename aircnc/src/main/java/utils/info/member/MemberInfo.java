@@ -1,5 +1,6 @@
 package utils.info.member;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
@@ -11,7 +12,13 @@ import java.time.LocalDate;
  * @author ClevelandAlto
  *
  */
-public abstract class MemberInfo extends MemberInfoTemplate {
+public abstract class MemberInfo extends MemberInfoTemplate implements Serializable {
+
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3515903786389626015L;
 
 	/**
 	 * mark a MemberInfo instance is valid or not. <br>

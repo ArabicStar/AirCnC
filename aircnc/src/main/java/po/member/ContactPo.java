@@ -16,6 +16,10 @@ import utils.info.member.ContactInfo;
  */
 public class ContactPo extends ContactInfo {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4897829587961143781L;
+	/**
 	 * Identifier, no need to set mannully
 	 */
 	private int cid;

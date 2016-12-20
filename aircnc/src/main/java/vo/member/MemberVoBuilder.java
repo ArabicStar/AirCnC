@@ -19,6 +19,7 @@ public class MemberVoBuilder extends MemberInfoBuilder {
 
 	public MemberVoBuilder(String type) {
 		super(type);
+		contact=new ContactVo();
 	}
 
 	public MemberVoBuilder(MemberInfo info) {

@@ -22,7 +22,7 @@ public enum PromotionQueryDaoImpl implements PromotionQueryDao {
 	@Override
 	public Set<PromotionPo> getHotelAllPromotions(int hotelId) {
 		if (!HotelInfoTemplate.checkID(hotelId))
-			throw illegalArgEx("Hotel id: " + hotelId);
+			throw illegalArgEx("Hotel id", hotelId);
 
 		return execute(session -> {
 			Criteria c = session.createCriteria(HotelPromotionPo.class);
@@ -45,6 +45,16 @@ public enum PromotionQueryDaoImpl implements PromotionQueryDao {
 
 			return new HashSet<>(list);
 		});
+	}
+
+	@Override
+	public PromotionPo getHotelPromotion(long id) {
+		return execute(session -> session.get(HotelPromotionPo.class, id));
+	}
+
+	@Override
+	public PromotionPo getWebsitePromotion(long id) {
+		return execute(session -> session.get(WebsitePromotionPo.class, id));
 	}
 
 }

@@ -13,6 +13,11 @@ import java.time.LocalDate;
  */
 public class EnterpriseMemberPo extends MemberPo {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 663736533819635976L;
+
 	protected EnterpriseMemberPo() {
 		super(Type.BUSINESS);
 	}

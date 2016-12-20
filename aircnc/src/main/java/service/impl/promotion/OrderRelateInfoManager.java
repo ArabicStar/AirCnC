@@ -8,8 +8,6 @@ import java.time.LocalDate;
 
 import data.dao.member.MemberDao;
 import data.dao.query.HotelQueryDao;
-import service.query.HotelQueryService;
-import service.query.MemberQueryService;
 import utils.info.hotel.HotelInfo;
 import utils.info.member.MemberInfo;
 import utils.promotion.OrderRelatedInfoHelper;

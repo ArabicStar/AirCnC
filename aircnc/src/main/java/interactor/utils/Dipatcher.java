@@ -12,6 +12,8 @@ public interface Dipatcher<Handler, rType> {
 		try {
 			return d.dipatch();
 		} catch (Exception e) {
+			e.printStackTrace();
+			
 			if (e.getCause() != null && e.getCause() instanceof RemoteException)
 				alertFail(title, title + "Failed - Network Error, please check you network");
 			else

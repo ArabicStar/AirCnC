@@ -85,17 +85,13 @@ public final class MemberAccountCourier implements MemberAccountInteractor {
 	@Override
 	@Title("Logout")
 	public boolean logout() {
-		return execute(getTitle(), () -> {
-			return handler.logout();
-		});
+		return execute(getTitle(), () -> handler.logout());
 	}
 
 	@Override
 	@Title("Refresh Account")
 	public boolean refreshCurrentAccount() {
-		MemberInfo info = execute(getTitle(), () -> {
-			return handler.refreshCurrentAccount();
-		});
+		MemberInfo info = execute(getTitle(), () -> handler.refreshCurrentAccount());
 
 		MemberInfoManagerImpl.getInstance().setUser(info);
 		return info != null;

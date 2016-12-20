@@ -12,11 +12,12 @@ public class PromotionApplicationManager implements PromotionApplicationService 
 	/* Singleton */
 	private static PromotionApplicationManager instance;
 
-	public static PromotionApplicationManager launch() {
+	public static PromotionApplicationManager launch(HotelPromotionApplicationService hotel,
+			WebsitePromotionApplicationService website) {
 		if (instance != null)
 			throw duplicateSingletonEx();
 
-		return instance = new PromotionApplicationManager();
+		return instance = new PromotionApplicationManager(hotel, website);
 	}
 
 	public static PromotionApplicationManager getInstance() {
@@ -27,11 +28,19 @@ public class PromotionApplicationManager implements PromotionApplicationService 
 	}
 	/* Singleton */
 
-	private PromotionApplicationManager() {
+	private HotelPromotionApplicationService hotel;
 
+	/**
+	 * @param hotel
+	 * @param website
+	 */
+	private PromotionApplicationManager(HotelPromotionApplicationService hotel,
+			WebsitePromotionApplicationService website) {
+		super();
+		this.hotel = hotel;
+		this.website = website;
 	}
 
-	private HotelPromotionApplicationService hotel;
 	private WebsitePromotionApplicationService website;
 
 	@Override

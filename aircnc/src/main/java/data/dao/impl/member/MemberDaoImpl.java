@@ -1,5 +1,6 @@
 package data.dao.impl.member;
 
+import static utils.exception.StaticExceptionFactory.*;
 import static data.hibernate.Hibernator.execute;
 
 import data.dao.member.MemberDao;
@@ -89,7 +90,7 @@ public enum MemberDaoImpl implements MemberDao {
 	/* parse an id string. if invalid, throw IAE. */
 	private static final int parseId(final String id) {
 		if (!MemberPo.checkID(id))
-			throw new IllegalArgumentException("MemberDaoImpl.parseId - Wrong ID");
+			throw illegalArgEx("Member id", id);
 
 		return Integer.parseInt(id);
 	}
