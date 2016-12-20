@@ -23,4 +23,8 @@ public interface SupremeSearchAccessor {
 	public void setGrade(double grade);
 	
 	public void setStarRange(int low,int high);
+	
+	public void setScope(String scope);
+	
+	public void setName(String name);
 }

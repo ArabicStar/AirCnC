@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import presentation.member.manager.impl.CreditChangeManagerImpl;
+import presentation.member.manager.impl.HistoryOrderManagerImpl;
 import presentation.member.manager.impl.MemberInfoManagerImpl;
 import presentation.member.manager.impl.MyOrderManagerImpl;
 import presentation.member.manager.impl.SearchHotelManagerImpl;
@@ -66,6 +67,7 @@ public class MemberTest {
 		list.add(vo2);
 		list.add(vo3);
 		MyOrderManagerImpl.getInstance().setOrderList(list);
+		HistoryOrderManagerImpl.getInstance().setOrderList(list);
 	}
 
 	public void getCreditData() {

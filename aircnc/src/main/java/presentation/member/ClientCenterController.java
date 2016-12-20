@@ -37,8 +37,6 @@ public class ClientCenterController extends Application {
 
 	private AnchorPane rootLayout;
 	private AnchorPane content;
-	
-	private MemberTest test;
 
 	private final static int Client_Width = 1024;
 	private final static int Client_Height = 768;
@@ -47,7 +45,7 @@ public class ClientCenterController extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		this.primaryStage = primaryStage;
 
-		//primaryStage.initStyle(StageStyle.UNDECORATED);
+		primaryStage.initStyle(StageStyle.UNDECORATED);
 		primaryStage.setTitle("AirCnC");
 
 		// show the pane of sign in.
@@ -61,8 +59,6 @@ public class ClientCenterController extends Application {
 		// addSignInPane();
 
 		primaryStage.show();
-		
-		test = new MemberTest();
 
 	}
 
@@ -96,7 +92,6 @@ public class ClientCenterController extends Application {
 	}
 
 	public void addSearchHotelPane() {
-		//test.getSearchedData();
 		content.getChildren().clear();
 		if(!SearchHotelManagerImpl.isLaunched())
 			SearchHotelManagerImpl.launch();
@@ -108,7 +103,6 @@ public class ClientCenterController extends Application {
 		
 		if(result.isPresent()){
 			SearchHotelInfoAccessorImpl.getInstance().setScope(result.get());
-			test.getSearchedData();
 			searchMain = new MemberSearchHotelPane();
 			content.getChildren().add(searchMain.getPane());
 			AnchorPane.setTopAnchor(searchMain.getPane(), 0.0);
@@ -120,7 +114,6 @@ public class ClientCenterController extends Application {
 	}
 	
 	public void addOrderMainPane() {
-		test.getMyOrderData();
 		content.getChildren().clear();
 		orderMain = new MemberOrderMainPane();
 		content.getChildren().add(orderMain.getPane());

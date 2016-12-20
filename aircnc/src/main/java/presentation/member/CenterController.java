@@ -22,6 +22,7 @@ import presentation.member.accessor.impl.SearchHotelInfoAccessorImpl;
 import presentation.member.accessor.impl.SearchOrderInfoAccessorImpl;
 import presentation.member.accessor.impl.SupremeSearchAccessorImpl;
 import presentation.member.manager.impl.CreditChangeManagerImpl;
+import presentation.member.manager.impl.HistoryOrderManagerImpl;
 import presentation.member.manager.impl.HotelCommentManagerImpl;
 import presentation.member.manager.impl.HotelPromotionManagerImpl;
 import presentation.member.manager.impl.MemberInfoManagerImpl;
@@ -51,6 +52,7 @@ public class CenterController extends Application {
 
 	private final static int Login_Width = 550;
 	private final static int Login_Height = 385;
+	private MemberTest test;
 
 	public static void main(String[] args) throws Exception {
 		launch(args);
@@ -82,6 +84,13 @@ public class CenterController extends Application {
 		SearchHotelManagerImpl.launch();
 		HotelCommentManagerImpl.launch();
 		HotelPromotionManagerImpl.launch();
+		HistoryOrderManagerImpl.launch();
+		
+		test = new MemberTest();
+		test.getSearchedData();
+		test.getMyOrderData();
+		test.getCreditData();
+		test.getUserData();
 		
 		this.primaryStage = primaryStage;
 

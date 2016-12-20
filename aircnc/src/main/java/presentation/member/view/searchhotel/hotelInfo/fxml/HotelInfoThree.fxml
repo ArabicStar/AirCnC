@@ -23,6 +23,5 @@
             <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="page-now" text="4" />
          </children>
       </HBox>
-      <Button layoutX="580.0" layoutY="475.0" mnemonicParsing="false" styleClass="reserve" text="预定房间" />
    </children>
 </Pane>
