@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import presentation.member.manager.CreditChangeManager;
 import presentation.member.model.CreditModel;
 import vo.member.credit.CreditChangeVo;
+import vo.order.OrderVo;
 
 /**
  * the manager of member credit info
@@ -66,6 +67,24 @@ public class CreditChangeManagerImpl implements CreditChangeManager{
 		while(it.hasNext())
 			creditChangesData.add(new CreditModel(it.next()));
 		return creditChangesData;
+	}
+
+	@Override
+	public boolean setCauseOrder(OrderVo vo) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public String getCauseHotelName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getCauseTime() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -4,7 +4,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="603.0" prefWidth="777.0" stylesheets="@../css/HotelInfoTwo.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.member.view.searchhotel.hotelInfo.fxml.HotelInfoTwoController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="603.0" prefWidth="777.0" stylesheets="@../css/HotelInfoTwo.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.manage.view.hotelmanage.fxml.HotelInfoTwoController">
    <children>
       <Label layoutX="41.0" layoutY="27.0" styleClass="title" text="优惠详细" />
       <Label fx:id="description" layoutX="60.0" layoutY="78.0" styleClass="content" text="Label" />

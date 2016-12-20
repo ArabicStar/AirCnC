@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="603.0" prefWidth="777.0" stylesheets="@../css/HotelInfoOne.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.member.view.searchhotel.hotelInfo.fxml.HotelInfoOneController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="603.0" prefWidth="777.0" stylesheets="@../css/HotelInfoOne.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.manage.view.hotelmanage.fxml.HotelInfoOneController">
    <children>
       <VBox layoutX="49.0" layoutY="27.0" prefHeight="461.0" prefWidth="687.0">
          <children>

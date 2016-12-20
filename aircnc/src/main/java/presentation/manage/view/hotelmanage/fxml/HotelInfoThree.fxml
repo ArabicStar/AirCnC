@@ -4,7 +4,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="603.0" prefWidth="777.0" stylesheets="@../css/HotelInfoThree.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.member.view.searchhotel.hotelInfo.fxml.HotelInfoThreeController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="603.0" prefWidth="777.0" stylesheets="@../css/HotelInfoThree.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.manage.view.hotelmanage.fxml.HotelInfoThreeController">
    <children>
       <ScrollPane hbarPolicy="NEVER" layoutX="30.0" layoutY="14.0" prefHeight="487.0" prefWidth="713.0" styleClass="scollpane">
         <content>

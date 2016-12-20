@@ -8,15 +8,15 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import presentation.member.manager.HotelPromotionManager;
-import presentation.member.manager.impl.HotelPromotionManagerImpl;
+import presentation.manage.manager.HotelManagePromotionManager;
+import presentation.manage.manager.impl.HotelManagePromotionManagerImpl;
 
 public class HotelInfoTwoController implements Initializable{
 
 	@FXML
 	public Label description;
 	
-	private HotelPromotionManager manager;
+	private HotelManagePromotionManager manager;
 	
 	private List<String> descriptionList;
 	
@@ -25,10 +25,10 @@ public class HotelInfoTwoController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		if(!HotelPromotionManagerImpl.isLaunched()){
-			HotelPromotionManagerImpl.launch();
+		if(!HotelManagePromotionManagerImpl.isLaunched()){
+			HotelManagePromotionManagerImpl.launch();
 		}
-		manager = HotelPromotionManagerImpl.getInstance();
+		manager = HotelManagePromotionManagerImpl.getInstance();
 		
 		Platform.runLater(new Runnable() {
 			  @Override public void run() {
