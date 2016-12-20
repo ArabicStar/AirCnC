@@ -14,6 +14,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import presentation.manage.CenterController;
 import presentation.manage.ManageTest;
@@ -24,6 +25,7 @@ import presentation.manage.manager.impl.HotelManageInfoManagerImpl;
 import presentation.manage.model.HotelManageModel;
 import presentation.manage.utils.cell.HotelManageButtonCell;
 import presentation.manage.utils.dialog.PlainDialog;
+import presentation.manage.view.hotelmanage.HotelInfoMainPane;
 import vo.hotel.HotelVo;
 
 /**
@@ -56,6 +58,10 @@ public class HotelManageMainController implements Initializable{
 	private ObservableList<HotelManageModel> models;
 	private HotelManageMainController hotController = this;
 	
+	private HotelInfoMainPane detailedInfo;
+	private HotelManageModel model;
+	private AnchorPane rootLayout;
+	
 	@SuppressWarnings("unused")
 	private CenterController centerController;
 	
@@ -72,7 +78,7 @@ public class HotelManageMainController implements Initializable{
 			ManageTest.getHotelData();
 			accessor.setId(hotelId.getText());
 			models = manager.getHotelInfoList();
-			
+			model = models.get(0);
 			hotelTable.setItems(models);
 			hotelName.setCellValueFactory(cellData -> cellData.getValue().hotelNameProperty());
 			id.setCellValueFactory(cellData -> cellData.getValue().idProperty());
@@ -101,9 +107,30 @@ public class HotelManageMainController implements Initializable{
 		}
 	}
 	
+	public void setHotelModel(HotelManageModel model){
+		this.model = model;
+	}
+	
+	public void setRootLayout(AnchorPane pane){
+		this.rootLayout = pane;
+	}
+	
+	@FXML
+	public void handleDetailedInfo(){
+		detailedInfo = new HotelInfoMainPane(model);
+		rootLayout.getChildren().add(detailedInfo.getAnchorPane());
+		AnchorPane.setTopAnchor(detailedInfo.getAnchorPane(), 0.0);
+		detailedInfo.getController().setController(this);
+	}
+	
+	public void removeDetailedInfo(){
+		rootLayout.getChildren().remove(rootLayout.getChildren().size()-1);
+	}
+	
 	public void setCenterController(CenterController controller){
 		this.centerController = controller;
 	}
 	
 	
-}
+} 
+

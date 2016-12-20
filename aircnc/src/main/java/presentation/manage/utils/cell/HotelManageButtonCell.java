@@ -74,7 +74,7 @@ public class HotelManageButtonCell extends TableCell<HotelManageModel, HotelVo> 
 
 				switch (type) {
 				case CHECK:
-					
+					controller.handleDetailedInfo();
 					break;
 				case MODIFY:
 					break;

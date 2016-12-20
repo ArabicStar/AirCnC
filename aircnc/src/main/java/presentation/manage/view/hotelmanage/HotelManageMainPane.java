@@ -32,7 +32,7 @@ public class HotelManageMainPane {
             loader.load();
             controller = loader.getController();
 			rootLayout = loader.getRoot();
-
+			controller.setRootLayout(rootLayout);
         } catch (IOException e) {
             e.printStackTrace();
         }

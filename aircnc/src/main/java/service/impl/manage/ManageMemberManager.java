@@ -64,8 +64,15 @@ public class ManageMemberManager implements ManageMemberService{
 
 	@Override
 	public MemberInfo getMemberInfo(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		if (dao == null)
+			throw unsupportedOpEx("get manage member info");
+
+		if (!MemberInfo.checkID(id))
+			throw illegalArgEx("Member id");
+
+		final MemberPo po = dao.findMember(id);
+
+		return po == null ? null : new MemberVoBuilder(dao.findMember(id)).getMemberInfo();
 	}
 
 }

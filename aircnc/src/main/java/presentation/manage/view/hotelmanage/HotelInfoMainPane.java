@@ -1,4 +1,4 @@
-package presentation.member.view.searchhotel.hotelInfo;
+package presentation.manage.view.hotelmanage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -6,15 +6,15 @@ import java.net.URL;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.layout.AnchorPane;
-import presentation.member.model.SearchHotelsModel;
-import presentation.member.view.searchhotel.hotelInfo.fxml.HotelInfoMainController;
+import presentation.manage.model.HotelManageModel;
+import presentation.manage.view.hotelmanage.fxml.HotelInfoMainController;
 
 public class HotelInfoMainPane {
 	private AnchorPane rootLayout;
 	private HotelInfoMainController controller;
-	private SearchHotelsModel model;
+	private HotelManageModel model;
 	
-	public HotelInfoMainPane(SearchHotelsModel model){
+	public HotelInfoMainPane(HotelManageModel model){
 		this.model = model;
 		initRootLayout();
 	}

@@ -92,7 +92,6 @@ public class MemberSearchHotelGeneralController implements Initializable{
 		detailedInfo.getController().setController(this);
 	}
 	
-	@FXML
 	public void removeDetailedInfo(){
 		rootLayout.getChildren().remove(rootLayout.getChildren().size()-1);
 	}

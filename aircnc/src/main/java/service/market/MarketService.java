@@ -3,7 +3,7 @@ package service.market;
 import java.util.List;
 
 import vo.order.OrderVo;
-import vo.promotion.PromotionVo;
+import vo.promotion.WebsitePromotionVo;
 
 public interface MarketService {
 
@@ -16,7 +16,11 @@ public interface MarketService {
 	 * @param  id
 	 * @return	获取促销策略
 	 */
-	public boolean makeMarketPromotion(PromotionVo promotion);
+	public boolean makeMarketPromotion(WebsitePromotionVo promotion);
+	
+	public boolean deletePromotion(WebsitePromotionVo vo);
+	
+	public boolean updatePromotion(WebsitePromotionVo vo);
 	
 	public boolean creditCharge(int money, String id);
 

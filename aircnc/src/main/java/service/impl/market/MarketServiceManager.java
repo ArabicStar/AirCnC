@@ -5,16 +5,14 @@ import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 import static utils.exception.StaticExceptionFactory.unsupportedOpEx;
 
 import java.util.List;
-import data.dao.promotion.WebsitePromotionDao;
-import po.promotion.PromotionPo;
-import po.promotion.PromotionPoBuilder;
 import service.market.MarketService;
 import service.member.MemberCreditService;
+import service.promotion.WebsitePromotionManagementService;
 import service.query.OrderQueryService;
 import utils.info.order.OrderStatus;
 import vo.member.MemberVo;
 import vo.order.OrderVo;
-import vo.promotion.PromotionVo;
+import vo.promotion.WebsitePromotionVo;
 
 public class MarketServiceManager implements MarketService{
 	
@@ -22,11 +20,11 @@ public class MarketServiceManager implements MarketService{
 
 	public static MarketService launch(OrderQueryService OrderQueryService
 			, MemberCreditService memberCreditService
-			, WebsitePromotionDao websitePromotionDao) {
+			, WebsitePromotionManagementService websitePromotionService) {
 		if (instance != null)
 			throw duplicateSingletonEx();
 		instance = new MarketServiceManager(OrderQueryService, memberCreditService,
-				websitePromotionDao);
+				websitePromotionService);
 		return getInstance();
 	}
 
@@ -39,13 +37,13 @@ public class MarketServiceManager implements MarketService{
 	
 	private OrderQueryService orderQueryService;
 	private MemberCreditService creditService;
-	private WebsitePromotionDao promotionDao;
+	private WebsitePromotionManagementService promotionService;
 	
 	public MarketServiceManager(OrderQueryService orderQueryService, MemberCreditService memberCreditService
-			, WebsitePromotionDao promotionService){
+			, WebsitePromotionManagementService promotionService){
 		this.orderQueryService = orderQueryService;
 		this.creditService = memberCreditService;
-		this.promotionDao = promotionService;
+		this.promotionService = promotionService;
 	}
 	
 	private List<OrderVo> bufferedOrderList;
@@ -67,14 +65,11 @@ public class MarketServiceManager implements MarketService{
 		}
 	
 	@Override
-	public boolean makeMarketPromotion(PromotionVo promotion) {
-		if (promotionDao == null)
-			throw unsupportedOpEx("make promotions");
-		
-	    PromotionPo po = new PromotionPoBuilder(promotion).getPromotionInfo();
+	public boolean makeMarketPromotion(WebsitePromotionVo promotion) {
+		if (promotionService == null)
+			throw unsupportedOpEx("make website promotions");
 	    
-	    //这里还没写完
-		return true;
+		return promotionService.addWebsitePromotion(promotion);
 	}
 
 	@Override
@@ -89,6 +84,22 @@ public class MarketServiceManager implements MarketService{
 		
 		return true;
 		
+	}
+
+	@Override
+	public boolean deletePromotion(WebsitePromotionVo promotion) {
+		if (promotionService == null)
+			throw unsupportedOpEx("make website promotions");
+	    
+		return promotionService.deleteWebsitePromotion(promotion);
+	}
+
+	@Override
+	public boolean updatePromotion(WebsitePromotionVo vo) {
+		if (promotionService == null)
+			throw unsupportedOpEx("make website promotions");
+	    
+		return promotionService.updateWebsitePromotion(vo);
 	}
 	
 	

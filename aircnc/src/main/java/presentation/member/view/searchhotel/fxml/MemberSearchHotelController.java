@@ -7,14 +7,12 @@ import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import presentation.member.ClientCenterController;
-import presentation.member.accessor.impl.SupremeSearchAccessorImpl;
 import presentation.member.manager.SearchHotelManager;
 import presentation.member.manager.impl.SearchHotelManagerImpl;
 import presentation.member.model.SearchHotelsModel;
@@ -50,6 +48,7 @@ public class MemberSearchHotelController implements Initializable{
 	@FXML
 	private VBox searchedResult;
 	
+	@SuppressWarnings("unused")
 	private ClientCenterController controller;
 	private SearchHotelManager manager;
 	

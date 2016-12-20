@@ -1,4 +1,4 @@
-package presentation.member.view.searchhotel.hotelInfo.fxml;
+package presentation.manage.view.hotelmanage.fxml;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -12,11 +12,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import presentation.member.model.SearchHotelsModel;
-import presentation.member.view.searchhotel.fxml.MemberSearchHotelGeneralController;
-import presentation.member.view.searchhotel.hotelInfo.HotelInfoOnePane;
-import presentation.member.view.searchhotel.hotelInfo.HotelInfoFourPane;
-import presentation.member.view.searchhotel.hotelInfo.HotelInfoTwoPane;
+import presentation.manage.model.HotelManageModel;
+import presentation.manage.view.hotelmanage.HotelInfoOnePane;
+import presentation.manage.view.hotelmanage.HotelInfoThreePane;
+import presentation.manage.view.hotelmanage.HotelInfoTwoPane;
 
 /**
  * 这里的图片路径要改
@@ -36,14 +35,14 @@ public class HotelInfoMainController implements Initializable{
 	@FXML
 	private Button back;
 	
-	private MemberSearchHotelGeneralController controller;
+	private HotelManageMainController controller;
 	private BorderPane contentLayout;
 	
 	private AnchorPane infoMainPane;
 	private HotelInfoOnePane onePane;
 	private HotelInfoTwoPane twoPane;
-	private HotelInfoFourPane fourPane;
-	private SearchHotelsModel model;
+	private HotelInfoThreePane threePane;
+	private HotelManageModel model;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -62,7 +61,7 @@ public class HotelInfoMainController implements Initializable{
 		controller.removeDetailedInfo();
 	}
 	
-	public void setController(MemberSearchHotelGeneralController controller){
+	public void setController(HotelManageMainController controller){
 		this.controller=controller;
 	}
 	
@@ -91,9 +90,9 @@ public class HotelInfoMainController implements Initializable{
 	@FXML
 	public void addHotelInfoFourPane() {
 		clearContent();
-		fourPane = new HotelInfoFourPane();
-		contentLayout.setCenter(fourPane.getPane());
-		fourPane.getController().setInfoMainController(this);	
+		threePane = new HotelInfoThreePane();
+		contentLayout.setCenter(threePane.getPane());
+		threePane.getController().setInfoMainController(this);	
 	}
 	
 	/**
@@ -109,7 +108,7 @@ public class HotelInfoMainController implements Initializable{
 		}
 	}
 	
-	public void setModel(SearchHotelsModel model){
+	public void setModel(HotelManageModel model){
 		this.model = model;
 	}
 	
@@ -119,7 +118,7 @@ public class HotelInfoMainController implements Initializable{
 	
 	private void initHotelInfo(){
 		name.setText(model.getHotelName());
-		grade.setText(String.valueOf(model.getHotelGrade()));
+		grade.setText(String.valueOf(model.getGrade()));
 		URL location = getClass().getResource("/images/hotel/star/hotel-"+model.getStar()+".png");
 		hotelImage.setImage(new Image(String.valueOf(location)));
 		

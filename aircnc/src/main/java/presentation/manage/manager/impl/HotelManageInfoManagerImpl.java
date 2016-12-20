@@ -3,11 +3,16 @@ package presentation.manage.manager.impl;
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
+import java.util.Iterator;
+import java.util.List;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import presentation.manage.manager.HotelManageInfoManager;
 import presentation.manage.model.HotelManageModel;
+import presentation.manage.model.ManageCommentModel;
 import vo.hotel.HotelVo;
+import vo.order.comment.CommentVo;
 
 public class HotelManageInfoManagerImpl implements HotelManageInfoManager{
 	
@@ -15,6 +20,8 @@ public class HotelManageInfoManagerImpl implements HotelManageInfoManager{
 	
 	private HotelVo vo;
 	private ObservableList<HotelManageModel> hotelInfo;
+	private List<CommentVo> commentList;
+	private ObservableList<ManageCommentModel> comments;
 	
 	public static final HotelManageInfoManager launch() {
 		if (instance != null)
@@ -62,6 +69,26 @@ public class HotelManageInfoManagerImpl implements HotelManageInfoManager{
 			return null;
 		
 		return new HotelManageModel(vo);
+	}
+
+	@Override
+	public boolean setComment(List<CommentVo> list) {
+		if(list == null)
+			return false;
+		this.commentList = list;
+		return true;
+	}
+
+	@Override
+	public ObservableList<ManageCommentModel> getCommentList() {
+		Iterator<CommentVo> it = commentList.iterator();		
+		comments = FXCollections.observableArrayList();
+		
+		while(it.hasNext()){
+			comments.add(new ManageCommentModel(it.next()));
+		}
+		
+		return comments;
 	}
 
 }
