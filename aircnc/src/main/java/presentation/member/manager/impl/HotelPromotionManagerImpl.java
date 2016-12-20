@@ -4,8 +4,9 @@ import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import presentation.member.manager.HotelPromotionManager;
@@ -15,12 +16,13 @@ import utils.promotion.applier.How;
 import utils.promotion.trigger.TriggerParams;
 import utils.promotion.trigger.hotel.HotelWhen;
 import vo.promotion.HotelPromotionVo;
+import vo.promotion.PromotionVo;
 import vo.promotion.PromotionVoBuilder;
 
 public class HotelPromotionManagerImpl implements HotelPromotionManager{
 	private static HotelPromotionManagerImpl instance;
 	
-	private List<HotelPromotionVo> promotions;
+	private Set<PromotionVo> promotions;
 	
 	public static final HotelPromotionManager launch() {
 		if (instance != null)
@@ -44,7 +46,7 @@ public class HotelPromotionManagerImpl implements HotelPromotionManager{
 	}
 	
 	@Override
-	public boolean setPromotion(List<HotelPromotionVo> promotions) {
+	public boolean setPromotion(Set<PromotionVo> promotions) {
 		if(promotions!=null){
 			this.promotions=promotions;
 			return true;
@@ -57,12 +59,12 @@ public class HotelPromotionManagerImpl implements HotelPromotionManager{
 	public List<String> getDescription() {
 		test();
 		
-		return promotions.stream().map(HotelPromotionVo::description).
+		return promotions.stream().map(PromotionVo::description).
 				collect(Collectors.toList());
 	}
 	
 	private void test(){
-		promotions = new ArrayList<HotelPromotionVo>();
+		promotions = new HashSet<PromotionVo>();
 		LocalDateTime now = LocalDateTime.now();
 		PromotionVoBuilder builder = new PromotionVoBuilder(Scope.Hotel).setId(123).
 				setHotelId(2).setName("企业优惠").setPractical(true);

@@ -4,6 +4,8 @@ public interface HotelInfoInteractor {
 	public void getHotelInfo();
 
 	public void getHotelAllPromotions();
+	
+	public void getHotelActivePromotions();
 
 	public void getHotelOrdersByStatus();
 

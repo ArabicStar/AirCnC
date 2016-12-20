@@ -7,16 +7,12 @@ import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
 import interactor.hotel.HotelAccountInteractor;
-import interactor.utils.Dipatcher;
 import interactor.utils.Title;
 import presentation.hotel.accessor.HotelLoginAccessor;
 import presentation.hotel.accessor.impl.HotelLoginAccessorImpl;
-import presentation.hotel.manager.InfoManager;
 import presentation.hotel.manager.impl.InfoManagerImpl;
 import service.hotel.HotelAccountService;
-import service.impl.hotel.HotelInfoManager;
 import utils.info.hotel.HotelInfo;
-import utils.info.member.MemberInfo;
 import vo.hotel.HotelVoBuilder;
 
 public class HotelAccountCourier implements HotelAccountInteractor {

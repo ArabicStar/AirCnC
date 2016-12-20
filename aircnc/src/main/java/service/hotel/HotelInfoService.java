@@ -5,6 +5,7 @@ import java.util.Set;
 
 import utils.info.hotel.HotelInfo;
 import utils.info.hotel.Room;
+import utils.info.order.OrderStatus;
 import vo.hotel.HotelVo;
 import vo.order.OrderVo;
 import vo.order.comment.CommentVo;
@@ -12,8 +13,10 @@ import vo.promotion.PromotionVo;
 
 public interface HotelInfoService {
 	public HotelInfo getHotelInfo(String name);
+	
+	public List<OrderVo> getHotelAllOrders(int id);
 
-	public List<OrderVo> getHotelOrder(int id);
+	public List<OrderVo> getHotelOrdersByStatus(int id, OrderStatus status);
 	
 	public List<CommentVo> getHotelComment(int id);
 
