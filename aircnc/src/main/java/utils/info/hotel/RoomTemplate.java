@@ -35,11 +35,6 @@ public abstract class RoomTemplate {
 	protected int numOfRoom;
 
 	/**
-	 * id int <br>
-	 */
-	protected int id;
-
-	/**
 	 * price double <br>
 	 */
 	protected double price;

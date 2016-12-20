@@ -44,8 +44,8 @@
 			name="introduction" type="string" />
 			
 		<!-- association table -->
-		<set name="rooms"  cascade="all" lazy="false" fetch = "select">
-            <key column="HOTELID" />
+		<set name="rooms"  cascade="all" lazy="false" >
+            <key column="HOTELID" foreign-key="id"/>
             <one-to-many class ="utils.info.hotel.Room"/>
         </set>		
 	</class>

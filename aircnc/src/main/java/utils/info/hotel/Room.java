@@ -4,6 +4,8 @@ import po.hotel.HotelPo;
 
 public class Room extends RoomTemplate {
 	protected boolean isValid;
+	
+	private int id;
 
 	private static final String BLANK = "";
 
@@ -13,6 +15,7 @@ public class Room extends RoomTemplate {
 		numOfPeople = 0;
 		numOfRoom = 0;
 		price = 0;
+		id = 0;
 		isValid = true;
 	}
 	
@@ -50,9 +53,7 @@ public class Room extends RoomTemplate {
 	}
 	
 	public int getId(){
-		if (isValid())
-			return id;
-		return Integer.MIN_VALUE;
+		return id;
 	}
 	
 	public double getPrice(){
@@ -61,11 +62,11 @@ public class Room extends RoomTemplate {
 		return Double.MIN_VALUE;
 	}
 	
-	public HotelPo getHotel(){
-		if(isValid())
-			return hotel;
-		return null;
-	}
+//	public HotelPo getHotel(){
+//		if(isValid())
+//			return hotel;
+//		return null;
+//	}
 
 	public boolean isValid() {
 		return isValid;
@@ -100,9 +101,9 @@ public class Room extends RoomTemplate {
 		return this;
 	}
 	
-	Room setHotel(HotelPo hotel){
-		this.hotel = hotel;
-		return this;
-	}
+//	Room setHotel(HotelPo hotel){
+//		this.hotel = hotel;
+//		return this;
+//	}
 
 }

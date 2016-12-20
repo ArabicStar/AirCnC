@@ -22,6 +22,8 @@
 
 		<!-- price, the price of room -->
 		<property column="PRICE" name="price" type="double" />
+		
+		<many-to-one column="HOTELID" name="hotel" class="po.hotel.HotelPo"  />
 
 
 
