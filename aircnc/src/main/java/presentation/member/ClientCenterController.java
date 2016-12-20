@@ -96,7 +96,7 @@ public class ClientCenterController extends Application {
 	}
 
 	public void addSearchHotelPane() {
-		test.getSearchedData();
+		//test.getSearchedData();
 		content.getChildren().clear();
 		if(!SearchHotelManagerImpl.isLaunched())
 			SearchHotelManagerImpl.launch();
@@ -120,6 +120,7 @@ public class ClientCenterController extends Application {
 	}
 	
 	public void addOrderMainPane() {
+		test.getMyOrderData();
 		content.getChildren().clear();
 		orderMain = new MemberOrderMainPane();
 		content.getChildren().add(orderMain.getPane());

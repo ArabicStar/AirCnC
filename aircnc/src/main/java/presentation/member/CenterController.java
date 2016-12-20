@@ -11,7 +11,8 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import presentation.hotel.accessor.impl.InfoModifyAccessorImpl;
+import presentation.member.accessor.impl.CreditChangeOrderAccessorImpl;
+import presentation.member.accessor.impl.InfoModifyAccessorImpl;
 import presentation.member.accessor.impl.MemberAppealAccessorImpl;
 import presentation.member.accessor.impl.MemberCommentAccessorImpl;
 import presentation.member.accessor.impl.MemberLoginAccessorImpl;
@@ -63,22 +64,24 @@ public class CenterController extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		
-//		InfoModifyAccessorImpl.launch();
-//		MemberAppealAccessorImpl.launch();
-//		MemberCommentAccessorImpl.launch();
-//		MemberLoginAccessorImpl.launch();
-//		MemberOrderOperationAccessorImpl.launch();
-//		RegisterAccessorImpl.launch();
-//		SearchHotelInfoAccessorImpl.launch();
-//		SearchOrderInfoAccessorImpl.launch();
-//		SupremeSearchAccessorImpl.launch();
-//		
-//		CreditChangeManagerImpl.launch();
-//		MemberInfoManagerImpl.launch();
-//		MyOrderManagerImpl.launch();
-//		SearchHotelManagerImpl.launch();
-//		HotelCommentManagerImpl.launch();
-//		HotelPromotionManagerImpl.launch();
+		InfoModifyAccessorImpl.launch();
+		MemberAppealAccessorImpl.launch();
+		MemberCommentAccessorImpl.launch();
+		MemberLoginAccessorImpl.launch();
+		MemberOrderOperationAccessorImpl.launch();
+		RegisterAccessorImpl.launch();
+		SearchHotelInfoAccessorImpl.launch();
+		SearchOrderInfoAccessorImpl.launch();
+		SupremeSearchAccessorImpl.launch();
+		CreditChangeOrderAccessorImpl.launch();
+		
+		
+		CreditChangeManagerImpl.launch();
+		MemberInfoManagerImpl.launch();
+		MyOrderManagerImpl.launch();
+		SearchHotelManagerImpl.launch();
+		HotelCommentManagerImpl.launch();
+		HotelPromotionManagerImpl.launch();
 		
 		this.primaryStage = primaryStage;
 

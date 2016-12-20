@@ -61,4 +61,9 @@ public class MemberOrderOperationAccessorImpl implements MemberOrderOperationAcc
 		this.appeal = content;
 	}
 
+	@Override
+	public void setCancel(String id) {
+		this.orderID = id;
+	}
+
 }

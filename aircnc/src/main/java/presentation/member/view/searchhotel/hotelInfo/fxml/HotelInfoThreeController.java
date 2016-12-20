@@ -48,6 +48,11 @@ public class HotelInfoThreeController implements Initializable{
 		controller.addHotelInfoTwoPane();
 	}
 	
+	@FXML
+	public void handlePage3(){
+		
+	}
+	
 	public void setInfoMainController(HotelInfoMainController controller){
 		this.controller=controller;
 	}

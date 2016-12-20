@@ -68,7 +68,7 @@ public class MemberSignInController implements Initializable {
 			// 下面是逻辑相连后的代码（没开服务器就会报错，暂时注释
 			interactor = MemberAccountCourier.getInstance();
 			boolean valid = interactor.login();
-
+//			boolean valid = true;
 			if (valid){
 				InfoModifyAccessorImpl.getInstance().setUser(MemberInfoManagerImpl.getInstance().getMemberVo());
 				controller.initializeClient();

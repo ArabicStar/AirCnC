@@ -3,6 +3,7 @@ package presentation.member.view.myorder.fxml;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import interactor.impl.order.OrderInfoCourier;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -44,6 +45,7 @@ public class MemberAppealController implements Initializable{
 		accessor.setOrderId(vo.getOrderId());
 		PlainDialog alert = new PlainDialog(AlertType.INFORMATION,
 			"申诉成功","已经收到您的申诉");
+		OrderInfoCourier.getInstance().makeAppeal();
 		alert.showDialog();
 		controller.removeAppealPane();
 	}

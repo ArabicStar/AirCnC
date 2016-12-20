@@ -56,11 +56,16 @@ public final class InfoModifyAccessorImpl implements InfoModifyAccessor{
 	public MemberVo getModifiedMemberVo() {
 		if(vo == null)
 			throw accessorNotReadyEx();
-		MemberVoBuilder builder = new MemberVoBuilder(vo.getType().toString()).setName(username)
+		try{
+			MemberVoBuilder builder = new MemberVoBuilder(vo.getType().toString()).setName(username)
 				.setContactInfo(new ContactVoBuilder().setEmail(email).setMobilePhone(mobi)
 						.setFixedPhone(tele).getContactInfo());
-		vo = builder.getMemberInfo();
-		return vo;
+			vo = builder.getMemberInfo();
+			
+			return vo;
+		}catch(Exception e){
+			return null;
+		}
 	}
 	
 	@Override

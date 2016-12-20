@@ -2,15 +2,19 @@ package presentation.member.view.myorder.fxml;
 
 import java.net.URL;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Set;
 
 import interactor.impl.member.MemberInfoCourier;
+import interactor.impl.order.OrderInfoCourier;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -22,6 +26,7 @@ import presentation.member.ClientCenterController;
 import presentation.member.accessor.SearchOrderInfoAccessor;
 import presentation.member.accessor.impl.MemberAppealAccessorImpl;
 import presentation.member.accessor.impl.MemberCommentAccessorImpl;
+import presentation.member.accessor.impl.MemberOrderOperationAccessorImpl;
 import presentation.member.accessor.impl.SearchOrderInfoAccessorImpl;
 import presentation.member.manager.MyOrderManager;
 import presentation.member.manager.impl.MyOrderManagerImpl;
@@ -78,6 +83,8 @@ public class MemberOrderMainController implements Initializable{
 	private SearchOrderInfoAccessor accessor;
 	private AnchorPane rootLayout;
 	private MemberOrderMainController OrderController = this;
+	private ObservableList<MyOrderModel> models;
+	private Set<OrderStatus> states;
 	
 	/**
 	 * set the controller
@@ -103,7 +110,7 @@ public class MemberOrderMainController implements Initializable{
 	@FXML
 	public void handleQuery(){
 		
-		Set<OrderStatus> states = new HashSet<OrderStatus>();		
+		states = new HashSet<OrderStatus>();		
 		if(finished.isSelected()){
 			states.add(OrderStatus.EXECUTED);
 			states.add(OrderStatus.REVIEWED);
@@ -126,8 +133,8 @@ public class MemberOrderMainController implements Initializable{
 		
 		MemberInfoCourier.getInstance().getMemberOrdersByStatus();
 		
-		orderTable.setItems(manager.getOrderList());
-		
+		models = manager.getOrderList();
+		orderTable.setItems(models);		
 		
 		hotelName.setCellValueFactory(cellData -> cellData.getValue().hotelNameProperty());
 		checkInTime.setCellValueFactory(cellData -> cellData.getValue().checkInTimeProperty());
@@ -187,10 +194,20 @@ public class MemberOrderMainController implements Initializable{
 		rootLayout.getChildren().remove(rootLayout.getChildren().size()-1);
 	}
 	
+	public void refresh(){
+		accessor.setSearchTarget(states);
+		MemberInfoCourier.getInstance().getMemberOrdersByStatus();
+		models = manager.getOrderList();
+	}
+	
 	public void cancelOrder(OrderVo vo){
 		PlainDialog alert3 = new PlainDialog(AlertType.INFORMATION,
        			"取消订单","你确定取消该订单吗？");
-       			alert3.showDialog();
+		Optional<ButtonType> result = alert3.showDialog();
+       		result.ifPresent( ok -> {
+    				MemberOrderOperationAccessorImpl.getInstance().setCancel(vo.getOrderId());
+    				OrderInfoCourier.getInstance().repeal();
+    			});
 	}
 	
 }

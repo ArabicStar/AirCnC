@@ -22,3 +22,14 @@
 	-fx-background-color:#575793;
 }
 
+.reserve{
+	-fx-font-size: 28px;
+	-fx-border-color:#575793;
+	-fx-text-fill: #575793;
+	-fx-background-color:transparent;
+}
+
+.reserve:hover{
+	-fx-background-color: #575793;
+	-fx-text-fill: #fff;
+}
