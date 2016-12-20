@@ -75,12 +75,9 @@ public class MemberRegisterEnterpriseController implements Initializable {
 		//这里还要修改
 		result.ifPresent(usernamePassword -> {
 			accessor.setEnterprise(enterprise.getText());
-			MemberAccountCourier.getInstance().register();
-			controller.addSignInPane();
-			
-			PlainDialog registerSuccess = new PlainDialog(AlertType.INFORMATION,
-					"注册成功","您的注册ID为");
-			registerSuccess.showDialog();
+			boolean valid = MemberAccountCourier.getInstance().register();
+			if(valid)
+				controller.addSignInPane();
 		});
 	}
 
