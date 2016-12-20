@@ -3,9 +3,10 @@ package service.impl.order;
 import data.dao.impl.order.OrderDaoImpl;
 import data.dao.order.OrderDao;
 import service.order.OrderDetailService;
+import utils.info.order.OrderInfo;
 
 public class OrderDetailServiceImpl implements OrderDetailService {
-
+	
 	private OrderDao orderDao;
 
 	/**
@@ -37,6 +38,12 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 		double price = -1;
 		price = orderDao.getOrder(orderId).getOriginalPrice();
 		return price;
+	}
+
+	@Override
+	public OrderInfo getOrderInfoById(String orderId) {
+		OrderInfo info = orderDao.getOrder(orderId);
+		return info;
 	}
 
 }

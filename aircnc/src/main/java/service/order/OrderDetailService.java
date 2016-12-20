@@ -1,5 +1,7 @@
 package service.order;
 
+import utils.info.order.OrderInfo;
+
 /**
  * 获取酒店详细信息的接口
  * @author Water
@@ -17,4 +19,6 @@ public interface OrderDetailService {
 	 * @return	获取订单价值
 	 */
 	public double getOrderOriginalPrice(String orderId);
+	
+	public OrderInfo getOrderInfoById(String orderId);
 }
