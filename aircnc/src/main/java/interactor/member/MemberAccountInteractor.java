@@ -16,11 +16,11 @@ package interactor.member;
  *
  */
 public interface MemberAccountInteractor {
-	public void register();
+	public boolean register();
 
-	public void login();
+	public boolean login();
 
-	public void logout();
+	public boolean logout();
 
-	public void refreshCurrentAccount();
+	public boolean refreshCurrentAccount();
 }

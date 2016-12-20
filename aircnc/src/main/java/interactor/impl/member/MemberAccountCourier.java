@@ -42,54 +42,63 @@ public final class MemberAccountCourier implements MemberAccountInteractor {
 
 	@Override
 	@Title("Register")
-	public void register() {
+	public boolean register() {
 		String title = getTitle();
 		MemberInfo info = execute(title, () -> {
-			MemberInfo tmp = handler.register(RegisterAccessorImpl.getInstance().getNewAccountInfo()
-					, RegisterAccessorImpl.getInstance().getPasswordHash());
+			MemberInfo tmp = handler.register(RegisterAccessorImpl.getInstance().getNewAccountInfo(),
+					RegisterAccessorImpl.getInstance().getPasswordHash());
+
 			if (tmp == null)
 				throw unknownEx();
 			return tmp;
 		});
 
-	 MemberInfoManagerImpl.getInstance().setUser(info);
+		MemberInfoManagerImpl.getInstance().setUser(info);
+		return info != null;
 	}
 
 	@Override
 	@Title("Login")
-	public void login() {
+	public boolean login() {
 		String title = getTitle();
 		MemberInfo info = execute(title, () -> {
-			MemberInfo tmp = handler.login(MemberLoginAccessorImpl.getInstance().getId()
-					, MemberLoginAccessorImpl.getInstance().getPasswordHash());
+			MemberInfo tmp = handler.login(MemberLoginAccessorImpl.getInstance().getId(),
+					MemberLoginAccessorImpl.getInstance().getPasswordHash());
 
-			if (tmp == null)
+			if (tmp == null) {
 				alertFail(title, "Wrong or not exist id");
+				return null;
+			}
 
-			if (!tmp.isValid())
+			if (!tmp.isValid()) {
 				alertFail(title, "Wrong password");
+				return null;
+			}
 
 			return tmp;
 		});
 
 		MemberInfoManagerImpl.getInstance().setUser(info);
+		return info != null;
 	}
 
 	@Override
 	@Title("Logout")
-	public void logout() {
-		execute(getTitle(), () -> {
+	public boolean logout() {
+		return execute(getTitle(), () -> {
 			return handler.logout();
 		});
 	}
 
 	@Override
 	@Title("Refresh Account")
-	public void refreshCurrentAccount() {
-		execute(getTitle(), () -> {
+	public boolean refreshCurrentAccount() {
+		MemberInfo info = execute(getTitle(), () -> {
 			return handler.refreshCurrentAccount();
 		});
 
+		MemberInfoManagerImpl.getInstance().setUser(info);
+		return info != null;
 	}
 
 }
