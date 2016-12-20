@@ -2,6 +2,7 @@ package presentation.member;
 
 import java.util.Optional;
 
+import interactor.impl.hotel.HotelSearchCourier;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -12,7 +13,7 @@ import presentation.member.view.memberinfo.MemberInfoModifyPane;
 import presentation.member.view.myorder.MemberOrderMainPane;
 import presentation.member.view.searchhotel.MemberSearchHotelPane;
 import presentation.member.accessor.impl.InfoModifyAccessorImpl;
-import presentation.member.accessor.impl.SearchHotelInfoAccessorImpl;
+import presentation.member.accessor.impl.SupremeSearchAccessorImpl;
 import presentation.member.manager.impl.SearchHotelManagerImpl;
 import presentation.member.utils.dialog.TextFieldDialog;
 import presentation.member.view.MemberMainPane;
@@ -95,14 +96,14 @@ public class ClientCenterController extends Application {
 		content.getChildren().clear();
 		if(!SearchHotelManagerImpl.isLaunched())
 			SearchHotelManagerImpl.launch();
-		if(!SearchHotelInfoAccessorImpl.isLaunched())
-			SearchHotelInfoAccessorImpl.launch();
 		TextFieldDialog dialog = new TextFieldDialog("搜索酒店","商圈：");
 		
 		Optional<String> result = dialog.showDialog();
 		
 		if(result.isPresent()){
-			SearchHotelInfoAccessorImpl.getInstance().setScope(result.get());
+			SupremeSearchAccessorImpl.getInstance().setScope(result.get());
+			HotelSearchCourier.getInstance().searchByCondition();
+			SupremeSearchAccessorImpl.getInstance().setScope(null);
 			searchMain = new MemberSearchHotelPane();
 			content.getChildren().add(searchMain.getPane());
 			AnchorPane.setTopAnchor(searchMain.getPane(), 0.0);

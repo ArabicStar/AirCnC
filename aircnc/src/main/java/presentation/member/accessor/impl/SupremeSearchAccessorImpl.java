@@ -12,10 +12,10 @@ import utils.condition.Condition;
 import utils.condition.ConditionBuilder;
 import utils.info.hotel.RoomTemplate.Type;
 
-public class SupremeSearchAccessorImpl implements SupremeSearchAccessor{
-	
+public class SupremeSearchAccessorImpl implements SupremeSearchAccessor {
+
 	private static SupremeSearchAccessor instance;
-	
+
 	private int year;
 	private int month;
 	private int day;
@@ -26,42 +26,50 @@ public class SupremeSearchAccessorImpl implements SupremeSearchAccessor{
 	private double grade;
 	private int lowStar;
 	private int highStar;
-	
+
+	private String scope;
+	private String name;
+
 	public static final SupremeSearchAccessor launch() {
 		if (instance != null)
 			throw duplicateSingletonEx();
 
 		return instance = new SupremeSearchAccessorImpl();
 	}
-	
-	public static final SupremeSearchAccessor getInstance(){
+
+	public static final SupremeSearchAccessor getInstance() {
 		if (instance == null)
 			throw singletonNotExistsEx();
 
 		return instance;
 	}
-	
+
 	@Override
 	public Condition getCondition() {
-		
 		ConditionBuilder builder = new ConditionBuilder();
-		builder.rankGreaterThan(grade);
-		builder.starBetween(lowStar, highStar);
-		builder.roomNeed(roomType);
-		builder.avaliable(empty);
-		builder.since(LocalDate.of(year,month,day));
-		builder.priceBetween(lowPrice, highPrice);
-		
+		if (this.name == null && this.scope == null) {
+			builder.rankGreaterThan(grade);
+			builder.starBetween(lowStar, highStar);
+			builder.roomNeed(roomType);
+			builder.avaliable(empty);
+			builder.since(LocalDate.of(year, month, day));
+			builder.priceBetween(lowPrice, highPrice);
+		}else if(this.name != null){
+			builder.nameLike(this.name);
+		}else if(this.scope != null){
+			builder.scopeLike(this.scope);
+		}
+
 		return builder.buildCondition();
 	}
-	
-	public static boolean isLaunched(){
-		if(instance == null)
+
+	public static boolean isLaunched() {
+		if (instance == null)
 			return false;
 		else
 			return true;
 	}
-	
+
 	@Override
 	public void setYear(int year) {
 		this.year = year;
@@ -90,7 +98,7 @@ public class SupremeSearchAccessorImpl implements SupremeSearchAccessor{
 	@Override
 	public void setRoomType(String type) {
 		this.roomType = new HashSet<Type>();
-		switch(type){
+		switch (type) {
 		case "所有":
 			roomType.add(Type.单人间);
 			roomType.add(Type.双人间);
@@ -126,6 +134,16 @@ public class SupremeSearchAccessorImpl implements SupremeSearchAccessor{
 	public void setStarRange(int low, int high) {
 		this.lowStar = low;
 		this.highStar = high;
+	}
+
+	@Override
+	public void setScope(String scope) {
+		this.scope = scope;
+	}
+
+	@Override
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

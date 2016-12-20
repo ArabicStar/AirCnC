@@ -12,13 +12,13 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import presentation.member.accessor.impl.CreditChangeOrderAccessorImpl;
+import presentation.member.accessor.impl.HotelNameAccessorImpl;
 import presentation.member.accessor.impl.InfoModifyAccessorImpl;
 import presentation.member.accessor.impl.MemberAppealAccessorImpl;
 import presentation.member.accessor.impl.MemberCommentAccessorImpl;
 import presentation.member.accessor.impl.MemberLoginAccessorImpl;
 import presentation.member.accessor.impl.MemberOrderOperationAccessorImpl;
 import presentation.member.accessor.impl.RegisterAccessorImpl;
-import presentation.member.accessor.impl.SearchHotelInfoAccessorImpl;
 import presentation.member.accessor.impl.SearchOrderInfoAccessorImpl;
 import presentation.member.accessor.impl.SupremeSearchAccessorImpl;
 import presentation.member.manager.impl.CreditChangeManagerImpl;
@@ -66,31 +66,30 @@ public class CenterController extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		
-		InfoModifyAccessorImpl.launch();
-		MemberAppealAccessorImpl.launch();
-		MemberCommentAccessorImpl.launch();
-		MemberLoginAccessorImpl.launch();
-		MemberOrderOperationAccessorImpl.launch();
-		RegisterAccessorImpl.launch();
-		SearchHotelInfoAccessorImpl.launch();
-		SearchOrderInfoAccessorImpl.launch();
-		SupremeSearchAccessorImpl.launch();
-		CreditChangeOrderAccessorImpl.launch();
-		
-		
-		CreditChangeManagerImpl.launch();
-		MemberInfoManagerImpl.launch();
-		MyOrderManagerImpl.launch();
-		SearchHotelManagerImpl.launch();
-		HotelCommentManagerImpl.launch();
-		HotelPromotionManagerImpl.launch();
-		HistoryOrderManagerImpl.launch();
-		
-		test = new MemberTest();
-		test.getSearchedData();
-		test.getMyOrderData();
-		test.getCreditData();
-		test.getUserData();
+//		InfoModifyAccessorImpl.launch();
+//		MemberAppealAccessorImpl.launch();
+//		MemberCommentAccessorImpl.launch();
+//		MemberLoginAccessorImpl.launch();
+//		MemberOrderOperationAccessorImpl.launch();
+//		RegisterAccessorImpl.launch();
+//		SearchOrderInfoAccessorImpl.launch();
+//		SupremeSearchAccessorImpl.launch();
+//		CreditChangeOrderAccessorImpl.launch();
+//		HotelNameAccessorImpl.launch();
+//		
+//		CreditChangeManagerImpl.launch();
+//		MemberInfoManagerImpl.launch();
+//		MyOrderManagerImpl.launch();
+//		SearchHotelManagerImpl.launch();
+//		HotelCommentManagerImpl.launch();
+//		HotelPromotionManagerImpl.launch();
+//		HistoryOrderManagerImpl.launch();
+//		
+//		test = new MemberTest();
+//		test.getSearchedData();
+//		test.getMyOrderData();
+//		test.getCreditData();
+//		test.getUserData();
 		
 		this.primaryStage = primaryStage;
 

@@ -3,12 +3,14 @@ package presentation.member.view.searchhotel.hotelInfo.fxml;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import interactor.impl.order.OrderInfoCourier;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import presentation.member.accessor.impl.HotelNameAccessorImpl;
 import presentation.member.manager.HistoryOrderManager;
 import presentation.member.manager.MyOrderManager;
 import presentation.member.manager.impl.HistoryOrderManagerImpl;
@@ -49,6 +51,7 @@ public class HotelHistoryOrderController implements Initializable{
 	
 	
 	public void initOrders(){
+		OrderInfoCourier.getInstance().getOrderInfoByHotel();
 		models = manager.getOrderList();
 		orderTable.setItems(models);		
 		

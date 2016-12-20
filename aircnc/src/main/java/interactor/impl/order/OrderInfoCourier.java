@@ -121,5 +121,11 @@ public class OrderInfoCourier implements OrderInfoInteractor{
 		MemberAppealAccessorImpl.getInstance().setAppeal("");
 		
 	}
+
+	@Override
+	public void getOrderInfoByHotel() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
