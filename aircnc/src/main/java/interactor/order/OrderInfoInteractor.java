@@ -1,6 +1,9 @@
 package interactor.order;
 
 public interface OrderInfoInteractor {
+	/**
+	 * for hotel to get an order
+	 */
 	public void getOrderInfo();
 	
 	/**
@@ -13,5 +16,7 @@ public interface OrderInfoInteractor {
 	 */
 	public void delay();
 	
+	
+	public void getOrderInfoById(String orderId);
 	
 }

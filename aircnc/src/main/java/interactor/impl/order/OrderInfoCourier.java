@@ -49,15 +49,23 @@ public class OrderInfoCourier implements OrderInfoInteractor{
 	@Title("Get Order Info")
 	public void getOrderInfo() {
 		String title = getTitle();	
-		@SuppressWarnings("unused")
-		OrderInfo info = execute(title, () -> {
-			String id = getCurrentId();
-			if (id != null) {
-				return detail.getOrderInfoById(id);
-			}
+		// TODO 这一段本来没有报错，但是突然就报错了
+//		OrderInfo info = execute(title, () -> {
+//			String id = getCurrentId();
+//			if(id != null) {
+//				return detail.getOrderById(id);
+//			}
+//			alertFail(title, "Not logged in yet");
+//			return null;
+//		});
+		String id = getCurrentId();
+		OrderInfo info;
+		if(id != null) {
+			info = detail.getOrderInfoById(id);
+			info.getComments();
+		} else {
 			alertFail(title, "Not logged in yet");
-			return null;
-		});
+		}
 		// TODO
 //		OrderInfoManagerImpl.getInstance().setOrder(info);
 	}
@@ -75,6 +83,12 @@ public class OrderInfoCourier implements OrderInfoInteractor{
 
 	@Override
 	public void delay() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void getOrderInfoById(String orderId) {
 		// TODO Auto-generated method stub
 		
 	}
