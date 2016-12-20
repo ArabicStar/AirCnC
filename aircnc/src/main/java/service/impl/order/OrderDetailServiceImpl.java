@@ -2,8 +2,8 @@ package service.impl.order;
 
 import data.dao.impl.order.OrderDaoImpl;
 import data.dao.order.OrderDao;
+import po.order.OrderPo;
 import service.order.OrderDetailService;
-import utils.info.order.OrderInfo;
 
 public class OrderDetailServiceImpl implements OrderDetailService {
 	
@@ -41,8 +41,8 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 	}
 
 	@Override
-	public OrderInfo getOrderInfoById(String orderId) {
-		OrderInfo info = orderDao.getOrder(orderId);
+	public OrderPo getOrderInfoById(String orderId) {
+		OrderPo info = orderDao.getOrder(orderId);
 		return info;
 	}
 

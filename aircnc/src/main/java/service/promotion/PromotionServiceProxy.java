@@ -14,7 +14,7 @@ import vo.promotion.PromotionVo;
 import vo.promotion.WebsitePromotionVo;
 
 public class PromotionServiceProxy extends AccessSecureProxy
-		implements PromotionApplicationService, WebsitePromotionManagementService, HotelPromotionManagmentService,
+		implements PromotionApplicationService, WebsitePromotionManagementService, HotelPromotionManagementService,
 		WebsitePromotionInfoService, HotelPromotionInfoService {
 
 	/* Singleton */
@@ -109,10 +109,10 @@ public class PromotionServiceProxy extends AccessSecureProxy
 	 ******* HotelPromotionManagementService*******
 	 *****************************************************
 	 */
-	private HotelPromotionManagmentService hotelManage;
+	private HotelPromotionManagementService hotelManage;
 
 	@AuthenticatePolicy({ Client.HOTEL, Client.MANAGE })
-	public void loadHotelPromotionManagementService(HotelPromotionManagmentService hotelPromotionManagementService) {
+	public void loadHotelPromotionManagementService(HotelPromotionManagementService hotelPromotionManagementService) {
 		checkAuthentication();
 
 		this.hotelManage = hotelPromotionManagementService;

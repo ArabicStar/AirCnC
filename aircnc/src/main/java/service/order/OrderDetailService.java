@@ -1,6 +1,6 @@
 package service.order;
 
-import utils.info.order.OrderInfo;
+import po.order.OrderPo;
 
 /**
  * 获取酒店详细信息的接口
@@ -20,5 +20,5 @@ public interface OrderDetailService {
 	 */
 	public double getOrderOriginalPrice(String orderId);
 	
-	public OrderInfo getOrderInfoById(String orderId);
+	public OrderPo getOrderInfoById(String orderId);
 }
