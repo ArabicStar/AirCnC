@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import po.order.comment.CommentPo;
+import utils.info.promotion.PromotionInfo;
 import utils.promotion.Promotion;
 
 public abstract class OrderInfoBuilder extends OrderInfoTemplate {
@@ -105,11 +106,12 @@ public abstract class OrderInfoBuilder extends OrderInfoTemplate {
 	 * @param promotions
 	 *            要设置的 promotions
 	 */
-	public OrderInfoBuilder setPromotions(Set<Promotion> promotions) {
+	public OrderInfoBuilder setPromotions(Set<? super PromotionInfo> promotions) {
 		if(promotions == null) {
 			System.err.println("Promotion is null");
 			return this;
 		}
+			
 		this.promotions.addAll(promotions);
 		return this;
 	}
