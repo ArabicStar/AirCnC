@@ -49,10 +49,10 @@ public class CommentPoBuilder extends CommentInfoBuilder{
 		return this;
 	}
 	
-//	public CommentPoBuilder setCheckInTime(LocalDate checkInTime){
-//		this.checkInTime = checkInTime;
-//		return this;
-//	}
+	public CommentPoBuilder setCheckInTime(LocalDate checkInTime){
+		this.checkInTime = checkInTime;
+		return this;
+	}
 	
 	public CommentPoBuilder setCommentTime(LocalDateTime commentTime){
 		this.commentTime = commentTime;
@@ -76,8 +76,8 @@ public class CommentPoBuilder extends CommentInfoBuilder{
 		if (!isReady()) {
 			return new CommentPo(0);
 		}
-		// 删除掉的.setCheckInTime(checkInTime)
-		CommentPo po = new CommentPo(grade).setHotelId(hotelId).setMemberId(memberId).setCommentTime(commentTime).setContent(content).
+		CommentPo po = new CommentPo(grade).setHotelId(hotelId).setMemberId(memberId).
+		setCheckInTime(checkInTime).setCommentTime(commentTime).setContent(content).
 		setOrderId(orderId).setGrade(grade);
 		return po;
 	}

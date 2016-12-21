@@ -49,10 +49,10 @@ public class CommentVoBuilder extends CommentInfoBuilder {
 		return this;
 	}
 
-//	public CommentVoBuilder setCheckInTime(LocalDate checkInTime) {
-//		this.checkInTime = checkInTime;
-//		return this;
-//	}
+	public CommentVoBuilder setCheckInTime(LocalDate checkInTime) {
+		this.checkInTime = checkInTime;
+		return this;
+	}
 
 	public CommentVoBuilder setCommentTime(LocalDateTime commentTime) {
 		this.commentTime = commentTime;
@@ -83,8 +83,7 @@ public class CommentVoBuilder extends CommentInfoBuilder {
 		if (!isReady()) {
 			return null;
 		} 
-		// 删除的部分.setCheckInTime(checkInTime)
-		return new CommentVo(grade).setHotelId(hotelId).setMemberId(memberId)
+		return new CommentVo(grade).setHotelId(hotelId).setMemberId(memberId).setCheckInTime(checkInTime)
 				.setContent(content).setCommentTime(commentTime).setMemberLevel(memberLevel)
 				.setMemberName(memberName).setOrderId(orderId).setGrade(grade);
 

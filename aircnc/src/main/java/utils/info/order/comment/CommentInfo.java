@@ -12,7 +12,7 @@ public class CommentInfo extends CommentInfoTemplate{
 		hotelId = 0;
 		memberId = BLANK;
 		content = BLANK;
-//		checkInTime = null;
+		checkInTime = null;
 		commentTime = null;
 		isValid = true;
 	}
@@ -22,7 +22,7 @@ public class CommentInfo extends CommentInfoTemplate{
 		memberId = BLANK;
 		content = BLANK;
 		this.grade = grade;
-//		checkInTime = null;
+		checkInTime = null;
 		commentTime = null;
 		isValid = true;
 	}
@@ -56,12 +56,12 @@ public class CommentInfo extends CommentInfoTemplate{
 		return Integer.MIN_VALUE;
 	}
 	
-//	public LocalDate getCheckInTime(){
-//		if (isValid()) {
-//			return checkInTime;
-//		}
-//		return null;
-//	}
+	public LocalDate getCheckInTime(){
+		if (isValid()) {
+			return checkInTime;
+		}
+		return null;
+	}
 	
 	public LocalDateTime getCommentTime(){
 		if (isValid()) {

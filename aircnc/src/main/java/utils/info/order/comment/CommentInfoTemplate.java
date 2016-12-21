@@ -1,5 +1,6 @@
 package utils.info.order.comment;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class CommentInfoTemplate {
@@ -8,7 +9,7 @@ public class CommentInfoTemplate {
 	protected String memberId;
 	protected String content;
 	protected int grade;
-//	protected LocalDate checkInTime;
+	protected LocalDate checkInTime;
 	protected LocalDateTime commentTime;
 	protected String orderId;
 	
@@ -26,7 +27,7 @@ public class CommentInfoTemplate {
 	}
 
 	public static final boolean checkCommentContent(String content) {
-		return content != null && content.length() != 0;
+		return content != null;
 	}
 
 //	public static final int convertID2Num(String id) {
