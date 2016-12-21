@@ -1,11 +1,9 @@
 package utils.info.hotel;
 
-import po.hotel.HotelPo;
-import utils.info.hotel.RoomTemplate.Type;
+import static utils.exception.StaticExceptionFactory.*;
 
 /**
- * Abstract of builder for RoomInfo, assisting to assure immutable object.
- * <br>
+ * Abstract of builder for RoomInfo, assisting to assure immutable object. <br>
  * <br>
  * <b>NOTICE:</b>
  * <ul>
@@ -18,39 +16,13 @@ import utils.info.hotel.RoomTemplate.Type;
  * @author jqwu
  * @see utils.info.hotel.Room
  */
-public class RoomBuilder extends RoomTemplate{
+public class RoomBuilder extends RoomTemplate {
 	private static final Room INVALID_ROOM;
 	static {
 		INVALID_ROOM = new Room(Type.其它);
 		INVALID_ROOM.invalidate();
 	}
-	
-	
-	/**
-	 * Initialize a builder by given RoomInfo, all information will be kept.. <br>
-	 * 
-	 * @param type
-	 */
-	public RoomBuilder(Room info){
-		this(info.getType());
-		this.setName(info.getName()).setPeopleNum(info.getPeopleNum()).
-		setRoomNum(info.getRoomNum());
-	}
-	
-	RoomBuilder(){}
-	
-	/**
-	 * Initialize a builder by given type. <br>
-	 * 
-	 * @param type
-	 */
-	public RoomBuilder(String name){
-		if (name == null)
-			throw new IllegalArgumentException();
 
-		this.setName(name);
-	}
-	
 	/**
 	 * Get an invalid RoomPo instance.
 	 * 
@@ -59,7 +31,41 @@ public class RoomBuilder extends RoomTemplate{
 	public static final Room getInvalidInfo() {
 		return INVALID_ROOM;
 	}
-	
+
+	private RoomBuilder() {
+		this.name = "";
+		this.numOfPeople = -1;
+		this.numOfRoom = -1;
+		this.price = -1;
+	}
+
+	public RoomBuilder(String typeName) {
+		this(Type.of(typeName));
+		this.name = typeName;
+	}
+
+	public RoomBuilder(Type type) {
+		this();
+		if (type == null)
+			throw illegalArgEx("room type", type);
+
+		this.type = type;
+		this.numOfPeople = type.ordinal() + 1;
+		this.name = type.name();
+	}
+
+	/**
+	 * Initialize a builder by given RoomInfo, all information will be kept..
+	 * <br>
+	 * 
+	 * @param type
+	 */
+	public RoomBuilder(Room info) {
+		this(info.getType());
+		this.setName(info.getName()).setPeopleNum(info.getPeopleNum()).setRoomNum(info.getRoomNum())
+				.setPrice(info.getPrice());
+	}
+
 	/**
 	 * Set name. <br>
 	 * 
@@ -67,23 +73,12 @@ public class RoomBuilder extends RoomTemplate{
 	 *            name string <br>
 	 * @return this instance <br>
 	 */
-	public RoomBuilder setName(String name){
-		
-		this.name = name;
-		try{
-			type = Type.valueOf(name);
-		}catch (IllegalArgumentException e){
-			type = Type.其它;
-		}
-		
-		if(type!=Type.其它){
-			numOfPeople = type.ordinal()+1;
-		}
-//		System.out.println(type.name());
+	public RoomBuilder setName(String name) {
+		if (type == Type.其它)
+			this.name = name;
 		return this;
 	}
-	
-	
+
 	/**
 	 * Set peopleNum. <br>
 	 * 
@@ -91,41 +86,34 @@ public class RoomBuilder extends RoomTemplate{
 	 *            peopleNum int <br>
 	 * @return this instance <br>
 	 */
-	public RoomBuilder setPeopleNum(int peopleNum){
-		if(checkPeopleNum(peopleNum)){
+	public RoomBuilder setPeopleNum(int peopleNum) {
+		if (type == Type.其它 && checkPeopleNum(peopleNum))
 			this.numOfPeople = peopleNum;
-		}
+
 		return this;
 	}
-	
-	public RoomBuilder setRoomNum(int roomNum){
-		if(checkRoomNum(roomNum)){
+
+	public RoomBuilder setRoomNum(int roomNum) {
+		if (checkRoomNum(roomNum))
 			this.numOfRoom = roomNum;
-		}
+
 		return this;
 	}
-	
-	public RoomBuilder setPrice(double price){
+
+	public RoomBuilder setPrice(double price) {
 		this.price = price;
 		return this;
 	}
-	
-//	public RoomBuilder setHotel(HotelPo hotel){
-//		this.hotel = hotel;
-//		return this;
-//	}
-	
+
 	public boolean isReady() {
-		return (name != null);
+		return (name != null) && checkName(name) && checkPeopleNum(numOfPeople) && checkRoomNum(numOfRoom);
 	}
 
-	public Room getRoomInfo(){
-		if (isReady())
-			return new Room(type).setName(name).setPeopleNum(numOfPeople).setRoomNum(numOfRoom).
-					setPrice(price);
-		
+	public Room getRoomInfo() {
+		if (!isReady())
+			throw illegalStateException("Room builder not set up");
 
-		return new RoomBuilder("single").getRoomInfo();
+		return new Room(type).setName(name).setPeopleNum(numOfPeople).setRoomNum(numOfRoom).setPrice(price);
 	}
 
 }

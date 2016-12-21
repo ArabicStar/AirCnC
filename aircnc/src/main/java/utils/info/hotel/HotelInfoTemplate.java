@@ -10,7 +10,10 @@ import java.util.Set;
  * 
  */
 public class HotelInfoTemplate {
-
+	/**
+	 * buffered blank string
+	 */
+	protected static final String BLANK = "";
 	/**
 	 * id int <br>
 	 */

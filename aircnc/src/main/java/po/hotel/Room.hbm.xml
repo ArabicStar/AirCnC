@@ -7,24 +7,28 @@
 	<class name="utils.info.hotel.Room" table="rooms">
 
 		<!-- key column, auto generated -->
-		<id column="ID" name="id" type="integer">
+		<id column="ID" name="id" type="int">
 			<generator class="native" />
 		</id>
 
 		<!-- type, the type of room -->
-		<property column="NAME" name="name" type="string" generated="never"/>
+		<property column="NAME" name="name" type="string" generated="never" />
 
 		<!-- peopleNumber, the capacity of room -->
-		<property column="PNUM" name="peopleNum" type="integer" generated="never" />
+		<property column="PNUM" name="peopleNum" type="integer"
+			generated="never" />
 
 		<!-- roomNumber, the amount of room -->
-		<property column="RNUM" name="roomNum" type="integer" generated="never"  />
+		<property column="RNUM" name="roomNum" type="integer"
+			generated="never" />
 
 		<!-- price, the price of room -->
-		<property column="PRICE" name="price" type="double" generated="never" />
-		
+		<property column="PRICE" name="price" type="double"
+			generated="never" />
 
 
+		<many-to-one name="hotel" column="HOTELID" class="po.hotel.HotelPo"
+			lazy="false" not-null="true" />
 
 	</class>
 </hibernate-mapping>

@@ -1,7 +1,7 @@
 package po.hotel;
 
 import java.util.Set;
-
+import static utils.exception.StaticExceptionFactory.*;
 import utils.info.hotel.HotelInfo;
 import utils.info.hotel.HotelInfoBuilder;
 import utils.info.hotel.Room;
@@ -24,39 +24,36 @@ public class HotelPoBuilder extends HotelInfoBuilder {
 		return INVALID_HOTEL_PO;
 	}
 
+	public HotelPoBuilder() {
+		super();
+	}
+
 	/**
 	 * Invalid HotelPo instance.<br>
 	 * Usually, used to mark invalid access and operation, etc.<br>
 	 */
 	public HotelPoBuilder(HotelInfo info) {
 		super(info);
-		// TODO Auto-generated constructor stub
-	}
-
-	public HotelPoBuilder() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public HotelPoBuilder setName(String name) {
-		if (checkHotelName(name)){
-			// insert blank space to avoid injection attack
-			this.name = name.replaceAll("(.{1})", "$1 ");
-		}
-		else
-			throw new IllegalArgumentException("Wrong hotel name");
-
-		return this;
 	}
 
 	@Override
 	public HotelPo getHotelInfo() {
-		if (!isReady() && passwordHash == Integer.MIN_VALUE)
-			throw new IllegalStateException("Lack Of Info");
+		if (!isReady() || passwordHash == Integer.MIN_VALUE)
+			throw illegalStateException("HotelPoBuilder not set up");
 
-		return new HotelPo().setName(name).setPasswordHash(passwordHash).setScope(scope).setLocation(location)
-				.setIntroduction(introduction).setStar(star).setGrade(grade).setRooms(rooms).setId(id);
+		return new HotelPo().setId(id).setPasswordHash(passwordHash).setName(name).setScope(scope).setLocation(location)
+				.setIntroduction(introduction).setStar(star).setGrade(grade).setRooms(rooms);
+	}
+
+	@Override
+	public HotelPoBuilder setName(String name) {
+		if (!checkHotelName(name))
+			throw new IllegalArgumentException("Wrong hotel name");
+
+		// insert blank space to avoid injection attack
+		this.name = name.replaceAll("(.{1})", "$1 ");
+
+		return this;
 	}
 
 	/**
@@ -68,8 +65,9 @@ public class HotelPoBuilder extends HotelInfoBuilder {
 		return this;
 	}
 
+	@Override
 	public HotelPoBuilder setRooms(Set<Room> rooms) {
-		this.rooms = rooms;
+		super.setRooms(rooms);
 		return this;
 	}
 
@@ -114,29 +112,30 @@ public class HotelPoBuilder extends HotelInfoBuilder {
 		super.setEquipment(equipment);
 		return this;
 	}
-	
+
 	/**
 	 * 
-	 * @param from modified hotel information
-	 * @param to 
+	 * @param from
+	 *            modified hotel information
+	 * @param to
 	 */
 	public static final void updatePo(HotelPo from, HotelPo to) {
 		if (from == null || to == null || from == to)
 			return;
 
 		if (from.getId() != to.getId() || !from.getName().equals(to.getName()))
-			throw new IllegalArgumentException("HotelPoBuilder.updatePo - Different identifier or name");
+			throw inconsistentStatusEx();
 
-		if(from.getScope() != ""){
-			to.setScope(from.getScope()).setLocation(from.getLocation())
-			.setIntroduction(from.getIntroduction()).setEquipment(from.getEquipment());
+		if (from.getScope() != "") {
+			to.setScope(from.getScope()).setLocation(from.getLocation()).setIntroduction(from.getIntroduction())
+					.setEquipment(from.getEquipment());
 		}
-		
-		if(from.getPasswordHash()!= Integer.MIN_VALUE){
+
+		if (from.getPasswordHash() != Integer.MIN_VALUE) {
 			to.setPasswordHash(from.getPasswordHash());
 		}
-		
-		if(from.getRooms()!=null){
+
+		if (from.getRooms() != null) {
 			to.setRooms(from.getRooms());
 		}
 	}

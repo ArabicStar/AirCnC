@@ -12,6 +12,22 @@ import po.hotel.HotelPo;
 public abstract class RoomTemplate {
 	public enum Type {
 		单人间, 双人间, 三人间, 其它;
+
+		public static Type of(String string) {
+			if (string == null)
+				return null;
+
+			switch (string) {
+			case "单人间":
+				return 单人间;
+			case "双人间":
+				return 双人间;
+			case "三人间":
+				return 三人间;
+			default:
+				return 其它;
+			}
+		}
 	}
 
 	/**
@@ -38,7 +54,7 @@ public abstract class RoomTemplate {
 	 * price double <br>
 	 */
 	protected double price;
-	
+
 	protected HotelPo hotel;
 
 	/**
