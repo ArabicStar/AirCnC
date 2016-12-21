@@ -1,6 +1,7 @@
 package launcher;
 
 import data.dao.hotel.HotelDaoProxy;
+import data.dao.market.MarketDaoProxy;
 import data.dao.member.MemberDaoProxy;
 import data.dao.query.QueryDaoProxy;
 import rmi.RemoteHelper;
@@ -49,9 +50,9 @@ public class DaoLauncher {
 	}
 
 	private static final void launchMarketDao(RemoteHelper helper) {
-		MemberDaoProxy proxy = MemberDaoProxy.launch();
+		MarketDaoProxy proxy = MarketDaoProxy.launch();
 
-		proxy.loadRemoteMemberDao(helper.getRemoteMemberDao());
+		proxy.loadRemoteMarketDao(helper.getRemoteMarketDao());
 
 		Log.d("market dao launched");
 	}

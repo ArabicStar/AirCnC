@@ -2,6 +2,8 @@ package launcher;
 
 import java.rmi.RemoteException;
 
+import rmi.remote.HotelDaoRemoteObj;
+import rmi.remote.MarketDaoRemoteObj;
 import rmi.remote.MemberDaoRemoteObj;
 import rmi.remote.PromotionDaoRemoteObj;
 import rmi.remote.QueryDaoRemoteObj;
@@ -11,6 +13,8 @@ public class RmiLauncher {
 	public static final void launch() {
 		try {
 			MemberDaoRemoteObj.launch();
+			HotelDaoRemoteObj.launch();
+			MarketDaoRemoteObj.launch();
 			QueryDaoRemoteObj.launch();
 			PromotionDaoRemoteObj.launch();
 
