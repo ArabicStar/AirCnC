@@ -18,6 +18,7 @@ import po.hotel.HotelPoBuilder;
 import service.hotel.HotelAccountService;
 import service.hotel.HotelInfoService;
 import service.promotion.HotelPromotionManagementService;
+import service.query.CommentQueryService;
 import service.query.HotelQueryService;
 import service.query.OrderQueryService;
 import utils.condition.Condition;
@@ -61,12 +62,13 @@ public class HotelInfoManager implements HotelInfoService ,HotelQueryService{
 	 *             singleton has existed already <br>
 	 */
 	public static HotelInfoManager launch(final HotelDao hotelDao, final HotelQueryDao hotelQueryDao,final HotelAccountService accountService,
-			final OrderQueryService orderQueryService,final HotelPromotionManagementService promotionManagementService) {
+			final OrderQueryService orderQueryService,final HotelPromotionManagementService promotionManagementService,
+			CommentQueryService commentQueryService) {
 		if (instance != null)
 			throw duplicateSingletonEx();
 
 		return instance = new HotelInfoManager(hotelDao, hotelQueryDao,accountService, orderQueryService,
-				promotionManagementService);
+				promotionManagementService,commentQueryService);
 	}
 
 	/**
@@ -88,14 +90,17 @@ public class HotelInfoManager implements HotelInfoService ,HotelQueryService{
 	private HotelAccountService accountService;
 	private OrderQueryService orderQueryService;
 	private HotelPromotionManagementService promotionManageService;
+	private CommentQueryService commentQueryService;
 
 
 	public HotelInfoManager(HotelDao hotelDao, HotelQueryDao hotelQueryDao,HotelAccountService accountService,
-			OrderQueryService orderQueryService,HotelPromotionManagementService promotionManagementService) {
+			OrderQueryService orderQueryService,HotelPromotionManagementService promotionManagementService,
+			CommentQueryService commentQueryService) {
 		this.accountService = accountService;
 		this.hotelDao = hotelDao;
 		this.promotionManageService = promotionManagementService;
 		this.orderQueryService = orderQueryService;
+		this.commentQueryService = commentQueryService;
 	}
 
 	@Override
@@ -153,8 +158,9 @@ public class HotelInfoManager implements HotelInfoService ,HotelQueryService{
 
 	@Override
 	public List<CommentVo> getHotelComment(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		if (orderQueryService == null)
+			throw unsupportedOpEx("get hotel orders by status");
+		return commentQueryService.getHotelComments(id);
 	}
 
 	@Override

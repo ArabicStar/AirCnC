@@ -12,18 +12,24 @@
 		</id>
 
 		<!-- type, the type of room -->
-		<property column="NAME" name="name" type="string" />
+		<property column="NAME" name="name" type="string" generated="never" />
 
 		<!-- peopleNumber, the capacity of room -->
-		<property column="PNUM" name="peopleNum" type="integer" />
+		<property column="PNUM" name="peopleNum" type="integer"
+			generated="never" />
 
 		<!-- roomNumber, the amount of room -->
-		<property column="RNUM" name="roomNum" type="integer" />
+		<property column="RNUM" name="roomNum" type="integer"
+			generated="never" />
 
 		<!-- price, the price of room -->
-		<property column="PRICE" name="price" type="double" />
+		<property column="PRICE" name="price" type="double"
+			generated="never" />
 
+		<property column="TYPE" name="type" type="string" generated="never" />
 
+		<many-to-one name="hotel" column="HOTELID" class="po.hotel.HotelPo"
+			cascade="all" lazy="false" not-null="false" />
 
 	</class>
 </hibernate-mapping>

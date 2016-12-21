@@ -14,26 +14,9 @@ import presentation.hotel.model.HotelPromotionModel;
 import vo.promotion.HotelPromotionVo;
 
 public class HotelPromotionMainController implements Initializable{
-	@FXML
-	private Button modifyBirth;
 	
 	@FXML
-	private Button modifyMulti;
-	
-	@FXML
-	private Button sendBirth;
-	
-	@FXML
-	private Button sendMulti;
-	
-	@FXML
-	private Button addEnter;
-	
-	@FXML
-	private Label birthday;
-	
-	@FXML
-	private Label multiRooms;
+	private Button addPromotion;
 	
 	@FXML
 	private TableView<HotelPromotionModel> promotionTable;
@@ -60,6 +43,11 @@ public class HotelPromotionMainController implements Initializable{
 	
 	private void initPromotion(){
 		
+	}
+	
+	@FXML
+	public void handleAddPromotion(){
+		//TODO
 	}
 
 }

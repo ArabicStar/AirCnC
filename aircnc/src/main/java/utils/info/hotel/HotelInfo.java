@@ -1,8 +1,7 @@
 package utils.info.hotel;
 
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
-
 
 /**
  * Abstract of hotel info<br>
@@ -13,19 +12,13 @@ import java.util.Set;
  * @author jqwu
  *
  */
-public abstract class HotelInfo extends HotelInfoTemplate{
-	
+public abstract class HotelInfo extends HotelInfoTemplate {
+
 	/**
 	 * mark a HotelInfo instance is valid or not. <br>
 	 */
 	protected boolean isValid;
 
-	/**
-	 * buffered blank string
-	 */
-	private static final String BLANK = "";
-
-	
 	/**
 	 * Default initialization <br>
 	 * <br>
@@ -44,7 +37,7 @@ public abstract class HotelInfo extends HotelInfoTemplate{
 		scope = BLANK;
 		location = BLANK;
 		introduction = BLANK;
-		rooms = null;
+		rooms = new HashSet<>();
 		star = 1;
 		grade = 0.0;
 		equipment = BLANK;
@@ -58,25 +51,25 @@ public abstract class HotelInfo extends HotelInfoTemplate{
 	}
 
 	public abstract String getName();
-	
+
 	public String getScope() {
 		if (isValid())
 			return scope;
 		return null;
 	}
-	
+
 	public String getLocation() {
 		if (isValid())
 			return location;
 		return null;
 	}
-	
+
 	public String getIntroduction() {
 		if (isValid())
 			return introduction;
 		return null;
 	}
-	
+
 	public Set<Room> getRooms() {
 		if (isValid())
 			return rooms;
@@ -89,14 +82,14 @@ public abstract class HotelInfo extends HotelInfoTemplate{
 		return Integer.MIN_VALUE;
 	}
 
-	public double getGrade(){
-		if(isValid())
+	public double getGrade() {
+		if (isValid())
 			return grade;
 		return Double.MIN_VALUE;
 	}
-	
-	public String getEquipment(){
-		if(isValid())
+
+	public String getEquipment() {
+		if (isValid())
 			return equipment;
 		return null;
 	}

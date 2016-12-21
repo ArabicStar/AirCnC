@@ -4,11 +4,11 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import vo.promotion.HotelPromotionVo;
+import vo.promotion.PromotionVo;
 
 public class HotelPromotionModel {
 	private final StringProperty description;
-    private final ObjectProperty<HotelPromotionVo> operation;
+    private final ObjectProperty<PromotionVo> operation;
     
     /**
      * Default constructor.
@@ -23,9 +23,9 @@ public class HotelPromotionModel {
      * @param description
      * @param operation
      */
-    public HotelPromotionModel(HotelPromotionVo vo) {
+    public HotelPromotionModel(PromotionVo vo) {
     	this.description = new SimpleStringProperty(vo.description());
-    	this.operation = new SimpleObjectProperty<HotelPromotionVo>(vo);
+    	this.operation = new SimpleObjectProperty<PromotionVo>(vo);
     }
     
     public String getDescription() {
@@ -40,15 +40,15 @@ public class HotelPromotionModel {
         return description;
     }
     
-    public HotelPromotionVo getOperation() {
+    public PromotionVo getOperation() {
         return operation.get();
     }
 
-    public void setOperation(HotelPromotionVo vo) {
+    public void setOperation(PromotionVo vo) {
         this.operation.set(vo);
     }
 
-    public ObjectProperty<HotelPromotionVo> operationProperty() {
+    public ObjectProperty<PromotionVo> operationProperty() {
         return operation;
     }
 

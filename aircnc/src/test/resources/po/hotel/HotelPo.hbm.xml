@@ -1,52 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
                                    "http://www.hibernate.org/dtd/hibernate-mapping">
-<!-- Generated 2016-11-22 10:03:21 by Hibernate Tools 3.5.0.Final -->
-<!-- ContactPo mapping xml -->
+<!-- Generated 2016-11-22 10:03:21 by Hibernate Tools 3.5.0.Final ContactPo 
+	mapping xml -->
 <hibernate-mapping>
 	<class name="po.hotel.HotelPo" table="hotels">
-	
 		<!-- hotelId, the key column, auto increase -->
-		<id column="ID" name="id" type="integer">
+		<id column="ID" name="id" type="int">
 			<generator class="native" />
 		</id>
-		
 		<!-- name -->
 		<property column="NAME" generated="never" lazy="false" name="name"
 			type="string" />
-			
 		<!-- passwordHash -->
 		<property column="PWD" generated="never" lazy="false" name="passwordHash"
 			type="integer" />
-			
 		<!-- star -->
 		<property column="STAR" generated="never" lazy="false" name="star"
 			type="integer" />
-			
 		<!-- grade -->
 		<property column="GRADE" generated="never" lazy="false" name="grade"
 			type="double" />
-			
 		<!-- equipment -->
-		<property column="EQUIPMENT" generated="never" lazy="false" name="equipment"
-			type="string" />
-			
+		<property column="EQUIPMENT" generated="never" lazy="false"
+			name="equipment" type="string" />
 		<!-- scope -->
 		<property column="SCOPE" generated="never" lazy="false" name="scope"
 			type="string" />
-			
 		<!-- location -->
-		<property column="LOCATION" generated="never" lazy="false" 
+		<property column="LOCATION" generated="never" lazy="false"
 			name="location" type="string" />
-			
 		<!-- introduction -->
 		<property column="INTRODUCTION" generated="never" lazy="false"
 			name="introduction" type="string" />
-			
 		<!-- association table -->
-		<set name="rooms"  cascade="all" lazy="false" fetch = "select">
-            <key column="HOTELID" />
-            <one-to-many class ="utils.info.hotel.Room"/>
-        </set>		
+		<set batch-size="5" cascade="all" lazy="false" name="rooms" sort="unsorted">
+			<key column="HOTELID" />
+			<one-to-many class="utils.info.hotel.Room" />
+		</set>
 	</class>
 </hibernate-mapping>
