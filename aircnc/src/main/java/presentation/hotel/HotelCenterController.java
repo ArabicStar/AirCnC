@@ -12,6 +12,7 @@ import presentation.hotel.view.checkOut.CheckOutPane;
 import presentation.hotel.view.hotelInfo.HotelInfoController;
 import presentation.hotel.view.hotelInfo.HotelInfoMainPane;
 import presentation.hotel.view.hotelInfo.HotelInfoModifyPane;
+import presentation.hotel.view.hotelPromotion.HotelPromotionMainPane;
 import presentation.hotel.view.orderBrowse.OrderBrowsePane;
 import presentation.hotel.view.orderExecute.OrderExecutePane;
 import presentation.hotel.accessor.impl.InfoModifyAccessorImpl;
@@ -30,6 +31,7 @@ public class HotelCenterController extends Application{
 	private CheckOutPane checkOutPane;
 	private OrderBrowsePane browsePane;
 	private AbnormalOrderPane abnormalPane;
+	private HotelPromotionMainPane promotionPane;
 	
 	private InfoManager hotelInfoManager;
 	
@@ -73,6 +75,14 @@ public class HotelCenterController extends Application{
 		orderExecutePane = new OrderExecutePane();
 		mainClient.getBorderPane().setCenter(orderExecutePane.getPane());
 		orderExecutePane.getController().setCenterController(this);	
+	}
+	
+	public void addHotelPromotionPane() {
+		clearContent();
+		promotionPane = new HotelPromotionMainPane();
+		mainClient.getBorderPane().setCenter(promotionPane.getPane());
+		promotionPane.getController().setCenterController(this);
+		promotionPane.getController().setRootLayout(rootLayout);
 	}
 	
 	public void addAbnormalOrderPane() {

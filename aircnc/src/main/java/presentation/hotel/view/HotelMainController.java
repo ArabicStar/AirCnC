@@ -70,8 +70,7 @@ public class HotelMainController implements Initializable{
 	
 	@FXML
 	private void handleHotelPromotion(){
-		hotelPromotion.setText("啊");
-//		controller.addCreditChangePane();
+		controller.addHotelPromotionPane();
 	}
 	
 	/**

@@ -6,13 +6,13 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="777.0" stylesheets="@../css/HotelPromotionMain.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="777.0" stylesheets="@../css/HotelPromotionMain.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.hotel.view.hotelPromotion.fxml.HotelPromotionMainController">
    <children>
       <Label layoutX="47.0" layoutY="59.0" styleClass="title" text="促销策略制定" />
-      <TableView fx:id="promotionTable" layoutX="44.0" layoutY="116.0" prefHeight="507.0" prefWidth="689.0">
+      <TableView fx:id="promotionTable" focusTraversable="false" layoutX="44.0" layoutY="116.0" prefHeight="507.0" prefWidth="689.0">
          <columns>
-            <TableColumn fx:id="description" prefWidth="520.0" resizable="false" text="策略信息" />
-            <TableColumn fx:id="operation" prefWidth="170.0" resizable="false" text="操作" />
+            <TableColumn fx:id="description" editable="false" text="策略信息" />
+            <TableColumn fx:id="operation" editable="false" text="操作" />
          </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
