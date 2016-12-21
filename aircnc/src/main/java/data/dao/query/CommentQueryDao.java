@@ -2,8 +2,8 @@ package data.dao.query;
 
 import java.util.List;
 
-import vo.order.comment.CommentVo;
+import po.order.comment.CommentPo;
 
 public interface CommentQueryDao {
-	public List<CommentVo> findByHotelId(int hotelId);
+	public List<CommentPo> findByHotelId(int hotelId);
 }

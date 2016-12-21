@@ -25,9 +25,9 @@ public enum CommentDaoImpl implements CommentQueryDao, CommentDao{
 	 * 第三步把vo添加到list
 	 */
 	@Override
-	public List<CommentVo> findByHotelId(int hotelId) {
+	public List<CommentPo> findByHotelId(int hotelId) {
 		// TODO Auto-generated method stub
-		List<CommentVo> list = new ArrayList<>();
+		List<CommentPo> list = new ArrayList<>();
 		return list;
 	}
 

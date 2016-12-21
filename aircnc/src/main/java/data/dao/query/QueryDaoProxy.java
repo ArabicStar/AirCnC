@@ -9,6 +9,7 @@ import java.util.Set;
 
 import org.hibernate.criterion.DetachedCriteria;
 
+import data.dao.rmi.query.RemoteCommentQueryDao;
 import data.dao.rmi.query.RemoteCreditQueryDao;
 import data.dao.rmi.query.RemoteHotelQueryDao;
 import data.dao.rmi.query.RemoteOrderQueryDao;
@@ -16,10 +17,11 @@ import data.dao.rmi.query.RemotePromotionQueryDao;
 import po.hotel.HotelPo;
 import po.member.credit.CreditChangePo;
 import po.order.OrderPo;
+import po.order.comment.CommentPo;
 import po.promotion.PromotionPo;
 import utils.info.order.OrderStatus;
 
-public final class QueryDaoProxy implements CreditQueryDao, OrderQueryDao, PromotionQueryDao, HotelQueryDao {
+public final class QueryDaoProxy implements CreditQueryDao, OrderQueryDao, PromotionQueryDao, HotelQueryDao, CommentQueryDao {
 	/* Singleton */
 	private static QueryDaoProxy instance;
 
@@ -153,5 +155,21 @@ public final class QueryDaoProxy implements CreditQueryDao, OrderQueryDao, Promo
 	@Override
 	public List<HotelPo> searchByCriteria(DetachedCriteria dc) {
 		return hazard(() -> remoteHotelQueryDao.searchByCriteria(dc));
+	}
+	
+	/*
+	 *******************************
+	 ******* CommentQueryDao*******
+	 *******************************
+	 */
+	private RemoteCommentQueryDao remoteCommentQueryDao;
+
+	public void loadRemoteCommentQueryDao(RemoteCommentQueryDao remoteCommentQueryDao) {
+		this.remoteCommentQueryDao = remoteCommentQueryDao;
+	}
+
+	@Override
+	public List<CommentPo> findByHotelId(int hotelId){
+		return hazard(() -> remoteCommentQueryDao.findByHotelId(hotelId));
 	}
 }

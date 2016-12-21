@@ -26,9 +26,10 @@
 		<property column="PRICE" name="price" type="double"
 			generated="never" />
 
+		<property column="TYPE" name="type" type="string" generated="never" />
 
 		<many-to-one name="hotel" column="HOTELID" class="po.hotel.HotelPo"
-			lazy="false" not-null="true" />
+			cascade="all" lazy="false" not-null="false" />
 
 	</class>
 </hibernate-mapping>

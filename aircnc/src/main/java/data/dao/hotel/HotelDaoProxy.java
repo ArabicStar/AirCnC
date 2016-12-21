@@ -1,28 +1,25 @@
 package data.dao.hotel;
 
+import static data.dao.rmi.RmiHazarder.hazard;
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
-import static utils.exception.StaticExceptionFactory.packedRmiEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
-
-import java.rmi.RemoteException;
 
 import data.dao.rmi.hotel.RemoteHotelDao;
 import po.hotel.HotelPo;
-import utils.proxy.AccessSecureProxy;
 import utils.proxy.AuthenticatePolicy;
 import utils.proxy.AuthenticatePolicy.Client;
 
-public class HotelDaoProxy extends AccessSecureProxy implements HotelDao {
+public class HotelDaoProxy implements HotelDao {
 	/**
 	 * Singleton instance
 	 */
 	private static HotelDaoProxy instance;
 
-	public static final HotelDaoProxy launch(Client clientId) {
+	public static final HotelDaoProxy launch() {
 		if (instance != null)
 			throw duplicateSingletonEx();
 
-		return instance = new HotelDaoProxy(clientId);
+		return instance = new HotelDaoProxy();
 	}
 
 	public static final HotelDaoProxy getInstance() {
@@ -32,116 +29,86 @@ public class HotelDaoProxy extends AccessSecureProxy implements HotelDao {
 		return instance;
 	}
 	
-	/**
-	 * Actual hotel dao handler
-	 */
-	private RemoteHotelDao hotelDao;
-	
+	/* singleton */
+
 	/**
 	 * 'Default constructor, defines client identifier.<br>
 	 * 
 	 * @param clientId
 	 */
-	private HotelDaoProxy(Client clientId) {
-		super(clientId);
-		// TODO Auto-generated constructor stub
+	private HotelDaoProxy() {
 	}
-	
-	/**
-	 * Load a spefic hotel dao, auth to clients of hotel and manage, plus
-	 * server.<br>
-	 */
-	@AuthenticatePolicy({ Client.HOTEL, Client.MANAGE})
-	public void loadRemoteHotelDao(RemoteHotelDao hotelDao){
-		checkAuthentication();
 
+	/*
+	 ****************************
+	 ******* MarketDao*******
+	 ****************************
+	 */
+	/**
+	 * /*
+	 ***************************
+	 ******* MarketDao******
+	 ***************************
+	 */
+	/**
+	 * Actual market dao handler
+	 */
+	private RemoteHotelDao hotelDao;
+
+	/**
+	 * Load a specific market dao, auth to clients of user and market.<br>
+	 * 
+	 * @param marketDao
+	 *            a specific market dao implementation
+	 */
+	public void loadRemoteHotelDao(RemoteHotelDao hotelDao) {
 		this.hotelDao = hotelDao;
 	}
 
-
 	@Override
-	@AuthenticatePolicy({ Client.HOTEL,Client.MANAGE })
-	public HotelPo findHotelById(int id) {
-		checkAuthentication();
-		
-		try {
-			return hotelDao.findHotelById(id);
-		} catch (RemoteException e) {
-			// e.printStackTrace();
-			throw packedRmiEx(e);
-		}
-		
-	}
-	
-	@Override
-	@AuthenticatePolicy({ Client.HOTEL,Client.MANAGE })
-	public HotelPo findHotelByName(String name) {
-		checkAuthentication();
-		
-		try {
-			return hotelDao.findHotelByName(name);
-		} catch (RemoteException e) {
-			// e.printStackTrace();
-			throw packedRmiEx(e);
-		}
-		
+	public boolean addHotel(HotelPo po) {
+		return hazard(() -> {
+			return hotelDao.addHotel(po);
+		});
 	}
 
+	/* As follow are proxy methods. */
 	@Override
 	@AuthenticatePolicy({ Client.MANAGE })
 	public boolean deleteHotel(int id) {
-		checkAuthentication();
-		
-		try {
+		return hazard(() -> {
 			return hotelDao.deleteHotel(id);
-		} catch (RemoteException e) {
-			// e.printStackTrace();
-			throw packedRmiEx(e);
-		}
-		
+		});
 	}
 
 	@Override
-	@AuthenticatePolicy({ Client.HOTEL,Client.MANAGE })
+	@AuthenticatePolicy({ Client.USER })
 	public boolean updateHotel(HotelPo po) {
-		checkAuthentication();
-		
-		try {
+		return hazard(() -> {
 			return hotelDao.updateHotel(po);
-		} catch (RemoteException e) {
-			// e.printStackTrace();
-			throw packedRmiEx(e);
-		}
-		
+		});
 	}
-
-	@Override
-	@AuthenticatePolicy({ Client.MANAGE })
-	public boolean addHotel(HotelPo po) {
-		checkAuthentication();
-		
-		try {
-			return hotelDao.addHotel(po);
-		} catch (RemoteException e) {
-			// e.printStackTrace();
-			throw packedRmiEx(e);
-		}
-		
-	}
-
 	
 	@Override
-	@AuthenticatePolicy({ Client.HOTEL})
+	public HotelPo findHotelById(int id) {
+		return hazard(() -> {
+			return hotelDao.findHotelById(id);
+		});
+	}
+
+	@Override
+	@AuthenticatePolicy({ Client.USER, Client.HOTEL })
 	public boolean existName(String name) {
-		checkAuthentication();
-		
-		try {
+		return hazard(() -> {
 			return hotelDao.existName(name);
-		} catch (RemoteException e) {
-			// e.printStackTrace();
-			throw packedRmiEx(e);
-		}
-		
+		});
+	}
+
+	@Override
+	public HotelPo findHotelByName(String name) {
+		return hazard(() -> {
+			return hotelDao.findHotelByName(name);
+		});
 	}
 
 }
