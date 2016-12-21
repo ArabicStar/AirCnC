@@ -32,10 +32,10 @@ public class CommentVo extends CommentInfo{
 		return this;
 	}
 	
-	CommentVo setCheckInTime(LocalDate checkInTime){
-		this.checkInTime = checkInTime;
-		return this;
-	}
+//	CommentVo setCheckInTime(LocalDate checkInTime){
+//		this.checkInTime = checkInTime;
+//		return this;
+//	}
 	
 	CommentVo setCommentTime(LocalDateTime commentTime){
 		this.commentTime = commentTime;

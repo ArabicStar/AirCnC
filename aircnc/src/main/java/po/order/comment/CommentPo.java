@@ -31,10 +31,10 @@ public class CommentPo extends CommentInfo {
 		return this;
 	}
 
-	CommentPo setCheckInTime(LocalDate checkInTime) {
-		this.checkInTime = checkInTime;
-		return this;
-	}
+//	CommentPo setCheckInTime(LocalDate checkInTime) {
+//		this.checkInTime = checkInTime;
+//		return this;
+//	}
 
 	CommentPo setCommentTime(LocalDateTime commentTime) {
 		this.commentTime = commentTime;
@@ -60,7 +60,8 @@ public class CommentPo extends CommentInfo {
 	}
 
 	public CommentVo toCommentVo() {
-		CommentVo vo = new CommentVoBuilder().setCheckInTime(checkInTime).setCommentTime(commentTime)
+		// 删除掉的.setCheckInTime(checkInTime)
+		CommentVo vo = new CommentVoBuilder().setCommentTime(commentTime)
 				.setContent(content).setHotelID(hotelId).setMemberID(memberId)
 				.setGrade(grade).setOrderId(orderId).getCommentInfo();
 		return vo;
