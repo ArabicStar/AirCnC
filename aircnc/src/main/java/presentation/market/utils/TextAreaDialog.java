@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+import interactor.impl.order.OrderInfoCourier;
+import interactor.order.OrderInfoInteractor;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,7 +29,15 @@ import javafx.stage.StageStyle;
 import presentation.market.accessor.MakeOrderAccessor;
 import presentation.market.accessor.impl.MakeOrderAccessorImpl;
 import presentation.market.model.MyOrderModel;
+import service.impl.order.OrderDetailServiceImpl;
+import service.impl.order.OrderListingServiceImpl;
+import service.impl.order.OrderLogicServiceImpl;
+import service.order.OrderDetailService;
+import service.order.OrderListingService;
+import service.order.OrderLogicService;
 import vo.hotel.HotelVo;
+import vo.order.OrderVo;
+import vo.order.OrderVoBuilder;
 
 public class TextAreaDialog extends GridPane {
 	Dialog<String> dialog;
@@ -129,7 +139,7 @@ public class TextAreaDialog extends GridPane {
 		gridPane.add(rb2, 2, 7);
 		gridPane.add(rb1, 3, 7);
 		
-		ButtonType btn = new ButtonType("提交", ButtonData.APPLY);
+		ButtonType btn = new ButtonType("确认", ButtonData.APPLY);
 		dialog.getDialogPane().getButtonTypes().add(btn);
 		Node ensureButton = dialog.getDialogPane().lookupButton(btn);
 		
@@ -142,16 +152,12 @@ public class TextAreaDialog extends GridPane {
 
 				// hasChildren
 				if(rb1.getToggleGroup().getSelectedToggle()!=null) {
-					System.out.println("非空");
 					String temp = rb1.getToggleGroup().getSelectedToggle().toString();
 					String result = temp.substring(temp.length() - 2, temp.length() - 1);
-					System.out.println(accessor == null);
 					if(result.equals("有")) {
 						accessor.setHasChildren(true);
-						System.out.println("有");
 					} else {
 						accessor.setHasChildren(false);
-						System.out.println("无");
 					}
 				}
 				
@@ -218,10 +224,37 @@ public class TextAreaDialog extends GridPane {
 
 			@Override
 			public void handle(MouseEvent event) {
-				System.out.println(event);
-				System.out.println("离开");
 				Alert alert = new Alert(AlertType.CONFIRMATION);
-				alert.setContentText("确认生成订单？");
+				// TODO:显示订单的信息
+				// 房间数量、最晚订单、入住人数、有无儿童
+				String temp = rb1.getToggleGroup().getSelectedToggle().toString();
+				String result = temp.substring(temp.length() - 2, temp.length() - 1);
+				String detail = enterDateLabel.getText() + " " + enterDatePickeratePicker.getValue().toString() + "\r\n"
+						+ leaveDateLabel.getText() + " " + leaveDatePickeratePicker.getValue().toString() + "\r\n"
+						+ roomTypeLabel.getText() + " " + roomTypeBox.getValue().toString() + "\r\n"
+						+ roomNumberLabel.getText() + " " + roomNumberField.getText() + "\r\n"
+						+ latestExecuteTimeLabel.getText() + " " + enterDatePickeratePicker.getValue().toString() + " " + timePicker.getDateTimeValue().getHour() + ":00" + "\r\n"
+						+ peopleNumberLabel.getText() + " " + peopleNumberField.getText() + "\r\n"
+						+ hasChildrenLabel.getText() + " " + result + "\r\n";
+				Node yesButton = alert.getDialogPane().lookupButton(ButtonType.OK);
+				yesButton.setOnMousePressed(new EventHandler<MouseEvent>() {
+
+					@Override
+					public void handle(MouseEvent event) {
+						OrderDetailService detail = new OrderDetailServiceImpl();
+						OrderListingService listing = new OrderListingServiceImpl(hotelVo.getId());
+						OrderLogicService logic = new OrderLogicServiceImpl(hotelVo.getId());
+//						if(!OrderInfoCourier.isLaunch()) {
+							OrderInfoInteractor interactor = OrderInfoCourier.launch(detail, listing, logic);
+//						}
+							// TODO 把该添加的订单信息加上去
+							OrderVo orderVo = new OrderVoBuilder().setHotelName(hotelVo.getName()).getOrderInfo();
+						interactor.addOrder(orderVo);
+						System.out.println("成功");
+					}
+				});
+				alert.setHeaderText("确认生成订单？");
+				alert.setContentText(detail);
 				alert.show();
 				dialog.close();
 			}

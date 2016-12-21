@@ -1,5 +1,7 @@
 package interactor.order;
 
+import vo.order.OrderVo;
+
 public interface OrderInfoInteractor {
 	/**
 	 * for hotel to get an order
@@ -27,4 +29,6 @@ public interface OrderInfoInteractor {
 	
 	public void repeal();
 	
+	
+	public void addOrder(OrderVo orderVo);
 }

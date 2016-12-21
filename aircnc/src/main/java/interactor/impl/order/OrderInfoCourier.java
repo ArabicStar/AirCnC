@@ -47,6 +47,14 @@ public class OrderInfoCourier implements OrderInfoInteractor{
 		return instance = new OrderInfoCourier(detail, listing, logic);
 	}
 	
+	public static boolean isLaunch() {
+		if(instance == null) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
 	public static OrderInfoInteractor getInstance() {
 		if (instance == null) {
 			throw singletonNotExistsEx();
@@ -132,6 +140,11 @@ public class OrderInfoCourier implements OrderInfoInteractor{
 	public void getOrderInfoByHotel() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void addOrder(OrderVo orderVo) {
+		detail.saveOrder(orderVo.orderVo2Po());
 	}
 	
 }
