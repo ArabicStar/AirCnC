@@ -6,7 +6,7 @@ import java.util.Set;
 import javax.persistence.Entity;
 
 import po.order.comment.CommentPo;
-import utils.info.promotion.PromotionInfo;
+import utils.promotion.Promotion;
 
 @Entity
 public abstract class OrderInfoTemplate {
@@ -28,7 +28,7 @@ public abstract class OrderInfoTemplate {
 	 */
 	protected LocalDateTime lastTime;
 
-	protected Set<? super PromotionInfo> promotions;
+	protected Set<Promotion> promotions;
 
 	/**
 	 * 除去小孩的总人数
@@ -60,7 +60,7 @@ public abstract class OrderInfoTemplate {
 	 * 申诉内容
 	 */
 	protected String appeal;
-	
+
 	protected static boolean isNumber(String str) {
 		if (str.matches("[0-9]+")) {
 			return true;
