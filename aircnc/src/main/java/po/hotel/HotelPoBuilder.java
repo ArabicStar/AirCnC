@@ -42,7 +42,7 @@ public class HotelPoBuilder extends HotelInfoBuilder {
 			throw illegalStateException("HotelPoBuilder not set up");
 
 		return new HotelPo().setId(id).setPasswordHash(passwordHash).setName(name).setScope(scope).setLocation(location)
-				.setIntroduction(introduction).setStar(star).setGrade(grade).setRooms(rooms);
+				.setIntroduction(introduction).setStar(star).setGrade(grade).setRooms(rooms).setEquipment(equipment);
 	}
 
 	@Override

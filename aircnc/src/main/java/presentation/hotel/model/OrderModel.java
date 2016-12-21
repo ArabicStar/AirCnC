@@ -15,7 +15,7 @@ public class OrderModel {
 	private final StringProperty userId;
 	private final StringProperty orderId;
 	private final StringProperty checkinTime;
-	private final StringProperty status;
+	private final StringProperty timeAndSum;
 	private final StringProperty totalPrice;
 	private final ObjectProperty<ButtonName> operation;
 
@@ -33,7 +33,7 @@ public class OrderModel {
 	 * @param userId
 	 * @param orderId
 	 * @param checkinTime
-	 * @param status
+	 * @param timeAndSum
 	 * @param totalPrice
 	 */
 	public OrderModel(OrderVo order) {
@@ -41,7 +41,7 @@ public class OrderModel {
 		this.userId = new SimpleStringProperty(String.valueOf(order.getUserId()));
 		this.orderId = new SimpleStringProperty(String.valueOf(order.getOrderId()));
 		this.checkinTime = new SimpleStringProperty(transformTime(order.getEntryTime()));
-		this.status = new SimpleStringProperty(order.getStatus().toString());
+		this.timeAndSum = new SimpleStringProperty(transDayAndNum(order.getStayDays(),order.getRoomNumber()));
 		this.totalPrice = new SimpleStringProperty(String.valueOf(order.getOriginalPrice()) + "元");
 		this.operation = new SimpleObjectProperty<ButtonName>();
 		
@@ -52,7 +52,7 @@ public class OrderModel {
 		this.userId = new SimpleStringProperty(s2);
 		this.orderId = new SimpleStringProperty(s3);
 		this.checkinTime = new SimpleStringProperty(s4);
-		this.status = new SimpleStringProperty(s5);
+		this.timeAndSum = new SimpleStringProperty(s5);
 		this.totalPrice = new SimpleStringProperty(s6);
 		this.operation = new SimpleObjectProperty<ButtonName>();
 	}
@@ -64,10 +64,16 @@ public class OrderModel {
 	 * @param date
 	 * @return new date format(String)
 	 */
-
 	private static String transformTime(LocalDateTime date) {
 
 		String result = date.getYear() + "-" + date.getMonthValue() + "-" + date.getDayOfMonth();
+
+		return result;
+	}
+	
+	private static String transDayAndNum(int day,int roomNum) {
+
+		String result = Integer.toString(day)+"晚/"+Integer.toString(roomNum)+"间";
 
 		return result;
 	}
@@ -121,15 +127,15 @@ public class OrderModel {
     }
     
     public String getTimeAndSum() {
-        return status.get();
+        return timeAndSum.get();
     }
 
     public void setTimeAndSum(String newTimeAndSum) {
-        this.status.set(newTimeAndSum);
+        this.timeAndSum.set(newTimeAndSum);
     }
 
     public StringProperty timeAndSumProperty() {
-        return status;
+        return timeAndSum;
     }
     
     public String getTotalPrice() {

@@ -74,6 +74,7 @@ public enum HotelDaoImpl implements HotelDao, HotelQueryDao {
 
 	@Override
 	public boolean existName(String name) {
+
 		return execute(session -> {
 			return !session.createCriteria(HotelPo.class).add(Restrictions.eq("name", name)).list().isEmpty();
 		});
@@ -81,6 +82,7 @@ public enum HotelDaoImpl implements HotelDao, HotelQueryDao {
 
 	@Override
 	public HotelPo findHotelByName(String name) {
+		
 		return execute(session -> {
 			@SuppressWarnings("unchecked")
 			List<HotelPo> hotels = (List<HotelPo>) session.createCriteria(HotelPo.class)

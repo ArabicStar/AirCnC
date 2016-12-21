@@ -1,26 +1,47 @@
 package service.impl.hotel;
 
+import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
+import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
+
 import data.dao.hotel.HotelDao;
 import po.hotel.HotelPo;
 import po.hotel.HotelPoBuilder;
 import service.hotel.HotelAccountService;
 import utils.info.hotel.HotelInfo;
-import vo.hotel.HotelVoBuilder;
 import vo.hotel.HotelVo;
+import vo.hotel.HotelVoBuilder;
 
 public class HotelAccountManager implements HotelAccountService{
 
+	private static HotelAccountService instance;
+
+	public static HotelAccountService launch(HotelDao dao) {
+		if (instance != null)
+			throw duplicateSingletonEx();
+
+		instance = new HotelAccountManager(dao);
+		return instance;
+	}
+
+	public static HotelAccountService getInstance() {
+		if (instance == null)
+			throw singletonNotExistsEx();
+
+		return instance;
+	}
+
+	private static final int ID_BOUND = 100000000;
 	private HotelDao dao;
 
 	private boolean isLogined = false;
 	/**
-	 * Logined hotel info.<br>
-	 * Actually, it should be a HotelPo instance, so casts it when neccessary.
+	 * Logined member info.<br>
+	 * Actually, it should be a MemberPo instance, so casts it when neccessary.
 	 * <br>
 	 */
 	private HotelPo currentAccount = null;
 
-	public HotelAccountManager(HotelDao dao) {
+	private HotelAccountManager(HotelDao dao) {
 		this.dao = dao;
 	}
 
@@ -31,14 +52,13 @@ public class HotelAccountManager implements HotelAccountService{
 
 		// set id and password, build po
 		HotelVo newHotelVo = newHotelInfo.getHotelInfo();
-		System.out.println(newHotelVo.getRooms()!=null);
 		HotelPo newHotelPo = new HotelPoBuilder(newHotelVo).setPasswordHash(passwordHash).getHotelInfo();
-		System.out.println(newHotelPo.getRooms()!=null);
 		
 		// add new hotel
 		boolean result = dao.addHotel(newHotelPo);
-		if (result)
+		if (result){
 			return newHotelVo;
+		}
 
 		return HotelVoBuilder.invalidInfo();
 	}

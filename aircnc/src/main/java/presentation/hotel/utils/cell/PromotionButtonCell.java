@@ -7,13 +7,13 @@ import javafx.scene.control.TableCell;
 import javafx.scene.layout.HBox;
 import presentation.hotel.model.HotelPromotionModel;
 import presentation.hotel.view.hotelPromotion.fxml.HotelPromotionMainController;
-import vo.promotion.HotelPromotionVo;
+import vo.promotion.PromotionVo;
 
-public class PromotionButtonCell extends TableCell<HotelPromotionModel, HotelPromotionVo>{
+public class PromotionButtonCell extends TableCell<HotelPromotionModel, PromotionVo>{
 
 	private Button[] cellButton;
 	private HBox buttons;
-	private HotelPromotionVo vo;
+	private PromotionVo vo;
 	
 	private HotelPromotionMainController controller;
 	
@@ -104,7 +104,7 @@ public class PromotionButtonCell extends TableCell<HotelPromotionModel, HotelPro
       * @param status, empty
       */
      @Override
-     protected void updateItem(HotelPromotionVo vo, boolean empty) {
+     protected void updateItem(PromotionVo vo, boolean empty) {
          super.updateItem(vo, empty);
          if(!empty){
          		this.vo = vo;	
