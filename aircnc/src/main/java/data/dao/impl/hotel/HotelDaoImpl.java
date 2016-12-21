@@ -14,12 +14,10 @@ import po.member.MemberPo;
 
 public enum HotelDaoImpl implements HotelDao, HotelQueryDao {
 	INSTANCE;
-	
+
 	@Override
 	public HotelPo findHotelById(final int id) {
-		return execute(session -> {
-			return session.get(HotelPo.class, id);
-		});
+		return execute(session -> session.get(HotelPo.class, id));
 	}
 
 	@Override
@@ -58,17 +56,15 @@ public enum HotelDaoImpl implements HotelDao, HotelQueryDao {
 		if (po == null)
 			return false;
 
-		// should not exist yet
-		if (existName(po.getName()))
-			return false;
-
 		return execute(session -> {
-			// save HotelPo
-//			System.out.println(session);
-			session.save(po);
-			
+			Boolean flag = Boolean.FALSE;
 
-			return true;
+			HotelPo test = session.get(HotelPo.class, po.getId());
+			if (flag = Boolean.valueOf(test == null))
+				// save HotelPo
+				session.save(po);
+
+			return flag;
 		});
 	}
 
@@ -82,16 +78,13 @@ public enum HotelDaoImpl implements HotelDao, HotelQueryDao {
 
 	@Override
 	public HotelPo findHotelByName(String name) {
-		
+
 		return execute(session -> {
+			System.err.println(name);
 			@SuppressWarnings("unchecked")
 			List<HotelPo> hotels = (List<HotelPo>) session.createCriteria(HotelPo.class)
 					.add(Restrictions.eq("name", name)).list();
-			if (hotels.size() == 0) {
-				return null;
-			} else {
-				return hotels.get(0);
-			}
+			return hotels.size() == 0 ? null : hotels.get(0);
 		});
 	}
 

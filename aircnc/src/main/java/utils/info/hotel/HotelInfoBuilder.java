@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang.StringUtils;
+
 public abstract class HotelInfoBuilder extends HotelInfoTemplate {
 
 	public HotelInfoBuilder() {
@@ -20,9 +22,9 @@ public abstract class HotelInfoBuilder extends HotelInfoTemplate {
 
 	public HotelInfoBuilder(HotelInfo info) {
 		this();
-		this.setID(info.getId()).setName(info.getName()).setScope(info.getScope()).setLocation(info.getLocation())
-				.setStar(info.getStar()).setGrade(info.getGrade()).setEquipment(info.getEquipment())
-				.setRooms(info.getRooms());
+		this.setID(info.getId()).setName(StringUtils.deleteWhitespace(info.getName())).setScope(info.getScope())
+				.setLocation(info.getLocation()).setStar(info.getStar()).setGrade(info.getGrade())
+				.setEquipment(info.getEquipment()).setRooms(info.getRooms());
 	}
 
 	public HotelInfoBuilder setID(int id) {

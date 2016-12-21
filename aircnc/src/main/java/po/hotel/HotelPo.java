@@ -2,8 +2,6 @@ package po.hotel;
 
 import java.util.Set;
 
-import org.apache.commons.lang.StringUtils;
-
 import utils.info.hotel.HotelInfo;
 import utils.info.hotel.Room;
 
@@ -13,7 +11,7 @@ public class HotelPo extends HotelInfo {
 	@Override
 	public String getName() {
 		if (isValid())
-			return StringUtils.deleteWhitespace(this.name);
+			return name;
 		return null;
 	}
 

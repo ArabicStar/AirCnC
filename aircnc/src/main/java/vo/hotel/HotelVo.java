@@ -1,15 +1,11 @@
 package vo.hotel;
 
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import utils.info.hotel.HotelInfo;
 import utils.info.hotel.Room;
-import utils.info.hotel.RoomBuilder;
 
 public class HotelVo extends HotelInfo {
-
-	private Set<Room> rooms;
 
 	public String getName() {
 		if (isValid())
