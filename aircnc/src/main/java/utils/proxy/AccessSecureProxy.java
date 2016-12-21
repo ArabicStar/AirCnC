@@ -1,7 +1,6 @@
 package utils.proxy;
 
 import java.lang.reflect.Method;
-import java.rmi.Remote;
 
 import utils.proxy.AuthenticatePolicy.Client;
 
