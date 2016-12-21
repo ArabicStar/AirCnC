@@ -8,16 +8,21 @@ import java.util.List;
 import java.util.Set;
 
 import data.dao.impl.member.CreditDaoImpl;
+import data.dao.impl.order.CommentDaoImpl;
 import data.dao.impl.query.PromotionQueryDaoImpl;
+import data.dao.query.CommentQueryDao;
 import data.dao.query.CreditQueryDao;
 import data.dao.query.PromotionQueryDao;
+import data.dao.rmi.query.RemoteCommentQueryDao;
 import data.dao.rmi.query.RemoteCreditQueryDao;
 import data.dao.rmi.query.RemotePromotionQueryDao;
 import po.member.credit.CreditChangePo;
+import po.order.comment.CommentPo;
 import po.promotion.PromotionPo;
 import rmi.RemoteHelper;
 
-public class QueryDaoRemoteObj extends UnicastRemoteObject implements RemoteCreditQueryDao, RemotePromotionQueryDao {
+public class QueryDaoRemoteObj extends UnicastRemoteObject implements RemoteCreditQueryDao
+, RemotePromotionQueryDao, RemoteCommentQueryDao {
 	/**
 	 * 
 	 */
@@ -34,8 +39,9 @@ public class QueryDaoRemoteObj extends UnicastRemoteObject implements RemoteCred
 
 		final CreditQueryDao creditQuery = CreditDaoImpl.INSTANCE;
 		final PromotionQueryDao promotionQuery = PromotionQueryDaoImpl.INSTANCE;
-
-		instance = new QueryDaoRemoteObj(creditQuery, promotionQuery);
+		final CommentQueryDao commentQuery = CommentDaoImpl.INSTANCE;
+		
+		instance = new QueryDaoRemoteObj(creditQuery, promotionQuery, commentQuery);
 
 		RemoteHelper.bindRemoteObj("RemoteQueryDao", instance);
 	}
@@ -47,10 +53,12 @@ public class QueryDaoRemoteObj extends UnicastRemoteObject implements RemoteCred
 	 * @param promotionQuery
 	 * @throws RemoteException
 	 */
-	private QueryDaoRemoteObj(CreditQueryDao creditQuery, PromotionQueryDao promotionQuery) throws RemoteException {
+	private QueryDaoRemoteObj(CreditQueryDao creditQuery, PromotionQueryDao promotionQuery
+			, CommentQueryDao commentQueryDao) throws RemoteException {
 		super();
 		this.creditQuery = creditQuery;
 		this.promotionQuery = promotionQuery;
+		
 	}
 
 	/*
@@ -95,6 +103,18 @@ public class QueryDaoRemoteObj extends UnicastRemoteObject implements RemoteCred
 	@Override
 	public PromotionPo getWebsitePromotion(long id) throws RemoteException {
 		return promotionQuery.getWebsitePromotion(id);
+	}
+
+	/*
+	 ************************************
+	 ******* CommentQueryDao*******
+	 ************************************
+	 */
+	private CommentQueryDao commentQuery;
+	
+	@Override
+	public List<CommentPo> findByHotelId(int hotelId) throws RemoteException {
+		return this.commentQuery.findByHotelId(hotelId);
 	}
 
 }
