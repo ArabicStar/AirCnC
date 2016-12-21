@@ -7,7 +7,7 @@ import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 import java.time.LocalDate;
 
 import presentation.manage.accessor.MemberManageInfoAccessor;
-import presentation.manage.model.MemberManageModel;
+import vo.member.MemberVo;
 import vo.member.MemberVoBuilder;
 
 public class MemberManageInfoAccessorImpl implements MemberManageInfoAccessor{
@@ -17,6 +17,7 @@ public class MemberManageInfoAccessorImpl implements MemberManageInfoAccessor{
 	private String id;
 	private LocalDate birthday;
 	private String enterprise;
+	private MemberVo vo;
 	
 	public static final MemberManageInfoAccessor launch() {
 		if (instance != null)
@@ -47,9 +48,16 @@ public class MemberManageInfoAccessorImpl implements MemberManageInfoAccessor{
 	}
 	
 	@Override
-	public MemberVoBuilder getModifiedMemberVo() {
-		// TODO Auto-generated method stub
-		return null;
+	public MemberVo getModifiedMemberVo() {
+		if(vo ==null)
+			return null;
+		
+		MemberVo mem;
+		if(vo.getType().toUpperCase().equals("BUSINESS"))
+			mem = new MemberVoBuilder(vo).setEnterprise(enterprise).getMemberInfo();
+		else
+			mem = new MemberVoBuilder(vo).setBirthday(birthday).getMemberInfo();
+		return mem;
 	}
 	
 	@Override
@@ -68,9 +76,8 @@ public class MemberManageInfoAccessorImpl implements MemberManageInfoAccessor{
 	}
 
 	@Override
-	public void setMemberModel(MemberManageModel model) {
-		// TODO Auto-generated method stub
-		
+	public void setMemberVo(MemberVo vo) {
+		this.vo = vo;
 	}
 
 }

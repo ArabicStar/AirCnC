@@ -1,11 +1,10 @@
 package presentation.manage.accessor;
 
-import presentation.manage.model.MarketManageModel;
-import vo.market.MarketVoBuilder;
+import vo.market.MarketVo;
 
 public interface MarketManageInfoAccessor {
 	
-	public MarketVoBuilder getModifiedMarketVo();
+	public MarketVo getModifiedMarketVo();
 	
 	public String getMarketId();
 	
@@ -13,7 +12,6 @@ public interface MarketManageInfoAccessor {
 	
 	public void setName(String name);
 	
-	public void setPassword(String password);
-	
-	public void setMarketModel(MarketManageModel model);
+	public void setMemberVo(MarketVo vo);
+
 }

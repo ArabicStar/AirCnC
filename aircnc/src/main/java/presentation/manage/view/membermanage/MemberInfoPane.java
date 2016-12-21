@@ -38,6 +38,7 @@ public class MemberInfoPane {
             loader.load();
             controller = loader.getController();
 			infoLayout = loader.getRoot();
+			controller.setModel(model);
 
         } catch (IOException e) {
             e.printStackTrace();

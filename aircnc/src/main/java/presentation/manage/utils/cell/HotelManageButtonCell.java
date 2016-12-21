@@ -20,6 +20,7 @@ public class HotelManageButtonCell extends TableCell<HotelManageModel, HotelVo> 
 
 	private Button[] cellButton;
 	private HBox buttons;
+	@SuppressWarnings("unused")
 	private HotelVo vo;
 	private HotelManageMainController controller;
 

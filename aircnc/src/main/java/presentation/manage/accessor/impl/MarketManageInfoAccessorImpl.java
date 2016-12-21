@@ -5,7 +5,7 @@ import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 import static utils.exception.StaticExceptionFactory.accessorNotReadyEx;
 
 import presentation.manage.accessor.MarketManageInfoAccessor;
-import presentation.manage.model.MarketManageModel;
+import vo.market.MarketVo;
 import vo.market.MarketVoBuilder;
 
 public class MarketManageInfoAccessorImpl implements MarketManageInfoAccessor{
@@ -14,7 +14,7 @@ public class MarketManageInfoAccessorImpl implements MarketManageInfoAccessor{
 	
 	private String id;
 	private String name;
-	private int passwordHash;
+	private MarketVo vo;
 	
 	public static final MarketManageInfoAccessor launch() {
 		if (instance != null)
@@ -38,9 +38,11 @@ public class MarketManageInfoAccessorImpl implements MarketManageInfoAccessor{
 	}
 	
 	@Override
-	public MarketVoBuilder getModifiedMarketVo() {
-		// TODO Auto-generated method stub
-		return null;
+	public MarketVo getModifiedMarketVo() {
+		if(vo ==null)
+			return null;
+		MarketVo market = new MarketVoBuilder(vo).setName(name).getMarketInfo();
+		return market;
 	}
 
 	@Override
@@ -62,13 +64,8 @@ public class MarketManageInfoAccessorImpl implements MarketManageInfoAccessor{
 	}
 
 	@Override
-	public void setPassword(String password) {
-		this.passwordHash = password.hashCode();
-	}
-
-	@Override
-	public void setMarketModel(MarketManageModel model) {
-		
+	public void setMemberVo(MarketVo vo) {
+		this.vo = vo;
 	}
 
 }

@@ -20,7 +20,9 @@ public class MarketManageButtonCell extends TableCell<MarketManageModel, MarketV
 
 	private Button[] cellButton;
 	private HBox buttons;
+	@SuppressWarnings("unused")
 	private MarketVo vo;
+	@SuppressWarnings("unused")
 	private MarketManageMainController controller;
 
 	public MarketManageButtonCell(MarketManageMainController controller) {

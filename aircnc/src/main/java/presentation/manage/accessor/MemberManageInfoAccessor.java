@@ -2,12 +2,11 @@ package presentation.manage.accessor;
 
 import java.time.LocalDate;
 
-import presentation.manage.model.MemberManageModel;
-import vo.member.MemberVoBuilder;
+import vo.member.MemberVo;
 
 public interface MemberManageInfoAccessor {
 	
-	public MemberVoBuilder getModifiedMemberVo();
+	public MemberVo getModifiedMemberVo();
 	
 	public String getMemberId();
 	
@@ -17,6 +16,6 @@ public interface MemberManageInfoAccessor {
 	
 	public void setEnterprise(String enterprise);
 	
-	public void setMemberModel(MemberManageModel model);
+	public void setMemberVo(MemberVo vo);
 	
 }

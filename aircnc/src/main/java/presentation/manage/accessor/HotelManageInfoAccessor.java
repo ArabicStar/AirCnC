@@ -1,11 +1,10 @@
 package presentation.manage.accessor;
 
-import presentation.manage.model.HotelManageModel;
-import vo.hotel.HotelVoBuilder;
+import vo.hotel.HotelVo;
 
 public interface HotelManageInfoAccessor {
 	
-	public HotelVoBuilder getModifiedHotelVo();
+	public HotelVo getModifiedHotelVo();
 	
 	public String getHotelId();
 	
@@ -13,9 +12,9 @@ public interface HotelManageInfoAccessor {
 	
 	public void setName(String name);
 	
-	public void setPassword(String password);
-	
 	public void setStar(int star);
 	
-	public void setHotelModel(HotelManageModel model);
+	public void setHotelVo(HotelVo vo);
+	
+	public void deleteHotel(String id);
 }

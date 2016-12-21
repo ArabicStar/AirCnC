@@ -25,7 +25,6 @@ import presentation.manage.manager.impl.MemberManageInfoImpl;
 import presentation.manage.model.MemberManageModel;
 import presentation.manage.utils.cell.MemberManageButtonCell;
 import presentation.manage.utils.dialog.PlainDialog;
-import presentation.manage.view.hotelmanage.HotelManageMainPane;
 import presentation.manage.view.membermanage.MemberInfoPane;
 import vo.member.MemberVo;
 

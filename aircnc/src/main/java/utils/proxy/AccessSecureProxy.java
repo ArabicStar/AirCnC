@@ -54,6 +54,7 @@ public abstract class AccessSecureProxy {
 	 */
 	protected void checkAuthentication() {
 		AuthenticatePolicy auth = getAuthPolicy();
+		System.out.println(auth);
 		if (auth == null)
 			return;
 

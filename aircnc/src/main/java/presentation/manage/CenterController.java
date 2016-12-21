@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import presentation.manage.accessor.impl.HotelManageInfoAccessorImpl;
 import presentation.manage.accessor.impl.MarketManageInfoAccessorImpl;
 import presentation.manage.accessor.impl.MemberManageInfoAccessorImpl;

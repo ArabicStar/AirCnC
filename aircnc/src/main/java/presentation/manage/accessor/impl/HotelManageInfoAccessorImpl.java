@@ -5,7 +5,7 @@ import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
 import presentation.manage.accessor.HotelManageInfoAccessor;
-import presentation.manage.model.HotelManageModel;
+import vo.hotel.HotelVo;
 import vo.hotel.HotelVoBuilder;
 
 public class HotelManageInfoAccessorImpl implements HotelManageInfoAccessor{
@@ -14,8 +14,8 @@ public class HotelManageInfoAccessorImpl implements HotelManageInfoAccessor{
 	
 	private String id;
 	private String name;
-	private int passwordHash;
 	private int star;
+	private HotelVo vo;
 	
 	public static final HotelManageInfoAccessor launch() {
 		if (instance != null)
@@ -39,9 +39,12 @@ public class HotelManageInfoAccessorImpl implements HotelManageInfoAccessor{
 	}
 	
 	@Override
-	public HotelVoBuilder getModifiedHotelVo() {
-		// TODO Auto-generated method stub
-		return null;
+	public HotelVo getModifiedHotelVo() {
+		if(vo == null)
+			return null;
+		
+		HotelVo hotel = new HotelVoBuilder(vo).setStar(star).setName(name).getHotelInfo();		
+		return hotel;
 	}
 
 	@Override
@@ -62,19 +65,18 @@ public class HotelManageInfoAccessorImpl implements HotelManageInfoAccessor{
 	}
 
 	@Override
-	public void setPassword(String password) {
-		this.passwordHash = password.hashCode();
-	}
-
-	@Override
 	public void setStar(int star) {
 		this.star = star;
 	}
 
 	@Override
-	public void setHotelModel(HotelManageModel model) {
-		// TODO Auto-generated method stub
-		
+	public void setHotelVo(HotelVo vo) {
+		this.vo = vo;
+	}
+
+	@Override
+	public void deleteHotel(String id) {
+		this.id = id;
 	}
 
 }
