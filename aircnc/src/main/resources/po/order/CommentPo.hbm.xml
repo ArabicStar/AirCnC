@@ -7,7 +7,7 @@
 	<class name="po.order.comment.CommentPo" table="comments">
 
 		<!-- key column, auto generated -->
-		<id name="orderId" column="orderId" type="string">
+		<id name="orderId_c" column="ORDERID_C" type="string">
 			<generator class="assigned" />
 		</id>
 

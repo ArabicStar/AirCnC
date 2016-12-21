@@ -11,7 +11,7 @@ public class CommentInfoTemplate {
 	protected int grade;
 	protected LocalDate checkInTime;
 	protected LocalDateTime commentTime;
-	protected String orderId;
+	protected String orderId_c;
 	
 //	private static final int ID_BOUND = 100000000;
 	private static final String ID_PATTERN = "[0-9]{8}";

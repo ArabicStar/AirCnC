@@ -56,8 +56,8 @@ public class CommentVo extends CommentInfo{
 		return this;
 	}
 	
-	public CommentVo setOrderId(String orderId) {
-		this.orderId = orderId;
+	public CommentVo setOrderId_c(String orderId) {
+		this.orderId_c = orderId;
 		return this;
 	}
 	

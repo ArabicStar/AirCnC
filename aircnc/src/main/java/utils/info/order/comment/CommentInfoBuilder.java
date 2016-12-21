@@ -13,12 +13,13 @@ public abstract class CommentInfoBuilder extends CommentInfoTemplate{
 		commentTime = LocalDateTime.now();
 		content = "";
 		grade = 0;
+		orderId_c = "";
 	}
 	
 	public CommentInfoBuilder(CommentInfo info){
 		this(info.getGrade());
 		this.setCheckInTime(info.getCheckInTime()).setCommentTime(info.getCommentTime()).setContent(info.getContent())
-		.setHotelID(info.getHotelId()).setMemberID(info.getMemberId());
+		.setHotelID(info.getHotelId()).setMemberID(info.getMemberId()).setOrderId_c(info.orderId_c);
 	}
 	
 	public CommentInfoBuilder(int grade){
@@ -59,8 +60,8 @@ public abstract class CommentInfoBuilder extends CommentInfoTemplate{
 		return this;
 	}
 	
-	public CommentInfoBuilder setOrderId(String orderId) {
-		this.orderId = orderId;
+	public CommentInfoBuilder setOrderId_c(String orderId) {
+		this.orderId_c = orderId;
 		return this;
 	}
 	

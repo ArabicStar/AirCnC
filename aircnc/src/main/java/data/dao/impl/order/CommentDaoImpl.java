@@ -36,13 +36,13 @@ public enum CommentDaoImpl implements CommentQueryDao, CommentDao{
 		if (commentPo == null) {
 			return false;
 		}
-		if(!OrderInfoTemplate.checkOrderId(commentPo.getOrderId())) {
+		if(!OrderInfoTemplate.checkOrderId(commentPo.getOrderId_c())) {
 			System.err.println("订单号长度应该大于等于16位，且长度为偶数");
 			throw illegalArgEx("CommentPo orderId");
 		}
 		return execute(session -> {
 			Boolean flag = Boolean.FALSE;
-			if (flag = Boolean.valueOf(session.get(CommentPo.class, commentPo.getOrderId()) == null)) {
+			if (flag = Boolean.valueOf(session.get(CommentPo.class, commentPo.getOrderId_c()) == null)) {
 				session.save(commentPo);
 			}
 			return flag;
@@ -71,7 +71,7 @@ public enum CommentDaoImpl implements CommentQueryDao, CommentDao{
 		if (commentPo == null) {
 			return false;
 		}
-		if(!OrderInfoTemplate.checkOrderId(commentPo.getOrderId())) {
+		if(!OrderInfoTemplate.checkOrderId(commentPo.getOrderId_c())) {
 			System.err.println("订单号长度应该大于等于16位，且长度为偶数");
 			throw illegalArgEx("CommentPo orderId");
 		}
@@ -79,7 +79,7 @@ public enum CommentDaoImpl implements CommentQueryDao, CommentDao{
 		return execute(session -> {
 			Boolean flag = Boolean.FALSE;
 
-			if (flag = Boolean.valueOf(session.get(OrderPo.class, commentPo.getOrderId()) == null)) {
+			if (flag = Boolean.valueOf(session.get(OrderPo.class, commentPo.getOrderId_c()) == null)) {
 				session.update(commentPo);
 			}
 			return flag;

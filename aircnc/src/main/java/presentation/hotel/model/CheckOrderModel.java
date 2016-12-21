@@ -39,7 +39,7 @@ public class CheckOrderModel {
 	 * 
 	 * @param userName
 	 * @param userId
-	 * @param orderId
+	 * @param orderId_c
 	 * @param checkinTime
 	 * @param status
 	 * @param totalPrice

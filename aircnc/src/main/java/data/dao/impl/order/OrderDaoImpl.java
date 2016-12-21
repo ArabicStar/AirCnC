@@ -43,7 +43,8 @@ public enum OrderDaoImpl implements OrderDao, OrderQueryDao {
 			if (flag = Boolean.valueOf(old != null)) {
 				OrderPoBuilder.updatePo(orderPo, old);
 			}
-
+			session.clear();
+			session.update(orderPo.getComments());
 			return flag;
 		});
 
@@ -59,6 +60,7 @@ public enum OrderDaoImpl implements OrderDao, OrderQueryDao {
 			Boolean flag = Boolean.FALSE;
 
 			if (flag = Boolean.valueOf(session.get(OrderPo.class, newPo.getOrderId()) == null)) {
+				session.save(newPo.getComments());
 				session.save(newPo);
 			}
 			return flag;

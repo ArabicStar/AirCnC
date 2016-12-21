@@ -15,6 +15,7 @@ public class CommentInfo extends CommentInfoTemplate{
 		checkInTime = null;
 		commentTime = null;
 		isValid = true;
+		orderId_c = BLANK;
 	}
 	
 	protected CommentInfo(int grade){
@@ -25,6 +26,7 @@ public class CommentInfo extends CommentInfoTemplate{
 		checkInTime = null;
 		commentTime = null;
 		isValid = true;
+		orderId_c = BLANK;
 	}
 	
 	public int getHotelId(){
@@ -74,9 +76,9 @@ public class CommentInfo extends CommentInfoTemplate{
 		return isValid;
 	}
 	
-	public String getOrderId() {
+	public String getOrderId_c() {
 		if (isValid()) {
-			return orderId;
+			return orderId_c;
 		}
 		return null;
 	}

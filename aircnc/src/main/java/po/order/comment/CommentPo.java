@@ -16,37 +16,37 @@ public class CommentPo extends CommentInfo {
 		super(grade);
 	}
 
-	CommentPo setHotelId(int id) {
+	public CommentPo setHotelId(int id) {
 		this.hotelId = id;
 		return this;
 	}
 
-	CommentPo setMemberId(String id) {
+	public CommentPo setMemberId(String id) {
 		this.memberId = id;
 		return this;
 	}
 
-	CommentPo setContent(String content) {
+	public CommentPo setContent(String content) {
 		this.content = content;
 		return this;
 	}
 
-	CommentPo setCheckInTime(LocalDate checkInTime) {
+	public CommentPo setCheckInTime(LocalDate checkInTime) {
 		this.checkInTime = checkInTime;
 		return this;
 	}
 
-	CommentPo setCommentTime(LocalDateTime commentTime) {
+	public CommentPo setCommentTime(LocalDateTime commentTime) {
 		this.commentTime = commentTime;
 		return this;
 	}
 	
-	CommentPo setOrderId(String orderId) {
-		this.orderId = orderId;
+	public CommentPo setOrderId_c(String orderId) {
+		this.orderId_c = orderId;
 		return this;
 	}
 	
-	CommentPo setGrade(int grade) {
+	public CommentPo setGrade(int grade) {
 		this.grade = grade;
 		return this;
 	}
@@ -62,7 +62,7 @@ public class CommentPo extends CommentInfo {
 	public CommentVo toCommentVo() {
 		CommentVo vo = new CommentVoBuilder().setCheckInTime(checkInTime).setCommentTime(commentTime)
 				.setContent(content).setHotelID(hotelId).setMemberID(memberId)
-				.setGrade(grade).setOrderId(orderId).getCommentInfo();
+				.setGrade(grade).setOrderId_c(orderId_c).getCommentInfo();
 		return vo;
 	}
 

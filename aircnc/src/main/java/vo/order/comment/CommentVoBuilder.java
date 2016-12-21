@@ -74,8 +74,8 @@ public class CommentVoBuilder extends CommentInfoBuilder {
 		return this;
 	}
 
-	public CommentVoBuilder setOrderId(String orderId) {
-		this.orderId = orderId;
+	public CommentVoBuilder setOrderId_c(String orderId) {
+		this.orderId_c = orderId;
 		return this;
 	}
 	@Override
@@ -85,7 +85,7 @@ public class CommentVoBuilder extends CommentInfoBuilder {
 		} 
 		return new CommentVo(grade).setHotelId(hotelId).setMemberId(memberId).setCheckInTime(checkInTime)
 				.setContent(content).setCommentTime(commentTime).setMemberLevel(memberLevel)
-				.setMemberName(memberName).setOrderId(orderId).setGrade(grade);
+				.setMemberName(memberName).setOrderId_c(orderId_c).setGrade(grade);
 
 	}
 
