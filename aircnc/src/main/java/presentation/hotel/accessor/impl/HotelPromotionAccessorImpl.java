@@ -9,6 +9,7 @@ import vo.promotion.PromotionVo;
 
 public class HotelPromotionAccessorImpl implements HotelPromotionAccessor{
 	private static HotelPromotionAccessorImpl instance;
+	private PromotionVo promotion;
 	private long promotionId;
 	private boolean practical;
 	
@@ -41,8 +42,9 @@ public class HotelPromotionAccessorImpl implements HotelPromotionAccessor{
 	}
 
 	@Override
-	public void setNewPromotion(long promotionId) {
-		// TODO Auto-generated method stub
+	public void setPromotion(PromotionVo vo) {
+		//if vo has id, update; else add;
+		this.promotion = vo;
 		
 	}
 
@@ -57,9 +59,8 @@ public class HotelPromotionAccessorImpl implements HotelPromotionAccessor{
 	}
 
 	@Override
-	public PromotionVo getNewPromotion() {
-		// TODO Auto-generated method stub
-		return null;
+	public PromotionVo getPromotion() {
+		return promotion;
 	}
 
 	@Override

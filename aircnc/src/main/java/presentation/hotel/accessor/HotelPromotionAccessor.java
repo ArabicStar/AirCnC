@@ -6,7 +6,7 @@ public interface HotelPromotionAccessor {
 	public void setPractical(long promotionId,boolean practical);
 	
 	
-	public void setNewPromotion(long promotionId);
+	public void setPromotion(PromotionVo vo);
 	
 	public void setDeletePromotion(long promotionId);
 	
@@ -14,6 +14,6 @@ public interface HotelPromotionAccessor {
 	
 	public boolean getPractical();
 	
-	public PromotionVo getNewPromotion();
+	public PromotionVo getPromotion();
 
 }

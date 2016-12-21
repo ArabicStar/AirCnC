@@ -1,6 +1,7 @@
 package presentation.hotel.view.hotelPromotion.fxml;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
@@ -10,8 +11,15 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
+import presentation.hotel.utils.dialog.PlainDialog;
+import utils.promotion.applier.ApplierParams;
+import utils.promotion.applier.How;
+import utils.promotion.trigger.TriggerParams;
+import utils.promotion.trigger.hotel.HotelWhen;
 import vo.promotion.PromotionVo;
+import vo.promotion.PromotionVoBuilder;
 
 public class PromotionDetailController implements Initializable{
 	
@@ -70,6 +78,7 @@ public class PromotionDetailController implements Initializable{
 		  			from.setDisable(false);
 		  			to.setDisable(false);
 		  			whenParaName.setText("时效名称");
+		  			whenPara.setText(null);
 		  			whenPara.setPromptText("双十一优惠");
 		  			whenPara.setDisable(false);
 		  			break;
@@ -79,12 +88,13 @@ public class PromotionDetailController implements Initializable{
 		  			switch (newValue){
 		  			case "多间房优惠":
 			  			whenParaName.setText("房间数量");
-//			  			whenPara.setText(null);
+			  			whenPara.setText(null);
 			  			whenPara.setPromptText("4");
 			  			whenPara.setDisable(false);
 		  				break;
 		  			case "合作企业优惠":
 		  				whenParaName.setText("企业名称");
+		  				whenPara.setText(null);
 			  			whenPara.setPromptText("南京大学");
 			  			whenPara.setDisable(false);
 		  				break;
@@ -105,10 +115,12 @@ public class PromotionDetailController implements Initializable{
 		  		switch (newValue){
 		  		case "原价折扣":
 		  			howPara.setDisable(false);
+		  			howPara.setText(null);
 		  			howPara.setPromptText("0.8");
 		  			break;
 		  		default:
 		  			howPara.setDisable(false);
+		  			howPara.setText(null);
 		  			howPara.setPromptText("100");		  			
 		  		}
 			}
@@ -120,6 +132,7 @@ public class PromotionDetailController implements Initializable{
 			return;
 		}else{
 			operate.setText("保存");
+			//TODO
 			switch (vo.getPromotion().getTrigger().when()){
 			case "BIRTHDAY":
 				when.setValue("生日优惠");
@@ -153,6 +166,12 @@ public class PromotionDetailController implements Initializable{
 	
 	@FXML
 	public void handleAddPromotion(){
+		String warning = check();
+		if(warning!=""){
+			PlainDialog alert = new PlainDialog(AlertType.WARNING,"保存失败",warning);
+         	alert.showDialog();
+         	return;
+		}
 		switch (operate.getText()){
 		case "保存":
 			
@@ -176,6 +195,106 @@ public class PromotionDetailController implements Initializable{
 	public void setController(HotelPromotionMainController controller) {
 		this.controller = controller;
 		
+	}
+	
+	private String check(){
+		String warning = "";
+		if(when.getValue()==null||how.getValue()==null){
+			warning = "请输入完整策略信息!";
+			return warning;
+		}
+		switch (when.getValue()){
+		case "时效性优惠":
+  			if(from.getValue().isBefore(LocalDate.now())){
+  				warning = "时效性优惠开始时间不能早于当天！";
+  				return warning;
+  			}
+  			
+  			if(to.getValue().isBefore(from.getValue().plusDays(1))){
+  				warning = "时效性优惠结束时间不能早于开始时间！";
+  				return warning;
+  			}
+  			break;
+		case "多间房优惠":
+  			try{
+  				int i = Integer.parseInt(whenPara.getText());
+  				if(i<=0){
+  					warning = "请输入大于0的房间数量！";
+  					return warning;
+  				}
+  			}catch (Exception e){
+  				warning = "请正确输入房间数量！";
+  				return warning;
+  			}
+			break;
+		case "合作企业优惠":
+			if(whenPara.getText()==null||whenPara.getText()==""){
+				warning = "请正确输入合作企业名称！";
+  				return warning;
+			}
+		}
+		
+		switch (how.getValue()){
+		case "原价折扣":
+			try{
+  				double i = Double.parseDouble(howPara.getText());
+  				if(i>=1||i<=0){
+  					warning = "请输入小于1大于0的折扣百分数！";
+  					return warning;
+  				}
+  			}catch (Exception e){
+  				warning = "请正确输入立减价格！";
+  				return warning;
+  			}
+  			break;
+		case "直接降价":
+  			try{
+  				double i = Double.parseDouble(howPara.getText());
+  				if(i<=0){
+  					warning = "请输入大于0的立减金额！";
+  					return warning;
+  				}
+  			}catch (Exception e){
+  				warning = "请正确输入立减价格！";
+  				return warning;
+  			}
+			break;
+		}
+		return warning;
+	}
+	
+	private void updateVo(){
+		PromotionVoBuilder builder = new PromotionVoBuilder(vo).setPractical(false);
+		switch (when.getValue()){
+  		case "时效性优惠":
+  			builder.when(HotelWhen.DURING_PERIOD)
+  			.setParam(TriggerParams.FROM, from.getValue().atStartOfDay())
+  			.setParam(TriggerParams.FROM, from.getValue().atStartOfDay());
+  			break;
+  		case "多间房优惠":
+  			builder.when(HotelWhen.MULTI_ROOMS)
+  			.setParam(TriggerParams.ROOM_NUM_THRESHOLD, Integer.parseInt(whenPara.getText()));
+  			break;
+  		case "合作企业优惠":
+  			builder.when(HotelWhen.ENTERPRISE)
+  			.setParam(TriggerParams.ENTERPRISE, whenPara.getText());
+  			break;
+		case "生日优惠":
+			builder.when(HotelWhen.BIRTHDAY);
+			break;
+		}
+		
+		switch (how.getValue()){
+  		case "原价折扣":
+  			builder.how(How.CONST)
+  			.setParam(ApplierParams.AMOUNT, Double.parseDouble(howPara.getText()));
+  			break;
+  		case "直接降价":
+  			builder.how(How.PERCENT_OFF)
+  			.setParam(ApplierParams.PERCENT, Double.parseDouble(howPara.getText()));
+  			break;
+		}
+		controller.addOrUpdate(builder.getPromotionInfo());
 	}
 	
 }

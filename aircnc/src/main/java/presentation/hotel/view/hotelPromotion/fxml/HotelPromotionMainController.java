@@ -113,6 +113,10 @@ public class HotelPromotionMainController implements Initializable{
 		addDetailPane(null);
 	}
 	
+	public void addOrUpdate(PromotionVo vo){
+		accessor.setPromotion(vo);
+	}
+	
 	public void setPractical(long promotionId,boolean practical){
 		accessor.setPractical(promotionId, practical);
 	}
