@@ -25,6 +25,8 @@ public class MemberManageModel {
 	private final StringProperty typeContent;
 	private final ObjectProperty<MemberVo> operation;
 	
+	private MemberVo vo;
+	
 	/**
 	 * Default constructor.
 	 */
@@ -33,6 +35,7 @@ public class MemberManageModel {
 	}
 	
 	public MemberManageModel(MemberVo vo){
+		this.vo = vo;
 		this.id = new SimpleStringProperty(vo.getId());
 		this.username = new SimpleStringProperty(vo.getName());
 		this.tele = new SimpleStringProperty(vo.getContact().getFixedPhone());
@@ -161,6 +164,10 @@ public class MemberManageModel {
 
     public ObjectProperty<MemberVo> operationProperty() {
         return operation;
+    }
+    
+    public MemberVo getMemberVo(){
+    	return this.vo;
     }
 }
 

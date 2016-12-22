@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="768.0" prefWidth="777.0" stylesheets="@../../membermanage/css/MemberManageMain.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.manage.view.marketmanage.fxml.MarketManageMainController">
+<AnchorPane prefHeight="768.0" prefWidth="777.0" stylesheets="@../css/MarketManage.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.manage.view.marketmanage.fxml.MarketManageMainController">
    <children>
       <Label layoutX="37.0" layoutY="73.0" prefHeight="62.0" prefWidth="338.0" styleClass="title" text="营销人员搜索结果" />
       <TableView fx:id="marketTable" layoutX="54.0" layoutY="153.0" prefHeight="471.0" prefWidth="702.0">
@@ -21,5 +21,6 @@
             <Button fx:id="search" mnemonicParsing="false" onAction="#handleQuery" prefHeight="27.0" prefWidth="27.0" styleClass="search" />
          </children>
       </HBox>
+      <Button layoutX="696.0" layoutY="638.0" mnemonicParsing="false" onAction="#handleAddMarket" prefHeight="40.0" prefWidth="40.0" styleClass="add" />
    </children>
 </AnchorPane>

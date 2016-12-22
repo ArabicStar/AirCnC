@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="768.0" prefWidth="777.0" stylesheets="@../../membermanage/css/MemberManageMain.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.manage.view.hotelmanage.fxml.HotelManageMainController">
+<AnchorPane prefHeight="768.0" prefWidth="777.0" stylesheets="@../css/HotelManage.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.manage.view.hotelmanage.fxml.HotelManageMainController">
    <children>
       <Label layoutX="37.0" layoutY="73.0" prefHeight="62.0" prefWidth="280.0" styleClass="title" text="酒店搜索结果" />
       <TableView fx:id="hotelTable" layoutX="54.0" layoutY="153.0" prefHeight="471.0" prefWidth="702.0">
@@ -21,7 +22,6 @@
             <Button fx:id="search" mnemonicParsing="false" onAction="#handleQuery" prefHeight="27.0" prefWidth="27.0" styleClass="search" />
          </children>
       </HBox>
+      <Button layoutX="696.0" layoutY="638.0" mnemonicParsing="false" onAction="#handleAddHotel" prefHeight="40.0" prefWidth="40.0" styleClass="add" />
    </children>
 </AnchorPane>
-
-

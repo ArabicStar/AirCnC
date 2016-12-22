@@ -114,6 +114,7 @@ public class CenterController extends Application {
 		content.getChildren().add(marketManage.getAnchorPane());
 		AnchorPane.setTopAnchor(marketManage.getAnchorPane(), 0.0);
 		marketManage.getController().setCenterController(this);
+		marketManage.getController().setRootLayout(content);
 	}
 	
 

@@ -25,6 +25,7 @@ import presentation.manage.manager.impl.HotelManageInfoManagerImpl;
 import presentation.manage.model.HotelManageModel;
 import presentation.manage.utils.cell.HotelManageButtonCell;
 import presentation.manage.utils.dialog.PlainDialog;
+import presentation.manage.view.hotelmanage.HotelAddPane;
 import presentation.manage.view.hotelmanage.HotelInfoMainPane;
 import vo.hotel.HotelVo;
 
@@ -59,6 +60,7 @@ public class HotelManageMainController implements Initializable{
 	private HotelManageMainController hotController = this;
 	
 	private HotelInfoMainPane detailedInfo;
+	private HotelAddPane addPane;
 	private HotelManageModel model;
 	private AnchorPane rootLayout;
 	
@@ -113,6 +115,19 @@ public class HotelManageMainController implements Initializable{
 	
 	public void setRootLayout(AnchorPane pane){
 		this.rootLayout = pane;
+	}
+	
+	@FXML
+	public void handleAddHotel(){
+		addPane = new HotelAddPane();
+		rootLayout.getChildren().add(addPane.getPane());
+		AnchorPane.setTopAnchor(addPane.getPane(), 200.0);
+		AnchorPane.setLeftAnchor(addPane.getPane(), 80.0);
+		addPane.getController().setController(this);
+	}
+	
+	public void removeAddHotel(){
+		rootLayout.getChildren().remove(rootLayout.getChildren().size()-1);
 	}
 	
 	@FXML

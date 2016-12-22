@@ -27,6 +27,8 @@ public class HotelManageModel {
 	private final StringProperty roomPrice;
 	private final StringProperty grade;
 	
+	private HotelVo vo;
+	
 	/**
 	 * Default constructor.
 	 */
@@ -35,6 +37,7 @@ public class HotelManageModel {
 	}
 	
 	public HotelManageModel(HotelVo vo){
+		this.vo = vo;
 		this.id = new SimpleStringProperty(String.valueOf(vo.getId()));
 		this.hotelName = new SimpleStringProperty(vo.getName());	
 		this.operation = new SimpleObjectProperty<HotelVo>(vo);
@@ -178,5 +181,9 @@ public class HotelManageModel {
 
     public StringProperty gradeProperty() {
         return grade;
+    }
+    
+    public HotelVo getHotelVo(){
+    	return vo;
     }
 }

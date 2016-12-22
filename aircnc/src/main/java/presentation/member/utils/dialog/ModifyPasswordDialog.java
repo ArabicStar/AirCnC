@@ -5,6 +5,7 @@ import java.util.Optional;
 import interactor.impl.member.MemberInfoCourier;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
@@ -62,11 +63,6 @@ public class ModifyPasswordDialog {
 
 		dialog.getDialogPane().setContent(grid);
 
-		// Request focus on the username field by default.
-		// Platform.runLater(() -> username.requestFocus());
-
-		// Convert the result to a username-password-pair when the login button
-		// is clicked.
 		dialog.setResultConverter(dialogButton -> {
 			if (dialogButton == loginButtonType) {
 				return new Pair<>(oldPwd.getText(), newPwd.getText());
@@ -80,7 +76,9 @@ public class ModifyPasswordDialog {
 			InfoModifyAccessorImpl.getInstance().setOldPassword(oldNewPassword.getKey());
 			InfoModifyAccessorImpl.getInstance().setNewPassword(oldNewPassword.getValue());
 			MemberInfoCourier.getInstance().updatePassword();
-			System.out.println("Old=" + oldNewPassword.getKey() + ", New=" + oldNewPassword.getValue());
+			//System.out.println("Old=" + oldNewPassword.getKey() + ", New=" + oldNewPassword.getValue());
+			PlainDialog alert = new PlainDialog(AlertType.INFORMATION,"修改成功","已成功修改密码");
+			alert.showDialog();
 		});
 	}
 

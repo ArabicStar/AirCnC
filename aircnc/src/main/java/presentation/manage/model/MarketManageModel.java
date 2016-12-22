@@ -18,6 +18,8 @@ public class MarketManageModel {
 	private final StringProperty id;
 	private final ObjectProperty<MarketVo> operation;
 	
+	private MarketVo vo;
+	
 	/**
 	 * Default constructor.
 	 */
@@ -26,6 +28,7 @@ public class MarketManageModel {
 	}
 	
 	public MarketManageModel(MarketVo vo){
+		this.vo = vo;
 		this.id = new SimpleStringProperty(vo.getId());
 		this.marketName = new SimpleStringProperty(vo.getName());
 		this.operation = new SimpleObjectProperty<MarketVo>(vo);
@@ -65,5 +68,9 @@ public class MarketManageModel {
 
     public ObjectProperty<MarketVo> operationProperty() {
         return operation;
+    }
+    
+    public MarketVo getMarketVo(){
+    	return vo;
     }
 }

@@ -14,6 +14,7 @@ public class MarketManageInfoAccessorImpl implements MarketManageInfoAccessor{
 	
 	private String id;
 	private String name;
+	private int passwordHash;
 	private MarketVo vo;
 	
 	public static final MarketManageInfoAccessor launch() {
@@ -64,8 +65,18 @@ public class MarketManageInfoAccessorImpl implements MarketManageInfoAccessor{
 	}
 
 	@Override
-	public void setMemberVo(MarketVo vo) {
+	public void setMarketVo(MarketVo vo) {
 		this.vo = vo;
+	}
+	
+	@Override
+	public void setPassword(String password) {
+		this.passwordHash = password.hashCode();
+	}
+
+	@Override
+	public int getPasswordHash() {
+		return passwordHash;
 	}
 
 }

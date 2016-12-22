@@ -72,3 +72,15 @@
 	-fx-border-color: #c3c3c3;
 	-fx-border-width: 1px;
 }
+
+.add{
+	-fx-background-image: url("/images/manage/plus.png");
+	-fx-background-color: transparent;
+	-fx-background-size: 38px 38px;
+	-fx-background-repeat: stretch;
+	-fx-border-radius: 20px;	
+}
+
+.add:hover{
+	-fx-background-size: 40px 40px;
+}

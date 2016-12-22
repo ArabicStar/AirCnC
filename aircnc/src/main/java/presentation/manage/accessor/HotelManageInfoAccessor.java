@@ -6,7 +6,11 @@ public interface HotelManageInfoAccessor {
 	
 	public HotelVo getModifiedHotelVo();
 	
+	public int getPasswordHash();
+	
 	public String getHotelId();
+	
+	public void setPassword(String password);
 	
 	public void setId(String id);
 	

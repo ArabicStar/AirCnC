@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.layout.HBox;
 import presentation.manage.model.MemberManageModel;
+import presentation.manage.utils.dialog.MemberModifyDialog;
 import presentation.manage.view.membermanage.fxml.MemberManageMainController;
 import vo.member.MemberVo;
 
@@ -78,6 +79,8 @@ public class MemberManageButtonCell extends TableCell<MemberManageModel, MemberV
 						controller.addInfoPane(new MemberManageModel(vo));
 					break;
 				case MODIFY:
+					@SuppressWarnings("unused") 
+					MemberModifyDialog memAlert = new MemberModifyDialog(vo);
 					break;
 				default:
 					break;

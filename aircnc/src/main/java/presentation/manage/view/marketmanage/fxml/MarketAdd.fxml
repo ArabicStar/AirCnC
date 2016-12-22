@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane stylesheets="@../css/MarketAdd.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="presentation.manage.view.marketmanage.fxml.MarketAddController">
+   <children>
+      <AnchorPane prefHeight="300.0" prefWidth="400.0" style="-fx-background-color: #fff;" />
+      <VBox layoutX="30.0" layoutY="60.0" spacing="25.0">
+         <children>
+            <HBox layoutX="64.0" layoutY="78.0" spacing="20.0">
+               <children>
+                  <Label text="营销人员名称" />
+                  <TextField fx:id="name" />
+               </children>
+            </HBox>
+            <HBox layoutX="90.0" layoutY="138.0" spacing="20.0">
+               <children>
+                  <Label layoutX="90.0" layoutY="138.0" text="设置密码" />
+                  <PasswordField fx:id="password" />
+               </children>
+            </HBox>
+            <HBox layoutX="90.0" layoutY="200.0" spacing="20.0">
+               <children>
+                  <Label layoutX="90.0" layoutY="138.0" text="确认密码" />
+                  <PasswordField fx:id="passwordConfirm" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Label layoutX="375.0" layoutY="10.0" onMouseClicked="#handleClose" text="X" />
+      <Button fx:id="confirm" layoutX="318.0" layoutY="245.0" mnemonicParsing="false" onAction="#handleConfirm" text="添加" />
+   </children>
+</AnchorPane>

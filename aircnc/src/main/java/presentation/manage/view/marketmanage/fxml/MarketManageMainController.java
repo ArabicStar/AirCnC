@@ -14,6 +14,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import presentation.manage.CenterController;
 import presentation.manage.ManageTest;
@@ -24,6 +25,7 @@ import presentation.manage.manager.impl.MarketManageInfoManagerImpl;
 import presentation.manage.model.MarketManageModel;
 import presentation.manage.utils.cell.MarketManageButtonCell;
 import presentation.manage.utils.dialog.PlainDialog;
+import presentation.manage.view.marketmanage.MarketAddPane;
 import vo.market.MarketVo;
 
 /**
@@ -55,6 +57,9 @@ public class MarketManageMainController implements Initializable{
 	private MarketManageInfoManager manager;
 	private ObservableList<MarketManageModel> models;
 	private MarketManageMainController marController = this;
+	
+	private MarketAddPane addPane;
+	private AnchorPane rootLayout;
 	
 	@SuppressWarnings("unused")
 	private CenterController centerController;
@@ -102,10 +107,26 @@ public class MarketManageMainController implements Initializable{
 		}
 	}
 	
+	@FXML
+	public void handleAddMarket(){
+		addPane = new MarketAddPane();
+		rootLayout.getChildren().add(addPane.getPane());
+		AnchorPane.setTopAnchor(addPane.getPane(), 200.0);
+		AnchorPane.setLeftAnchor(addPane.getPane(), 80.0);
+		addPane.getController().setController(this);
+	}
+	
+	public void removeAddHotel(){
+		rootLayout.getChildren().remove(rootLayout.getChildren().size()-1);
+	}
+	
 	public void setCenterController(CenterController controller){
 		this.centerController = controller;
 	}
 	
+	public void setRootLayout(AnchorPane pane){
+		this.rootLayout = pane;
+	}
 	
 }
 

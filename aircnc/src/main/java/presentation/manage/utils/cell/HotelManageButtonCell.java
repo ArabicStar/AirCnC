@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.layout.HBox;
 import presentation.manage.model.HotelManageModel;
+import presentation.manage.utils.dialog.HotelModifyDialog;
 import presentation.manage.view.hotelmanage.fxml.HotelManageMainController;
 import vo.hotel.HotelVo;
 
@@ -78,6 +79,8 @@ public class HotelManageButtonCell extends TableCell<HotelManageModel, HotelVo> 
 					controller.handleDetailedInfo();
 					break;
 				case MODIFY:
+					@SuppressWarnings("unused") 
+					HotelModifyDialog hotelAlert = new HotelModifyDialog(vo);
 					break;
 				case DELETE:
 					break;

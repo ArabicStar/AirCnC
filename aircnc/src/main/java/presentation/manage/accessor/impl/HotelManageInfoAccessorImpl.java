@@ -15,6 +15,7 @@ public class HotelManageInfoAccessorImpl implements HotelManageInfoAccessor{
 	private String id;
 	private String name;
 	private int star;
+	private int passwordHash;
 	private HotelVo vo;
 	
 	public static final HotelManageInfoAccessor launch() {
@@ -78,5 +79,16 @@ public class HotelManageInfoAccessorImpl implements HotelManageInfoAccessor{
 	public void deleteHotel(String id) {
 		this.id = id;
 	}
+
+	@Override
+	public void setPassword(String password) {
+		this.passwordHash = password.hashCode();
+	}
+	
+	@Override
+	public int getPasswordHash() {
+		return passwordHash;
+	}
+
 
 }
