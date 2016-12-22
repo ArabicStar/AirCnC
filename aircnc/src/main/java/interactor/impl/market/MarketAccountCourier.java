@@ -8,8 +8,6 @@ import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
 import interactor.market.MarketAccountInfoInteractor;
 import interactor.utils.Title;
-import presentation.market.accessor.impl.MarketLoginAccessorImpl;
-import presentation.member.accessor.impl.MemberLoginAccessorImpl;
 import service.market.MarketAccountService;
 import utils.info.market.MarketInfo;
 
@@ -41,20 +39,20 @@ public class MarketAccountCourier implements MarketAccountInfoInteractor{
 	@Override
 	@Title("Login")
 	public void login() {
-		String title = getTitle();
-		MarketInfo info = execute(title, () -> {
-			MarketInfo tmp = handler.login(MarketLoginAccessorImpl.getInstance().getId()
-					, MarketLoginAccessorImpl.getInstance().getPasswordHash());
-
-			if (tmp == null)
-				alertFail(title, "Wrong or not exist id");
-
-			if (!tmp.isValid())
-				alertFail(title, "Wrong password");
-
-			return tmp;
-		});
-
+//		String title = getTitle();
+//		MarketInfo info = execute(title, () -> {
+//			MarketInfo tmp = handler.login(MarketLoginAccessorImpl.getInstance().getId()
+//					, MemberLoginAccessorImpl.getInstance().getPasswordHash());
+//
+//			if (tmp == null)
+//				alertFail(title, "Wrong or not exist id");
+//
+//			if (!tmp.isValid())
+//				alertFail(title, "Wrong password");
+//
+//			return tmp;
+//		});
+//
 //		MarketInfoManagerImpl.getInstance().setUser(info);
 	}
 
