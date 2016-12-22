@@ -1,77 +1,86 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping">
+                                   "http://www.hibernate.org/dtd/hibernate-mapping">
 <!-- Generated 2016-12-1 19:57:11 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
 	<class name="po.order.OrderPo" table="order_t">
 		<id name="orderId" type="string">
-			<column name="ORDERID" />
+			<column name="order_id" />
 			<generator class="assigned" />
 		</id>
-		<!-- hotelId -->
-		<property column="HOTELID" generated="never" lazy="false"
-			name="hotelId" type="integer" update="false" />
 		<!-- orderStatus -->
-		<property name="status">
-			<column name="ORDERSTATUS" length="20" not-null="true" />
+		<property generated="never" lazy="false" name="status">
+			<column length="20" name="ORDERSTATUS" not-null="true" />
 			<type name="org.hibernate.type.EnumType">
 				<param name="enumClass">utils.info.order.OrderStatus</param>
 				<param name="type">12</param>
 			</type>
 		</property>
+
 		<!-- roomType -->
-		<property column="ROOMTYPE" generated="never" lazy="false"
+		<property column="room_type" generated="never" lazy="false"
 			name="roomType" type="string" update="false" />
+
 		<!-- stayDays -->
-		<property column="STAYDAYS" generated="never" lazy="false"
+		<property column="duration" generated="never" lazy="false"
 			name="stayDays" type="integer" update="false" />
-		<!-- userId -->
-		<property column="USERID" generated="never" lazy="false"
-			name="userId" type="integer" update="false" />
+
 		<!-- entryTime -->
-		<property column="ENTRYTIME" generated="never" lazy="false"
-			name="entryTime" update="false" />
+		<property column="entry_time" generated="never" lazy="false"
+			name="entryTime" type="java.time.LocalDateTime" update="false" />
+
 		<!-- lastTime -->
-		<property column="LASTTIME" generated="never" lazy="false"
-			name="lastTime" />
+		<property column="last_time" generated="never" lazy="false"
+			name="lastTime" type="java.time.LocalDateTime" update="false" />
+
 		<!-- peopleNumber -->
-		<property column="PEOPLENUMBER" generated="never" lazy="false"
+		<property column="people_num" generated="never" lazy="false"
 			name="peopleNumber" type="integer" update="false" />
+
 		<!-- originalPrice -->
-		<property column="ORIGINALPRICE" generated="never" lazy="false"
+		<property column="origi_price" generated="never" lazy="false"
 			name="originalPrice" type="double" update="false" />
+
 		<!-- discountPrice -->
-		<property column="DISCOUNTPRICE" generated="never" lazy="false"
+		<property column="dis_price" generated="never" lazy="false"
 			name="discountPrice" type="double" update="false" />
+
 		<!-- hasChildren -->
-		<property column="HASCHILDREN" generated="never" lazy="false"
-			name="hasChildren" type="boolean" update="false" />
-		<!-- hotelName -->
-		<property column="HOTELNAME" generated="never" lazy="false"
-			name="hotelName" type="string" update="false" />
+		<property column="has_children" generated="never" lazy="false"
+			name="hasChildren" type="yes_no" update="false" />
+
 		<!-- roomNumber -->
-		<property column="ROOMNUMBER" generated="never" lazy="false"
+		<property column="room_num" generated="never" lazy="false"
 			name="roomNumber" type="integer" update="false" />
-		<!-- isReviewed -->
-		<property column="ISREVIEWED" generated="never" lazy="false"
-			name="reviewed" type="yes_no" />
-		<!-- userName -->
-		<property column="USERNAME" generated="never" lazy="false"
-			name="userName" type="string" update="false" />
 
-		<property name="appeal" type="string" update="false" lazy="false"
-			generated="never" column="APPEAL" />
+		<property column="appeal" generated="never" lazy="false"
+			name="appeal" type="string" update="false" />
 
-		<set name="hotelPromotions" table="ord$hotelProm_rel" cascade="none">
+		<!-- hotel -->
+		<many-to-one cascade="save-update" class="po.hotel.HotelPo"
+			column="hotel_id" fetch="select" name="hotel" not-null="true" />
+
+		<!-- member -->
+		<many-to-one cascade="save-update" class="po.member.MemberPo"
+			column="member_id" fetch="select" name="member" not-null="true" />
+
+		<!-- hotel promotions -->
+		<set name="hotelPromotions" sort="unsorted" cascade="save-update"
+			table="ord$hotelProm_rel">
 			<key column="order_id" />
 			<many-to-many class="po.promotion.HotelPromotionPo"
-				column="hotelProm_id" />
+				column="hotelProm_id" unique="false" />
 		</set>
 
-		<set name="websitePromotions" table="ord$webProm_rel" cascade="save-update">
+		<!-- website promotions -->
+		<set name="websitePromotions" sort="unsorted" cascade="save-update"
+			table="ord$webProm_rel">
 			<key column="order_id" />
 			<many-to-many class="po.promotion.WebsitePromotionPo"
-				column="webProm_id" />
+				column="webProm_id" unique="false" />
 		</set>
+
+		<one-to-one name="comment" class="po.order.comment.CommentPo"
+			property-ref="order" />
 	</class>
 </hibernate-mapping>

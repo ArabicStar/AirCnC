@@ -1,99 +1,88 @@
 package vo.order.comment;
 
-import java.time.LocalDate;
+import static utils.exception.StaticExceptionFactory.illegalStateException;
+
 import java.time.LocalDateTime;
 
+import utils.info.hotel.HotelInfo;
+import utils.info.order.OrderInfo;
 import utils.info.order.comment.CommentInfo;
 import utils.info.order.comment.CommentInfoBuilder;
+import vo.hotel.HotelVo;
+import vo.hotel.HotelVoBuilder;
 
 public class CommentVoBuilder extends CommentInfoBuilder {
-	private int memberLevel;
-	private String memberName;
-	
-	private static final CommentVo INVALID_COMMENT_VO;
-	static {
-		INVALID_COMMENT_VO = new CommentVo(1);
-		INVALID_COMMENT_VO.invalidate();
-	}
+	private HotelVo hotel;
 
-	public static final CommentVo getInvalidInfo() {
-		return INVALID_COMMENT_VO;
-	}
-
-
+	/**
+	 * @param info
+	 */
 	public CommentVoBuilder(CommentInfo info) {
 		super(info);
 	}
 
-	public CommentVoBuilder() {
-		super();
+	public CommentVoBuilder(OrderInfo info) {
+		super(info);
 	}
 
+	/**
+	 * @param id
+	 *            to be set id
+	 */
+	@Override
+	public CommentInfoBuilder setId(long id) {
+		super.setId(id);
+		return this;
+	}
+
+	/**
+	 * @param commentTime
+	 *            to be set commentTime
+	 */
+	@Override
+	public CommentVoBuilder setCommentTime(LocalDateTime commentTime) {
+		super.setCommentTime(commentTime);
+		return this;
+	}
+
+	/**
+	 * @param content
+	 *            to be set content
+	 */
 	@Override
 	public CommentVoBuilder setContent(String content) {
 		super.setContent(content);
 		return this;
 	}
 
+	/**
+	 * @param grade
+	 *            to be set grade
+	 */
 	@Override
-	public CommentVoBuilder setHotelID(int id) {
-		super.setHotelID(id);
-		return this;
-	}
-
-	@Override
-	public CommentVoBuilder setMemberID(String id) {
-		super.setMemberID(id);
-		return this;
-	}
-
-	@Override
-	public CommentVoBuilder setCheckInTime(LocalDate checkInTime) {
-		super.setCheckInTime(checkInTime);
-		return this;
-	}
-
-	@Override
-	public CommentVoBuilder setCommentTime(LocalDateTime commentTime) {
-		super.setCommentTime(commentTime);
-		return this;
-	}
-	
-	public CommentVoBuilder setMemberLevel(int memberLevel) {
-		this.memberLevel = memberLevel;
-		return this;
-	}
-	
-	public CommentVoBuilder setMemberName(String memberName) {
-		if(memberName == null) {
-			return null;
-		}
-		this.memberName = memberName;
-		return this;
-	}
-	
 	public CommentVoBuilder setGrade(int grade) {
-		if(grade <= 0 || grade > 5) {
-			return null;
-		}
-		this.grade = grade;
+		super.setGrade(grade);
 		return this;
 	}
 
-	@Override
-	public CommentVoBuilder setOrderId_c(String orderId) {
-		super.setOrderId_c(orderId);
-		return this;
-	}
 	@Override
 	public CommentVo getCommentInfo() {
-		if (!isReady()) {
-			return null;
-		} 
-		return new CommentVo(grade).setHotelId(hotelId).setMemberId(memberId).setCheckInTime(checkInTime)
-				.setContent(content).setCommentTime(commentTime).setMemberLevel(memberLevel)
-				.setMemberName(memberName).setOrderId_c(orderId_c).setGrade(grade);
+		if (!isReady())
+			throw illegalStateException("Comment Vo Builder not set up");
 
+		return new CommentVo().setCommentTime(commentTime).setContent(content).setGrade(grade).setId(id)
+				.setHotel(hotel);
 	}
 
+	@Override
+	public CommentInfoBuilder setHotel(HotelInfo hotel) {
+		if (hotel.isValid())
+			this.hotel = new HotelVoBuilder(hotel).getHotelInfo();
+		return this;
+	}
+
+	@Override
+	protected HotelInfo getHotel() {
+		return hotel;
+	}
 }

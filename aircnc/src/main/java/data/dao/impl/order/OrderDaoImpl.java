@@ -21,30 +21,25 @@ public enum OrderDaoImpl implements OrderDao, OrderQueryDao {
 	INSTANCE;
 
 	public OrderPo getOrder(String orderId) {
-		if (!OrderPo.checkOrderId(orderId)) {
-			System.err.println("订单号长度应该大于等于16位，且长度为偶数");
+		if (!OrderPo.checkOrderId(orderId))
 			throw illegalArgEx("Order Id String");
-		}
 
-		return execute(session -> {
-			return (OrderPo) session.get(OrderPo.class, orderId);
-		});
+		return execute(session -> (OrderPo) session.get(OrderPo.class, orderId));
 	}
 
 	public boolean updateOrder(OrderPo orderPo) {
-		if (orderPo == null) {
+		if (orderPo == null)
 			return false;
-		}
-			
+
 		return execute(session -> {
 			Boolean flag = Boolean.FALSE;
 
 			OrderPo old = session.get(OrderPo.class, orderPo.getOrderId());
-			if (flag = Boolean.valueOf(old != null)) {
+			if (flag = Boolean.valueOf(old != null))
 				OrderPoBuilder.updatePo(orderPo, old);
-			}
+
 			session.clear();
-			session.update(orderPo.getComments());
+			session.update(orderPo.getComment());
 			return flag;
 		});
 
@@ -55,12 +50,11 @@ public enum OrderDaoImpl implements OrderDao, OrderQueryDao {
 			return false;
 		}
 
-
 		return execute(session -> {
 			Boolean flag = Boolean.FALSE;
 
 			if (flag = Boolean.valueOf(session.get(OrderPo.class, newPo.getOrderId()) == null)) {
-				session.save(newPo.getComments());
+				session.save(newPo.getComment());
 				session.save(newPo);
 			}
 			return flag;

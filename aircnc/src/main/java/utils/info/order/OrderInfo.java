@@ -78,4 +78,18 @@ public abstract class OrderInfo extends OrderInfoTemplate {
 	public abstract CommentInfo getComment();
 
 	public abstract Set<? extends PromotionInfo> getPromotions();
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("OrderInfo [orderId=").append(orderId).append(", status=").append(status).append(", entryTime=")
+				.append(entryTime).append(", lastTime=").append(lastTime).append(", stayDays=").append(stayDays)
+				.append(", roomNumber=").append(roomNumber).append(", roomType=").append(roomType)
+				.append(", peopleNumber=").append(peopleNumber).append(", hasChildren=").append(hasChildren)
+				.append(", originalPrice=").append(originalPrice).append(", discountPrice=").append(discountPrice)
+				.append(", appeal=").append(appeal).append(", getMember()=").append(getMember()).append(", getHotel()=")
+				.append(getHotel()).append(", getComment()=").append(getComment()).append("]");
+		return builder.toString();
+	}
+
 }

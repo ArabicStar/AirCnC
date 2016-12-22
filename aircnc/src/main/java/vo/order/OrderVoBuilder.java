@@ -5,16 +5,37 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import po.order.comment.CommentPo;
+import utils.info.hotel.HotelInfo;
+import utils.info.member.MemberInfo;
 import utils.info.order.OrderInfo;
 import utils.info.order.OrderInfoBuilder;
 import utils.info.order.OrderStatus;
+import utils.info.order.comment.CommentInfo;
 import utils.info.promotion.PromotionInfo;
+import vo.hotel.HotelVo;
+import vo.hotel.HotelVoBuilder;
+import vo.member.MemberVo;
+import vo.member.MemberVoBuilder;
+import vo.order.comment.CommentVo;
+import vo.order.comment.CommentVoBuilder;
 import vo.promotion.PromotionVo;
 import vo.promotion.PromotionVoBuilder;
 
 public class OrderVoBuilder extends OrderInfoBuilder {
+	private static final OrderVo INVALID_ORDER_VO;
+	static {
+		INVALID_ORDER_VO = new OrderVo();
+		INVALID_ORDER_VO.invalidate();
+	}
+
+	public static final OrderInfo invalidOrderInfo() {
+		return INVALID_ORDER_VO;
+	}
+
 	private Set<PromotionVo> promotions;
+	private CommentVo comment;
+	private MemberVo member;
+	private HotelVo hotel;
 
 	public OrderVoBuilder() {
 		super();
@@ -28,11 +49,22 @@ public class OrderVoBuilder extends OrderInfoBuilder {
 
 	@Override
 	public OrderVo getOrderInfo() {
-		return new OrderVo().setEntryTime(entryTime).setHasChildren(hasChildren).setLastTime(lastTime)
-				.setOrderId(orderId).setPeopleNumber(peopleNumber).setRoomType(roomType).setStatus(status)
-				.setStayDays(stayDays).setUserId(userId).setOriginalPrice(originalPrice).setHotelId(hotelId)
-				.setHotelName(hotelName).setRoomNumber(roomNumber).setIsReviewed(isReviewed).setUserName(userName)
-				.setPromotions(promotions).setDiscountPrice(discountPrice).setComments(comments).setAppeal(appeal);
+		return new OrderVo().setOrderId(orderId)//
+				.setStatus(status)//
+				.setMember(member)//
+				.setHotel(hotel)//
+				.setRoomType(roomType)//
+				.setRoomNumber(roomNumber)//
+				.setEntryTime(entryTime)//
+				.setLastTime(lastTime)//
+				.setStayDays(stayDays)//
+				.setPeopleNumber(peopleNumber)//
+				.setHasChildren(hasChildren)//
+				.setOriginalPrice(originalPrice)//
+				.setDiscountPrice(discountPrice)//
+				.setPromotions(promotions)//
+				.setComment(comment)//
+				.setAppeal(appeal);//
 	}
 
 	@Override
@@ -50,12 +82,6 @@ public class OrderVoBuilder extends OrderInfoBuilder {
 	@Override
 	public OrderVoBuilder setStayDays(int stayDays) {
 		super.setStayDays(stayDays);
-		return this;
-	}
-
-	@Override
-	public OrderVoBuilder setUserId(int userId) {
-		super.setUserId(userId);
 		return this;
 	}
 
@@ -96,32 +122,8 @@ public class OrderVoBuilder extends OrderInfoBuilder {
 	}
 
 	@Override
-	public OrderVoBuilder setHotelId(int hotelId) {
-		super.setHotelId(hotelId);
-		return this;
-	}
-
-	@Override
-	public OrderVoBuilder setHotelName(String hotelName) {
-		super.setHotelName(hotelName);
-		return this;
-	}
-
-	@Override
 	public OrderVoBuilder setRoomNumber(int roomNumber) {
 		super.setRoomNumber(roomNumber);
-		return this;
-	}
-
-	@Override
-	public OrderVoBuilder setReviewed(boolean isReviewed) {
-		super.setReviewed(isReviewed);
-		return this;
-	}
-
-	@Override
-	public OrderVoBuilder setUserName(String userName) {
-		super.setUserName(userName);
 		return this;
 	}
 
@@ -131,15 +133,20 @@ public class OrderVoBuilder extends OrderInfoBuilder {
 		return this;
 	}
 
-	@Override
-	public OrderVoBuilder setComments(CommentPo comments) {
-		super.setComments(comments);
+	public OrderVoBuilder setComment(CommentVo comment) {
+		this.comment = comment;
 		return this;
 	}
 
 	@Override
 	public OrderVoBuilder setAppeal(String appeal) {
-		super.setAppeal(appeal);
+		this.appeal = appeal;
+		return this;
+	}
+
+	@Override
+	public OrderVoBuilder addPromotion(PromotionInfo promotion) {
+		this.promotions.add(new PromotionVoBuilder(promotion).getPromotionInfo());
 		return this;
 	}
 
@@ -151,8 +158,30 @@ public class OrderVoBuilder extends OrderInfoBuilder {
 	}
 
 	@Override
-	public OrderVoBuilder addPromotion(PromotionInfo promotion) {
-		this.promotions.add(new PromotionVoBuilder(promotion).getPromotionInfo());
+	public OrderInfoBuilder setComment(CommentInfo comment) {
+		this.comment = new CommentVoBuilder(comment).getCommentInfo();
 		return this;
+	}
+
+	@Override
+	public OrderInfoBuilder setHotel(HotelInfo info) {
+		this.hotel = new HotelVoBuilder(info).getHotelInfo();
+		return this;
+	}
+
+	@Override
+	public OrderInfoBuilder setMember(MemberInfo info) {
+		this.member = new MemberVoBuilder(info).getMemberInfo();
+		return this;
+	}
+
+	@Override
+	protected MemberInfo getMember() {
+		return member;
+	}
+
+	@Override
+	protected HotelInfo getHotel() {
+		return hotel;
 	}
 }

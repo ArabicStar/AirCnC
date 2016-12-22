@@ -37,4 +37,13 @@ public abstract class CommentInfo extends CommentInfoTemplate {
 	public abstract OrderInfo getOrder();
 
 	public abstract HotelInfo getHotel();
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("CommentInfo [id=").append(id).append(", commentTime=").append(commentTime).append(", grade=")
+				.append(grade).append(", content=").append(content).append("]");
+		return builder.toString();
+	}
+
 }

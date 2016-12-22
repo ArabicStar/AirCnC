@@ -3,6 +3,8 @@ package service.impl.member;
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
+import java.time.LocalDateTime;
+
 import data.dao.member.CreditDao;
 import data.dao.member.MemberDao;
 import po.member.MemberPo;
@@ -27,7 +29,7 @@ public final class MemberCreditManager implements MemberCreditService {
 		return getInstance();
 	}
 
-	public static  MemberCreditService getInstance() {
+	public static MemberCreditService getInstance() {
 		if (instance == null)
 			throw singletonNotExistsEx();
 
@@ -62,7 +64,11 @@ public final class MemberCreditManager implements MemberCreditService {
 		CreditChangePo po = new CreditChangePoBuilder(m, ActionType.CHARGE).setMoney(money)
 				.setCreditChange(strategy.getChargeIncrement(money)).getCreditChangeInfo();
 
-		return new MemberVoBuilder(creditDao.changeCredit(po)).getMemberInfo();
+		MemberPo changeCredit;
+		if ((changeCredit = creditDao.changeCredit(po)) != null)
+			return new MemberVoBuilder(changeCredit).getMemberInfo();
+
+		return MemberVoBuilder.invalidInfo();
 	}
 
 	@Override
@@ -70,17 +76,21 @@ public final class MemberCreditManager implements MemberCreditService {
 		if (order == null)
 			return null;
 
-		if (order.getStatus() != OrderStatus.UNEXECUTED)
+		if (order.getStatus() != OrderStatus.EXECUTED)
 			return MemberVoBuilder.invalidInfo();
 
-		MemberPo m = getMember(MemberVo.formatID(order.getUserId()));
+		MemberPo m = getMember(order.getMember().getId());
 		if (m == null)
 			return null;
 
 		CreditChangePo po = new CreditChangePoBuilder(m, ActionType.ORDER_EXECUTION).setOrderId(order.getOrderId())
 				.setCreditChange(strategy.getExecutionIncrement(order)).getCreditChangeInfo();
 
-		return new MemberVoBuilder(creditDao.changeCredit(po)).getMemberInfo();
+		MemberPo changeCredit;
+		if ((changeCredit = creditDao.changeCredit(po)) != null)
+			return new MemberVoBuilder(changeCredit).getMemberInfo();
+
+		return MemberVoBuilder.invalidInfo();
 	}
 
 	@Override
@@ -88,17 +98,21 @@ public final class MemberCreditManager implements MemberCreditService {
 		if (order == null)
 			return null;
 
-		if (order.getStatus() != OrderStatus.UNEXECUTED)
+		if (order.getStatus() != OrderStatus.ABNORMAL)
 			return MemberVoBuilder.invalidInfo();
 
-		MemberPo m = getMember(MemberVo.formatID(order.getUserId()));
+		MemberPo m = getMember(order.getMember().getId());
 		if (m == null)
 			return null;
 
 		CreditChangePo po = new CreditChangePoBuilder(m, ActionType.ORDER_OVERDUE).setOrderId(order.getOrderId())
 				.setCreditChange(strategy.getOverdueReduction(order)).getCreditChangeInfo();
 
-		return new MemberVoBuilder(creditDao.changeCredit(po)).getMemberInfo();
+		MemberPo changeCredit;
+		if ((changeCredit = creditDao.changeCredit(po)) != null)
+			return new MemberVoBuilder(changeCredit).getMemberInfo();
+
+		return MemberVoBuilder.invalidInfo();
 	}
 
 	@Override
@@ -106,17 +120,24 @@ public final class MemberCreditManager implements MemberCreditService {
 		if (order == null)
 			return null;
 
-		if (order.getStatus() != OrderStatus.UNEXECUTED)
+		if (order.getStatus() != OrderStatus.REPEALED)
 			return MemberVoBuilder.invalidInfo();
 
-		MemberPo m = getMember(MemberVo.formatID(order.getUserId()));
+		MemberPo m = getMember(order.getMember().getId());
 		if (m == null)
 			return null;
+
+		if (LocalDateTime.now().plusHours(6).isBefore(order.getLastTime()))
+			return new MemberVoBuilder(m).getMemberInfo();
 
 		CreditChangePo po = new CreditChangePoBuilder(m, ActionType.ORDER_CANCEL).setOrderId(order.getOrderId())
 				.setCreditChange(strategy.getCancelReduction(order)).getCreditChangeInfo();
 
-		return new MemberVoBuilder(creditDao.changeCredit(po)).getMemberInfo();
+		MemberPo changeCredit;
+		if ((changeCredit = creditDao.changeCredit(po)) != null)
+			return new MemberVoBuilder(changeCredit).getMemberInfo();
+
+		return MemberVoBuilder.invalidInfo();
 	}
 
 	@Override
@@ -124,17 +145,21 @@ public final class MemberCreditManager implements MemberCreditService {
 		if (order == null)
 			return null;
 
-		if (order.getStatus() != OrderStatus.ABNORMAL)
+		if (order.getStatus() != OrderStatus.EXECUTED)
 			return MemberVoBuilder.invalidInfo();
 
-		MemberPo m = getMember(MemberVo.formatID(order.getUserId()));
+		MemberPo m = getMember(order.getMember().getId());
 		if (m == null)
 			return null;
 
 		CreditChangePo po = new CreditChangePoBuilder(m, ActionType.ORDER_DELAY).setOrderId(order.getOrderId())
 				.setCreditChange(strategy.getDelayRecovery(order)).getCreditChangeInfo();
 
-		return new MemberVoBuilder(creditDao.changeCredit(po)).getMemberInfo();
+		MemberPo changeCredit;
+		if ((changeCredit = creditDao.changeCredit(po)) != null)
+			return new MemberVoBuilder(changeCredit).getMemberInfo();
+
+		return MemberVoBuilder.invalidInfo();
 	}
 
 	@Override
@@ -142,17 +167,21 @@ public final class MemberCreditManager implements MemberCreditService {
 		if (order == null)
 			return null;
 
-		if (order.getStatus() != OrderStatus.ABNORMAL)
+		if (order.getStatus() != OrderStatus.REPEALED)
 			return MemberVoBuilder.invalidInfo();
 
-		MemberPo m = getMember(MemberVo.formatID(order.getUserId()));
+		MemberPo m = getMember(order.getMember().getId());
 		if (m == null)
 			return null;
 
 		CreditChangePo po = new CreditChangePoBuilder(m, ActionType.ORDER_APPEAL).setOrderId(order.getOrderId())
 				.setCreditChange(strategy.getAppealRecovery(order)).getCreditChangeInfo();
 
-		return new MemberVoBuilder(creditDao.changeCredit(po)).getMemberInfo();
+		MemberPo changeCredit;
+		if ((changeCredit = creditDao.changeCredit(po)) != null)
+			return new MemberVoBuilder(changeCredit).getMemberInfo();
+
+		return MemberVoBuilder.invalidInfo();
 	}
 
 	private MemberPo getMember(String id) {

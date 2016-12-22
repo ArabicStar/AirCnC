@@ -52,14 +52,14 @@ public class CommentPo extends CommentInfo {
 		return this;
 	}
 
-	public CommentPo setOrder(OrderPo order) {
-		this.order = order;
-		return this;
-	}
-
 	@Override
 	public OrderInfo getOrder() {
 		return order;
+	}
+
+	public CommentPo setOrder(OrderPo order) {
+		this.order = order;
+		return this;
 	}
 
 	@Override

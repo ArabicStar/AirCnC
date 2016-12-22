@@ -16,6 +16,7 @@ import service.query.OrderQueryService;
 import utils.info.member.MemberInfo;
 import utils.info.order.OrderStatus;
 import vo.hotel.HotelVo;
+import vo.hotel.HotelVoBuilder;
 import vo.member.MemberVo;
 import vo.member.MemberVoBuilder;
 import vo.member.credit.CreditChangeVo;
@@ -271,7 +272,7 @@ public final class MemberInfoManager implements MemberInfoService, MemberQuerySe
 			dirtyBuffer = false;
 		}
 
-		return bufferedOrderList.stream().map(o -> hotelQueryService.findById(o.getHotelId()))
+		return bufferedOrderList.stream().map(o -> o.getHotel()).map(h -> new HotelVoBuilder(h).getHotelInfo())
 				.collect(Collectors.toList());
 	}
 

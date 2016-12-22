@@ -4,11 +4,13 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
-import po.order.OrderPo;
-import po.order.OrderPoBuilder;
-import po.order.comment.CommentPo;
+import utils.info.hotel.HotelInfo;
+import utils.info.member.MemberInfo;
 import utils.info.order.OrderInfo;
 import utils.info.order.OrderStatus;
+import vo.hotel.HotelVo;
+import vo.member.MemberVo;
+import vo.order.comment.CommentVo;
 import vo.promotion.PromotionVo;
 
 /**
@@ -19,6 +21,9 @@ import vo.promotion.PromotionVo;
 public class OrderVo extends OrderInfo {
 
 	private Set<PromotionVo> promotions;
+	private CommentVo comment;
+	private MemberVo member;
+	private HotelVo hotel;
 
 	public OrderVo() {
 		promotions = new HashSet<>();
@@ -36,11 +41,6 @@ public class OrderVo extends OrderInfo {
 
 	OrderVo setStayDays(int stayDays) {
 		this.stayDays = stayDays;
-		return this;
-	}
-
-	OrderVo setUserId(int userId) {
-		this.userId = userId;
 		return this;
 	}
 
@@ -74,33 +74,8 @@ public class OrderVo extends OrderInfo {
 		return this;
 	}
 
-	OrderVo setHotelId(int hotelId) {
-		this.hotelId = hotelId;
-		return this;
-	}
-
-	OrderVo setHotelName(String hotelName) {
-		this.hotelName = hotelName;
-		return this;
-	}
-
 	OrderVo setRoomNumber(int roomNumber) {
 		this.roomNumber = roomNumber;
-		return this;
-	}
-
-	OrderVo setIsReviewed(boolean isReviewed) {
-		this.isReviewed = isReviewed;
-		return this;
-	}
-
-	OrderVo setUserName(String userName) {
-		this.userName = userName;
-		return this;
-	}
-
-	OrderVo setPromotions(Set<PromotionVo> promotions) {
-		this.promotions = new HashSet<>(promotions);
 		return this;
 	}
 
@@ -109,8 +84,9 @@ public class OrderVo extends OrderInfo {
 		return this;
 	}
 
-	OrderVo setComments(CommentPo comments) {
-		this.comments = comments;
+	OrderVo setComment(CommentVo comment) {
+		this.comment = comment;
+		comment.setOrder(this);
 		return this;
 	}
 
@@ -122,6 +98,36 @@ public class OrderVo extends OrderInfo {
 	@Override
 	public Set<PromotionVo> getPromotions() {
 		return new HashSet<>(promotions);
+	}
+
+	OrderVo setPromotions(Set<PromotionVo> promotions) {
+		this.promotions = new HashSet<>(promotions);
+		return this;
+	}
+
+	@Override
+	public CommentVo getComment() {
+		return comment;
+	}
+
+	OrderVo setMember(MemberVo member) {
+		this.member = member;
+		return this;
+	}
+
+	@Override
+	public MemberInfo getMember() {
+		return member;
+	}
+
+	OrderVo setHotel(HotelVo hotel) {
+		this.hotel = hotel;
+		return this;
+	}
+
+	@Override
+	public HotelInfo getHotel() {
+		return hotel;
 	}
 
 }

@@ -1,3 +1,4 @@
+
 package utils.info.order;
 
 import java.time.LocalDateTime;
@@ -30,6 +31,9 @@ public abstract class OrderInfoTemplate {
 
 	protected String appeal;
 
+	private static final DateTimeFormatter f = new DateTimeFormatterBuilder().appendValue(ChronoField.YEAR, 4)
+			.appendValue(ChronoField.MONTH_OF_YEAR, 2).appendValue(ChronoField.DAY_OF_MONTH, 2).toFormatter();
+
 	protected static boolean isNumber(String str) {
 		if (str.matches("[0-9]+")) {
 			return true;
@@ -61,9 +65,6 @@ public abstract class OrderInfoTemplate {
 	}
 
 	public static boolean verifyTimeString(String string) {
-		DateTimeFormatter f = new DateTimeFormatterBuilder().appendValue(ChronoField.YEAR, 4)
-				.appendValue(ChronoField.MONTH_OF_YEAR, 2).appendValue(ChronoField.DAY_OF_MONTH, 2).toFormatter();
-
 		try {
 			f.parse(string);
 			return true;
@@ -73,4 +74,7 @@ public abstract class OrderInfoTemplate {
 
 	}
 
+	public static final DateTimeFormatter getDateFormatter(){
+		return f;
+	}
 }

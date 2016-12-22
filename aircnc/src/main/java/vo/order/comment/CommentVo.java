@@ -1,74 +1,70 @@
 package vo.order.comment;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import utils.info.hotel.HotelInfo;
 import utils.info.order.comment.CommentInfo;
+import vo.hotel.HotelVo;
+import vo.order.OrderVo;
 
-public class CommentVo extends CommentInfo{
-	private int memberLevel;
-	private String memberName;
-	
-	protected CommentVo() {
-		super();
+public class CommentVo extends CommentInfo {
+
+	private OrderVo order;
+	private HotelVo hotel;
+
+	/**
+	 * @param id
+	 *            to be set id
+	 */
+	public CommentVo setId(long id) {
+		this.id = id;
+		return this;
 	}
 
-	protected CommentVo(int grade) {
-		super(grade);
-	}
-	
-	CommentVo setHotelId(int id){
-		this.hotelId = id;
-		return this;
-	}
-	
-	CommentVo setMemberId(String id){
-		this.memberId = id;
-		return this;
-	}
-	
-	CommentVo setContent(String content){
-		this.content = content;
-		return this;
-	}
-	
-	CommentVo setCheckInTime(LocalDate checkInTime){
-		this.checkInTime = checkInTime;
-		return this;
-	}
-	
-	CommentVo setCommentTime(LocalDateTime commentTime){
+	/**
+	 * @param commentTime
+	 *            to be set commentTime
+	 */
+	public CommentVo setCommentTime(LocalDateTime commentTime) {
 		this.commentTime = commentTime;
 		return this;
 	}
-	
-	public CommentVo setMemberName(String memberName) {
-		this.memberName = memberName;
+
+	/**
+	 * @param content
+	 *            to be set content
+	 */
+	public CommentVo setContent(String content) {
+		this.content = content;
 		return this;
 	}
-	
-	public String getMemberName() {
-		return memberName;
-	}
-	
-	public CommentVo setMemberLevel(int memberLevel) {
-		this.memberLevel = memberLevel;
-		return this;
-	}
-	
-	public CommentVo setOrderId_c(String orderId) {
-		this.orderId_c = orderId;
-		return this;
-	}
-	
+
+	/**
+	 * @param grade
+	 *            to be set grade
+	 */
 	public CommentVo setGrade(int grade) {
 		this.grade = grade;
 		return this;
 	}
-	
-	// TODO 实时计算
-	public int getMemberLevel() {
-		return memberLevel;
+
+	@Override
+	public OrderVo getOrder() {
+		return order;
 	}
 
+	public CommentVo setOrder(OrderVo order) {
+		this.order = order;
+		return this;
+	}
+
+	@Override
+	public HotelInfo getHotel() {
+		return hotel;
+	}
+
+	public CommentVo setHotel(HotelVo hotel) {
+		this.hotel = hotel;
+		return this;
+	}
 }
