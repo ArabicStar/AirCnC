@@ -23,38 +23,38 @@ import service.order.OrderListingService;
 import service.order.OrderLogicService;
 import utils.info.order.OrderStatus;
 import vo.order.OrderVo;
+import vo.order.OrderVoBuilder;
 
-public class OrderInfoCourier implements OrderInfoInteractor{
+public class OrderInfoCourier implements OrderInfoInteractor {
 	private static OrderInfoInteractor instance;
-	
+
 	private OrderDetailService detail;
 	private OrderListingService listing;
 	private OrderLogicService logic;
-	
-	private OrderInfoCourier(OrderDetailService detail, OrderListingService listing,
-			OrderLogicService logic) {
+
+	private OrderInfoCourier(OrderDetailService detail, OrderListingService listing, OrderLogicService logic) {
 		this.detail = detail;
 		this.listing = listing;
 		this.logic = logic;
 	}
-	
+
 	// singleton
-	public static OrderInfoInteractor launch(OrderDetailService detail,
-			OrderListingService listing, OrderLogicService logic) {
-		if(instance != null) {
+	public static OrderInfoInteractor launch(OrderDetailService detail, OrderListingService listing,
+			OrderLogicService logic) {
+		if (instance != null) {
 			throw duplicateSingletonEx();
 		}
 		return instance = new OrderInfoCourier(detail, listing, logic);
 	}
-	
+
 	public static boolean isLaunch() {
-		if(instance == null) {
+		if (instance == null) {
 			return false;
 		} else {
 			return true;
 		}
 	}
-	
+
 	public static OrderInfoInteractor getInstance() {
 		if (instance == null) {
 			throw singletonNotExistsEx();
@@ -65,11 +65,11 @@ public class OrderInfoCourier implements OrderInfoInteractor{
 	@Override
 	@Title("Get Order Info")
 	public void getOrderInfo() {
-		String title = getTitle();	
+		String title = getTitle();
 		OrderVo info = interactor.utils.Dipatcher.execute(title, () -> {
 			String id = getCurrentId();
-			if(detail != null) {
-				return detail.getOrderInfoById(id).orderPo2Vo();
+			if (detail != null) {
+				return new OrderVoBuilder(detail.getOrderInfoById(id)).getOrderInfo();
 			}
 			alertFail(title, "Not logged in yet");
 			return null;
@@ -77,7 +77,7 @@ public class OrderInfoCourier implements OrderInfoInteractor{
 
 		CreditChangeManagerImpl.getInstance().setCauseOrder(info);
 	}
-	
+
 	private String getCurrentId() {
 		return CreditChangeOrderAccessorImpl.getInstance().getCauseId();
 	}
@@ -85,16 +85,16 @@ public class OrderInfoCourier implements OrderInfoInteractor{
 	@Override
 	public void delay() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Title("Get OrderInfo by id")
 	@Override
 	public void getOrderInfoById(String orderId) {
-		String title = getTitle();	
+		String title = getTitle();
 		OrderVo info = interactor.utils.Dipatcher.execute(title, () -> {
-			if(detail != null) {
-				return detail.getOrderInfoById(orderId).orderPo2Vo();
+			if (detail != null) {
+				return new OrderVoBuilder(detail.getOrderInfoById(orderId)).getOrderInfo();
 			}
 			alertFail(title, "Not logged in yet");
 			return null;
@@ -104,14 +104,15 @@ public class OrderInfoCourier implements OrderInfoInteractor{
 
 	@Override
 	public void execute() {
-		
+
 	}
 
 	@Override
 	public void makeComment() {
 		OrderPo orderPo = detail.getOrderInfoById(MemberCommentAccessorImpl.getInstance().getId());
-		CommentPo commentPo = new CommentPoBuilder(orderPo.getComments()).setContent(MemberCommentAccessorImpl.getInstance().getComment())
-				.setGrade((int)MemberCommentAccessorImpl.getInstance().getRating()).setCommentTime(LocalDateTime.now())
+		CommentPo commentPo = new CommentPoBuilder(orderPo.getComments())
+				.setContent(MemberCommentAccessorImpl.getInstance().getComment())
+				.setGrade((int) MemberCommentAccessorImpl.getInstance().getRating()).setCommentTime(LocalDateTime.now())
 				.getCommentInfo();
 		OrderPo newOrderPo = new OrderPoBuilder(orderPo).setComments(commentPo).getOrderInfo();
 		// TODO 把评价和申诉加到数据库
@@ -132,19 +133,19 @@ public class OrderInfoCourier implements OrderInfoInteractor{
 		String appeal = MemberOrderOperationAccessorImpl.getInstance().getAppeal();
 		OrderPo newOrderPo = new OrderPoBuilder(orderPo).setAppeal(appeal).getOrderInfo();
 		detail.saveOrder(newOrderPo);
-//		MemberAppealAccessorImpl.getInstance().setAppeal("");
-		
+		// MemberAppealAccessorImpl.getInstance().setAppeal("");
+
 	}
 
 	@Override
 	public void getOrderInfoByHotel() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void addOrder(OrderVo orderVo) {
-		detail.saveOrder(orderVo.orderVo2Po());
+		detail.saveOrder(new OrderPoBuilder(orderVo).getOrderInfo());
 	}
-	
+
 }

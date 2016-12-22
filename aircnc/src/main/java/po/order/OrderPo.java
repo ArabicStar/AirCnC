@@ -115,10 +115,6 @@ public class OrderPo extends OrderInfo {
 		return this;
 	}
 
-	public OrderVo orderPo2Vo() {
-		return new OrderVoBuilder(this).getOrderInfo();
-	}
-
 	@Override
 	public Set<PromotionPo> getPromotions() {
 		return new HashSet<>(promotions);
