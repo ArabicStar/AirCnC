@@ -113,6 +113,11 @@ public abstract class MemberPo extends MemberInfo {
 
 	public abstract MemberPo setEnterprise(String enterprise);
 
+	public MemberPo setLevel(int level) {
+		this.level = level;
+		return this;
+	}
+
 	/**
 	 * Get encrypted name string. Automatically encrypt {@code name} field. Just
 	 * for hibernate. Make client requirement happy.<br>

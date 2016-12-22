@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import utils.info.member.ContactInfo;
 import utils.info.member.MemberInfo;
 
+@SuppressWarnings("serial")
 public abstract class MemberVo extends MemberInfo {
 
 	protected MemberVo(Type type) {
@@ -35,6 +36,11 @@ public abstract class MemberVo extends MemberInfo {
 
 	MemberVo setContact(ContactInfo contact) {
 		this.contact = contact;
+		return this;
+	}
+
+	MemberVo setLevel(int level) {
+		this.level = level;
 		return this;
 	}
 

@@ -16,6 +16,7 @@ import utils.info.member.MemberInfoBuilder;
  * @author ClevelandAlto
  *
  */
+@SuppressWarnings("serial")
 public class MemberPoBuilder extends MemberInfoBuilder {
 
 	private int passwordHash = Integer.MIN_VALUE;
@@ -106,10 +107,10 @@ public class MemberPoBuilder extends MemberInfoBuilder {
 
 		if (type == Type.BUSINESS)
 			return new EnterpriseMemberPo().setId(id).setName(name).setPasswordHash(passwordHash).setCredit(credit)
-					.setContact(contact).setEnterprise(enterprise);
+					.setLevel(level).setContact(contact).setEnterprise(enterprise);
 		else
 			return new PersonalMemberPo().setId(id).setName(name).setPasswordHash(passwordHash).setCredit(credit)
-					.setContact(contact).setBirthday(birthday);
+					.setLevel(level).setContact(contact).setBirthday(birthday);
 	}
 
 	public static final void updatePo(final MemberPo from, MemberPo to) {

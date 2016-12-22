@@ -1,88 +1,94 @@
 package po.order.comment;
 
-import java.time.LocalDate;
+import static utils.exception.StaticExceptionFactory.illegalStateException;
+
 import java.time.LocalDateTime;
 
+import po.hotel.HotelPo;
+import po.hotel.HotelPoBuilder;
+import utils.info.hotel.HotelInfo;
+import utils.info.order.OrderInfo;
 import utils.info.order.comment.CommentInfo;
 import utils.info.order.comment.CommentInfoBuilder;
 
-public class CommentPoBuilder extends CommentInfoBuilder{
+public class CommentPoBuilder extends CommentInfoBuilder {
 
-	private static final CommentPo INVALID_COMMENT_PO;
-	static {
-		INVALID_COMMENT_PO = new CommentPo(1);
-		INVALID_COMMENT_PO.invalidate();
-	}
+	private HotelPo hotel;
 
-	public static final CommentPo getInvalidInfo() {
-		return INVALID_COMMENT_PO;
-	}
-	
-	public CommentPoBuilder() {
-		super();
-	}
-	
-	
+	/**
+	 * @param info
+	 */
 	public CommentPoBuilder(CommentInfo info) {
 		super(info);
-		// TODO Auto-generated constructor stub
 	}
 
+	public CommentPoBuilder(OrderInfo info) {
+		super(info);
+	}
+
+	/**
+	 * @param id
+	 *            to be set id
+	 */
 	@Override
-	public CommentPoBuilder setContent(String content){
-		super.setContent(content);
+	public CommentPoBuilder setId(long id) {
+		super.setId(id);
 		return this;
 	}
-	
+
+	/**
+	 * @param commentTime
+	 *            to be set commentTime
+	 */
 	@Override
-	public CommentPoBuilder setHotelID(int id) {
-		super.setHotelID(id);
-		return this;
-	}
-	
-	@Override
-	public CommentPoBuilder setMemberID(String id) {
-		super.setMemberID(id);
-		return this;
-	}
-	
-	@Override
-	public CommentPoBuilder setCheckInTime(LocalDate checkInTime){
-		super.setCheckInTime(checkInTime);
-		return this;
-	}
-	
-	@Override
-	public CommentPoBuilder setCommentTime(LocalDateTime commentTime){
+	public CommentPoBuilder setCommentTime(LocalDateTime commentTime) {
 		super.setCommentTime(commentTime);
 		return this;
 	}
-	
-	public CommentPoBuilder setGrade(int grade){
-		if(grade <= 0 || grade > 5) {
-			return null;
-		}
-		this.grade = grade;
-		return this;
-	}
-	
+
+	/**
+	 * @param content
+	 *            to be set content
+	 */
 	@Override
-	public CommentPoBuilder setOrderId_c(String orderId) {
-		super.setOrderId_c(orderId);
+	public CommentPoBuilder setContent(String content) {
+		super.setContent(content);
 		return this;
 	}
-	
-	
-	
+
+	/**
+	 * @param grade
+	 *            to be set grade
+	 */
+	@Override
+	public CommentPoBuilder setGrade(int grade) {
+		super.setGrade(grade);
+		return this;
+	}
+
+	@Override
+	public CommentPoBuilder setHotel(HotelInfo hotel) {
+		this.hotel = new HotelPoBuilder(hotel).getHotelInfo();
+		return this;
+	}
+
+	@Override
+	public boolean isReady() {
+		return super.isReady();
+	}
+
 	@Override
 	public CommentPo getCommentInfo() {
-		if (!isReady()) {
-			return new CommentPo(0);
-		}
-		CommentPo po = new CommentPo(grade).setHotelId(hotelId).setMemberId(memberId).
-		setCheckInTime(checkInTime).setCommentTime(commentTime).setContent(content).
-		setOrderId_c(orderId_c).setGrade(grade);
-		return po;
+		if (!isReady())
+			throw illegalStateException("Comment Po Builder not set up");
+
+		return new CommentPo().setCommentTime(commentTime).setContent(content).setGrade(grade).setId(id)
+				.setHotel(hotel);
+	}
+
+	@Override
+	protected HotelInfo getHotel() {
+		return hotel;
 	}
 
 }

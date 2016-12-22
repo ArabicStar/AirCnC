@@ -55,6 +55,7 @@ public abstract class MemberInfoTemplate implements Serializable {
 	 */
 	protected String enterprise;
 
+	protected int level;
 	/**
 	 * id string pattern <br>
 	 * <i>8 numbers between 0 and 9</i>

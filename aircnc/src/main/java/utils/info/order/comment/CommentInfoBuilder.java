@@ -1,79 +1,82 @@
 package utils.info.order.comment;
 
-import java.time.LocalDate;
+import static utils.exception.StaticExceptionFactory.illegalArgEx;
+
 import java.time.LocalDateTime;
 
-import utils.info.order.OrderInfoTemplate;
+import utils.info.hotel.HotelInfo;
+import utils.info.order.OrderInfo;
 
-public abstract class CommentInfoBuilder extends CommentInfoTemplate{
-	
-	public CommentInfoBuilder() {
-		// all these should be illegal
-		hotelId = 0;
-		memberId = "00000000";
-		checkInTime = LocalDate.now();
-		commentTime = LocalDateTime.now();
-		content = "";
-		grade = 0;
-		orderId_c = "";
+public abstract class CommentInfoBuilder extends CommentInfoTemplate {
+
+	private CommentInfoBuilder() {
+		this.id = 0;
+		this.commentTime = LocalDateTime.now();
+		this.content = "";
+		this.grade = 0;
 	}
-	
-	public CommentInfoBuilder(CommentInfo info){
-		this(info.getGrade());
-		this.setCheckInTime(info.getCheckInTime()).setCommentTime(info.getCommentTime()).setContent(info.getContent())
-		.setHotelID(info.getHotelId()).setMemberID(info.getMemberId()).setOrderId_c(info.orderId_c);
+
+	protected CommentInfoBuilder(CommentInfo info) {
+		this();
+		setId(info.getId()).setContent(info.getContent()).setCommentTime(info.getCommentTime())
+				.setGrade(info.getGrade()).setHotel(info.getHotel());
 	}
-	
-	public CommentInfoBuilder(int grade){
-		if(grade == 0) {
-			throw new IllegalArgumentException();
-		}
-		this.grade = grade;
+
+	protected CommentInfoBuilder(OrderInfo info) {
+		this();
 	}
-	
-	public CommentInfoBuilder setContent(String content){
-		if(checkCommentContent(content)){
-			this.content = content;
-		}
+
+	/**
+	 * @param id
+	 *            to be set id
+	 */
+	public CommentInfoBuilder setId(long id) {
+		if (id < 0)
+			throw illegalArgEx("Comment id", id);
+		this.id = id;
 		return this;
 	}
-	
-	public CommentInfoBuilder setHotelID(int id) {
-		if (checkID(id)) {
-			this.hotelId = id;
-		}
-		return this;
-	}
-	
-	public CommentInfoBuilder setMemberID(String id) {
-		if (checkID(id)) {
-			this.memberId = id;
-		}
-		return this;
-	}
-	
-	public CommentInfoBuilder setCheckInTime(LocalDate checkInTime){
-		this.checkInTime = checkInTime;
-		return this;
-	}
-	
-	public CommentInfoBuilder setCommentTime(LocalDateTime commentTime){
+
+	/**
+	 * @param commentTime
+	 *            to be set commentTime
+	 */
+	public CommentInfoBuilder setCommentTime(LocalDateTime commentTime) {
+		if (commentTime == null)
+			throw illegalArgEx("Commemt time", commentTime);
 		this.commentTime = commentTime;
 		return this;
 	}
-	
-	public CommentInfoBuilder setOrderId_c(String orderId) {
-		if(!OrderInfoTemplate.checkOrderId(orderId)) {
-			return null;
-		}
-		this.orderId_c = orderId;
+
+	/**
+	 * @param content
+	 *            to be set content
+	 */
+	public CommentInfoBuilder setContent(String content) {
+		if (content == null)
+			throw illegalArgEx("Comment content", content);
+		this.content = content;
 		return this;
 	}
-	
-	public boolean isReady() {
-//		System.out.println(id + " " + name + " " + contact + " " + type + " " + enterprise + " " + birthday);
-		return hotelId != 0 && memberId != null && content != null && checkInTime != null && commentTime != null;
+
+	/**
+	 * @param grade
+	 *            to be set grade
+	 */
+	public CommentInfoBuilder setGrade(int grade) {
+		if (grade < 0)
+			throw illegalArgEx("Comment grade", grade);
+		this.grade = grade;
+		return this;
 	}
-	
+
+	protected abstract HotelInfo getHotel();
+
+	public boolean isReady() {
+		return checkId(id) && getHotel() != null;
+	}
+
+	public abstract CommentInfoBuilder setHotel(HotelInfo hotel);
+
 	public abstract CommentInfo getCommentInfo();
 }

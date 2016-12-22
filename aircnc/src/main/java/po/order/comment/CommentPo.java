@@ -1,69 +1,74 @@
 package po.order.comment;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import po.hotel.HotelPo;
+import po.order.OrderPo;
+import utils.info.order.OrderInfo;
 import utils.info.order.comment.CommentInfo;
-import vo.order.comment.CommentVo;
-import vo.order.comment.CommentVoBuilder;
 
 public class CommentPo extends CommentInfo {
-	protected CommentPo() {
+
+	private OrderPo order;
+	private HotelPo hotel;
+
+	public CommentPo() {
 		super();
 	}
 
-	protected CommentPo(int grade) {
-		super(grade);
-	}
-
-	public CommentPo setHotelId(int id) {
-		this.hotelId = id;
+	/**
+	 * @param id
+	 *            to be set id
+	 */
+	public CommentPo setId(long id) {
+		this.id = id;
 		return this;
 	}
 
-	public CommentPo setMemberId(String id) {
-		this.memberId = id;
+	/**
+	 * @param commentTime
+	 *            to be set commentTime
+	 */
+	public CommentPo setCommentTime(LocalDateTime commentTime) {
+		this.commentTime = commentTime;
 		return this;
 	}
 
+	/**
+	 * @param content
+	 *            to be set content
+	 */
 	public CommentPo setContent(String content) {
 		this.content = content;
 		return this;
 	}
 
-	public CommentPo setCheckInTime(LocalDate checkInTime) {
-		this.checkInTime = checkInTime;
-		return this;
-	}
-
-	public CommentPo setCommentTime(LocalDateTime commentTime) {
-		this.commentTime = commentTime;
-		return this;
-	}
-	
-	public CommentPo setOrderId_c(String orderId) {
-		this.orderId_c = orderId;
-		return this;
-	}
-	
+	/**
+	 * @param grade
+	 *            to be set grade
+	 */
 	public CommentPo setGrade(int grade) {
 		this.grade = grade;
 		return this;
 	}
 
-	public void show() {
-		System.out.println(this.getHotelId());
-		System.out.println(this.memberId);
-		System.out.println(this.hotelId);
-		System.out.println(this.grade);
-		System.out.println(this.content);
+	public CommentPo setOrder(OrderPo order) {
+		this.order = order;
+		return this;
 	}
 
-	public CommentVo toCommentVo() {
-		CommentVo vo = new CommentVoBuilder().setCheckInTime(checkInTime).setCommentTime(commentTime)
-				.setContent(content).setHotelID(hotelId).setMemberID(memberId)
-				.setGrade(grade).setOrderId_c(orderId_c).getCommentInfo();
-		return vo;
+	@Override
+	public OrderInfo getOrder() {
+		return order;
 	}
 
+	@Override
+	public HotelPo getHotel() {
+		return hotel;
+	}
+
+	public CommentPo setHotel(HotelPo hotel) {
+		this.hotel = hotel;
+		return this;
+	}
 }

@@ -21,6 +21,7 @@ import org.apache.commons.lang.StringUtils;
  * @author ClevelandAlto
  * @see utils.info.member.MemberInfo
  */
+@SuppressWarnings("serial")
 public abstract class MemberInfoBuilder extends MemberInfoTemplate {
 	/**
 	 * Initialize a builder by given type. <br>
@@ -50,7 +51,7 @@ public abstract class MemberInfoBuilder extends MemberInfoTemplate {
 			throw illegalArgEx("MemberInfo");
 
 		this.setId(info.getId()).setCredit(info.getCredit()).setContactInfo(info.getContact())
-				.setBirthday(info.getBirthday()).setEnterprise(info.getEnterprise());
+				.setBirthday(info.getBirthday()).setEnterprise(info.getEnterprise()).setLevel(info.getLevel());
 		String name = StringUtils.deleteWhitespace(info.getName());
 		this.setName(name);
 	}
@@ -157,6 +158,13 @@ public abstract class MemberInfoBuilder extends MemberInfoTemplate {
 		return this;
 	}
 
+	private MemberInfoBuilder setLevel(int level) {
+		if (level > 0)
+			this.level = level;
+
+		return this;
+	}
+
 	/**
 	 * Check if builder can build a MembertInfo instance, that is, all fields
 	 * are valid. <br>
@@ -164,8 +172,8 @@ public abstract class MemberInfoBuilder extends MemberInfoTemplate {
 	 * @return if all fields are valid <br>
 	 */
 	public boolean isReady() {
-//		 System.err.println(id + " " + name + " " + contact + " " + type + " "
-//		 + enterprise + " " + birthday);
+		// System.err.println(id + " " + name + " " + contact + " " + type + " "
+		// + enterprise + " " + birthday);
 		return id != null && name != null && contact != null
 				&& (type == Type.BUSINESS ? enterprise != null : birthday != null);
 	}

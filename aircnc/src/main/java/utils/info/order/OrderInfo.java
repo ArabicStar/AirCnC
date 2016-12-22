@@ -3,25 +3,24 @@ package utils.info.order;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-import po.order.comment.CommentPo;
+import utils.info.hotel.HotelInfo;
+import utils.info.member.MemberInfo;
+import utils.info.order.comment.CommentInfo;
 import utils.info.promotion.PromotionInfo;
 
 public abstract class OrderInfo extends OrderInfoTemplate {
+	private boolean isValid = true;
 
-	public String getUserName() {
-		return userName;
+	public boolean isValid() {
+		return isValid;
 	}
 
-	public String getHotelName() {
-		return hotelName;
+	public void invalidate() {
+		isValid = false;
 	}
 
 	public int getRoomNumber() {
 		return roomNumber;
-	}
-
-	public int getHotelId() {
-		return hotelId;
 	}
 
 	public double getDiscountPrice() {
@@ -48,10 +47,6 @@ public abstract class OrderInfo extends OrderInfoTemplate {
 		return stayDays;
 	}
 
-	public int getUserId() {
-		return userId;
-	}
-
 	public OrderStatus getStatus() {
 		return status;
 	}
@@ -68,17 +63,19 @@ public abstract class OrderInfo extends OrderInfoTemplate {
 		return hasChildren;
 	}
 
-	public boolean getReviewed() {
-		return isReviewed;
-	}
-
-	public CommentPo getComments() {
-		return comments;
+	public boolean isReviewed() {
+		return getComment() != null;
 	}
 
 	public String getAppeal() {
 		return appeal;
 	}
+
+	public abstract MemberInfo getMember();
+
+	public abstract HotelInfo getHotel();
+
+	public abstract CommentInfo getComment();
 
 	public abstract Set<? extends PromotionInfo> getPromotions();
 }

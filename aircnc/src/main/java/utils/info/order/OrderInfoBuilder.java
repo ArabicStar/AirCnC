@@ -3,38 +3,44 @@ package utils.info.order;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-import po.order.comment.CommentPo;
+import utils.info.hotel.HotelInfo;
+import utils.info.member.MemberInfo;
+import utils.info.order.comment.CommentInfo;
 import utils.info.promotion.PromotionInfo;
 
 public abstract class OrderInfoBuilder extends OrderInfoTemplate {
 	public OrderInfoBuilder() {
 		orderId = BLANK;
-		stayDays = -1;
-		userId = -1;
-		userName = BLANK;
 		status = OrderStatus.UNEXECUTED;
 		entryTime = null;
 		lastTime = null;
+		stayDays = -1;
 		peopleNumber = -1;
+		hasChildren = false;
 		originalPrice = -1;
 		discountPrice = -1;
-		hasChildren = false;
-		hotelId = -1;
-		hotelName = BLANK;
+		roomType = null;
 		roomNumber = -1;
-		isReviewed = false;
-		appeal = BLANK;
-		comments = null;
+		appeal = null;
 	}
 
 	public OrderInfoBuilder(OrderInfo info) {
 		this();
-		this.setOrderId(orderId).setRoomType(info.getRoomType()).setStayDays(info.getStayDays())
-				.setUserId(info.getUserId()).setStatus(info.getStatus()).setEntryTime(info.getEntryTime())
-				.setLastTime(info.getLastTime()).setPeopleNumber(info.getPeopleNumber())
-				.setOriginalPrice(info.getOriginalPrice()).setDiscountPrice(info.getDiscountPrice())
-				.setHasChildren(info.getHasChildren()).setHotelId(info.getHotelId()).setRoomNumber(info.getRoomNumber())
-				.setReviewed(info.getReviewed()).setAppeal(info.getAppeal()).setComments(info.comments);
+		this.setOrderId(info.getOrderId())//
+				.setStatus(info.getStatus())//
+				.setMember(info.getMember())//
+				.setHotel(info.getHotel()).//
+				setRoomType(info.getRoomType())//
+				.setRoomNumber(info.getRoomNumber())//
+				.setEntryTime(info.getEntryTime())//
+				.setLastTime(info.getLastTime())//
+				.setStayDays(info.getStayDays())//
+				.setPeopleNumber(info.getPeopleNumber())//
+				.setHasChildren(info.getHasChildren())//
+				.setOriginalPrice(info.getOriginalPrice())//
+				.setDiscountPrice(info.getDiscountPrice())//
+				.setComment(info.getComment())//
+				.setAppeal(info.getAppeal());//
 	}
 
 	/**
@@ -42,12 +48,12 @@ public abstract class OrderInfoBuilder extends OrderInfoTemplate {
 	 *            要设置的 orderId
 	 */
 	public OrderInfoBuilder setOrderId(String orderId) {
-		if(orderId == null) {
-			return null;
-		}
-		if(checkOrderId(orderId)){
+		if (orderId == null)
+			return this;
+
+		if (checkOrderId(orderId))
 			this.orderId = orderId;
-		}
+
 		return this;
 	}
 
@@ -56,10 +62,9 @@ public abstract class OrderInfoBuilder extends OrderInfoTemplate {
 	 *            要设置的 roomType
 	 */
 	public OrderInfoBuilder setRoomType(String roomType) {
-		if(roomType == null) {
-			return null;
-		}
-		this.roomType = roomType;
+		if (roomType != null)
+			this.roomType = roomType;
+
 		return this;
 	}
 
@@ -68,22 +73,9 @@ public abstract class OrderInfoBuilder extends OrderInfoTemplate {
 	 *            要设置的 stayDays
 	 */
 	public OrderInfoBuilder setStayDays(int stayDays) {
-		if(stayDays <= 0) {
-			return null;
-		}
-		this.stayDays = stayDays;
-		return this;
-	}
+		if (stayDays > 0)
+			this.stayDays = stayDays;
 
-	/**
-	 * @param userId
-	 *            要设置的 userId
-	 */
-	public OrderInfoBuilder setUserId(int userId) {
-		if(userId <= 0) {
-			return null;
-		}
-		this.userId = userId;
 		return this;
 	}
 
@@ -92,7 +84,9 @@ public abstract class OrderInfoBuilder extends OrderInfoTemplate {
 	 *            要设置的 status
 	 */
 	public OrderInfoBuilder setStatus(OrderStatus status) {
-		this.status = status;
+		if (status != null)
+			this.status = status;
+
 		return this;
 	}
 
@@ -101,7 +95,9 @@ public abstract class OrderInfoBuilder extends OrderInfoTemplate {
 	 *            要设置的 entryTime
 	 */
 	public OrderInfoBuilder setEntryTime(LocalDateTime entryTime) {
-		this.entryTime = entryTime;
+		if (entryTime != null)
+			this.entryTime = entryTime;
+
 		return this;
 	}
 
@@ -110,27 +106,20 @@ public abstract class OrderInfoBuilder extends OrderInfoTemplate {
 	 *            要设置的 lastTime
 	 */
 	public OrderInfoBuilder setLastTime(LocalDateTime lastTime) {
-		this.lastTime = lastTime;
+		if (lastTime != null)
+			this.lastTime = lastTime;
+
 		return this;
 	}
-
-	/**
-	 * @param promotions
-	 *            要设置的 promotions
-	 */
-	public abstract OrderInfoBuilder setPromotions(Set<? extends PromotionInfo> promotions);
-
-	public abstract OrderInfoBuilder addPromotion(PromotionInfo promotion);
 
 	/**
 	 * @param peopleNumber
 	 *            要设置的 peopleNumber
 	 */
 	public OrderInfoBuilder setPeopleNumber(int peopleNumber) {
-		if(peopleNumber <= 0) {
-			return null;
-		}
-		this.peopleNumber = peopleNumber;
+		if (peopleNumber > 0)
+			this.peopleNumber = peopleNumber;
+
 		return this;
 	}
 
@@ -139,10 +128,9 @@ public abstract class OrderInfoBuilder extends OrderInfoTemplate {
 	 *            要设置的 originalPrice
 	 */
 	public OrderInfoBuilder setOriginalPrice(double originalPrice) {
-		if(originalPrice <= 0) {
-			return null;
-		}
-		this.originalPrice = originalPrice;
+		if (originalPrice >= 0)
+			this.originalPrice = originalPrice;
+
 		return this;
 	}
 
@@ -151,13 +139,9 @@ public abstract class OrderInfoBuilder extends OrderInfoTemplate {
 	 *            要设置的 discountPrice
 	 */
 	public OrderInfoBuilder setDiscountPrice(double discountPrice) {
-		if(discountPrice <= 0) {
-			return null;
-		}
-		if(discountPrice > originalPrice) {
-			return null;
-		}
-		this.discountPrice = discountPrice;
+		if (discountPrice >= 0)
+			this.discountPrice = discountPrice;
+
 		return this;
 	}
 
@@ -171,89 +155,44 @@ public abstract class OrderInfoBuilder extends OrderInfoTemplate {
 	}
 
 	/**
-	 * @param hotelId
-	 *            要设置的 hotelId
-	 */
-	public OrderInfoBuilder setHotelId(int hotelId) {
-		if(hotelId <= 0) {
-			return null;
-		}
-		this.hotelId = hotelId;
-		return this;
-	}
-
-	/**
-	 * @param hotelName
-	 *            要设置的 hotelName
-	 */
-	public OrderInfoBuilder setHotelName(String hotelName) {
-		if(hotelName == null) {
-			return null;
-		}
-		this.hotelName = hotelName;
-		return this;
-	}
-
-	/**
 	 * @param roomNumber
 	 *            要设置的 roomNumber
 	 */
 	public OrderInfoBuilder setRoomNumber(int roomNumber) {
-		if(roomNumber <= 0) {
-			return null;
-		}
-		this.roomNumber = roomNumber;
+		if (roomNumber > 0)
+			this.roomNumber = roomNumber;
 		return this;
 	}
 
-	/**
-	 * @param isReviewed
-	 *            要设置的 isReviewed
-	 */
-	public OrderInfoBuilder setReviewed(boolean isReviewed) {
-		/**
-		 * The order that has been reviewed can't be cast to a unreviewed one
-		 */
-		if(this.isReviewed == true) {
-			return this;
-		}
-		this.isReviewed = isReviewed;
-		return this;
-	}
-
-	/**
-	 * @param userName
-	 *            要设置的 userName
-	 */
-	public OrderInfoBuilder setUserName(String userName) {
-		if(userName == null) {
-			return null;
-		}
-		this.userName = userName;
-		return this;
-	}
-	
-
-	public OrderInfoBuilder setComments(CommentPo comments) {
-		if(comments == null) {
-			return null;
-		}
-		this.comments = comments;
-		return this;
-	}
-
-	/**
-	 * 申诉内容
-	 * @param appeal
-	 * @return
-	 */
 	public OrderInfoBuilder setAppeal(String appeal) {
-		if(appeal == null) {
-			return null;
-		}
-		this.appeal = appeal;
+		if (appeal != null)
+			this.appeal = appeal;
 		return this;
 	}
+
+	public boolean isReady() {
+		return checkOrderId(orderId) && getMember() != null && getHotel() != null && roomType != null && stayDays > 0
+				&& status != null && entryTime != null && lastTime != null && peopleNumber > 0 && originalPrice >= 0
+				&& discountPrice >= 0 && roomNumber > 0;
+	}
+
+	public abstract OrderInfoBuilder addPromotion(PromotionInfo promotion);
+
+	/**
+	 * @param promotions
+	 *            要设置的 promotions
+	 */
+	public abstract OrderInfoBuilder setPromotions(Set<? extends PromotionInfo> promotions);
+
+	public abstract OrderInfoBuilder setComment(CommentInfo comment);
+
+	public abstract OrderInfoBuilder setHotel(HotelInfo info);
+
+	public abstract OrderInfoBuilder setMember(MemberInfo info);
+
+	protected abstract MemberInfo getMember();
+
+	protected abstract HotelInfo getHotel();
 
 	public abstract OrderInfo getOrderInfo();
 }

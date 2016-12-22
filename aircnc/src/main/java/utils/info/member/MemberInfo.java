@@ -14,7 +14,6 @@ import java.time.LocalDate;
  */
 public abstract class MemberInfo extends MemberInfoTemplate implements Serializable {
 
-
 	/**
 	 * 
 	 */
@@ -117,6 +116,10 @@ public abstract class MemberInfo extends MemberInfoTemplate implements Serializa
 	 * @return enterprise name string <br>
 	 */
 	public abstract String getEnterprise();
+
+	public int getLevel() {
+		return level;
+	}
 
 	/**
 	 * Get this instance validation status <br>

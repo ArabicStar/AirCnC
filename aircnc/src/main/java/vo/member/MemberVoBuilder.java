@@ -6,6 +6,7 @@ import utils.info.member.ContactInfo;
 import utils.info.member.MemberInfo;
 import utils.info.member.MemberInfoBuilder;
 
+@SuppressWarnings("serial")
 public class MemberVoBuilder extends MemberInfoBuilder {
 	private static final MemberVo INVALID_MEMBER_VO;
 	static {
@@ -19,7 +20,7 @@ public class MemberVoBuilder extends MemberInfoBuilder {
 
 	public MemberVoBuilder(String type) {
 		super(type);
-		contact=new ContactVo();
+		contact = new ContactVo();
 	}
 
 	public MemberVoBuilder(MemberInfo info) {
