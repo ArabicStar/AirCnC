@@ -50,9 +50,9 @@ public class MyOrderModel {
      * @param operation
      */
     public MyOrderModel(OrderVo order) {
-    	this.username = new SimpleStringProperty(order.getUserName());
+    	this.username = new SimpleStringProperty(order.getMember().getName());
     	this.orderID = new SimpleStringProperty(order.getOrderId());
-        this.hotelName = new SimpleStringProperty(order.getHotelName());
+        this.hotelName = new SimpleStringProperty(order.getHotel().getName());
         
         //process the checkinTime
         this.checkinTime = new SimpleStringProperty(transformTime(order.getEntryTime()));

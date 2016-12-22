@@ -81,7 +81,7 @@ public class CreditChangeManagerImpl implements CreditChangeManager{
 
 	@Override
 	public String getCauseHotelName() {
-		return cause == null ? null:cause.getHotelName();
+		return cause == null ? null:cause.getHotel().getName();
 	}
 
 	@Override

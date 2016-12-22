@@ -22,7 +22,7 @@ public class ManageCommentModel {
 	public ManageCommentModel(CommentVo vo){
 		this.memberName = new SimpleStringProperty(vo.getMemberName());
 		this.level = new SimpleStringProperty("Lv"+Integer.toString(vo.getMemberLevel()));
-		this.checkInTime = new SimpleStringProperty("于"+vo.getCheckInTime().toString()+"入住");
+		this.checkInTime = new SimpleStringProperty("于"+vo.getOrder().getEntryTime().toString()+"入住");
 		this.commentTime = new SimpleStringProperty(transformTime(vo.getCommentTime()));
 		this.grade = new SimpleStringProperty(Integer.toString(vo.getGrade()));
 		this.content = new SimpleStringProperty("    "+vo.getContent());

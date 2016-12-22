@@ -5,6 +5,8 @@
 /aircnc-server/bin/
 /aircnc-user-client/bin/
 /aircnc-hotel-client/bin/
+/aircnc-manage-client/target/
+/aircnc-manage-client/bin/
 .classpath
 .project
 .settings
