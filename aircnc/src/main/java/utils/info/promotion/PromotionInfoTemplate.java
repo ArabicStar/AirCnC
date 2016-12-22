@@ -33,6 +33,7 @@ public abstract class PromotionInfoTemplate implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((scope == null) ? 0 : scope.hashCode());
 		return result;
 	}
 
@@ -46,6 +47,8 @@ public abstract class PromotionInfoTemplate implements Serializable {
 			return false;
 		PromotionInfoTemplate other = (PromotionInfoTemplate) obj;
 		if (id != other.id)
+			return false;
+		if (scope != other.scope)
 			return false;
 		return true;
 	}
