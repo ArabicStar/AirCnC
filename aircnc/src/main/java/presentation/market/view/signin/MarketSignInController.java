@@ -45,7 +45,7 @@ public class MarketSignInController implements Initializable {
 	 */
 	@FXML
 	public void handleConfirm() {
-		// 按下登陆键，验证正确性，正确则跳只hotelMainPane，错误跳出对话框
+		// 按下登陆键，验证正确性，正确则跳出marketMainPane，错误跳出对话框
 		controller.initializeClient();
 	}
 

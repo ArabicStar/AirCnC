@@ -17,6 +17,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
@@ -26,6 +27,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.StageStyle;
+import javafx.util.Callback;
 import presentation.market.accessor.MakeOrderAccessor;
 import presentation.market.accessor.impl.MakeOrderAccessorImpl;
 import presentation.market.model.MyOrderModel;
@@ -35,6 +37,8 @@ import service.impl.order.OrderLogicServiceImpl;
 import service.order.OrderDetailService;
 import service.order.OrderListingService;
 import service.order.OrderLogicService;
+import utils.date.HotelDate;
+import utils.info.order.OrderStatus;
 import vo.hotel.HotelVo;
 import vo.order.OrderVo;
 import vo.order.OrderVoBuilder;
@@ -55,9 +59,45 @@ public class TextAreaDialog extends GridPane {
 		
 		final DatePicker enterDatePickeratePicker = new DatePicker(LocalDate.now().plusDays(1));
 		enterDatePickeratePicker.setShowWeekNumbers(true);
+		final Callback<DatePicker, DateCell> enterDayCellFactory = new Callback<DatePicker, DateCell>() {
+
+			@Override
+			public DateCell call(final DatePicker datePicker) {
+				return new DateCell() {
+					@Override
+					public void updateItem(LocalDate item, boolean empty) {
+						super.updateItem(item, empty);
+						
+						if(item.isBefore(LocalDate.now().plusDays(1))){
+							setDisable(true);
+							setStyle("-fx-background-color: #ffc0cb");
+						}
+					}
+				};
+			}
+		};
+		enterDatePickeratePicker.setDayCellFactory(enterDayCellFactory);
+		
 		final DatePicker leaveDatePickeratePicker = new DatePicker(LocalDate.now().plusDays(2));
 		leaveDatePickeratePicker.setShowWeekNumbers(true);
+		final Callback<DatePicker, DateCell> leaveDayCellFactory = new Callback<DatePicker, DateCell>() {
 
+			@Override
+			public DateCell call(final DatePicker datePicker) {
+				return new DateCell() {
+					@Override
+					public void updateItem(LocalDate item, boolean empty) {
+						super.updateItem(item, empty);
+//						datePicker.setValue(enterDatePickeratePicker.getValue().plusDays(1));
+						if(item.isBefore(enterDatePickeratePicker.getValue().plusDays(1))){
+							setDisable(true);
+							setStyle("-fx-background-color: #ffc0cb");
+						}
+					}
+				};
+			}
+		};
+		leaveDatePickeratePicker.setDayCellFactory(leaveDayCellFactory);
 		GridPane gridPane = new GridPane();
 		gridPane.setHgap(10);
 		gridPane.setVgap(10);
@@ -116,6 +156,31 @@ public class TextAreaDialog extends GridPane {
 		timePicker.setDateTimeValue(tempLastestDateTime);
 		gridPane.add(latestExecuteTimeLabel, 1, 5);
 		gridPane.add(timePicker, 2, 5);
+		final Callback<DatePicker, DateCell> lastestEcecuteCellFactory = new Callback<DatePicker, DateCell>() {
+
+			@Override
+			public DateCell call(final DatePicker datePicker) {
+				return new DateCell() {
+					@Override
+					public void updateItem(LocalDate item, boolean empty) {
+						super.updateItem(item, empty);
+						
+//						datePicker.setValue(enterDatePickeratePicker.getValue());
+						LocalDateTime dateTimeValue;
+						LocalTime tempTime = LocalTime.now();
+						int minutes = tempTime.getMinute();
+						tempTime = tempTime.minusMinutes(minutes);
+						dateTimeValue = LocalDateTime.of(enterDatePickeratePicker.getValue(), tempTime);
+						timePicker.setDateTimeValue(dateTimeValue);
+						if(!item.equals(enterDatePickeratePicker.getValue())) {
+							setDisable(true);
+							setStyle("-fx-background-color: #ffc0cb");
+						}
+					}
+				};
+			}
+		};
+		timePicker.setDayCellFactory(lastestEcecuteCellFactory);
 		
 		String peopleNumber = "入住人数";
 		Label peopleNumberLabel = new Label(peopleNumber);
@@ -226,9 +291,10 @@ public class TextAreaDialog extends GridPane {
 			public void handle(MouseEvent event) {
 				Alert alert = new Alert(AlertType.CONFIRMATION);
 				// TODO:显示订单的信息
-				// 房间数量、最晚订单、入住人数、有无儿童
+				// 拿到折扣信息，并进行优惠
 				String temp = rb1.getToggleGroup().getSelectedToggle().toString();
 				String result = temp.substring(temp.length() - 2, temp.length() - 1);
+				boolean hasChildren = result.equals("有") ? true : false;
 				String detail = enterDateLabel.getText() + " " + enterDatePickeratePicker.getValue().toString() + "\r\n"
 						+ leaveDateLabel.getText() + " " + leaveDatePickeratePicker.getValue().toString() + "\r\n"
 						+ roomTypeLabel.getText() + " " + roomTypeBox.getValue().toString() + "\r\n"
@@ -245,10 +311,22 @@ public class TextAreaDialog extends GridPane {
 						OrderListingService listing = new OrderListingServiceImpl(hotelVo.getId());
 						OrderLogicService logic = new OrderLogicServiceImpl(hotelVo.getId());
 //						if(!OrderInfoCourier.isLaunch()) {
-							OrderInfoInteractor interactor = OrderInfoCourier.launch(detail, listing, logic);
+						OrderInfoInteractor interactor = OrderInfoCourier.launch(detail, listing, logic);
 //						}
-							// TODO 把该添加的订单信息加上去
-							OrderVo orderVo = new OrderVoBuilder().setHotelName(hotelVo.getName()).getOrderInfo();
+						LocalTime time = LocalTime.MIDNIGHT;
+						LocalDateTime entry = LocalDateTime.of(enterDatePickeratePicker.getValue(), time);
+						LocalDateTime leave = LocalDateTime.of(leaveDatePickeratePicker.getValue(), time);
+						int stayDays = HotelDate.getGapDays(entry, leave);
+						// TODO 把宾馆信息和人员信息等信息加到订单上
+						// FIXME 不应该在这里用interactor将订单加到数据库中
+						OrderVo orderVo = new OrderVoBuilder().setEntryTime(entry)
+								.setHasChildren(hasChildren)
+								.setLastTime(timePicker.getDateTimeValue())
+								.setStayDays(stayDays).setStatus(OrderStatus.UNEXECUTED)
+								.setHotelName(hotelVo.getName())
+								.setRoomNumber(Integer.valueOf(roomNumberField.getText()))
+								.setRoomType(roomTypeBox.getValue())
+								.getOrderInfo();
 						interactor.addOrder(orderVo);
 						System.out.println("成功");
 					}
