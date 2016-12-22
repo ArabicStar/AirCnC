@@ -10,7 +10,9 @@ import javafx.scene.layout.HBox;
 import presentation.hotel.model.HotelPromotionModel;
 import presentation.hotel.utils.dialog.PlainDialog;
 import presentation.hotel.view.hotelPromotion.fxml.HotelPromotionMainController;
+import vo.promotion.HotelPromotionVo;
 import vo.promotion.PromotionVo;
+import vo.promotion.PromotionVoBuilder;
 
 public class PromotionButtonCell extends TableCell<HotelPromotionModel, PromotionVo>{
 
@@ -32,6 +34,7 @@ public class PromotionButtonCell extends TableCell<HotelPromotionModel, Promotio
     
     public void createAllButtons(){   	
     	buttons = new HBox();
+    	buttons.setAlignment(Pos.CENTER_RIGHT);
     	
     	if(practical){
     		cellButton = new Button[]{ createButtons(ButtonName.RECALL) };  
@@ -86,6 +89,7 @@ public class PromotionButtonCell extends TableCell<HotelPromotionModel, Promotio
              		 break;
              	 case DELETE: 
              		 if(vo != null&&!vo.getPractical()){
+             			 controller.deletePromotion((HotelPromotionVo) vo);
              			 PlainDialog alert = new PlainDialog(AlertType.INFORMATION,
      					"删除成功","已删除促销策略");
              		 	alert.showDialog();
@@ -93,7 +97,7 @@ public class PromotionButtonCell extends TableCell<HotelPromotionModel, Promotio
               		 break;
              	 case RECALL: 
              		 if(vo != null&&vo.getPractical()){
-             			controller.setPractical(vo.getId(), false);
+             			controller.addAndUpdate((HotelPromotionVo) new PromotionVoBuilder(vo).setPractical(false).getPromotionInfo());
              			PlainDialog alert = new PlainDialog(AlertType.INFORMATION,
             					"撤回成功","已撤回促销策略");
             			alert.showDialog();
@@ -102,7 +106,7 @@ public class PromotionButtonCell extends TableCell<HotelPromotionModel, Promotio
                		 break;
              	 case SEND: 
              		 if(vo != null&&!vo.getPractical()){
-             			controller.setPractical(vo.getId(), true);
+             			controller.addAndUpdate((HotelPromotionVo) new PromotionVoBuilder(vo).setPractical(true).getPromotionInfo());
              			PlainDialog alert = new PlainDialog(AlertType.INFORMATION,
             					"发布成功","已发布促销策略");
             			alert.showDialog();

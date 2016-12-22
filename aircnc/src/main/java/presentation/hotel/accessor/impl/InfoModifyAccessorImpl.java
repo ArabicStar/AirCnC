@@ -3,6 +3,8 @@ package presentation.hotel.accessor.impl;
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
+import java.util.Set;
+
 import presentation.hotel.accessor.InfoModifyAccessor;
 import utils.info.hotel.Room;
 import utils.info.hotel.RoomBuilder;
@@ -12,6 +14,8 @@ import vo.hotel.HotelVoBuilder;
 public class InfoModifyAccessorImpl implements InfoModifyAccessor {
 
 	private static InfoModifyAccessor instance;
+	
+	private HotelVo hotel;
 
 	private String introduction;
 	
@@ -72,8 +76,13 @@ public class InfoModifyAccessorImpl implements InfoModifyAccessor {
 
 	@Override
 	public HotelVo getModifyHotelInfo() {
-		HotelVoBuilder builder = new HotelVoBuilder().setIntro(introduction).setEquipment(equipment).
+		HotelVoBuilder builder = new HotelVoBuilder(hotel).setIntro(introduction).setEquipment(equipment).
 				setLocation(location).setScope(scope);
+		Set<Room> rooms = hotel.getRooms();
+		rooms.add(room);
+		if(room!=null){
+			builder.setRooms(rooms);
+		}
 		
 		return builder.getHotelInfo();
 	}
@@ -100,6 +109,12 @@ public class InfoModifyAccessorImpl implements InfoModifyAccessor {
 		RoomBuilder builder = new RoomBuilder(name).setPeopleNum(peopleNum).
 				setPrice(price).setRoomNum(roomNum);
 		room = builder.getRoomInfo();
+		
+	}
+
+	@Override
+	public void setHotel(HotelVo vo) {
+		this.hotel = vo;
 		
 	}
 

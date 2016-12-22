@@ -1,12 +1,13 @@
 package presentation.hotel.accessor;
 
+import vo.promotion.HotelPromotionVo;
 import vo.promotion.PromotionVo;
 
 public interface HotelPromotionAccessor {
 	public void setPractical(long promotionId,boolean practical);
 	
 	
-	public void setPromotion(PromotionVo vo);
+	public void setPromotion(HotelPromotionVo vo);
 	
 	public void setDeletePromotion(long promotionId);
 	
@@ -14,6 +15,6 @@ public interface HotelPromotionAccessor {
 	
 	public boolean getPractical();
 	
-	public PromotionVo getPromotion();
+	public HotelPromotionVo getPromotion();
 
 }

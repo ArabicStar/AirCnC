@@ -14,6 +14,8 @@ public interface InfoModifyAccessor {
 	
 	public void setEquip(String equip);
 	
+	public void setHotel(HotelVo vo);
+	
 	public HotelVo getModifyHotelInfo();
 	
 	public void setPassword(String password);

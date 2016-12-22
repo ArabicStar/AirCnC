@@ -2,6 +2,8 @@ package utils.info.hotel;
 
 import static utils.exception.StaticExceptionFactory.*;
 
+import po.hotel.HotelPo;
+
 /**
  * Abstract of builder for RoomInfo, assisting to assure immutable object. <br>
  * <br>
@@ -63,7 +65,7 @@ public class RoomBuilder extends RoomTemplate {
 	public RoomBuilder(Room info) {
 		this(info.getType());
 		this.setName(info.getName()).setPeopleNum(info.getPeopleNum()).setRoomNum(info.getRoomNum())
-				.setPrice(info.getPrice());
+				.setPrice(info.getPrice()).setId(info.getId()).setHotel(info.getHotel());
 	}
 
 	/**
@@ -99,6 +101,19 @@ public class RoomBuilder extends RoomTemplate {
 
 		return this;
 	}
+	
+	public RoomBuilder setHotel(HotelPo hotel) {
+		if (hotel!=null)
+			this.hotel = hotel;
+
+		return this;
+	}
+	
+	public RoomBuilder setId(int id) {
+		this.id = id;
+
+		return this;
+	}
 
 	public RoomBuilder setPrice(double price) {
 		this.price = price;
@@ -113,7 +128,8 @@ public class RoomBuilder extends RoomTemplate {
 		if (!isReady())
 			throw illegalStateException("Room builder not set up");
 
-		return new Room(type).setName(name).setPeopleNum(numOfPeople).setRoomNum(numOfRoom).setPrice(price);
+		return new Room(type).setName(name).setPeopleNum(numOfPeople).setRoomNum(numOfRoom).
+				setPrice(price).setId(id);
 	}
 
 }

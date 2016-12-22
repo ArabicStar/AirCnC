@@ -5,6 +5,7 @@ import static aircnc.test.service.hotel.DataPrepareHelper.prepareTestStatistic;
 import static aircnc.test.service.hotel.DataPrepareHelper.testName;
 import static org.junit.Assert.assertEquals;
 
+import org.apache.commons.lang.StringUtils;
 import org.junit.After;
 import org.junit.Test;
 
@@ -26,7 +27,6 @@ public class HotelAccountServiceTest {
 		HotelVoBuilder b = new HotelVoBuilder().setName("bbHotel").setStar(4);
 		HotelInfo v = acc.register(b, "12345678".hashCode());
 		String registeredName = v.getName();
-		System.out.println(registeredName);
 		
 		assertEquals(true, acc.existsHotel(registeredName));
 	}
@@ -40,8 +40,8 @@ public class HotelAccountServiceTest {
 		} catch (Exception e) {
 			
 		}
-		assertEquals(testName(), v2.getName());
-		assertEquals(testName(), acc.getCurrentAccount().getName());
+		assertEquals(testName(), StringUtils.deleteWhitespace(v2.getName()));
+		assertEquals(testName(), StringUtils.deleteWhitespace(acc.getCurrentAccount().getName()));
 		assertEquals(true, acc.isLogined());
 	}
 
@@ -56,6 +56,7 @@ public class HotelAccountServiceTest {
 		boolean res1 = false, res2 = false;
 		try {
 			res1 = acc.existsHotel(testName());
+//			res1 = acc.existsHotel("bbHotel");
 			res2 = acc.existsHotel("oldHotel");
 		} catch (Exception e) {
 		}

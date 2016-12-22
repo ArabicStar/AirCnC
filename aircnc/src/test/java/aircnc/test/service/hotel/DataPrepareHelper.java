@@ -33,9 +33,10 @@ public class DataPrepareHelper {
 	private static final String testEquip = "wifi;停车场;24小时热水;";
 	private static final int testPass = "12345678".hashCode();
 	// private static final String[] testType = new String[] { "单人间", "双人间" };
-	private static final Type[] testType = new Type[] { Type.单人间, Type.双人间 };
+	private static final Type[] testType = new Type[] { Type.单人间, Type.双人间,Type.其它 };
 //	private static final int[] testPnum = new int[] { 10, 2 };
-	private static final int[] testRnum = new int[] { 100, 20 };
+	private static final int[] testRnum = new int[] { 100, 20,80 };
+	private static HotelPo loginData = null;
 	public static HotelPo testData = null;
 	
 	static{
@@ -67,14 +68,20 @@ public class DataPrepareHelper {
 	
 	public static final void prepareTestStatistic() {
 		hotelDao.addHotel(testData);
-		testData = hotelDao.findHotelByName(testName);
+		loginData = hotelDao.findHotelByName(testName);
 	}
 
 	public static final void dumpTestStatistic() {
-		hotelDao.deleteHotel(testData.getId());
+		hotelDao.deleteHotel(loginData.getId());
 	}
 	
 	public static final String testName() {
 		return testName;
+	}
+	
+	public static final Room testRoom(){
+		RoomBuilder r = new RoomBuilder(testType[2]).setPrice(100).setRoomNum(testRnum[2]).setPeopleNum(5).setName("5人房");
+		return r.getRoomInfo();
+		
 	}
 }

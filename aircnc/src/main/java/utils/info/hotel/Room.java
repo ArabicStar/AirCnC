@@ -5,8 +5,6 @@ import po.hotel.HotelPo;
 public class Room extends RoomTemplate {
 	protected boolean isValid;
 
-	private int id;
-
 	private static final String BLANK = "";
 
 	public Room(Type type) {
@@ -80,23 +78,6 @@ public class Room extends RoomTemplate {
 		return this;
 	}
 
-	
-
-	// public HotelPo getHotel(){
-	// if(isValid())
-	// return hotel;
-	// return null;
-	// }
-
-	
-
-	
-
-	// public HotelPo getHotel(){
-	// if(isValid())
-	// return hotel;
-	// return null;
-	// }
 
 	public double getPrice() {
 		if (isValid())

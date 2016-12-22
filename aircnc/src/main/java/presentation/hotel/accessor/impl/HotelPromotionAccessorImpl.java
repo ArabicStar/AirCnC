@@ -4,12 +4,13 @@ import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
 import presentation.hotel.accessor.HotelPromotionAccessor;
+import vo.promotion.HotelPromotionVo;
 import vo.promotion.PromotionVo;
 
 
 public class HotelPromotionAccessorImpl implements HotelPromotionAccessor{
 	private static HotelPromotionAccessorImpl instance;
-	private PromotionVo promotion;
+	private HotelPromotionVo promotion;
 	private long promotionId;
 	private boolean practical;
 	
@@ -42,7 +43,7 @@ public class HotelPromotionAccessorImpl implements HotelPromotionAccessor{
 	}
 
 	@Override
-	public void setPromotion(PromotionVo vo) {
+	public void setPromotion(HotelPromotionVo vo) {
 		//if vo has id, update; else add;
 		this.promotion = vo;
 		
@@ -59,7 +60,7 @@ public class HotelPromotionAccessorImpl implements HotelPromotionAccessor{
 	}
 
 	@Override
-	public PromotionVo getPromotion() {
+	public HotelPromotionVo getPromotion() {
 		return promotion;
 	}
 

@@ -100,7 +100,7 @@ public class PromotionVoBuilder extends PromotionInfoBuilder {
 
 	@Override
 	public PromotionVo getPromotionInfo() {
-		if (!isReady() || prom == null)
+		if (!isReady() && prom == null)
 			throw illegalStateException("Not set up");
 
 		if (prom == null) {

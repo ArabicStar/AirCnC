@@ -3,6 +3,8 @@ package data.dao.impl.hotel;
 import static data.hibernate.Hibernator.execute;
 
 import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 
@@ -11,6 +13,7 @@ import data.dao.query.HotelQueryDao;
 import po.hotel.HotelPo;
 import po.hotel.HotelPoBuilder;
 import po.member.MemberPo;
+import utils.info.hotel.Room;
 
 public enum HotelDaoImpl implements HotelDao, HotelQueryDao {
 	INSTANCE;
@@ -28,7 +31,7 @@ public enum HotelDaoImpl implements HotelDao, HotelQueryDao {
 			HotelPo delHotel = (HotelPo) session.get(HotelPo.class, id);
 			if (flag = Boolean.valueOf((delHotel != null)))// check existence
 			{
-				// delete member po firstly
+				
 				session.delete(delHotel);
 			}
 			return flag;
@@ -58,9 +61,7 @@ public enum HotelDaoImpl implements HotelDao, HotelQueryDao {
 
 		return execute(session -> {
 			Boolean flag = Boolean.FALSE;
-
-			HotelPo test = session.get(HotelPo.class, po.getId());
-			if (flag = Boolean.valueOf(test == null))
+			if (flag = Boolean.valueOf(session.createCriteria(HotelPo.class).add(Restrictions.eq("name", po.getName())).list().isEmpty()))
 				// save HotelPo
 				session.save(po);
 
@@ -70,20 +71,21 @@ public enum HotelDaoImpl implements HotelDao, HotelQueryDao {
 
 	@Override
 	public boolean existName(String name) {
-
+		String tmp = name.replaceAll("(.{1})", "$1 ");
 		return execute(session -> {
-			return !session.createCriteria(HotelPo.class).add(Restrictions.eq("name", name)).list().isEmpty();
+			return !session.createCriteria(HotelPo.class).add(Restrictions.eq("name", tmp)).list().isEmpty();
 		});
 	}
 
 	@Override
 	public HotelPo findHotelByName(String name) {
 
+		String tmp = name.replaceAll("(.{1})", "$1 ");
 		return execute(session -> {
-			System.err.println(name);
+
 			@SuppressWarnings("unchecked")
 			List<HotelPo> hotels = (List<HotelPo>) session.createCriteria(HotelPo.class)
-					.add(Restrictions.eq("name", name)).list();
+					.add(Restrictions.eq("name", tmp)).list();
 			return hotels.size() == 0 ? null : hotels.get(0);
 		});
 	}

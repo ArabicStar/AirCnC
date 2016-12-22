@@ -17,8 +17,8 @@
 		<mapping resource="po/hotel/HotelPo.hbm.xml" />
 		<mapping resource="po/hotel/Room.hbm.xml" />
 		<mapping resource="po/market/MarketPo.hbm.xml" />
-		<mapping resource="po/order/OrderPo.hbm.xml" />
-		<mapping resource="po/order/comment/CommentPo.hbm.xml" />
+		<!-- <mapping resource="po/order/OrderPo.hbm.xml" /> 
+		<mapping resource="po/order/comment/CommentPo.hbm.xml" />-->
 		<mapping resource="po/promotion/HotelPromotionPo.hbm.xml" />
 		<mapping resource="po/promotion/WebsitePromotionPo.hbm.xml" />
 	</session-factory>

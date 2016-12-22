@@ -29,6 +29,10 @@ public abstract class RoomTemplate {
 			}
 		}
 	}
+	/**
+	 * id int <br>
+	 */
+	protected int id;
 
 	/**
 	 * name string <br>

@@ -14,10 +14,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
 import presentation.hotel.utils.dialog.PlainDialog;
+import utils.info.promotion.PromotionInfoTemplate.Scope;
 import utils.promotion.applier.ApplierParams;
 import utils.promotion.applier.How;
 import utils.promotion.trigger.TriggerParams;
 import utils.promotion.trigger.hotel.HotelWhen;
+import vo.promotion.HotelPromotionVo;
 import vo.promotion.PromotionVo;
 import vo.promotion.PromotionVoBuilder;
 
@@ -172,14 +174,18 @@ public class PromotionDetailController implements Initializable{
          	alert.showDialog();
          	return;
 		}
-		switch (operate.getText()){
-		case "保存":
-			
-			break;
-		default://添加
-			
-			break;
-		}
+//		switch (operate.getText()){
+//		case "保存":
+//			
+//			break;
+//		default://添加
+//			
+//			break;
+//		}
+		updateVo();
+		PlainDialog alert = new PlainDialog(AlertType.INFORMATION,"保存成功","已保存填写的促销策略信息");
+     	alert.showDialog();
+     	controller.removeDetailPane();
 	}
 	
 	@FXML
@@ -264,7 +270,13 @@ public class PromotionDetailController implements Initializable{
 	}
 	
 	private void updateVo(){
-		PromotionVoBuilder builder = new PromotionVoBuilder(vo).setPractical(false);
+		PromotionVoBuilder builder;
+		if(vo==null){
+			builder = new PromotionVoBuilder(Scope.Hotel);
+		}else{
+			builder = new PromotionVoBuilder(vo).setPractical(false);
+		}
+		
 		switch (when.getValue()){
   		case "时效性优惠":
   			builder.when(HotelWhen.DURING_PERIOD)
@@ -294,7 +306,7 @@ public class PromotionDetailController implements Initializable{
   			.setParam(ApplierParams.PERCENT, Double.parseDouble(howPara.getText()));
   			break;
 		}
-		controller.addOrUpdate(builder.getPromotionInfo());
+		controller.addAndUpdate((HotelPromotionVo) builder.getPromotionInfo());
 	}
 	
 }

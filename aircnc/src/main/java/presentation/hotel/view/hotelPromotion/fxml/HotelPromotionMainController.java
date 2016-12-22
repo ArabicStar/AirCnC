@@ -27,6 +27,7 @@ import presentation.hotel.view.hotelPromotion.PromotionDetailPane;
 import presentation.member.accessor.impl.MemberCommentAccessorImpl;
 import presentation.member.view.myorder.MemberCommentPane;
 import vo.order.OrderVo;
+import vo.promotion.HotelPromotionVo;
 import vo.promotion.PromotionVo;
 
 public class HotelPromotionMainController implements Initializable{
@@ -113,16 +114,12 @@ public class HotelPromotionMainController implements Initializable{
 		addDetailPane(null);
 	}
 	
-	public void addOrUpdate(PromotionVo vo){
+	public void addAndUpdate(HotelPromotionVo vo){
 		accessor.setPromotion(vo);
 	}
 	
-	public void setPractical(long promotionId,boolean practical){
-		accessor.setPractical(promotionId, practical);
-	}
-	
-	public void setDeletePromotion(long promotionId){
-		accessor.setDeletePromotion(promotionId);
+	public void deletePromotion(HotelPromotionVo vo){
+		accessor.setPromotion(vo);
 	}
 	
 	public void setRootLayout(Pane pane){

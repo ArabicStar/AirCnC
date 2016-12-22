@@ -105,6 +105,7 @@ public class HotelPromotionManagerImpl implements HotelPromotionManager{
 //		builder.when(HotelWhen.BIRTHDAY);
 //		builder.how(How.CONST).setParam(ApplierParams.AMOUNT, 10.0);
 		promotions.add(builder.getPromotionInfo());
+		System.out.println(promotions.size());
 	}
 
 	

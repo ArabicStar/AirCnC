@@ -44,7 +44,7 @@
 			name="introduction" type="string" />
 
 		<!-- association table -->
-		<set name="rooms" cascade="all" lazy="false">
+		<set batch-size="5" name="rooms" cascade="all" lazy="false" inverse="true" sort="unsorted">
 			<key column="HOTELID" />
 			<one-to-many class="utils.info.hotel.Room" />
 		</set>

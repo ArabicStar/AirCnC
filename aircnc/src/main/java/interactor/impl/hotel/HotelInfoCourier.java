@@ -1,6 +1,7 @@
 package interactor.impl.hotel;
 
 import static interactor.utils.AlertHelper.alertFail;
+import static interactor.utils.AlertHelper.alertSuccess;
 import static interactor.utils.Dipatcher.execute;
 import static interactor.utils.TitleGetter.getTitle;
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
@@ -12,21 +13,19 @@ import java.util.stream.Collectors;
 
 import interactor.hotel.HotelInfoInteractor;
 import interactor.utils.Title;
+import presentation.hotel.accessor.impl.InfoModifyAccessorImpl;
 import presentation.hotel.accessor.impl.SearchOrderAccessorImpl;
+import presentation.hotel.manager.impl.HotelCommentManagerImpl;
 import presentation.hotel.manager.impl.HotelOrderManagerImpl;
+import presentation.hotel.manager.impl.HotelRoomManagerImpl;
 import presentation.hotel.manager.impl.InfoManagerImpl;
-import presentation.member.accessor.impl.SearchOrderInfoAccessorImpl;
-import presentation.member.manager.impl.HotelPromotionManagerImpl;
-import presentation.member.manager.impl.MemberInfoManagerImpl;
-import presentation.member.manager.impl.MyOrderManagerImpl;
 import service.hotel.HotelAccountService;
 import service.hotel.HotelInfoService;
 import utils.info.hotel.HotelInfo;
-import utils.info.member.MemberInfo;
+import utils.info.hotel.Room;
 import vo.hotel.HotelVoBuilder;
 import vo.order.OrderVo;
-import vo.promotion.HotelPromotionVo;
-import vo.promotion.PromotionVo;
+import vo.order.comment.CommentVo;
 
 public class HotelInfoCourier implements HotelInfoInteractor {
 	private static HotelInfoInteractor instance;
@@ -75,22 +74,6 @@ public class HotelInfoCourier implements HotelInfoInteractor {
 	}
 
 	@Override
-	@Title("Get Hotel Info")
-	public void getHotelAllPromotions() {
-		String title = getTitle();
-		Set<PromotionVo> promotions = execute(title, () -> {
-			int id = getCurrentId();
-			if (id != Integer.MIN_VALUE)
-				return handler.getHotelAllPromotions(id);
-
-			alertFail(title, "Not logged in yet");
-			return null;
-		});
-		
-		HotelPromotionManagerImpl.getInstance().setPromotion(promotions);		
-	}
-
-	@Override
 	@Title("Get Orders by Status")
 	public void getHotelOrdersByStatus() {
 		String title = getTitle();
@@ -113,41 +96,78 @@ public class HotelInfoCourier implements HotelInfoInteractor {
 	}
 
 	@Override
+	@Title("Get Hotel Comments")
 	public void getHotelComments() {
-		// TODO Auto-generated method stub
+		String title = getTitle();
+
+		List<CommentVo> list = execute(title, () -> {
+			int id = getCurrentId();
+			if (id != Integer.MIN_VALUE)
+				return handler.getHotelComment(id);
+
+			alertFail(title, "Not logged in yet");
+			return null;
+		});
+
+		HotelCommentManagerImpl.getInstance().setComment(list);
 		
 	}
 
 	@Override
+	@Title("Get Hotel Rooms")
 	public void getHotelRooms() {
-		// TODO Auto-generated method stub
+		String title = getTitle();
+
+		Set<Room> set = execute(title, () -> {
+			String name = getCurrentName();
+			if (name!=null)
+				return handler.getHotelInfo(name).getRooms();
+
+			alertFail(title, "Not logged in yet");
+			return null;
+		});
+
+		HotelRoomManagerImpl.getInstance().setRooms(set);
 		
 	}
 
 	@Override
+	@Title("Update Hotel Passwords")
 	public void updatePassword() {
-		// TODO Auto-generated method stub
+//		String title = getTitle();
+//
+//		execute(title, () -> {
+//			int id = getCurrentId();
+//			if (id != Integer.MIN_VALUE)
+//
+//				if (!handler.updatePassword(InfoModifyAccessorImpl.getInstance().getOldPasswordHash(),
+//						InfoModifyAccessorImpl.getInstance().getNewPasswordHash()))
+//					alertFail(title, "Wrong password");
+//				else
+//					alertSuccess(title, "Update password succeed");
+//			return null;
+//		});
 		
 	}
 
 	@Override
-	public void updateBasicInfo() {
-		// TODO Auto-generated method stub
+	@Title("Get Hotel Basic Info")
+	public void updateHotel() {
+		String title = getTitle();
+		
+		execute(title, () -> {
+			int id = getCurrentId();
+			if (id != Integer.MIN_VALUE)
+
+				if (!handler.updateInfo(InfoModifyAccessorImpl.getInstance().getModifyHotelInfo()))
+					alertFail(title, "修改失败");
+				else
+					alertSuccess(title, "修改成功");
+			return null;
+		});
 		
 	}
 
-	@Override
-	public void updateRooms() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void getHotelActivePromotions() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	@Title("Get Orders")
