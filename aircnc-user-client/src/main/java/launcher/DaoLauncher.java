@@ -21,6 +21,8 @@ public class DaoLauncher {
 
 			// launch promotin dao proxy
 			launchPromotionDao(helper);
+
+			loadHotelDao(helper);
 			Log.i("Dao launch succeed");
 		} catch (Exception e) {
 			Log.e("Dao launch failed", e);
@@ -50,8 +52,14 @@ public class DaoLauncher {
 
 		proxy.loadRemoteCreditQueryDao(helper.getRemoteCreditQueryDao());
 		proxy.loadRemotePromotionQueryDao(helper.getRemotePromotionQueryDao());
+		proxy.loadRemoteOrderQueryDao(helper.getRemoteOrderQueryDao());
 
 		Log.d("query dao launched");
+	}
+
+	private static void loadHotelDao(RemoteHelper helper) {
+		// TODO 自动生成的方法存根
+
 	}
 
 	private DaoLauncher() {

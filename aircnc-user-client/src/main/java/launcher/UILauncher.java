@@ -24,20 +24,19 @@ import utils.logger.Log;
 public class UILauncher {
 	public static final void launch() {
 		try {
-			launchMemberUI();
+			launchAccessor();
+			launchManager();
+
+			Application.launch(CenterController.class);
 
 			Log.i("UI launch succeed");
 		} catch (Exception e) {
 			Log.f("FATAL ERROR - UI launch failed, System exits", e);
 			System.exit(1);
 		}
-		Application.launch(CenterController.class);
 	}
 
-	private UILauncher() {
-	}
-
-	private static final void launchMemberUI() {
+	private static final void launchAccessor() {
 		InfoModifyAccessorImpl.launch();
 		MemberAppealAccessorImpl.launch();
 		MemberCommentAccessorImpl.launch();
@@ -48,7 +47,10 @@ public class UILauncher {
 		SupremeSearchAccessorImpl.launch();
 		CreditChangeOrderAccessorImpl.launch();
 		HotelNameAccessorImpl.launch();
-		
+
+	}
+
+	private static final void launchManager() {
 		CreditChangeManagerImpl.launch();
 		MemberInfoManagerImpl.launch();
 		MyOrderManagerImpl.launch();
@@ -56,6 +58,10 @@ public class UILauncher {
 		HotelCommentManagerImpl.launch();
 		HotelPromotionManagerImpl.launch();
 		HistoryOrderManagerImpl.launch();
-		
 	}
+
+	private UILauncher() {
+
+	}
+
 }

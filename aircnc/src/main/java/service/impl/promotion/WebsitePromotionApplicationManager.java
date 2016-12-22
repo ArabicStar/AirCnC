@@ -12,6 +12,7 @@ import utils.info.order.OrderInfo;
 import utils.promotion.OrderRelatedInfoHelper;
 import utils.promotion.Promotion;
 import vo.order.OrderVoBuilder;
+import vo.promotion.PromotionVo;
 
 public class WebsitePromotionApplicationManager implements WebsitePromotionApplicationService {
 	/* Singleton */
@@ -49,11 +50,11 @@ public class WebsitePromotionApplicationManager implements WebsitePromotionAppli
 	@Override
 	public OrderInfo applyPromotion(OrderInfo info) {
 		final OrderInfo tmp = info;
-		final Set<Promotion> available = infoService.getUserAvailableWebsitePromotions().stream().map(vo -> vo.getPromotion())
-				.filter(p -> p.canApplyTo(tmp, helper)).collect(Collectors.toSet());
+		final Set<PromotionVo> available = infoService.getUserAvailableWebsitePromotions().stream()
+				.filter(vo -> vo.getPromotion().canApplyTo(tmp, helper)).collect(Collectors.toSet());
 
-		for (Promotion promotion : available)
-			info = promotion.applyTo(info);
+		for (PromotionVo promotion : available)
+			info = promotion.getPromotion().applyTo(info);
 
 		return new OrderVoBuilder(info).setPromotions(available).getOrderInfo();
 	}
