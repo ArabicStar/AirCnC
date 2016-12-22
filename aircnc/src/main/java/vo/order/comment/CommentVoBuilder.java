@@ -20,6 +20,7 @@ public class CommentVoBuilder extends CommentInfoBuilder {
 		return INVALID_COMMENT_VO;
 	}
 
+
 	public CommentVoBuilder(CommentInfo info) {
 		super(info);
 	}
@@ -28,34 +29,33 @@ public class CommentVoBuilder extends CommentInfoBuilder {
 		super();
 	}
 
+	@Override
 	public CommentVoBuilder setContent(String content) {
-		if (checkCommentContent(content)) {
-			this.content = content;
-		}
+		super.setContent(content);
 		return this;
 	}
 
+	@Override
 	public CommentVoBuilder setHotelID(int id) {
-		if (checkID(id)) {
-			this.hotelId = id;
-		}
+		super.setHotelID(id);
 		return this;
 	}
 
+	@Override
 	public CommentVoBuilder setMemberID(String id) {
-		if (checkID(id)) {
-			this.memberId = id;
-		}
+		super.setMemberID(id);
 		return this;
 	}
 
+	@Override
 	public CommentVoBuilder setCheckInTime(LocalDate checkInTime) {
-		this.checkInTime = checkInTime;
+		super.setCheckInTime(checkInTime);
 		return this;
 	}
 
+	@Override
 	public CommentVoBuilder setCommentTime(LocalDateTime commentTime) {
-		this.commentTime = commentTime;
+		super.setCommentTime(commentTime);
 		return this;
 	}
 	
@@ -65,17 +65,24 @@ public class CommentVoBuilder extends CommentInfoBuilder {
 	}
 	
 	public CommentVoBuilder setMemberName(String memberName) {
+		if(memberName == null) {
+			return null;
+		}
 		this.memberName = memberName;
 		return this;
 	}
 	
 	public CommentVoBuilder setGrade(int grade) {
+		if(grade <= 0 || grade > 5) {
+			return null;
+		}
 		this.grade = grade;
 		return this;
 	}
 
+	@Override
 	public CommentVoBuilder setOrderId_c(String orderId) {
-		this.orderId_c = orderId;
+		super.setOrderId_c(orderId);
 		return this;
 	}
 	@Override

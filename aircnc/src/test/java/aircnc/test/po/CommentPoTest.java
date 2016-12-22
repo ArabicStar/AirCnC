@@ -56,7 +56,7 @@ public class CommentPoTest {
 	@Test
 	public void testAddComment() {
 		CommentPo po = new CommentPoBuilder().setCheckInTime(LocalDate.now())
-				.setCommentTime(LocalDateTime.now()).setContent("嘻嘻哈哈").setOrderId("2016121900010001")
+				.setCommentTime(LocalDateTime.now()).setContent("嘻嘻哈哈").setOrderId_c("2016121900010001")
 				.setHotelID(10000000).setMemberID("12456743").setGrade(4).
 				getCommentInfo();
 		commentDao.addComment(po);
@@ -66,12 +66,12 @@ public class CommentPoTest {
 	@Test
 	public void testUpdateComment() {
 		CommentPo po = new CommentPoBuilder().setCheckInTime(LocalDate.now())
-				.setOrderId("2016121900010001")
+				.setOrderId_c("2016121900010001")
 				.setHotelID(10000000).setMemberID("52256743").
 				getCommentInfo();
 		commentDao.addComment(po);
 		CommentPo po2 = new CommentPoBuilder().setCheckInTime(LocalDate.now())
-				.setCommentTime(LocalDateTime.now()).setContent("2454+4+48+8+956+哈哈哈哈哈").setOrderId("2016121900010001")
+				.setCommentTime(LocalDateTime.now()).setContent("2454+4+48+8+956+哈哈哈哈哈").setOrderId_c("2016121900010001")
 				.setHotelID(10000000).setMemberID("12456743").setGrade(5).setCommentTime(LocalDateTime.now())
 				.getCommentInfo();
 		commentDao.updateComment(po2);

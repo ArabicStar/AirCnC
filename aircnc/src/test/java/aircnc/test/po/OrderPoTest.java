@@ -12,7 +12,6 @@ import po.order.OrderPo;
 import po.order.OrderPoBuilder;
 import po.order.comment.CommentPo;
 import po.order.comment.CommentPoBuilder;
-import utils.date.HotelDate;
 import utils.info.order.OrderStatus;
 
 public class OrderPoTest {
@@ -26,7 +25,7 @@ public class OrderPoTest {
 		LocalDate today = LocalDate.now();
 		CommentPo commentPo = new CommentPoBuilder().setCheckInTime(today).setCommentTime(entryTime)
 				.setContent("呵呵哈哈嘻嘻").setGrade(4).setHotelID(1000).setMemberID("20121314")
-				.setOrderId("2016121010001234").getCommentInfo();
+				.setOrderId_c("2016121010001234").getCommentInfo();
 		orderPo = new OrderPoBuilder().setEntryTime(entryTime).setHasChildren(false).setHotelId(1000)
 				.setLastTime(entryTime).setOrderId("2016121010001234").setPeopleNumber(3).setOriginalPrice(200)
 				.setReviewed(false).setRoomNumber(1).setRoomType("标准间").setStayDays(2).setUserId(20808121)

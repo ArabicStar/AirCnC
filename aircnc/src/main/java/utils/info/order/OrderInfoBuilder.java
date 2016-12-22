@@ -24,6 +24,7 @@ public abstract class OrderInfoBuilder extends OrderInfoTemplate {
 		roomNumber = -1;
 		isReviewed = false;
 		appeal = BLANK;
+		comments = null;
 	}
 
 	public OrderInfoBuilder(OrderInfo info) {
@@ -33,7 +34,7 @@ public abstract class OrderInfoBuilder extends OrderInfoTemplate {
 				.setLastTime(info.getLastTime()).setPeopleNumber(info.getPeopleNumber())
 				.setOriginalPrice(info.getOriginalPrice()).setDiscountPrice(info.getDiscountPrice())
 				.setHasChildren(info.getHasChildren()).setHotelId(info.getHotelId()).setRoomNumber(info.getRoomNumber())
-				.setReviewed(info.getReviewed()).setAppeal(info.getAppeal());
+				.setReviewed(info.getReviewed()).setAppeal(info.getAppeal()).setComments(info.comments);
 	}
 
 	/**
@@ -41,7 +42,12 @@ public abstract class OrderInfoBuilder extends OrderInfoTemplate {
 	 *            要设置的 orderId
 	 */
 	public OrderInfoBuilder setOrderId(String orderId) {
-		this.orderId = orderId;
+		if(orderId == null) {
+			return null;
+		}
+		if(checkOrderId(orderId)){
+			this.orderId = orderId;
+		}
 		return this;
 	}
 
@@ -50,6 +56,9 @@ public abstract class OrderInfoBuilder extends OrderInfoTemplate {
 	 *            要设置的 roomType
 	 */
 	public OrderInfoBuilder setRoomType(String roomType) {
+		if(roomType == null) {
+			return null;
+		}
 		this.roomType = roomType;
 		return this;
 	}
@@ -59,6 +68,9 @@ public abstract class OrderInfoBuilder extends OrderInfoTemplate {
 	 *            要设置的 stayDays
 	 */
 	public OrderInfoBuilder setStayDays(int stayDays) {
+		if(stayDays <= 0) {
+			return null;
+		}
 		this.stayDays = stayDays;
 		return this;
 	}
@@ -68,6 +80,9 @@ public abstract class OrderInfoBuilder extends OrderInfoTemplate {
 	 *            要设置的 userId
 	 */
 	public OrderInfoBuilder setUserId(int userId) {
+		if(userId <= 0) {
+			return null;
+		}
 		this.userId = userId;
 		return this;
 	}
@@ -112,6 +127,9 @@ public abstract class OrderInfoBuilder extends OrderInfoTemplate {
 	 *            要设置的 peopleNumber
 	 */
 	public OrderInfoBuilder setPeopleNumber(int peopleNumber) {
+		if(peopleNumber <= 0) {
+			return null;
+		}
 		this.peopleNumber = peopleNumber;
 		return this;
 	}
@@ -121,6 +139,9 @@ public abstract class OrderInfoBuilder extends OrderInfoTemplate {
 	 *            要设置的 originalPrice
 	 */
 	public OrderInfoBuilder setOriginalPrice(double originalPrice) {
+		if(originalPrice <= 0) {
+			return null;
+		}
 		this.originalPrice = originalPrice;
 		return this;
 	}
@@ -130,6 +151,12 @@ public abstract class OrderInfoBuilder extends OrderInfoTemplate {
 	 *            要设置的 discountPrice
 	 */
 	public OrderInfoBuilder setDiscountPrice(double discountPrice) {
+		if(discountPrice <= 0) {
+			return null;
+		}
+		if(discountPrice > originalPrice) {
+			return null;
+		}
 		this.discountPrice = discountPrice;
 		return this;
 	}
@@ -148,6 +175,9 @@ public abstract class OrderInfoBuilder extends OrderInfoTemplate {
 	 *            要设置的 hotelId
 	 */
 	public OrderInfoBuilder setHotelId(int hotelId) {
+		if(hotelId <= 0) {
+			return null;
+		}
 		this.hotelId = hotelId;
 		return this;
 	}
@@ -157,6 +187,9 @@ public abstract class OrderInfoBuilder extends OrderInfoTemplate {
 	 *            要设置的 hotelName
 	 */
 	public OrderInfoBuilder setHotelName(String hotelName) {
+		if(hotelName == null) {
+			return null;
+		}
 		this.hotelName = hotelName;
 		return this;
 	}
@@ -166,6 +199,9 @@ public abstract class OrderInfoBuilder extends OrderInfoTemplate {
 	 *            要设置的 roomNumber
 	 */
 	public OrderInfoBuilder setRoomNumber(int roomNumber) {
+		if(roomNumber <= 0) {
+			return null;
+		}
 		this.roomNumber = roomNumber;
 		return this;
 	}
@@ -175,6 +211,12 @@ public abstract class OrderInfoBuilder extends OrderInfoTemplate {
 	 *            要设置的 isReviewed
 	 */
 	public OrderInfoBuilder setReviewed(boolean isReviewed) {
+		/**
+		 * The order that has been reviewed can't be cast to a unreviewed one
+		 */
+		if(this.isReviewed == true) {
+			return this;
+		}
 		this.isReviewed = isReviewed;
 		return this;
 	}
@@ -184,16 +226,31 @@ public abstract class OrderInfoBuilder extends OrderInfoTemplate {
 	 *            要设置的 userName
 	 */
 	public OrderInfoBuilder setUserName(String userName) {
+		if(userName == null) {
+			return null;
+		}
 		this.userName = userName;
 		return this;
 	}
+	
 
 	public OrderInfoBuilder setComments(CommentPo comments) {
+		if(comments == null) {
+			return null;
+		}
 		this.comments = comments;
 		return this;
 	}
 
+	/**
+	 * 申诉内容
+	 * @param appeal
+	 * @return
+	 */
 	public OrderInfoBuilder setAppeal(String appeal) {
+		if(appeal == null) {
+			return null;
+		}
 		this.appeal = appeal;
 		return this;
 	}

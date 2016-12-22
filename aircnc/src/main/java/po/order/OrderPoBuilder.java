@@ -40,32 +40,31 @@ public class OrderPoBuilder extends OrderInfoBuilder {
 
 	@Override
 	public OrderPoBuilder setOrderId(String orderId) {
-		this.orderId = orderId;
+		super.setOrderId(orderId);
 		return this;
 	}
 
 	@Override
 	public OrderPoBuilder setRoomType(String roomType) {
-		this.roomType = roomType;
+		super.setRoomType(roomType);
 		return this;
 	}
 
 	@Override
 	public OrderPoBuilder setStayDays(int stayDays) {
-		this.stayDays = stayDays;
+		super.setStayDays(stayDays);
 		return this;
 	}
 
 	@Override
 	public OrderPoBuilder setUserId(int userId) {
-		this.userId = userId;
+		super.setUserId(userId);
 		return this;
 	}
 
 	@Override
 	public OrderPoBuilder setStatus(OrderStatus status) {
-
-		this.status = status;
+		super.setStatus(status);
 		return this;
 	}
 
@@ -77,61 +76,61 @@ public class OrderPoBuilder extends OrderInfoBuilder {
 
 	@Override
 	public OrderPoBuilder setLastTime(LocalDateTime lastTime) {
-		this.lastTime = lastTime;
+		super.setLastTime(lastTime);
 		return this;
 	}
 
 	@Override
 	public OrderPoBuilder setPeopleNumber(int peopleNumber) {
-		this.peopleNumber = peopleNumber;
+		super.setPeopleNumber(peopleNumber);
 		return this;
 	}
 
 	@Override
 	public OrderPoBuilder setOriginalPrice(double originalPrice) {
-		this.originalPrice = originalPrice;
+		super.setOriginalPrice(originalPrice);
 		return this;
 	}
 
 	@Override
 	public OrderPoBuilder setHasChildren(boolean hasChildren) {
-		this.hasChildren = hasChildren;
+		super.setHasChildren(hasChildren);
 		return this;
 	}
 
 	@Override
 	public OrderPoBuilder setHotelId(int hotelId) {
-		this.hotelId = hotelId;
+		super.setHotelId(hotelId);
 		return this;
 	}
 
 	@Override
 	public OrderPoBuilder setHotelName(String hotelName) {
-		this.hotelName = hotelName;
+		super.setHotelName(hotelName);
 		return this;
 	}
 
 	@Override
 	public OrderPoBuilder setRoomNumber(int roomNumber) {
-		this.roomNumber = roomNumber;
+		super.setRoomNumber(roomNumber);
 		return this;
 	}
 
 	@Override
 	public OrderPoBuilder setReviewed(boolean isReviewed) {
-		this.isReviewed = isReviewed;
+		super.setReviewed(isReviewed);
 		return this;
 	}
 
 	@Override
 	public OrderPoBuilder setUserName(String userName) {
-		this.userName = userName;
+		super.setUserName(userName);
 		return this;
 	}
 
 	@Override
 	public OrderPoBuilder setDiscountPrice(double discountPrice) {
-		this.discountPrice = discountPrice;
+		super.setDiscountPrice(discountPrice);
 		return this;
 	}
 
@@ -173,13 +172,13 @@ public class OrderPoBuilder extends OrderInfoBuilder {
 
 	@Override
 	public OrderPoBuilder setAppeal(String appeal) {
-		this.appeal = appeal;
+		super.setAppeal(appeal);
 		return this;
 	}
 
 	@Override
 	public OrderPoBuilder setComments(CommentPo comments) {
-		this.comments = comments;
+		super.setComments(comments);
 		return this;
 	}
 

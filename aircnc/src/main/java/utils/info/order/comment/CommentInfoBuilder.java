@@ -3,6 +3,8 @@ package utils.info.order.comment;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import utils.info.order.OrderInfoTemplate;
+
 public abstract class CommentInfoBuilder extends CommentInfoTemplate{
 	
 	public CommentInfoBuilder() {
@@ -61,6 +63,9 @@ public abstract class CommentInfoBuilder extends CommentInfoTemplate{
 	}
 	
 	public CommentInfoBuilder setOrderId_c(String orderId) {
+		if(!OrderInfoTemplate.checkOrderId(orderId)) {
+			return null;
+		}
 		this.orderId_c = orderId;
 		return this;
 	}

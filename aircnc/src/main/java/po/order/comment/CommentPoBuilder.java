@@ -28,44 +28,47 @@ public class CommentPoBuilder extends CommentInfoBuilder{
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
 	public CommentPoBuilder setContent(String content){
-		if(checkCommentContent(content)){
-			this.content = content;
-		}
+		super.setContent(content);
 		return this;
 	}
 	
+	@Override
 	public CommentPoBuilder setHotelID(int id) {
-		if (checkID(id)) {
-			this.hotelId = id;
-		}
+		super.setHotelID(id);
 		return this;
 	}
 	
+	@Override
 	public CommentPoBuilder setMemberID(String id) {
-		if (checkID(id)) {
-			this.memberId = id;
-		}
+		super.setMemberID(id);
 		return this;
 	}
 	
+	@Override
 	public CommentPoBuilder setCheckInTime(LocalDate checkInTime){
-		this.checkInTime = checkInTime;
+		super.setCheckInTime(checkInTime);
 		return this;
 	}
 	
+	@Override
 	public CommentPoBuilder setCommentTime(LocalDateTime commentTime){
-		this.commentTime = commentTime;
+		super.setCommentTime(commentTime);
 		return this;
 	}
 	
 	public CommentPoBuilder setGrade(int grade){
+		if(grade <= 0 || grade > 5) {
+			return null;
+		}
 		this.grade = grade;
 		return this;
 	}
 	
-	public CommentPoBuilder setOrderId(String orderId) {
-		this.orderId_c = orderId;
+	@Override
+	public CommentPoBuilder setOrderId_c(String orderId) {
+		super.setOrderId_c(orderId);
 		return this;
 	}
 	

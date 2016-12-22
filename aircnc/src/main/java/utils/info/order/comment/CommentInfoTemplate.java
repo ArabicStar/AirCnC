@@ -20,10 +20,11 @@ public class CommentInfoTemplate {
 
 	public static final boolean checkID(String s) {
 		return s != null && s.matches(ID_PATTERN);
+//		return s != null;
 	}
 	
 	public static final boolean checkID(int i) {
-		return i != 0;
+		return i > 0;
 	}
 
 	public static final boolean checkCommentContent(String content) {

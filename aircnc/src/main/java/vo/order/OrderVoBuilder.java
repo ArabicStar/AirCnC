@@ -32,7 +32,7 @@ public class OrderVoBuilder extends OrderInfoBuilder {
 				.setOrderId(orderId).setPeopleNumber(peopleNumber).setRoomType(roomType).setStatus(status)
 				.setStayDays(stayDays).setUserId(userId).setOriginalPrice(originalPrice).setHotelId(hotelId)
 				.setHotelName(hotelName).setRoomNumber(roomNumber).setIsReviewed(isReviewed).setUserName(userName)
-				.setPromotions(promotions).setDiscountPrice(discountPrice).setComments(comments);
+				.setPromotions(promotions).setDiscountPrice(discountPrice).setComments(comments).setAppeal(appeal);
 	}
 
 	@Override
@@ -133,13 +133,13 @@ public class OrderVoBuilder extends OrderInfoBuilder {
 
 	@Override
 	public OrderVoBuilder setComments(CommentPo comments) {
-		this.comments = comments;
+		super.setComments(comments);
 		return this;
 	}
 
 	@Override
 	public OrderVoBuilder setAppeal(String appeal) {
-		this.appeal = appeal;
+		super.setAppeal(appeal);
 		return this;
 	}
 
