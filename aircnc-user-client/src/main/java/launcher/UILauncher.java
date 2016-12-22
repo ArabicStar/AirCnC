@@ -1,6 +1,7 @@
 package launcher;
 
 import javafx.application.Application;
+import presentation.market.accessor.impl.MarketLoginAccessorImpl;
 import presentation.member.CenterController;
 import presentation.member.accessor.impl.CreditChangeOrderAccessorImpl;
 import presentation.member.accessor.impl.HotelNameAccessorImpl;
@@ -48,6 +49,7 @@ public class UILauncher {
 		SupremeSearchAccessorImpl.launch();
 		CreditChangeOrderAccessorImpl.launch();
 		HotelNameAccessorImpl.launch();
+		MarketLoginAccessorImpl.launch();
 		
 		CreditChangeManagerImpl.launch();
 		MemberInfoManagerImpl.launch();
