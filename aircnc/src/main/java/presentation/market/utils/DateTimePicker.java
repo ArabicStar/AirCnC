@@ -69,7 +69,7 @@ public class DateTimePicker extends DatePicker {
 	}
 
 	void setTimeValue(LocalTime timeValue) {
-		this.timeValue.set(timeValue);
+		this.timeValue.set(timeValue.minusMinutes(timeValue.getMinute()));
 	}
 
 	public ObjectProperty<LocalTime> timeValueProperty() {
