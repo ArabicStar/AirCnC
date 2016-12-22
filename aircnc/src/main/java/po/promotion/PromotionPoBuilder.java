@@ -23,9 +23,9 @@ public class PromotionPoBuilder extends PromotionInfoBuilder {
 		boolean flag = false;
 		try {
 			PromotionBuilder.parseString(contentString);
-
 			flag = true;
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
 		return flag;

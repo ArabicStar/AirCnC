@@ -12,6 +12,6 @@
 		<property name="name" column="name" type="string" />
 		<property name="active" column="is_active" type="yes_no" />
 		<property name="practical" column="is_practical" type="yes_no" />
-		<property name="contentString" column="content" type="string" />
+		<property name="contentString" column="content" type="text" />
 	</class>
 </hibernate-mapping>

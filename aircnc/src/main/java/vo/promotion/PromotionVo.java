@@ -3,6 +3,7 @@ package vo.promotion;
 import utils.info.promotion.PromotionInfo;
 import utils.promotion.Promotion;
 
+@SuppressWarnings("serial")
 public abstract class PromotionVo extends PromotionInfo {
 	protected Promotion promotion;
 
@@ -58,5 +59,9 @@ public abstract class PromotionVo extends PromotionInfo {
 
 	public Promotion getPromotion() {
 		return promotion;
+	}
+
+	public String getDescription() {
+		return name + (name.length() == 0 ? ": " : "") + promotion.description();
 	}
 }

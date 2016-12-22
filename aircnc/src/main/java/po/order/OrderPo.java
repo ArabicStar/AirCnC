@@ -1,16 +1,24 @@
 package po.order;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import po.order.comment.CommentPo;
+import po.promotion.PromotionPo;
 import utils.info.order.OrderInfo;
 import utils.info.order.OrderStatus;
-import utils.promotion.Promotion;
+import utils.info.promotion.PromotionInfoTemplate.Scope;
 import vo.order.OrderVo;
 import vo.order.OrderVoBuilder;
 
 public class OrderPo extends OrderInfo {
+	private Set<PromotionPo> promotions;
+
+	public OrderPo() {
+		promotions = new HashSet<>();
+	}
 
 	public OrderPo setHotelId(int hotelId) {
 		this.hotelId = hotelId;
@@ -87,8 +95,8 @@ public class OrderPo extends OrderInfo {
 		return this;
 	}
 
-	public OrderPo setPromotions(Set<Promotion> promotions) {
-		this.promotions = promotions;
+	public OrderPo setPromotionsInfo(Set<PromotionPo> promotions) {
+		this.promotions = new HashSet<>(promotions);
 		return this;
 	}
 
@@ -96,19 +104,39 @@ public class OrderPo extends OrderInfo {
 		this.discountPrice = discountPrice;
 		return this;
 	}
-	
+
 	public OrderPo setComments(CommentPo comments) {
 		this.comments = comments;
 		return this;
 	}
-	
+
 	public OrderPo setAppeal(String appeal) {
 		this.appeal = appeal;
 		return this;
 	}
-	
+
 	public OrderVo orderPo2Vo() {
 		return new OrderVoBuilder(this).getOrderInfo();
 	}
 
+	@Override
+	public Set<PromotionPo> getPromotions() {
+		return new HashSet<>(promotions);
+	}
+
+	public Set<PromotionPo> getHotelPromotions() {
+		return promotions.stream().filter(po -> po.getScope() == Scope.Hotel).collect(Collectors.toSet());
+	}
+
+	public void setWebsitePromotions(Set<PromotionPo> promotions) {
+		this.promotions.addAll(promotions);
+	}
+
+	public Set<PromotionPo> getWebsitePromotions() {
+		return promotions.stream().filter(po -> po.getScope() == Scope.Website).collect(Collectors.toSet());
+	}
+
+	public void setHotelPromotions(Set<PromotionPo> promotions) {
+		this.promotions.addAll(promotions);
+	}
 }

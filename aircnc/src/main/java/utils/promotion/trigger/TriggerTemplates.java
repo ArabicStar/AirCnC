@@ -126,8 +126,9 @@ public final class TriggerTemplates {
 	}
 
 	private static final Describer levelDesciber() {
-		return pms -> new StringBuilder(pms.getParameterValue(TriggerParams.LEVEL_THRESHOLD.paramName())).append("级会员")
-				.toString();
+		return pms -> new StringBuilder(
+				String.valueOf((int) pms.getParameterValue(TriggerParams.LEVEL_THRESHOLD.paramName()))).append("级会员")
+						.toString();
 	}
 
 	private static final Describer tradeAreaDescriber() {
@@ -163,7 +164,7 @@ public final class TriggerTemplates {
 	}
 
 	private static final ParametersList birthdayParameters() {
-		return null;
+		return new ParametersList();
 	}
 
 	private static final ParametersList enterpriseParamerters() {

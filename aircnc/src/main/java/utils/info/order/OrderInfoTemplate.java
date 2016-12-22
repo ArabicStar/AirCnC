@@ -1,12 +1,10 @@
 package utils.info.order;
 
 import java.time.LocalDateTime;
-import java.util.Set;
 
 import javax.persistence.Entity;
 
 import po.order.comment.CommentPo;
-import utils.promotion.Promotion;
 
 @Entity
 public abstract class OrderInfoTemplate {
@@ -27,8 +25,6 @@ public abstract class OrderInfoTemplate {
 	 * 订单最晚执行时间
 	 */
 	protected LocalDateTime lastTime;
-
-	protected Set<Promotion> promotions;
 
 	/**
 	 * 除去小孩的总人数
@@ -53,9 +49,9 @@ public abstract class OrderInfoTemplate {
 	protected boolean isReviewed;
 
 	protected String userName;
-	
+
 	protected CommentPo comments;
-	
+
 	/**
 	 * 申诉内容
 	 */

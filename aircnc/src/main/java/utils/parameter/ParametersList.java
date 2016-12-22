@@ -78,15 +78,15 @@ public class ParametersList {
 
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder("|");
+		StringBuilder sb = new StringBuilder("~");
 		for (Parameter<?> param : properties)
-			sb.append(param.toString()).append("|");
+			sb.append(param.toString()).append("~");
 
 		return sb.toString();
 	}
 
 	public static ParametersList parseString(String src) throws Exception {
-		Pattern pt = Pattern.compile("|(.+?)|");
+		Pattern pt = Pattern.compile("~(.*?)~");
 		Matcher m = pt.matcher(src);
 
 		ParametersList list = new ParametersList();

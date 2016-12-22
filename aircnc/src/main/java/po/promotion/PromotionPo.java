@@ -61,4 +61,9 @@ public abstract class PromotionPo extends PromotionInfo {
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
 	}
+
+	public String getDescription() {
+		return name;
+	}
+	
 }

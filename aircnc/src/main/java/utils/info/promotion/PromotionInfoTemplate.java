@@ -21,10 +21,33 @@ public abstract class PromotionInfoTemplate implements Serializable {
 	protected int hotelId;
 
 	public static boolean checkId(long id) {
-		return id >= 0;
+		return id >= 0L;
 	}
 
 	public static boolean checkName(String name) {
-		return name != null && name.length() > 0;
+		return name != null;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PromotionInfoTemplate other = (PromotionInfoTemplate) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+
 }

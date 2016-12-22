@@ -1,11 +1,10 @@
 package utils.info.order;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.Set;
 
 import po.order.comment.CommentPo;
-import utils.promotion.Promotion;
+import utils.info.promotion.PromotionInfo;
 
 public abstract class OrderInfoBuilder extends OrderInfoTemplate {
 	public OrderInfoBuilder() {
@@ -13,10 +12,9 @@ public abstract class OrderInfoBuilder extends OrderInfoTemplate {
 		stayDays = -1;
 		userId = -1;
 		userName = BLANK;
-		status = OrderStatus.ABNORMAL;
+		status = OrderStatus.UNEXECUTED;
 		entryTime = null;
 		lastTime = null;
-		promotions = new HashSet<>();
 		peopleNumber = -1;
 		originalPrice = -1;
 		discountPrice = -1;
@@ -29,13 +27,13 @@ public abstract class OrderInfoBuilder extends OrderInfoTemplate {
 	}
 
 	public OrderInfoBuilder(OrderInfo info) {
+		this();
 		this.setOrderId(orderId).setRoomType(info.getRoomType()).setStayDays(info.getStayDays())
 				.setUserId(info.getUserId()).setStatus(info.getStatus()).setEntryTime(info.getEntryTime())
-				.setLastTime(info.getLastTime()).setPromotions(info.getPromotions())
-				.setPeopleNumber(info.getPeopleNumber()).setOriginalPrice(info.getOriginalPrice())
-				.setDiscountPrice(info.getDiscountPrice()).setHasChildren(info.getHasChildren())
-				.setHotelId(info.getHotelId()).setRoomNumber(info.getRoomNumber()).setReviewed(info.getReviewed())
-				.setAppeal(info.getAppeal());
+				.setLastTime(info.getLastTime()).setPeopleNumber(info.getPeopleNumber())
+				.setOriginalPrice(info.getOriginalPrice()).setDiscountPrice(info.getDiscountPrice())
+				.setHasChildren(info.getHasChildren()).setHotelId(info.getHotelId()).setRoomNumber(info.getRoomNumber())
+				.setReviewed(info.getReviewed()).setAppeal(info.getAppeal());
 	}
 
 	/**
@@ -105,19 +103,9 @@ public abstract class OrderInfoBuilder extends OrderInfoTemplate {
 	 * @param promotions
 	 *            要设置的 promotions
 	 */
-	public OrderInfoBuilder setPromotions(Set<Promotion> promotions) {
-		if(promotions == null) {
-			System.err.println("Promotion is null");
-			return this;
-		}
-		this.promotions.addAll(promotions);
-		return this;
-	}
+	public abstract OrderInfoBuilder setPromotions(Set<? extends PromotionInfo> promotions);
 
-	public OrderInfoBuilder addPromotion(Promotion promotion) {
-		this.promotions.add(promotion);
-		return this;
-	}
+	public abstract OrderInfoBuilder addPromotion(PromotionInfo promotion);
 
 	/**
 	 * @param peopleNumber
@@ -199,12 +187,12 @@ public abstract class OrderInfoBuilder extends OrderInfoTemplate {
 		this.userName = userName;
 		return this;
 	}
-	
+
 	public OrderInfoBuilder setComments(CommentPo comments) {
 		this.comments = comments;
 		return this;
 	}
-	
+
 	public OrderInfoBuilder setAppeal(String appeal) {
 		this.appeal = appeal;
 		return this;

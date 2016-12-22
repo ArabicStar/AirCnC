@@ -1,20 +1,29 @@
 package vo.order;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import po.order.comment.CommentPo;
 import utils.info.order.OrderInfo;
 import utils.info.order.OrderInfoBuilder;
 import utils.info.order.OrderStatus;
-import utils.promotion.Promotion;
+import utils.info.promotion.PromotionInfo;
+import vo.promotion.PromotionVo;
+import vo.promotion.PromotionVoBuilder;
 
 public class OrderVoBuilder extends OrderInfoBuilder {
+	private Set<PromotionVo> promotions;
+
 	public OrderVoBuilder() {
+		super();
+		promotions = new HashSet<>();
 	}
 
 	public OrderVoBuilder(OrderInfo info) {
 		super(info);
+		promotions = new HashSet<>();
 	}
 
 	@Override
@@ -117,26 +126,33 @@ public class OrderVoBuilder extends OrderInfoBuilder {
 	}
 
 	@Override
-	public OrderVoBuilder setPromotions(Set<Promotion> promotions) {
-		super.setPromotions(promotions);
-		return this;
-	}
-
-	@Override
 	public OrderVoBuilder setDiscountPrice(double discountPrice) {
 		super.setDiscountPrice(discountPrice);
 		return this;
 	}
-	
+
 	@Override
 	public OrderVoBuilder setComments(CommentPo comments) {
 		this.comments = comments;
 		return this;
 	}
-	
+
 	@Override
 	public OrderVoBuilder setAppeal(String appeal) {
 		this.appeal = appeal;
+		return this;
+	}
+
+	@Override
+	public OrderVoBuilder setPromotions(Set<? extends PromotionInfo> promotions) {
+		this.promotions.addAll(promotions.stream().map(info -> new PromotionVoBuilder(info).getPromotionInfo())
+				.collect(Collectors.toSet()));
+		return this;
+	}
+
+	@Override
+	public OrderVoBuilder addPromotion(PromotionInfo promotion) {
+		this.promotions.add(new PromotionVoBuilder(promotion).getPromotionInfo());
 		return this;
 	}
 }

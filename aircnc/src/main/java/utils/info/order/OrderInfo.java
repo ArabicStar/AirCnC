@@ -4,9 +4,10 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 import po.order.comment.CommentPo;
-import utils.promotion.Promotion;
+import utils.info.promotion.PromotionInfo;
 
 public abstract class OrderInfo extends OrderInfoTemplate {
+
 	public String getUserName() {
 		return userName;
 	}
@@ -21,10 +22,6 @@ public abstract class OrderInfo extends OrderInfoTemplate {
 
 	public int getHotelId() {
 		return hotelId;
-	}
-
-	public Set<Promotion> getPromotions() {
-		return promotions;
 	}
 
 	public double getDiscountPrice() {
@@ -74,12 +71,14 @@ public abstract class OrderInfo extends OrderInfoTemplate {
 	public boolean getReviewed() {
 		return isReviewed;
 	}
-	
+
 	public CommentPo getComments() {
 		return comments;
 	}
-	
+
 	public String getAppeal() {
 		return appeal;
 	}
+
+	public abstract Set<? extends PromotionInfo> getPromotions();
 }

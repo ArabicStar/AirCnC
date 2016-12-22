@@ -3,6 +3,8 @@ package utils.promotion.applier;
 import static utils.exception.StaticExceptionFactory.illegalArgEx;
 import static utils.exception.StaticExceptionFactory.illegalStateException;
 
+import org.apache.commons.lang.StringUtils;
+
 import utils.parameter.ParametersList;
 
 public class ApplierBuilder {
@@ -34,7 +36,7 @@ public class ApplierBuilder {
 	}
 
 	public static final Applier parseString(String src) throws Exception {
-		String[] strs = src.split("@^@");
+		String[] strs = StringUtils.split(src, "@^@");
 
 		if (strs.length != 2)
 			throw illegalArgEx("Applier source string");

@@ -1,6 +1,7 @@
 package vo.order;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 import po.order.OrderPo;
@@ -8,7 +9,7 @@ import po.order.OrderPoBuilder;
 import po.order.comment.CommentPo;
 import utils.info.order.OrderInfo;
 import utils.info.order.OrderStatus;
-import utils.promotion.Promotion;
+import vo.promotion.PromotionVo;
 
 /**
  * orderNo 订单编号 orderInfo 订单详情 userInfo 用户信息（用户名+信用值信息） entryTime 用户入住时间
@@ -16,7 +17,13 @@ import utils.promotion.Promotion;
  * 
  */
 public class OrderVo extends OrderInfo {
-	
+
+	private Set<PromotionVo> promotions;
+
+	public OrderVo() {
+		promotions = new HashSet<>();
+	}
+
 	OrderVo setOrderId(String orderId) {
 		this.orderId = orderId;
 		return this;
@@ -92,8 +99,8 @@ public class OrderVo extends OrderInfo {
 		return this;
 	}
 
-	OrderVo setPromotions(Set<Promotion> promotions) {
-		this.promotions = promotions;
+	OrderVo setPromotions(Set<PromotionVo> promotions) {
+		this.promotions = new HashSet<>(promotions);
 		return this;
 	}
 
@@ -101,19 +108,24 @@ public class OrderVo extends OrderInfo {
 		this.discountPrice = discountPrice;
 		return this;
 	}
-	
+
 	OrderVo setComments(CommentPo comments) {
 		this.comments = comments;
 		return this;
 	}
-	
+
 	OrderVo setAppeal(String appeal) {
 		this.appeal = appeal;
 		return this;
 	}
-	
-	public OrderPo orderVo2Po(){
+
+	public OrderPo orderVo2Po() {
 		return new OrderPoBuilder(this).getOrderInfo();
+	}
+
+	@Override
+	public Set<PromotionVo> getPromotions() {
+		return new HashSet<>(promotions);
 	}
 
 }

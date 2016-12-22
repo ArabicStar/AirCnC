@@ -58,11 +58,20 @@
 		<!-- userName -->
 		<property column="USERNAME" generated="never" lazy="false"
 			name="userName" type="string" update="false" />
-		<!-- appeal -->
-		<property column="APPEAL" generated="never" lazy="false"
-			name="appeal" type="string" update="false" />
-		<!-- Comment -->
-		<many-to-one column="COMMENTS" name="comments"
-			class="po.order.comment.CommentPo" lazy="false" foreign-key="orderId_c" />
+
+		<property name="appeal" type="string" update="false" lazy="false"
+			generated="never" column="APPEAL" />
+
+		<set name="hotelPromotions" table="ord$hotelProm_rel" cascade="none">
+			<key column="order_id" />
+			<many-to-many class="po.promotion.HotelPromotionPo"
+				column="hotelProm_id" />
+		</set>
+
+		<set name="websitePromotions" table="ord$webProm_rel" cascade="save-update">
+			<key column="order_id" />
+			<many-to-many class="po.promotion.WebsitePromotionPo"
+				column="webProm_id" />
+		</set>
 	</class>
 </hibernate-mapping>

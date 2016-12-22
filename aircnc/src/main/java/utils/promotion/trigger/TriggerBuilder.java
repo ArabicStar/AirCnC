@@ -3,6 +3,8 @@ package utils.promotion.trigger;
 import static utils.exception.StaticExceptionFactory.illegalArgEx;
 import static utils.exception.StaticExceptionFactory.illegalStateException;
 
+import org.apache.commons.lang.StringUtils;
+
 import utils.parameter.ParametersList;
 import utils.promotion.trigger.hotel.HotelTrigger;
 import utils.promotion.trigger.hotel.HotelWhen;
@@ -54,9 +56,9 @@ public class TriggerBuilder {
 	}
 
 	public static final Trigger parseString(String src) throws Exception {
-		String[] strs = src.split("@^@");// Don't worry, be happy
+		String[] strs = StringUtils.split(src, "@^@");// Don't worry, be happy
 
-		if (strs.length != 0)
+		if (strs.length == 0)
 			throw illegalArgEx("Trigger source string");
 
 		ParametersList list = ParametersList.parseString(strs[2]);

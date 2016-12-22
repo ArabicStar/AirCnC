@@ -14,11 +14,11 @@ import utils.promotion.trigger.TriggerBuilder;
 import utils.promotion.trigger.hotel.HotelWhen;
 import utils.promotion.trigger.website.WebsiteWhen;
 
+@SuppressWarnings("serial")
 public class PromotionVoBuilder extends PromotionInfoBuilder {
 	protected ApplierBuilder applierBuilder;
 	protected TriggerBuilder triggerBuilder;
 	private Promotion prom;
-	private int hotelId;
 
 	public PromotionVoBuilder(Scope scope) {
 		super(scope);
@@ -95,18 +95,20 @@ public class PromotionVoBuilder extends PromotionInfoBuilder {
 	}
 
 	public boolean isReady() {
-		return super.isReady() && applierBuilder.isReady() && triggerBuilder.isReady();
+		return super.isReady() && (prom != null || (applierBuilder.isReady() && triggerBuilder.isReady()));
 	}
 
 	@Override
 	public PromotionVo getPromotionInfo() {
-		if (!isReady() && prom == null)
+		if (!isReady() || prom == null)
 			throw illegalStateException("Not set up");
 
-		Applier applier = applierBuilder.isReady() ? applierBuilder.build() : prom.getApplier();
-		Trigger trigger = triggerBuilder.isReady() ? triggerBuilder.build() : prom.getTrigger();
+		if (prom == null) {
+			Applier applier = applierBuilder.isReady() ? applierBuilder.build() : prom.getApplier();
+			Trigger trigger = triggerBuilder.isReady() ? triggerBuilder.build() : prom.getTrigger();
 
-		prom = new Promotion(applier, trigger);
+			prom = new Promotion(applier, trigger);
+		}
 
 		PromotionVo vo = null;
 		if (scope == Scope.Website)

@@ -34,7 +34,7 @@ public abstract class MemberPo extends MemberInfo {
 	@Override
 	public String getName() {
 		if (isValid())
-			return StringUtils.deleteWhitespace(this.name);
+			return name;
 		return null;
 	}
 

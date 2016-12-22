@@ -64,6 +64,8 @@ public abstract class PromotionInfo extends PromotionInfoTemplate {
 		this.isActive = false;
 	}
 
+	public abstract String getDescription();
+
 	public abstract int getHotelId();
 
 	public abstract String getContentString();

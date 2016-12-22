@@ -4,6 +4,7 @@ import static utils.exception.StaticExceptionFactory.illegalArgEx;
 
 import utils.info.hotel.HotelInfoTemplate;
 
+@SuppressWarnings("serial")
 public abstract class PromotionInfoBuilder extends PromotionInfoTemplate {
 
 	public PromotionInfoBuilder(Scope scope) {
@@ -19,7 +20,8 @@ public abstract class PromotionInfoBuilder extends PromotionInfoTemplate {
 			throw illegalArgEx("Invalid promotion info");
 
 		this.scope = info.getScope();
-		this.setId(info.getId()).setName(info.getName()).setPractical(info.getPractical()).setHotelId(hotelId);
+		this.setId(info.getId()).setName(info.getName()).setPractical(info.getPractical())
+				.setHotelId(info.getHotelId());
 		isActive = info.getActive();
 	}
 
@@ -61,7 +63,7 @@ public abstract class PromotionInfoBuilder extends PromotionInfoTemplate {
 			return this;
 
 		if (!HotelInfoTemplate.checkID(hotelId))
-			throw illegalArgEx("Hotel id in promtion");
+			throw illegalArgEx("Hotel id in promtion", hotelId);
 
 		this.hotelId = hotelId;
 		return this;
