@@ -114,7 +114,7 @@ public class OrderInfoCourier implements OrderInfoInteractor {
 				.setContent(MemberCommentAccessorImpl.getInstance().getComment())
 				.setGrade((int) MemberCommentAccessorImpl.getInstance().getRating()).setCommentTime(LocalDateTime.now())
 				.getCommentInfo();
-		OrderPo newOrderPo = new OrderPoBuilder(orderPo).setComments(commentPo).getOrderInfo();
+		OrderPo newOrderPo = new OrderPoBuilder(orderPo).setComment(commentPo).getOrderInfo();
 		// TODO 把评价和申诉加到数据库
 		detail.saveOrder(newOrderPo);
 	}

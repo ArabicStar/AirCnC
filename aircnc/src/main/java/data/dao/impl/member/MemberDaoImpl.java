@@ -25,7 +25,7 @@ public enum MemberDaoImpl implements MemberDao {
 			Boolean flag = Boolean.FALSE;
 
 			// should not exist yet
-			MemberPo test = (MemberPo) session.get(MemberPo.class, po.getId());
+			MemberPo test = (MemberPo) session.get(MemberPo.class, parseId(po.getId()));
 			if (flag = Boolean.valueOf((test == null))) {
 				// save associated ContactPo firstly
 				session.save(po.getContact());

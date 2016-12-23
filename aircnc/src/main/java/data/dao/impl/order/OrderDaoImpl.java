@@ -34,9 +34,11 @@ public enum OrderDaoImpl implements OrderDao, OrderQueryDao {
 			Boolean flag = Boolean.FALSE;
 
 			OrderPo old = session.get(OrderPo.class, orderPo.getOrderId());
+
 			if (flag = Boolean.valueOf(old != null))
 				OrderPoBuilder.updatePo(orderPo, old);
-
+			session.merge(old);
+			// session.saveOrUpdate(old.getComments());
 			return flag;
 		});
 
