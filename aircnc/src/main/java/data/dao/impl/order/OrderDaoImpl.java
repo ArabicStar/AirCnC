@@ -6,7 +6,6 @@ import static utils.exception.StaticExceptionFactory.illegalArgEx;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 
 import data.dao.order.OrderDao;
@@ -22,7 +21,7 @@ public enum OrderDaoImpl implements OrderDao, OrderQueryDao {
 
 	public OrderPo getOrder(String orderId) {
 		if (!OrderPo.checkOrderId(orderId))
-			throw illegalArgEx("Order Id String");
+			throw illegalArgEx("Order Id String", orderId);
 
 		return execute(session -> (OrderPo) session.get(OrderPo.class, orderId));
 	}
@@ -38,8 +37,6 @@ public enum OrderDaoImpl implements OrderDao, OrderQueryDao {
 			if (flag = Boolean.valueOf(old != null))
 				OrderPoBuilder.updatePo(orderPo, old);
 
-			session.clear();
-			session.update(orderPo.getComment());
 			return flag;
 		});
 
@@ -53,47 +50,41 @@ public enum OrderDaoImpl implements OrderDao, OrderQueryDao {
 		return execute(session -> {
 			Boolean flag = Boolean.FALSE;
 
-			if (flag = Boolean.valueOf(session.get(OrderPo.class, newPo.getOrderId()) == null)) {
-				session.save(newPo.getComment());
+			if (flag = Boolean.valueOf(session.get(OrderPo.class, newPo.getOrderId()) == null))
 				session.save(newPo);
-			}
+
 			return flag;
 		});
 	}
 
 	public boolean existsOrder(String orderId) {
-		return execute(session -> {
-			return (OrderPo) session.get(OrderPo.class, orderId) != null;
-		});
+		return execute(session -> (OrderPo) session.get(OrderPo.class, orderId) != null);
 	}
 
 	public boolean deleteOrder(String orderId) {
 		// The order that exists can be deleted
-		if (!existsOrder(orderId)) {
+		if (!existsOrder(orderId))
 			return false;
-		}
 
 		return execute(session -> {
 			Boolean flag = Boolean.FALSE;
 
 			OrderPo toDelete = session.get(OrderPo.class, orderId);
-			if (flag = Boolean.valueOf(toDelete != null)) {
+			if (flag = Boolean.valueOf(toDelete != null))
 				session.delete(toDelete);
-			}
+
 			return flag;
 		});
 	}
 
 	@Override
 	public List<OrderPo> searchByMember(String memberId) {
-		if (!MemberInfoTemplate.checkID(memberId)) {
-			throw illegalArgEx("Member id");
-		}
+		if (!MemberInfoTemplate.checkID(memberId))
+			throw illegalArgEx("Member id", memberId);
+
 		return execute(session -> {
 			final Criteria criteria = session.createCriteria(OrderPo.class);
-			final Criterion memIdCond = Restrictions.eq("userId", new Integer(memberId));
-
-			criteria.add(memIdCond);
+			criteria.add(Restrictions.eq("member", MemberInfoTemplate.convertID2Num(memberId)));
 
 			@SuppressWarnings("unchecked")
 			List<OrderPo> list = criteria.list();
@@ -105,13 +96,11 @@ public enum OrderDaoImpl implements OrderDao, OrderQueryDao {
 	@Override
 	public List<OrderPo> searchByHotel(int hotelId) {
 		if (!HotelInfoTemplate.checkID(hotelId))
-			throw illegalArgEx("Hotel id");
+			throw illegalArgEx("Hotel id", hotelId);
 
 		return execute(session -> {
 			final Criteria criteria = session.createCriteria(OrderPo.class);
-			final Criterion hotelIdCond = Restrictions.eq("hotelId", new Integer(hotelId));
-
-			criteria.add(hotelIdCond);
+			criteria.add(Restrictions.eq("hotel", new Integer(hotelId)));
 
 			@SuppressWarnings("unchecked")
 			List<OrderPo> list = criteria.list();
@@ -124,9 +113,7 @@ public enum OrderDaoImpl implements OrderDao, OrderQueryDao {
 	public List<OrderPo> searchByStatus(OrderStatus status) {
 		return execute(session -> {
 			final Criteria criteria = session.createCriteria(OrderPo.class);
-			final Criterion statusCond = Restrictions.eq("orderStatus", status);
-
-			criteria.add(statusCond);
+			criteria.add(Restrictions.eq("status", status));
 
 			@SuppressWarnings("unchecked")
 			List<OrderPo> list = criteria.list();

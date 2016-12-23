@@ -21,17 +21,19 @@ public enum MemberDaoImpl implements MemberDao {
 		if (po == null)
 			return false;
 
-		// should not exist yet
-		if (existsMember(po.getId()))
-			return false;
-
 		return execute(session -> {
-			// save associated ContactPo firstly
-			session.save(po.getContact());
-			// save MemberPo
-			session.save(po);
+			Boolean flag = Boolean.FALSE;
 
-			return true;
+			// should not exist yet
+			MemberPo test = (MemberPo) session.get(MemberPo.class, po.getId());
+			if (flag = Boolean.valueOf((test == null))) {
+				// save associated ContactPo firstly
+				session.save(po.getContact());
+				// save MemberPo
+				session.save(po);
+			}
+
+			return flag;
 		});
 	}
 
