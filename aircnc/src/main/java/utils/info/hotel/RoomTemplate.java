@@ -1,7 +1,8 @@
 package utils.info.hotel;
 
+import java.io.Serializable;
+
 import po.hotel.HotelPo;
-import utils.info.promotion.PromotionInfoTemplate;
 
 /**
  * Abstract of room info object.<br>
@@ -10,26 +11,12 @@ import utils.info.promotion.PromotionInfoTemplate;
  * @author jqwu
  * 
  */
-public abstract class RoomTemplate {
-	public enum Type {
-		单人间, 双人间, 三人间, 其它;
+public abstract class RoomTemplate implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 81449451930312412L;
 
-		public static Type of(String string) {
-			if (string == null)
-				return null;
-
-			switch (string) {
-			case "单人间":
-				return 单人间;
-			case "双人间":
-				return 双人间;
-			case "三人间":
-				return 三人间;
-			default:
-				return 其它;
-			}
-		}
-	}
 	/**
 	 * id int <br>
 	 */
@@ -39,11 +26,6 @@ public abstract class RoomTemplate {
 	 * name string <br>
 	 */
 	protected String name;
-
-	/**
-	 * type Type <br>
-	 */
-	protected Type type;
 
 	/**
 	 * numOfPeople int <br>
@@ -70,7 +52,7 @@ public abstract class RoomTemplate {
 	 *         <b>true</b> if valid <br>
 	 */
 	public static boolean checkName(String name) {
-		return name != null;
+		return name != null&&name.length()>0;
 	}
 
 	/**

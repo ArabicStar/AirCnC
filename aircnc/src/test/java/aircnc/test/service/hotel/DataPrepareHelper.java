@@ -19,7 +19,6 @@ import service.query.CommentQueryService;
 import service.query.OrderQueryService;
 import utils.info.hotel.Room;
 import utils.info.hotel.RoomBuilder;
-import utils.info.hotel.RoomTemplate.Type;
 
 public class DataPrepareHelper {
 	
@@ -33,9 +32,10 @@ public class DataPrepareHelper {
 	private static final String testEquip = "wifi;停车场;24小时热水;";
 	private static final int testPass = "12345678".hashCode();
 	// private static final String[] testType = new String[] { "单人间", "双人间" };
-	private static final Type[] testType = new Type[] { Type.单人间, Type.双人间,Type.其它 };
-//	private static final int[] testPnum = new int[] { 10, 2 };
+	private static final String[] testType = new String[] { "单人间", "双人间","情侣间" };
+	private static final int[] testPnum = new int[] { 1, 2 ,2};
 	private static final int[] testRnum = new int[] { 100, 20,80 };
+	private static final int[] testPrice = new int[] { 100, 200 ,300};
 	private static HotelPo loginData = null;
 	public static HotelPo testData = null;
 	
@@ -47,7 +47,8 @@ public class DataPrepareHelper {
 		Set<Room> rooms = new HashSet<Room>();
 
 		for (int j = 0; j < 2; j++) {
-			RoomBuilder r = new RoomBuilder(testType[j]).setPrice(300).setRoomNum(testRnum[j]);
+			RoomBuilder r = new RoomBuilder(testType[j]).setPrice(testPrice[j]).
+					setRoomNum(testRnum[j]).setPeopleNum(testPnum[j]);
 			Room room = r.getRoomInfo();
 			rooms.add(room);
 		}
@@ -80,7 +81,8 @@ public class DataPrepareHelper {
 	}
 	
 	public static final Room testRoom(){
-		RoomBuilder r = new RoomBuilder(testType[2]).setPrice(100).setRoomNum(testRnum[2]).setPeopleNum(5).setName("5人房");
+		RoomBuilder r = new RoomBuilder(testType[2]).setPrice(testPrice[2]).
+				setRoomNum(testRnum[2]).setPeopleNum(testPnum[2]);
 		return r.getRoomInfo();
 		
 	}

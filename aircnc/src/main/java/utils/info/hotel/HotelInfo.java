@@ -15,6 +15,10 @@ import java.util.Set;
 public abstract class HotelInfo extends HotelInfoTemplate {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3409409458333956461L;
+	/**
 	 * mark a HotelInfo instance is valid or not. <br>
 	 */
 	protected boolean isValid;

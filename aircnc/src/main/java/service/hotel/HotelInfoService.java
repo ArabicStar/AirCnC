@@ -3,6 +3,7 @@ package service.hotel;
 import java.util.List;
 import java.util.Set;
 
+import utils.condition.Condition;
 import utils.info.hotel.HotelInfo;
 import utils.info.hotel.Room;
 import utils.info.order.OrderStatus;
@@ -25,6 +26,8 @@ public interface HotelInfoService {
 	public Set<PromotionVo> getHotelAllPromotions(int hotelId);
 
 	public boolean updateInfo(HotelInfo modifiedInfo);
+	
+	public List<HotelVo> findByCondition(Condition cond);
 
 	
 }

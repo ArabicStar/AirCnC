@@ -1,10 +1,13 @@
 package vo.hotel;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
+import utils.condition.Condition.Type;
 import utils.info.hotel.HotelInfo;
 import utils.info.hotel.Room;
 
+@SuppressWarnings("serial")
 public class HotelVo extends HotelInfo {
 
 	public String getName() {
@@ -84,6 +87,22 @@ public class HotelVo extends HotelInfo {
 	
 	public double getLowestPrice(){
 		return rooms.stream().mapToDouble(Room::getPrice).min().getAsDouble();
+	}
+	
+	public double getHighestPrice(){
+		return rooms.stream().mapToDouble(Room::getPrice).max().getAsDouble();
+	}
+	
+	public boolean hasRoom(Type type,boolean isAvailable){
+		if(type.ordinal()>3||type.ordinal()==0){
+			return rooms.stream().filter(r->r.getRoomNum()>0||!isAvailable).
+					mapToInt(Room::getPeopleNum).max().getAsInt()>type.ordinal();
+		}else{
+			return !rooms.stream().filter(r->r.getRoomNum()>0||!isAvailable).
+					filter(r->r.getPeopleNum()==type.ordinal()).
+					collect(Collectors.toList()).isEmpty();
+					
+		}
 	}
 
 }

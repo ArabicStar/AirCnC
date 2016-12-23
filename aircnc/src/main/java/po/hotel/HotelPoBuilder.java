@@ -1,14 +1,17 @@
 package po.hotel;
 
-import java.util.HashSet;
+import static utils.exception.StaticExceptionFactory.illegalStateException;
+import static utils.exception.StaticExceptionFactory.inconsistentStatusEx;
+
 import java.util.Iterator;
 import java.util.Set;
-import static utils.exception.StaticExceptionFactory.*;
+
 import utils.info.hotel.HotelInfo;
 import utils.info.hotel.HotelInfoBuilder;
 import utils.info.hotel.Room;
 import utils.info.hotel.RoomBuilder;
 
+@SuppressWarnings("serial")
 public class HotelPoBuilder extends HotelInfoBuilder {
 	private int passwordHash = Integer.MIN_VALUE;
 

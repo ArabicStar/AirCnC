@@ -1,6 +1,6 @@
 package utils.info.hotel;
 
-import static utils.exception.StaticExceptionFactory.*;
+import static utils.exception.StaticExceptionFactory.illegalStateException;
 
 import po.hotel.HotelPo;
 
@@ -18,10 +18,11 @@ import po.hotel.HotelPo;
  * @author jqwu
  * @see utils.info.hotel.Room
  */
+@SuppressWarnings("serial")
 public class RoomBuilder extends RoomTemplate {
 	private static final Room INVALID_ROOM;
 	static {
-		INVALID_ROOM = new Room(Type.其它);
+		INVALID_ROOM = new Room("");
 		INVALID_ROOM.invalidate();
 	}
 
@@ -41,19 +42,10 @@ public class RoomBuilder extends RoomTemplate {
 		this.price = -1;
 	}
 
-	public RoomBuilder(String typeName) {
-		this(Type.of(typeName));
-		this.name = typeName;
-	}
-
-	public RoomBuilder(Type type) {
-		this();
-		if (type == null)
-			throw illegalArgEx("room type", type);
-
-		this.type = type;
-		this.numOfPeople = type.ordinal() + 1;
-		this.name = type.name();
+	public RoomBuilder(String name) {
+		if(!checkName(name))
+			throw new IllegalArgumentException("RoomBuilder - Null Name String");
+		this.name = name;
 	}
 
 	/**
@@ -63,22 +55,9 @@ public class RoomBuilder extends RoomTemplate {
 	 * @param type
 	 */
 	public RoomBuilder(Room info) {
-		this(info.getType());
-		this.setName(info.getName()).setPeopleNum(info.getPeopleNum()).setRoomNum(info.getRoomNum())
+		this(info.getName());
+		this.setPeopleNum(info.getPeopleNum()).setRoomNum(info.getRoomNum())
 				.setPrice(info.getPrice()).setId(info.getId()).setHotel(info.getHotel());
-	}
-
-	/**
-	 * Set name. <br>
-	 * 
-	 * @param name
-	 *            name string <br>
-	 * @return this instance <br>
-	 */
-	public RoomBuilder setName(String name) {
-		if (type == Type.其它)
-			this.name = name;
-		return this;
 	}
 
 	/**
@@ -89,7 +68,7 @@ public class RoomBuilder extends RoomTemplate {
 	 * @return this instance <br>
 	 */
 	public RoomBuilder setPeopleNum(int peopleNum) {
-		if (type == Type.其它 && checkPeopleNum(peopleNum))
+		if (checkPeopleNum(peopleNum))
 			this.numOfPeople = peopleNum;
 
 		return this;
@@ -121,14 +100,14 @@ public class RoomBuilder extends RoomTemplate {
 	}
 
 	public boolean isReady() {
-		return (name != null) && checkName(name) && checkPeopleNum(numOfPeople) && checkRoomNum(numOfRoom);
+		return checkName(name) && checkPeopleNum(numOfPeople) && checkRoomNum(numOfRoom);
 	}
 
 	public Room getRoomInfo() {
 		if (!isReady())
 			throw illegalStateException("Room builder not set up");
 
-		return new Room(type).setName(name).setPeopleNum(numOfPeople).setRoomNum(numOfRoom).
+		return new Room(name).setPeopleNum(numOfPeople).setRoomNum(numOfRoom).
 				setPrice(price).setId(id).setHotel(hotel);
 	}
 	

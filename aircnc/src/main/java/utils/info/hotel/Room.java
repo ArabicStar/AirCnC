@@ -3,13 +3,18 @@ package utils.info.hotel;
 import po.hotel.HotelPo;
 
 public class Room extends RoomTemplate {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -406517527311810609L;
+
 	protected boolean isValid;
 
 	private static final String BLANK = "";
 
-	public Room(Type type) {
+	public Room(String name) {
 		this();
-		this.type = type;
+		this.name = name;
 	}
 
 	public Room() {
@@ -24,24 +29,9 @@ public class Room extends RoomTemplate {
 	public int getId() {
 		return id;
 	}
-
-	// public HotelPo getHotel(){
-	// if(isValid())
-	// return hotel;
-	// return null;
-	// }
 	
 	public Room setId(int id) {
 		this.id = id;
-		return this;
-	}
-
-	public String getType() {
-		return type.name();
-	}
-
-	public Room setType(String typeName) {
-		this.type = Type.valueOf(typeName);
 		return this;
 	}
 

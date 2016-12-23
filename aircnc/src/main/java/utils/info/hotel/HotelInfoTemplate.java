@@ -1,5 +1,6 @@
 package utils.info.hotel;
 
+import java.io.Serializable;
 import java.util.Set;
 
 /**
@@ -9,7 +10,11 @@ import java.util.Set;
  * @author jqwu
  * 
  */
-public class HotelInfoTemplate {
+public class HotelInfoTemplate implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2555599964478710369L;
 	/**
 	 * buffered blank string
 	 */

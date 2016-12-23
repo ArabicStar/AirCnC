@@ -9,11 +9,9 @@ import java.util.Set;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
 
 import utils.info.hotel.Room;
 import utils.info.hotel.RoomBuilder;
-import utils.info.hotel.RoomTemplate.Type;
 
 public class HotelTest {
 	private static final List<HotelPo> testData = new ArrayList<>();
@@ -26,7 +24,7 @@ public class HotelTest {
 			"kokookoko" };
 	private static final int testPass = "12345678".hashCode();
 	// private static final String[] testType = new String[] { "单人间", "双人间" };
-	private static final Type[] testType = new Type[] { Type.单人间, Type.双人间 };
+	private static final String[] testType = new String[] { "单人间", "双人间 "};
 	private static final int[] testPnum = new int[] { 10, 2 };
 	private static final int[] testRnum = new int[] { 100, 20 };
 

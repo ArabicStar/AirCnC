@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.lang.StringUtils;
 
+@SuppressWarnings("serial")
 public abstract class HotelInfoBuilder extends HotelInfoTemplate {
 
 	public HotelInfoBuilder() {

@@ -32,7 +32,7 @@ import vo.order.OrderVo;
 import vo.order.comment.CommentVo;
 import vo.promotion.PromotionVo;
 
-public class HotelInfoManager implements HotelInfoService ,HotelQueryService{
+public class HotelInfoManager implements HotelInfoService{
 	
 	/****** singleton ******/
 	private static HotelInfoManager instance;
@@ -63,12 +63,12 @@ public class HotelInfoManager implements HotelInfoService ,HotelQueryService{
 	 */
 	public static HotelInfoManager launch(final HotelDao hotelDao, final HotelQueryDao hotelQueryDao,final HotelAccountService accountService,
 			final OrderQueryService orderQueryService,final HotelPromotionManagementService promotionManagementService,
-			CommentQueryService commentQueryService) {
+			final CommentQueryService commentQueryService,final HotelQueryService hotelQueryService) {
 		if (instance != null)
 			throw duplicateSingletonEx();
 
 		return instance = new HotelInfoManager(hotelDao, hotelQueryDao,accountService, orderQueryService,
-				promotionManagementService,commentQueryService);
+				promotionManagementService,commentQueryService,hotelQueryService);
 	}
 
 	/**
@@ -91,16 +91,18 @@ public class HotelInfoManager implements HotelInfoService ,HotelQueryService{
 	private OrderQueryService orderQueryService;
 	private HotelPromotionManagementService promotionManageService;
 	private CommentQueryService commentQueryService;
+	private HotelQueryService hotelQueryService;
 
 
 	public HotelInfoManager(HotelDao hotelDao, HotelQueryDao hotelQueryDao,HotelAccountService accountService,
 			OrderQueryService orderQueryService,HotelPromotionManagementService promotionManagementService,
-			CommentQueryService commentQueryService) {
+			CommentQueryService commentQueryService,HotelQueryService hotelQueryService) {
 		this.accountService = accountService;
 		this.hotelDao = hotelDao;
 		this.promotionManageService = promotionManagementService;
 		this.orderQueryService = orderQueryService;
 		this.commentQueryService = commentQueryService;
+		this.hotelQueryService = hotelQueryService;
 	}
 
 	@Override
@@ -181,28 +183,25 @@ public class HotelInfoManager implements HotelInfoService ,HotelQueryService{
 		return hotelDao
 				.updateHotel(new HotelPoBuilder(modifiedInfo).setPasswordHash(po.getPasswordHash()).getHotelInfo());
 	}
-
-
-	@Override
-	public HotelVo findById(int hotelId) {
-		HotelPo po = hotelDao.findHotelById(hotelId);
-		
-		return po == null ? null : new HotelVoBuilder(po).getHotelInfo();
-	}
-
-	@Override
-	public HotelVo findByName(String name) {
-		HotelPo po = hotelDao.findHotelByName(name);
-		return po == null ? null : new HotelVoBuilder(po).getHotelInfo();
-	}
+//
+//
+//	@Override
+//	public HotelVo findById(int hotelId) {
+//		HotelPo po = hotelDao.findHotelById(hotelId);
+//		
+//		return po == null ? null : new HotelVoBuilder(po).getHotelInfo();
+//	}
+//
+//	@Override
+//	public HotelVo findByName(String name) {
+//		HotelPo po = hotelDao.findHotelByName(name);
+//		return po == null ? null : new HotelVoBuilder(po).getHotelInfo();
+//	}
 
 	@Override
 	public List<HotelVo> findByCondition(Condition cond) {
-		DetachedCriteria dc = DetachedCriteria.forClass(HotelPo.class);
-		dc = ConditionBuilder.parseCondition(dc, cond);
-				
-		hotelQueryDao.searchByCriteria(dc);
-		return null;
+
+		return hotelQueryService.findByCondition(cond);
 	}
 
 	@Override

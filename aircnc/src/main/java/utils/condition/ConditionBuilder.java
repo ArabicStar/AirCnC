@@ -7,7 +7,8 @@ import java.util.Set;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 
-import utils.info.hotel.RoomTemplate.Type;
+import po.hotel.HotelPo;
+import utils.condition.Condition.Type;
 
 public class ConditionBuilder {
 	private double rankGreaterThan;
@@ -15,7 +16,7 @@ public class ConditionBuilder {
 	private DoubleBound priceBound;
 	private String scopeLike;
 	private String nameLike;
-	private Set<Type> roomTypes;
+	private Type roomTypes;
 	private boolean available;
 	private LocalDate since;
 
@@ -25,7 +26,7 @@ public class ConditionBuilder {
 		priceBound = new DoubleBound(0.0,1000.0);
 		scopeLike = "";
 		nameLike = "";
-		roomTypes = new HashSet<>();
+		roomTypes = Type.全部;
 		available = false;
 		since = LocalDate.now().plusDays(1);
 	}
@@ -53,11 +54,7 @@ public class ConditionBuilder {
 	}
 
 	public void roomNeed(Type roomType) {
-		this.roomTypes.add(roomType);
-	}
-
-	public void roomNeed(Set<Type> roomTypes) {
-		this.roomTypes.addAll(roomTypes);
+		this.roomTypes = roomType;
 	}
 
 	public void avaliable(boolean available) {
@@ -73,11 +70,13 @@ public class ConditionBuilder {
 				.setRoomTypes(roomTypes).setScopeLike(scopeLike).setSince(since).setStarBound(starBound);
 	}
 
-	public static DetachedCriteria parseCondition(DetachedCriteria criteria, final Condition cond) {
+	public static DetachedCriteria parseCondition(final String scope) {
 		// TODO
-		criteria.add(Restrictions.like("NAME", cond.getNameLike())).add(Restrictions.like("SCOPE", cond.getScopeLike()))
-				.add(Restrictions.ge("GRADE", cond.getRankGreaterThan()))
-				.add(Restrictions.between("STAR", cond.getStarFrom(), cond.getStarTo()));
+//		criteria.add(Restrictions.like("name", cond.getNameLike())).add(Restrictions.like("scope", cond.getScopeLike()))
+//				.add(Restrictions.ge("grade", cond.getRankGreaterThan()))
+//				.add(Restrictions.between("star", cond.getStarFrom(), cond.getStarTo()));
+		DetachedCriteria criteria = DetachedCriteria.forClass(HotelPo.class);
+		criteria.add(Restrictions.like("scope", scope));
 		return criteria;
 	}
 }

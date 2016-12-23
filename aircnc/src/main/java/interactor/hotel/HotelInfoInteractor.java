@@ -14,4 +14,6 @@ public interface HotelInfoInteractor {
 	public void getHotelOrdersByStatus() ;
 	
 	public void updateHotel();
+	
+	public void getHotelsByCondition();
 }

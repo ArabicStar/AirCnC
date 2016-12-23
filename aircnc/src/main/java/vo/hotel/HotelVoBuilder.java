@@ -6,6 +6,7 @@ import utils.info.hotel.HotelInfo;
 import utils.info.hotel.HotelInfoBuilder;
 import utils.info.hotel.Room;
 
+@SuppressWarnings("serial")
 public class HotelVoBuilder extends HotelInfoBuilder {
 
 	private static final HotelVo INVALID_HOTEL_VO;

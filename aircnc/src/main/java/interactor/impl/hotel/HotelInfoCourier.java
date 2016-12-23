@@ -21,10 +21,13 @@ import presentation.hotel.manager.impl.HotelCommentManagerImpl;
 import presentation.hotel.manager.impl.HotelOrderManagerImpl;
 import presentation.hotel.manager.impl.HotelRoomManagerImpl;
 import presentation.hotel.manager.impl.InfoManagerImpl;
+import presentation.member.accessor.impl.SupremeSearchAccessorImpl;
+import presentation.member.manager.impl.SearchHotelManagerImpl;
 import service.hotel.HotelAccountService;
 import service.hotel.HotelInfoService;
 import utils.info.hotel.HotelInfo;
 import utils.info.hotel.Room;
+import vo.hotel.HotelVo;
 import vo.hotel.HotelVoBuilder;
 import vo.order.OrderVo;
 import vo.order.comment.CommentVo;
@@ -186,6 +189,24 @@ public class HotelInfoCourier implements HotelInfoInteractor {
 		});
 
 		HotelOrderManagerImpl.getInstance().setOrderList(list);
+		
+	}
+	
+	@Override
+	@Title("搜索酒店")
+	public void getHotelsByCondition() {
+		String title = getTitle();
+		List<HotelVo> hotels = execute(title,()->{
+			List<HotelVo> list = handler.findByCondition(SupremeSearchAccessorImpl.getInstance().getCondition());
+			if(list==null||list.isEmpty()){
+				alertFail(title, "没有符合条件的酒店");
+				return null;
+			}else{
+				return list;
+			}
+		});
+				
+		SearchHotelManagerImpl.getInstance().setHotel(hotels);
 		
 	}
 	

@@ -3,15 +3,16 @@ package utils.condition;
 import java.time.LocalDate;
 import java.util.Set;
 
-import utils.info.hotel.RoomTemplate.Type;
-
 public class Condition {
+	public enum Type{
+		全部,单人间,双人间,三人间,其它;
+	}
 	private double rankGreaterThan;
 	private IntegerBound starBound;
 	private DoubleBound priceBound;
 	private String scopeLike;
 	private String nameLike;
-	private Set<Type> roomTypes;
+	private Type roomTypes;
 	private boolean available;
 	private LocalDate since;
 
@@ -52,7 +53,7 @@ public class Condition {
 	/**
 	 * @return the roomTypes
 	 */
-	public Set<Type> getRoomTypes() {
+	public Type getRoomTypes() {
 		return roomTypes;
 	}
 
@@ -119,7 +120,7 @@ public class Condition {
 	 * @param roomTypes
 	 *            the roomTypes to set
 	 */
-	Condition setRoomTypes(Set<Type> roomTypes) {
+	Condition setRoomTypes(Type roomTypes) {
 		this.roomTypes = roomTypes;
 		return this;
 	}
