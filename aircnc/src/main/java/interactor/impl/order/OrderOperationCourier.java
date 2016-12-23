@@ -8,7 +8,7 @@ import static utils.exception.StaticExceptionFactory.unknownEx;
 
 import interactor.order.UserOrderOperationInteractor;
 import interactor.utils.Title;
-import presentation.market.accessor.impl.MakeOrderAccessorImpl;
+import presentation.member.accessor.impl.MemberOrderOperationAccessorImpl;
 import service.member.MemberAccountService;
 import service.order.OrderOperationService;
 import service.promotion.PromotionApplicationService;
@@ -90,10 +90,11 @@ public class OrderOperationCourier implements UserOrderOperationInteractor {
 	}
 
 	private static final OrderInfo getOrderFromUI() {
-		return MakeOrderAccessorImpl.getIntance().getOrder();
+		return MemberOrderOperationAccessorImpl.getInstance().getOrder();
 	}
 
 	private static final OrderInfoBuilder getNewOrderFromUI() {
-		return MakeOrderAccessorImpl.getIntance().getNewOrder();
+		// return MemberOrderOperationAccessorImpl.getInstance().getOrder();
+		return null;
 	}
 }
