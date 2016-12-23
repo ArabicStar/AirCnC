@@ -3,7 +3,6 @@ package launcher;
 import javafx.application.Application;
 import presentation.member.CenterController;
 import presentation.member.accessor.impl.CreditChangeOrderAccessorImpl;
-import presentation.member.accessor.impl.HotelNameAccessorImpl;
 import presentation.member.accessor.impl.InfoModifyAccessorImpl;
 import presentation.member.accessor.impl.MemberAppealAccessorImpl;
 import presentation.member.accessor.impl.MemberCommentAccessorImpl;
@@ -46,7 +45,7 @@ public class UILauncher {
 		SearchOrderInfoAccessorImpl.launch();
 		SupremeSearchAccessorImpl.launch();
 		CreditChangeOrderAccessorImpl.launch();
-		HotelNameAccessorImpl.launch();
+		//HotelNameAccessorImpl.launch();
 
 	}
 
