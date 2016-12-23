@@ -5,15 +5,14 @@ import data.dao.query.QueryDaoProxy;
 import service.impl.member.MemberAccountManager;
 import service.impl.member.MemberCreditManager;
 import service.impl.member.MemberInfoManager;
-import service.impl.order.OrderQueryManager;
 import service.impl.promotion.HotelPromotionApplicationManager;
 import service.impl.promotion.HotelPromotionInfoManager;
-import service.impl.promotion.OrderRelateInfoManager;
 import service.impl.promotion.PromotionApplicationManager;
 import service.impl.promotion.WebsitePromotionApplicationManager;
 import service.impl.promotion.WebsitePromotionInfoManager;
 import service.impl.query.CreditQueryManager;
 import service.impl.query.HotelQueryManager;
+import service.impl.query.OrderQueryManager;
 import service.member.MemberAccountService;
 import service.member.MemberCreditService;
 import service.member.MemberInfoService;
@@ -31,7 +30,6 @@ import service.query.MemberQueryService;
 import service.query.OrderQueryService;
 import service.query.QueryServiceProxy;
 import utils.logger.Log;
-import utils.promotion.OrderRelatedInfoHelper;
 import utils.proxy.AuthenticatePolicy.Client;
 
 public class ServiceLauncher {
@@ -67,16 +65,13 @@ public class ServiceLauncher {
 	}
 
 	private static final void launchPromotionService(Client clientId) {
-		final MemberDaoProxy memberDaoProxy = MemberDaoProxy.getInstance();
 		final QueryDaoProxy queryDaoProxy = QueryDaoProxy.getInstance();
 
-		final OrderRelatedInfoHelper helper = OrderRelateInfoManager.launch(memberDaoProxy, queryDaoProxy);
 		final HotelPromotionInfoService hotelInfo = HotelPromotionInfoManager.launch(queryDaoProxy);
 		final WebsitePromotionInfoService websiteInfo = WebsitePromotionInfoManager.launch(queryDaoProxy);
-		final HotelPromotionApplicationService hotelApplication = HotelPromotionApplicationManager.launch(hotelInfo,
-				helper);
+		final HotelPromotionApplicationService hotelApplication = HotelPromotionApplicationManager.launch(hotelInfo);
 		final WebsitePromotionApplicationService websiteApplication = WebsitePromotionApplicationManager
-				.launch(websiteInfo, helper);
+				.launch(websiteInfo);
 		final PromotionApplicationService application = PromotionApplicationManager.launch(hotelApplication,
 				websiteApplication);
 

@@ -2,7 +2,6 @@ package utils.promotion.trigger.hotel;
 
 import utils.info.order.OrderInfo;
 import utils.parameter.ParametersList;
-import utils.promotion.OrderRelatedInfoHelper;
 import utils.promotion.trigger.Trigger;
 
 public class HotelTrigger implements Trigger {
@@ -20,8 +19,8 @@ public class HotelTrigger implements Trigger {
 	}
 
 	@Override
-	public boolean test(OrderInfo order, OrderRelatedInfoHelper helper) {
-		return when.test(params, order, helper);
+	public boolean test(OrderInfo order) {
+		return when.test(params, order);
 	}
 
 	@Override

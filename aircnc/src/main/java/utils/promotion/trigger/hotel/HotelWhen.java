@@ -3,7 +3,6 @@ package utils.promotion.trigger.hotel;
 import utils.info.order.OrderInfo;
 import utils.parameter.ParametersList;
 import utils.promotion.Describer;
-import utils.promotion.OrderRelatedInfoHelper;
 import utils.promotion.trigger.Criterion;
 import utils.promotion.trigger.TriggerTemplates;
 
@@ -25,7 +24,7 @@ public enum HotelWhen {
 		return describer.describe(params);
 	}
 
-	public boolean test(final ParametersList params, OrderInfo order, final OrderRelatedInfoHelper helper) {
-		return criterion.test(params, order, helper);
+	public boolean test(final ParametersList params, OrderInfo order) {
+		return criterion.test(params, order);
 	}
 }

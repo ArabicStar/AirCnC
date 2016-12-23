@@ -13,8 +13,8 @@ public class Promotion {
 		this.trigger = trigger;
 	}
 
-	public boolean canApplyTo(OrderInfo order, OrderRelatedInfoHelper helper) {
-		return trigger.test(order, helper);
+	public boolean canApplyTo(OrderInfo order) {
+		return trigger.test(order);
 	}
 
 	public OrderInfo applyTo(OrderInfo order) {

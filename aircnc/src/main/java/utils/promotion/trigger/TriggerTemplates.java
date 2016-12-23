@@ -1,7 +1,5 @@
 package utils.promotion.trigger;
 
-import static utils.info.member.MemberInfoTemplate.formatID;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -91,7 +89,7 @@ public final class TriggerTemplates {
 	}
 
 	private static final Criterion periodCritierion() {
-		return (paramList, order, helper) -> {
+		return (paramList, order) -> {
 
 			LocalDateTime from = paramList.getParameterValue(TriggerParams.FROM.paramName());
 			LocalDateTime to = paramList.getParameterValue(TriggerParams.TO.paramName());
@@ -103,12 +101,12 @@ public final class TriggerTemplates {
 	}
 
 	private static final Criterion levelCriterion() {
-		return (paramList, order, helper) -> helper.getMemberLevel(formatID(order.getUserId())) >= (int) paramList
-				.getParameterValue(TriggerParams.LEVEL_THRESHOLD.paramName());
+		return (paramList, order) -> order.getMember()
+				.getLevel() >= (int) paramList.getParameterValue(TriggerParams.LEVEL_THRESHOLD.paramName());
 	}
 
 	private static final Criterion tradeAreaCriterion() {
-		return (paramList, order, helper) -> helper.getHotelScope(order.getHotelId())
+		return (paramList, order) -> order.getHotel().getScope()
 				.equals(paramList.getParameterValue(TriggerParams.TARGET_TRADE_AREA.paramName()));
 	}
 
@@ -200,8 +198,8 @@ public final class TriggerTemplates {
 	}
 
 	private static final Criterion birthdayCriterion() {
-		return (paramList, order, helper) -> {
-			LocalDate birthday = helper.getMemberBirthday(formatID(order.getUserId()));
+		return (paramList, order) -> {
+			LocalDate birthday = order.getMember().getBirthday();
 			int month = birthday.getMonthValue();
 			int date = birthday.getDayOfMonth();
 
@@ -214,12 +212,12 @@ public final class TriggerTemplates {
 	}
 
 	private static final Criterion enterpriseCriterion() {
-		return (paramList, order, helper) -> helper.getMemberEnterprise(formatID(order.getUserId()))
+		return (paramList, order) -> order.getMember().getEnterprise()
 				.equals(paramList.getParameterValue(TriggerParams.ENTERPRISE.paramName()));
 	}
 
 	private static final Criterion multiRoomsCriterion() {
-		return (paramList, order, helper) -> order
+		return (paramList, order) -> order
 				.getRoomNumber() >= (int) paramList.getParameterValue(TriggerParams.ROOM_NUM_THRESHOLD.paramName());
 	}
 

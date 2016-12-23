@@ -51,7 +51,7 @@ public class WebsitePromotionApplicationManager implements WebsitePromotionAppli
 	public OrderInfo applyPromotion(OrderInfo info) {
 		final OrderInfo tmp = info;
 		final Set<PromotionVo> available = infoService.getUserAvailableWebsitePromotions().stream()
-				.filter(vo -> vo.getPromotion().canApplyTo(tmp, helper)).collect(Collectors.toSet());
+				.filter(vo -> vo.getPromotion().canApplyTo(tmp)).collect(Collectors.toSet());
 
 		for (PromotionVo promotion : available)
 			info = promotion.getPromotion().applyTo(info);
