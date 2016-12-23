@@ -49,11 +49,11 @@ public class CommentVo extends CommentInfo {
 	}
 
 	@Override
-	public OrderVo getOrder() {
+	public OrderVo getRelOrder() {
 		return order;
 	}
 
-	public CommentVo setOrder(OrderVo order) {
+	public CommentVo setRelOrder(OrderVo order) {
 		this.order = order;
 		return this;
 	}

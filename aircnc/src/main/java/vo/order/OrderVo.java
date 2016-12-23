@@ -84,9 +84,9 @@ public class OrderVo extends OrderInfo {
 		return this;
 	}
 
-	OrderVo setComment(CommentVo comment) {
+	OrderVo setComments(CommentVo comment) {
 		this.comment = comment;
-		comment.setOrder(this);
+		comment.setRelOrder(this);
 		return this;
 	}
 
@@ -106,7 +106,7 @@ public class OrderVo extends OrderInfo {
 	}
 
 	@Override
-	public CommentVo getComment() {
+	public CommentVo getComments() {
 		return comment;
 	}
 

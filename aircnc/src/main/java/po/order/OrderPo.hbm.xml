@@ -80,7 +80,7 @@
 				column="webProm_id" unique="false" />
 		</set>
 
-		<one-to-one name="comment" class="po.order.comment.CommentPo"
-			property-ref="order" />
+		<one-to-one name="comments" class="po.order.comment.CommentPo"
+			cascade="all" fetch="select" property-ref="relOrder" />
 	</class>
 </hibernate-mapping>

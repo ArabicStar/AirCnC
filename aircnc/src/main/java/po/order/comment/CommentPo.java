@@ -9,7 +9,7 @@ import utils.info.order.comment.CommentInfo;
 
 public class CommentPo extends CommentInfo {
 
-	private OrderPo order;
+	private OrderPo relOrder;
 	private HotelPo hotel;
 
 	public CommentPo() {
@@ -53,12 +53,12 @@ public class CommentPo extends CommentInfo {
 	}
 
 	@Override
-	public OrderInfo getOrder() {
-		return order;
+	public OrderInfo getRelOrder() {
+		return relOrder;
 	}
 
-	public CommentPo setOrder(OrderPo order) {
-		this.order = order;
+	public CommentPo setRelOrder(OrderPo order) {
+		this.relOrder = order;
 		return this;
 	}
 

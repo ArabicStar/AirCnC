@@ -63,7 +63,7 @@ public class OrderVoBuilder extends OrderInfoBuilder {
 				.setOriginalPrice(originalPrice)//
 				.setDiscountPrice(discountPrice)//
 				.setPromotions(promotions)//
-				.setComment(comment)//
+				.setComments(comment)//
 				.setAppeal(appeal);//
 	}
 

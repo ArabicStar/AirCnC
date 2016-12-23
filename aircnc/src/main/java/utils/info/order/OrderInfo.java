@@ -64,7 +64,7 @@ public abstract class OrderInfo extends OrderInfoTemplate {
 	}
 
 	public boolean isReviewed() {
-		return getComment() != null;
+		return getComments() != null;
 	}
 
 	public String getAppeal() {
@@ -75,7 +75,7 @@ public abstract class OrderInfo extends OrderInfoTemplate {
 
 	public abstract HotelInfo getHotel();
 
-	public abstract CommentInfo getComment();
+	public abstract CommentInfo getComments();
 
 	public abstract Set<? extends PromotionInfo> getPromotions();
 
@@ -88,7 +88,7 @@ public abstract class OrderInfo extends OrderInfoTemplate {
 				.append(", peopleNumber=").append(peopleNumber).append(", hasChildren=").append(hasChildren)
 				.append(", originalPrice=").append(originalPrice).append(", discountPrice=").append(discountPrice)
 				.append(", appeal=").append(appeal).append(", getMember()=").append(getMember()).append(", getHotel()=")
-				.append(getHotel()).append(", getComment()=").append(getComment()).append("]");
+				.append(getHotel()).append(", getComment()=").append(getComments()).append("]");
 		return builder.toString();
 	}
 

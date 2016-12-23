@@ -109,14 +109,14 @@ public class OrderPo extends OrderInfo {
 		return promotions.stream().filter(po -> po.getScope() == Scope.Hotel).collect(Collectors.toSet());
 	}
 
-	public OrderPo setComment(CommentPo comment) {
+	public OrderPo setComments(CommentPo comment) {
 		this.comment = comment;
-		comment.setOrder(this);
+		comment.setRelOrder(this);
 		return this;
 	}
 
 	@Override
-	public CommentPo getComment() {
+	public CommentPo getComments() {
 		return comment;
 	}
 

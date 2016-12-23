@@ -61,7 +61,7 @@ public class OrderPoBuilder extends OrderInfoBuilder {
 				.setOriginalPrice(originalPrice)//
 				.setDiscountPrice(discountPrice)//
 				.setPromotions(promotions)//
-				.setComment(comment)//
+				.setComments(comment)//
 				.setAppeal(appeal);//
 	}
 
@@ -187,7 +187,7 @@ public class OrderPoBuilder extends OrderInfoBuilder {
 			throw unsupportedOpEx("Couldn't revert the comment");
 
 		to.setStatus(from.getStatus());
-		to.setComment(from.getComment());
+		to.setComments(from.getComments());
 	}
 
 	@Override

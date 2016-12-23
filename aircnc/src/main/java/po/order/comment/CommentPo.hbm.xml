@@ -21,11 +21,11 @@
 			type="integer" />
 
 		<!-- hotel -->
-		<many-to-one cascade="svae-update" class="po.hotel.HotelPo"
+		<many-to-one cascade="save-update" class="po.hotel.HotelPo"
 			column="hotel" fetch="select" name="hotel" not-null="true" />
 
 		<!-- order -->
-		<many-to-one class="po.order.OrderPo" column="order"
-			fetch="select" name="order" unique="true" />
+		<many-to-one class="po.order.OrderPo" column="rel_order"
+			fetch="select" name="relOrder" unique="true" />
 	</class>
 </hibernate-mapping>

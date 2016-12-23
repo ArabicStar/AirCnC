@@ -39,7 +39,7 @@ public abstract class OrderInfoBuilder extends OrderInfoTemplate {
 				.setHasChildren(info.getHasChildren())//
 				.setOriginalPrice(info.getOriginalPrice())//
 				.setDiscountPrice(info.getDiscountPrice())//
-				.setComment(info.getComment())//
+				.setComment(info.getComments())//
 				.setAppeal(info.getAppeal());//
 	}
 

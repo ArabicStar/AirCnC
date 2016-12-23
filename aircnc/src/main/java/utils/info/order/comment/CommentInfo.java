@@ -35,12 +35,12 @@ public abstract class CommentInfo extends CommentInfoTemplate {
 		return grade;
 	}
 
-	public abstract OrderInfo getOrder();
+	public abstract OrderInfo getRelOrder();
 
 	public abstract HotelInfo getHotel();
 
 	public MemberInfo getMember() {
-		final OrderInfo order = getOrder();
+		final OrderInfo order = getRelOrder();
 		return order == null ? null : order.getMember();
 	}
 
