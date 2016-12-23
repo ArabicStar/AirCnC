@@ -3,10 +3,9 @@ package service.order;
 import utils.info.member.MemberInfo;
 import utils.info.order.OrderInfo;
 import vo.order.OrderVo;
-import vo.order.OrderVoBuilder;
 
 public interface OrderOperationService {
-	public OrderInfo makeOrder(OrderVoBuilder info, int hotelId);
+	public OrderInfo makeOrder(OrderVo info);
 
 	public MemberInfo cancelOrder(OrderVo info);
 

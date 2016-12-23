@@ -66,13 +66,16 @@ public class OrderOperationManager implements OrderOperationService {
 	private PromotionApplicationService promotion;
 
 	@Override
-	public OrderInfo makeOrder(OrderVoBuilder newOrder, int hotelId) {
+	public OrderInfo makeOrder(OrderVo newOrder) {
 		if (newOrder == null)
 			throw illegalArgEx("Order info", newOrder);
 
-		String id = generateId(hotelId);
-		OrderInfo newOrderInfo = promotion
-				.applyPromotion(newOrder.setOrderId(id).setStatus(OrderStatus.UNEXECUTED).getOrderInfo());
+		String id = generateId(newOrder);
+		OrderInfo newOrderInfo = promotion.applyPromotion(
+				new OrderVoBuilder(newOrder).setOrderId(id).setStatus(OrderStatus.UNEXECUTED).getOrderInfo());
+		if (newOrderInfo.getMember().getCredit() < 0)
+			return null;
+
 		OrderPo newOrderPo = new OrderPoBuilder(newOrderInfo).getOrderInfo();
 
 		if (dao.addOrder(newOrderPo))
@@ -162,7 +165,8 @@ public class OrderOperationManager implements OrderOperationService {
 
 	private static final Random R = new Random(System.currentTimeMillis());
 
-	private String generateId(int hotelId) {
+	private String generateId(OrderInfo order) {
+		int hotelId = order.getHotel().getId();
 		StringBuilder builder = new StringBuilder();
 		builder.append(OrderVo.getDateFormatter().format(LocalDateTime.now()));
 
