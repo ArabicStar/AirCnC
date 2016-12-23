@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import data.dao.impl.member.CreditDaoImpl;
-import data.dao.impl.order.CommentDaoImpl;
+import data.dao.impl.query.CommentQueryDaoImpl;
 import data.dao.impl.query.PromotionQueryDaoImpl;
 import data.dao.query.CommentQueryDao;
 import data.dao.query.CreditQueryDao;
@@ -39,7 +39,7 @@ public class QueryDaoRemoteObj extends UnicastRemoteObject implements RemoteCred
 
 		final CreditQueryDao creditQuery = CreditDaoImpl.INSTANCE;
 		final PromotionQueryDao promotionQuery = PromotionQueryDaoImpl.INSTANCE;
-		final CommentQueryDao commentQuery = CommentDaoImpl.INSTANCE;
+		final CommentQueryDao commentQuery = CommentQueryDaoImpl.INSTANCE;
 		
 		instance = new QueryDaoRemoteObj(creditQuery, promotionQuery, commentQuery);
 
