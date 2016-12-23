@@ -3,6 +3,7 @@ package utils.info.order.comment;
 import java.time.LocalDateTime;
 
 import utils.info.hotel.HotelInfo;
+import utils.info.member.MemberInfo;
 import utils.info.order.OrderInfo;
 
 public abstract class CommentInfo extends CommentInfoTemplate {
@@ -37,6 +38,11 @@ public abstract class CommentInfo extends CommentInfoTemplate {
 	public abstract OrderInfo getOrder();
 
 	public abstract HotelInfo getHotel();
+
+	public MemberInfo getMember() {
+		final OrderInfo order = getOrder();
+		return order == null ? null : order.getMember();
+	}
 
 	@Override
 	public String toString() {
