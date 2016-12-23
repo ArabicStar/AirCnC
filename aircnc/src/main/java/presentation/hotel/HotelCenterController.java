@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import presentation.hotel.manager.InfoManager;
 import presentation.hotel.view.HotelMainPane;
 import presentation.hotel.view.abnormalOrder.AbnormalOrderPane;
 import presentation.hotel.view.checkInLive.CheckInLivePane;
@@ -33,9 +32,8 @@ public class HotelCenterController extends Application{
 	private AbnormalOrderPane abnormalPane;
 	private HotelPromotionMainPane promotionPane;
 	
-	private InfoManager hotelInfoManager;
-	
-	private HotelTest test;
+//	private InfoManager hotelInfoManager;	
+//	private HotelTest test;
 	
 	
 	private final static int Client_Width = 1024;
@@ -56,18 +54,10 @@ public class HotelCenterController extends Application{
 		rootLayout = mainClient.getBorderPane();
 		scene = new Scene(mainClient.getBorderPane(), Client_Width, Client_Height);
 		primaryStage.setScene(scene);
-
-		// addSignInPane();
-
-		test = new HotelTest();
-		initialize();
+//
+//		test = new HotelTest();
 		primaryStage.show();
 		
-	}
-	
-	public void initialize(){
-		if(!InfoModifyAccessorImpl.isLaunched())
-			InfoModifyAccessorImpl.launch();
 	}
 	
 	public void addOrderExecutePane() {
@@ -114,24 +104,35 @@ public class HotelCenterController extends Application{
 	}
 	
 	public void addHotelModifyPane() {
-		hotelInfoManager = test.getHotelData();
+//		hotelInfoManager = test.getHotelData();
 		clearContent();
 		modifyPane = new HotelInfoModifyPane();
 		mainClient.getBorderPane().setCenter(modifyPane.getPane());
 		modifyPane.getController().setCenterController(this);
-		modifyPane.getController().setManager(hotelInfoManager);
+//		modifyPane.getController().setManager(hotelInfoManager);
 		modifyPane.getController().setRootLayout(rootLayout);
 	}
 	
 	public void addHotelInfoMainPane() {
 		
-		hotelInfoManager = test.getHotelData();
+//		hotelInfoManager = test.getHotelData();
 		clearContent();
 		infoMainPane = new HotelInfoMainPane();
 		mainClient.getBorderPane().setCenter(infoMainPane.getBorderPane());
 		infoMainPane.getController().setCenterController(this);	
-		infoMainPane.getController().setManager(hotelInfoManager);
+//		infoMainPane.getController().setManager(hotelInfoManager);
 		HotelInfoController infoController = new HotelInfoController(infoMainPane,this);
+	}
+	
+	public void initializeLogin(){
+		primaryStage.close();
+		CenterController login = new CenterController();
+		try {
+			login.start(new Stage());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 

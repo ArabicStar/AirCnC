@@ -3,6 +3,9 @@ package presentation.hotel.view.signIn;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import interactor.hotel.HotelAccountInteractor;
+import interactor.impl.hotel.HotelAccountCourier;
+import interactor.member.MemberAccountInteractor;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert.AlertType;
@@ -29,14 +32,17 @@ public class HotelSignInController implements Initializable{
 	
 	private HotelLoginAccessor accessor;
 	
+	private HotelAccountInteractor interactor;
+	
 	/**
      * Initializes the controller class. This method is automatically called
      * after the fxml file has been loaded.
      */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		name.setText("");
-		password.setText("");
+		interactor = HotelAccountCourier.getInstance();
+		name.setPromptText("酒店名称");
+		password.setPromptText("密码");
 		
 	}
 	
@@ -49,15 +55,13 @@ public class HotelSignInController implements Initializable{
 	@FXML
 	public void handleConfirm(){
 		if(name.getText().length()!=0&&password.getText().length()!=0){
-			if(!HotelLoginAccessorImpl.isLaunched()){
-				HotelLoginAccessorImpl.launch();
-			}
+
 			accessor = HotelLoginAccessorImpl.getInstance();
 			accessor.setDeliveredName(name.getText());
 			accessor.setDeliveredPassword(password.getText());
 			
 			//use valid to mark whether it is correct
-			boolean valid = true;
+			boolean valid = interactor.login();
 			
 			if(valid)
 				controller.initializeClient();

@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang.StringUtils;
+
 import interactor.hotel.HotelInfoInteractor;
 import interactor.utils.Title;
 import presentation.hotel.accessor.impl.InfoModifyAccessorImpl;
@@ -190,7 +192,7 @@ public class HotelInfoCourier implements HotelInfoInteractor {
 	
 	private String getCurrentName() {
 		HotelInfo curAcc = helper.getCurrentAccount();
-		return curAcc == null ? null : curAcc.getName();
+		return curAcc == null ? null : StringUtils.deleteWhitespace(curAcc.getName());
 	}
 	
 	private int getCurrentId() {

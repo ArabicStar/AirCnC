@@ -9,19 +9,19 @@
    <left>
       <Pane prefHeight="768" prefWidth="247.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox alignment="CENTER" layoutY="271" prefHeight="400.0" prefWidth="247.0">
+            <VBox alignment="CENTER" layoutY="271" prefHeight="472.0" prefWidth="247.0">
                <children>
-                  <HBox alignment="CENTER" onMouseClicked="#handleHotelInfo" prefHeight="100.0" prefWidth="121.0" styleClass="hbox">
+                  <HBox fx:id="hotelInfo" alignment="CENTER" onMouseClicked="#handleHotelInfo" prefHeight="100.0" prefWidth="121.0" styleClass="hbox">
                      <children>
-                        <Label fx:id="hotelInfo" contentDisplay="CENTER" text="酒店信息" textAlignment="CENTER" />
+                        <Label contentDisplay="CENTER" text="酒店信息" textAlignment="CENTER" />
                      </children>
                      <padding>
                         <Insets right="30.0" />
                      </padding>
                   </HBox>
-                  <HBox alignment="CENTER" onMouseClicked="#handleOrderExecute" prefHeight="100.0" prefWidth="121.0" styleClass="hbox">
+                  <HBox fx:id="orderExecute" alignment="CENTER" onMouseClicked="#handleOrderExecute" prefHeight="100.0" prefWidth="121.0" styleClass="hbox">
                      <children>
-                        <Label fx:id="orderExecute" text="订单执行" textAlignment="CENTER" />
+                        <Label text="订单执行" textAlignment="CENTER" />
                      </children>
                      <VBox.margin>
                         <Insets />
@@ -30,46 +30,56 @@
                         <Insets right="30.0" />
                      </padding>
                   </HBox>
-                  <HBox alignment="CENTER" onMouseClicked="#handleOrderBrowse" prefHeight="100.0" prefWidth="121.0" styleClass="hbox">
+                  <HBox fx:id="orderBrowse" alignment="CENTER" onMouseClicked="#handleOrderBrowse" prefHeight="100.0" prefWidth="121.0" styleClass="hbox">
                      <children>
-                        <Label fx:id="orderBrowse" text="订单浏览" textAlignment="CENTER" />
+                        <Label text="订单浏览" textAlignment="CENTER" />
                      </children>
                      <padding>
                         <Insets right="30.0" />
                      </padding>
                   </HBox>
-                  <HBox alignment="CENTER" onMouseClicked="#handleCheckInLive" prefHeight="100.0" prefWidth="121.0" styleClass="hbox">
+                  <HBox fx:id="checkInLive" alignment="CENTER" onMouseClicked="#handleCheckInLive" prefHeight="100.0" prefWidth="121.0" styleClass="hbox">
                      <children>
-                        <Label fx:id="checkInLive" text="线下入住登记" textAlignment="CENTER" />
+                        <Label text="线下入住登记" textAlignment="CENTER" />
                      </children>
                      <padding>
                         <Insets right="30.0" />
                      </padding>
                   </HBox>
-                  <HBox alignment="CENTER" onMouseClicked="#handleCheckOut" prefHeight="100.0" prefWidth="121.0" styleClass="hbox">
+                  <HBox fx:id="checkOut" alignment="CENTER" onMouseClicked="#handleCheckOut" prefHeight="100.0" prefWidth="121.0" styleClass="hbox">
                      <children>
-                        <Label fx:id="checkOut" text="客户退房" textAlignment="CENTER" />
+                        <Label text="客户退房" textAlignment="CENTER" />
                      </children>
                      <padding>
                         <Insets right="30.0" />
                      </padding>
                   </HBox>
-                  <HBox alignment="CENTER" onMouseClicked="#handleAbnormalOrder" prefHeight="100.0" prefWidth="121.0" styleClass="hbox">
+                  <HBox fx:id="abnormalOrder" alignment="CENTER" onMouseClicked="#handleAbnormalOrder" prefHeight="100.0" prefWidth="121.0" styleClass="hbox">
                      <children>
-                        <Label fx:id="abnormalOrder" text="过期订单" textAlignment="CENTER" />
+                        <Label text="过期订单" textAlignment="CENTER" />
                      </children>
                      <padding>
                         <Insets right="30.0" />
                      </padding>
                   </HBox>
-                  <HBox alignment="CENTER" onMouseClicked="#handleHotelPromotion" prefHeight="100.0" prefWidth="121.0" styleClass="hbox">
+                  <HBox fx:id="hotelPromotion" alignment="CENTER" onMouseClicked="#handleHotelPromotion" prefHeight="100.0" prefWidth="121.0" styleClass="hbox">
                      <children>
-                        <Label fx:id="hotelPromotion" text="促销策略" textAlignment="CENTER" />
+                        <Label text="促销策略" textAlignment="CENTER" />
                      </children>
                      <padding>
                         <Insets right="30.0" />
                      </padding>
                   </HBox>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" layoutX="-2.0" layoutY="31.0" prefHeight="231.0" prefWidth="223.0" spacing="20.0">
+               <children>
+                  <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="196.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="107.0" prefWidth="100.0" styleClass="portrait-hbox" />
+                     </children>
+                  </HBox>
+                  <Button fx:id="logout" mnemonicParsing="false" onAction="#handleLogout" styleClass="logout" text="注销" />
                </children>
             </VBox>
          </children>
