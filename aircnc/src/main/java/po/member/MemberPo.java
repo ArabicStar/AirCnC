@@ -5,8 +5,6 @@ import static utils.crypto.Cryptor.encrypt;
 
 import java.time.LocalDate;
 
-import org.apache.commons.lang.StringUtils;
-
 import utils.info.member.ContactInfo;
 import utils.info.member.MemberInfo;
 
@@ -138,4 +136,5 @@ public abstract class MemberPo extends MemberInfo {
 	public void setEncryptName(String encryptName) {
 		this.name = decrypt(encryptName);
 	}
+
 }

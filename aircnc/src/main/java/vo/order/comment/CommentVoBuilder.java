@@ -14,6 +14,10 @@ import vo.hotel.HotelVoBuilder;
 public class CommentVoBuilder extends CommentInfoBuilder {
 	private HotelVo hotel;
 
+	public CommentVoBuilder() {
+		super();
+	}
+
 	/**
 	 * @param info
 	 */

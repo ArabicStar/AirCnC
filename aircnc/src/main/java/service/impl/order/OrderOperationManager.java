@@ -66,7 +66,7 @@ public class OrderOperationManager implements OrderOperationService {
 	private PromotionApplicationService promotion;
 
 	@Override
-	public OrderInfo makeOrder(OrderVo newOrder) {
+	public OrderInfo makeOrder(OrderInfo newOrder) {
 		if (newOrder == null)
 			throw illegalArgEx("Order info", newOrder);
 
@@ -85,7 +85,7 @@ public class OrderOperationManager implements OrderOperationService {
 	}
 
 	@Override
-	public MemberInfo executeOrder(OrderVo info) {
+	public MemberInfo executeOrder(OrderInfo info) {
 		if (!verifyOrder(info, OrderStatus.UNEXECUTED))
 			throw illegalArgEx("Order info", info);
 
@@ -99,7 +99,7 @@ public class OrderOperationManager implements OrderOperationService {
 	}
 
 	@Override
-	public MemberInfo cancelOrder(OrderVo info) {
+	public MemberInfo cancelOrder(OrderInfo info) {
 		if (!verifyOrder(info, OrderStatus.UNEXECUTED))
 			throw illegalArgEx("Order info", info);
 
@@ -112,7 +112,7 @@ public class OrderOperationManager implements OrderOperationService {
 	}
 
 	@Override
-	public MemberInfo overdueOrder(OrderVo info) {
+	public MemberInfo overdueOrder(OrderInfo info) {
 		if (!verifyOrder(info, OrderStatus.UNEXECUTED))
 			throw illegalArgEx("Order info", info);
 
@@ -126,7 +126,7 @@ public class OrderOperationManager implements OrderOperationService {
 	}
 
 	@Override
-	public MemberInfo delayOrder(OrderVo info) {
+	public MemberInfo delayOrder(OrderInfo info) {
 		if (!verifyOrder(info, OrderStatus.ABNORMAL))
 			throw illegalArgEx("Order info", info);
 
@@ -140,11 +140,38 @@ public class OrderOperationManager implements OrderOperationService {
 	}
 
 	@Override
-	public MemberInfo appealOrder(OrderVo info) {
+	public OrderInfo commentOrder(OrderInfo info) {
+		if (!verifyOrder(info, OrderStatus.EXECUTED))
+			throw illegalArgEx("Order info", info);
+
+		OrderPo commentedPo = new OrderPoBuilder(info).getOrderInfo();
+
+		if (dao.updateOrder(commentedPo))
+			return info;
+
+		return OrderVoBuilder.invalidOrderInfo();
+	}
+
+	@Override
+	public OrderInfo appealOrder(OrderInfo info) {
 		if (!verifyOrder(info, OrderStatus.ABNORMAL))
 			throw illegalArgEx("Order info", info);
 
-		OrderVo appealedVo = new OrderVoBuilder(info).setStatus(OrderStatus.ABNORMAL).getOrderInfo();
+		OrderVo appealingVo = new OrderVoBuilder(info).setStatus(OrderStatus.APPEALING).getOrderInfo();
+		OrderPo appealingPo = new OrderPoBuilder(appealingVo).getOrderInfo();
+
+		if (dao.updateOrder(appealingPo))
+			return appealingVo;
+
+		return OrderVoBuilder.invalidOrderInfo();
+	}
+
+	@Override
+	public MemberInfo approveAppeal(OrderInfo info) {
+		if (!verifyOrder(info, OrderStatus.ABNORMAL))
+			throw illegalArgEx("Order info", info);
+
+		OrderVo appealedVo = new OrderVoBuilder(info).setStatus(OrderStatus.EXECUTED).getOrderInfo();
 		OrderPo appealedPo = new OrderPoBuilder(appealedVo).getOrderInfo();
 
 		if (dao.updateOrder(appealedPo))

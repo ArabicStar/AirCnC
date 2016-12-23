@@ -3,6 +3,7 @@ package utils.crypto;
 import static utils.crypto.BytesCharsConverter.bytes2HexString;
 import static utils.crypto.BytesCharsConverter.hexString2Bytes;
 
+import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.Security;
@@ -13,6 +14,8 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
 
 /**
  * Helper for crypto.<br>
@@ -23,29 +26,8 @@ import javax.crypto.SecretKey;
  *
  */
 public abstract class Cryptor {
-
-	private static KeyGenerator keygen;
-	private static SecretKey deskey;
-	private static Cipher c;
-
-	static {
-		try {
-			init();
-		} catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
-			e.printStackTrace();
-		}
-	}
-
-	private static final void init() throws NoSuchAlgorithmException, NoSuchPaddingException {
-		Security.addProvider(new com.sun.crypto.provider.SunJCE());
-		// 实例化支持DES算法的密钥生成器(算法名称命名需按规定，否则抛出异常)
-		keygen = KeyGenerator.getInstance("AES");
-		// 生成密钥
-		deskey = keygen.generateKey();
-		// 生成Cipher对象,指定其支持的DES算法
-		c = Cipher.getInstance("AES");
-
-	}
+	public static final String VIPARA = "1269571569321021";
+	public static final String password = "8665513896432496";
 
 	/**
 	 * 对字符串加密
@@ -61,17 +43,21 @@ public abstract class Cryptor {
 		byte[] en = null;
 		try {
 			en = doEncrypt(src);
-		} catch (InvalidKeyException | IllegalBlockSizeException | BadPaddingException e) {
+		} catch (InvalidKeyException | IllegalBlockSizeException | BadPaddingException | NoSuchAlgorithmException
+				| NoSuchPaddingException | InvalidAlgorithmParameterException e) {
 			e.printStackTrace();
 		}
 		return bytes2HexString(en);
 	}
 
-	private static final byte[] doEncrypt(byte[] src)
-			throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
-		// 根据密钥，对Cipher对象进行初始化，ENCRYPT_MODE表示加密模式
-		c.init(Cipher.ENCRYPT_MODE, deskey);
-		return c.doFinal(src);
+	private static final byte[] doEncrypt(byte[] src) throws InvalidKeyException, IllegalBlockSizeException,
+			BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidAlgorithmParameterException {
+		IvParameterSpec zeroIv = new IvParameterSpec(VIPARA.getBytes());
+		SecretKeySpec key = new SecretKeySpec(password.getBytes(), "AES");
+		Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+		cipher.init(Cipher.ENCRYPT_MODE, key, zeroIv);
+
+		return cipher.doFinal(src);
 	}
 
 	/**
@@ -92,7 +78,8 @@ public abstract class Cryptor {
 		byte[] en = null;
 		try {
 			en = doDecrypt(buff);
-		} catch (InvalidKeyException | IllegalBlockSizeException | BadPaddingException e) {
+		} catch (InvalidKeyException | IllegalBlockSizeException | BadPaddingException | NoSuchAlgorithmException
+				| NoSuchPaddingException | InvalidAlgorithmParameterException e) {
 			e.printStackTrace();
 		}
 		if (en == null)
@@ -101,11 +88,16 @@ public abstract class Cryptor {
 		return new String(en);
 	}
 
-	private static byte[] doDecrypt(byte[] buff)
-			throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
+	private static byte[] doDecrypt(byte[] buff) throws InvalidKeyException, IllegalBlockSizeException,
+			BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidAlgorithmParameterException {
 		// 根据密钥，对Cipher对象进行初始化，DECRYPT_MODE表示加密模式
-		c.init(Cipher.DECRYPT_MODE, deskey);
-		return c.doFinal(buff);
+		IvParameterSpec zeroIv = new IvParameterSpec(VIPARA.getBytes());
+		SecretKeySpec key = new SecretKeySpec(password.getBytes(), "AES");
+		Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+
+		cipher.init(Cipher.DECRYPT_MODE, key, zeroIv);
+
+		return cipher.doFinal(buff);
 	}
 
 }

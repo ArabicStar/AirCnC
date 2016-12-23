@@ -65,8 +65,7 @@ public class MemberPoBuilder extends MemberInfoBuilder {
 
 	public MemberPoBuilder setName(String name) {
 		if (checkUserName(name))
-			// insert blank space to avoid injection attack
-			this.name = name.replaceAll("(.{1})", "$1 ");
+			this.name = name;
 		else
 			throw illegalArgEx("Member's name");
 

@@ -6,7 +6,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import po.hotel.HotelPo;
+import po.member.EnterpriseMemberPo;
 import po.member.MemberPo;
+import po.member.PersonalMemberPo;
 import po.order.comment.CommentPo;
 import po.promotion.PromotionPo;
 import utils.info.order.OrderInfo;
@@ -110,6 +112,8 @@ public class OrderPo extends OrderInfo {
 	}
 
 	public OrderPo setComments(CommentPo comment) {
+		if (comment == null)
+			return this;
 		this.comment = comment;
 		comment.setRelOrder(this);
 		return this;
@@ -138,5 +142,29 @@ public class OrderPo extends OrderInfo {
 	@Override
 	public HotelPo getHotel() {
 		return hotel;
+	}
+
+	public MemberPo getEnterpriseMember() {
+		if (member instanceof EnterpriseMemberPo)
+			return member;
+		else
+			return null;
+	}
+
+	public MemberPo getPersonalMember() {
+		if (member instanceof PersonalMemberPo)
+			return member;
+		else
+			return null;
+	}
+
+	public void setEnterpriseMember(MemberPo memberPo) {
+		if (member instanceof EnterpriseMemberPo)
+			this.member = memberPo;
+	}
+
+	public void setPersonalMember(MemberPo memberPo) {
+		if (member instanceof PersonalMemberPo)
+			this.member = memberPo;
 	}
 }

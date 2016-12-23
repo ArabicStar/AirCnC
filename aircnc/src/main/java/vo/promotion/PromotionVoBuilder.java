@@ -103,6 +103,9 @@ public class PromotionVoBuilder extends PromotionInfoBuilder {
 		if (!isReady() && prom == null)
 			throw illegalStateException("Not set up");
 
+		if (scope == Scope.Hotel && hotelId < 0)
+			throw illegalStateException("Not set up");
+
 		if (prom == null) {
 			Applier applier = applierBuilder.isReady() ? applierBuilder.build() : prom.getApplier();
 			Trigger trigger = triggerBuilder.isReady() ? triggerBuilder.build() : prom.getTrigger();

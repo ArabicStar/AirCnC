@@ -52,6 +52,9 @@ public abstract class OrderInfoTemplate {
 	 * @return
 	 */
 	public static boolean checkOrderId(String orderId) {
+		if (orderId.length() == 0)
+			return true;
+
 		if ((orderId.length() & 1) == 1)
 			return false;
 
@@ -74,7 +77,7 @@ public abstract class OrderInfoTemplate {
 
 	}
 
-	public static final DateTimeFormatter getDateFormatter(){
+	public static final DateTimeFormatter getDateFormatter() {
 		return f;
 	}
 }

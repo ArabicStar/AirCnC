@@ -5,7 +5,6 @@ public abstract class PromotionInfo extends PromotionInfoTemplate {
 	 * 
 	 */
 	private static final long serialVersionUID = -1594812134845326912L;
-	protected boolean isActive;
 	protected boolean isValid;
 
 	protected PromotionInfo() {
@@ -61,6 +60,7 @@ public abstract class PromotionInfo extends PromotionInfoTemplate {
 	}
 
 	public void expire() {
+		this.isPractical = false;
 		this.isActive = false;
 	}
 

@@ -117,7 +117,7 @@ public final class MemberAccountManager implements MemberAccountService {
 
 	@Override
 	public MemberPo getCurrentAccount() {
-		return currentAccount;
+		return new MemberPoBuilder(currentAccount).getMemberInfo();
 	}
 
 	@Override

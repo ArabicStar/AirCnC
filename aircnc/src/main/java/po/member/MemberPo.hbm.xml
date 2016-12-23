@@ -4,7 +4,8 @@
 <!-- Generated 2016-11-17 15:46:16 by Hibernate Tools 3.5.0.Final MemberPo 
 	mapping xml -->
 <hibernate-mapping>
-	<class name="po.member.MemberPo" table="member">
+	<class name="po.member.MemberPo" table="member" abstract="true"
+		polymorphism="explicit">
 		<!-- memberId, the key column, auto increase -->
 		<id column="id" name="numId" type="integer">
 			<generator class="assigned" />

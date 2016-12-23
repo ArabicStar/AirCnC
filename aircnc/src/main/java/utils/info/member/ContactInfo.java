@@ -1,7 +1,5 @@
 package utils.info.member;
 
-import java.io.Serializable;
-
 /**
  * Abstract of contact info.<br>
  * Immutable object.<br>
@@ -62,17 +60,11 @@ public abstract class ContactInfo extends ContactInfoTemplate {
 	}
 
 	@Override
-	public boolean equals(final Object o) {
-		if (o == null || !(o instanceof ContactInfo))
-			return false;
-
-		ContactInfo i = (ContactInfo) o;
-		return email.equals(i.getEmail()) && mobilePhone.equals(i.getMobilePhone())
-				&& fixedPhone.equals(i.getFixedPhone());
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("ContactInfo [cid=").append(cid).append(", email=").append(email).append(", mobilePhone=")
+				.append(mobilePhone).append(", fixedPhone=").append(fixedPhone).append("]");
+		return builder.toString();
 	}
 
-	@Override
-	public int hashCode() {
-		return email.hashCode() + fixedPhone.hashCode() + mobilePhone.hashCode();
-	}
 }

@@ -15,6 +15,10 @@ public class CommentPoBuilder extends CommentInfoBuilder {
 
 	private HotelPo hotel;
 
+	public CommentPoBuilder() {
+		super();
+	}
+
 	/**
 	 * @param info
 	 */
@@ -22,10 +26,9 @@ public class CommentPoBuilder extends CommentInfoBuilder {
 		super(info);
 	}
 
-	public CommentPoBuilder(OrderInfo info) {
+	public CommentPoBuilder(OrderInfo info){
 		super(info);
 	}
-
 	/**
 	 * @param id
 	 *            to be set id

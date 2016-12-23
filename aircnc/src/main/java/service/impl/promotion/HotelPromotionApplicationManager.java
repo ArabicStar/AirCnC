@@ -9,8 +9,6 @@ import java.util.stream.Collectors;
 import service.promotion.HotelPromotionApplicationService;
 import service.promotion.HotelPromotionInfoService;
 import utils.info.order.OrderInfo;
-import utils.promotion.OrderRelatedInfoHelper;
-import utils.promotion.Promotion;
 import vo.order.OrderVoBuilder;
 import vo.promotion.PromotionVo;
 
@@ -18,12 +16,11 @@ public class HotelPromotionApplicationManager implements HotelPromotionApplicati
 	/* Singleton */
 	private static HotelPromotionApplicationManager instance;
 
-	public static HotelPromotionApplicationManager launch(HotelPromotionInfoService infoService,
-			OrderRelatedInfoHelper helper) {
+	public static HotelPromotionApplicationManager launch(HotelPromotionInfoService infoService) {
 		if (instance != null)
 			throw duplicateSingletonEx();
 
-		return instance = new HotelPromotionApplicationManager(infoService, helper);
+		return instance = new HotelPromotionApplicationManager(infoService);
 	}
 
 	public static HotelPromotionApplicationManager getInstance() {
@@ -38,7 +35,7 @@ public class HotelPromotionApplicationManager implements HotelPromotionApplicati
 	 * @param infoService
 	 * @param helper
 	 */
-	private HotelPromotionApplicationManager(HotelPromotionInfoService infoService, OrderRelatedInfoHelper helper) {
+	private HotelPromotionApplicationManager(HotelPromotionInfoService infoService) {
 		super();
 		this.infoService = infoService;
 	}

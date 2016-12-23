@@ -9,8 +9,6 @@ import java.util.stream.Collectors;
 import service.promotion.WebsitePromotionApplicationService;
 import service.promotion.WebsitePromotionInfoService;
 import utils.info.order.OrderInfo;
-import utils.promotion.OrderRelatedInfoHelper;
-import utils.promotion.Promotion;
 import vo.order.OrderVoBuilder;
 import vo.promotion.PromotionVo;
 
@@ -18,12 +16,11 @@ public class WebsitePromotionApplicationManager implements WebsitePromotionAppli
 	/* Singleton */
 	private static WebsitePromotionApplicationManager instance;
 
-	public static WebsitePromotionApplicationManager launch(WebsitePromotionInfoService infoService,
-			OrderRelatedInfoHelper helper) {
+	public static WebsitePromotionApplicationManager launch(WebsitePromotionInfoService infoService) {
 		if (instance != null)
 			throw duplicateSingletonEx();
 
-		return instance = new WebsitePromotionApplicationManager(infoService, helper);
+		return instance = new WebsitePromotionApplicationManager(infoService);
 	}
 
 	public static WebsitePromotionApplicationManager getInstance() {
@@ -38,14 +35,12 @@ public class WebsitePromotionApplicationManager implements WebsitePromotionAppli
 	 * @param infoService
 	 * @param helper
 	 */
-	private WebsitePromotionApplicationManager(WebsitePromotionInfoService infoService, OrderRelatedInfoHelper helper) {
+	private WebsitePromotionApplicationManager(WebsitePromotionInfoService infoService) {
 		super();
 		this.infoService = infoService;
-		this.helper = helper;
 	}
 
 	private WebsitePromotionInfoService infoService;
-	private OrderRelatedInfoHelper helper;
 
 	@Override
 	public OrderInfo applyPromotion(OrderInfo info) {

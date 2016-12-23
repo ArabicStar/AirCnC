@@ -158,19 +158,19 @@ public class OrderVoBuilder extends OrderInfoBuilder {
 	}
 
 	@Override
-	public OrderInfoBuilder setComment(CommentInfo comment) {
+	public OrderVoBuilder setComment(CommentInfo comment) {
 		this.comment = new CommentVoBuilder(comment).getCommentInfo();
 		return this;
 	}
 
 	@Override
-	public OrderInfoBuilder setHotel(HotelInfo info) {
+	public OrderVoBuilder setHotel(HotelInfo info) {
 		this.hotel = new HotelVoBuilder(info).getHotelInfo();
 		return this;
 	}
 
 	@Override
-	public OrderInfoBuilder setMember(MemberInfo info) {
+	public OrderVoBuilder setMember(MemberInfo info) {
 		this.member = new MemberVoBuilder(info).getMemberInfo();
 		return this;
 	}

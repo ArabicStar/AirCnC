@@ -6,6 +6,7 @@ import utils.info.promotion.PromotionInfo;
 import utils.info.promotion.PromotionInfoBuilder;
 import utils.promotion.PromotionBuilder;
 
+@SuppressWarnings("serial")
 public class PromotionPoBuilder extends PromotionInfoBuilder {
 	private String contentString;
 

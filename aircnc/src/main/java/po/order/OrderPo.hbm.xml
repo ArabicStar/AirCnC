@@ -54,15 +54,17 @@
 			name="roomNumber" type="integer" update="false" />
 
 		<property column="appeal" generated="never" lazy="false"
-			name="appeal" type="string" update="false" />
+			name="appeal" type="string" />
 
 		<!-- hotel -->
-		<many-to-one cascade="save-update" class="po.hotel.HotelPo"
-			column="hotel_id" fetch="select" name="hotel" not-null="true" />
+		<many-to-one cascade="all" class="po.hotel.HotelPo" lazy="false"
+			column="hotel_id" fetch="select" name="hotel" not-null="true" update="false" />
 
 		<!-- member -->
-		<many-to-one cascade="save-update" class="po.member.MemberPo"
-			column="member_id" fetch="select" name="member" not-null="true" />
+		<many-to-one cascade="save-update" class="po.member.EnterpriseMemberPo"
+			lazy="false" column="e_mem_id" fetch="select" name="enterpriseMember" />
+		<many-to-one cascade="save-update" class="po.member.PersonalMemberPo"
+			lazy="false" column="p_mem_id" fetch="select" name="personalMember" />
 
 		<!-- hotel promotions -->
 		<set name="hotelPromotions" sort="unsorted" cascade="save-update"
@@ -77,10 +79,10 @@
 			table="ord$webProm_rel">
 			<key column="order_id" />
 			<many-to-many class="po.promotion.WebsitePromotionPo"
-				column="webProm_id" unique="false" />
+				lazy="false" column="webProm_id" unique="false" />
 		</set>
 
 		<one-to-one name="comments" class="po.order.comment.CommentPo"
-			cascade="all" fetch="select" property-ref="relOrder" />
+			lazy="false" cascade="all" property-ref="relOrder" />
 	</class>
 </hibernate-mapping>

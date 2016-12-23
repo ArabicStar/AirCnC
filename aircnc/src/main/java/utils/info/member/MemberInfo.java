@@ -136,4 +136,32 @@ public abstract class MemberInfo extends MemberInfoTemplate implements Serializa
 	public void invalidate() {
 		isValid = false;
 	}
+
+	/*
+	 * （非 Javadoc）
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("MemberInfo [isValid=").append(isValid).append(", ");
+		if (id != null)
+			builder.append("id=").append(id).append(", ");
+		if (name != null)
+			builder.append("name=").append(name).append(", ");
+		if (type != null)
+			builder.append("type=").append(type).append(", ");
+		builder.append("credit=").append(credit).append(", ");
+		if (birthday != null)
+			builder.append("birthday=").append(birthday).append(", ");
+		if (enterprise != null)
+			builder.append("enterprise=").append(enterprise).append(", ");
+		builder.append("level=").append(level).append(", ");
+		if (contact != null)
+			builder.append("contact=").append(contact);
+		builder.append("]");
+		return builder.toString();
+	}
+
 }

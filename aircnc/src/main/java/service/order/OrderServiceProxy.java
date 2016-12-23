@@ -9,7 +9,6 @@ import utils.info.member.MemberInfo;
 import utils.info.order.OrderInfo;
 import utils.proxy.AccessSecureProxy;
 import utils.proxy.AuthenticatePolicy;
-import vo.order.OrderVo;
 
 public class OrderServiceProxy extends AccessSecureProxy implements OrderInfoService, OrderOperationService {
 	/* Singleton */
@@ -50,7 +49,7 @@ public class OrderServiceProxy extends AccessSecureProxy implements OrderInfoSer
 
 	@Override
 	@AuthenticatePolicy({ Client.USER })
-	public OrderInfo makeOrder(OrderVo info) {
+	public OrderInfo makeOrder(OrderInfo info) {
 		checkAuthentication();
 
 		return orderOperation.makeOrder(info);
@@ -58,7 +57,7 @@ public class OrderServiceProxy extends AccessSecureProxy implements OrderInfoSer
 
 	@Override
 	@AuthenticatePolicy({ Client.USER })
-	public MemberInfo cancelOrder(OrderVo info) {
+	public MemberInfo cancelOrder(OrderInfo info) {
 		checkAuthentication();
 
 		return orderOperation.cancelOrder(info);
@@ -66,7 +65,7 @@ public class OrderServiceProxy extends AccessSecureProxy implements OrderInfoSer
 
 	@Override
 	@AuthenticatePolicy({ Client.HOTEL })
-	public MemberInfo executeOrder(OrderVo info) {
+	public MemberInfo executeOrder(OrderInfo info) {
 		checkAuthentication();
 
 		return orderOperation.executeOrder(info);
@@ -74,7 +73,7 @@ public class OrderServiceProxy extends AccessSecureProxy implements OrderInfoSer
 
 	@Override
 	@AuthenticatePolicy({ Client.HOTEL })
-	public MemberInfo delayOrder(OrderVo info) {
+	public MemberInfo delayOrder(OrderInfo info) {
 		checkAuthentication();
 
 		return orderOperation.delayOrder(info);
@@ -82,7 +81,7 @@ public class OrderServiceProxy extends AccessSecureProxy implements OrderInfoSer
 
 	@Override
 	@AuthenticatePolicy({ Client.HOTEL, Client.SERVER })
-	public MemberInfo overdueOrder(OrderVo info) {
+	public MemberInfo overdueOrder(OrderInfo info) {
 		checkAuthentication();
 
 		return orderOperation.overdueOrder(info);
@@ -90,7 +89,7 @@ public class OrderServiceProxy extends AccessSecureProxy implements OrderInfoSer
 
 	@Override
 	@AuthenticatePolicy({ Client.MARKET })
-	public MemberInfo appealOrder(OrderVo info) {
+	public MemberInfo appealOrder(OrderInfo info) {
 		checkAuthentication();
 
 		return orderOperation.appealOrder(info);

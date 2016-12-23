@@ -187,6 +187,7 @@ public class OrderPoBuilder extends OrderInfoBuilder {
 			throw unsupportedOpEx("Couldn't revert the comment");
 
 		to.setStatus(from.getStatus());
+		to.setAppeal(from.getAppeal());
 		to.setComments(from.getComments());
 	}
 

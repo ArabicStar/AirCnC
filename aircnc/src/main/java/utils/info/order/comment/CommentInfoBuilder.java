@@ -9,7 +9,7 @@ import utils.info.order.OrderInfo;
 
 public abstract class CommentInfoBuilder extends CommentInfoTemplate {
 
-	private CommentInfoBuilder() {
+	protected CommentInfoBuilder() {
 		this.id = 0;
 		this.commentTime = LocalDateTime.now();
 		this.content = "";
@@ -23,7 +23,7 @@ public abstract class CommentInfoBuilder extends CommentInfoTemplate {
 	}
 
 	protected CommentInfoBuilder(OrderInfo info) {
-		this();
+		setHotel(info.getHotel());
 	}
 
 	/**
