@@ -4,8 +4,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-import interactor.impl.order.OrderInfoCourier;
-import interactor.order.OrderInfoInteractor;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -30,15 +28,15 @@ import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import presentation.member.accessor.OrderMakerAccessor;
 import presentation.member.accessor.impl.OrderMakerAccessorImpl;
-import utils.date.HotelDate;
-import utils.info.order.OrderStatus;
+import presentation.member.model.MyOrderModel;
+import presentation.member.utils.DateTimePicker;
+import utils.info.hotel.Room;
 import vo.hotel.HotelVo;
-import vo.order.OrderVo;
-import vo.order.OrderVoBuilder;
 
 public class MakeOrderDialog {
 	Dialog<String> dialog;
 	private OrderMakerAccessor accessor;
+
 	public MakeOrderDialog(String content, HotelVo hotelVo) {
 		if(!OrderMakerAccessorImpl.isLaunch()) {
 			accessor = OrderMakerAccessorImpl.launch();
@@ -121,8 +119,8 @@ public class MakeOrderDialog {
 			options.add(tempRooms[i].getName());
 		}
 		// 这里应该是room有问题导致无法运行，因此使用替换策略
-		ObservableList<String> options = FXCollections.observableArrayList(
-				"单人间", "双人间", "三人间");
+//		ObservableList<String> options = FXCollections.observableArrayList(
+//				"单人间", "双人间", "三人间");
 		ComboBox<String> roomTypeBox = new ComboBox<>(options);
 		roomTypeBox.setValue(options.get(0));
 		gridPane.add(roomTypeLabel, 1, 3);
@@ -300,34 +298,9 @@ public class MakeOrderDialog {
 
 					@Override
 					public void handle(MouseEvent event) {
-						OrderDetailService detail = new OrderDetailServiceImpl();
-						OrderListingService listing = new OrderListingServiceImpl(hotelVo.getId());
-						OrderLogicService logic = new OrderLogicServiceImpl(hotelVo.getId());
-//						if(!OrderInfoCourier.isLaunch()) {
-						OrderInfoInteractor interactor = OrderInfoCourier.launch(detail, listing, logic);
-//						}
-						LocalTime time = LocalTime.MIDNIGHT;
-						LocalDateTime entry = LocalDateTime.of(enterDatePickeratePicker.getValue(), time);
-						LocalDateTime leave = LocalDateTime.of(leaveDatePickeratePicker.getValue(), time);
-						int stayDays = HotelDate.getGapDays(entry, leave);
-						// TODO 把宾馆信息和人员信息等信息加到订单上
-						// FIXME 不应该在这里用interactor将订单加到数据库中
-						OrderVo orderVo = new OrderVoBuilder().setEntryTime(entry)
-								.setHasChildren(hasChildren)
-								.setLastTime(timePicker.getDateTimeValue())
-								.setStayDays(stayDays).setStatus(OrderStatus.UNEXECUTED)
-								.setHotelName(hotelVo.getName())
-								.setRoomNumber(Integer.valueOf(roomNumberField.getText()))
-								.setRoomType(roomTypeBox.getValue())
-								.getOrderInfo();
-						interactor.addOrder(orderVo);
-						System.out.println("成功");
+						
 					}
 				});
-				alert.setHeaderText("确认生成订单？");
-				alert.setContentText(detail);
-				alert.show();
-				dialog.close();
 			}
 		});
 //		ensureButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -341,23 +314,15 @@ public class MakeOrderDialog {
 	}
 	
 
-	public TextAreaDialog(String content, MyOrderModel orderModel) {
+	public MakeOrderDialog(String content, MyOrderModel orderModel) {
 		// Create the custom dialog.
 		dialog = new Dialog<String>();
 		dialog.initStyle(StageStyle.UNDECORATED);
 		dialog.setHeaderText(content);
 
-		// Set the icon (must be included in the project).
-		// dialog.setGraphic(new
-		// ImageView(this.getClass().getResource("login.png").toString()));
-
-		// Set the button types.
-//		ButtonType loginButtonType = new ButtonType("OK", ButtonData.OK_DONE);
-//		dialog.getDialogPane().getButtonTypes().addAll(loginButtonType, ButtonType.CANCEL);
 		dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
 		
 		
-		// Create the username and password labels and fields.
 		GridPane grid = new GridPane();
 		grid.setHgap(10);
 		grid.setVgap(10);
@@ -371,48 +336,24 @@ public class MakeOrderDialog {
 		String detail = 
 				"用户名 " + orderModel.getUserName() + "\n" 
 		+ "酒店名 " + orderModel.getHotelName() + "\n"
-		+ "订单号 " + orderModel.getOrderId() + "\n"
-		+ "状态" + orderModel.getState() + " (" + orderModel.isReviewed() + ")\n" 
+		+ "订单号 " + orderModel.getOrderID() + "\n"
+		+ "状态" + orderModel.getState()
 		+ "入住时间 " + orderModel.getCheckInTime() + "\n"
 		+ "退房时间 " + orderModel.getLeaveTime() + "\n"
 		+ "房间类型 " + orderModel.getRoomType() + "\n"
 		+ "房间数量 " + orderModel.getRoomNumber() + "\n"
 		+ "入住人数 " + orderModel.getPeopleNumber() + "\n"
-		+ "有无儿童 " + orderModel.hasChildren() + "\n"
+		+ "有无儿童 " + orderModel.hasChild() + "\n"
 		+ "总价 " + orderModel.getTotalPrice() + "\n"
 		;
 		orderDetail.setText(detail);
 
-		// Enable/Disable login button depending on whether a username was
-		// entered.
-//		Node loginButton = dialog.getDialogPane().lookupButton(loginButtonType);
-//		loginButton.setDisable(true);
-
-		// Do some validation (using the Java 8 lambda syntax).
-//		orderDetail.textProperty().addListener((observable, oldValue, newValue) -> {
-//			loginButton.setDisable(newValue.trim().isEmpty());
-//		});
 
 		dialog.getDialogPane().setContent(grid);
 
 		// Request focus on the username field by default.
 		Platform.runLater(() -> orderDetail.requestFocus());
 
-		// Convert the result to a username-password-pair when the login button
-		// is clicked.
-//		dialog.setResultConverter(dialogButton -> {
-//			if (dialogButton == loginButtonType) {
-//				return new String(orderDetail.getText());
-//			}
-//			return null;
-//		});
-
-//		Optional<String> result = dialog.showAndWait();
-//
-//		result.ifPresent(usernamePassword -> {
-//			System.out.println("Username=" + usernamePassword.toString());
-//		});
-		
 
 	}
 

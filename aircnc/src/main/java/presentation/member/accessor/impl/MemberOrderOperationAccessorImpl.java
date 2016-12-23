@@ -1,17 +1,22 @@
 package presentation.member.accessor.impl;
 
+import static utils.exception.StaticExceptionFactory.accessorNotReadyEx;
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
+import java.time.LocalDateTime;
+
 import presentation.member.accessor.MemberOrderOperationAccessor;
+import vo.order.OrderVo;
+import vo.order.OrderVoBuilder;
+import vo.order.comment.CommentVo;
+import vo.order.comment.CommentVoBuilder;
 
 public class MemberOrderOperationAccessorImpl implements MemberOrderOperationAccessor {
 	
 	private static MemberOrderOperationAccessor instance;
 	
-	private String orderID;
-	private String comment;
-	private String appeal;
+	private OrderVo order;
 	
 	public static final MemberOrderOperationAccessor launch() {
 		if (instance != null)
@@ -35,35 +40,38 @@ public class MemberOrderOperationAccessorImpl implements MemberOrderOperationAcc
 	}
 	
 	@Override
-	public String getComment() {
-		return comment;
+	public OrderVo getOrder(){
+		return order;
 	}
 
 	@Override
-	public String getAppeal() {
-		return appeal;
-	}
-	
-	@Override
-	public String getOrderId(){
-		return orderID;
-	}
-
-	@Override
-	public void setComment(String id, String content) {
-		this.orderID = id;
-		this.comment = content;
+	public void setComment(OrderVo vo, double rate, String content) {
+		this.order = vo;
+		if(order == null)
+			throw accessorNotReadyEx();
+		else{
+			CommentVo comment = new CommentVoBuilder(vo).setContent(content).setGrade((int)rate)
+					.setCommentTime(LocalDateTime.now()).getCommentInfo();
+			OrderVoBuilder builder = new OrderVoBuilder(vo).setComment(comment);
+			this.order = builder.getOrderInfo();
+		}
+			
 	}
 
 	@Override
-	public void setAppeal(String id, String content) {
-		this.orderID = id;
-		this.appeal = content;
+	public void setAppeal(OrderVo vo, String content) {
+		this.order = vo;
+		if(order == null)
+			throw accessorNotReadyEx();
+		else{
+			OrderVoBuilder builder = new OrderVoBuilder(vo).setAppeal(content);
+			this.order = builder.getOrderInfo();
+		}
 	}
 
 	@Override
-	public void setCancel(String id) {
-		this.orderID = id;
+	public void setCancel(OrderVo vo) {
+		this.order = vo;
 	}
 
 }

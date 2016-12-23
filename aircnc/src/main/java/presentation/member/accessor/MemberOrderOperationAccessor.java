@@ -1,17 +1,14 @@
 package presentation.member.accessor;
 
+import vo.order.OrderVo;
 
 public interface MemberOrderOperationAccessor {
 	
-	public String getComment();
+	public OrderVo getOrder();
 	
-	public String getAppeal();
+	public void setComment(OrderVo vo, double rate, String content);
 	
-	public String getOrderId();
+	public void setAppeal(OrderVo vo, String content);
 	
-	public void setComment(String id, String content);
-	
-	public void setAppeal(String id, String content);
-	
-	public void setCancel(String id);
+	public void setCancel(OrderVo vo);
 }

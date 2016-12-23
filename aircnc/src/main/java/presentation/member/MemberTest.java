@@ -35,6 +35,7 @@ import vo.order.OrderVoBuilder;
 public class MemberTest {
 
 	MemberVo memberVo;
+	HotelVo hotelVo;
 
 	public MemberTest() {
 		MemberVoBuilder builder = new MemberVoBuilder("PERSONAL").setId("00002222").setName("hhh")
@@ -51,18 +52,18 @@ public class MemberTest {
 
 	public void getMyOrderData() {
 		List<OrderVo> list = new ArrayList<OrderVo>();
-		OrderVo vo1 = new OrderVoBuilder().setEntryTime(LocalDateTime.now()).setHasChildren(false).setHotelId(1000)
-				.setHotelName("乐天玛特").setLastTime(LocalDateTime.now()).setOrderId("201636").setPeopleNumber(3)
-				.setOriginalPrice(200).setReviewed(true).setRoomNumber(1).setRoomType("标准间").setStayDays(2).setUserId(20808121)
-				.setStatus(OrderStatus.EXECUTED).setUserName("南京大学渣").getOrderInfo();
-		OrderVo vo2 = new OrderVoBuilder().setEntryTime(LocalDateTime.now()).setHasChildren(false).setHotelId(1000)
-				.setHotelName("速八酒店").setLastTime(LocalDateTime.now()).setOrderId("201636").setPeopleNumber(3)
-				.setOriginalPrice(200).setReviewed(true).setRoomNumber(1).setRoomType("标准间").setStayDays(2).setUserId(20808121)
-				.setStatus(OrderStatus.ABNORMAL).setUserName("南京大学渣").getOrderInfo();
-		OrderVo vo3 = new OrderVoBuilder().setEntryTime(LocalDateTime.now()).setHasChildren(false).setHotelId(1000)
-				.setHotelName("速八酒店").setLastTime(LocalDateTime.now()).setOrderId("201636").setPeopleNumber(3)
-				.setOriginalPrice(200).setReviewed(true).setRoomNumber(1).setRoomType("标准间").setStayDays(2).setUserId(20808121)
-				.setStatus(OrderStatus.UNEXECUTED).setUserName("南京大学渣").getOrderInfo();
+		OrderVo vo1 = (OrderVo) new OrderVoBuilder().setEntryTime(LocalDateTime.now()).setHasChildren(false).setHotel(hotelVo)
+				.setLastTime(LocalDateTime.now()).setOrderId("201636").setPeopleNumber(3)
+				.setOriginalPrice(200).setRoomNumber(1).setRoomType("标准间").setStayDays(2).setMember(memberVo)
+				.setStatus(OrderStatus.EXECUTED).getOrderInfo();
+		OrderVo vo2 = (OrderVo) new OrderVoBuilder().setEntryTime(LocalDateTime.now()).setHasChildren(false).setHotel(hotelVo)
+				.setLastTime(LocalDateTime.now()).setOrderId("201636").setPeopleNumber(3)
+				.setOriginalPrice(200).setRoomNumber(1).setRoomType("标准间").setStayDays(2).setMember(memberVo)
+				.setStatus(OrderStatus.ABNORMAL).getOrderInfo();
+		OrderVo vo3 = (OrderVo) new OrderVoBuilder().setEntryTime(LocalDateTime.now()).setHasChildren(false).setHotel(hotelVo)
+				.setLastTime(LocalDateTime.now()).setOrderId("201636").setPeopleNumber(3)
+				.setOriginalPrice(200).setRoomNumber(1).setRoomType("标准间").setStayDays(2).setMember(memberVo)
+				.setStatus(OrderStatus.UNEXECUTED).getOrderInfo();
 		list.add(vo1);
 		list.add(vo2);
 		list.add(vo3);
@@ -107,6 +108,8 @@ public class MemberTest {
 		builder.setRooms(rooms);
 		
 		HotelVo hotel = builder.getHotelInfo();
+		
+		this.hotelVo = hotel;
 		
 		list.add(hotel);
 		SearchHotelManagerImpl.getInstance().setHotel(list);
