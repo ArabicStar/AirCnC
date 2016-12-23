@@ -1,6 +1,7 @@
 package utils.info.hotel;
 
 import po.hotel.HotelPo;
+import utils.info.promotion.PromotionInfoTemplate;
 
 /**
  * Abstract of room info object.<br>
@@ -92,5 +93,19 @@ public abstract class RoomTemplate {
 	 */
 	public static boolean checkRoomNum(int roomNum) {
 		return roomNum >= 1 || roomNum <= -1;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		RoomTemplate other = (RoomTemplate) obj;
+		if (id != other.id)
+			return false;
+		return true;
 	}
 }

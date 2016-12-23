@@ -6,6 +6,9 @@ import static aircnc.test.service.hotel.DataPrepareHelper.testName;
 import static aircnc.test.service.hotel.DataPrepareHelper.testRoom;
 import static org.junit.Assert.assertEquals;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.apache.commons.lang.StringUtils;
 import org.junit.After;
 import org.junit.Test;
@@ -14,6 +17,7 @@ import po.hotel.HotelPoBuilder;
 import service.hotel.HotelAccountService;
 import service.hotel.HotelInfoService;
 import utils.info.hotel.HotelInfo;
+import utils.info.hotel.Room;
 import vo.hotel.HotelVoBuilder;
 
 public class HotelInfoServiceTest {
@@ -49,8 +53,11 @@ public class HotelInfoServiceTest {
 		HotelInfo v = info.getHotelInfo(testName());
 		
 		acc.login(StringUtils.deleteWhitespace(v.getName()), "12345678".hashCode());
-		HotelInfo v2 = new HotelVoBuilder(v).getHotelInfo();
-		v2.getRooms().add(testRoom());
+		
+		Set<Room> rooms = new HashSet<Room>();
+		rooms.add(testRoom());
+		
+		HotelInfo v2 = new HotelVoBuilder(v).setRooms(rooms).getHotelInfo();
 		assertEquals(true, info.updateInfo(v2));
 		v = info.getHotelInfo(testName());
 		assertEquals(3, v.getRooms().size());

@@ -1,10 +1,13 @@
 package po.hotel;
 
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 import static utils.exception.StaticExceptionFactory.*;
 import utils.info.hotel.HotelInfo;
 import utils.info.hotel.HotelInfoBuilder;
 import utils.info.hotel.Room;
+import utils.info.hotel.RoomBuilder;
 
 public class HotelPoBuilder extends HotelInfoBuilder {
 	private int passwordHash = Integer.MIN_VALUE;
@@ -136,8 +139,21 @@ public class HotelPoBuilder extends HotelInfoBuilder {
 		}
 
 		if (from.getRooms() != null) {
+			Iterator<Room> itTo = to.getRooms().iterator();
+			Iterator<Room> itFrom = from.getRooms().iterator();
+			Room newRoom = itFrom.next();
+			System.out.println(newRoom.getName()+"xin");
+			while(itTo.hasNext()){
+				Room oldRoom = itTo.next();
+				System.out.println(oldRoom.getName()+"old");
+				if(newRoom.getName().equals(oldRoom.getName())){
+					RoomBuilder.updatePo(newRoom, oldRoom);
+					return;
+				}
+			}
 			to.setRooms(from.getRooms());
-		}
+				
+		}	
 	}
 
 }

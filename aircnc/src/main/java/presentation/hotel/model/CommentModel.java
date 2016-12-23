@@ -19,9 +19,9 @@ public class CommentModel {
 	}
 	
 	public CommentModel(CommentVo vo){
-		this.memberName = new SimpleStringProperty(vo.getMemberName());
-		this.level = new SimpleStringProperty("Lv"+Integer.toString(vo.getMemberLevel()));
-		this.checkInTime = new SimpleStringProperty("于"+vo.getCheckInTime().toString()+"入住");
+		this.memberName = new SimpleStringProperty(vo.getMember().getName());
+		this.level = new SimpleStringProperty("Lv"+Integer.toString(vo.getMember().getLevel()));
+		this.checkInTime = new SimpleStringProperty("于"+transformTime(vo.getOrder().getEntryTime())+"入住");
 		this.commentTime = new SimpleStringProperty(transformTime(vo.getCommentTime()));
 		this.grade = new SimpleStringProperty(Integer.toString(vo.getGrade()));
 		this.content = new SimpleStringProperty("    "+vo.getContent());

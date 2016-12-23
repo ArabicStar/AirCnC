@@ -129,7 +129,21 @@ public class RoomBuilder extends RoomTemplate {
 			throw illegalStateException("Room builder not set up");
 
 		return new Room(type).setName(name).setPeopleNum(numOfPeople).setRoomNum(numOfRoom).
-				setPrice(price).setId(id);
+				setPrice(price).setId(id).setHotel(hotel);
+	}
+	
+	/**
+	 * 
+	 * @param modified
+	 *            modified hotel information
+	 * @param old
+	 */
+	public static final void updatePo(Room modified, Room old) {
+		if (modified == null || old == null || modified == old)
+			return;
+
+		old.setPeopleNum(modified.getPeopleNum()).setPrice(modified.getPrice()).
+		setRoomNum(modified.getRoomNum()+old.getRoomNum());
 	}
 
 }

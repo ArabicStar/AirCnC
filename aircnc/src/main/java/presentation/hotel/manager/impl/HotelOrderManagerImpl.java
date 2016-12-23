@@ -74,19 +74,7 @@ public class HotelOrderManagerImpl implements HotelOrderManager{
 	}
 	
 	private void test(){
-		orders = new ArrayList<OrderVo>();
-		OrderVoBuilder builder = new OrderVoBuilder().setUserName("小手表").setUserId(13245364).
-				setHotelId(3).setEntryTime(LocalDateTime.now()).setStayDays(5).
-				setRoomNumber(3).setDiscountPrice(20).setOriginalPrice(900).setOrderId("24383759");
-		orders.add(builder.getOrderInfo());
-		
-		orders.add(builder.getOrderInfo());
-		
-		orders.add(builder.getOrderInfo());
-//    	orderData.add(new OrderModel("小手表","233","101","2016-10-09","5晚/1间","290元"));
-//		orderData.add(new OrderModel("小手表","233","102","2016-10-12","2晚/1间","1000元"));
-//		orderData.add(new OrderModel("小手表","233","103","2016-10-15","10晚/1间","400元"));
-//		orderData.add(new OrderModel("小手表","233","104","2016-10-30","1晚/10间","2950元"));
+
 	}
 
 }
