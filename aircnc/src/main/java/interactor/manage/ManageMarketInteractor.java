@@ -1,11 +1,11 @@
 package interactor.manage;
 
 public interface ManageMarketInteractor {
-	public void AddMarketInfo();
+	public boolean AddMarketInfo();
 	
-	public void ModifyMarketInfo();
+	public boolean ModifyMarketInfo();
 	
-	public void getMarketInfo();
+	public boolean getMarketInfo();
 	
-	public void deleteMarketInfo();
+	public boolean deleteMarketInfo();
 }

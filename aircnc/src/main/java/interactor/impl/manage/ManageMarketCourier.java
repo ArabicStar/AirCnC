@@ -1,10 +1,19 @@
 package interactor.impl.manage;
 
+import static interactor.utils.AlertHelper.alertFail;
+import static interactor.utils.Dipatcher.execute;
+import static interactor.utils.TitleGetter.getTitle;
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
+import static utils.exception.StaticExceptionFactory.unknownEx;
 
 import interactor.manage.ManageMarketInteractor;
+import interactor.utils.AlertHelper;
+import presentation.manage.accessor.impl.MarketManageInfoAccessorImpl;
+import presentation.manage.manager.impl.MarketManageInfoManagerImpl;
 import service.manage.ManageMarketService;
+import utils.info.market.MarketInfo;
+import vo.market.MarketVoBuilder;
 
 public class ManageMarketCourier implements ManageMarketInteractor{
 	/* singleton */
@@ -33,26 +42,77 @@ public class ManageMarketCourier implements ManageMarketInteractor{
 	}
 
 	@Override
-	public void AddMarketInfo() {
-		// TODO Auto-generated method stub
-		
+	public boolean AddMarketInfo() {
+		String title = getTitle();
+		MarketInfo info = execute(title, () -> {
+			MarketInfo tmp = handler.AddMarketInfo(new MarketVoBuilder(MarketManageInfoAccessorImpl.getInstance()
+					.getModifiedMarketVo()), MarketManageInfoAccessorImpl.getInstance().getPasswordHash());
+
+			if (tmp == null)
+				throw unknownEx();
+			return tmp;
+		});
+
+		if (info != null)
+			AlertHelper.alertSuccess(title, String.format("添加营销人员成功！该账号是%s。此账号将会作为登录凭据", info.getId()));
+		else
+			AlertHelper.alertFail(title, "添加失败！");
+		MarketManageInfoManagerImpl.getInstance().setMarket(new MarketVoBuilder(info).getMarketInfo());
+		return info != null;
 	}
 
 	@Override
-	public void ModifyMarketInfo() {
-		// TODO Auto-generated method stub
-		
+	public boolean ModifyMarketInfo() {
+		String title = getTitle();
+		MarketInfo modified = MarketManageInfoAccessorImpl.getInstance().getModifiedMarketVo();
+
+		boolean res = execute(title, () -> {
+			String id = MarketManageInfoAccessorImpl.getInstance().getMarketId();
+			if (id != null)
+				return handler.ModifyMarketInfo(modified);
+
+			alertFail(title, "Not input the modified info yet");
+			return null;
+		});
+
+		MarketManageInfoManagerImpl.getInstance().setMarket(res ? new MarketVoBuilder(modified).getMarketInfo() : null);
+		return modified != null;
 	}
 
 	@Override
-	public void getMarketInfo() {
-		// TODO Auto-generated method stub
+	public boolean getMarketInfo() {
+		String title = getTitle();
+
+		MarketInfo info = execute(title, () -> {
+			String id = MarketManageInfoAccessorImpl.getInstance().getMarketId();
+			if (id != null)
+				return handler.getMarketInfo(id);
+
+			alertFail(title, "Not input Market id yet");
+			return null;
+		});
+
+		MarketManageInfoManagerImpl.getInstance().setMarket(new MarketVoBuilder(info).getMarketInfo());
 		
+		return info != null;
 	}
 
 	@Override
-	public void deleteMarketInfo() {
-		// TODO Auto-generated method stub
-		
+	public boolean deleteMarketInfo() {
+		String title = getTitle();
+		boolean valid = execute(title, () -> {
+			boolean tmp = handler.deleteMarketInfo(MarketManageInfoAccessorImpl.getInstance().getMarketId());
+
+			if (tmp == false)
+				throw unknownEx();
+			return tmp;
+		});
+
+		if (valid != false)
+			AlertHelper.alertSuccess(title, "删除营销人员成功");
+		else
+			AlertHelper.alertFail(title, "删除失败！");
+		MarketManageInfoManagerImpl.getInstance().setMarket(null);
+		return valid != false;
 	}
 }

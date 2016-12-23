@@ -1,10 +1,19 @@
 package interactor.impl.manage;
 
+import static interactor.utils.AlertHelper.alertFail;
+import static interactor.utils.Dipatcher.execute;
+import static interactor.utils.TitleGetter.getTitle;
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
+import static utils.exception.StaticExceptionFactory.unknownEx;
 
 import interactor.manage.ManageHotelInteractor;
+import interactor.utils.AlertHelper;
+import presentation.manage.accessor.impl.HotelManageInfoAccessorImpl;
+import presentation.manage.manager.impl.HotelManageInfoManagerImpl;
 import service.manage.ManageHotelService;
+import utils.info.hotel.HotelInfo;
+import vo.hotel.HotelVoBuilder;
 
 public class ManageHotelCourier implements ManageHotelInteractor{
 	/* singleton */
@@ -32,27 +41,79 @@ public class ManageHotelCourier implements ManageHotelInteractor{
 		this.handler = handler;
 	}
 	@Override
-	public void AddHotelInfo() {
-		// TODO Auto-generated method stub
-		
+	public boolean AddHotelInfo() {
+		String title = getTitle();
+		HotelInfo info = execute(title, () -> {
+			HotelInfo tmp = handler.AddHotelInfo(new HotelVoBuilder(HotelManageInfoAccessorImpl.getInstance()
+					.getModifiedHotelVo()), HotelManageInfoAccessorImpl.getInstance().getPasswordHash());
+
+			if (tmp == null)
+				throw unknownEx();
+			return tmp;
+		});
+
+		if (info != null)
+			AlertHelper.alertSuccess(title, String.format("添加酒店成功！该账号是%s。此账号将会作为登录凭据", info.getId()));
+		else
+			AlertHelper.alertFail(title, "添加失败！");
+		HotelManageInfoManagerImpl.getInstance().setHotel(new HotelVoBuilder(info).getHotelInfo());
+		return info != null;
 	}
 
 	@Override
-	public void ModifyHotelInfo() {
-		// TODO Auto-generated method stub
-		
+	public boolean ModifyHotelInfo() {
+		String title = getTitle();
+		HotelInfo modified = HotelManageInfoAccessorImpl.getInstance().getModifiedHotelVo();
+
+		boolean res = execute(title, () -> {
+			String id = HotelManageInfoAccessorImpl.getInstance().getHotelId();
+			if (id != null)
+				return handler.ModifyHotelInfo(modified);
+
+			alertFail(title, "Not input the modified info yet");
+			return null;
+		});
+
+		HotelManageInfoManagerImpl.getInstance().setHotel(res ? new HotelVoBuilder(modified).getHotelInfo() : null);
+		return modified != null;
 	}
 
 	@Override
-	public void getHotelInfo() {
-		// TODO Auto-generated method stub
+	public boolean getHotelInfo() {
+		String title = getTitle();
+
+		HotelInfo info = execute(title, () -> {
+			String id = HotelManageInfoAccessorImpl.getInstance().getHotelId();
+			if (id != null)
+				return handler.getHotelInfo(id);
+
+			alertFail(title, "Not input Market id yet");
+			return null;
+		});
+
+		HotelManageInfoManagerImpl.getInstance().setHotel(new HotelVoBuilder(info).getHotelInfo());
 		
+		return info != null;
 	}
 
 	@Override
-	public void deleteHotelInfo() {
-		// TODO Auto-generated method stub
-		
+	public boolean deleteHotelInfo() {
+		String title = getTitle();
+		boolean valid = execute(title, () -> {
+			String id = HotelManageInfoAccessorImpl.getInstance().getHotelId();
+			boolean tmp = handler.deleteHotelInfo(Integer.valueOf(id));
+
+			if (tmp == false)
+				throw unknownEx();
+			return tmp;
+		});
+
+		if (valid != false)
+			AlertHelper.alertSuccess(title, "删除酒店成功");
+		else
+			AlertHelper.alertFail(title, "删除失败！");
+		HotelManageInfoManagerImpl.getInstance().setHotel(null);
+		return valid != false;
 	}
 
 }

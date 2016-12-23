@@ -3,11 +3,11 @@ package interactor.manage;
 
 public interface ManageHotelInteractor {
 	
-	public void AddHotelInfo();
+	public boolean AddHotelInfo();
 	
-	public void ModifyHotelInfo();
+	public boolean ModifyHotelInfo();
 	
-	public void getHotelInfo();
+	public boolean getHotelInfo();
 	
-	public void deleteHotelInfo();
+	public boolean deleteHotelInfo();
 }
