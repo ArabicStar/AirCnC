@@ -1,8 +1,6 @@
 package data.dao.impl.promotion;
 
 import static data.hibernate.Hibernator.execute;
-import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
-import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
 import data.dao.promotion.HotelPromotionDao;
 import po.promotion.HotelPromotionPo;
@@ -52,10 +50,12 @@ public enum HotelPromotionDaoImpl implements HotelPromotionDao {
 			HotelPromotionPo toBeUpdate = session.get(HotelPromotionPo.class, po.getId());
 
 			if (flag = Boolean.valueOf(toBeUpdate != null)) {
-				po.setId(0);
+				if (po.getActive()) {
+					po.setId(0);
 
-				// save updated po
-				session.save(po);
+					// save updated po
+					session.save(po);
+				}
 
 				// "delete" old po: set it inactive
 				toBeUpdate.expire();

@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.hibernate.criterion.DetachedCriteria;
-
 import data.dao.query.HotelQueryDao;
 import po.hotel.HotelPo;
 import service.query.HotelQueryService;

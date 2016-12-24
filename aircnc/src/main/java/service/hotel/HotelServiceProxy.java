@@ -6,14 +6,12 @@ import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 import java.util.List;
 import java.util.Set;
 
-import utils.condition.Condition;
 import utils.info.hotel.HotelInfo;
 import utils.info.order.OrderInfo;
 import utils.info.order.OrderStatus;
 import utils.proxy.AccessSecureProxy;
 import utils.proxy.AuthenticatePolicy;
 import utils.proxy.AuthenticatePolicy.Client;
-import vo.hotel.HotelVo;
 import vo.hotel.HotelVoBuilder;
 import vo.order.OrderVo;
 import vo.order.comment.CommentVo;
@@ -38,23 +36,11 @@ public final class HotelServiceProxy extends AccessSecureProxy
 		return instance;
 	}
 
-	private HotelInfoService infoService;
-
 	private HotelServiceProxy(Client clientId) {
 		super(clientId);
 	}
 
-	/*
-	 ***************************
-	 * Actual manager loader
-	 ***************************
-	 */
-	@AuthenticatePolicy({ Client.HOTEL })
-	public void loadAccountService(HotelAccountService accountService) {
-		checkAuthentication();
-
-		this.accountService = accountService;
-	}
+	private HotelInfoService infoService;
 
 	@AuthenticatePolicy({ Client.HOTEL, Client.USER, Client.MANAGE })
 	public void loadInfoService(HotelInfoService infoService) {
@@ -88,14 +74,6 @@ public final class HotelServiceProxy extends AccessSecureProxy
 	}
 
 	@Override
-	@AuthenticatePolicy({ Client.HOTEL })
-	public Set<PromotionVo> getHotelAllPromotions(int hotelId) {
-		checkAuthentication();
-
-		return infoService.getHotelAllPromotions(hotelId);
-	}
-
-	@Override
 	@AuthenticatePolicy({ Client.HOTEL, Client.MANAGE })
 	public boolean updateInfo(HotelInfo modifiedInfo) {
 		checkAuthentication();
@@ -104,6 +82,18 @@ public final class HotelServiceProxy extends AccessSecureProxy
 	}
 
 	private HotelAccountService accountService;
+
+	/*
+	 ***************************
+	 * Actual manager loader
+	 ***************************
+	 */
+	@AuthenticatePolicy({ Client.HOTEL })
+	public void loadAccountService(HotelAccountService accountService) {
+		checkAuthentication();
+
+		this.accountService = accountService;
+	}
 
 	@Override
 	@AuthenticatePolicy({ Client.MANAGE })
@@ -159,14 +149,6 @@ public final class HotelServiceProxy extends AccessSecureProxy
 		checkAuthentication();
 
 		return accountService.existsHotel(name);
-	}
-
-	@Override
-	@AuthenticatePolicy({ Client.USER })
-	public List<HotelVo> findByCondition(Condition cond) {
-		checkAuthentication();
-
-		return infoService.findByCondition(cond);
 	}
 
 	/*
