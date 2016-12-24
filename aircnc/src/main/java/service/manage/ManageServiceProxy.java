@@ -45,21 +45,21 @@ public class ManageServiceProxy extends AccessSecureProxy
 	 * Actual manager loader
 	 ***************************
 	 */
-	@AuthenticatePolicy({ Client.MANAGE })
+	@AuthenticatePolicy({ Client.USER })
 	public void loadMemberManageService(ManageMemberService memberService) {
 		checkAuthentication();
 
 		this.manageMemberService = memberService;
 	}
 
-	@AuthenticatePolicy({ Client.MANAGE })
+	@AuthenticatePolicy({ Client.USER })
 	public void loadHotelManageService(ManageHotelService hotelService) {
 		checkAuthentication();
 
 		this.manageHotelService = hotelService;
 	}
 
-	@AuthenticatePolicy({ Client.USER, Client.HOTEL, Client.MARKET, Client.MANAGE })
+	@AuthenticatePolicy({ Client.USER, Client.HOTEL, Client.MARKET })
 	public void loadMarketManageService(ManageMarketService marketService) {
 		checkAuthentication();
 

@@ -5,14 +5,14 @@ import java.util.ResourceBundle;
 
 import org.controlsfx.control.Rating;
 
-import interactor.impl.order.OrderOperationCourier;
+import interactor.impl.member.MemberOrderOperationCourier;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
 import presentation.member.accessor.MemberOrderOperationAccessor;
 import presentation.member.accessor.impl.MemberOrderOperationAccessorImpl;
@@ -59,9 +59,7 @@ public class MemberCommentController implements Initializable {
 		if (rates.getRating() != 0) {
 			if (comment.getText().length() < 50) {
 				accessor.setComment(vo, rates.getRating(), comment.getText());
-				//OrderOperationCourier.getInstance().makeComment();
-				PlainDialog alert = new PlainDialog(AlertType.INFORMATION, "评价成功", "感谢您的评价！");
-				alert.showDialog();
+				MemberOrderOperationCourier.getInstance().commentOrder();
 				controller.removeCommentPane();
 			} else {
 				PlainDialog alert = new PlainDialog(AlertType.INFORMATION, "评价失败", "评论请少于50字");
