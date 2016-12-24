@@ -16,7 +16,8 @@ public class MemberOrderOperationAccessorImpl implements MemberOrderOperationAcc
 	
 	private static MemberOrderOperationAccessor instance;
 	
-	private OrderVo order;
+	private OrderVoBuilder order;
+	private OrderVo vo;
 	
 	public static final MemberOrderOperationAccessor launch() {
 		if (instance != null)
@@ -40,38 +41,41 @@ public class MemberOrderOperationAccessorImpl implements MemberOrderOperationAcc
 	}
 	
 	@Override
-	public OrderVo getOrder(){
+	public OrderVoBuilder getOrder(){
 		return order;
 	}
 
 	@Override
 	public void setComment(OrderVo vo, double rate, String content) {
-		this.order = vo;
 		if(order == null)
 			throw accessorNotReadyEx();
 		else{
 			CommentVo comment = new CommentVoBuilder(vo).setContent(content).setGrade((int)rate)
 					.setCommentTime(LocalDateTime.now()).getCommentInfo();
 			OrderVoBuilder builder = new OrderVoBuilder(vo).setComment(comment);
-			this.order = builder.getOrderInfo();
+			this.order = builder;
 		}
 			
 	}
 
 	@Override
 	public void setAppeal(OrderVo vo, String content) {
-		this.order = vo;
 		if(order == null)
 			throw accessorNotReadyEx();
 		else{
 			OrderVoBuilder builder = new OrderVoBuilder(vo).setAppeal(content);
-			this.order = builder.getOrderInfo();
+			this.order = builder;
 		}
 	}
 
 	@Override
 	public void setCancel(OrderVo vo) {
-		this.order = vo;
+		this.vo = vo;
+	}
+
+	@Override
+	public OrderVo getCanceledOrder() {
+		return vo;
 	}
 
 }
