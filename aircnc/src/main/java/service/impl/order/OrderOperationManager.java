@@ -70,11 +70,13 @@ public class OrderOperationManager implements OrderOperationService {
 		if (newOrder == null)
 			throw illegalArgEx("Order info", newOrder);
 
+		if (newOrder.getMember().getCredit() < 0)
+			return null;
+
 		String id = generateId(newOrder);
+
 		OrderInfo newOrderInfo = promotion.applyPromotion(
 				new OrderVoBuilder(newOrder).setOrderId(id).setStatus(OrderStatus.UNEXECUTED).getOrderInfo());
-		if (newOrderInfo.getMember().getCredit() < 0)
-			return null;
 
 		OrderPo newOrderPo = new OrderPoBuilder(newOrderInfo).getOrderInfo();
 
@@ -168,7 +170,7 @@ public class OrderOperationManager implements OrderOperationService {
 
 	@Override
 	public MemberInfo approveAppeal(OrderInfo info) {
-		if (!verifyOrder(info, OrderStatus.ABNORMAL))
+		if (!verifyOrder(info, OrderStatus.APPEALING))
 			throw illegalArgEx("Order info", info);
 
 		OrderVo appealedVo = new OrderVoBuilder(info).setStatus(OrderStatus.EXECUTED).getOrderInfo();
@@ -212,6 +214,6 @@ public class OrderOperationManager implements OrderOperationService {
 	}
 
 	private static final String formatInt(int value, int length) {
-		return String.format("%" + length + "d", value);
+		return String.format("%0" + length + "d", value);
 	}
 }

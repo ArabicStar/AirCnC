@@ -45,6 +45,7 @@ public class OrderVoBuilder extends OrderInfoBuilder {
 	public OrderVoBuilder(OrderInfo info) {
 		super(info);
 		promotions = new HashSet<>();
+		setPromotions(info.getPromotions());
 	}
 
 	@Override
@@ -61,7 +62,7 @@ public class OrderVoBuilder extends OrderInfoBuilder {
 				.setPeopleNumber(peopleNumber)//
 				.setHasChildren(hasChildren)//
 				.setOriginalPrice(originalPrice)//
-				.setDiscountPrice(discountPrice)//
+				.setDiscountPrice(discountPrice < 0 ? originalPrice : discountPrice)//
 				.setPromotions(promotions)//
 				.setComments(comment)//
 				.setAppeal(appeal);//
@@ -133,11 +134,6 @@ public class OrderVoBuilder extends OrderInfoBuilder {
 		return this;
 	}
 
-	public OrderVoBuilder setComment(CommentVo comment) {
-		this.comment = comment;
-		return this;
-	}
-
 	@Override
 	public OrderVoBuilder setAppeal(String appeal) {
 		this.appeal = appeal;
@@ -152,6 +148,9 @@ public class OrderVoBuilder extends OrderInfoBuilder {
 
 	@Override
 	public OrderVoBuilder setPromotions(Set<? extends PromotionInfo> promotions) {
+		if (promotions == null)
+			return this;
+
 		this.promotions.addAll(promotions.stream().map(info -> new PromotionVoBuilder(info).getPromotionInfo())
 				.collect(Collectors.toSet()));
 		return this;
@@ -159,7 +158,8 @@ public class OrderVoBuilder extends OrderInfoBuilder {
 
 	@Override
 	public OrderVoBuilder setComment(CommentInfo comment) {
-		this.comment = new CommentVoBuilder(comment).getCommentInfo();
+		if (comment != null)
+			this.comment = new CommentVoBuilder(comment).getCommentInfo();
 		return this;
 	}
 
