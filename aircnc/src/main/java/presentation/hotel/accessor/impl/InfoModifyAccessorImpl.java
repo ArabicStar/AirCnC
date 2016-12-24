@@ -78,15 +78,16 @@ public class InfoModifyAccessorImpl implements InfoModifyAccessor {
 
 	@Override
 	public HotelVo getModifyHotelInfo() {
-		HotelVoBuilder builder = new HotelVoBuilder(hotel).setIntro(introduction).setEquipment(equipment).
-				setLocation(location).setScope(scope);
+		HotelVoBuilder builder = new HotelVoBuilder(hotel);
 		if(room!=null){
 			Set<Room> rooms = new HashSet<Room>();
 			rooms.add(room);
 			builder.setRooms(rooms);
+			return builder.getHotelInfo();
 		}
 		
-		return builder.getHotelInfo();
+		return builder.setIntro(introduction).setEquipment(equipment).
+		setLocation(location).setScope(scope).getHotelInfo();
 	}
 
 

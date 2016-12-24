@@ -3,6 +3,8 @@ package presentation.hotel.view.checkOut.fxml;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import interactor.hotel.HotelInfoInteractor;
+import interactor.impl.hotel.HotelInfoCourier;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -33,18 +35,18 @@ public class CheckOutController implements Initializable{
 	private HotelRoomManager manager;
 	
 	private HotelRoomAccessor accessor;
+	
+	private HotelInfoInteractor interactor;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		if(!HotelRoomManagerImpl.isLaunched()){
-			HotelRoomManagerImpl.launch();
-		}
+
 		manager = HotelRoomManagerImpl.getInstance();
-		
-		if(!HotelRoomAccessorImpl.isLaunched()){
-			HotelRoomAccessorImpl.launch();
-		}
+
 		accessor = HotelRoomAccessorImpl.getInstance();
+		
+		interactor = HotelInfoCourier.getInstance();
+		interactor.getHotelRooms();
 		
 		Platform.runLater(new Runnable() {
 			  @Override public void run() {
@@ -56,18 +58,19 @@ public class CheckOutController implements Initializable{
 	
 	@FXML
 	public void handleConfirm(){
-		if(checkText(roomNum.getText(),true)&&checkText(roomType.getValue(),false)){
+		String result = checkText();
+		if(result==""){
 			accessor.setRoomName(roomType.getValue());
-			accessor.setRoomNum(-Integer.parseInt(roomNum.getText()));
+			accessor.setRoomNum(Integer.parseInt(roomNum.getText()));
+			accessor.setRoom(manager.getRoomByName(roomType.getValue()));
 			
-			PlainDialog alert = new PlainDialog(AlertType.INFORMATION,
-					"退房成功",roomNum.getText()+"间"+roomType.getValue()+"已退房");
-			alert.showDialog();
+			interactor.liveCheckOut();
+
 			roomNum.setText("");
 			roomType.setValue("");
 		}else{
-			PlainDialog alert = new PlainDialog(AlertType.INFORMATION,
-					"退房失败","请正确输入房间的信息");
+			PlainDialog alert = new PlainDialog(AlertType.WARNING,
+					"退房失败",result);
 			alert.showDialog();
 		}
 	}
@@ -76,20 +79,18 @@ public class CheckOutController implements Initializable{
 		this.controller=controller;
 	}
 	
-	private boolean checkText(String content,boolean isNum){
-		if(content==""||content==null){
-			return false;
-		}
-				
-		if(isNum){
-			try{
-				Integer.parseInt(content);
-			}catch (Exception e){
-				return false;
-			}
+	private String checkText(){				
+		try{
+			int i = Integer.parseInt(roomNum.getText());
+			if(i<=0)
+				return "房间数量必须大于0";
+		}catch (Exception e){
+			return "请正确输入房间数量";
 		}
 		
-		return true;
+		if(roomType.getValue()==null||roomType.getValue()=="")
+			return "请选择房间类型";
+		return "";
 	}
 	
 }

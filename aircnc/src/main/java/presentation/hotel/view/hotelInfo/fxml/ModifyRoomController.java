@@ -3,6 +3,8 @@ package presentation.hotel.view.hotelInfo.fxml;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import interactor.hotel.HotelInfoInteractor;
+import interactor.impl.hotel.HotelInfoCourier;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,7 +15,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import presentation.hotel.accessor.InfoModifyAccessor;
 import presentation.hotel.accessor.impl.InfoModifyAccessorImpl;
+import presentation.hotel.manager.HotelRoomManager;
+import presentation.hotel.manager.impl.HotelRoomManagerImpl;
 import presentation.hotel.utils.dialog.PlainDialog;
+import utils.info.hotel.Room;
 
 public class ModifyRoomController implements Initializable{
 	@FXML
@@ -37,14 +42,27 @@ public class ModifyRoomController implements Initializable{
 	@FXML
 	private Button plus;
 	
+	@FXML
+	private Button modify;
+	
 	HotelInfoModifyController controller;
 	
 	InfoModifyAccessor accessor;
 	
+	HotelRoomManager manager;
+	
+	HotelInfoInteractor interactor;
+	
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
+		manager = HotelRoomManagerImpl.getInstance();
+		
+		accessor = InfoModifyAccessorImpl.getInstance();
+		
+		interactor = HotelInfoCourier.getInstance();
+		interactor.getHotelRooms();
+
 		Platform.runLater(new Runnable(){
 
 			@Override
@@ -52,7 +70,8 @@ public class ModifyRoomController implements Initializable{
 				minus.setDisable(true);
 				plus.setDisable(true);
 				name.setDisable(true);
-				type.getItems().addAll("单人间","双人间","三人间","其它");
+				type.getItems().add("其它");
+				type.getItems().addAll(manager.getNames());
 				type.valueProperty().addListener((observable, oldValue, newValue) -> {
 				  	if(oldValue!=newValue){
 				  		switch (newValue){
@@ -61,25 +80,21 @@ public class ModifyRoomController implements Initializable{
 				  			plus.setDisable(false);
 				  			name.setDisable(false);
 				  			name.setText("");
+				  			price.setText("");
+				  			roomNum.setText("");
 				  			peopleNum.setText("1");
+				  			modify.setText("添加房间");
 				  			break;
 				  		default:
 				  			minus.setDisable(true);
 				  			plus.setDisable(true);
 				  			name.setDisable(true);
 				  			name.setText(newValue);
-				  			switch (newValue){
-				  			case "单人间":
-				  				peopleNum.setText("1");
-				  				break;
-				  			case "双人间":
-				  				peopleNum.setText("2");
-				  				break;
-				  			case "三人间":
-				  				peopleNum.setText("3");
-				  				break;
-				  			}
-				  			break;
+				  			Room r = manager.getRoomByName(newValue);
+				  			peopleNum.setText(Integer.toString(r.getPeopleNum()));
+				  			price.setText(Double.toString(r.getPrice()));
+				  			roomNum.setText(Integer.toString(r.getRoomNum()));
+				  			modify.setText("修改房间");
 				  		}
 					}
 				});
@@ -93,32 +108,22 @@ public class ModifyRoomController implements Initializable{
 	
 	@FXML
 	public void close(){
-		controller.removeSupremeSearch();
+		controller.removeModifyRoom();
 	}
 	
 	@FXML
 	public void handleAddRoom(){
-		
-		if(checkText(name.getText(),false)&&checkText(roomNum.getText(),true)&&
-				checkText(peopleNum.getText(),true)&&checkText(price.getText(),true)){
+		String result = checkText();
+		if(result==""){
 
-			if(!InfoModifyAccessorImpl.isLaunched()){
-				InfoModifyAccessorImpl.launch();
-			}
 			accessor = InfoModifyAccessorImpl.getInstance();
 			accessor.setRoom(name.getText(), Integer.parseInt(peopleNum.getText()),
 					Integer.parseInt(roomNum.getText()),Double.parseDouble(price.getText()));
-			//下面是逻辑相连后的代码（没开服务器就会报错，暂时注释）
-			//<<<<<<<<<<<<<<<<<<
-			//MemberInfoCourier.getInstance().updateInfo();
-			//<<<<<<<<<<<<<<<<<<
-			PlainDialog alert = new PlainDialog(AlertType.INFORMATION,
-					"添加成功","已录入新增客房");
-			alert.showDialog();
-			controller.removeSupremeSearch();
+			interactor.updateHotel();
+			controller.removeModifyRoom();
 			}else{
-			PlainDialog alert = new PlainDialog(AlertType.INFORMATION,
-					"添加失败","请正确输入完整的信息");
+			PlainDialog alert = new PlainDialog(AlertType.WARNING,
+					"添加失败",result);
 			alert.showDialog();
 		}
 		
@@ -145,20 +150,26 @@ public class ModifyRoomController implements Initializable{
 		}
 	}
 	
-	private boolean checkText(String content,boolean isNum){
-		if(content==""||content==null){
-			return false;
-		}
-				
-		if(isNum){
-			try{
-				Double.parseDouble(content);
-			}catch (Exception e){
-				return false;
-			}
+	private String checkText(){
+		try{
+			int i = Integer.parseInt(roomNum.getText());
+			if(i<=0)
+				return "房间数量必须大于0";
+		}catch (Exception e){
+			return "请正确输入房间数量";
 		}
 		
-		return true;
+		try{
+			double i = Double.parseDouble(price.getText());
+			if(i<=0)
+				return "房间价格必须大于0";
+		}catch (Exception e){
+			return "请正确输入房间价格";
+		}
+		
+		if(type.getValue()=="其它"&&manager.getNames().stream().filter(n->n.equals(name.getText())).iterator().hasNext())
+			return "请勿输入已有的房间类型";
+		return "";
 	}
 	
 	public void setController(HotelInfoModifyController controller){

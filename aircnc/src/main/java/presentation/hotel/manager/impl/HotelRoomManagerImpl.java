@@ -46,23 +46,28 @@ public class HotelRoomManagerImpl implements HotelRoomManager{
 		}
 		return false;
 	}
+	
+	@Override
+	public Room getRoomByName(String name){
+		return rooms.stream().filter(r->r.getName().equals(name)).iterator().next();
+	}
 
 	@Override
 	public List<String> getNames() {
-		test();
+//		test();
 		return rooms.stream().map(Room::getName).collect(Collectors.toList());
 	}
 	
-	public void test(){
-		rooms = new HashSet<Room>();
-		RoomBuilder builder = new RoomBuilder("单人间");
-		rooms.add(builder.getRoomInfo());
-		builder = new RoomBuilder("双人间");
-		rooms.add(builder.getRoomInfo());
-		builder = new RoomBuilder("奇怪的房间");
-		rooms.add(builder.getRoomInfo());
-		builder = new RoomBuilder("情侣间");
-		rooms.add(builder.getRoomInfo());
-	}
+//	public void test(){
+//		rooms = new HashSet<Room>();
+//		RoomBuilder builder = new RoomBuilder("单人间");
+//		rooms.add(builder.getRoomInfo());
+//		builder = new RoomBuilder("双人间");
+//		rooms.add(builder.getRoomInfo());
+//		builder = new RoomBuilder("奇怪的房间");
+//		rooms.add(builder.getRoomInfo());
+//		builder = new RoomBuilder("情侣间");
+//		rooms.add(builder.getRoomInfo());
+//	}
 
 }

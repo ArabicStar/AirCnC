@@ -3,6 +3,8 @@ package presentation.hotel.view.checkInLive.fxml;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import interactor.hotel.HotelInfoInteractor;
+import interactor.impl.hotel.HotelInfoCourier;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,6 +19,7 @@ import presentation.hotel.accessor.impl.HotelRoomAccessorImpl;
 import presentation.hotel.manager.HotelRoomManager;
 import presentation.hotel.manager.impl.HotelRoomManagerImpl;
 import presentation.hotel.utils.dialog.PlainDialog;
+import utils.info.hotel.Room;
 
 public class CheckInLiveController implements Initializable{
 	@FXML
@@ -33,41 +36,48 @@ public class CheckInLiveController implements Initializable{
 	private HotelRoomManager manager;
 	
 	private HotelRoomAccessor accessor;
+	
+	private HotelInfoInteractor interactor;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		if(!HotelRoomManagerImpl.isLaunched()){
-			HotelRoomManagerImpl.launch();
-		}
+
 		manager = HotelRoomManagerImpl.getInstance();
-		
-		if(!HotelRoomAccessorImpl.isLaunched()){
-			HotelRoomAccessorImpl.launch();
-		}
+
 		accessor = HotelRoomAccessorImpl.getInstance();
+		
+		interactor = HotelInfoCourier.getInstance();
+		interactor.getHotelRooms();
 		
 		Platform.runLater(new Runnable() {
 			  @Override public void run() {
 				  roomType.getItems().addAll(manager.getNames());
+				  roomType.valueProperty().addListener((observable, oldValue, newValue) -> {
+					  	if(newValue!=""){
+					  		roomNum.setText("");
+					  		roomNum.setPromptText("剩余可用"+Integer.toString(manager.getRoomByName(newValue).getRoomNum())+"间");
+						}
+					});
 			  }
 		});
 	}
 	
 	@FXML
 	public void handleConfirm(){
-		if(checkText(roomNum.getText(),true)&&checkText(roomType.getValue(),false)){
+		String result = checkText();
+		if(result==""){
 			accessor.setRoomName(roomType.getValue());
 			accessor.setRoomNum(-Integer.parseInt(roomNum.getText()));
+			accessor.setRoom(manager.getRoomByName(roomType.getValue()));
 			
-			PlainDialog alert = new PlainDialog(AlertType.INFORMATION,
-					"线下入住成功",roomNum.getText()+"间"+roomType.getValue()+"已入住");
-			
-			alert.showDialog();
+			interactor.liveCheckIn();
+
 			roomNum.setText("");
 			roomType.setValue("");
+			roomNum.setPromptText("");
 		}else{
-			PlainDialog alert = new PlainDialog(AlertType.INFORMATION,
-					"线下入住失败","请正确输入房间的信息");
+			PlainDialog alert = new PlainDialog(AlertType.WARNING,
+					"线下入住失败",result);
 			alert.showDialog();
 		}
 	}
@@ -76,20 +86,22 @@ public class CheckInLiveController implements Initializable{
 		this.controller=controller;
 	}
 	
-	private boolean checkText(String content,boolean isNum){
-		if(content==""||content==null){
-			return false;
-		}
-				
-		if(isNum){
-			try{
-				Integer.parseInt(content);
-			}catch (Exception e){
-				return false;
-			}
+	private String checkText(){		
+		int i = 0;
+		try{
+			i = Integer.parseInt(roomNum.getText());
+			if(i<=0)
+				return "房间数量必须大于0";
+		}catch (Exception e){
+			return "请正确输入房间数量";
 		}
 		
-		return true;
+		if(roomType.getValue()==null||roomType.getValue()=="")
+			return "请选择房间类型";
+		
+		if(i>manager.getRoomByName(roomType.getValue()).getRoomNum())
+			return "该类型房间不足，无法入住";
+		return "";
 	}
 	
 	

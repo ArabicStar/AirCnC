@@ -9,4 +9,6 @@ public interface HotelRoomManager {
 	public boolean setRooms(Set<Room> rooms);
 	
 	public List<String> getNames();
+	
+	public Room getRoomByName(String name);
 }

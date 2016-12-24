@@ -7,6 +7,7 @@ import static interactor.utils.TitleGetter.getTitle;
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -14,6 +15,8 @@ import org.apache.commons.lang.StringUtils;
 
 import interactor.hotel.HotelInfoInteractor;
 import interactor.utils.Title;
+import po.hotel.HotelPoBuilder;
+import presentation.hotel.accessor.impl.HotelRoomAccessorImpl;
 import presentation.hotel.accessor.impl.InfoModifyAccessorImpl;
 import presentation.hotel.manager.impl.HotelCommentManagerImpl;
 import presentation.hotel.manager.impl.HotelRoomManagerImpl;
@@ -164,6 +167,48 @@ public class HotelInfoCourier implements HotelInfoInteractor {
 		SearchHotelManagerImpl.getInstance().setHotel(hotels);
 
 	}
+	
+	@Override
+	@Title("线下入住")
+	public void liveCheckIn() {
+		String title = getTitle();
+		
+		
+		execute(title, () -> {
+			int id = getCurrentId();
+			if (id != Integer.MIN_VALUE){
+				Set<Room> rooms = new HashSet<Room>();
+				rooms.add(HotelRoomAccessorImpl.getInstance().getRoom());
+				if (!handler.updateInfo(new HotelPoBuilder(helper.getCurrentAccount()).setRooms(rooms).getHotelInfo()))
+					alertFail(title, "线下入住失败");
+				else
+					alertSuccess(title, "线下入住成功");
+			}
+			return null;
+		});	
+		
+	}
+	
+	@Override
+	@Title("退房")
+	public void liveCheckOut() {
+		String title = getTitle();
+		
+		
+		execute(title, () -> {
+			int id = getCurrentId();
+			if (id != Integer.MIN_VALUE){
+				Set<Room> rooms = new HashSet<Room>();
+				rooms.add(HotelRoomAccessorImpl.getInstance().getRoom());
+				if (!handler.updateInfo(new HotelPoBuilder(helper.getCurrentAccount()).setRooms(rooms).getHotelInfo()))
+					alertFail(title, "退房失败");
+				else
+					alertSuccess(title, "退房成功");
+			}
+			return null;
+		});	
+		
+	}
 
 	private String getCurrentName() {
 		HotelInfo curAcc = helper.getCurrentAccount();
@@ -174,5 +219,7 @@ public class HotelInfoCourier implements HotelInfoInteractor {
 		HotelInfo curAcc = helper.getCurrentAccount();
 		return curAcc == null ? Integer.MIN_VALUE : curAcc.getId();
 	}
+
+	
 
 }

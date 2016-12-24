@@ -164,7 +164,7 @@ public class HotelInfoModifyController implements Initializable{
 		addRoomPane.getController().setController(this);
 	}
 	
-	public void removeSupremeSearch(){
+	public void removeModifyRoom(){
 		rootLayout.getChildren().remove(rootLayout.getChildren().size()-1);
 	}
 	

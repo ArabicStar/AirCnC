@@ -22,7 +22,7 @@
                   <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="40.0">
                      <children>
                         <Label styleClass="info-index" text="房间数量" />
-                        <TextField fx:id="roomNum" prefHeight="41.0" prefWidth="149.0" styleClass="info-content" />
+                        <TextField fx:id="roomNum" alignment="CENTER" prefHeight="41.0" prefWidth="149.0" styleClass="info-content" />
                      </children>
                   </HBox>
                   <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="42.0">
