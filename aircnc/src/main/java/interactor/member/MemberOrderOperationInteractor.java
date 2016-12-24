@@ -1,6 +1,6 @@
-package interactor.order;
+package interactor.member;
 
-public interface UserOrderOperationInteractor {
+public interface MemberOrderOperationInteractor {
 	public boolean tryMakeOrder();
 
 	public boolean makeOrder();
