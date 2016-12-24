@@ -145,6 +145,7 @@ public final class MemberInfoCourier implements MemberInfoInteractor {
 	}
 
 	@Override
+	@Title("修改密码")
 	public void updatePassword() {
 		String title = getTitle();
 
@@ -156,7 +157,7 @@ public final class MemberInfoCourier implements MemberInfoInteractor {
 						InfoModifyAccessorImpl.getInstance().getNewPasswordHash()))
 					alertFail(title, "Wrong password");
 				else
-					alertSuccess(title, "Update password succeed");
+					alertSuccess(title, "修改密码成功！");
 			return null;
 		});
 	}

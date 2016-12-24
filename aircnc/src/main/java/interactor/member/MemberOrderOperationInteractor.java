@@ -6,4 +6,8 @@ public interface MemberOrderOperationInteractor {
 	public boolean makeOrder();
 
 	public boolean cancelOrder();
+
+	public boolean appealOrder();
+
+	public boolean commentOrder();
 }
