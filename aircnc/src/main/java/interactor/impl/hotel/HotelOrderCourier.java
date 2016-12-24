@@ -5,10 +5,8 @@ import static interactor.utils.Dipatcher.execute;
 import static interactor.utils.TitleGetter.getTitle;
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
-
 import java.util.List;
 import java.util.stream.Collectors;
-
 import interactor.hotel.HotelOrderInteractor;
 import interactor.utils.Title;
 import presentation.hotel.accessor.impl.SearchOrderAccessorImpl;
@@ -18,7 +16,7 @@ import service.hotel.HotelOrderService;
 import utils.info.hotel.HotelInfo;
 import vo.order.OrderVo;
 
-public class HotelOrderCourier implements HotelOrderInteractor{
+public class HotelOrderCourier implements HotelOrderInteractor {
 
 	private static HotelOrderInteractor instance;
 
@@ -55,18 +53,14 @@ public class HotelOrderCourier implements HotelOrderInteractor{
 		List<OrderVo> list = execute(title, () -> {
 			int id = getCurrentId();
 			if (id != Integer.MIN_VALUE)
-				return SearchOrderAccessorImpl.getInstance().getStatus().stream().map(status -> handler.getHotelOrdersByStatus(id, status))
-						.collect(Collectors.reducing((l1, l2) -> {
-							l1.addAll(l2);
-							return l1;
-						})).get();
+
+				return handler.getHotelAllOrders(id);
 
 			alertFail(title, "Not logged in yet");
 			return null;
 		});
 
 		HotelOrderManagerImpl.getInstance().setOrderList(list);
-		
 	}
 
 	@Override
@@ -76,11 +70,18 @@ public class HotelOrderCourier implements HotelOrderInteractor{
 
 		List<OrderVo> list = execute(title, () -> {
 			int id = getCurrentId();
-			if (id != Integer.MIN_VALUE)
-				return handler.getHotelAllOrders(id);
 
-			alertFail(title, "Not logged in yet");
-			return null;
+			if (id == Integer.MIN_VALUE) {
+				alertFail(title, "Not logged in yet");
+				return null;
+			}
+
+			return SearchOrderAccessorImpl.getInstance().getStatus().stream()
+					.map(status -> handler.getHotelOrdersByStatus(id, status))
+					.collect(Collectors.reducing((l1, l2) -> {
+						l1.addAll(l2);
+						return l1;
+					})).get();
 		});
 
 		HotelOrderManagerImpl.getInstance().setOrderList(list);
@@ -101,7 +102,5 @@ public class HotelOrderCourier implements HotelOrderInteractor{
 	@Override
 	public void appealOrder() {
 		// TODO Auto-generated method stub
-		
 	}
-
 }
