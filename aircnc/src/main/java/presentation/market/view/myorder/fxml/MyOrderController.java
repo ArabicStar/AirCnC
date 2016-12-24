@@ -74,16 +74,16 @@ public class MyOrderController implements Initializable {
 	private void handleQuery() {
 		LocalDateTime entryTime = LocalDateTime.now();
 
-		OrderVo order = new OrderVoBuilder().setEntryTime(entryTime).setHasChildren(false).setHotelId(1000)
-				.setHotelName("乐天玛特").setLastTime(entryTime).setOrderId("2016121010001234").setPeopleNumber(3)
-				.setOriginalPrice(200).setReviewed(false).setRoomNumber(1).setRoomType("标准间").setStayDays(2)
-				.setUserId(20808121).setStatus(OrderStatus.EXECUTED).setUserName("南京大学渣").getOrderInfo();
+		OrderVo order = new OrderVoBuilder().setEntryTime(entryTime).setHasChildren(false)
+				.setLastTime(entryTime).setOrderId("2016121010001234").setPeopleNumber(3)
+				.setOriginalPrice(200).setRoomNumber(1).setRoomType("标准间").setStayDays(2)
+				.setStatus(OrderStatus.EXECUTED).getOrderInfo();
 		MyOrderModel orderModel = new MyOrderModel(order);
 
-		OrderVo order1 = new OrderVoBuilder().setEntryTime(entryTime).setHasChildren(true).setHotelId(2412)
-				.setHotelName("百祥速8").setLastTime(entryTime).setOrderId("2016122501011234").setPeopleNumber(3)
-				.setOriginalPrice(1400).setReviewed(false).setRoomNumber(1).setRoomType("三人间").setStayDays(7)
-				.setUserId(208032121).setStatus(OrderStatus.UNEXECUTED).setUserName("南京大学渣").getOrderInfo();
+		OrderVo order1 = new OrderVoBuilder().setEntryTime(entryTime).setHasChildren(true)
+				.setLastTime(entryTime).setOrderId("2016122501011234").setPeopleNumber(3)
+				.setOriginalPrice(1400).setRoomNumber(1).setRoomType("三人间").setStayDays(7)
+				.setStatus(OrderStatus.UNEXECUTED).getOrderInfo();
 		MyOrderModel orderModel1 = new MyOrderModel(order1);
 
 		ObservableList<MyOrderModel> orderData = FXCollections.observableArrayList();

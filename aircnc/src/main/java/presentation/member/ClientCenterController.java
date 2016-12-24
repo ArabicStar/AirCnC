@@ -13,7 +13,7 @@ import presentation.member.view.memberinfo.MemberInfoModifyPane;
 import presentation.member.view.myorder.MemberOrderMainPane;
 import presentation.member.view.searchhotel.MemberSearchHotelPane;
 import presentation.member.accessor.impl.InfoModifyAccessorImpl;
-import presentation.member.accessor.impl.SupremeSearchAccessorImpl;
+import presentation.member.accessor.impl.HotelSearchAccessorImpl;
 import presentation.member.manager.impl.SearchHotelManagerImpl;
 import presentation.member.utils.dialog.TextFieldDialog;
 import presentation.member.view.MemberMainPane;
@@ -101,9 +101,9 @@ public class ClientCenterController extends Application {
 		Optional<String> result = dialog.showDialog();
 		
 		if(result.isPresent()){
-			SupremeSearchAccessorImpl.getInstance().setScope(result.get());
+			HotelSearchAccessorImpl.getInstance().setScope(result.get());
 			HotelSearchCourier.getInstance().searchByCondition();
-			SupremeSearchAccessorImpl.getInstance().setScope(null);
+			HotelSearchAccessorImpl.getInstance().setScope(null);
 			searchMain = new MemberSearchHotelPane();
 			content.getChildren().add(searchMain.getPane());
 			AnchorPane.setTopAnchor(searchMain.getPane(), 0.0);

@@ -4,14 +4,6 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import presentation.manage.accessor.impl.HotelManageInfoAccessorImpl;
-import presentation.manage.accessor.impl.MarketManageInfoAccessorImpl;
-import presentation.manage.accessor.impl.MemberManageInfoAccessorImpl;
-import presentation.manage.manager.impl.HotelManageInfoManagerImpl;
-import presentation.manage.manager.impl.HotelManagePromotionManagerImpl;
-import presentation.manage.manager.impl.ManageHotelCommentManagerImpl;
-import presentation.manage.manager.impl.MarketManageInfoManagerImpl;
-import presentation.manage.manager.impl.MemberManageInfoImpl;
 import presentation.manage.view.ManageMainPane;
 import presentation.manage.view.hotelmanage.HotelManageMainPane;
 import presentation.manage.view.marketmanage.MarketManageMainPane;
@@ -54,15 +46,15 @@ public class CenterController extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		
-		HotelManageInfoManagerImpl.launch();
-		HotelManagePromotionManagerImpl.launch();
-		ManageHotelCommentManagerImpl.launch();
-		MarketManageInfoManagerImpl.launch();
-		MemberManageInfoImpl.launch();
-		
-		HotelManageInfoAccessorImpl.launch();
-		MarketManageInfoAccessorImpl.launch();
-		MemberManageInfoAccessorImpl.launch();
+//		HotelManageInfoManagerImpl.launch();
+//		HotelManagePromotionManagerImpl.launch();
+//		ManageHotelCommentManagerImpl.launch();
+//		MarketManageInfoManagerImpl.launch();
+//		MemberManageInfoImpl.launch();
+//		
+//		HotelManageInfoAccessorImpl.launch();
+//		MarketManageInfoAccessorImpl.launch();
+//		MemberManageInfoAccessorImpl.launch();
 		
 		test = new ManageTest();
 		

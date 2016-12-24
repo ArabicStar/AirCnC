@@ -37,8 +37,8 @@ public class OrderModel {
 	 * @param totalPrice
 	 */
 	public OrderModel(OrderVo order) {
-		this.userName = new SimpleStringProperty(order.getUserName());
-		this.userId = new SimpleStringProperty(String.valueOf(order.getUserId()));
+		this.userName = new SimpleStringProperty(order.getMember().getName());
+		this.userId = new SimpleStringProperty(String.valueOf(order.getMember().getId()));
 		this.orderId = new SimpleStringProperty(String.valueOf(order.getOrderId()));
 		this.checkinTime = new SimpleStringProperty(transformTime(order.getEntryTime()));
 		this.status = new SimpleStringProperty(order.getStatus().toString());

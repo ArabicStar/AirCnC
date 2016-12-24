@@ -21,7 +21,7 @@ import presentation.hotel.manager.impl.HotelCommentManagerImpl;
 import presentation.hotel.manager.impl.HotelOrderManagerImpl;
 import presentation.hotel.manager.impl.HotelRoomManagerImpl;
 import presentation.hotel.manager.impl.InfoManagerImpl;
-import presentation.member.accessor.impl.SupremeSearchAccessorImpl;
+import presentation.member.accessor.impl.HotelSearchAccessorImpl;
 import presentation.member.manager.impl.SearchHotelManagerImpl;
 import service.hotel.HotelAccountService;
 import service.hotel.HotelInfoService;
@@ -200,7 +200,7 @@ public class HotelInfoCourier implements HotelInfoInteractor {
 	public void getHotelsByCondition() {
 		String title = getTitle();
 		List<HotelVo> hotels = execute(title, () -> {
-			List<HotelVo> list = handler.findByCondition(SupremeSearchAccessorImpl.getInstance().getCondition());
+			List<HotelVo> list = handler.findByCondition(HotelSearchAccessorImpl.getInstance().getCondition());
 			if (list == null || list.isEmpty()) {
 				alertFail(title, "没有符合条件的酒店");
 				return null;

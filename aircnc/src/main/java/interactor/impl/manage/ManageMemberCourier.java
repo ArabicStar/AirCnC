@@ -40,7 +40,7 @@ public class ManageMemberCourier implements ManageMemberInteractor{
 	}
 	
 	@Override
-	public void ModifyMemberInfo() {
+	public boolean ModifyMemberInfo() {
 		String title = getTitle();
 		MemberInfo modified = MemberManageInfoAccessorImpl.getInstance().getModifiedMemberVo();
 
@@ -54,10 +54,11 @@ public class ManageMemberCourier implements ManageMemberInteractor{
 		});
 
 		MemberManageInfoImpl.getInstance().setUser(res ? new MemberVoBuilder(modified).getMemberInfo() : null);
+		return res;
 	}
 
 	@Override
-	public void getMemberInfo() {
+	public boolean getMemberInfo() {
 		String title = getTitle();
 
 		MemberInfo info = execute(title, () -> {
@@ -68,8 +69,12 @@ public class ManageMemberCourier implements ManageMemberInteractor{
 			alertFail(title, "Not input Member id yet");
 			return null;
 		});
-
-		MemberManageInfoImpl.getInstance().setUser(new MemberVoBuilder(info).getMemberInfo());
+		
+		if(info != null){
+			MemberManageInfoImpl.getInstance().setUser(new MemberVoBuilder(info).getMemberInfo());
+			return true;
+		}else
+			return false;
 	}
 
 }

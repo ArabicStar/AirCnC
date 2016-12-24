@@ -13,8 +13,8 @@ import presentation.manage.accessor.HotelManageInfoAccessor;
 import presentation.manage.accessor.impl.HotelManageInfoAccessorImpl;
 import presentation.manage.manager.HotelManageInfoManager;
 import presentation.manage.manager.impl.HotelManageInfoManagerImpl;
-import presentation.member.accessor.SupremeSearchAccessor;
-import presentation.member.accessor.impl.SupremeSearchAccessorImpl;
+import presentation.member.accessor.HotelSearchAccessor;
+import presentation.member.accessor.impl.HotelSearchAccessorImpl;
 import presentation.member.manager.SearchHotelManager;
 import presentation.member.manager.impl.SearchHotelManagerImpl;
 import service.query.HotelQueryService;
@@ -68,7 +68,7 @@ public class HotelSearchCourier implements HotelSearchInteractor {
 	@Title("Search Hotel By Condition")
 	public boolean searchByCondition() {
 		String title = getTitle();
-		SupremeSearchAccessor acs = SupremeSearchAccessorImpl.getInstance();
+		HotelSearchAccessor acs = HotelSearchAccessorImpl.getInstance();
 		List<HotelVo> hotels = execute(title, () -> {
 			return handler.findByCondition(acs.getCondition());
 

@@ -2,7 +2,7 @@ package presentation.member.accessor;
 
 import utils.condition.Condition;
 
-public interface SupremeSearchAccessor {
+public interface HotelSearchAccessor {
 	
 	public Condition getCondition();
 	

@@ -7,7 +7,7 @@ import java.util.ResourceBundle;
 import java.util.Set;
 
 import interactor.impl.member.MemberInfoCourier;
-import interactor.impl.order.OrderInfoCourier;
+import interactor.impl.order.OrderOperationCourier;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -24,8 +24,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import presentation.member.ClientCenterController;
 import presentation.member.accessor.SearchOrderInfoAccessor;
-import presentation.member.accessor.impl.MemberAppealAccessorImpl;
-import presentation.member.accessor.impl.MemberCommentAccessorImpl;
 import presentation.member.accessor.impl.MemberOrderOperationAccessorImpl;
 import presentation.member.accessor.impl.SearchOrderInfoAccessorImpl;
 import presentation.member.manager.MyOrderManager;
@@ -167,8 +165,6 @@ public class MemberOrderMainController implements Initializable{
 	}
 	
 	public void addCommentPane(OrderVo vo){
-		if(!MemberCommentAccessorImpl.isLaunched())
-        	MemberCommentAccessorImpl.launch();
 		MemberCommentPane comment = new MemberCommentPane(vo);
 		rootLayout.getChildren().add(comment.getPane());
 		AnchorPane.setTopAnchor(comment.getPane(), 150.0);
@@ -181,8 +177,6 @@ public class MemberOrderMainController implements Initializable{
 	}
 	
 	public void addAppealPane(OrderVo vo){
-		if(!MemberAppealAccessorImpl.isLaunched())
-        	MemberAppealAccessorImpl.launch();
 		MemberAppealPane appeal = new MemberAppealPane(vo);
 		rootLayout.getChildren().add(appeal.getPane());
 		AnchorPane.setTopAnchor(appeal.getPane(), 150.0);
@@ -205,8 +199,8 @@ public class MemberOrderMainController implements Initializable{
        			"取消订单","你确定取消该订单吗？");
 		Optional<ButtonType> result = alert3.showDialog();
        		result.ifPresent( ok -> {
-    				MemberOrderOperationAccessorImpl.getInstance().setCancel(vo.getOrderId());
-    				OrderInfoCourier.getInstance().repeal();
+    				MemberOrderOperationAccessorImpl.getInstance().setCancel(vo);
+    				OrderOperationCourier.getInstance().cancelOrder();
     			});
 	}
 	

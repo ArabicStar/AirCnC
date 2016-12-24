@@ -46,7 +46,7 @@ public class LabelDialog extends GridPane {
 				orderModel.getHotelName(), 
 				orderModel.getUserName(),
 				orderModel.getOrderId(), 
-				orderModel.getState() + " (" + orderModel.isReviewed() + ")",
+				orderModel.getState(),
 				orderModel.getCheckInTime(), 
 				orderModel.getLeaveTime(), 
 				orderModel.getRoomType(),

@@ -4,24 +4,22 @@ import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
-import presentation.member.accessor.SupremeSearchAccessor;
+import presentation.member.accessor.HotelSearchAccessor;
 import utils.condition.Condition;
+import utils.condition.Condition.Type;
 import utils.condition.ConditionBuilder;
-import utils.info.hotel.RoomTemplate.Type;
 
-public class SupremeSearchAccessorImpl implements SupremeSearchAccessor {
+public class HotelSearchAccessorImpl implements HotelSearchAccessor {
 
-	private static SupremeSearchAccessor instance;
+	private static HotelSearchAccessor instance;
 
 	private int year;
 	private int month;
 	private int day;
 	private int lowPrice;
 	private int highPrice;
-	private Set<Type> roomType;
+	private Type roomType;
 	private boolean empty;
 	private double grade;
 	private int lowStar;
@@ -30,14 +28,14 @@ public class SupremeSearchAccessorImpl implements SupremeSearchAccessor {
 	private String scope;
 	private String name;
 
-	public static final SupremeSearchAccessor launch() {
+	public static final HotelSearchAccessor launch() {
 		if (instance != null)
 			throw duplicateSingletonEx();
 
-		return instance = new SupremeSearchAccessorImpl();
+		return instance = new HotelSearchAccessorImpl();
 	}
 
-	public static final SupremeSearchAccessor getInstance() {
+	public static final HotelSearchAccessor getInstance() {
 		if (instance == null)
 			throw singletonNotExistsEx();
 
@@ -97,25 +95,21 @@ public class SupremeSearchAccessorImpl implements SupremeSearchAccessor {
 
 	@Override
 	public void setRoomType(String type) {
-		this.roomType = new HashSet<Type>();
 		switch (type) {
 		case "所有":
-			roomType.add(Type.单人间);
-			roomType.add(Type.双人间);
-			roomType.add(Type.三人间);
-			roomType.add(Type.其它);
+			roomType = Type.全部;
 			break;
 		case "单人间":
-			roomType.add(Type.单人间);
+			roomType = Type.单人间;
 			break;
 		case "双人间":
-			roomType.add(Type.双人间);
+			roomType = Type.双人间;
 			break;
 		case "三人间":
-			roomType.add(Type.三人间);
+			roomType = Type.三人间;
 			break;
 		case "其他":
-			roomType.add(Type.其它);
+			roomType = Type.其它;
 			break;
 		}
 	}

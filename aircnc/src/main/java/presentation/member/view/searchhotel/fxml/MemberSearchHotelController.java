@@ -15,7 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import presentation.member.ClientCenterController;
-import presentation.member.accessor.impl.SupremeSearchAccessorImpl;
+import presentation.member.accessor.impl.HotelSearchAccessorImpl;
 import presentation.member.manager.SearchHotelManager;
 import presentation.member.manager.impl.SearchHotelManagerImpl;
 import presentation.member.model.SearchHotelsModel;
@@ -88,9 +88,9 @@ public class MemberSearchHotelController implements Initializable {
 	@FXML
 	public void handleAddGeneralInfo() {
 		if (hotelName.getText().length() > 0) {
-			SupremeSearchAccessorImpl.getInstance().setName(hotelName.getText());
+			HotelSearchAccessorImpl.getInstance().setName(hotelName.getText());
 			HotelSearchCourier.getInstance().searchByCondition();
-			SupremeSearchAccessorImpl.getInstance().setName(null);
+			HotelSearchAccessorImpl.getInstance().setName(null);
 			searchedResult.getChildren().clear();
 			this.hotelNum = 0;
 			list = manager.getHotelList(pageNum);

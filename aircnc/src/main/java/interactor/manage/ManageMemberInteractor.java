@@ -3,7 +3,7 @@ package interactor.manage;
 
 public interface ManageMemberInteractor {
 	
-	public void ModifyMemberInfo();
+	public boolean ModifyMemberInfo();
 	
-	public void getMemberInfo();
+	public boolean getMemberInfo();
 }

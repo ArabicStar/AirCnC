@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 
 import org.controlsfx.control.Rating;
 
-import interactor.impl.order.OrderInfoCourier;
+import interactor.impl.order.OrderOperationCourier;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,8 +14,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
-import presentation.member.accessor.MemberCommentAccessor;
-import presentation.member.accessor.impl.MemberCommentAccessorImpl;
+import presentation.member.accessor.MemberOrderOperationAccessor;
+import presentation.member.accessor.impl.MemberOrderOperationAccessorImpl;
 import presentation.member.utils.dialog.PlainDialog;
 import vo.order.OrderVo;
 
@@ -33,7 +33,7 @@ public class MemberCommentController implements Initializable {
 	private Button confirm;
 
 	private OrderVo vo;
-	private MemberCommentAccessor accessor;
+	private MemberOrderOperationAccessor accessor;
 	private MemberOrderMainController controller;
 
 	@Override
@@ -51,17 +51,15 @@ public class MemberCommentController implements Initializable {
 				confirm.setDisable(newValue.trim().isEmpty());
 			});
 		});
-		accessor = MemberCommentAccessorImpl.getInstance();
+		accessor = MemberOrderOperationAccessorImpl.getInstance();
 	}
 
 	@FXML
 	public void handleConfirm() {
 		if (rates.getRating() != 0) {
 			if (comment.getText().length() < 50) {
-				accessor.setComment(comment.getText());
-				accessor.setRating(rates.getRating());
-				accessor.setOrderId(vo.getOrderId());
-				OrderInfoCourier.getInstance().makeComment();
+				accessor.setComment(vo, rates.getRating(), comment.getText());
+				//OrderOperationCourier.getInstance().makeComment();
 				PlainDialog alert = new PlainDialog(AlertType.INFORMATION, "评价成功", "感谢您的评价！");
 				alert.showDialog();
 				controller.removeCommentPane();

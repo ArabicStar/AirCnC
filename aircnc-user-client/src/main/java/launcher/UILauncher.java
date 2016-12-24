@@ -10,7 +10,7 @@ import presentation.member.accessor.impl.MemberLoginAccessorImpl;
 import presentation.member.accessor.impl.MemberOrderOperationAccessorImpl;
 import presentation.member.accessor.impl.RegisterAccessorImpl;
 import presentation.member.accessor.impl.SearchOrderInfoAccessorImpl;
-import presentation.member.accessor.impl.SupremeSearchAccessorImpl;
+import presentation.member.accessor.impl.HotelSearchAccessorImpl;
 import presentation.member.manager.impl.CreditChangeManagerImpl;
 import presentation.member.manager.impl.HistoryOrderManagerImpl;
 import presentation.member.manager.impl.HotelCommentManagerImpl;
@@ -43,7 +43,7 @@ public class UILauncher {
 		MemberOrderOperationAccessorImpl.launch();
 		RegisterAccessorImpl.launch();
 		SearchOrderInfoAccessorImpl.launch();
-		SupremeSearchAccessorImpl.launch();
+		HotelSearchAccessorImpl.launch();
 		CreditChangeOrderAccessorImpl.launch();
 		//HotelNameAccessorImpl.launch();
 

@@ -14,8 +14,8 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert.AlertType;
-import presentation.member.accessor.SupremeSearchAccessor;
-import presentation.member.accessor.impl.SupremeSearchAccessorImpl;
+import presentation.member.accessor.HotelSearchAccessor;
+import presentation.member.accessor.impl.HotelSearchAccessorImpl;
 import presentation.member.utils.dialog.PlainDialog;
 
 public class SupremeSearchController implements Initializable{
@@ -59,7 +59,7 @@ public class SupremeSearchController implements Initializable{
 	private ToggleGroup isEmpty;
 	
 	private MemberSearchHotelController controller;
-	private SupremeSearchAccessor accessor;
+	private HotelSearchAccessor accessor;
 	
 	/**
 	 * contains:
@@ -170,7 +170,7 @@ public class SupremeSearchController implements Initializable{
 			  }
 			  
 		});
-		accessor = SupremeSearchAccessorImpl.getInstance();
+		accessor = HotelSearchAccessorImpl.getInstance();
 		
 	}
 	

@@ -3,6 +3,7 @@ package presentation.manage.view.membermanage.fxml;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import interactor.impl.manage.ManageMemberCourier;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -30,99 +31,116 @@ import vo.member.MemberVo;
 
 /**
  * the controller of member manage.
+ * 
  * @author paranoia
  *
  */
-public class MemberManageMainController implements Initializable{
+public class MemberManageMainController implements Initializable {
 
 	@FXML
 	private TextField userId;
-	
+
 	@FXML
 	private Button search;
-	
+
 	@FXML
 	private TableView<MemberManageModel> memberTable;
-	
+
 	@FXML
 	private TableColumn<MemberManageModel, String> username;
-	
+
 	@FXML
-    private TableColumn<MemberManageModel, String> id;
-	
+	private TableColumn<MemberManageModel, String> id;
+
 	@FXML
-	private TableColumn<MemberManageModel,MemberVo> operation;
-	
+	private TableColumn<MemberManageModel, MemberVo> operation;
+
 	private MemberManageInfoAccessor accessor;
 	private MemberManageInfoManager manager;
 	private ObservableList<MemberManageModel> models;
 	private MemberManageMainController memController = this;
-	
+
 	private AnchorPane rootLayout;
-	
+
 	@SuppressWarnings("unused")
 	private CenterController centerController;
-	
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		userId.setPromptText("用户ID");
 		memberTable.setEditable(false);
 		accessor = MemberManageInfoAccessorImpl.getInstance();
 		manager = MemberManageInfoImpl.getInstance();
 	}
-	
+
 	@FXML
-	public void handleQuery(){
-		if(userId.getText().length()>0){
-			accessor.setId(userId.getText());
-			models = manager.getMemberInfoList();
-			
-			memberTable.setItems(models);
-			username.setCellValueFactory(cellData -> cellData.getValue().usernameProperty());
-			id.setCellValueFactory(cellData -> cellData.getValue().idProperty());
-			
-			operation.setSortable(false);
-			
-			operation.setCellValueFactory(
-	                new Callback<TableColumn.CellDataFeatures<MemberManageModel, MemberVo>, 
-	                ObservableValue<MemberVo>>() {
+	public void handleQuery() {
+		if (userId.getText().length() > 0) {
+			if (checkId(userId.getText())) {
 
-	            public ObservableValue<MemberVo> call(TableColumn.CellDataFeatures<MemberManageModel, MemberVo> p) {
-	            	return new SimpleObjectProperty<MemberVo>(p.getValue().getOperation());
-	            }
-	        });
-		
+				accessor.setId(userId.getText());
+				boolean valid = ManageMemberCourier.getInstance().getMemberInfo();
+				if (valid) {
+					models = manager.getMemberInfoList();
 
-			operation.setCellFactory(
-	                new Callback<TableColumn<MemberManageModel,MemberVo>, TableCell<MemberManageModel, MemberVo>>() {
-	            public TableCell<MemberManageModel,MemberVo> call(TableColumn<MemberManageModel, MemberVo> p) {
-	                return new MemberManageButtonCell(memController);
-	            }       
-	        });
-		}else{
-			PlainDialog alert = new PlainDialog(AlertType.INFORMATION,"搜索失败","请输入搜索的ID");
+					memberTable.setItems(models);
+					username.setCellValueFactory(cellData -> cellData.getValue().usernameProperty());
+					id.setCellValueFactory(cellData -> cellData.getValue().idProperty());
+
+					operation.setSortable(false);
+
+					operation.setCellValueFactory(
+							new Callback<TableColumn.CellDataFeatures<MemberManageModel, MemberVo>, ObservableValue<MemberVo>>() {
+
+								public ObservableValue<MemberVo> call(
+										TableColumn.CellDataFeatures<MemberManageModel, MemberVo> p) {
+									return new SimpleObjectProperty<MemberVo>(p.getValue().getOperation());
+								}
+							});
+
+					operation.setCellFactory(
+							new Callback<TableColumn<MemberManageModel, MemberVo>, TableCell<MemberManageModel, MemberVo>>() {
+								public TableCell<MemberManageModel, MemberVo> call(
+										TableColumn<MemberManageModel, MemberVo> p) {
+									return new MemberManageButtonCell(memController);
+								}
+							});
+				} else {
+					PlainDialog alert = new PlainDialog(AlertType.INFORMATION, "搜索失败", "未找到该ID！");
+					alert.showDialog();
+				}
+			} else {
+				PlainDialog alert = new PlainDialog(AlertType.INFORMATION, "搜索失败", "请输入有效的8位ID");
+				alert.showDialog();
+			}
+		} else {
+			PlainDialog alert = new PlainDialog(AlertType.INFORMATION, "搜索失败", "请输入搜索的ID");
 			alert.showDialog();
 		}
 	}
-	
-	public void setRootLayout(AnchorPane root){
+
+	public void setRootLayout(AnchorPane root) {
 		this.rootLayout = root;
 	}
-	
-	public void addInfoPane(MemberManageModel model){
-		//this.rootLayout.getChildren().clear();
+
+	public void addInfoPane(MemberManageModel model) {
+		// this.rootLayout.getChildren().clear();
 		MemberInfoPane pane = new MemberInfoPane(model);
 		this.rootLayout.getChildren().add(pane.getContentPane());
 		AnchorPane.setTopAnchor(pane.getContentPane(), 0.0);
 		pane.getController().setController(this);
 	}
-	
-	public void removeInfoPane(){
-		this.rootLayout.getChildren().remove(this.rootLayout.getChildren().size()-1);
+
+	public void removeInfoPane() {
+		this.rootLayout.getChildren().remove(this.rootLayout.getChildren().size() - 1);
 	}
-	
-	public void setCenterController(CenterController controller){
+
+	public void setCenterController(CenterController controller) {
 		this.centerController = controller;
 	}
-	
-	
+
+	private static boolean checkId(String id) {
+		return id != null && id.matches("[0-9]{8}");
+	}
+
 }

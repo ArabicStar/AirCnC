@@ -4,8 +4,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-import interactor.impl.order.OrderInfoCourier;
-import interactor.order.OrderInfoInteractor;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -31,12 +29,6 @@ import javafx.util.Callback;
 import presentation.market.accessor.MakeOrderAccessor;
 import presentation.market.accessor.impl.MakeOrderAccessorImpl;
 import presentation.market.model.MyOrderModel;
-import service.impl.order.OrderDetailServiceImpl;
-import service.impl.order.OrderListingServiceImpl;
-import service.impl.order.OrderLogicServiceImpl;
-import service.order.OrderDetailService;
-import service.order.OrderListingService;
-import service.order.OrderLogicService;
 import utils.date.HotelDate;
 import utils.info.order.OrderStatus;
 import vo.hotel.HotelVo;
@@ -307,28 +299,28 @@ public class TextAreaDialog extends GridPane {
 
 					@Override
 					public void handle(MouseEvent event) {
-						OrderDetailService detail = new OrderDetailServiceImpl();
-						OrderListingService listing = new OrderListingServiceImpl(hotelVo.getId());
-						OrderLogicService logic = new OrderLogicServiceImpl(hotelVo.getId());
-//						if(!OrderInfoCourier.isLaunch()) {
-						OrderInfoInteractor interactor = OrderInfoCourier.launch(detail, listing, logic);
-//						}
-						LocalTime time = LocalTime.MIDNIGHT;
-						LocalDateTime entry = LocalDateTime.of(enterDatePickeratePicker.getValue(), time);
-						LocalDateTime leave = LocalDateTime.of(leaveDatePickeratePicker.getValue(), time);
-						int stayDays = HotelDate.getGapDays(entry, leave);
-						// TODO 把宾馆信息和人员信息等信息加到订单上
-						// FIXME 不应该在这里用interactor将订单加到数据库中
-						OrderVo orderVo = new OrderVoBuilder().setEntryTime(entry)
-								.setHasChildren(hasChildren)
-								.setLastTime(timePicker.getDateTimeValue())
-								.setStayDays(stayDays).setStatus(OrderStatus.UNEXECUTED)
-								.setHotelName(hotelVo.getName())
-								.setRoomNumber(Integer.valueOf(roomNumberField.getText()))
-								.setRoomType(roomTypeBox.getValue())
-								.getOrderInfo();
-						interactor.addOrder(orderVo);
-						System.out.println("成功");
+//						OrderDetailService detail = new OrderDetailServiceImpl();
+//						OrderListingService listing = new OrderListingServiceImpl(hotelVo.getId());
+//						OrderLogicService logic = new OrderLogicServiceImpl(hotelVo.getId());
+////						if(!OrderInfoCourier.isLaunch()) {
+//						OrderInfoInteractor interactor = OrderInfoCourier.launch(detail, listing, logic);
+////						}
+//						LocalTime time = LocalTime.MIDNIGHT;
+//						LocalDateTime entry = LocalDateTime.of(enterDatePickeratePicker.getValue(), time);
+//						LocalDateTime leave = LocalDateTime.of(leaveDatePickeratePicker.getValue(), time);
+//						int stayDays = HotelDate.getGapDays(entry, leave);
+//						// TODO 把宾馆信息和人员信息等信息加到订单上
+//						// FIXME 不应该在这里用interactor将订单加到数据库中
+//						OrderVo orderVo = new OrderVoBuilder().setEntryTime(entry)
+//								.setHasChildren(hasChildren)
+//								.setLastTime(timePicker.getDateTimeValue())
+//								.setStayDays(stayDays).setStatus(OrderStatus.UNEXECUTED)
+//								.setHotelName(hotelVo.getName())
+//								.setRoomNumber(Integer.valueOf(roomNumberField.getText()))
+//								.setRoomType(roomTypeBox.getValue())
+//								.getOrderInfo();
+//						interactor.addOrder(orderVo);
+//						System.out.println("成功");
 					}
 				});
 				alert.setHeaderText("确认生成订单？");
@@ -379,7 +371,7 @@ public class TextAreaDialog extends GridPane {
 				"用户名 " + orderModel.getUserName() + "\n" 
 		+ "酒店名 " + orderModel.getHotelName() + "\n"
 		+ "订单号 " + orderModel.getOrderId() + "\n"
-		+ "状态" + orderModel.getState() + " (" + orderModel.isReviewed() + ")\n" 
+		+ "状态" + orderModel.getState() + "\n" 
 		+ "入住时间 " + orderModel.getCheckInTime() + "\n"
 		+ "退房时间 " + orderModel.getLeaveTime() + "\n"
 		+ "房间类型 " + orderModel.getRoomType() + "\n"

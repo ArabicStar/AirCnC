@@ -19,7 +19,7 @@ public class MyOrderModel {
     private final StringProperty timeAndSum;
     private final StringProperty totalPrice;
     private final ObjectProperty<OrderStatus> operation;
-    private final BooleanProperty isReviewed;
+    //private final BooleanProperty isReviewed;
 	private final int stayDays;
 	private LocalDateTime leaveTime;
 	private final BooleanProperty hasChildren;
@@ -48,10 +48,10 @@ public class MyOrderModel {
      * @param operation
      */
     public MyOrderModel(OrderVo order) {
-        this.hotelName = new SimpleStringProperty(order.getHotelName());
+        this.hotelName = new SimpleStringProperty(order.getHotel().getName());
         this.stayDays = order.getStayDays();
         this.leaveTime = order.getEntryTime().plusDays(stayDays);
-        this.isReviewed = new SimpleBooleanProperty(order.getReviewed());
+        //this.isReviewed = new SimpleBooleanProperty(order.getReviewed());
         //process the checkinTime
         this.checkinTime = new SimpleStringProperty(transformTime(order.getEntryTime()));
         this.hasChildren = new SimpleBooleanProperty(order.getHasChildren());
@@ -77,9 +77,9 @@ public class MyOrderModel {
         this.timeAndSum = new SimpleStringProperty(order.getStayDays()+"晚/"+order.getRoomNumber()+"间");
         this.totalPrice = new SimpleStringProperty(String.valueOf(order.getOriginalPrice())+"元");
         this.operation = new SimpleObjectProperty<OrderStatus>(order.getStatus());
-        this.userName = new SimpleStringProperty(order.getUserName());
+        this.userName = new SimpleStringProperty(order.getMember().getName());
         this.orderId = new SimpleStringProperty(order.getOrderId());
-        this.hotelId = new SimpleStringProperty(Integer.toString(order.getHotelId()));
+        this.hotelId = new SimpleStringProperty(Integer.toString(order.getHotel().getId()));
         this.roomType = new SimpleStringProperty(order.getRoomType());
         this.roomNumber = new SimpleStringProperty(Integer.toString(order.getRoomNumber()));
         this.peopleNumber = new SimpleStringProperty(Integer.toString(order.getPeopleNumber()));
@@ -195,13 +195,13 @@ public class MyOrderModel {
         return operation;
     }
 
-	public String isReviewed() {
-		if(isReviewed.get()) {
-			return "已评价";
-		} else {
-			return "未评价";
-		}
-	}
+//	public String isReviewed() {
+//		if(isReviewed.get()) {
+//			return "已评价";
+//		} else {
+//			return "未评价";
+//		}
+//	}
 
 	public int getStayDays() {
 		return stayDays;

@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import presentation.manage.manager.impl.ManageHotelCommentManagerImpl;
 import presentation.member.manager.impl.CreditChangeManagerImpl;
 import presentation.member.manager.impl.HistoryOrderManagerImpl;
 import presentation.member.manager.impl.MemberInfoManagerImpl;
@@ -25,6 +26,8 @@ import vo.member.credit.CreditChangeVo;
 import vo.member.credit.CreditChangeVoBuilder;
 import vo.order.OrderVo;
 import vo.order.OrderVoBuilder;
+import vo.order.comment.CommentVo;
+import vo.order.comment.CommentVoBuilder;
 
 /**
  * 这是一个迟早要删掉的类，我就不用英文勒，这里就模拟的是member的逻辑层
@@ -116,7 +119,18 @@ public class MemberTest {
 		SearchHotelManagerImpl.getInstance().setHotel(list);
 	}
 	
-	public void ChangeOrder(){
-		
+	public void getCommentData(){
+		List<CommentVo> comments = new ArrayList<CommentVo>();
+		CommentVoBuilder builder = new CommentVoBuilder().setContent("环境极差，找了几个同学一起来晚，半夜还撞鬼了。")
+				.setCommentTime(LocalDateTime.now()).setGrade(3).setHotel(hotelVo);
+		OrderVo vo1 = (OrderVo) new OrderVoBuilder().setEntryTime(LocalDateTime.now()).setHasChildren(false).setHotel(hotelVo)
+				.setLastTime(LocalDateTime.now()).setOrderId("201636").setPeopleNumber(3)
+				.setOriginalPrice(200).setRoomNumber(1).setRoomType("标准间").setStayDays(2).setMember(memberVo)
+				.setStatus(OrderStatus.EXECUTED).setComment(builder.getCommentInfo()).getOrderInfo();
+		comments.add(vo1.getComments());
+		comments.add(vo1.getComments());
+		comments.add(vo1.getComments());
+		comments.add(vo1.getComments());
+		ManageHotelCommentManagerImpl.getInstance().setComment(comments);
 	}
 }
