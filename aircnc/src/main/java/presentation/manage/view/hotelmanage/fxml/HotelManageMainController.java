@@ -17,13 +17,13 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import presentation.manage.CenterController;
-import presentation.manage.ManageTest;
 import presentation.manage.accessor.HotelManageInfoAccessor;
 import presentation.manage.accessor.impl.HotelManageInfoAccessorImpl;
 import presentation.manage.manager.HotelManageInfoManager;
 import presentation.manage.manager.impl.HotelManageInfoManagerImpl;
 import presentation.manage.model.HotelManageModel;
 import presentation.manage.utils.cell.HotelManageButtonCell;
+import presentation.manage.utils.dialog.HotelModifyDialog;
 import presentation.manage.utils.dialog.PlainDialog;
 import presentation.manage.view.hotelmanage.HotelAddPane;
 import presentation.manage.view.hotelmanage.HotelInfoMainPane;
@@ -77,7 +77,6 @@ public class HotelManageMainController implements Initializable{
 	@FXML
 	public void handleQuery(){
 		if(hotelId.getText().length()>0){
-			ManageTest.getHotelData();
 			accessor.setId(hotelId.getText());
 			models = manager.getHotelInfoList();
 			model = models.get(0);
@@ -140,6 +139,16 @@ public class HotelManageMainController implements Initializable{
 	
 	public void removeDetailedInfo(){
 		rootLayout.getChildren().remove(rootLayout.getChildren().size()-1);
+	}
+	
+	public void handleModifyHotel(HotelVo vo){
+		@SuppressWarnings("unused")
+		HotelModifyDialog hotelAlert = new HotelModifyDialog(vo);
+	}
+	
+	public void handleDeleteHotel(HotelVo vo){
+		PlainDialog delete = new PlainDialog(AlertType.CONFIRMATION,"删除酒店","确认删除该酒店吗？");
+		
 	}
 	
 	public void setCenterController(CenterController controller){

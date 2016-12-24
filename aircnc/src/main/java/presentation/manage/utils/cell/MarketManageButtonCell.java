@@ -7,7 +7,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.layout.HBox;
 import presentation.manage.model.MarketManageModel;
-import presentation.manage.utils.dialog.MarketModifyDialog;
 import presentation.manage.view.marketmanage.fxml.MarketManageMainController;
 import vo.market.MarketVo;
 
@@ -22,7 +21,6 @@ public class MarketManageButtonCell extends TableCell<MarketManageModel, MarketV
 	private Button[] cellButton;
 	private HBox buttons;
 	private MarketVo vo;
-	@SuppressWarnings("unused")
 	private MarketManageMainController controller;
 
 	public MarketManageButtonCell(MarketManageMainController controller) {
@@ -80,10 +78,10 @@ public class MarketManageButtonCell extends TableCell<MarketManageModel, MarketV
 					
 					break;
 				case MODIFY:
-					@SuppressWarnings("unused") 
-					MarketModifyDialog memAlert = new MarketModifyDialog(vo);
+					controller.handleModifyMarket(vo);
 					break;
 				case DELETE:
+					controller.handleDeleteMarket(vo);
 					break;
 				}
 

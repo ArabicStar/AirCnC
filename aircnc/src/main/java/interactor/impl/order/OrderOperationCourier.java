@@ -4,6 +4,8 @@ import static interactor.utils.AlertHelper.alertFail;
 import static interactor.utils.AlertHelper.alertSuccess;
 import static interactor.utils.Dipatcher.execute;
 import static interactor.utils.TitleGetter.getTitle;
+import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
+import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 import static utils.exception.StaticExceptionFactory.unknownEx;
 
 import interactor.order.UserOrderOperationInteractor;
@@ -17,11 +19,36 @@ import utils.info.order.OrderInfo;
 import utils.info.order.OrderInfoBuilder;
 
 public class OrderOperationCourier implements UserOrderOperationInteractor {
+	
+	private static UserOrderOperationInteractor instance;
 
+	public static UserOrderOperationInteractor launch(OrderOperationService handler
+			, PromotionApplicationService promotion, MemberAccountService acc) {
+		/* singleton */
+		if (instance != null)
+			throw duplicateSingletonEx();
+
+		return instance = new OrderOperationCourier(handler, promotion, acc);
+	}
+
+	public static UserOrderOperationInteractor getInstance() {
+		if (instance == null)
+			throw singletonNotExistsEx();
+
+		return instance;
+	}
+	
 	private OrderOperationService handler;
 	private PromotionApplicationService promotion;
 	private MemberAccountService acc;
 
+	public OrderOperationCourier(OrderOperationService handler
+			, PromotionApplicationService promotion, MemberAccountService acc){
+		this.handler = handler;
+		this.promotion = promotion;
+		this.acc = acc;
+	}
+	
 	@Override
 	public boolean tryMakeOrder() {
 		String title = getTitle();

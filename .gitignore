@@ -7,6 +7,8 @@
 /aircnc-hotel-client/bin/
 /aircnc-manage-client/target/
 /aircnc-manage-client/bin/
+/aircnc-market-client/target/
+/aircnc-market-client/bin/
 .classpath
 .project
 .settings

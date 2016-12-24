@@ -79,7 +79,7 @@ public class CommentVoBuilder extends CommentInfoBuilder {
 	}
 
 	@Override
-	public CommentInfoBuilder setHotel(HotelInfo hotel) {
+	public CommentVoBuilder setHotel(HotelInfo hotel) {
 		if (hotel.isValid())
 			this.hotel = new HotelVoBuilder(hotel).getHotelInfo();
 		return this;
