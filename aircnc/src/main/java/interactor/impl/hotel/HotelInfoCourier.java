@@ -25,6 +25,7 @@ import presentation.member.accessor.impl.SupremeSearchAccessorImpl;
 import presentation.member.manager.impl.SearchHotelManagerImpl;
 import service.hotel.HotelAccountService;
 import service.hotel.HotelInfoService;
+import service.hotel.HotelOrderService;
 import utils.info.hotel.HotelInfo;
 import utils.info.hotel.Room;
 import vo.hotel.HotelVo;
@@ -54,12 +55,13 @@ public class HotelInfoCourier implements HotelInfoInteractor {
 
 	private HotelInfoService handler;
 	private HotelAccountService helper;
+	private HotelOrderService orderService;
 
 	private HotelInfoCourier(HotelInfoService handler, HotelAccountService helper) {
 		this.handler = handler;
 		this.helper = helper;
 	}
-	
+
 	@Override
 	@Title("Get Hotel Info")
 	public void getHotelInfo() {
@@ -75,7 +77,7 @@ public class HotelInfoCourier implements HotelInfoInteractor {
 		});
 
 		InfoManagerImpl.getInstance().setHotel(new HotelVoBuilder(info).getHotelInfo());
-		
+
 	}
 
 	@Override
@@ -85,19 +87,20 @@ public class HotelInfoCourier implements HotelInfoInteractor {
 
 		List<OrderVo> list = execute(title, () -> {
 			int id = getCurrentId();
-			if (id != Integer.MIN_VALUE)
-				return SearchOrderAccessorImpl.getInstance().getStatus().stream().map(status -> handler.getHotelOrdersByStatus(id, status))
-						.collect(Collectors.reducing((l1, l2) -> {
-							l1.addAll(l2);
-							return l1;
-						})).get();
+			if (id == Integer.MIN_VALUE) {
+				alertFail(title, "Not logged in yet");
+				return null;
+			}
 
-			alertFail(title, "Not logged in yet");
-			return null;
+			return SearchOrderAccessorImpl.getInstance().getStatus().stream()
+					.map(status -> orderService.getHotelOrdersByStatus(id, status))
+					.collect(Collectors.reducing((l1, l2) -> {
+						l1.addAll(l2);
+						return l1;
+					})).get();
 		});
 
 		HotelOrderManagerImpl.getInstance().setOrderList(list);
-		
 	}
 
 	@Override
@@ -115,7 +118,7 @@ public class HotelInfoCourier implements HotelInfoInteractor {
 		});
 
 		HotelCommentManagerImpl.getInstance().setComment(list);
-		
+
 	}
 
 	@Override
@@ -125,7 +128,7 @@ public class HotelInfoCourier implements HotelInfoInteractor {
 
 		Set<Room> set = execute(title, () -> {
 			String name = getCurrentName();
-			if (name!=null)
+			if (name != null)
 				return handler.getHotelInfo(name).getRooms();
 
 			alertFail(title, "Not logged in yet");
@@ -133,33 +136,34 @@ public class HotelInfoCourier implements HotelInfoInteractor {
 		});
 
 		HotelRoomManagerImpl.getInstance().setRooms(set);
-		
+
 	}
 
 	@Override
 	@Title("Update Hotel Passwords")
 	public void updatePassword() {
-//		String title = getTitle();
-//
-//		execute(title, () -> {
-//			int id = getCurrentId();
-//			if (id != Integer.MIN_VALUE)
-//
-//				if (!handler.updatePassword(InfoModifyAccessorImpl.getInstance().getOldPasswordHash(),
-//						InfoModifyAccessorImpl.getInstance().getNewPasswordHash()))
-//					alertFail(title, "Wrong password");
-//				else
-//					alertSuccess(title, "Update password succeed");
-//			return null;
-//		});
-		
+		// String title = getTitle();
+		//
+		// execute(title, () -> {
+		// int id = getCurrentId();
+		// if (id != Integer.MIN_VALUE)
+		//
+		// if
+		// (!handler.updatePassword(InfoModifyAccessorImpl.getInstance().getOldPasswordHash(),
+		// InfoModifyAccessorImpl.getInstance().getNewPasswordHash()))
+		// alertFail(title, "Wrong password");
+		// else
+		// alertSuccess(title, "Update password succeed");
+		// return null;
+		// });
+
 	}
 
 	@Override
 	@Title("Get Hotel Basic Info")
 	public void updateHotel() {
 		String title = getTitle();
-		
+
 		execute(title, () -> {
 			int id = getCurrentId();
 			if (id != Integer.MIN_VALUE)
@@ -170,9 +174,8 @@ public class HotelInfoCourier implements HotelInfoInteractor {
 					alertSuccess(title, "修改成功");
 			return null;
 		});
-		
-	}
 
+	}
 
 	@Override
 	@Title("Get Orders")
@@ -182,40 +185,39 @@ public class HotelInfoCourier implements HotelInfoInteractor {
 		List<OrderVo> list = execute(title, () -> {
 			int id = getCurrentId();
 			if (id != Integer.MIN_VALUE)
-				return handler.getHotelAllOrders(id);
+				return orderService.getHotelAllOrders(id);
 
 			alertFail(title, "Not logged in yet");
 			return null;
 		});
 
 		HotelOrderManagerImpl.getInstance().setOrderList(list);
-		
+
 	}
-	
+
 	@Override
 	@Title("搜索酒店")
 	public void getHotelsByCondition() {
 		String title = getTitle();
-		List<HotelVo> hotels = execute(title,()->{
+		List<HotelVo> hotels = execute(title, () -> {
 			List<HotelVo> list = handler.findByCondition(SupremeSearchAccessorImpl.getInstance().getCondition());
-			if(list==null||list.isEmpty()){
+			if (list == null || list.isEmpty()) {
 				alertFail(title, "没有符合条件的酒店");
 				return null;
-			}else{
+			} else {
 				return list;
 			}
 		});
-				
+
 		SearchHotelManagerImpl.getInstance().setHotel(hotels);
-		
+
 	}
-	
-	
+
 	private String getCurrentName() {
 		HotelInfo curAcc = helper.getCurrentAccount();
 		return curAcc == null ? null : StringUtils.deleteWhitespace(curAcc.getName());
 	}
-	
+
 	private int getCurrentId() {
 		HotelInfo curAcc = helper.getCurrentAccount();
 		return curAcc == null ? Integer.MIN_VALUE : curAcc.getId();
