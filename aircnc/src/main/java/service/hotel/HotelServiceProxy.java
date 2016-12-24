@@ -8,6 +8,7 @@ import java.util.Set;
 
 import utils.condition.Condition;
 import utils.info.hotel.HotelInfo;
+import utils.info.order.OrderInfo;
 import utils.info.order.OrderStatus;
 import utils.proxy.AccessSecureProxy;
 import utils.proxy.AuthenticatePolicy;
@@ -18,8 +19,8 @@ import vo.order.OrderVo;
 import vo.order.comment.CommentVo;
 import vo.promotion.PromotionVo;
 
-public final class HotelServiceProxy extends AccessSecureProxy 
-	implements HotelAccountService,HotelInfoService{
+public final class HotelServiceProxy extends AccessSecureProxy
+		implements HotelAccountService, HotelInfoService, HotelOrderService {
 
 	private static HotelServiceProxy instance;
 
@@ -37,7 +38,6 @@ public final class HotelServiceProxy extends AccessSecureProxy
 		return instance;
 	}
 
-	private HotelAccountService accountService;
 	private HotelInfoService infoService;
 
 	private HotelServiceProxy(Client clientId) {
@@ -66,98 +66,151 @@ public final class HotelServiceProxy extends AccessSecureProxy
 	@Override
 	@AuthenticatePolicy({ Client.HOTEL, Client.USER, Client.MANAGE })
 	public HotelInfo getHotelInfo(String name) {
+		checkAuthentication();
 
 		return infoService.getHotelInfo(name);
 	}
 
 	@Override
-	@AuthenticatePolicy({ Client.HOTEL})
-	public List<OrderVo> getHotelAllOrders(int id) {
-
-		return infoService.getHotelAllOrders(id);
-	}
-
-	@Override
-	@AuthenticatePolicy({ Client.HOTEL})
-	public List<OrderVo> getHotelOrdersByStatus(int id, OrderStatus status) {
-
-		return infoService.getHotelOrdersByStatus(id, status);
-	}
-
-	@Override
-	@AuthenticatePolicy({ Client.HOTEL, Client.USER})
+	@AuthenticatePolicy({ Client.HOTEL, Client.USER })
 	public List<CommentVo> getHotelComment(int id) {
+		checkAuthentication();
 
 		return infoService.getHotelComment(id);
 	}
 
 	@Override
-	@AuthenticatePolicy({ Client.HOTEL, Client.USER})
+	@AuthenticatePolicy({ Client.HOTEL, Client.USER })
 	public Set<PromotionVo> getHotelActivePromotion(int id) {
-		
+		checkAuthentication();
+
 		return infoService.getHotelActivePromotion(id);
 	}
 
 	@Override
-	@AuthenticatePolicy({ Client.HOTEL})
+	@AuthenticatePolicy({ Client.HOTEL })
 	public Set<PromotionVo> getHotelAllPromotions(int hotelId) {
+		checkAuthentication();
 
 		return infoService.getHotelAllPromotions(hotelId);
 	}
 
 	@Override
-	@AuthenticatePolicy({ Client.HOTEL,Client.MANAGE })
+	@AuthenticatePolicy({ Client.HOTEL, Client.MANAGE })
 	public boolean updateInfo(HotelInfo modifiedInfo) {
+		checkAuthentication();
 
 		return infoService.updateInfo(modifiedInfo);
 	}
 
+	private HotelAccountService accountService;
+
 	@Override
 	@AuthenticatePolicy({ Client.MANAGE })
 	public HotelInfo register(HotelVoBuilder newHotel, int passwordHash) {
+		checkAuthentication();
+
 		return accountService.register(newHotel, passwordHash);
 	}
 
 	@Override
 	@AuthenticatePolicy({ Client.HOTEL })
 	public HotelInfo login(String name, int passwordHash) {
+		checkAuthentication();
+
 		return accountService.login(name, passwordHash);
 	}
 
 	@Override
 	@AuthenticatePolicy({ Client.HOTEL })
 	public boolean logout() {
+		checkAuthentication();
+
 		return accountService.logout();
 	}
 
 	@Override
 	@AuthenticatePolicy({ Client.HOTEL })
 	public boolean isLogined() {
+		checkAuthentication();
+
 		return accountService.isLogined();
 	}
 
 	@Override
 	@AuthenticatePolicy({ Client.HOTEL })
 	public HotelInfo refreshCurrentAccount() {
+		checkAuthentication();
+
 		return accountService.refreshCurrentAccount();
 	}
 
 	@Override
 	@AuthenticatePolicy({ Client.HOTEL })
 	public HotelInfo getCurrentAccount() {
+		checkAuthentication();
+
 		return accountService.getCurrentAccount();
 	}
 
 	@Override
 	@AuthenticatePolicy({ Client.MANAGE })
 	public boolean existsHotel(String name) {
+		checkAuthentication();
+
 		return accountService.existsHotel(name);
 	}
 
 	@Override
 	@AuthenticatePolicy({ Client.USER })
 	public List<HotelVo> findByCondition(Condition cond) {
+		checkAuthentication();
+
 		return infoService.findByCondition(cond);
 	}
-	
+
+	/*
+	 **********************************
+	 ******* HotelOrderService*******
+	 **********************************
+	 */
+	private HotelOrderService orderService;
+
+	@AuthenticatePolicy({ Client.HOTEL })
+	public void loadHotelOrderService(HotelOrderService hotelOrderService) {
+		checkAuthentication();
+
+		this.orderService = hotelOrderService;
+	}
+
+	@Override
+	@AuthenticatePolicy({ Client.HOTEL })
+	public List<OrderVo> getHotelAllOrders(int id) {
+		checkAuthentication();
+
+		return orderService.getHotelAllOrders(id);
+	}
+
+	@Override
+	@AuthenticatePolicy({ Client.HOTEL })
+	public List<OrderVo> getHotelOrdersByStatus(int id, OrderStatus status) {
+		checkAuthentication();
+
+		return orderService.getHotelOrdersByStatus(id, status);
+	}
+
+	@Override
+	public boolean executeOrder(OrderInfo order) {
+		checkAuthentication();
+
+		return orderService.executeOrder(order);
+	}
+
+	@Override
+	public boolean appealOrder(OrderInfo order) {
+		checkAuthentication();
+
+		return orderService.appealOrder(order);
+	}
+
 }

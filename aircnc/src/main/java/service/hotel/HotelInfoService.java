@@ -5,10 +5,7 @@ import java.util.Set;
 
 import utils.condition.Condition;
 import utils.info.hotel.HotelInfo;
-import utils.info.hotel.Room;
-import utils.info.order.OrderStatus;
 import vo.hotel.HotelVo;
-import vo.order.OrderVo;
 import vo.order.comment.CommentVo;
 import vo.promotion.PromotionVo;
 
