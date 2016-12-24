@@ -4,7 +4,7 @@ import java.net.URL;
 import java.util.Iterator;
 import java.util.ResourceBundle;
 
-import interactor.impl.hotel.HotelSearchCourier;
+import interactor.impl.member.HotelSearchCourier;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

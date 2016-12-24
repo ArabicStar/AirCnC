@@ -2,6 +2,7 @@ package launcher;
 
 import data.dao.hotel.HotelDaoProxy;
 import data.dao.member.MemberDaoProxy;
+import data.dao.promotion.PromotionDaoProxy;
 import data.dao.query.QueryDaoProxy;
 import service.hotel.HotelAccountService;
 import service.hotel.HotelInfoService;
@@ -59,17 +60,20 @@ public class ServiceLauncher {
 
 	private static final void launchPromotionService(Client clientId) {
 
-		final HotelPromotionManagementService hotelPromotion = HotelPromotionManagementManager.launch();
+		final QueryDaoProxy queryDao = QueryDaoProxy.getInstance();
+		final PromotionDaoProxy promotionDao = PromotionDaoProxy.getInstance();
+		
+		PromotionServiceProxy proxy = PromotionServiceProxy.launch(clientId);
+		final HotelPromotionManagementService hotelPromotion = HotelPromotionManagementManager.launch(queryDao,promotionDao);
 //		final WebsitePromotionInfoService websiteInfo = WebsitePromotionInfoManager.launch(queryDaoProxy);
 //		final HotelPromotionApplicationService hotelApplication = HotelPromotionApplicationManager.launch(hotelInfo);
 //		final WebsitePromotionApplicationService websiteApplication = WebsitePromotionApplicationManager
 //				.launch(websiteInfo);
 //		final PromotionApplicationService application = PromotionApplicationManager.launch(hotelApplication,
 //				websiteApplication);
+		
 
-		PromotionServiceProxy proxy = PromotionServiceProxy.launch(clientId);
-
-		proxy.loadHotelPromotionManagementService(hotelPromotion);;
+		proxy.loadHotelPromotionManagementService(hotelPromotion);
 //		proxy.loadWebsitePromotionInfoService(websiteInfo);
 //		proxy.loadPromotionApplicationService(application);
 	}
@@ -88,14 +92,13 @@ public class ServiceLauncher {
 
 	private static void launchHotelService(Client clientId) {
 		final HotelDaoProxy hotelDao = HotelDaoProxy.getInstance();
-		final QueryDaoProxy queryDao = QueryDaoProxy.getInstance();
 
 		HotelServiceProxy hotelProxy = HotelServiceProxy.launch(clientId);
 		QueryServiceProxy queryProxy = QueryServiceProxy.getInstance();
 		PromotionServiceProxy promotionProxy = PromotionServiceProxy.getInstance();
 
 		final HotelAccountService acc = HotelAccountManager.launch(hotelDao);
-		final HotelInfoService info = HotelInfoManager.launch(hotelDao,acc, queryProxy, promotionProxy, queryProxy, queryProxy);
+		final HotelInfoService info = HotelInfoManager.launch(hotelDao,acc,promotionProxy, queryProxy);
 
 		hotelProxy.loadAccountService(acc);
 		hotelProxy.loadInfoService(info);

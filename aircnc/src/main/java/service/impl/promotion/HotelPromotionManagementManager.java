@@ -20,11 +20,11 @@ public class HotelPromotionManagementManager implements HotelPromotionManagement
 	/* Singleton */
 	private static HotelPromotionManagementManager instance;
 
-	public static HotelPromotionManagementManager launch() {
+	public static HotelPromotionManagementManager launch(final PromotionQueryDao query, final HotelPromotionDao dao) {
 		if (instance != null)
 			throw duplicateSingletonEx();
 
-		return instance = new HotelPromotionManagementManager();
+		return instance = new HotelPromotionManagementManager(query,dao);
 	}
 
 	public static HotelPromotionManagementManager getInstance() {
@@ -35,8 +35,9 @@ public class HotelPromotionManagementManager implements HotelPromotionManagement
 	}
 	/* Singleton */
 
-	private HotelPromotionManagementManager() {
-
+	private HotelPromotionManagementManager(PromotionQueryDao query,HotelPromotionDao dao) {
+		this.query = query;
+		this.dao = dao;
 	}
 
 	private PromotionQueryDao query;

@@ -63,7 +63,7 @@ public class HotelPromotionCourier implements HotelPromotionInteractor{
 	}
 
 	@Override
-	@Title("Add New Promotion")
+	@Title("新增促销策略")
 	public void addNew() {
 		String title = getTitle();
 
@@ -72,9 +72,9 @@ public class HotelPromotionCourier implements HotelPromotionInteractor{
 			if (id != Integer.MIN_VALUE)
 
 				if (!handler.addHotelPromotion(HotelPromotionAccessorImpl.getInstance().getPromotion()))
-					alertFail(title, "增加失败");
+					alertFail(title, "新增酒店促销策略失败");
 				else
-					alertSuccess(title, "增加成功");
+					alertSuccess(title, "新增酒店促销策略成功");
 			return null;
 		});
 	}
@@ -94,23 +94,6 @@ public class HotelPromotionCourier implements HotelPromotionInteractor{
 					alertSuccess(title, "删除成功");
 			return null;
 		});
-	}
-
-	@Override
-	@Title("Get All Hotel Promotions")
-	public boolean getHotelAllPromotion() {
-		String title = getTitle();
-		Set<PromotionVo> promotions = execute(title, () -> {
-			int hotelId = getCurrentId();
-			if (hotelId != Integer.MIN_VALUE)
-				return handler.getHotelAllPromotions(hotelId);
-
-			alertFail(title, "Not logged in yet");
-			return null;
-		});
-		
-		HotelPromotionManagerImpl.getInstance().setPromotion(promotions);
-		return false;
 	}
 
 	@Override

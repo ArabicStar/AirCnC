@@ -66,47 +66,46 @@ public class HotelPromotionManagerImpl implements HotelPromotionManager{
 
 	@Override
 	public List<String> getDescription() {
-		test();
 		
-		return promotions.stream().map(PromotionVo::description).
+		return promotions.stream().filter(p->p.getPractical()).map(PromotionVo::description).
 				collect(Collectors.toList());
 	}
 	
 	@Override
 	public ObservableList<HotelPromotionModel> getPromotionList() {
 		promotionData = FXCollections.observableArrayList();
-		test();
+//		test();
 		Iterator<PromotionVo> it = promotions.iterator();
 		while(it.hasNext())
 			promotionData.add(new HotelPromotionModel(it.next()));
 		return promotionData;
 	}
 	
-	private void test(){
-		promotions = new HashSet<PromotionVo>();
-		LocalDateTime now = LocalDateTime.now();
-		PromotionVoBuilder builder = new PromotionVoBuilder(Scope.Hotel).setId(123).
-				setHotelId(2).setName("企业优惠").setPractical(false);
-		
-		builder.when(HotelWhen.DURING_PERIOD).setParam(TriggerParams.FROM,now.plusDays(1)).setParam(TriggerParams.TO,now.plusDays(5));
-		builder.how(How.PERCENT_OFF).setParam(ApplierParams.PERCENT, 0.8);
-		promotions.add(builder.getPromotionInfo());
-		
-
-		builder.when(HotelWhen.MULTI_ROOMS).setParam(TriggerParams.ROOM_NUM_THRESHOLD, 5);
-		builder.how(How.PERCENT_OFF).setParam(ApplierParams.PERCENT, 0.9);
-		promotions.add(builder.getPromotionInfo());
-		
-		builder.setPractical(true);		
-		builder.when(HotelWhen.ENTERPRISE).setParam(TriggerParams.ENTERPRISE,"南京大学" );
-		builder.how(How.CONST).setParam(ApplierParams.AMOUNT, 10.0);
-		promotions.add(builder.getPromotionInfo());
-			
-//		builder.when(HotelWhen.BIRTHDAY);
+//	private void test(){
+//		promotions = new HashSet<PromotionVo>();
+//		LocalDateTime now = LocalDateTime.now();
+//		PromotionVoBuilder builder = new PromotionVoBuilder(Scope.Hotel).setId(123).
+//				setHotelId(2).setName("企业优惠").setPractical(false);
+//		
+//		builder.when(HotelWhen.DURING_PERIOD).setParam(TriggerParams.FROM,now.plusDays(1)).setParam(TriggerParams.TO,now.plusDays(5));
+//		builder.how(How.PERCENT_OFF).setParam(ApplierParams.PERCENT, 0.8);
+//		promotions.add(builder.getPromotionInfo());
+//		
+//
+//		builder.when(HotelWhen.MULTI_ROOMS).setParam(TriggerParams.ROOM_NUM_THRESHOLD, 5);
+//		builder.how(How.PERCENT_OFF).setParam(ApplierParams.PERCENT, 0.9);
+//		promotions.add(builder.getPromotionInfo());
+//		
+//		builder.setPractical(true);		
+//		builder.when(HotelWhen.ENTERPRISE).setParam(TriggerParams.ENTERPRISE,"南京大学" );
 //		builder.how(How.CONST).setParam(ApplierParams.AMOUNT, 10.0);
-		promotions.add(builder.getPromotionInfo());
-		System.out.println(promotions.size());
-	}
+//		promotions.add(builder.getPromotionInfo());
+//			
+////		builder.when(HotelWhen.BIRTHDAY);
+////		builder.how(How.CONST).setParam(ApplierParams.AMOUNT, 10.0);
+//		promotions.add(builder.getPromotionInfo());
+//		System.out.println(promotions.size());
+//	}
 
 	
 

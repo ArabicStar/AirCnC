@@ -14,6 +14,4 @@ public interface HotelInfoInteractor {
 	public void liveCheckIn();
 	
 	public void liveCheckOut();
-	
-	public void getHotelsByCondition();
 }

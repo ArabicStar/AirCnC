@@ -2,7 +2,9 @@ package launcher;
 
 import interactor.impl.hotel.HotelAccountCourier;
 import interactor.impl.hotel.HotelInfoCourier;
+import interactor.impl.hotel.HotelPromotionCourier;
 import service.hotel.HotelServiceProxy;
+import service.promotion.PromotionServiceProxy;
 
 public final class InteractorLauncher {
 	public static void launch() {
@@ -18,10 +20,12 @@ public final class InteractorLauncher {
 //	}
 
 	private static void launchHotelInteractor() {
-		final HotelServiceProxy proxy = HotelServiceProxy.getInstance();
+		final HotelServiceProxy hotelProxy = HotelServiceProxy.getInstance();
+		final PromotionServiceProxy promotionProxy = PromotionServiceProxy.getInstance();
 
-		HotelAccountCourier.launch(proxy);
-		HotelInfoCourier.launch(proxy, proxy);
+		HotelAccountCourier.launch(hotelProxy);
+		HotelInfoCourier.launch(hotelProxy, hotelProxy);
+		HotelPromotionCourier.launch(promotionProxy, hotelProxy);
 	}
 
 	private static void launchManageInteractor() {

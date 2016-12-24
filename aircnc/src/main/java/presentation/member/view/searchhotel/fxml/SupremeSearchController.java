@@ -4,7 +4,7 @@ import java.net.URL;
 import java.util.Calendar;
 import java.util.ResourceBundle;
 
-import interactor.impl.hotel.HotelSearchCourier;
+import interactor.impl.member.HotelSearchCourier;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

@@ -8,8 +8,6 @@ public interface HotelPromotionInteractor {
 	
 	public void delete();
 	
-	public boolean getHotelAllPromotion();
-	
 	public boolean getHotelActivePromotion();
 
 }

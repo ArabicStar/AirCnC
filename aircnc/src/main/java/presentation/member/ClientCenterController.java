@@ -2,7 +2,7 @@ package presentation.member;
 
 import java.util.Optional;
 
-import interactor.impl.hotel.HotelSearchCourier;
+import interactor.impl.member.HotelSearchCourier;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;

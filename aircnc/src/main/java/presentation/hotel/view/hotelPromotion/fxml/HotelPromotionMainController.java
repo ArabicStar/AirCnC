@@ -3,6 +3,8 @@ package presentation.hotel.view.hotelPromotion.fxml;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import interactor.hotel.HotelPromotionInteractor;
+import interactor.impl.hotel.HotelPromotionCourier;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
@@ -45,6 +47,8 @@ public class HotelPromotionMainController implements Initializable{
 	
 	private HotelPromotionAccessor accessor;
 	
+	private HotelPromotionInteractor interactor;
+	
 	private ObservableList<HotelPromotionModel> models;
 	
 	private HotelPromotionMainController promotionController = this;
@@ -55,16 +59,13 @@ public class HotelPromotionMainController implements Initializable{
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
-		if(!HotelPromotionManagerImpl.isLaunched()){
-			HotelPromotionManagerImpl.launch();
-		}
+
 		manager = HotelPromotionManagerImpl.getInstance();
-		
-		if(!HotelPromotionAccessorImpl.isLaunched()){
-			HotelPromotionAccessorImpl.launch();
-		}
+
 		accessor = HotelPromotionAccessorImpl.getInstance();
+		
+		interactor = HotelPromotionCourier.getInstance();
+		interactor.getHotelActivePromotion();
 		
 		Platform.runLater(new Runnable() {
 			  @Override public void run() {
@@ -112,10 +113,15 @@ public class HotelPromotionMainController implements Initializable{
 	
 	public void addAndUpdate(HotelPromotionVo vo){
 		accessor.setPromotion(vo);
+		if(vo.getId()==0)
+			interactor.addNew();
+		else
+			interactor.update();
 	}
 	
 	public void deletePromotion(HotelPromotionVo vo){
 		accessor.setPromotion(vo);
+		interactor.delete();
 	}
 	
 	public void setRootLayout(Pane pane){

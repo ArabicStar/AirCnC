@@ -1,4 +1,4 @@
-package interactor.hotel;
+package interactor.member;
 
 import java.util.List;
 

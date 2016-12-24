@@ -1,4 +1,4 @@
-package interactor.impl.hotel;
+package interactor.impl.member;
 
 import static interactor.utils.Dipatcher.execute;
 import static interactor.utils.TitleGetter.getTitle;
@@ -7,7 +7,7 @@ import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
 import java.util.List;
 
-import interactor.hotel.HotelSearchInteractor;
+import interactor.member.HotelSearchInteractor;
 import interactor.utils.Title;
 import presentation.manage.accessor.HotelManageInfoAccessor;
 import presentation.manage.accessor.impl.HotelManageInfoAccessorImpl;

@@ -204,39 +204,32 @@ public class PromotionDetailController implements Initializable{
 	}
 	
 	private String check(){
-		String warning = "";
 		if(when.getValue()==null||how.getValue()==null){
-			warning = "请输入完整策略信息!";
-			return warning;
+			return "请输入完整策略信息!";
 		}
 		switch (when.getValue()){
 		case "时效性优惠":
   			if(from.getValue().isBefore(LocalDate.now())){
-  				warning = "时效性优惠开始时间不能早于当天！";
-  				return warning;
+  				return "时效性优惠开始时间不能早于当天！";
   			}
   			
   			if(to.getValue().isBefore(from.getValue().plusDays(1))){
-  				warning = "时效性优惠结束时间不能早于开始时间！";
-  				return warning;
+  				return "时效性优惠结束时间不能早于开始时间！";
   			}
   			break;
 		case "多间房优惠":
   			try{
   				int i = Integer.parseInt(whenPara.getText());
   				if(i<=0){
-  					warning = "请输入大于0的房间数量！";
-  					return warning;
+  					return "请输入大于0的房间数量！";
   				}
   			}catch (Exception e){
-  				warning = "请正确输入房间数量！";
-  				return warning;
+  				return "请正确输入房间数量！";
   			}
 			break;
 		case "合作企业优惠":
 			if(whenPara.getText()==null||whenPara.getText()==""){
-				warning = "请正确输入合作企业名称！";
-  				return warning;
+				return "请正确输入合作企业名称！";
 			}
 		}
 		
@@ -245,28 +238,24 @@ public class PromotionDetailController implements Initializable{
 			try{
   				double i = Double.parseDouble(howPara.getText());
   				if(i>=1||i<=0){
-  					warning = "请输入小于1大于0的折扣百分数！";
-  					return warning;
+  					return "请输入小于1大于0的折扣百分数！";
   				}
   			}catch (Exception e){
-  				warning = "请正确输入立减价格！";
-  				return warning;
+  				return "请正确输入立减价格！";
   			}
   			break;
 		case "直接降价":
   			try{
   				double i = Double.parseDouble(howPara.getText());
   				if(i<=0){
-  					warning = "请输入大于0的立减金额！";
-  					return warning;
+  					return "请输入大于0的立减金额！";
   				}
   			}catch (Exception e){
-  				warning = "请正确输入立减价格！";
-  				return warning;
+  				return "请正确输入立减价格！";
   			}
 			break;
 		}
-		return warning;
+		return "";
 	}
 	
 	private void updateVo(){
