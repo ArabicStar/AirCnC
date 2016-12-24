@@ -72,8 +72,9 @@ public class ManageMarketManager implements ManageMarketService {
 	@Override
 	public boolean ModifyMarketInfo(MarketInfo marketInfo) {
 		MarketPo po = dao.findMarket(marketInfo.getId());
-
-		if (marketInfo.getId() != po.getId())
+		
+		
+		if (!marketInfo.getId().equals(po.getId()))
 			throw new IllegalArgumentException("Incorresponding Market Info");
 
 		return dao
@@ -84,7 +85,6 @@ public class ManageMarketManager implements ManageMarketService {
 	public MarketInfo getMarketInfo(String id) {
 		if (dao == null)
 			throw unsupportedOpEx("get market info");
-
 		if (!MarketInfo.checkID(id))
 			throw illegalArgEx("Market id");
 
