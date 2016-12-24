@@ -15,10 +15,6 @@ import vo.promotion.PromotionVo;
 public interface HotelInfoService {
 	public HotelInfo getHotelInfo(String name);
 	
-	public List<OrderVo> getHotelAllOrders(int id);
-
-	public List<OrderVo> getHotelOrdersByStatus(int id, OrderStatus status);
-	
 	public List<CommentVo> getHotelComment(int id);
 
 	public Set<PromotionVo> getHotelActivePromotion(int id);

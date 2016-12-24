@@ -95,7 +95,7 @@ public class ServiceLauncher {
 		PromotionServiceProxy promotionProxy = PromotionServiceProxy.getInstance();
 
 		final HotelAccountService acc = HotelAccountManager.launch(hotelDao);
-		final HotelInfoService info = HotelInfoManager.launch(hotelDao,queryDao, acc, queryProxy, promotionProxy, queryProxy);
+		final HotelInfoService info = HotelInfoManager.launch(hotelDao,acc, queryProxy, promotionProxy, queryProxy, queryProxy);
 
 		hotelProxy.loadAccountService(acc);
 		hotelProxy.loadInfoService(info);

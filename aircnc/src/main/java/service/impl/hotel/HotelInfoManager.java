@@ -61,13 +61,13 @@ public class HotelInfoManager implements HotelInfoService{
 	 * @throws IllegalStateException
 	 *             singleton has existed already <br>
 	 */
-	public static HotelInfoManager launch(final HotelDao hotelDao, final HotelQueryDao hotelQueryDao,final HotelAccountService accountService,
+	public static HotelInfoManager launch(final HotelDao hotelDao,final HotelAccountService accountService,
 			final OrderQueryService orderQueryService,final HotelPromotionManagementService promotionManagementService,
 			final CommentQueryService commentQueryService,final HotelQueryService hotelQueryService) {
 		if (instance != null)
 			throw duplicateSingletonEx();
 
-		return instance = new HotelInfoManager(hotelDao, hotelQueryDao,accountService, orderQueryService,
+		return instance = new HotelInfoManager(hotelDao, accountService, orderQueryService,
 				promotionManagementService,commentQueryService,hotelQueryService);
 	}
 
@@ -86,7 +86,6 @@ public class HotelInfoManager implements HotelInfoService{
 	}
 
 	private HotelDao hotelDao;
-	private HotelQueryDao hotelQueryDao;
 	private HotelAccountService accountService;
 	private OrderQueryService orderQueryService;
 	private HotelPromotionManagementService promotionManageService;
@@ -94,7 +93,7 @@ public class HotelInfoManager implements HotelInfoService{
 	private HotelQueryService hotelQueryService;
 
 
-	public HotelInfoManager(HotelDao hotelDao, HotelQueryDao hotelQueryDao,HotelAccountService accountService,
+	public HotelInfoManager(HotelDao hotelDao,HotelAccountService accountService,
 			OrderQueryService orderQueryService,HotelPromotionManagementService promotionManagementService,
 			CommentQueryService commentQueryService,HotelQueryService hotelQueryService) {
 		this.accountService = accountService;
@@ -118,46 +117,7 @@ public class HotelInfoManager implements HotelInfoService{
 		return po == null ? null : new HotelVoBuilder(po).getHotelInfo();
 	}
 	
-	/* Buffered member order query service */
-	private int bufferedId = Integer.MIN_VALUE;
-	private List<OrderVo> bufferedOrderList;
-
-	@Override
-	public List<OrderVo> getHotelAllOrders(final int id) {
-		if (orderQueryService == null)
-			throw unsupportedOpEx("get hotel orders");
-
-		if (!HotelInfo.checkID(id))
-			throw illegalArgEx("Hotel id");
-
-		/* different id from buffered one */
-		if (bufferedId == Integer.MIN_VALUE || bufferedId!=id) {
-			// get
-			List<OrderVo> res = orderQueryService.getHotelOrders(id);
-
-			// given id not exists, return
-			if (res == null)
-				return null;
-
-			// exists, refresh buffer
-			bufferedId = id;
-			bufferedOrderList = res;
-
-			return bufferedOrderList;
-		}
-
-		return bufferedOrderList = orderQueryService.getHotelOrders(id);
-	}
-
-	@Override
-	public List<OrderVo> getHotelOrdersByStatus(int id, OrderStatus status)  {
-
-		if (orderQueryService == null)
-			throw unsupportedOpEx("get hotel orders by status");
-
-		return bufferedOrderList.stream().filter(o -> o.getStatus() == status).collect(Collectors.toList());
-	}
-
+	
 	@Override
 	public List<CommentVo> getHotelComment(int id) {
 		if (orderQueryService == null)
@@ -183,20 +143,6 @@ public class HotelInfoManager implements HotelInfoService{
 		return hotelDao
 				.updateHotel(new HotelPoBuilder(modifiedInfo).setPasswordHash(po.getPasswordHash()).getHotelInfo());
 	}
-//
-//
-//	@Override
-//	public HotelVo findById(int hotelId) {
-//		HotelPo po = hotelDao.findHotelById(hotelId);
-//		
-//		return po == null ? null : new HotelVoBuilder(po).getHotelInfo();
-//	}
-//
-//	@Override
-//	public HotelVo findByName(String name) {
-//		HotelPo po = hotelDao.findHotelByName(name);
-//		return po == null ? null : new HotelVoBuilder(po).getHotelInfo();
-//	}
 
 	@Override
 	public List<HotelVo> findByCondition(Condition cond) {
@@ -208,6 +154,7 @@ public class HotelInfoManager implements HotelInfoService{
 	public Set<PromotionVo> getHotelAllPromotions(int hotelId) {
 		return promotionManageService.getHotelAllPromotions(hotelId);
 	}
+
 
 
 

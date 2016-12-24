@@ -13,7 +13,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.util.Callback;
 import presentation.hotel.HotelCenterController;
@@ -24,9 +23,6 @@ import presentation.hotel.manager.impl.HotelPromotionManagerImpl;
 import presentation.hotel.model.HotelPromotionModel;
 import presentation.hotel.utils.cell.PromotionButtonCell;
 import presentation.hotel.view.hotelPromotion.PromotionDetailPane;
-import presentation.member.accessor.impl.MemberCommentAccessorImpl;
-import presentation.member.view.myorder.MemberCommentPane;
-import vo.order.OrderVo;
 import vo.promotion.HotelPromotionVo;
 import vo.promotion.PromotionVo;
 

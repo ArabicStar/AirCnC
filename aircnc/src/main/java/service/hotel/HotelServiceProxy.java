@@ -6,11 +6,13 @@ import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 import java.util.List;
 import java.util.Set;
 
+import utils.condition.Condition;
 import utils.info.hotel.HotelInfo;
 import utils.info.order.OrderStatus;
 import utils.proxy.AccessSecureProxy;
 import utils.proxy.AuthenticatePolicy;
 import utils.proxy.AuthenticatePolicy.Client;
+import vo.hotel.HotelVo;
 import vo.hotel.HotelVoBuilder;
 import vo.order.OrderVo;
 import vo.order.comment.CommentVo;
@@ -150,6 +152,12 @@ public final class HotelServiceProxy extends AccessSecureProxy
 	@AuthenticatePolicy({ Client.MANAGE })
 	public boolean existsHotel(String name) {
 		return accountService.existsHotel(name);
+	}
+
+	@Override
+	@AuthenticatePolicy({ Client.USER })
+	public List<HotelVo> findByCondition(Condition cond) {
+		return infoService.findByCondition(cond);
 	}
 	
 }

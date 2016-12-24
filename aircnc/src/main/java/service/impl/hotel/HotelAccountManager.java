@@ -97,7 +97,7 @@ public class HotelAccountManager implements HotelAccountService{
 
 	@Override
 	public HotelPo getCurrentAccount() {
-		return currentAccount;
+		return new HotelPoBuilder(currentAccount).getHotelInfo();
 	}
 
 	@Override

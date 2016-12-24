@@ -121,8 +121,7 @@ public class RoomBuilder extends RoomTemplate {
 		if (modified == null || old == null || modified == old)
 			return;
 
-		old.setPeopleNum(modified.getPeopleNum()).setPrice(modified.getPrice()).
-		setRoomNum(modified.getRoomNum()+old.getRoomNum());
+		old.setPrice(modified.getPrice()).setRoomNum(modified.getRoomNum());
 	}
 
 }

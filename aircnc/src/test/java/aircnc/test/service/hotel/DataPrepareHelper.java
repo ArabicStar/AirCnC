@@ -65,7 +65,7 @@ public class DataPrepareHelper {
 	private static final HotelPromotionManagementService promotionService = null;
 	public static final HotelAccountService acc = HotelAccountManager.launch(hotelDao);
 	
-	public static final HotelInfoService info = HotelInfoManager.launch(hotelDao, hotelQueryDao, acc, orderQueryService, promotionService,commentQueryService);
+	public static final HotelInfoService info = HotelInfoManager.launch(hotelDao,acc, orderQueryService, promotionService,commentQueryService,null);
 	
 	public static final void prepareTestStatistic() {
 		hotelDao.addHotel(testData);
