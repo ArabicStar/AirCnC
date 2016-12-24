@@ -1,6 +1,8 @@
 package launcher;
 
+import data.dao.hotel.HotelDaoProxy;
 import data.dao.member.MemberDaoProxy;
+import data.dao.order.OrderDaoProxy;
 import data.dao.promotion.PromotionDaoProxy;
 import data.dao.query.QueryDaoProxy;
 import rmi.RemoteHelper;
@@ -16,17 +18,37 @@ public class DaoLauncher {
 			// launch member dao proxy
 			launchMemberDao(helper);
 
+			// launch order dao proxy
+			launchOrderDao(helper);
+
 			// launch query dao proxy
 			launchQueryDao(helper);
 
 			// launch promotin dao proxy
 			launchPromotionDao(helper);
 
-			loadHotelDao(helper);
+			// launch hotel dao proxy
+			launchHotelDao(helper);
 			Log.i("Dao launch succeed");
 		} catch (Exception e) {
 			Log.e("Dao launch failed", e);
 		}
+	}
+
+	private static void launchOrderDao(RemoteHelper helper) {
+		OrderDaoProxy proxy = OrderDaoProxy.launch();
+
+		proxy.loadRemoteOrderDao(helper.getRemoteOrderDao());
+
+		Log.d("order dao launched");
+	}
+
+	private static void launchHotelDao(RemoteHelper helper) {
+		HotelDaoProxy proxy = HotelDaoProxy.launch();
+
+		proxy.loadRemoteHotelDao(helper.getRemoteHotelDao());
+
+		Log.d("hotel dao launched");
 	}
 
 	private static void launchPromotionDao(RemoteHelper helper) {
@@ -55,11 +77,6 @@ public class DaoLauncher {
 		proxy.loadRemoteOrderQueryDao(helper.getRemoteOrderQueryDao());
 
 		Log.d("query dao launched");
-	}
-
-	private static void loadHotelDao(RemoteHelper helper) {
-		// TODO 自动生成的方法存根
-
 	}
 
 	private DaoLauncher() {
