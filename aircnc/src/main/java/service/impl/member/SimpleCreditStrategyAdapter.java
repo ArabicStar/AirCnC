@@ -22,27 +22,27 @@ public class SimpleCreditStrategyAdapter implements CreditStrategy {
 
 	@Override
 	public int getExecutionIncrement(OrderVo vo) {
-		return (int) (vo.getOriginalPrice() * EXECUTION_POW);
+		return (int) (vo.getDiscountPrice() * EXECUTION_POW);
 	}
 
 	@Override
 	public int getCancelReduction(OrderVo vo) {
-		return -(int) (vo.getOriginalPrice() * CANCEL_POW);
+		return -(int) (vo.getDiscountPrice() * CANCEL_POW);
 	}
 
 	@Override
 	public int getOverdueReduction(OrderVo vo) {
-		return -(int) (vo.getOriginalPrice() * OVERDUE_POW);
+		return -(int) (vo.getDiscountPrice() * OVERDUE_POW);
 	}
 
 	@Override
 	public int getAppealRecovery(OrderVo vo) {
-		return (int) (vo.getOriginalPrice() * APPEAL_POW);
+		return (int) (vo.getDiscountPrice() * APPEAL_POW);
 	}
 
 	@Override
 	public int getDelayRecovery(OrderVo vo) {
-		return (int) (vo.getOriginalPrice() * DELAY_POW);
+		return (int) (vo.getDiscountPrice() * DELAY_POW);
 	}
 
 }

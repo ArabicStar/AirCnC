@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ButtonType;
@@ -38,7 +39,11 @@ public class HotelMainController implements Initializable{
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+		Platform.runLater(new Runnable() {
+			  @Override public void run() {
+				  handleHotelInfo();
+			  }
+		});
 	}
 	
 	

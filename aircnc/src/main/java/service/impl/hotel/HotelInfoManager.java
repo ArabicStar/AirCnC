@@ -7,33 +7,21 @@ import static utils.exception.StaticExceptionFactory.unsupportedOpEx;
 
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
-
-import org.hibernate.criterion.DetachedCriteria;
 
 import data.dao.hotel.HotelDao;
-import data.dao.query.HotelQueryDao;
 import po.hotel.HotelPo;
 import po.hotel.HotelPoBuilder;
 import service.hotel.HotelAccountService;
 import service.hotel.HotelInfoService;
 import service.promotion.HotelPromotionManagementService;
 import service.query.CommentQueryService;
-import service.query.HotelQueryService;
-import service.query.OrderQueryService;
-import utils.condition.Condition;
-import utils.condition.ConditionBuilder;
 import utils.info.hotel.HotelInfo;
-import utils.info.member.MemberInfo;
-import utils.info.order.OrderStatus;
-import vo.hotel.HotelVo;
 import vo.hotel.HotelVoBuilder;
-import vo.order.OrderVo;
 import vo.order.comment.CommentVo;
 import vo.promotion.PromotionVo;
 
-public class HotelInfoManager implements HotelInfoService{
-	
+public class HotelInfoManager implements HotelInfoService {
+
 	/****** singleton ******/
 	private static HotelInfoManager instance;
 
@@ -61,14 +49,14 @@ public class HotelInfoManager implements HotelInfoService{
 	 * @throws IllegalStateException
 	 *             singleton has existed already <br>
 	 */
-	public static HotelInfoManager launch(final HotelDao hotelDao,final HotelAccountService accountService,
-			final OrderQueryService orderQueryService,final HotelPromotionManagementService promotionManagementService,
-			final CommentQueryService commentQueryService,final HotelQueryService hotelQueryService) {
+	public static HotelInfoManager launch(final HotelDao hotelDao, final HotelAccountService accountService,
+			final HotelPromotionManagementService promotionManagementService,
+			final CommentQueryService commentQueryService) {
 		if (instance != null)
 			throw duplicateSingletonEx();
 
-		return instance = new HotelInfoManager(hotelDao, accountService, orderQueryService,
-				promotionManagementService,commentQueryService,hotelQueryService);
+		return instance = new HotelInfoManager(hotelDao, accountService, promotionManagementService,
+				commentQueryService);
 	}
 
 	/**
@@ -87,21 +75,15 @@ public class HotelInfoManager implements HotelInfoService{
 
 	private HotelDao hotelDao;
 	private HotelAccountService accountService;
-	private OrderQueryService orderQueryService;
 	private HotelPromotionManagementService promotionManageService;
 	private CommentQueryService commentQueryService;
-	private HotelQueryService hotelQueryService;
 
-
-	public HotelInfoManager(HotelDao hotelDao,HotelAccountService accountService,
-			OrderQueryService orderQueryService,HotelPromotionManagementService promotionManagementService,
-			CommentQueryService commentQueryService,HotelQueryService hotelQueryService) {
+	public HotelInfoManager(HotelDao hotelDao, HotelAccountService accountService,
+			HotelPromotionManagementService promotionManagementService, CommentQueryService commentQueryService) {
 		this.accountService = accountService;
 		this.hotelDao = hotelDao;
 		this.promotionManageService = promotionManagementService;
-		this.orderQueryService = orderQueryService;
 		this.commentQueryService = commentQueryService;
-		this.hotelQueryService = hotelQueryService;
 	}
 
 	@Override
@@ -116,11 +98,10 @@ public class HotelInfoManager implements HotelInfoService{
 
 		return po == null ? null : new HotelVoBuilder(po).getHotelInfo();
 	}
-	
-	
+
 	@Override
 	public List<CommentVo> getHotelComment(int id) {
-		if (orderQueryService == null)
+		if (commentQueryService == null)
 			throw unsupportedOpEx("get hotel orders by status");
 		return commentQueryService.getHotelComments(id);
 	}
@@ -143,19 +124,4 @@ public class HotelInfoManager implements HotelInfoService{
 		return hotelDao
 				.updateHotel(new HotelPoBuilder(modifiedInfo).setPasswordHash(po.getPasswordHash()).getHotelInfo());
 	}
-
-	@Override
-	public List<HotelVo> findByCondition(Condition cond) {
-
-		return hotelQueryService.findByCondition(cond);
-	}
-
-	@Override
-	public Set<PromotionVo> getHotelAllPromotions(int hotelId) {
-		return promotionManageService.getHotelAllPromotions(hotelId);
-	}
-
-
-
-
 }

@@ -22,7 +22,7 @@
                         <Label layoutX="95.0" layoutY="198.0" text="房间名称" />
                         <HBox spacing="10.0">
                            <children>
-                              <TextField fx:id="name" prefHeight="30.0" prefWidth="189.0" />
+                              <TextField fx:id="name" alignment="CENTER" prefHeight="30.0" prefWidth="189.0" />
                            </children>
                         </HBox>
                      </children>
@@ -38,18 +38,18 @@
                   <HBox spacing="40.0">
                      <children>
                         <Label text="房间数量" />
-                        <TextField fx:id="roomNum" prefHeight="30.0" prefWidth="195.0" />
+                        <TextField fx:id="roomNum" alignment="CENTER" prefHeight="30.0" prefWidth="195.0" />
                      </children>
                   </HBox>
                   <HBox spacing="40.0">
                      <children>
                         <Label text="每晚价格" />
-                        <TextField fx:id="price" prefHeight="32.0" prefWidth="199.0" />
+                        <TextField fx:id="price" alignment="CENTER" prefHeight="32.0" prefWidth="199.0" />
                      </children>
                   </HBox>
                </children>
             </VBox>
-            <Button layoutX="361.0" layoutY="338.0" mnemonicParsing="false" onAction="#handleAddRoom" text="添加房间" />
+            <Button fx:id="modify" layoutX="361.0" layoutY="338.0" mnemonicParsing="false" onAction="#handleAddRoom" text="添加房间" />
          </children>
       </Pane>
    </children>

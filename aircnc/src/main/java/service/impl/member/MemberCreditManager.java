@@ -167,7 +167,7 @@ public final class MemberCreditManager implements MemberCreditService {
 		if (order == null)
 			return null;
 
-		if (order.getStatus() != OrderStatus.REPEALED)
+		if (order.getStatus() != OrderStatus.EXECUTED)
 			return MemberVoBuilder.invalidInfo();
 
 		MemberPo m = getMember(order.getMember().getId());

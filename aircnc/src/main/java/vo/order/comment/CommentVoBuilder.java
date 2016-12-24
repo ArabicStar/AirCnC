@@ -34,7 +34,7 @@ public class CommentVoBuilder extends CommentInfoBuilder {
 	 *            to be set id
 	 */
 	@Override
-	public CommentInfoBuilder setId(long id) {
+	public CommentVoBuilder setId(long id) {
 		super.setId(id);
 		return this;
 	}

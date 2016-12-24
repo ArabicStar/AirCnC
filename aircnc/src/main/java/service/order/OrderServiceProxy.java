@@ -88,11 +88,27 @@ public class OrderServiceProxy extends AccessSecureProxy implements OrderInfoSer
 	}
 
 	@Override
+	@AuthenticatePolicy({ Client.USER })
+	public OrderInfo commentOrder(OrderInfo info) {
+		checkAuthentication();
+
+		return orderOperation.commentOrder(info);
+	}
+
+	@Override
 	@AuthenticatePolicy({ Client.MARKET })
-	public MemberInfo appealOrder(OrderInfo info) {
+	public OrderInfo appealOrder(OrderInfo info) {
 		checkAuthentication();
 
 		return orderOperation.appealOrder(info);
+	}
+
+	@Override
+	@AuthenticatePolicy({ Client.MARKET })
+	public MemberInfo approveAppeal(OrderInfo info) {
+		checkAuthentication();
+
+		return orderOperation.approveAppeal(info);
 	}
 
 	private OrderInfoService orderInfo;

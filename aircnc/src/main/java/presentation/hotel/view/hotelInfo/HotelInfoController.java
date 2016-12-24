@@ -7,12 +7,14 @@ public class HotelInfoController {
 	private HotelInfoOnePane onePane;
 	private HotelInfoTwoPane twoPane;
 	private HotelInfoThreePane threePane;
+	private HotelInfoController controller;
 	
 	private HotelCenterController centerController;
 	
 	public HotelInfoController(HotelInfoMainPane infoMainPane,HotelCenterController centerController){
 		this.infoMainPane = infoMainPane;
 		this.centerController = centerController;
+		this.controller = this;
 		addHotelInfoOnePane();
 	}
 	
@@ -24,22 +26,21 @@ public class HotelInfoController {
 		clearContent();
 		onePane = new HotelInfoOnePane();
 		infoMainPane.getBorderPane().setCenter(onePane.getPane());
-		onePane.getController().setInfoMainController(this);	
-		onePane.getController().setManager(infoMainPane.getController().getManager());
+		onePane.getController().setInfoMainController(controller);	
 	}
 	
 	public void addHotelInfoTwoPane() {
 		clearContent();
 		twoPane = new HotelInfoTwoPane();
 		infoMainPane.getBorderPane().setCenter(twoPane.getPane());
-		twoPane.getController().setInfoMainController(this);	
+		twoPane.getController().setInfoMainController(controller);	
 	}
 	
 	public void addHotelInfoThreePane() {
 		clearContent();
 		threePane = new HotelInfoThreePane();
 		infoMainPane.getBorderPane().setCenter(threePane.getPane());
-		threePane.getController().setInfoMainController(this);	
+		threePane.getController().setInfoMainController(controller);	
 	}
 	
 	

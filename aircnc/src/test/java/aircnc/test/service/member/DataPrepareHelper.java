@@ -54,9 +54,8 @@ public class DataPrepareHelper {
 	private static final CreditQueryDao creditQueryDao = CreditDaoImpl.INSTANCE;
 	private static final CreditQueryService creditQueryService = CreditQueryManager.launch(creditQueryDao);
 	private static final OrderQueryService orderQueryService = null;
-	private static final HotelQueryService hotelQueryService = null;
 	public static final MemberInfoService infoService = MemberInfoManager.launch(memberDao, accountService,
-			creditQueryService, orderQueryService, hotelQueryService);
+			creditQueryService, orderQueryService);
 
 	public static final void prepareTestStatistic() {
 		testData.forEach(memberDao::addMember);

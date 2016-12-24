@@ -7,18 +7,18 @@ import static interactor.utils.TitleGetter.getTitle;
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.apache.commons.lang.StringUtils;
 
 import interactor.hotel.HotelInfoInteractor;
 import interactor.utils.Title;
+import po.hotel.HotelPoBuilder;
+import presentation.hotel.accessor.impl.HotelRoomAccessorImpl;
 import presentation.hotel.accessor.impl.InfoModifyAccessorImpl;
-import presentation.hotel.accessor.impl.SearchOrderAccessorImpl;
 import presentation.hotel.manager.impl.HotelCommentManagerImpl;
-import presentation.hotel.manager.impl.HotelOrderManagerImpl;
 import presentation.hotel.manager.impl.HotelRoomManagerImpl;
 import presentation.hotel.manager.impl.InfoManagerImpl;
 import presentation.member.accessor.impl.HotelSearchAccessorImpl;
@@ -30,7 +30,6 @@ import utils.info.hotel.HotelInfo;
 import utils.info.hotel.Room;
 import vo.hotel.HotelVo;
 import vo.hotel.HotelVoBuilder;
-import vo.order.OrderVo;
 import vo.order.comment.CommentVo;
 
 public class HotelInfoCourier implements HotelInfoInteractor {
@@ -55,7 +54,6 @@ public class HotelInfoCourier implements HotelInfoInteractor {
 
 	private HotelInfoService handler;
 	private HotelAccountService helper;
-	private HotelOrderService orderService;
 
 	private HotelInfoCourier(HotelInfoService handler, HotelAccountService helper) {
 		this.handler = handler;
@@ -63,7 +61,7 @@ public class HotelInfoCourier implements HotelInfoInteractor {
 	}
 
 	@Override
-	@Title("Get Hotel Info")
+	@Title("获取酒店信息")
 	public void getHotelInfo() {
 		String title = getTitle();
 
@@ -72,39 +70,15 @@ public class HotelInfoCourier implements HotelInfoInteractor {
 			if (name != null)
 				return handler.getHotelInfo(name);
 
-			alertFail(title, "Not logged in yet");
+			alertFail(title, "还没有登录哦");
 			return null;
 		});
 
 		InfoManagerImpl.getInstance().setHotel(new HotelVoBuilder(info).getHotelInfo());
-
+		InfoModifyAccessorImpl.getInstance().setHotel(new HotelVoBuilder(info).getHotelInfo());
+		
 	}
 
-	@Override
-	@Title("Get Orders by Status")
-	public void getHotelOrdersByStatus() {
-		String title = getTitle();
-
-		List<OrderVo> list = execute(title, () -> {
-			int id = getCurrentId();
-			if (id == Integer.MIN_VALUE) {
-				alertFail(title, "Not logged in yet");
-				return null;
-			}
-
-			return SearchOrderAccessorImpl.getInstance().getStatus().stream()
-					.map(status -> orderService.getHotelOrdersByStatus(id, status))
-					.collect(Collectors.reducing((l1, l2) -> {
-						l1.addAll(l2);
-						return l1;
-					})).get();
-		});
-
-		HotelOrderManagerImpl.getInstance().setOrderList(list);
-	}
-
-	@Override
-	@Title("Get Hotel Comments")
 	public void getHotelComments() {
 		String title = getTitle();
 
@@ -113,7 +87,7 @@ public class HotelInfoCourier implements HotelInfoInteractor {
 			if (id != Integer.MIN_VALUE)
 				return handler.getHotelComment(id);
 
-			alertFail(title, "Not logged in yet");
+			alertFail(title, "还没有登录哦");
 			return null;
 		});
 
@@ -122,7 +96,7 @@ public class HotelInfoCourier implements HotelInfoInteractor {
 	}
 
 	@Override
-	@Title("Get Hotel Rooms")
+	@Title("获取酒店房间")
 	public void getHotelRooms() {
 		String title = getTitle();
 
@@ -131,7 +105,7 @@ public class HotelInfoCourier implements HotelInfoInteractor {
 			if (name != null)
 				return handler.getHotelInfo(name).getRooms();
 
-			alertFail(title, "Not logged in yet");
+			alertFail(title, "还没有登录哦");
 			return null;
 		});
 
@@ -140,7 +114,7 @@ public class HotelInfoCourier implements HotelInfoInteractor {
 	}
 
 	@Override
-	@Title("Update Hotel Passwords")
+	@Title("修改密码")
 	public void updatePassword() {
 		// String title = getTitle();
 		//
@@ -160,7 +134,7 @@ public class HotelInfoCourier implements HotelInfoInteractor {
 	}
 
 	@Override
-	@Title("Get Hotel Basic Info")
+	@Title("修改酒店信息")
 	public void updateHotel() {
 		String title = getTitle();
 
@@ -176,25 +150,6 @@ public class HotelInfoCourier implements HotelInfoInteractor {
 		});
 
 	}
-
-	@Override
-	@Title("Get Orders")
-	public void getHotelAllOrders() {
-		String title = getTitle();
-
-		List<OrderVo> list = execute(title, () -> {
-			int id = getCurrentId();
-			if (id != Integer.MIN_VALUE)
-				return orderService.getHotelAllOrders(id);
-
-			alertFail(title, "Not logged in yet");
-			return null;
-		});
-
-		HotelOrderManagerImpl.getInstance().setOrderList(list);
-
-	}
-
 	@Override
 	@Title("搜索酒店")
 	public void getHotelsByCondition() {
@@ -212,6 +167,48 @@ public class HotelInfoCourier implements HotelInfoInteractor {
 		SearchHotelManagerImpl.getInstance().setHotel(hotels);
 
 	}
+	
+	@Override
+	@Title("线下入住")
+	public void liveCheckIn() {
+		String title = getTitle();
+		
+		
+		execute(title, () -> {
+			int id = getCurrentId();
+			if (id != Integer.MIN_VALUE){
+				Set<Room> rooms = new HashSet<Room>();
+				rooms.add(HotelRoomAccessorImpl.getInstance().getRoom());
+				if (!handler.updateInfo(new HotelPoBuilder(helper.getCurrentAccount()).setRooms(rooms).getHotelInfo()))
+					alertFail(title, "线下入住失败");
+				else
+					alertSuccess(title, "线下入住成功");
+			}
+			return null;
+		});	
+		
+	}
+	
+	@Override
+	@Title("退房")
+	public void liveCheckOut() {
+		String title = getTitle();
+		
+		
+		execute(title, () -> {
+			int id = getCurrentId();
+			if (id != Integer.MIN_VALUE){
+				Set<Room> rooms = new HashSet<Room>();
+				rooms.add(HotelRoomAccessorImpl.getInstance().getRoom());
+				if (!handler.updateInfo(new HotelPoBuilder(helper.getCurrentAccount()).setRooms(rooms).getHotelInfo()))
+					alertFail(title, "退房失败");
+				else
+					alertSuccess(title, "退房成功");
+			}
+			return null;
+		});	
+		
+	}
 
 	private String getCurrentName() {
 		HotelInfo curAcc = helper.getCurrentAccount();
@@ -222,5 +219,7 @@ public class HotelInfoCourier implements HotelInfoInteractor {
 		HotelInfo curAcc = helper.getCurrentAccount();
 		return curAcc == null ? Integer.MIN_VALUE : curAcc.getId();
 	}
+
+	
 
 }

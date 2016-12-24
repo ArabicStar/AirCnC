@@ -5,6 +5,8 @@ import java.util.ResourceBundle;
 
 import org.controlsfx.control.Rating;
 
+import interactor.hotel.HotelInfoInteractor;
+import interactor.impl.hotel.HotelInfoCourier;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,6 +16,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import presentation.hotel.manager.InfoManager;
+import presentation.hotel.manager.impl.InfoManagerImpl;
 import presentation.hotel.model.HotelInfoModel;
 import presentation.hotel.view.hotelInfo.HotelInfoController;
 
@@ -55,8 +58,13 @@ public class HotelInfoOneController implements Initializable{
 	
 	private HotelInfoModel model;
 	
+	private HotelInfoInteractor interactor;
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		manager = InfoManagerImpl.getInstance();
+		
+		interactor = HotelInfoCourier.getInstance();
 		
 		Platform.runLater(new Runnable() {
 			  @Override public void run() {
@@ -85,16 +93,8 @@ public class HotelInfoOneController implements Initializable{
 		this.controller=controller;
 	}
 	
-	/**
-	 * set the hotel info manager
-	 * aiming to fetch the hotel info model
-	 * @param manager
-	 */
-	public void setManager(InfoManager manager){
-		this.manager = manager;
-	}
-	
 	private void initHotelInfo(){
+//		interactor.getHotelInfo();
 		String style = "-fx-background-color: #fff;-fx-border-color: #585697;-fx-padding:5px 10px 5px 10px;-fx-text-fill: #fff; -fx-font-size: 20px; -fx-border-radius: 10;-fx-text-fill:#585697; ";
 		model = manager.getHotelInfo();
 		this.scope.setText(model.getScope());

@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 
+import interactor.hotel.HotelOrderInteractor;
+import interactor.impl.hotel.HotelOrderCourier;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
@@ -62,6 +64,8 @@ public class OrderExecuteController implements Initializable{
 	
 	private SearchOrderAccessor accessor;
 	
+	private HotelOrderInteractor interactor;
+	
 	public void setCenterController(HotelCenterController controller){
 		this.controller=controller;
 	}
@@ -69,15 +73,12 @@ public class OrderExecuteController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		orderTable.setEditable(false);
-		if(!HotelOrderManagerImpl.isLaunched()){
-			HotelOrderManagerImpl.launch();
-		}
+
 		manager = HotelOrderManagerImpl.getInstance();
 		
-		if(!SearchOrderAccessorImpl.isLaunched()){
-			SearchOrderAccessorImpl.launch();
-		}
 		accessor = SearchOrderAccessorImpl.getInstance();
+		
+		interactor = HotelOrderCourier.getInstance();
 		
 		Platform.runLater(new Runnable() {
 			  @Override public void run() {

@@ -59,7 +59,7 @@ public class OrderPoBuilder extends OrderInfoBuilder {
 				.setPeopleNumber(peopleNumber)//
 				.setHasChildren(hasChildren)//
 				.setOriginalPrice(originalPrice)//
-				.setDiscountPrice(discountPrice)//
+				.setDiscountPrice(discountPrice < 0 ? originalPrice : discountPrice)//
 				.setPromotions(promotions)//
 				.setComments(comment)//
 				.setAppeal(appeal);//
@@ -153,7 +153,8 @@ public class OrderPoBuilder extends OrderInfoBuilder {
 
 	@Override
 	public OrderPoBuilder setComment(CommentInfo comment) {
-		this.comment = new CommentPoBuilder(comment).getCommentInfo();
+		if (comment != null)
+			this.comment = new CommentPoBuilder(comment).getCommentInfo();
 		return this;
 	}
 

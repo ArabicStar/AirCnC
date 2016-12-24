@@ -21,6 +21,7 @@ public class PromotionBuilderTest {
 
 	@Test
 	public void testPromotionBuilder() {
+
 		OrderInfo order = DataPrepareHelper.getAnOrder();
 
 		LocalDateTime now = LocalDateTime.now();
@@ -32,7 +33,7 @@ public class PromotionBuilderTest {
 
 		System.out.println(p.description());
 
-		if (p.canApplyTo(order, null))
+		if (p.canApplyTo(order))
 			order = p.applyTo(order);
 
 		assertEquals(70.0, order.getDiscountPrice(), 0.1);
@@ -41,7 +42,7 @@ public class PromotionBuilderTest {
 		a = PromotionBuilder.how(How.CONST).setParam(ApplierParams.AMOUNT, 30.0).build();
 		p = new PromotionBuilder().setApplier(a).setTrigger(t).build();
 
-		if (p.canApplyTo(order, null))
+		if (p.canApplyTo(order))
 			order = p.applyTo(order);
 
 		System.out.println(p.description());
@@ -53,7 +54,7 @@ public class PromotionBuilderTest {
 		a = PromotionBuilder.how(How.PERCENT_OFF).setParam(ApplierParams.PERCENT, 0.9).build();
 		p = new PromotionBuilder().setApplier(a).setTrigger(t).build();
 
-		if (p.canApplyTo(order, null))
+		if (p.canApplyTo(order))
 			order = p.applyTo(order);
 
 		System.out.println(p.description());
@@ -65,7 +66,7 @@ public class PromotionBuilderTest {
 		a = PromotionBuilder.how(How.PERCENT_OFF).setParam(ApplierParams.PERCENT, 0.9).build();
 		p = new PromotionBuilder().setApplier(a).setTrigger(t).build();
 
-		if (p.canApplyTo(order, null))
+		if (p.canApplyTo(order))
 			order = p.applyTo(order);
 
 		System.out.println(p.description());

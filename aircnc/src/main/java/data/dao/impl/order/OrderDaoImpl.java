@@ -10,6 +10,8 @@ import org.hibernate.criterion.Restrictions;
 
 import data.dao.order.OrderDao;
 import data.dao.query.OrderQueryDao;
+import po.hotel.HotelPo;
+import po.member.MemberPo;
 import po.order.OrderPo;
 import po.order.OrderPoBuilder;
 import utils.info.hotel.HotelInfoTemplate;
@@ -23,7 +25,11 @@ public enum OrderDaoImpl implements OrderDao, OrderQueryDao {
 		if (!OrderPo.checkOrderId(orderId))
 			throw illegalArgEx("Order Id String", orderId);
 
-		return execute(session -> (OrderPo) session.get(OrderPo.class, orderId));
+		return execute(session -> {
+			OrderPo po = (OrderPo) session.get(OrderPo.class, orderId);
+			po.setMember(session.get(MemberPo.class, po.getMemberId()));
+			return po;
+		});
 	}
 
 	public boolean updateOrder(OrderPo orderPo) {
@@ -86,10 +92,13 @@ public enum OrderDaoImpl implements OrderDao, OrderQueryDao {
 
 		return execute(session -> {
 			final Criteria criteria = session.createCriteria(OrderPo.class);
-			criteria.add(Restrictions.eq("member", MemberInfoTemplate.convertID2Num(memberId)));
+			criteria.add(Restrictions.eq("memberId", MemberInfoTemplate.convertID2Num(memberId)));
 
 			@SuppressWarnings("unchecked")
 			List<OrderPo> list = criteria.list();
+
+			for (OrderPo po : list)
+				po.setMember(session.get(MemberPo.class, po.getMemberId()));
 
 			return list;
 		});
@@ -102,10 +111,14 @@ public enum OrderDaoImpl implements OrderDao, OrderQueryDao {
 
 		return execute(session -> {
 			final Criteria criteria = session.createCriteria(OrderPo.class);
-			criteria.add(Restrictions.eq("hotel", new Integer(hotelId)));
+			HotelPo hotel = session.get(HotelPo.class, hotelId);
+			criteria.add(Restrictions.eq("hotel", hotel));
 
 			@SuppressWarnings("unchecked")
 			List<OrderPo> list = criteria.list();
+
+			for (OrderPo po : list)
+				po.setMember(session.get(MemberPo.class, po.getMemberId()));
 
 			return list;
 		});
@@ -119,6 +132,9 @@ public enum OrderDaoImpl implements OrderDao, OrderQueryDao {
 
 			@SuppressWarnings("unchecked")
 			List<OrderPo> list = criteria.list();
+
+			for (OrderPo po : list)
+				po.setMember(session.get(MemberPo.class, po.getMemberId()));
 
 			return list;
 		});

@@ -30,7 +30,6 @@ public class HotelAccountManager implements HotelAccountService{
 		return instance;
 	}
 
-	private static final int ID_BOUND = 100000000;
 	private HotelDao dao;
 
 	private boolean isLogined = false;

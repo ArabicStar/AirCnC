@@ -1,10 +1,14 @@
 package launcher;
 
 import data.dao.member.MemberDaoProxy;
+import data.dao.order.OrderDao;
+import data.dao.order.OrderDaoProxy;
 import data.dao.query.QueryDaoProxy;
 import service.impl.member.MemberAccountManager;
 import service.impl.member.MemberCreditManager;
 import service.impl.member.MemberInfoManager;
+import service.impl.order.OrderInfoManager;
+import service.impl.order.OrderOperationManager;
 import service.impl.promotion.HotelPromotionApplicationManager;
 import service.impl.promotion.HotelPromotionInfoManager;
 import service.impl.promotion.PromotionApplicationManager;
@@ -17,6 +21,9 @@ import service.member.MemberAccountService;
 import service.member.MemberCreditService;
 import service.member.MemberInfoService;
 import service.member.MemberServiceProxy;
+import service.order.OrderInfoService;
+import service.order.OrderOperationService;
+import service.order.OrderServiceProxy;
 import service.promotion.HotelPromotionApplicationService;
 import service.promotion.HotelPromotionInfoService;
 import service.promotion.PromotionApplicationService;
@@ -38,8 +45,7 @@ public class ServiceLauncher {
 			launchMemberService(clientId);
 			launchQueryService(clientId);
 			launchPromotionService(clientId);
-			// launchOrderService(clientId);
-			launchHotelService(clientId);
+			launchOrderService(clientId);
 			Log.i("Services launch succeed");
 		} catch (Exception e) {
 			Log.f("FATAL ERROR - Services launch failed, System exits", e);
@@ -57,7 +63,7 @@ public class ServiceLauncher {
 
 		final MemberAccountService acc = MemberAccountManager.launch(memberDaoProxy);
 		final MemberCreditService cre = MemberCreditManager.launch(memberDaoProxy, memberDaoProxy);
-		final MemberInfoService info = MemberInfoManager.launch(memberDaoProxy, acc, null, null, null);
+		final MemberInfoService info = MemberInfoManager.launch(memberDaoProxy, acc, null, null);
 
 		proxy.loadAccountService(acc);
 		proxy.loadCreditService(cre);
@@ -83,9 +89,9 @@ public class ServiceLauncher {
 	}
 
 	private static final void launchQueryService(Client clientId) {
-		final QueryDaoProxy queryDao = QueryDaoProxy.getInstance();
-
 		QueryServiceProxy proxy = QueryServiceProxy.launch(clientId);
+
+		final QueryDaoProxy queryDao = QueryDaoProxy.getInstance();
 
 		final MemberQueryService mem = MemberInfoManager.getInstance();
 		final CreditQueryService cre = CreditQueryManager.launch(queryDao);
@@ -100,14 +106,22 @@ public class ServiceLauncher {
 		proxy.loadCommentQueryService(comm);
 	}
 
-	private static void launchHotelService(Client clientId) {
-		// TODO 自动生成的方法存根
-
-	}
-
 	private static void launchOrderService(Client clientId) {
-		// TODO 自动生成的方法存根
+		OrderServiceProxy proxy = OrderServiceProxy.launch(clientId);
 
+		final OrderDao orderDao = OrderDaoProxy.getInstance();
+
+		final HotelQueryService hotelQuery = QueryServiceProxy.getInstance();
+		final MemberQueryService memberQuery = QueryServiceProxy.getInstance();
+		final MemberCreditService creditService = MemberServiceProxy.getInstance();
+		final PromotionApplicationService promotionService = PromotionServiceProxy.getInstance();
+
+		final OrderInfoService info = OrderInfoManager.launch(orderDao);
+		final OrderOperationService operation = OrderOperationManager.launch(orderDao, hotelQuery, memberQuery,
+				creditService, promotionService);
+
+		proxy.loadOrderInfoService(info);
+		proxy.loadOrderOperationService(operation);
 	}
 
 }

@@ -86,7 +86,8 @@ public class OrderVo extends OrderInfo {
 
 	OrderVo setComments(CommentVo comment) {
 		this.comment = comment;
-		comment.setRelOrder(this);
+		if (comment != null)
+			comment.setRelOrder(this);
 		return this;
 	}
 

@@ -173,7 +173,7 @@ public abstract class OrderInfoBuilder extends OrderInfoTemplate {
 	public boolean isReady() {
 		return checkOrderId(orderId) && getMember() != null && getHotel() != null && roomType != null && stayDays > 0
 				&& status != null && entryTime != null && lastTime != null && peopleNumber > 0 && originalPrice >= 0
-				&& discountPrice >= 0 && roomNumber > 0;
+				&& roomNumber > 0;
 	}
 
 	public abstract OrderInfoBuilder addPromotion(PromotionInfo promotion);

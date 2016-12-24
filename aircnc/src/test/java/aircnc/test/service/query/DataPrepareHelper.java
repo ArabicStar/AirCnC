@@ -48,7 +48,7 @@ public class DataPrepareHelper {
 	private static final MemberDao memberDao = MemberDaoImpl.INSTANCE;
 	public static final CreditQueryService cqs = CreditQueryManager.launch(creditDao);
 	public static final HotelQueryService hqs = HotelQueryManager.launch(hotelDao);
-	public static final MemberQueryService mqs = MemberInfoManager.launch(memberDao, null, null, null, null);
+	public static final MemberQueryService mqs = MemberInfoManager.launch(memberDao, null, null, null);
 
 	public static final void prepareTestStatistic() {
 		testData.forEach(memberDao::addMember);

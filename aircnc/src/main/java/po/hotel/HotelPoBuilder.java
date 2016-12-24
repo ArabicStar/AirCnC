@@ -40,6 +40,9 @@ public class HotelPoBuilder extends HotelInfoBuilder {
 	 */
 	public HotelPoBuilder(HotelInfo info) {
 		super(info);
+		
+		if (info instanceof HotelPo)
+			setPasswordHash(((HotelPo) info).getPasswordHash());
 	}
 
 	@Override

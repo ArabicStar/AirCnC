@@ -5,6 +5,7 @@ import java.rmi.RemoteException;
 import rmi.remote.HotelDaoRemoteObj;
 import rmi.remote.MarketDaoRemoteObj;
 import rmi.remote.MemberDaoRemoteObj;
+import rmi.remote.OrderDaoRemoteObj;
 import rmi.remote.PromotionDaoRemoteObj;
 import rmi.remote.QueryDaoRemoteObj;
 import utils.logger.Log;
@@ -17,7 +18,7 @@ public class RmiLauncher {
 			MarketDaoRemoteObj.launch();
 			QueryDaoRemoteObj.launch();
 			PromotionDaoRemoteObj.launch();
-
+			OrderDaoRemoteObj.launch();
 			Log.i("Rmi launched");
 		} catch (RemoteException e) {
 			// Fatal error, exit forcely

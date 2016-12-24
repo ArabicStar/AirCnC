@@ -4,10 +4,9 @@ import javafx.application.Application;
 import presentation.member.CenterController;
 import presentation.member.accessor.impl.CreditChangeOrderAccessorImpl;
 import presentation.member.accessor.impl.InfoModifyAccessorImpl;
-import presentation.member.accessor.impl.MemberAppealAccessorImpl;
-import presentation.member.accessor.impl.MemberCommentAccessorImpl;
 import presentation.member.accessor.impl.MemberLoginAccessorImpl;
 import presentation.member.accessor.impl.MemberOrderOperationAccessorImpl;
+import presentation.member.accessor.impl.OrderMakerAccessorImpl;
 import presentation.member.accessor.impl.RegisterAccessorImpl;
 import presentation.member.accessor.impl.SearchOrderInfoAccessorImpl;
 import presentation.member.accessor.impl.HotelSearchAccessorImpl;
@@ -37,15 +36,14 @@ public class UILauncher {
 
 	private static final void launchAccessor() {
 		InfoModifyAccessorImpl.launch();
-		MemberAppealAccessorImpl.launch();
-		MemberCommentAccessorImpl.launch();
 		MemberLoginAccessorImpl.launch();
 		MemberOrderOperationAccessorImpl.launch();
 		RegisterAccessorImpl.launch();
 		SearchOrderInfoAccessorImpl.launch();
 		HotelSearchAccessorImpl.launch();
 		CreditChangeOrderAccessorImpl.launch();
-		//HotelNameAccessorImpl.launch();
+		OrderMakerAccessorImpl.launch();
+		// HotelNameAccessorImpl.launch();
 
 	}
 

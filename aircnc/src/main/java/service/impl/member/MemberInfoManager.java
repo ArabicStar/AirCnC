@@ -1,6 +1,12 @@
 package service.impl.member;
 
-import static utils.exception.StaticExceptionFactory.*;
+import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
+import static utils.exception.StaticExceptionFactory.illegalArgEx;
+import static utils.exception.StaticExceptionFactory.illegalStateException;
+import static utils.exception.StaticExceptionFactory.inconsistentStatusEx;
+import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
+import static utils.exception.StaticExceptionFactory.unsupportedOpEx;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -10,7 +16,6 @@ import po.member.MemberPoBuilder;
 import service.member.MemberAccountService;
 import service.member.MemberInfoService;
 import service.query.CreditQueryService;
-import service.query.HotelQueryService;
 import service.query.MemberQueryService;
 import service.query.OrderQueryService;
 import utils.info.member.MemberInfo;
@@ -60,13 +65,11 @@ public final class MemberInfoManager implements MemberInfoService, MemberQuerySe
 	 *             singleton has existed already <br>
 	 */
 	public static MemberInfoManager launch(final MemberDao memberDao, final MemberAccountService accountService,
-			final CreditQueryService creditQueryService, final OrderQueryService orderQueryService,
-			final HotelQueryService hotelQueryService) {
+			final CreditQueryService creditQueryService, final OrderQueryService orderQueryService) {
 		if (instance != null)
 			throw duplicateSingletonEx();
 
-		return instance = new MemberInfoManager(memberDao, accountService, creditQueryService, orderQueryService,
-				hotelQueryService);
+		return instance = new MemberInfoManager(memberDao, accountService, creditQueryService, orderQueryService);
 	}
 
 	/**
@@ -88,16 +91,13 @@ public final class MemberInfoManager implements MemberInfoService, MemberQuerySe
 	private MemberAccountService accountService;
 	private CreditQueryService creditQueryService;
 	private OrderQueryService orderQueryService;
-	private HotelQueryService hotelQueryService;
 
 	private MemberInfoManager(MemberDao memberDao, MemberAccountService accountService,
-			CreditQueryService creditQueryService, OrderQueryService orderQueryService,
-			HotelQueryService hotelQueryService) {
+			CreditQueryService creditQueryService, OrderQueryService orderQueryService) {
 		this.memberDao = memberDao;
 		this.accountService = accountService;
 		this.creditQueryService = creditQueryService;
 		this.orderQueryService = orderQueryService;
-		this.hotelQueryService = hotelQueryService;
 	}
 
 	/*

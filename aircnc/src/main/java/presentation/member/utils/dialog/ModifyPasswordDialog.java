@@ -76,9 +76,11 @@ public class ModifyPasswordDialog {
 			InfoModifyAccessorImpl.getInstance().setOldPassword(oldNewPassword.getKey());
 			InfoModifyAccessorImpl.getInstance().setNewPassword(oldNewPassword.getValue());
 			MemberInfoCourier.getInstance().updatePassword();
-			//System.out.println("Old=" + oldNewPassword.getKey() + ", New=" + oldNewPassword.getValue());
-			PlainDialog alert = new PlainDialog(AlertType.INFORMATION,"修改成功","已成功修改密码");
-			alert.showDialog();
+			// System.out.println("Old=" + oldNewPassword.getKey() + ", New=" +
+			// oldNewPassword.getValue());
+			// PlainDialog alert = new
+			// PlainDialog(AlertType.INFORMATION,"修改成功","已成功修改密码");
+			// alert.showDialog();
 		});
 	}
 

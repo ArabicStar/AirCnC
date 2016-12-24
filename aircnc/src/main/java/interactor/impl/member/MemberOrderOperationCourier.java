@@ -1,4 +1,4 @@
-package interactor.impl.order;
+package interactor.impl.member;
 
 import static interactor.utils.AlertHelper.alertFail;
 import static interactor.utils.AlertHelper.alertSuccess;
@@ -8,7 +8,7 @@ import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 import static utils.exception.StaticExceptionFactory.unknownEx;
 
-import interactor.order.UserOrderOperationInteractor;
+import interactor.member.MemberOrderOperationInteractor;
 import interactor.utils.Title;
 import presentation.member.accessor.impl.MemberOrderOperationAccessorImpl;
 import service.member.MemberAccountService;
@@ -18,37 +18,37 @@ import utils.info.member.MemberInfo;
 import utils.info.order.OrderInfo;
 import utils.info.order.OrderInfoBuilder;
 
-public class OrderOperationCourier implements UserOrderOperationInteractor {
-	
-	private static UserOrderOperationInteractor instance;
+public class MemberOrderOperationCourier implements MemberOrderOperationInteractor {
 
-	public static UserOrderOperationInteractor launch(OrderOperationService handler
-			, PromotionApplicationService promotion, MemberAccountService acc) {
+	private static MemberOrderOperationInteractor instance;
+
+	public static MemberOrderOperationInteractor launch(OrderOperationService handler,
+			PromotionApplicationService promotion, MemberAccountService acc) {
 		/* singleton */
 		if (instance != null)
 			throw duplicateSingletonEx();
 
-		return instance = new OrderOperationCourier(handler, promotion, acc);
+		return instance = new MemberOrderOperationCourier(handler, promotion, acc);
 	}
 
-	public static UserOrderOperationInteractor getInstance() {
+	public static MemberOrderOperationInteractor getInstance() {
 		if (instance == null)
 			throw singletonNotExistsEx();
 
 		return instance;
 	}
-	
+
 	private OrderOperationService handler;
 	private PromotionApplicationService promotion;
 	private MemberAccountService acc;
 
-	public OrderOperationCourier(OrderOperationService handler
-			, PromotionApplicationService promotion, MemberAccountService acc){
+	public MemberOrderOperationCourier(OrderOperationService handler, PromotionApplicationService promotion,
+			MemberAccountService acc) {
 		this.handler = handler;
 		this.promotion = promotion;
 		this.acc = acc;
 	}
-	
+
 	@Override
 	public boolean tryMakeOrder() {
 		String title = getTitle();
@@ -114,6 +114,42 @@ public class OrderOperationCourier implements UserOrderOperationInteractor {
 
 		acc.refreshCurrentAccount();
 		return mem != null;
+	}
+
+	@Override
+	public boolean appealOrder() {
+		String title = getTitle();
+		OrderInfo order = execute(title, () -> {
+			OrderInfo info = handler.appealOrder(getOrderFromUI());
+
+			if (info == null || !info.isValid())
+				throw unknownEx();
+
+			return info;
+		});
+
+		if (order != null)
+			alertSuccess(title, "已提交申诉！");
+
+		return order != null;
+	}
+
+	@Override
+	public boolean commentOrder() {
+		String title = getTitle();
+		OrderInfo order = execute(title, () -> {
+			OrderInfo info = handler.commentOrder(getOrderFromUI());
+
+			if (info == null || !info.isValid())
+				throw unknownEx();
+
+			return info;
+		});
+
+		if (order != null)
+			alertSuccess(title, "评价成功！");
+
+		return order != null;
 	}
 
 	private static final OrderInfo getOrderFromUI() {

@@ -7,6 +7,8 @@ public interface HotelRoomAccessor {
 	
 	public void setRoomNum(int roonNum);
 	
+	public void setRoom(Room room);
+	
 	public Room getRoom();
 
 }

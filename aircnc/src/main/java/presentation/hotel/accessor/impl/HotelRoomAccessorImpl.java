@@ -11,6 +11,7 @@ import utils.info.hotel.RoomBuilder;
 public class HotelRoomAccessorImpl implements HotelRoomAccessor{
 
 	private static HotelRoomAccessorImpl instance;
+	private Room room;
 	private String roomName;
 	private int roomNum;
 	
@@ -53,8 +54,14 @@ public class HotelRoomAccessorImpl implements HotelRoomAccessor{
 
 	@Override
 	public Room getRoom() {
-		RoomBuilder builder = new RoomBuilder(roomName).setRoomNum(roomNum);
+		RoomBuilder builder = new RoomBuilder(room).setRoomNum(room.getRoomNum()+roomNum);
 		return builder.getRoomInfo();
+	}
+
+	@Override
+	public void setRoom(Room room) {
+		this.room = room;
+		
 	}
 
 }

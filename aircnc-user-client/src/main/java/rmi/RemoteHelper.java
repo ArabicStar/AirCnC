@@ -9,13 +9,14 @@ import java.rmi.NotBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
+import data.dao.rmi.hotel.RemoteHotelDao;
 import data.dao.rmi.member.RemoteCreditDao;
 import data.dao.rmi.member.RemoteMemberDao;
+import data.dao.rmi.order.RemoteOrderDao;
 import data.dao.rmi.promotion.RemoteHotelPromotionDao;
-import data.dao.rmi.promotion.RemoteWebsitePromotionApplicationService;
 import data.dao.rmi.promotion.RemoteWebsitePromotionDao;
-import data.dao.rmi.promotion.RemoteWebsitePromotionInfoService;
 import data.dao.rmi.query.RemoteCreditQueryDao;
+import data.dao.rmi.query.RemoteOrderQueryDao;
 import data.dao.rmi.query.RemotePromotionQueryDao;
 import utils.logger.Log;
 
@@ -45,6 +46,8 @@ public final class RemoteHelper {
 		fetchMemberDaoRemoteObj();
 		fetchQueryDaoRemoteObj();
 		fetchPromotionDaoRemoteObj();
+		fetchOrderDaoRemoteObj();
+		fetchHotelDaoRemoteObj();
 	}
 
 	private void fetchQueryDaoRemoteObj() {
@@ -65,9 +68,23 @@ public final class RemoteHelper {
 		Log.d("fetch promotion dao remote obj " + (promotionDaoRemoteObj != null ? "succeed" : "failed"));
 	}
 
+	private void fetchOrderDaoRemoteObj() {
+		orderDaoRemoteObj = findRemote("RemoteOrderDao");
+
+		Log.d("fetch order dao remote obj " + (orderDaoRemoteObj != null ? "succeed" : "failed"));
+	}
+
+	private void fetchHotelDaoRemoteObj() {
+		hotelDaoRemoteObj = findRemote("RemoteHotelDao");
+
+		Log.d("fetch hotel dao remote obj " + (hotelDaoRemoteObj != null ? "succeed" : "failed"));
+	}
+
 	private Remote memberDaoRemoteObj;
 	private Remote queryDaoRemoteObj;
 	private Remote promotionDaoRemoteObj;
+	private Remote orderDaoRemoteObj;
+	private Remote hotelDaoRemoteObj;
 
 	public RemoteMemberDao getRemoteMemberDao() {
 		return (RemoteMemberDao) memberDaoRemoteObj;
@@ -77,8 +94,20 @@ public final class RemoteHelper {
 		return (RemoteCreditDao) memberDaoRemoteObj;
 	}
 
+	public RemoteHotelDao getRemoteHotelDao() {
+		return (RemoteHotelDao) hotelDaoRemoteObj;
+	}
+
 	public RemoteCreditQueryDao getRemoteCreditQueryDao() {
 		return (RemoteCreditQueryDao) queryDaoRemoteObj;
+	}
+
+	public RemoteOrderQueryDao getRemoteOrderQueryDao() {
+		return (RemoteOrderQueryDao) queryDaoRemoteObj;
+	}
+
+	public RemoteOrderDao getRemoteOrderDao() {
+		return (RemoteOrderDao) orderDaoRemoteObj;
 	}
 
 	public RemotePromotionQueryDao getRemotePromotionQueryDao() {

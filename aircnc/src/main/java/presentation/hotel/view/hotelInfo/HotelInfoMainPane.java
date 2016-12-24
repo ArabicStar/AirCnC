@@ -14,6 +14,7 @@ import presentation.hotel.view.hotelInfo.fxml.HotelInfoMainController;
 public class HotelInfoMainPane {
 	private BorderPane rootLayout;
 	private HotelInfoMainController controller;
+	private HotelInfoController infoController;
 	
 	public HotelInfoMainPane(){
 		initRootLayout();
@@ -43,8 +44,4 @@ public class HotelInfoMainPane {
     public BorderPane getBorderPane() {
         return rootLayout;
     }
-    
-//    public Node getPane(){
-//    	return rootLayout;
-//    }
 }

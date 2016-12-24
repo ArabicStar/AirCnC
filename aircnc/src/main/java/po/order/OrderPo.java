@@ -20,6 +20,7 @@ public class OrderPo extends OrderInfo {
 	private CommentPo comment;
 	private MemberPo member;
 	private HotelPo hotel;
+	private int memberId;
 
 	public OrderPo() {
 		promotions = new HashSet<>();
@@ -112,10 +113,9 @@ public class OrderPo extends OrderInfo {
 	}
 
 	public OrderPo setComments(CommentPo comment) {
-		if (comment == null)
-			return this;
 		this.comment = comment;
-		comment.setRelOrder(this);
+		if (comment != null)
+			comment.setRelOrder(this);
 		return this;
 	}
 
@@ -144,27 +144,11 @@ public class OrderPo extends OrderInfo {
 		return hotel;
 	}
 
-	public MemberPo getEnterpriseMember() {
-		if (member instanceof EnterpriseMemberPo)
-			return member;
-		else
-			return null;
+	public int getMemberId() {
+		return member == null ? memberId : member.getNumId();
 	}
 
-	public MemberPo getPersonalMember() {
-		if (member instanceof PersonalMemberPo)
-			return member;
-		else
-			return null;
-	}
-
-	public void setEnterpriseMember(MemberPo memberPo) {
-		if (member instanceof EnterpriseMemberPo)
-			this.member = memberPo;
-	}
-
-	public void setPersonalMember(MemberPo memberPo) {
-		if (member instanceof PersonalMemberPo)
-			this.member = memberPo;
+	public void setMemberId(int memberId) {
+		this.memberId = memberId;
 	}
 }
