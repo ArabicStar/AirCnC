@@ -17,13 +17,13 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import presentation.manage.CenterController;
-import presentation.manage.ManageTest;
 import presentation.manage.accessor.MarketManageInfoAccessor;
 import presentation.manage.accessor.impl.MarketManageInfoAccessorImpl;
 import presentation.manage.manager.MarketManageInfoManager;
 import presentation.manage.manager.impl.MarketManageInfoManagerImpl;
 import presentation.manage.model.MarketManageModel;
 import presentation.manage.utils.cell.MarketManageButtonCell;
+import presentation.manage.utils.dialog.MarketModifyDialog;
 import presentation.manage.utils.dialog.PlainDialog;
 import presentation.manage.view.marketmanage.MarketAddPane;
 import vo.market.MarketVo;
@@ -75,7 +75,6 @@ public class MarketManageMainController implements Initializable{
 	@FXML
 	public void handleQuery(){
 		if(marketId.getText().length()>0){
-			ManageTest.getMarketData();
 			accessor.setId(marketId.getText());
 			models = manager.getMarketInfoList();
 			
@@ -118,6 +117,16 @@ public class MarketManageMainController implements Initializable{
 	
 	public void removeAddHotel(){
 		rootLayout.getChildren().remove(rootLayout.getChildren().size()-1);
+	}
+	
+	public void handleModifyMarket(MarketVo vo){
+		@SuppressWarnings("unused")
+		MarketModifyDialog memAlert = new MarketModifyDialog(vo);
+	}
+	
+	public void handleDeleteMarket(MarketVo vo){
+		PlainDialog delete = new PlainDialog(AlertType.CONFIRMATION,"删除营销人员","确认删除该营销人员吗？");
+		
 	}
 	
 	public void setCenterController(CenterController controller){

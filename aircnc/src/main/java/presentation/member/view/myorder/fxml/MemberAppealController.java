@@ -3,15 +3,14 @@ package presentation.member.view.myorder.fxml;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import interactor.impl.order.OrderInfoCourier;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Alert.AlertType;
-import presentation.member.accessor.MemberAppealAccessor;
-import presentation.member.accessor.impl.MemberAppealAccessorImpl;
+import presentation.member.accessor.MemberOrderOperationAccessor;
+import presentation.member.accessor.impl.MemberOrderOperationAccessorImpl;
 import presentation.member.utils.dialog.PlainDialog;
 import vo.order.OrderVo;
 
@@ -24,7 +23,7 @@ public class MemberAppealController implements Initializable{
 	private Button confirm;
 	
 	private OrderVo vo;
-	private MemberAppealAccessor accessor;
+	private MemberOrderOperationAccessor accessor;
 	private MemberOrderMainController controller;
 	
 	@Override
@@ -36,16 +35,15 @@ public class MemberAppealController implements Initializable{
 				confirm.setDisable(newValue.trim().isEmpty());
 			});
 		});
-		accessor = MemberAppealAccessorImpl.getInstance();
+		accessor = MemberOrderOperationAccessorImpl.getInstance();
 	}
 	
 	@FXML
 	public void handleConfirm(){
-		accessor.setAppeal(appeal.getText());
-		accessor.setOrderId(vo.getOrderId());
+		accessor.setAppeal(vo, appeal.getText());
 		PlainDialog alert = new PlainDialog(AlertType.INFORMATION,
 			"申诉成功","已经收到您的申诉");
-		OrderInfoCourier.getInstance().makeAppeal();
+		//OrderOperationCourier.getInstance().
 		alert.showDialog();
 		controller.removeAppealPane();
 	}

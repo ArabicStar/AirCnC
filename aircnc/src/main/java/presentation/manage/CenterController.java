@@ -8,6 +8,8 @@ import presentation.manage.accessor.impl.HotelManageInfoAccessorImpl;
 import presentation.manage.accessor.impl.MarketManageInfoAccessorImpl;
 import presentation.manage.accessor.impl.MemberManageInfoAccessorImpl;
 import presentation.manage.manager.impl.HotelManageInfoManagerImpl;
+import presentation.manage.manager.impl.HotelManagePromotionManagerImpl;
+import presentation.manage.manager.impl.ManageHotelCommentManagerImpl;
 import presentation.manage.manager.impl.MarketManageInfoManagerImpl;
 import presentation.manage.manager.impl.MemberManageInfoImpl;
 import presentation.manage.view.ManageMainPane;
@@ -35,6 +37,7 @@ public class CenterController extends Application {
 	private HotelManageMainPane hotelManage;
 	private MarketManageMainPane marketManage;
 	
+	private ManageTest test;
 
 	private final static int Main_Width = 1024;
 	private final static int Main_Height = 768;
@@ -50,6 +53,25 @@ public class CenterController extends Application {
 	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		
+		HotelManageInfoManagerImpl.launch();
+		HotelManagePromotionManagerImpl.launch();
+		ManageHotelCommentManagerImpl.launch();
+		MarketManageInfoManagerImpl.launch();
+		MemberManageInfoImpl.launch();
+		
+		HotelManageInfoAccessorImpl.launch();
+		MarketManageInfoAccessorImpl.launch();
+		MemberManageInfoAccessorImpl.launch();
+		
+		test = new ManageTest();
+		
+		test.getUserData();
+		test.getHotelData();
+		test.getMarketData();
+		test.getCommentData();
+	
+		
 		this.primaryStage = primaryStage;
 
 		//primaryStage.initStyle(StageStyle.UNDECORATED);
@@ -74,10 +96,6 @@ public class CenterController extends Application {
 	 * add the pane of member manage
 	 */
 	public void addMemberManagePane() {
-		if(!MemberManageInfoAccessorImpl.isLaunched())
-			MemberManageInfoAccessorImpl.launch();
-		if(!MemberManageInfoImpl.isLaunched())
-			MemberManageInfoImpl.launch();
 		content.getChildren().clear();
 		memberManage = new MemberManageMainPane(primaryStage);
 		content.getChildren().add(memberManage.getAnchorPane());
@@ -90,10 +108,6 @@ public class CenterController extends Application {
 	 * add the pane of hotel manage
 	 */
 	public void addHotelManagePane() {
-		if(!HotelManageInfoAccessorImpl.isLaunched())
-			HotelManageInfoAccessorImpl.launch();
-		if(!HotelManageInfoManagerImpl.isLaunched())
-			HotelManageInfoManagerImpl.launch();
 		content.getChildren().clear();
 		hotelManage = new HotelManageMainPane(primaryStage);
 		content.getChildren().add(hotelManage.getAnchorPane());
@@ -105,10 +119,6 @@ public class CenterController extends Application {
 	 * add the pane of market manage
 	 */
 	public void addMarketManagePane() {
-		if(!MarketManageInfoAccessorImpl.isLaunched())
-			MarketManageInfoAccessorImpl.launch();
-		if(!MarketManageInfoManagerImpl.isLaunched())
-			MarketManageInfoManagerImpl.launch();
 		content.getChildren().clear();
 		marketManage = new MarketManageMainPane(primaryStage);
 		content.getChildren().add(marketManage.getAnchorPane());

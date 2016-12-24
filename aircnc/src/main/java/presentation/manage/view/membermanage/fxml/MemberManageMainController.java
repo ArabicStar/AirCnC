@@ -73,7 +73,6 @@ public class MemberManageMainController implements Initializable{
 	@FXML
 	public void handleQuery(){
 		if(userId.getText().length()>0){
-			ManageTest.getUserData();
 			accessor.setId(userId.getText());
 			models = manager.getMemberInfoList();
 			

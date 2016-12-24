@@ -79,6 +79,7 @@ public class MemberTest {
 				.setOrderId("6666").getCreditChangeInfo();
 		CreditChangeVo vo3 = new CreditChangeVoBuilder(memberVo, ActionType.ORDER_OVERDUE).setCreditChange(23300)
 				.setOrderId("6666").getCreditChangeInfo();
+		
 		list.add(vo1);
 		list.add(vo2);
 		list.add(vo3);
