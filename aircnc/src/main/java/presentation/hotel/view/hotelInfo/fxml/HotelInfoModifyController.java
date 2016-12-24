@@ -3,6 +3,8 @@ package presentation.hotel.view.hotelInfo.fxml;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import interactor.hotel.HotelInfoInteractor;
+import interactor.impl.hotel.HotelInfoCourier;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,7 +17,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import presentation.hotel.HotelCenterController;
 import presentation.hotel.accessor.InfoModifyAccessor;
+import presentation.hotel.accessor.impl.InfoModifyAccessorImpl;
 import presentation.hotel.manager.InfoManager;
+import presentation.hotel.manager.impl.InfoManagerImpl;
 import presentation.hotel.model.HotelInfoModel;
 import presentation.hotel.view.hotelInfo.ModifyRoomPane;
 import presentation.member.utils.dialog.ModifyPasswordDialog;
@@ -60,10 +64,19 @@ public class HotelInfoModifyController implements Initializable{
 	private ModifyRoomPane addRoomPane;
 	
 	private Pane rootLayout;
+	
 	private AnchorPane addRoomLayout;
+	
+	private HotelInfoInteractor interactor;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		manager = InfoManagerImpl.getInstance();
+		
+		accessor = InfoModifyAccessorImpl.getInstance();
+		
+		interactor = HotelInfoCourier.getInstance();
+		
 		introduction.setWrapText(true);
 		equipment.setWrapText(true);
 
@@ -92,6 +105,8 @@ public class HotelInfoModifyController implements Initializable{
 			accessor.setLocation(location.getText());
 			accessor.setScope(scope.getText());
 			
+			interactor.updateHotel();
+			
 			PlainDialog alert = new PlainDialog(AlertType.INFORMATION,
 					"保存成功","已保存修改的信息");
 			alert.showDialog();
@@ -105,6 +120,7 @@ public class HotelInfoModifyController implements Initializable{
 	
 	@FXML
 	public void handleRoomModify(){
+		
 		addModifyRoom();
 	}
 	
@@ -120,16 +136,8 @@ public class HotelInfoModifyController implements Initializable{
 		this.controller=controller;
 	}
 	
-	/**
-	 * set the hotel info manager
-	 * aiming to fetch the hotel info model
-	 * @param manager
-	 */
-	public void setManager(InfoManager manager){
-		this.manager = manager;
-	}
-	
 	private void initHotelInfo(){
+		interactor.getHotelInfo();
 		model = manager.getHotelInfo();
 		this.scope.setText(model.getScope());
 		this.id.setText(model.getId());

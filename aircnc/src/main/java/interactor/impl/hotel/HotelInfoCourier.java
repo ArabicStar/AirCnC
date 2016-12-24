@@ -9,16 +9,13 @@ import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.apache.commons.lang.StringUtils;
 
 import interactor.hotel.HotelInfoInteractor;
 import interactor.utils.Title;
 import presentation.hotel.accessor.impl.InfoModifyAccessorImpl;
-import presentation.hotel.accessor.impl.SearchOrderAccessorImpl;
 import presentation.hotel.manager.impl.HotelCommentManagerImpl;
-import presentation.hotel.manager.impl.HotelOrderManagerImpl;
 import presentation.hotel.manager.impl.HotelRoomManagerImpl;
 import presentation.hotel.manager.impl.InfoManagerImpl;
 import presentation.member.accessor.impl.SupremeSearchAccessorImpl;
@@ -29,7 +26,6 @@ import utils.info.hotel.HotelInfo;
 import utils.info.hotel.Room;
 import vo.hotel.HotelVo;
 import vo.hotel.HotelVoBuilder;
-import vo.order.OrderVo;
 import vo.order.comment.CommentVo;
 
 public class HotelInfoCourier implements HotelInfoInteractor {
@@ -61,7 +57,7 @@ public class HotelInfoCourier implements HotelInfoInteractor {
 	}
 	
 	@Override
-	@Title("Get Hotel Info")
+	@Title("获取酒店信息")
 	public void getHotelInfo() {
 		String title = getTitle();
 
@@ -70,38 +66,17 @@ public class HotelInfoCourier implements HotelInfoInteractor {
 			if (name != null)
 				return handler.getHotelInfo(name);
 
-			alertFail(title, "Not logged in yet");
+			alertFail(title, "还没有登录哦");
 			return null;
 		});
 
 		InfoManagerImpl.getInstance().setHotel(new HotelVoBuilder(info).getHotelInfo());
+		InfoModifyAccessorImpl.getInstance().setHotel(new HotelVoBuilder(info).getHotelInfo());
 		
 	}
 
 	@Override
-	@Title("Get Orders by Status")
-	public void getHotelOrdersByStatus() {
-		String title = getTitle();
-
-		List<OrderVo> list = execute(title, () -> {
-			int id = getCurrentId();
-			if (id != Integer.MIN_VALUE)
-				return SearchOrderAccessorImpl.getInstance().getStatus().stream().map(status -> handler.getHotelOrdersByStatus(id, status))
-						.collect(Collectors.reducing((l1, l2) -> {
-							l1.addAll(l2);
-							return l1;
-						})).get();
-
-			alertFail(title, "Not logged in yet");
-			return null;
-		});
-
-		HotelOrderManagerImpl.getInstance().setOrderList(list);
-		
-	}
-
-	@Override
-	@Title("Get Hotel Comments")
+	@Title("获取酒店评论")
 	public void getHotelComments() {
 		String title = getTitle();
 
@@ -110,7 +85,7 @@ public class HotelInfoCourier implements HotelInfoInteractor {
 			if (id != Integer.MIN_VALUE)
 				return handler.getHotelComment(id);
 
-			alertFail(title, "Not logged in yet");
+			alertFail(title, "还没有登录哦");
 			return null;
 		});
 
@@ -119,7 +94,7 @@ public class HotelInfoCourier implements HotelInfoInteractor {
 	}
 
 	@Override
-	@Title("Get Hotel Rooms")
+	@Title("获取酒店房间")
 	public void getHotelRooms() {
 		String title = getTitle();
 
@@ -128,7 +103,7 @@ public class HotelInfoCourier implements HotelInfoInteractor {
 			if (name!=null)
 				return handler.getHotelInfo(name).getRooms();
 
-			alertFail(title, "Not logged in yet");
+			alertFail(title, "还没有登录哦");
 			return null;
 		});
 
@@ -156,7 +131,7 @@ public class HotelInfoCourier implements HotelInfoInteractor {
 	}
 
 	@Override
-	@Title("Get Hotel Basic Info")
+	@Title("修改酒店信息")
 	public void updateHotel() {
 		String title = getTitle();
 		
@@ -170,25 +145,6 @@ public class HotelInfoCourier implements HotelInfoInteractor {
 					alertSuccess(title, "修改成功");
 			return null;
 		});
-		
-	}
-
-
-	@Override
-	@Title("Get Orders")
-	public void getHotelAllOrders() {
-		String title = getTitle();
-
-		List<OrderVo> list = execute(title, () -> {
-			int id = getCurrentId();
-			if (id != Integer.MIN_VALUE)
-				return handler.getHotelAllOrders(id);
-
-			alertFail(title, "Not logged in yet");
-			return null;
-		});
-
-		HotelOrderManagerImpl.getInstance().setOrderList(list);
 		
 	}
 	

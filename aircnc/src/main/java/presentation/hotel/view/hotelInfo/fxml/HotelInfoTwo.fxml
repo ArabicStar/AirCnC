@@ -10,9 +10,9 @@
       <Label fx:id="description" layoutX="60.0" layoutY="78.0" styleClass="content" text="Label" />
       <HBox alignment="CENTER" layoutX="282.0" layoutY="509.0" prefHeight="43.0" prefWidth="193.0" spacing="40.0">
          <children>
-            <Button fx:id="page1" mnemonicParsing="false" onAction="#handlePage1" prefHeight="30.0" prefWidth="30.0" styleClass="page" text="1" />
+            <Button mnemonicParsing="false" onAction="#handlePage1" prefHeight="30.0" prefWidth="30.0" styleClass="page" text="1" />
             <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="page-now" text="2" />
-            <Button fx:id="page3" mnemonicParsing="false" onAction="#handlePage3" prefHeight="30.0" prefWidth="30.0" styleClass="page" text="3" />
+            <Button mnemonicParsing="false" onAction="#handlePage3" prefHeight="30.0" prefWidth="30.0" styleClass="page" text="3" />
          </children>
       </HBox>
    </children>

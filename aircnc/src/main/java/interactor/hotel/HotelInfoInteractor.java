@@ -9,10 +9,6 @@ public interface HotelInfoInteractor {
 
 	public void updatePassword();
 	
-	public void getHotelAllOrders();
-	
-	public void getHotelOrdersByStatus() ;
-	
 	public void updateHotel();
 	
 	public void getHotelsByCondition();

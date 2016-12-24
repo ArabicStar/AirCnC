@@ -14,7 +14,6 @@ import presentation.hotel.view.hotelInfo.HotelInfoModifyPane;
 import presentation.hotel.view.hotelPromotion.HotelPromotionMainPane;
 import presentation.hotel.view.orderBrowse.OrderBrowsePane;
 import presentation.hotel.view.orderExecute.OrderExecutePane;
-import presentation.hotel.accessor.impl.InfoModifyAccessorImpl;
 
 
 public class HotelCenterController extends Application{
@@ -31,6 +30,8 @@ public class HotelCenterController extends Application{
 	private OrderBrowsePane browsePane;
 	private AbnormalOrderPane abnormalPane;
 	private HotelPromotionMainPane promotionPane;
+	
+	private HotelInfoController infoController;
 	
 //	private InfoManager hotelInfoManager;	
 //	private HotelTest test;
@@ -115,13 +116,11 @@ public class HotelCenterController extends Application{
 	
 	public void addHotelInfoMainPane() {
 		
-//		hotelInfoManager = test.getHotelData();
 		clearContent();
 		infoMainPane = new HotelInfoMainPane();
+		infoController = new HotelInfoController(infoMainPane,this);
 		mainClient.getBorderPane().setCenter(infoMainPane.getBorderPane());
 		infoMainPane.getController().setCenterController(this);	
-//		infoMainPane.getController().setManager(hotelInfoManager);
-		HotelInfoController infoController = new HotelInfoController(infoMainPane,this);
 	}
 	
 	public void initializeLogin(){

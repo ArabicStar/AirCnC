@@ -4,6 +4,8 @@ import java.net.URL;
 import java.util.Iterator;
 import java.util.ResourceBundle;
 
+import interactor.hotel.HotelInfoInteractor;
+import interactor.impl.hotel.HotelInfoCourier;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -22,14 +24,16 @@ public class HotelInfoThreeController implements Initializable{
 	private VBox comments;
 	
 	private HotelCommentManager manager;
+	
+	private HotelInfoInteractor interactor;
+	
 	private ObservableList<CommentModel> list;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		if(!HotelCommentManagerImpl.isLaunched()){
-			HotelCommentManagerImpl.launch();
-		}
+		interactor = HotelInfoCourier.getInstance();
+		
 		manager = HotelCommentManagerImpl.getInstance();
 		
 		Platform.runLater(new Runnable() {
@@ -54,6 +58,7 @@ public class HotelInfoThreeController implements Initializable{
 	}
 	
 	public void initComment(){
+		interactor.getHotelComments();
 		list = manager.getCommentList();
 //		System.out.println(list.get(0).getContent());
 		Iterator<CommentModel> it = list.iterator();

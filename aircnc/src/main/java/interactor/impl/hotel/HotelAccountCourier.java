@@ -41,29 +41,36 @@ public class HotelAccountCourier implements HotelAccountInteractor {
 	}
 
 	@Override
-	@Title("Login")
+	@Title("登录")
 	public boolean login() {
 		HotelLoginAccessor acs = HotelLoginAccessorImpl.getInstance();
 		String title = getTitle();
 		HotelInfo info = execute(title, () -> {
 			HotelInfo tmp = handler.login(acs.getName(), acs.getPasswordHash());
 
-			if (tmp == null)
-				alertFail(title, "Wrong or not exist name");
+			if (tmp == null){
+				alertFail(title, "该酒店不存在");
+				return null;
+			}
 
 			if (!tmp.isValid())
-				alertFail(title, "Wrong password");
+				alertFail(title, "密码错误");
 
 			return tmp;
 		});
 
-		InfoManagerImpl.getInstance().setHotel(new HotelVoBuilder(info).getHotelInfo());
-		return info != null;
+		if(info!=null&&info.isValid()){
+			InfoManagerImpl.getInstance().setHotel(new HotelVoBuilder(info).getHotelInfo());
+			return true;
+		}else{
+			return false;
+		}
+
 
 	}
 
 	@Override
-	@Title("Log Out")
+	@Title("注销")
 	public boolean logout() {
 		return execute(getTitle(), () -> handler.logout());
 	}
