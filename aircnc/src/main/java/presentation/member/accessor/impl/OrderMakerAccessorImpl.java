@@ -18,8 +18,8 @@ public class OrderMakerAccessorImpl implements OrderMakerAccessor{
 	private static OrderMakerAccessor instance;
 
 	private int roomNumber;
-	private LocalDate enterTime;
-	private LocalDate leaveTime;
+	private LocalDateTime enterTime;
+	private LocalDateTime leaveTime;
 	private String roomType;
 	private LocalDateTime latestExecuteTime;
 	private int peopleNumber;
@@ -56,12 +56,12 @@ public class OrderMakerAccessorImpl implements OrderMakerAccessor{
 	}
 
 	@Override
-	public void setEnterTime(LocalDate enterTime) {
+	public void setEnterTime(LocalDateTime enterTime) {
 		this.enterTime = enterTime;
 	}
 
 	@Override
-	public void setLeaveTime(LocalDate leaveTime) {
+	public void setLeaveTime(LocalDateTime leaveTime) {
 		this.leaveTime = leaveTime;
 	}
 
@@ -90,12 +90,11 @@ public class OrderMakerAccessorImpl implements OrderMakerAccessor{
 		if(instance == null) {
 			throw accessorNotReadyEx();
 		}
-		LocalDateTime entryTime = LocalDateTime.of(enterTime, LocalTime.now());
 		// TODO 填写完整信息
-		int stayDays = (int) (leaveTime.toEpochDay() - enterTime.toEpochDay());
+		int stayDays = (int) (leaveTime.toLocalDate().toEpochDay() - enterTime.toLocalDate().toEpochDay());
 		return new OrderVoBuilder().
 				setLastTime(latestExecuteTime).setRoomNumber(roomNumber)
-				.setStatus(OrderStatus.UNEXECUTED).setEntryTime(entryTime)
+				.setStatus(OrderStatus.UNEXECUTED).setEntryTime(enterTime)
 				.setRoomType(roomType).setPeopleNumber(peopleNumber)
 				.setHasChildren(hasChildren).setStayDays(stayDays).setHotel(hotelVo);
 	}

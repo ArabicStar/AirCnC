@@ -43,7 +43,6 @@ public class UILauncher {
 		HotelSearchAccessorImpl.launch();
 		CreditChangeOrderAccessorImpl.launch();
 		OrderMakerAccessorImpl.launch();
-		// HotelNameAccessorImpl.launch();
 
 	}
 

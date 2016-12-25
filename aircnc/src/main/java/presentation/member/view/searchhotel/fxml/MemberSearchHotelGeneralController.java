@@ -85,7 +85,7 @@ public class MemberSearchHotelGeneralController implements Initializable{
 	public void handleReverse(){
 		makeOrder = new MakeOrderPane();
 		rootLayout.getChildren().add(makeOrder.getPane());
-		AnchorPane.setTopAnchor(makeOrder.getPane(), 0.0);
+		AnchorPane.setTopAnchor(makeOrder.getPane(), 100.0);
 		makeOrder.getController().setController(this);
 		makeOrder.getController().setHotelVo(model);
 	}

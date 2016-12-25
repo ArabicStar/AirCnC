@@ -1,6 +1,5 @@
 package presentation.member.accessor;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import vo.hotel.HotelVo;
@@ -11,9 +10,9 @@ public interface OrderMakerAccessor {
 	
 	public void setRoomNumber(int roomNumber);
 	
-	public void setEnterTime(LocalDate enterTime);
+	public void setEnterTime(LocalDateTime entry);
 	
-	public void setLeaveTime(LocalDate leaveTime);
+	public void setLeaveTime(LocalDateTime leaveTime);
 	
 	public void setRoomType(String roomType);
 	
