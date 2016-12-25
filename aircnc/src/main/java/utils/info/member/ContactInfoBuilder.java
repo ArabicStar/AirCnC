@@ -1,5 +1,6 @@
 package utils.info.member;
 
+import static utils.exception.StaticExceptionFactory.*;
 /**
  * Abstract of builder for ContactInfo, assisting to assure immutable object.
  * <br>
@@ -17,6 +18,7 @@ package utils.info.member;
  * @see utils.info.member.ContactInfo
  * 
  */
+@SuppressWarnings("serial")
 public abstract class ContactInfoBuilder extends ContactInfoTemplate {
 	/**
 	 * Initialize a builder from a given ContactInfo instance, information will
@@ -60,7 +62,7 @@ public abstract class ContactInfoBuilder extends ContactInfoTemplate {
 		}
 
 		if (!checkEmail(email))
-			throw new IllegalArgumentException("ContactInfoBuilder.setemail - Invalid Email String");
+			throw illegalArgEx("email string", email);
 
 		this.email = email;
 		return this;

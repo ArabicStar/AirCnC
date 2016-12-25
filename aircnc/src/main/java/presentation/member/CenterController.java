@@ -82,11 +82,11 @@ public class CenterController extends Application {
 //		HotelPromotionManagerImpl.launch();
 //		HistoryOrderManagerImpl.launch();
 //		
-		test = new MemberTest();
-		test.getSearchedData();
-		test.getMyOrderData();
-		test.getCreditData();
-		test.getUserData();
+//		test = new MemberTest();
+//		test.getSearchedData();
+//		test.getMyOrderData();
+//		test.getCreditData();
+//		test.getUserData();
 		
 		this.primaryStage = primaryStage;
 

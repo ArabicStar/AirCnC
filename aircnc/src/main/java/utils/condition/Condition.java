@@ -4,17 +4,18 @@ import java.time.LocalDate;
 import java.util.Set;
 
 public class Condition {
-	public enum Type{
-		全部,单人间,双人间,三人间,其它;
+	public enum Type {
+		全部, 单人间, 双人间, 三人间, 其它;
 	}
-	private double rankGreaterThan;
-	private IntegerBound starBound;
-	private DoubleBound priceBound;
-	private String scopeLike;
-	private String nameLike;
-	private Type roomTypes;
-	private boolean available;
-	private LocalDate since;
+
+	private double rankGreaterThan = 0.0;
+	private IntegerBound starBound = new IntegerBound();
+	private DoubleBound priceBound = new DoubleBound();;
+	private String scopeLike = "";
+	private String nameLike = "";
+	private Type roomTypes = Type.全部;
+	private boolean available = false;
+	private LocalDate since = LocalDate.now();
 
 	public int getStarFrom() {
 		return starBound.getFrom();
@@ -23,11 +24,11 @@ public class Condition {
 	public int getStarTo() {
 		return starBound.getTo();
 	}
-	
+
 	public double getPriceFrom() {
 		return priceBound.getFrom();
 	}
-	
+
 	public double getPriceTo() {
 		return priceBound.getTo();
 	}
@@ -88,7 +89,7 @@ public class Condition {
 		this.starBound = starBound;
 		return this;
 	}
-	
+
 	/**
 	 * @param priceBound
 	 *            the priceBound to set

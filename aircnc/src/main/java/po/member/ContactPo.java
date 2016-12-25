@@ -110,7 +110,7 @@ public class ContactPo extends ContactInfo {
 	 *            encrpyted fixed phone string
 	 */
 	public void setEncryptFixedPhone(String encryptFixedPhone) {
-		this.email = decrypt(encryptFixedPhone);
+		this.fixedPhone = decrypt(encryptFixedPhone);
 	}
 
 	/**
@@ -133,6 +133,6 @@ public class ContactPo extends ContactInfo {
 	 *            encrpyted mobile phone string
 	 */
 	public void setEncryptMobilePhone(String encryptMobilePhone) {
-		this.email = decrypt(encryptMobilePhone);
+		this.mobilePhone = decrypt(encryptMobilePhone);
 	}
 }

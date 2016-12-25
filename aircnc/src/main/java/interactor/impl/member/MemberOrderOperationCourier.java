@@ -11,12 +11,14 @@ import static utils.exception.StaticExceptionFactory.unknownEx;
 import interactor.member.MemberOrderOperationInteractor;
 import interactor.utils.Title;
 import presentation.member.accessor.impl.MemberOrderOperationAccessorImpl;
+import presentation.member.accessor.impl.OrderMakerAccessorImpl;
 import service.member.MemberAccountService;
 import service.order.OrderOperationService;
 import service.promotion.PromotionApplicationService;
 import utils.info.member.MemberInfo;
 import utils.info.order.OrderInfo;
-import utils.info.order.OrderInfoBuilder;
+import vo.order.OrderVo;
+import vo.order.OrderVoBuilder;
 
 public class MemberOrderOperationCourier implements MemberOrderOperationInteractor {
 
@@ -50,6 +52,7 @@ public class MemberOrderOperationCourier implements MemberOrderOperationInteract
 	}
 
 	@Override
+	@Title("确认订单")
 	public boolean tryMakeOrder() {
 		String title = getTitle();
 		if (!acc.isLoggedin()) {
@@ -64,7 +67,7 @@ public class MemberOrderOperationCourier implements MemberOrderOperationInteract
 		}
 
 		OrderInfo order = execute(title,
-				() -> promotion.applyPromotion(getNewOrderFromUI().setMember(member).getOrderInfo()));
+				() -> promotion.applyPromotion(getOrderBuilderFromMakerUI().setMember(member).getOrderInfo()));
 
 		return order != null;
 	}
@@ -78,8 +81,9 @@ public class MemberOrderOperationCourier implements MemberOrderOperationInteract
 			return false;
 		}
 
+		MemberInfo member = acc.getCurrentAccount();
 		OrderInfo order = execute(title, () -> {
-			OrderInfo info = handler.makeOrder(getOrderFromUI());
+			OrderInfo info = handler.makeOrder(getOrderBuilderFromMakerUI().setMember(member).getOrderInfo());
 
 			if (info == null)
 				alertFail(title, "预订失败，您的信用值不足！");
@@ -101,7 +105,7 @@ public class MemberOrderOperationCourier implements MemberOrderOperationInteract
 	public boolean cancelOrder() {
 		String title = getTitle();
 		MemberInfo mem = execute(title, () -> {
-			MemberInfo info = handler.cancelOrder(getOrderFromUI());
+			MemberInfo info = handler.cancelOrder(getCanceledOrderFromOperationUI());
 
 			if (info == null || !info.isValid())
 				throw unknownEx();
@@ -119,8 +123,10 @@ public class MemberOrderOperationCourier implements MemberOrderOperationInteract
 	@Override
 	public boolean appealOrder() {
 		String title = getTitle();
+
+		MemberInfo member = acc.getCurrentAccount();
 		OrderInfo order = execute(title, () -> {
-			OrderInfo info = handler.appealOrder(getOrderFromUI());
+			OrderInfo info = handler.appealOrder(getOrderBuilderFromOperationUI().setMember(member).getOrderInfo());
 
 			if (info == null || !info.isValid())
 				throw unknownEx();
@@ -137,8 +143,11 @@ public class MemberOrderOperationCourier implements MemberOrderOperationInteract
 	@Override
 	public boolean commentOrder() {
 		String title = getTitle();
+
+		MemberInfo member = acc.getCurrentAccount();
+
 		OrderInfo order = execute(title, () -> {
-			OrderInfo info = handler.commentOrder(getOrderFromUI());
+			OrderInfo info = handler.commentOrder(getOrderBuilderFromOperationUI().setMember(member).getOrderInfo());
 
 			if (info == null || !info.isValid())
 				throw unknownEx();
@@ -152,12 +161,15 @@ public class MemberOrderOperationCourier implements MemberOrderOperationInteract
 		return order != null;
 	}
 
-	private static final OrderInfo getOrderFromUI() {
+	private static final OrderVoBuilder getOrderBuilderFromOperationUI() {
 		return MemberOrderOperationAccessorImpl.getInstance().getOrder();
 	}
 
-	private static final OrderInfoBuilder getNewOrderFromUI() {
-		// return MemberOrderOperationAccessorImpl.getInstance().getOrder();
-		return null;
+	private static final OrderVo getCanceledOrderFromOperationUI() {
+		return MemberOrderOperationAccessorImpl.getInstance().getCanceledOrder();
+	}
+
+	private static final OrderVoBuilder getOrderBuilderFromMakerUI() {
+		return OrderMakerAccessorImpl.getIntance().getMadeOrder();
 	}
 }

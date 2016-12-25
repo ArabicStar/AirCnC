@@ -16,6 +16,7 @@ import data.dao.rmi.order.RemoteOrderDao;
 import data.dao.rmi.promotion.RemoteHotelPromotionDao;
 import data.dao.rmi.promotion.RemoteWebsitePromotionDao;
 import data.dao.rmi.query.RemoteCreditQueryDao;
+import data.dao.rmi.query.RemoteHotelQueryDao;
 import data.dao.rmi.query.RemoteOrderQueryDao;
 import data.dao.rmi.query.RemotePromotionQueryDao;
 import utils.logger.Log;
@@ -98,20 +99,8 @@ public final class RemoteHelper {
 		return (RemoteHotelDao) hotelDaoRemoteObj;
 	}
 
-	public RemoteCreditQueryDao getRemoteCreditQueryDao() {
-		return (RemoteCreditQueryDao) queryDaoRemoteObj;
-	}
-
-	public RemoteOrderQueryDao getRemoteOrderQueryDao() {
-		return (RemoteOrderQueryDao) queryDaoRemoteObj;
-	}
-
 	public RemoteOrderDao getRemoteOrderDao() {
 		return (RemoteOrderDao) orderDaoRemoteObj;
-	}
-
-	public RemotePromotionQueryDao getRemotePromotionQueryDao() {
-		return (RemotePromotionQueryDao) queryDaoRemoteObj;
 	}
 
 	public RemoteHotelPromotionDao getRemoteHotelPromotionDao() {
@@ -120,6 +109,22 @@ public final class RemoteHelper {
 
 	public RemoteWebsitePromotionDao getRemoteWebsitePromotionDao() {
 		return (RemoteWebsitePromotionDao) promotionDaoRemoteObj;
+	}
+
+	public RemoteOrderQueryDao getRemoteOrderQueryDao() {
+		return (RemoteOrderQueryDao) queryDaoRemoteObj;
+	}
+
+	public RemoteCreditQueryDao getRemoteCreditQueryDao() {
+		return (RemoteCreditQueryDao) queryDaoRemoteObj;
+	}
+
+	public RemotePromotionQueryDao getRemotePromotionQueryDao() {
+		return (RemotePromotionQueryDao) queryDaoRemoteObj;
+	}
+
+	public RemoteHotelQueryDao getRemoteHotelQueryDao() {
+		return (RemoteHotelQueryDao) queryDaoRemoteObj;
 	}
 
 	private static final int PORT = 8888;

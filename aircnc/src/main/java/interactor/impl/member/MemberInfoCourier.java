@@ -173,7 +173,7 @@ public final class MemberInfoCourier implements MemberInfoInteractor {
 				return handler.updateBasicInfo(modified);
 
 			alertFail(title, "Not logged in yet");
-			return null;
+			return false;
 		});
 
 		MemberInfoManagerImpl.getInstance().setUser(res ? modified : null);

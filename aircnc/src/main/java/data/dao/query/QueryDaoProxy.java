@@ -21,7 +21,8 @@ import po.order.comment.CommentPo;
 import po.promotion.PromotionPo;
 import utils.info.order.OrderStatus;
 
-public final class QueryDaoProxy implements CreditQueryDao, OrderQueryDao, PromotionQueryDao, HotelQueryDao, CommentQueryDao {
+public final class QueryDaoProxy
+		implements CreditQueryDao, OrderQueryDao, PromotionQueryDao, HotelQueryDao, CommentQueryDao {
 	/* Singleton */
 	private static QueryDaoProxy instance;
 
@@ -156,7 +157,7 @@ public final class QueryDaoProxy implements CreditQueryDao, OrderQueryDao, Promo
 	public List<HotelPo> searchByCriteria(DetachedCriteria dc) {
 		return hazard(() -> remoteHotelQueryDao.searchByCriteria(dc));
 	}
-	
+
 	/*
 	 *******************************
 	 ******* CommentQueryDao*******
@@ -169,7 +170,7 @@ public final class QueryDaoProxy implements CreditQueryDao, OrderQueryDao, Promo
 	}
 
 	@Override
-	public List<CommentPo> findByHotelId(int hotelId){
+	public List<CommentPo> findByHotelId(int hotelId) {
 		return hazard(() -> remoteCommentQueryDao.findByHotelId(hotelId));
 	}
 }
