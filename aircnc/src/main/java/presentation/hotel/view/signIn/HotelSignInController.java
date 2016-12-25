@@ -64,18 +64,7 @@ public class HotelSignInController implements Initializable{
 			boolean valid = interactor.login();
 			
 			if(valid)
-				controller.initializeClient();
-			else{
-				PlainDialog alert = new PlainDialog(AlertType.INFORMATION,
-						"登录失败","错误的用户名或密码！");
-				alert.showDialog();
-			}
-				
-
-		}else{
-			PlainDialog alert = new PlainDialog(AlertType.INFORMATION,
-					"登录失败","请输入你的用户名和密码");
-			alert.showDialog();			
+				controller.initializeClient();		
 		}
 	}
 	

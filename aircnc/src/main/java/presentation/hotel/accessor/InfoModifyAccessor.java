@@ -18,9 +18,13 @@ public interface InfoModifyAccessor {
 	
 	public HotelVo getModifyHotelInfo();
 	
-	public void setPassword(String password);
+	public void setOldPassword(String password);
+
+	public void setNewPassword(String password);
 	
-	public int getPasswordHash();
+	public int getOldPasswordHash();
+
+	public int getNewPasswordHash();
 	
 	public void setRoom(String name,int peopleNum,int roomNum,double price);
 	

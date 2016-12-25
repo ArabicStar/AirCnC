@@ -2,6 +2,7 @@ package presentation.hotel.utils.dialog;
 
 import java.util.Optional;
 
+import interactor.impl.hotel.HotelInfoCourier;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.ButtonBar.ButtonData;
@@ -11,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.layout.GridPane;
 import javafx.util.Pair;
+import presentation.hotel.accessor.impl.InfoModifyAccessorImpl;
 
 public class ModifyPasswordDialog {
 	
@@ -72,8 +74,10 @@ public class ModifyPasswordDialog {
 
 		Optional<Pair<String, String>> result = dialog.showAndWait();
 
-		result.ifPresent(usernamePassword -> {
-		    System.out.println("Username=" + usernamePassword.getKey() + ", Password=" + usernamePassword.getValue());
+		result.ifPresent(oldNewPassword -> {
+			InfoModifyAccessorImpl.getInstance().setOldPassword(oldNewPassword.getKey());
+			InfoModifyAccessorImpl.getInstance().setNewPassword(oldNewPassword.getValue());
+			HotelInfoCourier.getInstance().updatePassword();
 		});
 	}
 	

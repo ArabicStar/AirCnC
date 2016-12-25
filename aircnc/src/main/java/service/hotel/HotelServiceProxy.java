@@ -80,6 +80,15 @@ public final class HotelServiceProxy extends AccessSecureProxy
 
 		return infoService.updateInfo(modifiedInfo);
 	}
+	
+
+	@Override
+	@AuthenticatePolicy({ Client.HOTEL })
+	public boolean updatePassword(int oldPass, int newPass) {
+		checkAuthentication();
+		
+		return infoService.updatePassword(oldPass, newPass);
+	}
 
 	private HotelAccountService accountService;
 
@@ -182,6 +191,7 @@ public final class HotelServiceProxy extends AccessSecureProxy
 	}
 
 	@Override
+	@AuthenticatePolicy({ Client.HOTEL })
 	public boolean executeOrder(OrderInfo order) {
 		checkAuthentication();
 
@@ -189,10 +199,12 @@ public final class HotelServiceProxy extends AccessSecureProxy
 	}
 
 	@Override
+	@AuthenticatePolicy({ Client.HOTEL })
 	public boolean appealOrder(OrderInfo order) {
 		checkAuthentication();
 
 		return orderService.appealOrder(order);
 	}
+
 
 }

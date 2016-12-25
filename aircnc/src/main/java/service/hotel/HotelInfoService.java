@@ -15,4 +15,6 @@ public interface HotelInfoService {
 	public Set<PromotionVo> getHotelActivePromotion(int id);
 
 	public boolean updateInfo(HotelInfo modifiedInfo);
+	
+	public boolean updatePassword(int oldPass,int newPass);
 }

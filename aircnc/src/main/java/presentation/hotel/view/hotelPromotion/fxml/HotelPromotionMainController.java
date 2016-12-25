@@ -119,11 +119,13 @@ public class HotelPromotionMainController implements Initializable{
 			interactor.addNew();
 		else
 			interactor.update();
+		refresh();
 	}
 	
 	public void deletePromotion(HotelPromotionVo vo){
 		accessor.setPromotion(vo);
 		interactor.delete();
+		refresh();
 	}
 	
 	public void setRootLayout(Pane pane){
@@ -140,6 +142,13 @@ public class HotelPromotionMainController implements Initializable{
 	
 	public void removeDetailPane(){
 		rootLayout.getChildren().remove(rootLayout.getChildren().size()-1);
+		refresh();
+	}
+	
+	public void refresh(){
+		interactor.getHotelActivePromotion();
+		models = manager.getPromotionList();
+		promotionTable.setItems(models);
 	}
 
 }

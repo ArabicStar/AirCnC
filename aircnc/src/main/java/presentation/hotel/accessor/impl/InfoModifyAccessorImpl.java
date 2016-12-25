@@ -26,7 +26,9 @@ public class InfoModifyAccessorImpl implements InfoModifyAccessor {
 	
 	private String equipment;
 	
-	private int password;
+	private int oldPwdHash;
+
+	private int newPwdHash;
 	
 	private Room room;
 
@@ -90,16 +92,24 @@ public class InfoModifyAccessorImpl implements InfoModifyAccessor {
 		setLocation(location).setScope(scope).getHotelInfo();
 	}
 
-
 	@Override
-	public void setPassword(String password) {
-		this.password = password.hashCode();
-		
+	public void setOldPassword(String password) {
+		this.oldPwdHash = password.hashCode();
 	}
 
 	@Override
-	public int getPasswordHash() {		
-		return password;
+	public void setNewPassword(String password) {
+		this.newPwdHash = password.hashCode();
+	}
+
+	@Override
+	public int getOldPasswordHash() {
+		return oldPwdHash;
+	}
+
+	@Override
+	public int getNewPasswordHash() {
+		return newPwdHash;
 	}
 
 	@Override

@@ -112,20 +112,19 @@ public class HotelInfoCourier implements HotelInfoInteractor {
 	@Override
 	@Title("修改密码")
 	public void updatePassword() {
-		// String title = getTitle();
-		//
-		// execute(title, () -> {
-		// int id = getCurrentId();
-		// if (id != Integer.MIN_VALUE)
-		//
-		// if
-		// (!handler.updatePassword(InfoModifyAccessorImpl.getInstance().getOldPasswordHash(),
-		// InfoModifyAccessorImpl.getInstance().getNewPasswordHash()))
-		// alertFail(title, "Wrong password");
-		// else
-		// alertSuccess(title, "Update password succeed");
-		// return null;
-		// });
+		String title = getTitle();
+
+		execute(title, () -> {
+			int id = getCurrentId();
+			if (id != Integer.MIN_VALUE)
+				
+				if (!handler.updatePassword(InfoModifyAccessorImpl.getInstance().getOldPasswordHash(),
+						InfoModifyAccessorImpl.getInstance().getNewPasswordHash()))
+					alertFail(title, "Wrong password");
+				else
+					alertSuccess(title, "修改密码成功！");
+			return null;
+		});
 
 	}
 

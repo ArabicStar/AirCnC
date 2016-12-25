@@ -134,7 +134,7 @@ public class PromotionDetailController implements Initializable{
 			return;
 		}else{
 			operate.setText("保存");
-			//TODO
+
 			switch (vo.getPromotion().getTrigger().when()){
 			case "BIRTHDAY":
 				when.setValue("生日优惠");
@@ -174,17 +174,8 @@ public class PromotionDetailController implements Initializable{
          	alert.showDialog();
          	return;
 		}
-//		switch (operate.getText()){
-//		case "保存":
-//			
-//			break;
-//		default://添加
-//			
-//			break;
-//		}
+
 		updateVo();
-		PlainDialog alert = new PlainDialog(AlertType.INFORMATION,"保存成功","已保存填写的促销策略信息");
-     	alert.showDialog();
      	controller.removeDetailPane();
 	}
 	
@@ -261,7 +252,7 @@ public class PromotionDetailController implements Initializable{
 	private void updateVo(){
 		PromotionVoBuilder builder;
 		if(vo==null){
-			builder = new PromotionVoBuilder(Scope.Hotel);
+			builder = new PromotionVoBuilder(Scope.Hotel).setPractical(false);
 		}else{
 			builder = new PromotionVoBuilder(vo).setPractical(false);
 		}
@@ -270,7 +261,7 @@ public class PromotionDetailController implements Initializable{
   		case "时效性优惠":
   			builder.when(HotelWhen.DURING_PERIOD)
   			.setParam(TriggerParams.FROM, from.getValue().atStartOfDay())
-  			.setParam(TriggerParams.FROM, from.getValue().atStartOfDay());
+  			.setParam(TriggerParams.TO, to.getValue().atStartOfDay());
   			break;
   		case "多间房优惠":
   			builder.when(HotelWhen.MULTI_ROOMS)
@@ -286,11 +277,11 @@ public class PromotionDetailController implements Initializable{
 		}
 		
 		switch (how.getValue()){
-  		case "原价折扣":
+  		case "直接降价":
   			builder.how(How.CONST)
   			.setParam(ApplierParams.AMOUNT, Double.parseDouble(howPara.getText()));
   			break;
-  		case "直接降价":
+  		case "原价折扣":
   			builder.how(How.PERCENT_OFF)
   			.setParam(ApplierParams.PERCENT, Double.parseDouble(howPara.getText()));
   			break;

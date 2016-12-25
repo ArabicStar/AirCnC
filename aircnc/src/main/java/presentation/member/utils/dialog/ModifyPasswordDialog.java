@@ -5,7 +5,6 @@ import java.util.Optional;
 import interactor.impl.member.MemberInfoCourier;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;

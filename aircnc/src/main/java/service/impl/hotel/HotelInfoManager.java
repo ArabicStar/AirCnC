@@ -2,6 +2,7 @@ package service.impl.hotel;
 
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.illegalArgEx;
+import static utils.exception.StaticExceptionFactory.illegalStateException;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 import static utils.exception.StaticExceptionFactory.unsupportedOpEx;
 
@@ -11,6 +12,8 @@ import java.util.Set;
 import data.dao.hotel.HotelDao;
 import po.hotel.HotelPo;
 import po.hotel.HotelPoBuilder;
+import po.member.MemberPo;
+import po.member.MemberPoBuilder;
 import service.hotel.HotelAccountService;
 import service.hotel.HotelInfoService;
 import service.promotion.HotelPromotionManagementService;
@@ -123,5 +126,21 @@ public class HotelInfoManager implements HotelInfoService {
 
 		return hotelDao
 				.updateHotel(new HotelPoBuilder(modifiedInfo).setPasswordHash(po.getPasswordHash()).getHotelInfo());
+	}
+	
+	@Override
+	public boolean updatePassword(int oldPwdHash, int newPwdHash) {
+		if (accountService == null || hotelDao == null)
+			throw unsupportedOpEx("update password");
+
+		if (!accountService.isLogined())
+			throw illegalStateException("Not logged in yet");
+
+		HotelPo po = (HotelPo) accountService.getCurrentAccount();
+
+		if (po.getPasswordHash() != oldPwdHash)
+			return false;
+
+		return updateInfo(new HotelPoBuilder(po).setPasswordHash(newPwdHash).getHotelInfo());
 	}
 }

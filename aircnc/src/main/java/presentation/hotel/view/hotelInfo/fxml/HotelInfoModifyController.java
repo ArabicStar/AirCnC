@@ -21,9 +21,9 @@ import presentation.hotel.accessor.impl.InfoModifyAccessorImpl;
 import presentation.hotel.manager.InfoManager;
 import presentation.hotel.manager.impl.InfoManagerImpl;
 import presentation.hotel.model.HotelInfoModel;
+import presentation.hotel.utils.dialog.ModifyPasswordDialog;
+import presentation.hotel.utils.dialog.PlainDialog;
 import presentation.hotel.view.hotelInfo.ModifyRoomPane;
-import presentation.member.utils.dialog.ModifyPasswordDialog;
-import presentation.member.utils.dialog.PlainDialog;
 
 public class HotelInfoModifyController implements Initializable{
 	@FXML
