@@ -1,5 +1,6 @@
 package utils.info.market;
 
+import static utils.exception.StaticExceptionFactory.illegalArgEx;
 
 /**
  * Abstract of builder for MarketInfo, assisting to assure immutable object.
@@ -16,7 +17,7 @@ package utils.info.market;
  * @author paranoia
  * @see utils.info.market.MarketInfo
  */
-
+@SuppressWarnings("serial")
 public abstract class MarketInfoBuilder extends MarketInfoTemplate{
 	
 	/**
@@ -35,6 +36,9 @@ public abstract class MarketInfoBuilder extends MarketInfoTemplate{
 	 * @param info
 	 */
 	public MarketInfoBuilder(MarketInfo info) {
+		this();
+		if (!info.isValid())
+			throw illegalArgEx("MarketInfo");
 		this.setID(info.getId()).setName(info.getName());
 	}
 	

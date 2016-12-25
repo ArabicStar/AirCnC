@@ -1,6 +1,9 @@
 package po.market;
 
 
+import static utils.crypto.Cryptor.decrypt;
+import static utils.crypto.Cryptor.encrypt;
+
 import org.apache.commons.lang.StringUtils;
 
 import utils.info.market.MarketInfo;
@@ -15,6 +18,11 @@ import utils.info.market.MarketInfo;
  */
 
 public class MarketPo extends MarketInfo{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -234691130919960373L;
 	protected int passwordHash;
 	protected int numId = Integer.MIN_VALUE;
 
@@ -72,5 +80,26 @@ public class MarketPo extends MarketInfo{
 	public MarketPo setPasswordHash(int passwordHash) {
 		this.passwordHash = passwordHash;
 		return this;
+	}
+	
+	/**
+	 * Get encrypted name string. Automatically encrypt {@code name} field. Just
+	 * for hibernate. Make client requirement happy.<br>
+	 * 
+	 * @return encrypted name string.
+	 */
+	public String getEncryptName() {
+		return encrypt(this.name);
+	}
+
+	/**
+	 * Set encrypted name string. Automatically decrypt {@code encryptName}
+	 * field. Just for hibernate. Make client requirement happy.<br>
+	 * 
+	 * @param encryptName
+	 *            encrpyted name string
+	 */
+	public void setEncryptName(String encryptName) {
+		this.name = decrypt(encryptName);
 	}
 }

@@ -74,7 +74,7 @@ public class DataPrepareHelper {
 	private static final String[] marketTestID = new String[] { "33334444", "44445555"};
 	private static final int marketTestPass = "12345678".hashCode();
 	static {
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 2; i++) {
 			MarketPoBuilder b = new MarketPoBuilder().setName(marketTestName[i])
 					.setID(marketTestID[i]).setPasswordHash(marketTestPass);
 			marketData.add(b.getMarketInfo());

@@ -6,6 +6,8 @@ public interface MarketManageInfoAccessor {
 	
 	public MarketVo getModifiedMarketVo();
 	
+	public MarketVo getAddedMarketVo();
+	
 	public int getPasswordHash();
 	
 	public void setPassword(String password);

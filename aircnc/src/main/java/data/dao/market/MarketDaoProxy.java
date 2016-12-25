@@ -90,6 +90,7 @@ public class MarketDaoProxy implements MarketDao{
 	}
 	
 	@Override
+	@AuthenticatePolicy({ Client.USER, Client.MANAGE })
 	public MarketPo findMarket(String id) {
 		return hazard(() -> {
 			return marketDao.findMarket(id);

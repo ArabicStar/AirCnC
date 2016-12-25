@@ -3,6 +3,9 @@ package po.market;
 import utils.info.market.MarketInfo;
 import utils.info.market.MarketInfoBuilder;
 
+import static utils.exception.StaticExceptionFactory.builderNotReadyEx;
+import static utils.exception.StaticExceptionFactory.illegalArgEx;
+
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -11,6 +14,7 @@ import org.apache.commons.lang.StringUtils;
  * @author paranoia
  *
  */
+@SuppressWarnings("serial")
 public class MarketPoBuilder extends MarketInfoBuilder {
 
 	private int passwordHash = Integer.MIN_VALUE;
@@ -47,10 +51,9 @@ public class MarketPoBuilder extends MarketInfoBuilder {
 
 	public MarketPoBuilder setName(String name) {
 		if (checkUserName(name))
-			// insert blank space to avoid injection attack
-			this.name = name.replaceAll("(.{1})", "$1 ");
+			this.name = name;
 		else
-			throw new IllegalArgumentException("Wrong name");
+			throw illegalArgEx("Market's name");
 
 		return this;
 	}
@@ -67,7 +70,7 @@ public class MarketPoBuilder extends MarketInfoBuilder {
 	@Override
 	public MarketPo getMarketInfo() {
 		if (!isReady() && passwordHash != Integer.MIN_VALUE)
-			throw new IllegalStateException("Lack Of Info");
+			throw builderNotReadyEx();
 
 		return new MarketPo().setId(id).setName(name).setPasswordHash(passwordHash);
 	}

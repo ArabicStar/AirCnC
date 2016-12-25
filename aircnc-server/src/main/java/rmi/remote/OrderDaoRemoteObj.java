@@ -1,7 +1,6 @@
 package rmi.remote;
 
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
-import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;

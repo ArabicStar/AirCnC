@@ -3,6 +3,7 @@ package presentation.manage.view.hotelmanage.fxml;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import interactor.impl.manage.ManageHotelCourier;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -54,8 +55,9 @@ public class HotelAddController implements Initializable {
 				HotelManageInfoAccessorImpl.getInstance().setName(name.getText());
 				HotelManageInfoAccessorImpl.getInstance().setStar(star.getValue());
 				HotelManageInfoAccessorImpl.getInstance().setPassword(password.getText());
-				// 连接
-				controller.removeAddHotel();
+				boolean valid = ManageHotelCourier.getInstance().AddHotelInfo();
+				if(valid)
+					controller.removeAddHotel();
 			} else {
 				PlainDialog alert = new PlainDialog(AlertType.INFORMATION, "添加失败", "请输入相同的密码");
 				alert.showDialog();

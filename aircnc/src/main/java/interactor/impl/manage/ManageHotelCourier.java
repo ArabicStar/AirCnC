@@ -83,9 +83,9 @@ public class ManageHotelCourier implements ManageHotelInteractor{
 		String title = getTitle();
 
 		HotelInfo info = execute(title, () -> {
-			String id = HotelManageInfoAccessorImpl.getInstance().getHotelId();
-			if (id != null)
-				return handler.getHotelInfo(id);
+			String name = HotelManageInfoAccessorImpl.getInstance().getHotelId();
+			if (name != null)
+				return handler.getHotelInfo(name);
 
 			alertFail(title, "Not input Market id yet");
 			return null;

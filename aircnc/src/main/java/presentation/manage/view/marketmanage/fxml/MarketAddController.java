@@ -3,6 +3,7 @@ package presentation.manage.view.marketmanage.fxml;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import interactor.impl.manage.ManageMarketCourier;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -47,8 +48,9 @@ public class MarketAddController implements Initializable {
 			if (password.getText().equals(passwordConfirm.getText())) {
 				MarketManageInfoAccessorImpl.getInstance().setName(name.getText());
 				MarketManageInfoAccessorImpl.getInstance().setPassword(password.getText());
-				// 连接
-				controller.removeAddHotel();
+				boolean valid = ManageMarketCourier.getInstance().AddMarketInfo();
+				if(valid)
+					controller.removeAddMarket();
 			} else {
 				PlainDialog alert = new PlainDialog(AlertType.INFORMATION, "添加失败", "请输入相同的密码");
 				alert.showDialog();
@@ -61,7 +63,7 @@ public class MarketAddController implements Initializable {
 
 	@FXML
 	public void handleClose() {
-		controller.removeAddHotel();
+		controller.removeAddMarket();
 	}
 
 	public void setController(MarketManageMainController controller) {

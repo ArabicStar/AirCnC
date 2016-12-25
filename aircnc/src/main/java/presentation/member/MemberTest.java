@@ -96,18 +96,17 @@ public class MemberTest {
 				.setName("阿拉伯之星").setScope("栖霞区").setLocation("仙林大道")
 				.setIntro("我们表面上看起来只是个学校，其实……嘿嘿嘿");
 		
+		
 		Set<Room> rooms = new HashSet<Room>();
+		
 		RoomBuilder roombuilder = new RoomBuilder("SIGNLE").setRoomNum(50).setPrice(245);
-		rooms.add(roombuilder.getRoomInfo());
 		
 		roombuilder = new RoomBuilder("DOUBLE").setRoomNum(20).setPrice(400);
-		rooms.add(roombuilder.getRoomInfo());
 		
 		roombuilder = new RoomBuilder("TRIPLE").setRoomNum(10).setPrice(588);
-		rooms.add(roombuilder.getRoomInfo());
 		
 		roombuilder = new RoomBuilder("4人开黑房").setRoomNum(10).setPeopleNum(4).setPrice(698);
-		rooms.add(roombuilder.getRoomInfo());
+		
 		
 		builder.setRooms(rooms);
 		

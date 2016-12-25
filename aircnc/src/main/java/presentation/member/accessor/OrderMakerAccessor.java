@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import vo.hotel.HotelVo;
+import vo.order.OrderVo;
 import vo.order.OrderVoBuilder;
 
 public interface OrderMakerAccessor {
@@ -29,5 +30,9 @@ public interface OrderMakerAccessor {
 	 * @return
 	 */
 	public OrderVoBuilder getMadeOrder();
+	
+	public void setCompleteOrder(OrderVo vo);
+	
+	public OrderVo getCompleteOrder();
 	
 }

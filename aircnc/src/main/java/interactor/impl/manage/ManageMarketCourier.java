@@ -46,7 +46,7 @@ public class ManageMarketCourier implements ManageMarketInteractor{
 		String title = getTitle();
 		MarketInfo info = execute(title, () -> {
 			MarketInfo tmp = handler.AddMarketInfo(new MarketVoBuilder(MarketManageInfoAccessorImpl.getInstance()
-					.getModifiedMarketVo()), MarketManageInfoAccessorImpl.getInstance().getPasswordHash());
+					.getAddedMarketVo()), MarketManageInfoAccessorImpl.getInstance().getPasswordHash());
 
 			if (tmp == null)
 				throw unknownEx();

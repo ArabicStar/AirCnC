@@ -15,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import presentation.member.model.SearchHotelsModel;
+import presentation.member.view.searchhotel.MakeOrderPane;
 import presentation.member.view.searchhotel.hotelInfo.HotelInfoMainPane;
 
 /**
@@ -69,6 +70,7 @@ public class MemberSearchHotelGeneralController implements Initializable{
 	private SearchHotelsModel model;
 	private AnchorPane rootLayout;
 	private HotelInfoMainPane detailedInfo;
+	private MakeOrderPane makeOrder;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -81,7 +83,15 @@ public class MemberSearchHotelGeneralController implements Initializable{
 	
 	@FXML
 	public void handleReverse(){
-		//万总的生成订单界面
+		makeOrder = new MakeOrderPane();
+		rootLayout.getChildren().add(makeOrder.getPane());
+		AnchorPane.setTopAnchor(makeOrder.getPane(), 0.0);
+		makeOrder.getController().setController(this);
+		makeOrder.getController().setHotelVo(model);
+	}
+	
+	public void removeReverse(){
+		rootLayout.getChildren().remove(rootLayout.getChildren().size()-1);
 	}
 	
 	@FXML

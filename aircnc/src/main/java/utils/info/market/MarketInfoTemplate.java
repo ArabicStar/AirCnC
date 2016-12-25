@@ -1,5 +1,7 @@
 package utils.info.market;
 
+import java.io.Serializable;
+
 /**
  * Market information template<br>
  * Provide universal field for subclass, and static checker and formatter for
@@ -9,8 +11,13 @@ package utils.info.market;
  *
  */
 
-public class MarketInfoTemplate {
+public class MarketInfoTemplate implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8412448174488261835L;
+
 	protected static String BLANK = "";
 	
 	protected String id;

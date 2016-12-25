@@ -2,6 +2,7 @@ package presentation.manage.utils.dialog;
 
 import java.util.Optional;
 
+import interactor.impl.manage.ManageMarketCourier;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.ButtonType;
@@ -38,12 +39,9 @@ public class MarketModifyDialog {
 		grid.add(new Label("营销人员名称:"), 0, 0);
 		grid.add(newName, 1, 0);
 
-		// Enable/Disable login button depending on whether a username was
-		// entered.
 		Node confirmButton = dialog.getDialogPane().lookupButton(ConfirmButtonType);
 		confirmButton.setDisable(true);
 
-		// Do some validation (using the Java 8 lambda syntax).
 		newName.textProperty().addListener((observable, oldValue, newValue) -> {
 			confirmButton.setDisable(newValue.trim().isEmpty());
 		});
@@ -62,7 +60,7 @@ public class MarketModifyDialog {
 		result.ifPresent(newInfo -> {
 			MarketManageInfoAccessorImpl.getInstance().setMarketVo(vo);
 			MarketManageInfoAccessorImpl.getInstance().setName(newName.getText());
-			//MemberInfoCourier.getInstance().updatePassword();
+			ManageMarketCourier.getInstance().ModifyMarketInfo();
 			PlainDialog alert = new PlainDialog(AlertType.INFORMATION,"修改成功","已成功修改营销人员信息");
 			alert.showDialog();
 		});

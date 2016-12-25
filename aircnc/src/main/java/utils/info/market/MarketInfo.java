@@ -1,5 +1,6 @@
 package utils.info.market;
 
+import java.io.Serializable;
 
 /**
  * Abstract of member info<br>
@@ -10,8 +11,13 @@ package utils.info.market;
  * @author paranoia
  *
  */
-public abstract class MarketInfo extends MarketInfoTemplate {
+public abstract class MarketInfo extends MarketInfoTemplate implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2554307018911369010L;
+
 	/**
 	 * mark a MarketInfo instance is valid or not. <br>
 	 */

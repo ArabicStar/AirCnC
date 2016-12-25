@@ -1,8 +1,10 @@
 package presentation.manage.utils.dialog;
 
 import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Optional;
 
+import interactor.impl.manage.ManageMemberCourier;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.ButtonType;
@@ -51,12 +53,44 @@ public class MemberModifyDialog {
 
 		ComboBox<Integer> newYear = new ComboBox<Integer>();
 		newYear.setValue(vo.getBirthday().getYear());
-
+		newYear.setPrefWidth(100);
 		ComboBox<Integer> newMonth = new ComboBox<Integer>();
-		newMonth.setValue(vo.getBirthday().getMonthValue() + 1);
+		newMonth.setValue(vo.getBirthday().getMonthValue());
+		newMonth.setPrefWidth(100);
 
 		ComboBox<Integer> newDay = new ComboBox<Integer>();
 		newDay.setValue(vo.getBirthday().getDayOfMonth());
+		newDay.setPrefWidth(100);
+		
+		newYear.getItems().addAll(
+				  1970,1971,1972,1973,1974,1975,1976,1977,1978,1979,
+				  1980,1981,1982,1983,1984,1985,1986,1987,1988,1989,
+		          1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,
+		          2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,
+		          2010,2011,2012,2013,2014,2015,2016
+		        );
+		newMonth.getItems().addAll(  
+		            1,2,3,4,5,6,7,8,9,10,11,12  
+		        );
+		  
+		newMonth.valueProperty().addListener((observable, oldValue, newValue) -> {
+			   if(oldValue!=newValue){
+				   newDay.getItems().clear();
+			   }
+			   if(!newDay.isDisable()){
+				   Calendar time=Calendar.getInstance(); 
+				   time.clear(); 
+				   time.set(Calendar.YEAR,newYear.getValue()); 
+				   //year年
+				   time.set(Calendar.MONTH,newMonth.getValue()-1);
+				   //Calendar对象默认一月为0,month月            
+				   int day=time.getActualMaximum(Calendar.DAY_OF_MONTH);//本月份的天数
+				   for(int i=1;i<=day;i++){
+					   newDay.getItems().add(i);
+				   }
+			   }
+			   newDay.setValue(1);
+			});
 
 		grid.add(new Label("生日:"), 0, 0);
 		grid.add(newYear, 1, 0);
@@ -90,7 +124,7 @@ public class MemberModifyDialog {
 		result.ifPresent(newInfo -> {
 			MemberManageInfoAccessorImpl.getInstance().setMemberVo(vo);
 			MemberManageInfoAccessorImpl.getInstance().setBirthday(newInfo);
-			// MemberInfoCourier.getInstance().updatePassword();
+			ManageMemberCourier.getInstance().ModifyMemberInfo();
 			PlainDialog alert = new PlainDialog(AlertType.INFORMATION, "修改成功", "已成功修改客户信息");
 			alert.showDialog();
 		});
@@ -140,7 +174,7 @@ public class MemberModifyDialog {
 		result.ifPresent(newInfo -> {
 			MemberManageInfoAccessorImpl.getInstance().setMemberVo(vo);
 			MemberManageInfoAccessorImpl.getInstance().setEnterprise(newEnt.getText());
-			// MemberInfoCourier.getInstance().updatePassword();
+			ManageMemberCourier.getInstance().ModifyMemberInfo();
 			PlainDialog alert = new PlainDialog(AlertType.INFORMATION, "修改成功", "已成功修改客户信息");
 			alert.showDialog();
 		});

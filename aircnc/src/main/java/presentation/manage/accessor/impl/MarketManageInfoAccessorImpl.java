@@ -79,4 +79,10 @@ public class MarketManageInfoAccessorImpl implements MarketManageInfoAccessor{
 		return passwordHash;
 	}
 
+	@Override
+	public MarketVo getAddedMarketVo() {
+		MarketVo market = new MarketVoBuilder().setName(name).getMarketInfo();
+		return market;
+	}
+
 }
