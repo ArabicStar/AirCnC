@@ -11,7 +11,7 @@ public class LoggerLauncher {
 
 	public static final void launch() {
 		PropertyConfigurator.configure("log4j.properties");
-		final Logger logger = Logger.getLogger("AirCnc Client Logger");
+		final Logger logger = Logger.getLogger("AirCnc Hotel Logger");
 		Log.launchLogger(logger);
 		Log.i("Logger launch succeed");
 	}

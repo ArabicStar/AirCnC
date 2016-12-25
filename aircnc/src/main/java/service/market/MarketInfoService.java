@@ -1,9 +1,6 @@
 package service.market;
 
-import java.util.Set;
-
 import utils.info.market.MarketInfo;
-import vo.promotion.PromotionVo;
 
 /**
  * Interface for account operation<br>
@@ -19,9 +16,5 @@ public interface MarketInfoService {
 	 * @return
 	 */
 	public MarketInfo getMarketInfo(String id);
-	/**
-	 * @param  id
-	 * @return	获取促销策略
-	 */
-	public Set<PromotionVo> getMarketPromotion();
+
 }

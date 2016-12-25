@@ -5,15 +5,11 @@ import static utils.exception.StaticExceptionFactory.illegalArgEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 import static utils.exception.StaticExceptionFactory.unsupportedOpEx;
 
-import java.util.Set;
-
 import data.dao.market.MarketDao;
 import po.market.MarketPo;
 import service.market.MarketInfoService;
-import service.promotion.WebsitePromotionInfoService;
 import utils.info.market.MarketInfo;
 import vo.market.MarketVoBuilder;
-import vo.promotion.PromotionVo;
 /**
  * Implementation of MarketInfoService and MarketQueryService.<br>
  * Singleton.<br>
@@ -45,12 +41,11 @@ public final class MarketInfoManager implements MarketInfoService{
 	 * @throws IllegalStateException
 	 *             singleton has existed already <br>
 	 */
-	public static MarketInfoManager launch(final MarketDao marketDao
-			, final WebsitePromotionInfoService websitePromotionInfoService) {
+	public static MarketInfoManager launch(final MarketDao marketDao) {
 		if (instance != null)
 			throw duplicateSingletonEx();
 
-		return instance = new MarketInfoManager(marketDao, websitePromotionInfoService);
+		return instance = new MarketInfoManager(marketDao);
 	}
 
 	/**
@@ -68,11 +63,9 @@ public final class MarketInfoManager implements MarketInfoService{
 	}
 
 	private MarketDao marketDao;
-	private WebsitePromotionInfoService websitePromotionInfoService;
 
-	private MarketInfoManager(MarketDao marketDao, WebsitePromotionInfoService websitePromotionInfoService) {
+	private MarketInfoManager(MarketDao marketDao) {
 		this.marketDao = marketDao;
-		this.websitePromotionInfoService = websitePromotionInfoService;
 	}
 
 	/*
@@ -93,22 +86,5 @@ public final class MarketInfoManager implements MarketInfoService{
 		return po == null ? null : new MarketVoBuilder(marketDao.findMarket(id)).getMarketInfo();
 	}
 	
-	private Set<PromotionVo> bufferedPromotionList;
-	
-	@Override
-	public Set<PromotionVo> getMarketPromotion() {
-		if(websitePromotionInfoService == null)
-			throw unsupportedOpEx("get market promotion info");
-		
-		Set<PromotionVo> res = websitePromotionInfoService.getUserAvailableWebsitePromotions();
-
-		// given id not exists, return
-		if (res == null)
-			return null;
-		
-		bufferedPromotionList = res;
-
-		return bufferedPromotionList;
-	}
 	
 }

@@ -2,12 +2,16 @@ package launcher;
 
 import javafx.application.Application;
 import presentation.market.CenterController;
+import presentation.market.accessor.impl.MarketLoginAccessorImpl;
+import presentation.market.accessor.impl.MarketPromotionAccessorImpl;
+import presentation.market.manage.impl.MarketPromotionManagerImpl;
 import utils.logger.Log;
 
 public class UILauncher {
 	public static final void launch() {
 		try {
-			launchManageUI();
+			launchAccessor();
+			launchManager();
 
 			Log.i("UI launch succeed");
 		} catch (Exception e) {
@@ -20,7 +24,15 @@ public class UILauncher {
 	private UILauncher() {
 	}
 
-	private static final void launchManageUI(){
-		
+	private static final void launchAccessor() {
+		MarketPromotionAccessorImpl.launch();
+		MarketLoginAccessorImpl.launch();
+
+	}
+
+	private static final void launchManager() {
+
+		MarketPromotionManagerImpl.launch();
+
 	}
 }

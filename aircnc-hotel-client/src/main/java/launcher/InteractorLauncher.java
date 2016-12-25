@@ -11,14 +11,6 @@ public final class InteractorLauncher {
 		launchHotelInteractor();
 	}
 
-//	private static void launchMemberInteractor() {
-//		final MemberServiceProxy proxy = MemberServiceProxy.getInstance();
-//
-//		MemberAccountCourier.launch(proxy);
-//		MemberInfoCourier.launch(proxy, proxy);
-//
-//	}
-
 	private static void launchHotelInteractor() {
 		final HotelServiceProxy hotelProxy = HotelServiceProxy.getInstance();
 		final PromotionServiceProxy promotionProxy = PromotionServiceProxy.getInstance();
@@ -27,15 +19,7 @@ public final class InteractorLauncher {
 		HotelInfoCourier.launch(hotelProxy, hotelProxy);
 		HotelPromotionCourier.launch(promotionProxy, hotelProxy);
 	}
-
-	private static void launchManageInteractor() {
-
-	}
-
-	private static void launchMarketInteractor() {
-
-	}
-
+	
 	private InteractorLauncher() {
 	}
 }

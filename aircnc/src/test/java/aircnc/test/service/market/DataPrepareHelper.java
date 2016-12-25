@@ -31,7 +31,7 @@ public class DataPrepareHelper {
 	public static final MarketDao marketDao = MarketDaoImpl.INSTANCE;
 	public static final MarketAccountService accountService = MarketAccountManager.launch(marketDao);
 	private static final WebsitePromotionInfoService websitePromotionInfoService = null;
-	public static final MarketInfoService infoService = MarketInfoManager.launch(marketDao, websitePromotionInfoService);
+	public static final MarketInfoService infoService = MarketInfoManager.launch(marketDao);
 
 	public static final void prepareTestStatistic() {
 		testData.forEach(marketDao::addMarket);
