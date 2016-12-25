@@ -83,9 +83,9 @@ public class ParametersList implements Serializable{
 
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder("~");
+		StringBuilder sb = new StringBuilder();
 		for (Parameter<?> param : properties)
-			sb.append(param.toString()).append("~");
+			sb.append("~").append(param.toString()).append("~");
 
 		return sb.toString();
 	}
