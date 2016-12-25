@@ -3,11 +3,12 @@ package presentation.member.accessor;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import vo.order.OrderVo;
+import vo.hotel.HotelVo;
+import vo.order.OrderVoBuilder;
 
 public interface OrderMakerAccessor {
 	
-public void setRoomNumber(int roomNumber);
+	public void setRoomNumber(int roomNumber);
 	
 	public void setEnterTime(LocalDate enterTime);
 	
@@ -21,10 +22,12 @@ public void setRoomNumber(int roomNumber);
 	
 	public void setHasChildren(boolean hasChildren);
 	
+	public void setHotel(HotelVo vo);
+	
 	/**
 	 * 获取已经生成的订单
 	 * @return
 	 */
-	public OrderVo getMadeOrder();
+	public OrderVoBuilder getMadeOrder();
 	
 }

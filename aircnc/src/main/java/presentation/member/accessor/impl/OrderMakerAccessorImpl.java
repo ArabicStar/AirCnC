@@ -10,6 +10,7 @@ import java.time.LocalTime;
 
 import presentation.member.accessor.OrderMakerAccessor;
 import utils.info.order.OrderStatus;
+import vo.hotel.HotelVo;
 import vo.order.OrderVo;
 import vo.order.OrderVoBuilder;
 
@@ -23,6 +24,7 @@ public class OrderMakerAccessorImpl implements OrderMakerAccessor{
 	private LocalDateTime latestExecuteTime;
 	private int peopleNumber;
 	private boolean hasChildren;
+	private HotelVo hotelVo;
 
 	public static final OrderMakerAccessor launch() {
 		if(instance != null) {
@@ -83,7 +85,7 @@ public class OrderMakerAccessorImpl implements OrderMakerAccessor{
 	}
 	
 	@Override
-	public OrderVo getMadeOrder() {
+	public OrderVoBuilder getMadeOrder() {
 		if(instance == null) {
 			throw accessorNotReadyEx();
 		}
@@ -94,6 +96,12 @@ public class OrderMakerAccessorImpl implements OrderMakerAccessor{
 				setLastTime(latestExecuteTime).setRoomNumber(roomNumber)
 				.setStatus(OrderStatus.UNEXECUTED).setEntryTime(entryTime)
 				.setRoomType(roomType).setPeopleNumber(peopleNumber)
-				.setHasChildren(hasChildren).setStayDays(stayDays).getOrderInfo();
+				.setHasChildren(hasChildren).setStayDays(stayDays).setHotel(hotelVo);
+	}
+
+
+	@Override
+	public void setHotel(HotelVo vo) {
+		this.hotelVo = vo;
 	}
 }
