@@ -4,8 +4,10 @@ import java.io.Serializable;
 
 import utils.info.order.OrderInfo;
 
-public interface Trigger extends Serializable{
-	public abstract boolean test(OrderInfo order);
+public interface Trigger extends Serializable {
+	public boolean test(OrderInfo order);
 
-	public abstract String when();
+	public String when();
+
+	public String name();
 }

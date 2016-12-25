@@ -4,7 +4,7 @@ import utils.info.order.OrderInfo;
 import utils.parameter.ParametersList;
 import utils.promotion.trigger.Trigger;
 
-public class HotelTrigger implements Trigger{
+public class HotelTrigger implements Trigger {
 	/**
 	 * 
 	 */
@@ -30,5 +30,10 @@ public class HotelTrigger implements Trigger{
 	@Override
 	public String toString() {
 		return new StringBuilder("Hotel@^@").append(when.name()).append("@^@").append(params.toString()).toString();
+	}
+
+	@Override
+	public String name() {
+		return when.name();
 	}
 }

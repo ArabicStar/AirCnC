@@ -32,4 +32,9 @@ public class WebsiteTrigger implements Trigger {
 	public String toString() {
 		return new StringBuilder("Website@^@").append(when.name()).append("@^@").append(params.toString()).toString();
 	}
+
+	@Override
+	public String name() {
+		return when.name();
+	}
 }
