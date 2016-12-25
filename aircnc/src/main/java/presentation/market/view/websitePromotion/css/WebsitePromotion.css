@@ -4,10 +4,12 @@
 	-fx-background-size: 1024px 768px;*/
 }
 
+
 .title{
-	-fx-text-fill:#4f4e84;
 	-fx-font-size: 40px;
+	-fx-text-fill: #4f4e84;
 }
+
 
 .table-view {
     -fx-base: #fff;
@@ -30,6 +32,7 @@
 .column-header {
     -fx-border-width: 0 0 18px 0;
     -fx-border-color: #4f4e84;
+    -fx-font-size:20px;
 }
 
 .column-header .label {
@@ -50,3 +53,22 @@
 .table-row-cell{
     -fx-background-color: transparent;
 }
+
+.add{
+	-fx-font-size: 28px;
+	-fx-text-fill: #575793;
+	-fx-background-color:transparent;
+	-fx-border-color:#575793;
+	-fx-border-radius:0px;
+}
+
+
+.modify{
+	-fx-font-size: 20px;
+	-fx-text-fill: #ffffff;
+	-fx-background-radius:15px,15px,15px,15px;
+	-fx-background-color:#575793;
+}
+
+
+

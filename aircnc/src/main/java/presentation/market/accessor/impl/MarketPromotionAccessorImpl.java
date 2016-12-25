@@ -4,12 +4,12 @@ import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
 import presentation.market.accessor.MarketPromotionAccessor;
-import vo.promotion.PromotionVo;
+import vo.promotion.WebsitePromotionVo;
 
 public class MarketPromotionAccessorImpl implements MarketPromotionAccessor {
 	private static MarketPromotionAccessor instance;
 
-	private PromotionVo promotion;
+	private WebsitePromotionVo promotion;
 
 	private long promotionId;
 
@@ -46,7 +46,7 @@ public class MarketPromotionAccessorImpl implements MarketPromotionAccessor {
 	}
 
 	@Override
-	public void setPromotion(PromotionVo vo) {
+	public void setPromotion(WebsitePromotionVo vo) {
 		//if vo has id, update; else add;
 		this.promotion = vo;
 		
@@ -63,7 +63,7 @@ public class MarketPromotionAccessorImpl implements MarketPromotionAccessor {
 	}
 
 	@Override
-	public PromotionVo getPromotion() {
+	public WebsitePromotionVo getPromotion() {
 		return promotion;
 	}
 

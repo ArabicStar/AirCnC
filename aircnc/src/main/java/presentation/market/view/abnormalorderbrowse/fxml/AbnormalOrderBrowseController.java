@@ -15,8 +15,8 @@ import javafx.scene.control.TableView;
 import javafx.util.Callback;
 import presentation.market.MarketCenterController;
 import presentation.market.model.OrderModel;
-import presentation.market.utils.ButtonCell;
-import presentation.market.utils.ButtonName;
+import presentation.market.utils.cell.ButtonCell;
+import presentation.market.utils.cell.ButtonName;
 
 public class AbnormalOrderBrowseController implements Initializable {
 	@SuppressWarnings("unused")

@@ -1,4 +1,4 @@
-package presentation.market.utils;
+package presentation.market.utils.cell;
 
 import java.util.Optional;
 

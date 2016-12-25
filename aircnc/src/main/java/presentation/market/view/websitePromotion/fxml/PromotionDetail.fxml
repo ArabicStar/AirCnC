@@ -4,9 +4,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" stylesheets="@../css/PromotionDetail.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.hotel.view.hotelPromotion.fxml.PromotionDetailController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" stylesheets="@../css/PromotionDetail.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.market.view.websitePromotion.fxml.PromotionDetailController">
    <children>
-      <Pane prefHeight="500.0" prefWidth="500.0" styleClass="bg" stylesheets="@../css/PromotionDetail.css">
+      <Pane prefHeight="500.0" prefWidth="500.0" styleClass="bg">
          <children>
             <Label layoutX="463.0" layoutY="14.0" onMouseClicked="#close" text="X" />
             <VBox layoutX="36.0" layoutY="41.0" prefHeight="338.0" prefWidth="348.0" spacing="30.0">
@@ -60,7 +60,7 @@
                   </HBox>
                </children>
             </VBox>
-            <Button fx:id="operate" layoutX="372.0" layoutY="416.0" mnemonicParsing="false" onAction="#handleAddPromotion" text="添加" />
+            <Button fx:id="operate" layoutX="361.0" layoutY="416.0" mnemonicParsing="false" onAction="#handleAddPromotion" text="添加策略" />
          </children>
       </Pane>
    </children>

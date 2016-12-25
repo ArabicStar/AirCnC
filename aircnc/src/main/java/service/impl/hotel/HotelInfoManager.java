@@ -141,6 +141,6 @@ public class HotelInfoManager implements HotelInfoService {
 		if (po.getPasswordHash() != oldPwdHash)
 			return false;
 
-		return updateInfo(new HotelPoBuilder(po).setPasswordHash(newPwdHash).getHotelInfo());
+		return hotelDao.updateHotel(new HotelPoBuilder(po).setPasswordHash(newPwdHash).getHotelInfo());
 	}
 }

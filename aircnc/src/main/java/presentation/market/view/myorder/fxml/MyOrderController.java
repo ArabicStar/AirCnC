@@ -19,7 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import presentation.market.MarketCenterController;
 import presentation.market.model.MyOrderModel;
-import presentation.market.utils.FunctionButtons;
+import presentation.market.utils.cell.FunctionButtons;
 import presentation.market.view.myorder.OrderDetailPane;
 import utils.info.order.OrderStatus;
 import vo.order.OrderVo;

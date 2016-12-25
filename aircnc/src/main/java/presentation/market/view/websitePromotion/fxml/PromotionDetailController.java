@@ -1,32 +1,26 @@
-package presentation.hotel.view.hotelPromotion.fxml;
+package presentation.market.view.websitePromotion.fxml;
 
-import java.net.URL;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
-import po.promotion.HotelPromotionPo;
-import po.promotion.PromotionPoBuilder;
 import presentation.hotel.utils.dialog.PlainDialog;
 import utils.info.promotion.PromotionInfoTemplate.Scope;
 import utils.promotion.applier.ApplierParams;
 import utils.promotion.applier.How;
 import utils.promotion.trigger.TriggerParams;
-import utils.promotion.trigger.hotel.HotelWhen;
-import vo.promotion.HotelPromotionVo;
+import utils.promotion.trigger.website.WebsiteWhen;
 import vo.promotion.PromotionVo;
 import vo.promotion.PromotionVoBuilder;
 
-public class PromotionDetailController implements Initializable{
+public class PromotionDetailController {
+	WebsitePromotionController controller;
 	
 	@FXML
 	private ComboBox<String> when;
@@ -55,13 +49,6 @@ public class PromotionDetailController implements Initializable{
 	
 	private DatePicker to;
 	
-	private HotelPromotionMainController controller;
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-
-		
-	}
 	
 	private void initPromotion(){
 		from = new DatePicker();
@@ -75,7 +62,7 @@ public class PromotionDetailController implements Initializable{
 		from.setDisable(true);
 		to.setDisable(true);
 		
-		when.getItems().addAll("生日优惠","合作企业优惠","多间房优惠","时效性优惠");
+		when.getItems().addAll("会员等级优惠","特定商圈优惠","时效性优惠");
 		when.valueProperty().addListener((observable, oldValue, newValue) -> {
 		  	if(oldValue!=newValue){
 		  		switch (newValue){
@@ -91,25 +78,19 @@ public class PromotionDetailController implements Initializable{
 		  			from.setDisable(true);
 		  			to.setDisable(true);
 		  			switch (newValue){
-		  			case "多间房优惠":
-			  			whenParaName.setText("房间数量");
+		  			case "会员等级优惠":
+			  			whenParaName.setText("会员等级");
 			  			whenPara.setText(null);
-			  			whenPara.setPromptText("4");
+			  			whenPara.setPromptText("大于等于该等级均享受优惠");
 			  			whenPara.setDisable(false);
 		  				break;
-		  			case "合作企业优惠":
-		  				whenParaName.setText("企业名称");
+		  			case "特定商圈优惠":
+		  				whenParaName.setText("商圈名称");
 		  				whenPara.setText(null);
-			  			whenPara.setPromptText("南京大学");
+			  			whenPara.setPromptText("新街口");
 			  			whenPara.setDisable(false);
-		  				break;
-		  			case "生日优惠":
-		  				whenParaName.setText("优惠名称");
-			  			whenPara.setText("生日优惠");;
-			  			whenPara.setDisable(true);
 		  				break;
 		  			}
-		  			break;
 		  		}
 			}
 		});
@@ -139,17 +120,14 @@ public class PromotionDetailController implements Initializable{
 			operate.setText("保存");
 
 			switch (vo.getPromotion().getTrigger().name()){
-			case "BIRTHDAY":
-				when.setValue("生日优惠");
+			case "LEVEL":
+				when.setValue("会员等级优惠");
 				break;
-			case "ENTERPRISE":
-				when.setValue("合作企业优惠");
+			case "TRADE_AREA":
+				when.setValue("特定商圈优惠");
 				break;
 			case "DURING_PERIOD":
 				when.setValue("时效性优惠");
-				break;
-			case "MULTI_ROOMS":
-				when.setValue("多间房优惠");
 				break;
 			default:
 				
@@ -157,7 +135,7 @@ public class PromotionDetailController implements Initializable{
 			}
 			when.setDisable(true);
 			
-			switch (vo.getPromotion().getApplier().name()){
+			switch (vo.getPromotion().getApplier().how()){
 			case "CONST":
 				how.setValue("直接降价");
 				break;
@@ -193,7 +171,7 @@ public class PromotionDetailController implements Initializable{
 		initPromotion();
 	}
 
-	public void setController(HotelPromotionMainController controller) {
+	public void setController(WebsitePromotionController controller) {
 		this.controller = controller;
 		
 	}
@@ -212,20 +190,22 @@ public class PromotionDetailController implements Initializable{
   				return "时效性优惠结束时间不能早于开始时间！";
   			}
   			break;
-		case "多间房优惠":
+		case "会员等级优惠":
   			try{
   				int i = Integer.parseInt(whenPara.getText());
   				if(i<=0){
-  					return "请输入大于0的房间数量！";
+  					return "请输入大于0的会员等级！";
   				}
   			}catch (Exception e){
-  				return "请正确输入房间数量！";
+  				return "请正确输入会员等级！";
   			}
 			break;
-		case "合作企业优惠":
+		case "特定商圈优惠":
 			if(whenPara.getText()==null||whenPara.getText()==""){
-				return "请正确输入合作企业名称！";
+				return "请正确输入商圈名称！";
 			}
+		default:
+			return "请选择策略名称";
 		}
 		
 		switch (how.getValue()){
@@ -249,35 +229,34 @@ public class PromotionDetailController implements Initializable{
   				return "请正确输入立减价格！";
   			}
 			break;
-		}
+		default:
+			return "请选择优惠方式";	
+		}		
 		return "";
 	}
 	
 	private void updateVo(){
 		PromotionVoBuilder builder;
 		if(vo==null){
-			builder = new PromotionVoBuilder(Scope.Hotel).setPractical(false);
+			builder = new PromotionVoBuilder(Scope.Website).setPractical(false);
 		}else{
 			builder = new PromotionVoBuilder(vo).setPractical(false);
 		}
 		
 		switch (when.getValue()){
   		case "时效性优惠":
-  			builder.when(HotelWhen.DURING_PERIOD)
+  			builder.when(WebsiteWhen.DURING_PERIOD)
   			.setParam(TriggerParams.FROM, from.getValue().atStartOfDay())
   			.setParam(TriggerParams.TO, to.getValue().atStartOfDay());
   			break;
-  		case "多间房优惠":
-  			builder.when(HotelWhen.MULTI_ROOMS)
-  			.setParam(TriggerParams.ROOM_NUM_THRESHOLD, Integer.parseInt(whenPara.getText()));
+  		case "会员等级优惠":
+  			builder.when(WebsiteWhen.LEVEL)
+  			.setParam(TriggerParams.LEVEL_THRESHOLD, Integer.parseInt(whenPara.getText()));
   			break;
-  		case "合作企业优惠":
-  			builder.when(HotelWhen.ENTERPRISE)
-  			.setParam(TriggerParams.ENTERPRISE, whenPara.getText());
+  		case "特定商圈优惠":
+  			builder.when(WebsiteWhen.TRADE_AREA)
+  			.setParam(TriggerParams.TARGET_TRADE_AREA, whenPara.getText());
   			break;
-		case "生日优惠":
-			builder.when(HotelWhen.BIRTHDAY);
-			break;
 		}
 		
 		switch (how.getValue()){
@@ -294,15 +273,20 @@ public class PromotionDetailController implements Initializable{
 	}
 	
 //	public void test(){
-//		PromotionVoBuilder builder = new PromotionVoBuilder(Scope.Hotel).setHotelId(1).
+//		PromotionVoBuilder builder = new PromotionVoBuilder(Scope.Website).
 //				setName("lala").setPractical(false);
 //		LocalDateTime now = LocalDateTime.now();
-//		builder.when(HotelWhen.DURING_PERIOD)
+//		
+//		builder.when(WebsiteWhen.DURING_PERIOD)
 //			.setParam(TriggerParams.FROM, now.plusDays(1))
 //			.setParam(TriggerParams.TO, now.plusDays(5));
+//		
+//		builder.when(WebsiteWhen.LEVEL).setParam(TriggerParams.LEVEL_THRESHOLD, 3);
+//		
+//		builder.when(WebsiteWhen.TRADE_AREA).setParam(TriggerParams.TARGET_TRADE_AREA, "xinjiekou");
 //		builder.how(How.CONST).setParam(ApplierParams.AMOUNT, 100);
-//		HotelPromotionVo vo = (HotelPromotionVo) builder.getPromotionInfo();
-//		PromotionPo po = (HotelPromotionPo) new PromotionPoBuilder(vo).getPromotionInfo();
+//		WebsitePromotionVo vo = (WebsitePromotionVo) builder.getPromotionInfo();
+//		
 //	}
-	
+
 }

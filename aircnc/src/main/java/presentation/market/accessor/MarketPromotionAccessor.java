@@ -1,11 +1,11 @@
 package presentation.market.accessor;
 
-import vo.promotion.PromotionVo;
+import vo.promotion.WebsitePromotionVo;
 
 public interface MarketPromotionAccessor {
 	public void setPractical(long promotionId,boolean practical);
 	
-	public void setPromotion(PromotionVo vo);
+	public void setPromotion(WebsitePromotionVo vo);
 	
 	public void setDeletePromotion(long promotionId);
 	
@@ -13,5 +13,5 @@ public interface MarketPromotionAccessor {
 	
 	public boolean getPractical();
 	
-	public PromotionVo getPromotion();
+	public WebsitePromotionVo getPromotion();
 }

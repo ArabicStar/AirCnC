@@ -148,10 +148,10 @@ public class HotelPoBuilder extends HotelInfoBuilder {
 			Iterator<Room> itTo = to.getRooms().iterator();
 			Iterator<Room> itFrom = from.getRooms().iterator();
 			Room newRoom = itFrom.next();
-			System.out.println(newRoom.getName()+"xin");
+
 			while(itTo.hasNext()){
 				Room oldRoom = itTo.next();
-				System.out.println(oldRoom.getName()+"old");
+
 				if(newRoom.getName().equals(oldRoom.getName())){
 					RoomBuilder.updatePo(newRoom, oldRoom);
 					return;

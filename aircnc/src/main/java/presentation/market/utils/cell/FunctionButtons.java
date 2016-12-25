@@ -1,4 +1,4 @@
-package presentation.market.utils;
+package presentation.market.utils.cell;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.layout.HBox;
 import presentation.market.model.MyOrderModel;
+import presentation.market.utils.dialog.LabelDialog;
 import presentation.market.view.myorder.fxml.MyOrderController;
 import utils.info.order.OrderStatus;
 

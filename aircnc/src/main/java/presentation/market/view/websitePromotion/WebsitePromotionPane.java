@@ -1,4 +1,4 @@
-package presentation.market.view.websitepromotionstrategy;
+package presentation.market.view.websitePromotion;
 
 import java.io.IOException;
 import java.net.URL;
@@ -6,13 +6,13 @@ import java.net.URL;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.layout.Pane;
-import presentation.market.view.websitepromotionstrategy.fxml.WebsitePromotionStrategyController;
+import presentation.market.view.websitePromotion.fxml.WebsitePromotionController;
 
-public class WebsitePromotionStrategyPane {
+public class WebsitePromotionPane {
 	private Pane orderLayout;
-	private WebsitePromotionStrategyController controller;
+	private WebsitePromotionController controller;
 	
-	public WebsitePromotionStrategyPane() {
+	public WebsitePromotionPane() {
 		init();
 	}
 
@@ -20,11 +20,11 @@ public class WebsitePromotionStrategyPane {
 		try {
 			// Load sign in overview.
 			FXMLLoader loader = new FXMLLoader();
-			URL location = getClass().getResource("fxml/WebsitePromotionStrategy.fxml");
+			URL location = getClass().getResource("fxml/WebsitePromotion.fxml");
 			loader.setLocation(location);
 			loader.setBuilderFactory(new JavaFXBuilderFactory());
 			loader.load();
-			controller = (WebsitePromotionStrategyController) loader.getController();
+			controller = (WebsitePromotionController) loader.getController();
 			orderLayout = loader.getRoot();
 
 		} catch (IOException e) {
@@ -32,7 +32,7 @@ public class WebsitePromotionStrategyPane {
 		}
 	}
 	
-	public WebsitePromotionStrategyController getController() {
+	public WebsitePromotionController getController() {
 		return this.controller;
 	}
 

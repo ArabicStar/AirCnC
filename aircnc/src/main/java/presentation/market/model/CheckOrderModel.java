@@ -13,7 +13,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
-import presentation.market.utils.ButtonName;
+import presentation.market.utils.cell.ButtonName;
 import vo.order.OrderVo;
 
 public class CheckOrderModel {

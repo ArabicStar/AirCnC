@@ -10,7 +10,7 @@ import presentation.market.view.abnormalorderbrowse.AbnormalOrderBrowsePane;
 import presentation.market.view.credittopup.CreditTopUpPane;
 import presentation.market.view.myorder.MyOrderPane;
 import presentation.market.view.searchhotel.SearchHotelPane;
-import presentation.market.view.websitepromotionstrategy.WebsitePromotionStrategyPane;
+import presentation.market.view.websitePromotion.WebsitePromotionPane;
 
 public class MarketCenterController extends Application {
 	@SuppressWarnings("unused")
@@ -20,7 +20,7 @@ public class MarketCenterController extends Application {
 	private BorderPane rootLayout;
 
 	private MarketMainPane mainClient;
-	private WebsitePromotionStrategyPane websitePromotionStrategyPane;
+	private WebsitePromotionPane websitePromotionPane;
 	private AbnormalOrderBrowsePane abnormalOrderBrowsePane;
 	private CreditTopUpPane creditTopUpPane;
 	private MyOrderPane myOrderPane;
@@ -52,11 +52,9 @@ public class MarketCenterController extends Application {
 	 */
 	public void addWebsitePromotionStrategyPane() {
 		clearContent();
-		websitePromotionStrategyPane = new WebsitePromotionStrategyPane();
-		mainClient.getBorderPane().setCenter(websitePromotionStrategyPane.getPane());
-		websitePromotionStrategyPane.getController().setCenterController(this);
-		// TODO:测试用代码
-		websitePromotionStrategyPane.getController().test();
+		websitePromotionPane = new WebsitePromotionPane();
+		mainClient.getBorderPane().setCenter(websitePromotionPane.getPane());
+		websitePromotionPane.getController().setCenterController(this);
 	}
 	
 	/**

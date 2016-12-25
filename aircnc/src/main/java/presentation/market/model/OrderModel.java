@@ -6,7 +6,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import presentation.market.utils.ButtonName;
+import presentation.market.utils.cell.ButtonName;
 import vo.order.OrderVo;
 
 public class OrderModel {

@@ -1,4 +1,4 @@
-package presentation.market.utils;
+package presentation.market.utils.dialog;
 
 import javafx.geometry.Insets;
 import javafx.scene.Node;
