@@ -1,12 +1,14 @@
 package utils.promotion.trigger.website;
 
+import java.io.Serializable;
+
 import utils.info.order.OrderInfo;
 import utils.parameter.ParametersList;
 import utils.promotion.Describer;
 import utils.promotion.trigger.Criterion;
 import utils.promotion.trigger.TriggerTemplates;
 
-public enum WebsiteWhen {
+public enum WebsiteWhen implements Serializable{
 	LEVEL, //
 	TRADE_AREA, //
 	DURING_PERIOD;//

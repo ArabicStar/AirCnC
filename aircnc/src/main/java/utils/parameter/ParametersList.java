@@ -1,11 +1,16 @@
 package utils.parameter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ParametersList {
+public class ParametersList implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5577249141678283556L;
 	private List<Parameter<?>> properties;
 
 	public ParametersList() {

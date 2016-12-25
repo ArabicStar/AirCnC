@@ -43,6 +43,7 @@ public class HotelPromotionCourier implements HotelPromotionInteractor{
 
 	private HotelPromotionCourier(HotelPromotionManagementService handler,HotelAccountService helper) {
 		this.handler = handler;
+		this.helper = helper;
 	}
 	
 	@Override
@@ -110,6 +111,7 @@ public class HotelPromotionCourier implements HotelPromotionInteractor{
 		});
 		
 		HotelPromotionManagerImpl.getInstance().setPromotion(promotions);
+		HotelPromotionManagerImpl.getInstance().setHotelId(getCurrentId());
 		return false;
 	}
 	

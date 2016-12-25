@@ -1,6 +1,8 @@
 package utils.promotion.applier;
 
-public enum ApplierParams {
+import java.io.Serializable;
+
+public enum ApplierParams implements Serializable{
 	PERCENT, AMOUNT;
 	
 	public String paramName() {

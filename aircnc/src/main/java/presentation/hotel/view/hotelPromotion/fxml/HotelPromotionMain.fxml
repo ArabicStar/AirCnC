@@ -18,6 +18,6 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button fx:id="addPromotion" layoutX="609.0" layoutY="640.0" mnemonicParsing="false" onAction="#handleAddPromotion" styleClass="add" text="制定策略" />
+      <Button fx:id="addPromotion" layoutX="581.0" layoutY="651.0" mnemonicParsing="false" onAction="#handleAddPromotion" styleClass="add" text="制定策略" />
    </children>
 </Pane>

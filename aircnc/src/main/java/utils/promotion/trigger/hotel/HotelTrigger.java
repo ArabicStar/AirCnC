@@ -4,7 +4,11 @@ import utils.info.order.OrderInfo;
 import utils.parameter.ParametersList;
 import utils.promotion.trigger.Trigger;
 
-public class HotelTrigger implements Trigger {
+public class HotelTrigger implements Trigger{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3865683247216238692L;
 	private ParametersList params;
 	private HotelWhen when;
 

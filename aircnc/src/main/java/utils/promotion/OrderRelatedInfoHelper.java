@@ -1,8 +1,9 @@
 package utils.promotion;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public interface OrderRelatedInfoHelper {
+public interface OrderRelatedInfoHelper extends Serializable{
 	public int getMemberLevel(String memberId);
 
 	public String getMemberEnterprise(String memberId);

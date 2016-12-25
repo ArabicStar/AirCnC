@@ -6,6 +6,10 @@ import utils.promotion.trigger.Trigger;
 
 public class WebsiteTrigger implements Trigger {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1840988148367708706L;
 	private ParametersList params;
 	private WebsiteWhen when;
 

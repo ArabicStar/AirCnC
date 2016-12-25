@@ -3,24 +3,21 @@ package presentation.hotel.manager.impl;
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import presentation.hotel.manager.HotelOrderManager;
-import presentation.hotel.model.CheckOrderModel;
 import presentation.hotel.model.OrderModel;
 import vo.order.OrderVo;
-import vo.order.OrderVoBuilder;
 
 public class HotelOrderManagerImpl implements HotelOrderManager{
 	private static HotelOrderManager instance;
 	
 	private List<OrderVo> orders;
 	
-	private ObservableList<CheckOrderModel> checkOrderData;
+	private ObservableList<OrderModel> checkOrderData;
 	
 	private ObservableList<OrderModel> orderData;
 	
@@ -55,11 +52,11 @@ public class HotelOrderManagerImpl implements HotelOrderManager{
 	}
 
 	@Override
-	public ObservableList<CheckOrderModel> getCheckOrderList() {
+	public ObservableList<OrderModel> getCheckOrderList() {
 		checkOrderData = FXCollections.observableArrayList();
 		Iterator<OrderVo> it = orders.iterator();
 		while(it.hasNext())
-			checkOrderData.add(new CheckOrderModel(it.next()));
+			checkOrderData.add(new OrderModel(it.next()));
 		return checkOrderData;
 	}
 

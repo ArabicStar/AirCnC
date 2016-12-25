@@ -1,9 +1,15 @@
 package utils.promotion.applier;
 
+import java.io.Serializable;
+
 import utils.info.order.OrderInfo;
 import utils.parameter.ParametersList;
 
-public class Applier {
+public class Applier implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4746280171334749151L;
 	private ParametersList params;
 	private How how;
 

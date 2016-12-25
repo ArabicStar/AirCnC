@@ -1,10 +1,16 @@
 package utils.promotion;
 
+import java.io.Serializable;
+
 import utils.info.order.OrderInfo;
 import utils.promotion.applier.Applier;
 import utils.promotion.trigger.Trigger;
 
-public class Promotion {
+public class Promotion implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4111719648815680772L;
 	private Applier applier;
 	private Trigger trigger;
 

@@ -2,6 +2,11 @@ package po.promotion;
 
 public class HotelPromotionPo extends PromotionPo {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2386804550537356167L;
+
 	public HotelPromotionPo() {
 		super(Scope.Hotel);
 	}

@@ -9,12 +9,17 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Parameter<T> {
+public class Parameter<T> implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7032174850205028236L;
 	private String name;
 	private Class<T> type;
 	private T value;

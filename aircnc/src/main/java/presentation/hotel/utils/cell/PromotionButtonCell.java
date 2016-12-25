@@ -3,9 +3,9 @@ package presentation.hotel.utils.cell;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.HBox;
 import presentation.hotel.model.HotelPromotionModel;
 import presentation.hotel.utils.dialog.PlainDialog;
@@ -97,7 +97,7 @@ public class PromotionButtonCell extends TableCell<HotelPromotionModel, Promotio
               		 break;
              	 case RECALL: 
              		 if(vo != null&&vo.getPractical()){
-             			controller.addAndUpdate((HotelPromotionVo) new PromotionVoBuilder(vo).setPractical(false).getPromotionInfo());
+             			controller.addAndUpdate(new PromotionVoBuilder(vo).setPractical(false));
              			PlainDialog alert = new PlainDialog(AlertType.INFORMATION,
             					"撤回成功","已撤回促销策略");
             			alert.showDialog();
@@ -106,7 +106,7 @@ public class PromotionButtonCell extends TableCell<HotelPromotionModel, Promotio
                		 break;
              	 case SEND: 
              		 if(vo != null&&!vo.getPractical()){
-             			controller.addAndUpdate((HotelPromotionVo) new PromotionVoBuilder(vo).setPractical(true).getPromotionInfo());
+             			controller.addAndUpdate(new PromotionVoBuilder(vo).setPractical(true));
              			PlainDialog alert = new PlainDialog(AlertType.INFORMATION,
             					"发布成功","已发布促销策略");
             			alert.showDialog();

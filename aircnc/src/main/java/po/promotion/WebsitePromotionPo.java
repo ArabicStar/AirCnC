@@ -2,6 +2,11 @@ package po.promotion;
 
 public class WebsitePromotionPo extends PromotionPo {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2708003294017307523L;
+
 	public WebsitePromotionPo() {
 		super(Scope.Website);
 	}

@@ -1,12 +1,14 @@
 package utils.promotion.trigger.hotel;
 
+import java.io.Serializable;
+
 import utils.info.order.OrderInfo;
 import utils.parameter.ParametersList;
 import utils.promotion.Describer;
 import utils.promotion.trigger.Criterion;
 import utils.promotion.trigger.TriggerTemplates;
 
-public enum HotelWhen {
+public enum HotelWhen implements Serializable{
 	BIRTHDAY, //
 	MULTI_ROOMS, //
 	ENTERPRISE, //

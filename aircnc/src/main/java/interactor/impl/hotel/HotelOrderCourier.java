@@ -1,6 +1,7 @@
 package interactor.impl.hotel;
 
 import static interactor.utils.AlertHelper.alertFail;
+import static interactor.utils.AlertHelper.alertSuccess;
 import static interactor.utils.Dipatcher.execute;
 import static interactor.utils.TitleGetter.getTitle;
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import interactor.hotel.HotelOrderInteractor;
 import interactor.utils.Title;
+import presentation.hotel.accessor.impl.InfoModifyAccessorImpl;
 import presentation.hotel.accessor.impl.SearchOrderAccessorImpl;
 import presentation.hotel.manager.impl.HotelOrderManagerImpl;
 import service.hotel.HotelAccountService;
@@ -94,12 +96,27 @@ public class HotelOrderCourier implements HotelOrderInteractor {
 	}
 
 	@Override
+	@Title("订单执行")
 	public void executeOrder() {
-		// TODO Auto-generated method stub
+		String title = getTitle();
+
+		execute(title, () -> {
+			int id = getCurrentId();
+			if (id != Integer.MIN_VALUE)
+
+				if (!handler.executeOrder(SearchOrderAccessorImpl.getInstance().getOrderVo()))
+					alertFail(title, "执行失败");
+				else
+					alertSuccess(title, "订单执行成功");
+			return null;
+		});
+		
+		
 		
 	}
 
 	@Override
+	@Title("延迟入住")
 	public void appealOrder() {
 		// TODO Auto-generated method stub
 	}

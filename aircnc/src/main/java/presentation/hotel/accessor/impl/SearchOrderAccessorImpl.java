@@ -10,12 +10,15 @@ import presentation.hotel.accessor.SearchOrderAccessor;
 import presentation.member.accessor.SearchOrderInfoAccessor;
 import presentation.member.accessor.impl.SearchOrderInfoAccessorImpl;
 import utils.info.order.OrderStatus;
+import vo.order.OrderVo;
 
 public class SearchOrderAccessorImpl implements SearchOrderAccessor{
 
 	private static SearchOrderAccessor instance;
 	
 	private Set<OrderStatus> status;
+	
+	private OrderVo vo;
 	
 	public static final SearchOrderAccessor launch() {
 		if (instance != null)
@@ -49,6 +52,17 @@ public class SearchOrderAccessorImpl implements SearchOrderAccessor{
 	public void setSearchTarget(Set<OrderStatus> target) {
 		this.status = target;
 		
+	}
+
+	@Override
+	public void setOrderVo(OrderVo vo) {
+		this.vo = vo;
+		
+	}
+
+	@Override
+	public OrderVo getOrderVo() {
+		return vo;		
 	}
 
 }

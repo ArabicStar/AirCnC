@@ -27,6 +27,7 @@ import presentation.hotel.utils.cell.PromotionButtonCell;
 import presentation.hotel.view.hotelPromotion.PromotionDetailPane;
 import vo.promotion.HotelPromotionVo;
 import vo.promotion.PromotionVo;
+import vo.promotion.PromotionVoBuilder;
 
 public class HotelPromotionMainController implements Initializable{
 	private HotelCenterController controller;
@@ -111,7 +112,8 @@ public class HotelPromotionMainController implements Initializable{
 		addDetailPane(null);
 	}
 	
-	public void addAndUpdate(HotelPromotionVo vo){
+	public void addAndUpdate(PromotionVoBuilder builder){
+		HotelPromotionVo vo = (HotelPromotionVo) builder.setHotelId(manager.getHotelId()).getPromotionInfo();
 		accessor.setPromotion(vo);
 		if(vo.getId()==0)
 			interactor.addNew();

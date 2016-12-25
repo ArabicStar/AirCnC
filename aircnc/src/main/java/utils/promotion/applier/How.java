@@ -1,11 +1,14 @@
 package utils.promotion.applier;
 
 import static utils.exception.StaticExceptionFactory.*;
+
+import java.io.Serializable;
+
 import utils.info.order.OrderInfo;
 import utils.parameter.ParametersList;
 import utils.promotion.Describer;
 
-public enum How {
+public enum How implements Serializable{
 	CONST, //
 	PERCENT_OFF;
 

@@ -2,6 +2,7 @@ package vo.promotion;
 
 import utils.promotion.Promotion;
 
+@SuppressWarnings("serial")
 public class HotelPromotionVo extends PromotionVo {
 	private int hotelId;
 

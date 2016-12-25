@@ -295,7 +295,7 @@ public class PromotionDetailController implements Initializable{
   			.setParam(ApplierParams.PERCENT, Double.parseDouble(howPara.getText()));
   			break;
 		}
-		controller.addAndUpdate((HotelPromotionVo) builder.getPromotionInfo());
+		controller.addAndUpdate(builder);
 	}
 	
 }

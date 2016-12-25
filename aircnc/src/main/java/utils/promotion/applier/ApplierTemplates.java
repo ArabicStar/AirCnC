@@ -1,11 +1,17 @@
 package utils.promotion.applier;
 
+import java.io.Serializable;
+
 import utils.parameter.ParametersList;
 import utils.promotion.Describer;
 import vo.order.OrderVoBuilder;
 
-public abstract class ApplierTemplates {
+public abstract class ApplierTemplates implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6872709792041495990L;
 	private static final String CONST = "CONST";
 	private static final String PERCENT_OFF = "PERCENT_OFF";
 

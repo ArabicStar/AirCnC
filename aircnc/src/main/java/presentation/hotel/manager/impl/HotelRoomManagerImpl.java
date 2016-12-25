@@ -3,14 +3,12 @@ package presentation.hotel.manager.impl;
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import presentation.hotel.manager.HotelRoomManager;
 import utils.info.hotel.Room;
-import utils.info.hotel.RoomBuilder;
 
 public class HotelRoomManagerImpl implements HotelRoomManager{
 
