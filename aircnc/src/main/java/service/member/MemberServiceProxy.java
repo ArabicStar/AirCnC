@@ -191,7 +191,7 @@ public final class MemberServiceProxy extends AccessSecureProxy
 	public List<CreditChangeVo> getMemberCreditChange(String id) {
 		checkAuthentication();
 
-		return getMemberCreditChange(id);
+		return infoService.getMemberCreditChange(id);
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package utils.info.member.credit;
 
+import java.io.Serializable;
 import java.time.Instant;
 
 /**
@@ -8,7 +9,12 @@ import java.time.Instant;
  * @author ClevelandAlto
  *
  */
-public abstract class CreditChangeInfoTemplate {
+public abstract class CreditChangeInfoTemplate implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6127333271113932092L;
+
 	/**
 	 * Cache of format string <br>
 	 */

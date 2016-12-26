@@ -115,7 +115,7 @@ public final class MemberInfoManager implements MemberInfoService, MemberQuerySe
 
 		final MemberPo po = memberDao.findMember(id);
 
-		return po == null ? null : new MemberVoBuilder(memberDao.findMember(id)).getMemberInfo();
+		return po == null ? null : new MemberVoBuilder(po).getMemberInfo();
 	}
 
 	/* MemberQueryService */

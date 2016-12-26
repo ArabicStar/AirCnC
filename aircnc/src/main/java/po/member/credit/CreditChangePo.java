@@ -19,6 +19,10 @@ import utils.info.member.credit.CreditChangeInfo;
  *
  */
 public class CreditChangePo extends CreditChangeInfo {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6176844202075480616L;
 	private int ccid;
 
 	/**

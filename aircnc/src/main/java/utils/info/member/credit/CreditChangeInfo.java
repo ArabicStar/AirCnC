@@ -10,6 +10,11 @@ import java.time.Instant;
  */
 public abstract class CreditChangeInfo extends CreditChangeInfoTemplate {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2049240588529083204L;
+
+	/**
 	 * Get member id.<br>
 	 * 
 	 * @return member id string

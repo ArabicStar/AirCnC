@@ -41,8 +41,8 @@ public class MemberOrderOperationAccessorImpl implements MemberOrderOperationAcc
 	}
 	
 	@Override
-	public OrderVoBuilder getOrder(){
-		return order;
+	public OrderVo getOrder(){
+		return vo;
 	}
 
 	@Override
@@ -76,6 +76,11 @@ public class MemberOrderOperationAccessorImpl implements MemberOrderOperationAcc
 	@Override
 	public OrderVo getCanceledOrder() {
 		return vo;
+	}
+
+	@Override
+	public void setOrder(OrderVo vo) {
+		this.vo = vo;
 	}
 
 }

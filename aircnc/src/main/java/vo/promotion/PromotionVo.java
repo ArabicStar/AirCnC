@@ -62,7 +62,7 @@ public abstract class PromotionVo extends PromotionInfo {
 	}
 
 	public String getDescription() {
-		return name + (name.length() == 0 ? ": " : "") + promotion.description();
+		return name + (name.length() != 0 ? ": " : "") + promotion.description();
 	}
 
 }

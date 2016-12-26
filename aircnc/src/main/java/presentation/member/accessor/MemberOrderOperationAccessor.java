@@ -1,11 +1,10 @@
 package presentation.member.accessor;
 
 import vo.order.OrderVo;
-import vo.order.OrderVoBuilder;
 
 public interface MemberOrderOperationAccessor {
 	
-	public OrderVoBuilder getOrder();
+	public OrderVo getOrder();
 	
 	public OrderVo getCanceledOrder();
 	
@@ -14,4 +13,6 @@ public interface MemberOrderOperationAccessor {
 	public void setAppeal(OrderVo vo, String content);
 	
 	public void setCancel(OrderVo vo);
+	
+	public void setOrder(OrderVo vo);
 }

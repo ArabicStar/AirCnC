@@ -86,7 +86,7 @@ public class QueryServiceProxy extends AccessSecureProxy
 	 */
 	private MemberQueryService member;
 
-	@AuthenticatePolicy({ Client.MANAGE, Client.MARKET, Client.USER })
+	@AuthenticatePolicy({ Client.MANAGE, Client.MARKET, Client.USER, Client.HOTEL })
 	public void loadMemberQueryService(MemberQueryService memberQueryService) {
 		checkAuthentication();
 
@@ -94,7 +94,7 @@ public class QueryServiceProxy extends AccessSecureProxy
 	}
 
 	@Override
-	@AuthenticatePolicy({ Client.USER, Client.MARKET, Client.MANAGE })
+	@AuthenticatePolicy({ Client.USER, Client.MARKET, Client.MANAGE, Client.HOTEL })
 	public MemberInfo searchById(String id) {
 		checkAuthentication();
 
@@ -108,7 +108,7 @@ public class QueryServiceProxy extends AccessSecureProxy
 	 */
 	private HotelQueryService hotel;
 
-	@AuthenticatePolicy({ Client.USER, Client.MANAGE, Client.MARKET })
+	@AuthenticatePolicy({ Client.USER, Client.MANAGE, Client.MARKET ,Client.HOTEL})
 	public void loadHotelQueryService(HotelQueryService hotelQueryService) {
 		checkAuthentication();
 
@@ -116,7 +116,7 @@ public class QueryServiceProxy extends AccessSecureProxy
 	}
 
 	@Override
-	@AuthenticatePolicy({ Client.USER, Client.MANAGE, Client.MARKET })
+	@AuthenticatePolicy({ Client.USER, Client.MANAGE, Client.MARKET, Client.HOTEL })
 	public HotelVo findById(int hotelId) {
 		checkAuthentication();
 
