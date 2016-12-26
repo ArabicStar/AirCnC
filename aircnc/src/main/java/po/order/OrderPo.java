@@ -6,9 +6,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import po.hotel.HotelPo;
-import po.member.EnterpriseMemberPo;
 import po.member.MemberPo;
-import po.member.PersonalMemberPo;
 import po.order.comment.CommentPo;
 import po.promotion.PromotionPo;
 import utils.info.order.OrderInfo;
@@ -16,6 +14,10 @@ import utils.info.order.OrderStatus;
 import utils.info.promotion.PromotionInfoTemplate.Scope;
 
 public class OrderPo extends OrderInfo {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6825689731562604621L;
 	private Set<PromotionPo> promotions;
 	private CommentPo comment;
 	private MemberPo member;

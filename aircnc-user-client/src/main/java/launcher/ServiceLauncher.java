@@ -1,5 +1,7 @@
 package launcher;
 
+import data.dao.member.CreditDao;
+import data.dao.member.MemberDao;
 import data.dao.member.MemberDaoProxy;
 import data.dao.order.OrderDao;
 import data.dao.order.OrderDaoProxy;
@@ -42,6 +44,11 @@ import utils.proxy.AuthenticatePolicy.Client;
 public class ServiceLauncher {
 	public static final void launch(Client clientId) {
 		try {
+			MemberServiceProxy.launch(clientId);
+			PromotionServiceProxy.launch(clientId);
+			QueryServiceProxy.launch(clientId);
+			OrderServiceProxy.launch(clientId);
+
 			launchMemberService(clientId);
 			launchQueryService(clientId);
 			launchPromotionService(clientId);
@@ -57,13 +64,17 @@ public class ServiceLauncher {
 	}
 
 	private static final void launchMemberService(Client clientId) {
-		final MemberDaoProxy memberDaoProxy = MemberDaoProxy.getInstance();
+		final MemberDao memberDao = MemberDaoProxy.getInstance();
+		final CreditDao creditDao = MemberDaoProxy.getInstance();
 
-		MemberServiceProxy proxy = MemberServiceProxy.launch(clientId);
+		final CreditQueryService creditQuery = QueryServiceProxy.getInstance();
+		final OrderQueryService orderQuery = QueryServiceProxy.getInstance();
 
-		final MemberAccountService acc = MemberAccountManager.launch(memberDaoProxy);
-		final MemberCreditService cre = MemberCreditManager.launch(memberDaoProxy, memberDaoProxy);
-		final MemberInfoService info = MemberInfoManager.launch(memberDaoProxy, acc, null, null);
+		MemberServiceProxy proxy = MemberServiceProxy.getInstance();
+
+		final MemberAccountService acc = MemberAccountManager.launch(memberDao);
+		final MemberCreditService cre = MemberCreditManager.launch(memberDao, creditDao);
+		final MemberInfoService info = MemberInfoManager.launch(memberDao, acc, creditQuery, orderQuery);
 
 		proxy.loadAccountService(acc);
 		proxy.loadCreditService(cre);
@@ -81,7 +92,7 @@ public class ServiceLauncher {
 		final PromotionApplicationService application = PromotionApplicationManager.launch(hotelApplication,
 				websiteApplication);
 
-		PromotionServiceProxy proxy = PromotionServiceProxy.launch(clientId);
+		PromotionServiceProxy proxy = PromotionServiceProxy.getInstance();
 
 		proxy.loadHotelPromotionInfoService(hotelInfo);
 		proxy.loadWebsitePromotionInfoService(websiteInfo);
@@ -89,7 +100,7 @@ public class ServiceLauncher {
 	}
 
 	private static final void launchQueryService(Client clientId) {
-		QueryServiceProxy proxy = QueryServiceProxy.launch(clientId);
+		QueryServiceProxy proxy = QueryServiceProxy.getInstance();
 
 		final QueryDaoProxy queryDao = QueryDaoProxy.getInstance();
 
@@ -107,7 +118,7 @@ public class ServiceLauncher {
 	}
 
 	private static void launchOrderService(Client clientId) {
-		OrderServiceProxy proxy = OrderServiceProxy.launch(clientId);
+		OrderServiceProxy proxy = OrderServiceProxy.getInstance();
 
 		final OrderDao orderDao = OrderDaoProxy.getInstance();
 

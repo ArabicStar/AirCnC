@@ -9,6 +9,10 @@ import utils.info.order.comment.CommentInfo;
 import utils.info.promotion.PromotionInfo;
 
 public abstract class OrderInfo extends OrderInfoTemplate {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1666126585583703603L;
 	private boolean isValid = true;
 
 	public boolean isValid() {

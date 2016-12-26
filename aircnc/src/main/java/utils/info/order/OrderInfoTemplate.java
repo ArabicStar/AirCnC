@@ -1,6 +1,7 @@
 
 package utils.info.order;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
@@ -9,7 +10,12 @@ import java.time.temporal.ChronoField;
 import javax.persistence.Entity;
 
 @Entity
-public abstract class OrderInfoTemplate {
+public abstract class OrderInfoTemplate implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2089940939009533933L;
+
 	protected static final String BLANK = "";
 
 	protected String orderId;
