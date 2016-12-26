@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.ResourceBundle;
 import java.util.Set;
 
+import interactor.impl.member.MemberOrderOperationCourier;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -58,7 +59,8 @@ public class MakeOrderNextController implements Initializable {
 	@FXML
 	public void handleConfirm() {
 		OrderMakerAccessorImpl.getIntance().setCompleteOrder(new OrderVoBuilder(order).getOrderInfo());
-		this.parentController.removeReverse();
+		if(MemberOrderOperationCourier.getInstance().makeOrder())
+				this.parentController.removeReverse();
 	}
 
 	@FXML

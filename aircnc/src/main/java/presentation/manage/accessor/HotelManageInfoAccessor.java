@@ -8,11 +8,13 @@ public interface HotelManageInfoAccessor {
 	
 	public int getPasswordHash();
 	
-	public String getHotelId();
+	public int getHotelId();
+	
+	public String getHotelName();
 	
 	public void setPassword(String password);
 	
-	public void setId(String id);
+	public void setId(int id);
 	
 	public void setName(String name);
 	
@@ -20,5 +22,5 @@ public interface HotelManageInfoAccessor {
 	
 	public void setHotelVo(HotelVo vo);
 	
-	public void deleteHotel(String id);
+	public void deleteHotel(int id);
 }

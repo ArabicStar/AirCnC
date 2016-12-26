@@ -1,6 +1,5 @@
 package presentation.manage.accessor.impl;
 
-import static utils.exception.StaticExceptionFactory.accessorNotReadyEx;
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
@@ -12,7 +11,7 @@ public class HotelManageInfoAccessorImpl implements HotelManageInfoAccessor{
 	
 	private static HotelManageInfoAccessor instance;
 	
-	private String id;
+	private int id;
 	private String name;
 	private int star;
 	private int passwordHash;
@@ -49,14 +48,12 @@ public class HotelManageInfoAccessorImpl implements HotelManageInfoAccessor{
 	}
 
 	@Override
-	public String getHotelId() {
-		if(id == null)
-			throw accessorNotReadyEx();
+	public int getHotelId() {
 		return id;
 	}
 	
 	@Override
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -76,7 +73,7 @@ public class HotelManageInfoAccessorImpl implements HotelManageInfoAccessor{
 	}
 
 	@Override
-	public void deleteHotel(String id) {
+	public void deleteHotel(int id) {
 		this.id = id;
 	}
 
@@ -88,6 +85,11 @@ public class HotelManageInfoAccessorImpl implements HotelManageInfoAccessor{
 	@Override
 	public int getPasswordHash() {
 		return passwordHash;
+	}
+
+	@Override
+	public String getHotelName() {
+		return name;
 	}
 
 

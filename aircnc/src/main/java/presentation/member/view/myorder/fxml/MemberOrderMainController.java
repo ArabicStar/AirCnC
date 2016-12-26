@@ -107,54 +107,59 @@ public class MemberOrderMainController implements Initializable {
 	 */
 	@FXML
 	public void handleQuery() {
-
-		states = new HashSet<OrderStatus>();
-		if (finished.isSelected()) {
-			states.add(OrderStatus.EXECUTED);
-			states.add(OrderStatus.REVIEWED);
-		}
-
-		if (unfinished.isSelected()) {
-			states.add(OrderStatus.UNEXECUTED);
-		}
-
-		if (exception.isSelected()) {
-			states.add(OrderStatus.ABNORMAL);
-			states.add(OrderStatus.APPEALING);
-		}
-
-		if (cancelled.isSelected()) {
-			states.add(OrderStatus.REPEALED);
-		}
-
-		accessor.setSearchTarget(states);
-
-		MemberInfoCourier.getInstance().getMemberOrdersByStatus();
-
-		models = manager.getOrderList();
-		orderTable.setItems(models);
-
-		hotelName.setCellValueFactory(cellData -> cellData.getValue().hotelNameProperty());
-		checkInTime.setCellValueFactory(cellData -> cellData.getValue().checkInTimeProperty());
-		state.setCellValueFactory(cellData -> cellData.getValue().stateProperty());
-		timeAndSum.setCellValueFactory(cellData -> cellData.getValue().timeAndSumProperty());
-		totalPrice.setCellValueFactory(cellData -> cellData.getValue().totalPriceProperty());
-
-		operation.setSortable(false);
-
-		operation.setCellValueFactory(
-				new Callback<TableColumn.CellDataFeatures<MyOrderModel, OrderVo>, ObservableValue<OrderVo>>() {
-
-					public ObservableValue<OrderVo> call(TableColumn.CellDataFeatures<MyOrderModel, OrderVo> p) {
-						return new SimpleObjectProperty<OrderVo>(p.getValue().getOperation());
-					}
-				});
-
-		operation.setCellFactory(new Callback<TableColumn<MyOrderModel, OrderVo>, TableCell<MyOrderModel, OrderVo>>() {
-			public TableCell<MyOrderModel, OrderVo> call(TableColumn<MyOrderModel, OrderVo> p) {
-				return new FunctionButtons(OrderController);
+		if (!finished.isSelected() && !unfinished.isSelected() && !exception.isSelected() && !cancelled.isSelected()) {
+			states = new HashSet<OrderStatus>();
+			if (finished.isSelected()) {
+				states.add(OrderStatus.EXECUTED);
+				states.add(OrderStatus.REVIEWED);
 			}
-		});
+
+			if (unfinished.isSelected()) {
+				states.add(OrderStatus.UNEXECUTED);
+			}
+
+			if (exception.isSelected()) {
+				states.add(OrderStatus.ABNORMAL);
+				states.add(OrderStatus.APPEALING);
+			}
+
+			if (cancelled.isSelected()) {
+				states.add(OrderStatus.REPEALED);
+			}
+
+			accessor.setSearchTarget(states);
+
+			MemberInfoCourier.getInstance().getMemberOrdersByStatus();
+
+			models = manager.getOrderList();
+			orderTable.setItems(models);
+
+			hotelName.setCellValueFactory(cellData -> cellData.getValue().hotelNameProperty());
+			checkInTime.setCellValueFactory(cellData -> cellData.getValue().checkInTimeProperty());
+			state.setCellValueFactory(cellData -> cellData.getValue().stateProperty());
+			timeAndSum.setCellValueFactory(cellData -> cellData.getValue().timeAndSumProperty());
+			totalPrice.setCellValueFactory(cellData -> cellData.getValue().totalPriceProperty());
+
+			operation.setSortable(false);
+
+			operation.setCellValueFactory(
+					new Callback<TableColumn.CellDataFeatures<MyOrderModel, OrderVo>, ObservableValue<OrderVo>>() {
+
+						public ObservableValue<OrderVo> call(TableColumn.CellDataFeatures<MyOrderModel, OrderVo> p) {
+							return new SimpleObjectProperty<OrderVo>(p.getValue().getOperation());
+						}
+					});
+
+			operation.setCellFactory(
+					new Callback<TableColumn<MyOrderModel, OrderVo>, TableCell<MyOrderModel, OrderVo>>() {
+						public TableCell<MyOrderModel, OrderVo> call(TableColumn<MyOrderModel, OrderVo> p) {
+							return new FunctionButtons(OrderController);
+						}
+					});
+		} else {
+			PlainDialog alert = new PlainDialog(AlertType.INFORMATION,"搜索失败","请选择要搜索的订单");
+			alert.showDialog();
+		}
 	}
 
 	public void setRootLayout(AnchorPane pane) {

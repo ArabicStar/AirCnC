@@ -2,6 +2,7 @@ package presentation.manage.utils.dialog;
 
 import java.util.Optional;
 
+import interactor.impl.manage.ManageHotelCourier;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.ButtonBar.ButtonData;
@@ -18,13 +19,13 @@ import presentation.member.utils.dialog.PlainDialog;
 import vo.hotel.HotelVo;
 
 public class HotelModifyDialog {
-	
+
 	public HotelModifyDialog(HotelVo vo) {
 		// Create the custom dialog.
 		Dialog<Pair<String, Integer>> dialog = new Dialog<>();
 		dialog.setTitle("修改酒店信息");
 		dialog.setHeaderText("填写修改的信息");
-		
+
 		ButtonType ConfirmButtonType = new ButtonType("确认", ButtonData.OK_DONE);
 		dialog.getDialogPane().getButtonTypes().addAll(ConfirmButtonType, ButtonType.CANCEL);
 
@@ -37,7 +38,7 @@ public class HotelModifyDialog {
 		TextField newName = new TextField();
 		newName.setText(vo.getName());
 		ComboBox<Integer> newStar = new ComboBox<Integer>();
-		newStar.getItems().addAll(1,2,3,4,5,6,7);
+		newStar.getItems().addAll(1, 2, 3, 4, 5, 6, 7);
 		newStar.setValue(Integer.valueOf(vo.getStar()));
 
 		grid.add(new Label("酒店名称:"), 0, 0);
@@ -45,8 +46,6 @@ public class HotelModifyDialog {
 		grid.add(new Label("修改星级:"), 0, 1);
 		grid.add(newStar, 1, 1);
 
-		// Enable/Disable login button depending on whether a username was
-		// entered.
 		Node confirmButton = dialog.getDialogPane().lookupButton(ConfirmButtonType);
 		confirmButton.setDisable(true);
 
@@ -68,13 +67,17 @@ public class HotelModifyDialog {
 
 		result.ifPresent(newInfo -> {
 			HotelManageInfoAccessorImpl.getInstance().setHotelVo(vo);
-			HotelManageInfoAccessorImpl.getInstance().setName(newInfo.getKey());
-			HotelManageInfoAccessorImpl.getInstance().setStar(newInfo.getValue());
-			//MemberInfoCourier.getInstance().updatePassword();
-			PlainDialog alert = new PlainDialog(AlertType.INFORMATION,"修改成功","已成功修改酒店信息");
-			alert.showDialog();
+			HotelManageInfoAccessorImpl.getInstance().setName(newName.getText());
+			HotelManageInfoAccessorImpl.getInstance().setStar(newStar.getValue());
+			HotelManageInfoAccessorImpl.getInstance().setId(vo.getId());
+			if (ManageHotelCourier.getInstance().ModifyHotelInfo()) {
+				PlainDialog alert = new PlainDialog(AlertType.INFORMATION, "修改成功", "已成功修改酒店信息");
+				alert.showDialog();
+			} else {
+				PlainDialog alert = new PlainDialog(AlertType.INFORMATION, "修改失败", "修改酒店信息失败");
+				alert.showDialog();
+			}
 		});
 	}
 
 }
-

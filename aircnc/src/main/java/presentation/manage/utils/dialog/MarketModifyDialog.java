@@ -17,13 +17,13 @@ import presentation.member.utils.dialog.PlainDialog;
 import vo.market.MarketVo;
 
 public class MarketModifyDialog {
-	
+
 	public MarketModifyDialog(MarketVo vo) {
 		// Create the custom dialog.
 		Dialog<String> dialog = new Dialog<>();
 		dialog.setTitle("修改营销人员信息");
 		dialog.setHeaderText("填写修改的信息");
-		
+
 		ButtonType ConfirmButtonType = new ButtonType("确认", ButtonData.OK_DONE);
 		dialog.getDialogPane().getButtonTypes().addAll(ConfirmButtonType, ButtonType.CANCEL);
 
@@ -60,9 +60,13 @@ public class MarketModifyDialog {
 		result.ifPresent(newInfo -> {
 			MarketManageInfoAccessorImpl.getInstance().setMarketVo(vo);
 			MarketManageInfoAccessorImpl.getInstance().setName(newName.getText());
-			ManageMarketCourier.getInstance().ModifyMarketInfo();
-			PlainDialog alert = new PlainDialog(AlertType.INFORMATION,"修改成功","已成功修改营销人员信息");
-			alert.showDialog();
+			if (ManageMarketCourier.getInstance().ModifyMarketInfo()) {
+				PlainDialog alert = new PlainDialog(AlertType.INFORMATION, "修改成功", "已成功修改营销人员信息");
+				alert.showDialog();
+			} else {
+				PlainDialog alert = new PlainDialog(AlertType.INFORMATION, "修改失败", "修改营销人员信息失败");
+				alert.showDialog();
+			}
 		});
 	}
 

@@ -26,9 +26,6 @@ public class HotelInfoThreeController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		if(!ManageHotelCommentManagerImpl.isLaunched()){
-			ManageHotelCommentManagerImpl.launch();
-		}
 		manager = ManageHotelCommentManagerImpl.getInstance();
 		
 		Platform.runLater(new Runnable() {

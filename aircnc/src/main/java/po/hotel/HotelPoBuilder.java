@@ -47,7 +47,7 @@ public class HotelPoBuilder extends HotelInfoBuilder {
 
 	@Override
 	public HotelPo getHotelInfo() {
-		if (!isReady() || passwordHash == Integer.MIN_VALUE)
+		if (!isReady())
 			throw illegalStateException("HotelPoBuilder not set up");
 
 		return new HotelPo().setId(id).setPasswordHash(passwordHash).setName(name).setScope(scope).setLocation(location)

@@ -66,8 +66,8 @@ public class ManageHotelCourier implements ManageHotelInteractor{
 		HotelInfo modified = HotelManageInfoAccessorImpl.getInstance().getModifiedHotelVo();
 
 		boolean res = execute(title, () -> {
-			String id = HotelManageInfoAccessorImpl.getInstance().getHotelId();
-			if (id != null)
+			String name = HotelManageInfoAccessorImpl.getInstance().getHotelName();
+			if (name != null)
 				return handler.ModifyHotelInfo(modified);
 
 			alertFail(title, "Not input the modified info yet");
@@ -83,11 +83,11 @@ public class ManageHotelCourier implements ManageHotelInteractor{
 		String title = getTitle();
 
 		HotelInfo info = execute(title, () -> {
-			String name = HotelManageInfoAccessorImpl.getInstance().getHotelId();
+			String name = HotelManageInfoAccessorImpl.getInstance().getHotelName();
 			if (name != null)
-				return handler.getHotelInfo(name);
+				return handler.getHotelInfo(String.valueOf(name));
 
-			alertFail(title, "Not input Market id yet");
+			alertFail(title, "Not input hotel id yet");
 			return null;
 		});
 
@@ -100,8 +100,8 @@ public class ManageHotelCourier implements ManageHotelInteractor{
 	public boolean deleteHotelInfo() {
 		String title = getTitle();
 		boolean valid = execute(title, () -> {
-			String id = HotelManageInfoAccessorImpl.getInstance().getHotelId();
-			boolean tmp = handler.deleteHotelInfo(Integer.valueOf(id));
+			int id = HotelManageInfoAccessorImpl.getInstance().getHotelId();
+			boolean tmp = handler.deleteHotelInfo(id);
 
 			if (tmp == false)
 				throw unknownEx();

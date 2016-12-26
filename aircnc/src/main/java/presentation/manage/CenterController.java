@@ -56,12 +56,12 @@ public class CenterController extends Application {
 //		MarketManageInfoAccessorImpl.launch();
 //		MemberManageInfoAccessorImpl.launch();
 		
-		test = new ManageTest();
-		
-		test.getUserData();
-		test.getHotelData();
-		test.getMarketData();
-		test.getCommentData();
+//		test = new ManageTest();
+//		
+//		test.getUserData();
+//		test.getHotelData();
+//		test.getMarketData();
+//		test.getCommentData();
 	
 		
 		this.primaryStage = primaryStage;

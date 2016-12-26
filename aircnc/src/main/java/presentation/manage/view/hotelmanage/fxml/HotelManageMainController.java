@@ -1,15 +1,18 @@
 package presentation.manage.view.hotelmanage.fxml;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import interactor.impl.manage.ManageHotelCourier;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -71,15 +74,18 @@ public class HotelManageMainController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		hotelTable.setEditable(false);
-		accessor = HotelManageInfoAccessorImpl.getInstance();
-		manager = HotelManageInfoManagerImpl.getInstance();
+		Platform.runLater(() -> {
+			hotelId.setPromptText("酒店名称");
+			hotelTable.setEditable(false);
+			accessor = HotelManageInfoAccessorImpl.getInstance();
+			manager = HotelManageInfoManagerImpl.getInstance();
+		});
 	}
 
 	@FXML
 	public void handleQuery() {
 		if (hotelId.getText().length() > 0) {
-			accessor.setId(hotelId.getText());
+			accessor.setName(hotelId.getText());
 			boolean valid = ManageHotelCourier.getInstance().getHotelInfo();
 			if (valid) {
 				models = manager.getHotelInfoList();
@@ -155,6 +161,12 @@ public class HotelManageMainController implements Initializable {
 
 	public void handleDeleteHotel(HotelVo vo) {
 		PlainDialog delete = new PlainDialog(AlertType.CONFIRMATION, "删除酒店", "确认删除该酒店吗？");
+		Optional<ButtonType> result = delete.showDialog();
+
+		if(result.get() == ButtonType.OK){
+			HotelManageInfoAccessorImpl.getInstance().setId(vo.getId());
+			ManageHotelCourier.getInstance().deleteHotelInfo();
+		}
 
 	}
 

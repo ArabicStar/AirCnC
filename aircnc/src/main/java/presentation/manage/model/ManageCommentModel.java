@@ -20,7 +20,6 @@ public class ManageCommentModel {
 	}
 	
 	public ManageCommentModel(CommentVo vo){
-		System.out.println(vo);
 		this.memberName = new SimpleStringProperty(vo.getMember().getName());
 		this.level = new SimpleStringProperty("Lv"+Integer.toString(vo.getMember().getLevel()));
 		this.checkInTime = new SimpleStringProperty("于"+transformTime(vo.getRelOrder().getEntryTime())+"入住");
