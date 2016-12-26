@@ -246,6 +246,9 @@ public final class MemberInfoManager implements MemberInfoService, MemberQuerySe
 		if (orderQueryService == null)
 			throw unsupportedOpEx("get member orders by status");
 
+		if (bufferedOrderList == null)
+			getMemberAllOrders(id);
+
 		return bufferedOrderList.stream().filter(o -> o.getStatus() == status).collect(Collectors.toList());
 	}
 
