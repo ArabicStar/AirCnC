@@ -12,9 +12,11 @@ import java.rmi.RemoteException;
 import data.dao.rmi.hotel.RemoteHotelDao;
 import data.dao.rmi.member.RemoteCreditDao;
 import data.dao.rmi.member.RemoteMemberDao;
+import data.dao.rmi.order.RemoteOrderDao;
 import data.dao.rmi.promotion.RemoteHotelPromotionDao;
-import data.dao.rmi.promotion.RemoteWebsitePromotionDao;
 import data.dao.rmi.query.RemoteCreditQueryDao;
+import data.dao.rmi.query.RemoteHotelQueryDao;
+import data.dao.rmi.query.RemoteOrderQueryDao;
 import data.dao.rmi.query.RemotePromotionQueryDao;
 import utils.logger.Log;
 
@@ -44,6 +46,8 @@ public class RemoteHelper {
 		fetchHotelDaoRemoteObj();
 		fetchQueryDaoRemoteObj();
 		fetchPromotionDaoRemoteObj();
+		fetchMemberDaoRemoteObj();
+		fetchOrderDaoRemoteObj();
 	}
 
 	private void fetchQueryDaoRemoteObj() {
@@ -57,11 +61,11 @@ public class RemoteHelper {
 
 		Log.d("fetch hotel dao remote obj " + (hotelDaoRemoteObj != null ? "succeed" : "failed"));
 	}
-	
-	private void fetchCommentDaoRemoteObj() {
-		hotelDaoRemoteObj = findRemote("RemoteCommentDao");
 
-		Log.d("fetch comment dao remote obj " + (commentDaoRemoteObj != null ? "succeed" : "failed"));
+	private void fetchMemberDaoRemoteObj() {
+		memberDaoRemoteObj = findRemote("RemoteMemberDao");
+
+		Log.d("fetch member dao remote obj " + (memberDaoRemoteObj != null ? "succeed" : "failed"));
 	}
 
 	private void fetchPromotionDaoRemoteObj() {
@@ -70,10 +74,17 @@ public class RemoteHelper {
 		Log.d("fetch promotion dao remote obj " + (promotionDaoRemoteObj != null ? "succeed" : "failed"));
 	}
 
+	private void fetchOrderDaoRemoteObj() {
+		orderDaoRemoteObj = findRemote("RemoteOrderDao");
+
+		Log.d("fetch order dao remote obj " + (orderDaoRemoteObj != null ? "succeed" : "failed"));
+	}
+
+	private Remote memberDaoRemoteObj;
 	private Remote hotelDaoRemoteObj;
 	private Remote queryDaoRemoteObj;
 	private Remote promotionDaoRemoteObj;
-	private Remote commentDaoRemoteObj;
+	private Remote orderDaoRemoteObj;
 
 	public RemoteHotelDao getRemoteHotelDao() {
 		return (RemoteHotelDao) hotelDaoRemoteObj;
@@ -83,21 +94,37 @@ public class RemoteHelper {
 		return (RemoteCreditQueryDao) queryDaoRemoteObj;
 	}
 
+	public RemoteHotelQueryDao getRemoteHotelQueryDao() {
+		return (RemoteHotelQueryDao) queryDaoRemoteObj;
+	}
+
 	public RemotePromotionQueryDao getRemotePromotionQueryDao() {
 		return (RemotePromotionQueryDao) queryDaoRemoteObj;
+	}
+
+	public RemoteOrderQueryDao getRemoteOrderQueryDao() {
+		return (RemoteOrderQueryDao) queryDaoRemoteObj;
 	}
 
 	public RemoteHotelPromotionDao getRemoteHotelPromotionDao() {
 		return (RemoteHotelPromotionDao) promotionDaoRemoteObj;
 	}
-	
-//	public RemoteCommentDao getRemoteCommentDao() {
-//		return (RemoteCommentDao) commentDaoRemoteObj;
-//	}
 
-//	public RemoteWebsitePromotionDao getRemoteWebsitePromotionDao() {
-//		return (RemoteWebsitePromotionDao) promotionDaoRemoteObj;
-//	}
+	public RemoteOrderDao getRemoteOrderDao() {
+		return (RemoteOrderDao) orderDaoRemoteObj;
+	}
+
+	public RemoteCreditDao getRemoteCreditDao() {
+		return (RemoteCreditDao) memberDaoRemoteObj;
+	}
+
+	// public RemoteCommentDao getRemoteCommentDao() {
+	// return (RemoteCommentDao) commentDaoRemoteObj;
+	// }
+
+	// public RemoteWebsitePromotionDao getRemoteWebsitePromotionDao() {
+	// return (RemoteWebsitePromotionDao) promotionDaoRemoteObj;
+	// }
 
 	private static final int PORT = 8888;
 	private static final String URL_HEADER = new StringBuilder("rmi://localhost:").append(PORT).append("/").toString();
@@ -110,5 +137,9 @@ public class RemoteHelper {
 			Log.e("RMI Exception", e);
 		}
 		return null;
+	}
+
+	public RemoteMemberDao getRemoteMemberDao() {
+		return (RemoteMemberDao) memberDaoRemoteObj;
 	}
 }
