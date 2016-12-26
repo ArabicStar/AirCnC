@@ -1,4 +1,4 @@
-package presentation.market.manage;
+package presentation.market.manager;
 
 import java.util.List;
 import java.util.Set;

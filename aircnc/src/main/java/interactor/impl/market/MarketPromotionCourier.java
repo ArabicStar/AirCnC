@@ -12,7 +12,7 @@ import java.util.Set;
 import interactor.market.MarketPromotionInteractor;
 import interactor.utils.Title;
 import presentation.market.accessor.impl.MarketPromotionAccessorImpl;
-import presentation.market.manage.impl.MarketPromotionManagerImpl;
+import presentation.market.manager.impl.MarketPromotionManagerImpl;
 import service.market.MarketAccountService;
 import service.promotion.WebsitePromotionManagementService;
 import utils.info.market.MarketInfo;

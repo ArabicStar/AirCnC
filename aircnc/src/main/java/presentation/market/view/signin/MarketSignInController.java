@@ -3,12 +3,16 @@ package presentation.market.view.signin;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import interactor.hotel.HotelAccountInteractor;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import presentation.hotel.accessor.impl.HotelLoginAccessorImpl;
 import presentation.market.CenterController;
+import presentation.market.accessor.MarketLoginAccessor;
+import presentation.market.accessor.impl.MarketLoginAccessorImpl;
 
 public class MarketSignInController implements Initializable {
 
@@ -22,10 +26,14 @@ public class MarketSignInController implements Initializable {
 	private Button confirm;
 
 	private CenterController controller;
+	
+	private MarketLoginAccessor accessor;
+	
+	private HotelAccountInteractor interactor;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
+		accessor = MarketLoginAccessorImpl.getInstance();
 
 	}
 
@@ -39,14 +47,24 @@ public class MarketSignInController implements Initializable {
 	}
 
 	/**
-	 * handle the button action (Confirm) check the input value <br>
-	 * if the value is valid, jump to main client. <br>
-	 * otherwise, pop up error message.<br>
+	 * handle the button action (Confirm)
+	 * check the input value
+	 * if the value is valid, jump to main client.
+	 * otherwise, pop up error message.
 	 */
 	@FXML
-	public void handleConfirm() {
-		// 按下登陆键，验证正确性，正确则跳出marketMainPane，错误跳出对话框
-		controller.initializeClient();
+	public void handleConfirm(){
+		if(username.getText().length()!=0&&password.getText().length()!=0){
+
+			accessor.setDeliveredId(username.getText());
+			accessor.setDeliveredPassword(password.getText());
+			
+			//use valid to mark whether it is correct
+			boolean valid = interactor.login();
+			
+			if(valid)
+				controller.initializeClient();		
+		}
 	}
 
 }

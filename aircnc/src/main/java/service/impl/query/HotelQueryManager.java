@@ -100,7 +100,7 @@ public final class HotelQueryManager implements HotelQueryService {
 			return true;
 		}
 		bufferHotels = queryDao.searchByCriteria(ConditionBuilder.parseCondition(scope)).stream().
-				map(h -> new HotelVoBuilder(h).getHotelInfo()).collect(Collectors.toList());
+				filter(h->!h.getRooms().isEmpty()).map(h -> new HotelVoBuilder(h).getHotelInfo()).collect(Collectors.toList());
 		return true;
 	}
 

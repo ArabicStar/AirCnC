@@ -1,4 +1,4 @@
-package presentation.market.manage.impl;
+package presentation.market.manager.impl;
 
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import presentation.market.manage.MarketPromotionManager;
+import presentation.market.manager.MarketPromotionManager;
 import presentation.market.model.WebsitePromotionModel;
 import vo.promotion.PromotionVo;
 

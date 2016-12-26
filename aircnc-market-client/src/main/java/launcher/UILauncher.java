@@ -4,7 +4,7 @@ import javafx.application.Application;
 import presentation.market.CenterController;
 import presentation.market.accessor.impl.MarketLoginAccessorImpl;
 import presentation.market.accessor.impl.MarketPromotionAccessorImpl;
-import presentation.market.manage.impl.MarketPromotionManagerImpl;
+import presentation.market.manager.impl.MarketPromotionManagerImpl;
 import utils.logger.Log;
 
 public class UILauncher {

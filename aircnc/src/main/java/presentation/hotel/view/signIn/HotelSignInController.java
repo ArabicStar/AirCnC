@@ -41,6 +41,7 @@ public class HotelSignInController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		interactor = HotelAccountCourier.getInstance();
+		accessor = HotelLoginAccessorImpl.getInstance();
 		name.setPromptText("酒店名称");
 		password.setPromptText("密码");
 		
@@ -56,7 +57,7 @@ public class HotelSignInController implements Initializable{
 	public void handleConfirm(){
 		if(name.getText().length()!=0&&password.getText().length()!=0){
 
-			accessor = HotelLoginAccessorImpl.getInstance();
+			
 			accessor.setDeliveredName(name.getText());
 			accessor.setDeliveredPassword(password.getText());
 			
