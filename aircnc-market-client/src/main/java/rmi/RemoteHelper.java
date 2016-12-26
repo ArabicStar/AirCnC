@@ -44,6 +44,13 @@ public final class RemoteHelper {
 		fetchHotelDaoRemoteObj();
 		fetchMarketDaoRemoteObj();
 		fetchQueryDaoRemoteObj();
+		fetchPromotionDaoRemoteObj();
+	}
+	
+	private void fetchPromotionDaoRemoteObj() {
+		promotionDaoRemoteObj = findRemote("RemotePromotionDao");
+
+		Log.d("fetch promotion dao remote obj " + (promotionDaoRemoteObj != null ? "succeed" : "failed"));
 	}
 
 	private void fetchQueryDaoRemoteObj() {

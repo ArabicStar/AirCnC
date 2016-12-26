@@ -6,7 +6,7 @@ package presentation.market.accessor;
  * @author Water
  *
  */
-public interface MarketTopUpAccessor {
+public interface MarketChargeAccessor {
 	public String getMemberId();
 	
 	public int getTopupMoney();

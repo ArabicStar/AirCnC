@@ -9,19 +9,19 @@
    <left>
       <Pane prefHeight="768" prefWidth="247.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox alignment="CENTER" layoutY="274.0" prefHeight="268.0" prefWidth="247.0">
+            <VBox alignment="CENTER" layoutY="295.0" prefHeight="417.0" prefWidth="247.0">
                <children>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="121.0" styleClass="hbox" onMouseClicked="#handleWebsitePromotionStrategy">
+                  <HBox alignment="CENTER" onMouseClicked="#handleWebsitePromotionStrategy" prefHeight="100.0" prefWidth="121.0" styleClass="hbox">
                      <children>
-                        <Label fx:id="websitePromotionStrategy" contentDisplay="CENTER"  text="网站营销策略" textAlignment="CENTER" />
+                        <Label fx:id="websitePromotionStrategy" contentDisplay="CENTER" text="网站营销策略" textAlignment="CENTER" />
                      </children>
                      <padding>
                         <Insets right="30.0" />
                      </padding>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="121.0" styleClass="hbox" onMouseClicked="#handleAbnormalOrderBrowse">
+                  <HBox alignment="CENTER" onMouseClicked="#handleAbnormalOrderBrowse" prefHeight="100.0" prefWidth="121.0" styleClass="hbox">
                      <children>
-                        <Label fx:id="abnormalOrderBrowse"  text="异常订单浏览" textAlignment="CENTER" />
+                        <Label fx:id="abnormalOrderBrowse" text="异常订单浏览" textAlignment="CENTER" />
                      </children>
                      <VBox.margin>
                         <Insets />
@@ -30,25 +30,9 @@
                         <Insets right="30.0" />
                      </padding>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="121.0" styleClass="hbox" onMouseClicked="#handleCreditTopup">
+                  <HBox alignment="CENTER" onMouseClicked="#handleCreditTopup" prefHeight="100.0" prefWidth="121.0" styleClass="hbox">
                      <children>
-                        <Label fx:id="creditTopup"  text="信用充值" textAlignment="CENTER" />
-                     </children>
-                     <padding>
-                        <Insets right="30.0" />
-                     </padding>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="121.0" styleClass="hbox" onMouseClicked="#handleMyOrder">
-                     <children>
-                        <Label fx:id="myOrder"  text="我的订单" textAlignment="CENTER" />
-                     </children>
-                     <padding>
-                        <Insets right="30.0" />
-                     </padding>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="121.0" styleClass="hbox" onMouseClicked="#handleSearchHotel">
-                     <children>
-                        <Label fx:id="searchHotel"  text="搜索酒店" textAlignment="CENTER" />
+                        <Label fx:id="creditTopup" text="信用充值" textAlignment="CENTER" />
                      </children>
                      <padding>
                         <Insets right="30.0" />

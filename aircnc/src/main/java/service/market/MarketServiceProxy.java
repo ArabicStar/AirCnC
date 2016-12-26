@@ -41,14 +41,14 @@ public class MarketServiceProxy extends AccessSecureProxy
 	 * Actual manager loader
 	 ***************************
 	 */
-	@AuthenticatePolicy({ Client.USER })
+	@AuthenticatePolicy({ Client.MARKET })
 	public void loadAccountService(MarketAccountService accountService) {
 		checkAuthentication();
 
 		this.accountService = accountService;
 	}
 
-	@AuthenticatePolicy({ Client.USER })
+	@AuthenticatePolicy({ Client.MANAGE})
 	public void loadInfoService(MarketInfoService infoService) {
 		checkAuthentication();
 

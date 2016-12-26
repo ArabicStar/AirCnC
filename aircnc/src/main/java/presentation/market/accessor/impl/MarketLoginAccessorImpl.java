@@ -15,7 +15,7 @@ public class MarketLoginAccessorImpl implements MarketLoginAccessor {
 	private int passwordHash;
 
 	public static final MarketLoginAccessor launch() {
-		if (instance == null) {
+		if (instance != null) {
 			throw duplicateSingletonEx();
 		}
 		return instance = new MarketLoginAccessorImpl();
@@ -26,14 +26,6 @@ public class MarketLoginAccessorImpl implements MarketLoginAccessor {
 			throw singletonNotExistsEx();
 		}
 		return instance;
-	}
-
-	public static boolean isLaunched() {
-		if (instance == null) {
-			return false;
-		} else {
-			return true;
-		}
 	}
 
 	@Override

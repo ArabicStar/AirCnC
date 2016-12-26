@@ -8,6 +8,7 @@ import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
 import interactor.market.MarketAccountInfoInteractor;
 import interactor.utils.Title;
+import presentation.market.accessor.impl.MarketLoginAccessorImpl;
 import service.market.MarketAccountService;
 import utils.info.market.MarketInfo;
 
@@ -38,35 +39,38 @@ public class MarketAccountCourier implements MarketAccountInfoInteractor{
 	
 	@Override
 	@Title("Login")
-	public void login() {
-//		String title = getTitle();
-//		MarketInfo info = execute(title, () -> {
-//			MarketInfo tmp = handler.login(MarketLoginAccessorImpl.getInstance().getId()
-//					, MemberLoginAccessorImpl.getInstance().getPasswordHash());
-//
-//			if (tmp == null)
-//				alertFail(title, "Wrong or not exist id");
-//
-//			if (!tmp.isValid())
-//				alertFail(title, "Wrong password");
-//
-//			return tmp;
-//		});
-//
-//		MarketInfoManagerImpl.getInstance().setUser(info);
+	public boolean login() {
+		String title = getTitle();
+		MarketInfo info = execute(title, () -> {
+			MarketInfo tmp = handler.login(MarketLoginAccessorImpl.getInstance().getId()
+					,MarketLoginAccessorImpl.getInstance().getPasswordHash());
+
+			if (tmp == null)
+				alertFail(title, "请输入账号和密码");
+
+			if (!tmp.isValid())
+				alertFail(title, "密码错误");
+
+			return tmp;
+		});
+
+		return info!=null&&info.isValid();
+
 	}
 
 	@Override
 	@Title("Logout")
 	public void logout() {
-		// TODO Auto-generated method stub
+		execute(getTitle(), () -> handler.logout());
+		return;
 		
 	}
 
 	@Override
 	@Title("Refresh Account")
 	public void refreshCurrentAccount() {
-		// TODO Auto-generated method stub
+		execute(getTitle(), () -> handler.refreshCurrentAccount());
+		return;
 		
 	}
 

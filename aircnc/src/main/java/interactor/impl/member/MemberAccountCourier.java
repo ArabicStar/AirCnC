@@ -42,7 +42,7 @@ public final class MemberAccountCourier implements MemberAccountInteractor {
 	}
 
 	@Override
-	@Title("Register")
+	@Title("注册")
 	public boolean register() {
 		String title = getTitle();
 		MemberInfo info = execute(title, () -> {
@@ -63,7 +63,7 @@ public final class MemberAccountCourier implements MemberAccountInteractor {
 	}
 
 	@Override
-	@Title("Login")
+	@Title("登陆")
 	public boolean login() {
 		String title = getTitle();
 		MemberInfo info = execute(title, () -> {
@@ -83,12 +83,11 @@ public final class MemberAccountCourier implements MemberAccountInteractor {
 			return tmp;
 		});
 
-		MemberInfoManagerImpl.getInstance().setUser(info);
 		return info != null;
 	}
 
 	@Override
-	@Title("Logout")
+	@Title("退出")
 	public boolean logout() {
 		return execute(getTitle(), () -> handler.logout());
 	}

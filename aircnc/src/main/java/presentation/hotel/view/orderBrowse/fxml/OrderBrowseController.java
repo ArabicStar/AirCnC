@@ -108,7 +108,7 @@ public class OrderBrowseController implements Initializable{
     
     public void delayOrder(OrderVo vo){
     	accessor.setOrderVo(vo);
-    	interactor.appealOrder();
+    	interactor.delayOrder();
     	refresh();
     }
     

@@ -53,7 +53,7 @@ public class MarketServiceManager implements MarketService{
 		if (orderQueryService == null)
 			throw unsupportedOpEx("get abnormal orders");
 		
-			List<OrderVo> res = orderQueryService.getOrdersOfStatus(OrderStatus.ABNORMAL);
+			List<OrderVo> res = orderQueryService.getOrdersOfStatus(OrderStatus.APPEALING);
 
 			// given id not exists, return
 			if (res == null)

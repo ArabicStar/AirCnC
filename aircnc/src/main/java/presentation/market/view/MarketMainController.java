@@ -9,15 +9,6 @@ import javafx.scene.control.Label;
 import presentation.market.MarketCenterController;
 
 public class MarketMainController implements Initializable {
-	private static int count = 0;
-	
-	private static int count1 = 0;
-	
-	private static int count2 = 0;
-	
-	private static int count3 = 0;
-	
-	private static int count4 = 0;
 
 	@FXML
 	private Label websitePromotionStrategy;
@@ -27,13 +18,6 @@ public class MarketMainController implements Initializable {
 
 	@FXML
 	private Label creditTopup;
-
-	@FXML
-	private Label myOrder;
-	
-	@FXML
-	private Label searchHotel;
-
 
 	private MarketCenterController controller;
 
@@ -54,37 +38,18 @@ public class MarketMainController implements Initializable {
 	
 	@FXML
 	private void handleWebsitePromotionStrategy(){
-		count++;
-		websitePromotionStrategy.setText(Integer.toBinaryString(count));
 		this.controller.addWebsitePromotionStrategyPane();
 	}
 	
 	@FXML
 	private void handleAbnormalOrderBrowse(){
-		count1++;
-		abnormalOrderBrowse.setText(Integer.toBinaryString(count1));
 		this.controller.addAbnormalOrderBrowsePane();
 	}
 	
 	@FXML
 	private void handleCreditTopup(){
-		count2++;
-		creditTopup.setText(Integer.toBinaryString(count2));
 		this.controller.addCreditTopUpPane();
 	}
-	
-	@FXML
-	private void handleMyOrder() {
-		count3++;
-		myOrder.setText(Integer.toBinaryString(count3));
-		this.controller.addMyOrderPane();
-	}
-	
-	@FXML
-	private void handleSearchHotel() {
-		count4++;
-		searchHotel.setText(Integer.toBinaryString(count4));
-		this.controller.addSearchHotelPane();
-	}
+
 
 }

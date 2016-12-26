@@ -117,7 +117,18 @@ public class HotelOrderCourier implements HotelOrderInteractor {
 
 	@Override
 	@Title("延迟入住")
-	public void appealOrder() {
-		// TODO Auto-generated method stub
+	public void delayOrder() {
+		String title = getTitle();
+
+		execute(title, () -> {
+			int id = getCurrentId();
+			if (id != Integer.MIN_VALUE)
+
+				if (!handler.delayOrder(SearchOrderAccessorImpl.getInstance().getOrderVo()))
+					alertFail(title, "执行失败");
+				else
+					alertSuccess(title, "订单执行成功");
+			return null;
+		});
 	}
 }

@@ -17,7 +17,7 @@ package interactor.market;
  */
 public interface MarketAccountInfoInteractor {
 	
-	public void login();
+	public boolean login();
 
 	public void logout();
 

@@ -8,6 +8,6 @@ public interface HotelOrderInteractor {
 	
 	public void executeOrder();
 	
-	public void appealOrder();
+	public void delayOrder();
 
 }

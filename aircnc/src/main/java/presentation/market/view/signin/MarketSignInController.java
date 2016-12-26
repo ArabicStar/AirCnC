@@ -3,13 +3,13 @@ package presentation.market.view.signin;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import interactor.hotel.HotelAccountInteractor;
+import interactor.impl.market.MarketAccountCourier;
+import interactor.market.MarketAccountInfoInteractor;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import presentation.hotel.accessor.impl.HotelLoginAccessorImpl;
 import presentation.market.CenterController;
 import presentation.market.accessor.MarketLoginAccessor;
 import presentation.market.accessor.impl.MarketLoginAccessorImpl;
@@ -29,11 +29,12 @@ public class MarketSignInController implements Initializable {
 	
 	private MarketLoginAccessor accessor;
 	
-	private HotelAccountInteractor interactor;
+	private MarketAccountInfoInteractor interactor;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		accessor = MarketLoginAccessorImpl.getInstance();
+		interactor = MarketAccountCourier.getInstance();
 
 	}
 

@@ -200,10 +200,10 @@ public final class HotelServiceProxy extends AccessSecureProxy
 
 	@Override
 	@AuthenticatePolicy({ Client.HOTEL })
-	public boolean appealOrder(OrderInfo order) {
+	public boolean delayOrder(OrderInfo order) {
 		checkAuthentication();
 
-		return orderService.appealOrder(order);
+		return orderService.delayOrder(order);
 	}
 
 

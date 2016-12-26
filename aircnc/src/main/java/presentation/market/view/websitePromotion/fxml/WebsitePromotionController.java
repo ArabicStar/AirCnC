@@ -2,6 +2,8 @@ package presentation.market.view.websitePromotion.fxml;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import interactor.impl.market.MarketPromotionCourier;
 import interactor.market.MarketPromotionInteractor;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
@@ -67,7 +69,7 @@ public class WebsitePromotionController implements Initializable{
 
 		accessor = MarketPromotionAccessorImpl.getInstance();
 		
-//		interactor = MarketPromotionCourier.getInstance();
+		interactor = MarketPromotionCourier.getInstance();
 		interactor.getMarketActivePromotion();
 		
 		Platform.runLater(new Runnable() {

@@ -10,7 +10,7 @@ public interface HotelOrderService {
 
 	public boolean executeOrder(OrderInfo order);
 	
-	public boolean appealOrder(OrderInfo order);	
+	public boolean delayOrder(OrderInfo order);	
 	
 	public List<OrderVo> getHotelAllOrders(int id);
 

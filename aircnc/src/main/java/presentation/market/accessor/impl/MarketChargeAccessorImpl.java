@@ -4,35 +4,27 @@ import static utils.exception.StaticExceptionFactory.accessorNotReadyEx;
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
-import presentation.market.accessor.MarketTopUpAccessor;
+import presentation.market.accessor.MarketChargeAccessor;
 
-public class MarketTopUpAccessorImpl implements MarketTopUpAccessor {
-	private static MarketTopUpAccessor instance;
+public class MarketChargeAccessorImpl implements MarketChargeAccessor {
+	private static MarketChargeAccessor instance;
 	
 	private String memberId;
 	
 	private int money;
 	
-	public static final MarketTopUpAccessor launch() {
-		if (instance == null) {
+	public static final MarketChargeAccessor launch() {
+		if (instance != null) {
 			throw duplicateSingletonEx();
 		}
-		return instance = new MarketTopUpAccessorImpl();
+		return instance = new MarketChargeAccessorImpl();
 	}
 	
-	public static final MarketTopUpAccessor getInstance() {
+	public static final MarketChargeAccessor getInstance() {
 		if (instance == null) {
 			throw singletonNotExistsEx();
 		}
 		return instance;
-	}
-	
-	public static boolean isLaunched() {
-		if (instance == null) {
-			return false;
-		} else {
-			return true;
-		}
 	}
 	
 	@Override

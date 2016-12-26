@@ -75,9 +75,8 @@ public final class HotelQueryManager implements HotelQueryService {
 		}
 		
 		if(cond.getNameLike().length()>0){
-			List<HotelVo> result = new ArrayList<HotelVo>();
-			result.add(findByName(cond.getNameLike()));
-			return result;
+			return bufferHotels.stream().filter(h->h.getName().
+					contains(cond.getNameLike())).collect(Collectors.toList());
 		}
 		
 		if(bufferHotels==null||bufferHotels.isEmpty()){

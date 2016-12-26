@@ -1,5 +1,6 @@
 package launcher;
 
+import data.dao.market.MarketDaoProxy;
 import data.dao.promotion.PromotionDaoProxy;
 import data.dao.query.QueryDaoProxy;
 import rmi.RemoteHelper;
@@ -17,6 +18,8 @@ public class DaoLauncher {
 
 			// launch promotin dao proxy
 			launchPromotionDao(helper);
+			
+			launchMarketDao(helper);
 
 			Log.i("Dao launch succeed");
 		} catch (Exception e) {
@@ -30,6 +33,14 @@ public class DaoLauncher {
 		proxy.loadRemoteWebsiteDao(helper.getRemoteWebsitePromotionDao());
 
 		Log.d("promotion dao launched");
+	}
+	
+	private static void launchMarketDao(RemoteHelper helper) {
+		MarketDaoProxy proxy = MarketDaoProxy.launch();
+
+		proxy.loadRemoteMarketDao(helper.getRemoteMarketDao());
+
+		Log.d("market dao launched");
 	}
 
 

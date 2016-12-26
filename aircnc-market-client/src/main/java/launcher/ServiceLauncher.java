@@ -54,10 +54,8 @@ public class ServiceLauncher {
 		QueryServiceProxy proxy = QueryServiceProxy.launch(clientId);
 
 		final OrderQueryService order = OrderQueryManager.launch(queryDao);
-		final CommentQueryService comm = null;
 
 		proxy.loadOrderQueryService(order);
-		proxy.loadCommentQueryService(comm);
 	}
 
 	private static void launchMarketService(Client clientId) {
@@ -66,10 +64,7 @@ public class ServiceLauncher {
 		MarketServiceProxy marketProxy = MarketServiceProxy.launch(clientId);
 
 		final MarketAccountService acc = MarketAccountManager.launch(marketDao);
-		final MarketInfoService info = MarketInfoManager.launch(marketDao);
 
 		marketProxy.loadAccountService(acc);
-		marketProxy.loadInfoService(info);
-
 	}
 }

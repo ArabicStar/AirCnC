@@ -17,23 +17,23 @@
    <center>
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox layoutX="148.0" layoutY="102.0" prefHeight="221.0" prefWidth="375.0">
+            <VBox layoutX="195.0" layoutY="92.0" prefHeight="221.0">
                <children>
-                  <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="40.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="40.0">
                      <children>
-                        <Label styleClass="info-index" text="用户ID" />
-                        <TextField fx:id="userID" prefHeight="41.0" prefWidth="151.0" styleClass="info-content" />
+                        <Label styleClass="info-index" text="用户账号" />
+                        <TextField fx:id="userID" prefHeight="41.0" prefWidth="180.0" styleClass="info-content" />
                      </children>
                   </HBox>
-                  <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="40.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="123.0" prefWidth="375.0" spacing="40.0">
                      <children>
                         <Label styleClass="info-index" text="充值金额" />
-                        <TextField fx:id="moneyToppedUp" prefHeight="41.0" prefWidth="151.0" styleClass="info-content" />
+                        <TextField fx:id="money" prefHeight="41.0" prefWidth="180.0" styleClass="info-content" />
                      </children>
                   </HBox>
                </children>
             </VBox>
-            <Button fx:id="confirm" layoutX="523.0" layoutY="323.0" mnemonicParsing="false" onAction="#handleConfirm" styleClass="confirm" text="确认" />
+            <Button layoutX="523.0" layoutY="323.0" mnemonicParsing="false" onAction="#handleConfirm" styleClass="confirm" text="确认" />
          </children>
       </Pane>
    </center>

@@ -31,7 +31,7 @@ public class UILauncher {
 	}
 
 	private static final void launchManager() {
-
+		
 		MarketPromotionManagerImpl.launch();
 
 	}

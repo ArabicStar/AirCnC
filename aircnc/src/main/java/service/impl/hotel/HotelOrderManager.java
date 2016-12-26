@@ -114,7 +114,7 @@ public class HotelOrderManager implements HotelOrderService{
 	}
 
 	@Override
-	public boolean appealOrder(OrderInfo order) {
+	public boolean delayOrder(OrderInfo order) {
 		if (!accountService.isLogined())
 			throw new IllegalStateException("No Hotel Login");
 
@@ -125,7 +125,7 @@ public class HotelOrderManager implements HotelOrderService{
 		
 		Room room = po.getRooms().stream().filter(r->r.getName().equals(order.getRoomType())).iterator().next();
 		if((room.getRoomNum()-order.getRoomNumber())<0||
-				(!orderOperationService.appealOrder(order).isValid()))
+				(!orderOperationService.delayOrder(order).isValid()))
 			return false;
 	
 		room = new RoomBuilder(room).setRoomNum(room.getRoomNum()-order.getRoomNumber()).getRoomInfo();
