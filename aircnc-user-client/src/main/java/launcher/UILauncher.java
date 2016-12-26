@@ -14,6 +14,7 @@ import presentation.member.manager.impl.CreditChangeManagerImpl;
 import presentation.member.manager.impl.HistoryOrderManagerImpl;
 import presentation.member.manager.impl.HotelCommentManagerImpl;
 import presentation.member.manager.impl.HotelPromotionManagerImpl;
+import presentation.member.manager.impl.MakeOrderManagerImpl;
 import presentation.member.manager.impl.MemberInfoManagerImpl;
 import presentation.member.manager.impl.MyOrderManagerImpl;
 import presentation.member.manager.impl.SearchHotelManagerImpl;
@@ -54,6 +55,7 @@ public class UILauncher {
 		HotelCommentManagerImpl.launch();
 		HotelPromotionManagerImpl.launch();
 		HistoryOrderManagerImpl.launch();
+		MakeOrderManagerImpl.launch();
 	}
 
 	private UILauncher() {

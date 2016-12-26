@@ -4,17 +4,17 @@ import static utils.exception.StaticExceptionFactory.accessorNotReadyEx;
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.util.Set;
 
 import presentation.member.accessor.OrderMakerAccessor;
+import utils.info.hotel.Room;
 import utils.info.order.OrderStatus;
 import vo.hotel.HotelVo;
 import vo.order.OrderVo;
 import vo.order.OrderVoBuilder;
 
-public class OrderMakerAccessorImpl implements OrderMakerAccessor{
+public class OrderMakerAccessorImpl implements OrderMakerAccessor {
 	private static OrderMakerAccessor instance;
 
 	private int roomNumber;
@@ -26,14 +26,14 @@ public class OrderMakerAccessorImpl implements OrderMakerAccessor{
 	private boolean hasChildren;
 	private HotelVo hotelVo;
 	private OrderVo OrderVo;
+	private double totalPrice;
 
 	public static final OrderMakerAccessor launch() {
-		if(instance != null) {
+		if (instance != null) {
 			throw duplicateSingletonEx();
 		}
 		return instance = new OrderMakerAccessorImpl();
 	}
-
 
 	public static final OrderMakerAccessor getIntance() {
 		if (instance == null) {
@@ -84,33 +84,47 @@ public class OrderMakerAccessorImpl implements OrderMakerAccessor{
 	public void setHasChildren(boolean hasChildren) {
 		this.hasChildren = hasChildren;
 	}
-	
+
 	@Override
 	public OrderVoBuilder getMadeOrder() {
-		if(instance == null) {
+		if (instance == null) {
 			throw accessorNotReadyEx();
 		}
+		this.totalPrice = calPrice();
 		// TODO 填写完整信息
 		int stayDays = (int) (leaveTime.toLocalDate().toEpochDay() - enterTime.toLocalDate().toEpochDay());
-		return new OrderVoBuilder().
-				setLastTime(latestExecuteTime).setRoomNumber(roomNumber)
-				.setStatus(OrderStatus.UNEXECUTED).setEntryTime(enterTime)
-				.setRoomType(roomType).setPeopleNumber(peopleNumber)
-				.setHasChildren(hasChildren).setStayDays(stayDays).setHotel(hotelVo);
+		return new OrderVoBuilder().setLastTime(latestExecuteTime).setRoomNumber(roomNumber)
+				.setStatus(OrderStatus.UNEXECUTED).setEntryTime(enterTime).setRoomType(roomType)
+				.setPeopleNumber(peopleNumber).setHasChildren(hasChildren).setStayDays(stayDays).setHotel(hotelVo)
+				.setOriginalPrice(this.totalPrice);
 	}
 
+	private double calPrice() {
+		Set<Room> rooms = hotelVo.getRooms();
+		Room room = null;
+		for (Room r : rooms) {
+			if (r.getName().equals(roomType)) {
+				room = r;
+				break;
+			}
+		}
+		if (room != null) {
+			double result = roomNumber * room.getPrice();
+			return result;
+		} else {
+			return 0;
+		}
+	}
 
 	@Override
 	public void setHotel(HotelVo vo) {
 		this.hotelVo = vo;
 	}
 
-
 	@Override
 	public OrderVo getCompleteOrder() {
 		return OrderVo;
-	} 
-
+	}
 
 	@Override
 	public void setCompleteOrder(OrderVo vo) {

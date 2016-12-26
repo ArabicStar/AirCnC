@@ -4,13 +4,14 @@ import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
 import presentation.member.manager.MakeOrderManager;
+import utils.info.order.OrderInfo;
 import vo.order.OrderVo;
 
 public class MakeOrderManagerImpl implements MakeOrderManager{
 	
 private static MakeOrderManager instance;
 	
-	private OrderVo order;
+	private OrderInfo info;
 	
 	public static final MakeOrderManager launch() {
 		if (instance != null)
@@ -34,12 +35,12 @@ private static MakeOrderManager instance;
 	}
 	
 	@Override
-	public void setOrderVo(OrderVo vo){
-		this.order = vo;
+	public void setOrderVo(OrderInfo vo){
+		this.info = vo;
 	}
 	
 	@Override
-	public OrderVo getOrderVo(){
-		return order;
+	public OrderInfo getOrderVo(){
+		return info;
 	}
 }

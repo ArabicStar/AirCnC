@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 
+import interactor.impl.member.MemberOrderOperationCourier;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert.AlertType;
@@ -63,6 +65,13 @@ public class MakeOrderController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		Platform.runLater(() -> {
+			  initMakeOrder();
+		});	
+
+	}
+	
+	public void initMakeOrder(){
 		enterDatePickeratePicker = new DatePicker(LocalDate.now().plusDays(1));
 		enterDatePickeratePicker.setShowWeekNumbers(true);
 		final Callback<DatePicker, DateCell> enterDayCellFactory = new Callback<DatePicker, DateCell>() {
@@ -138,16 +147,14 @@ public class MakeOrderController implements Initializable {
 		timePicker.setDayCellFactory(lastestEcecuteCellFactory);
 		timePicker.setStyle(null);
 		latestTimeHbox.getChildren().add(timePicker);
-
-//		String[] rooms = model.getRoomName().split("\n");
-//		for (String s : rooms)
-//			roomType.getItems().add(s);
+		String[] rooms = model.getRoomName().split("\n");
+		for (String s : rooms)
+			roomType.getItems().add(s);
 
 		child = new ToggleGroup();
 		hasChild.setToggleGroup(child);
 		notHasChild.setToggleGroup(child);
 		notHasChild.setSelected(true);
-
 	}
 
 	@FXML
@@ -163,10 +170,13 @@ public class MakeOrderController implements Initializable {
 			OrderMakerAccessorImpl.getIntance().setPeopleNumber(Integer.valueOf(peopleNum.getText()));
 			OrderMakerAccessorImpl.getIntance().setLatestExecuteTime(timePicker.getDateTimeValue());
 			OrderMakerAccessorImpl.getIntance().setHasChildren(hasChild.isSelected());
+			OrderMakerAccessorImpl.getIntance().setHotel(model.getHotel());
+			MemberOrderOperationCourier.getInstance().tryMakeOrder();
 			nextPane = new MakeOrderNextPane();
 			rootLayout.getChildren().add(nextPane.getPane());
 			AnchorPane.setTopAnchor(nextPane.getPane(), 0.0);
 			nextPane.getController().setParentController(this.controller);
+			
 		} else {
 			PlainDialog alert = new PlainDialog(AlertType.INFORMATION, "下订单", "请输入有效信息！");
 			alert.showDialog();

@@ -55,9 +55,9 @@ public class HotelInfoMainController implements Initializable{
 				  contentLayout = (BorderPane) infoMainPane.getChildren().get(0);
 				  initHotelInfo();
 				  addHotelInfoOnePane();
+				  HotelSearchAccessorImpl.getInstance().setName(model.getHotelName());
 			  }
 		});
-		HotelSearchAccessorImpl.getInstance().setName(model.getHotelName());
 		
 	}
 	

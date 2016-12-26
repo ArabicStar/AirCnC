@@ -24,14 +24,14 @@ public class DataPrepareHelper {
 
 	private static final int testStar = 1;
 	private static final double testGrade = 5;
-	private static final String testName = "DDhotel";
+	private static final String testName = "AAhotel";
 	private static final String testScope = "new way";
 	private static final String testLocation = "newnewnew";
 	private static final String testIntro = "zzzzz";
-	private static final String testEquip = "wifi;停车场;24小时热水;";
+	private static final String testEquip = "wifi;park;";
 	private static final int testPass = "12345678".hashCode();
 	// private static final String[] testType = new String[] { "单人间", "双人间" };
-	private static final String[] testType = new String[] { "单人间", "双人间", "情侣间" };
+	private static final String[] testType = new String[] { "single", "double", "hhhh" };
 	private static final int[] testPnum = new int[] { 1, 2, 2 };
 	private static final int[] testRnum = new int[] { 100, 20, 80 };
 	private static final int[] testPrice = new int[] { 100, 200, 300 };

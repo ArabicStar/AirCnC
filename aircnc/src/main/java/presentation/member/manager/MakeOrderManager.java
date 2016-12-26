@@ -1,10 +1,10 @@
 package presentation.member.manager;
 
-import vo.order.OrderVo;
+import utils.info.order.OrderInfo;
 
 public interface MakeOrderManager {
 	
-	public void setOrderVo(OrderVo vo);
+	public void setOrderVo(OrderInfo vo);
 	
-	public OrderVo getOrderVo();
+	public OrderInfo getOrderVo();
 }

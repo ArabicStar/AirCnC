@@ -6,10 +6,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane stylesheets="@../css/MakeOrder.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="presentation.member.view.searchhotel.fxml.MakeOrderNextController">
+<AnchorPane stylesheets="@../css/MakeOrder.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.member.view.searchhotel.fxml.MakeOrderNextController">
    <children>
-      <AnchorPane prefHeight="400.0" prefWidth="500.0">
+      <AnchorPane prefHeight="400.0" prefWidth="500.0" style="-fx-background-color: #fff;">
          <children>
             <VBox layoutX="45.0" layoutY="60.0" spacing="10.0">
                <children>
@@ -36,7 +35,7 @@
                   <VBox>
                      <children>
                         <Label text="优惠后价格" />
-                        <Label fx:id="totalPrice1" text="\%优惠价格">
+                        <Label fx:id="disPrice" text="\%优惠价格">
                            <VBox.margin>
                               <Insets left="30.0" />
                            </VBox.margin>

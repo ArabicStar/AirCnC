@@ -12,6 +12,7 @@ import interactor.member.MemberOrderOperationInteractor;
 import interactor.utils.Title;
 import presentation.member.accessor.impl.MemberOrderOperationAccessorImpl;
 import presentation.member.accessor.impl.OrderMakerAccessorImpl;
+import presentation.member.manager.impl.MakeOrderManagerImpl;
 import service.member.MemberAccountService;
 import service.order.OrderOperationService;
 import service.promotion.PromotionApplicationService;
@@ -68,7 +69,7 @@ public class MemberOrderOperationCourier implements MemberOrderOperationInteract
 
 		OrderInfo order = execute(title,
 				() -> promotion.applyPromotion(getOrderBuilderFromMakerUI().setMember(member).getOrderInfo()));
-
+		MakeOrderManagerImpl.getInstance().setOrderVo(order);
 		return order != null;
 	}
 

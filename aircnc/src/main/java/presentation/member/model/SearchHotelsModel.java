@@ -11,7 +11,6 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import vo.hotel.HotelVo;
-import vo.member.MemberVo;
 import vo.order.OrderVo;
 
 /**
@@ -43,7 +42,7 @@ public class SearchHotelsModel {
 	private final StringProperty roomName;
 	private final StringProperty roomPrice;
 
-		
+	private final HotelVo hotel;
 	/**
      * Default constructor.
      */
@@ -69,13 +68,13 @@ public class SearchHotelsModel {
      * @param repeal
      */
 	public SearchHotelsModel(HotelVo vo){
+		this.hotel = vo;
 		
 		this.star = new SimpleIntegerProperty(vo.getStar());
 		this.hotelName = new SimpleStringProperty(vo.getName());
 		this.hotelGrade = new SimpleDoubleProperty(vo.getGrade());
 		this.hotelScope = new SimpleStringProperty(vo.getScope());
 		this.hotelLocation = new SimpleStringProperty(vo.getLocation());
-		
 		//这条不太对，等待修改
 		this.lowestPrice = new SimpleDoubleProperty(vo.getLowestPrice());
 		
@@ -299,5 +298,9 @@ public class SearchHotelsModel {
 
     public StringProperty roomNameProperty() {
         return roomName;
+    }
+    
+    public HotelVo getHotel(){
+    	return this.hotel;
     }
 }
