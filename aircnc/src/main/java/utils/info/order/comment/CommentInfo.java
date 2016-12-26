@@ -8,6 +8,11 @@ import utils.info.order.OrderInfo;
 
 public abstract class CommentInfo extends CommentInfoTemplate {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4658690972208276634L;
+
+	/**
 	 * @return id
 	 */
 	public long getId() {

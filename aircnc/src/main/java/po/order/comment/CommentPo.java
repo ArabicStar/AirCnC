@@ -9,6 +9,10 @@ import utils.info.order.comment.CommentInfo;
 
 public class CommentPo extends CommentInfo {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1017968058772930435L;
 	private OrderPo relOrder;
 	private HotelPo hotel;
 

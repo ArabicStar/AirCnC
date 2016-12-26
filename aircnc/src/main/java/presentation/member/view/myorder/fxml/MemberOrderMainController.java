@@ -107,7 +107,7 @@ public class MemberOrderMainController implements Initializable {
 	 */
 	@FXML
 	public void handleQuery() {
-		if (!finished.isSelected() && !unfinished.isSelected() && !exception.isSelected() && !cancelled.isSelected()) {
+		if (finished.isSelected() || unfinished.isSelected() || exception.isSelected() || cancelled.isSelected()) {
 			states = new HashSet<OrderStatus>();
 			if (finished.isSelected()) {
 				states.add(OrderStatus.EXECUTED);
@@ -157,7 +157,7 @@ public class MemberOrderMainController implements Initializable {
 						}
 					});
 		} else {
-			PlainDialog alert = new PlainDialog(AlertType.INFORMATION,"搜索失败","请选择要搜索的订单");
+			PlainDialog alert = new PlainDialog(AlertType.INFORMATION, "搜索失败", "请选择要搜索的订单");
 			alert.showDialog();
 		}
 	}

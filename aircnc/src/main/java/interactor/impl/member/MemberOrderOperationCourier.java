@@ -68,7 +68,7 @@ public class MemberOrderOperationCourier implements MemberOrderOperationInteract
 		}
 
 		OrderInfo order = execute(title,
-				() -> promotion.applyPromotion(getOrderBuilderFromMakerUI().setMember(member).getOrderInfo()));
+				() -> promotion.applyPromotion(getOrderFromMakerUI().setMember(member).getOrderInfo()));
 		MakeOrderManagerImpl.getInstance().setOrderVo(order);
 		return order != null;
 	}
@@ -84,10 +84,12 @@ public class MemberOrderOperationCourier implements MemberOrderOperationInteract
 
 		MemberInfo member = acc.getCurrentAccount();
 		OrderInfo order = execute(title, () -> {
-			OrderInfo info = handler.makeOrder(getOrderBuilderFromMakerUI().setMember(member).getOrderInfo());
+			OrderInfo info = handler.makeOrder(getOrderFromMakerUI().setMember(member).getOrderInfo());
 
-			if (info == null)
+			if (info == null) {
 				alertFail(title, "预订失败，您的信用值不足！");
+				return null;
+			}
 
 			if (!info.isValid())
 				throw unknownEx();
@@ -106,7 +108,7 @@ public class MemberOrderOperationCourier implements MemberOrderOperationInteract
 	public boolean cancelOrder() {
 		String title = getTitle();
 		MemberInfo mem = execute(title, () -> {
-			MemberInfo info = handler.cancelOrder(getCanceledOrderFromOperationUI());
+			MemberInfo info = handler.cancelOrder(getOrderFromOperationUI());
 
 			if (info == null || !info.isValid())
 				throw unknownEx();
@@ -125,9 +127,8 @@ public class MemberOrderOperationCourier implements MemberOrderOperationInteract
 	public boolean appealOrder() {
 		String title = getTitle();
 
-		MemberInfo member = acc.getCurrentAccount();
 		OrderInfo order = execute(title, () -> {
-			OrderInfo info = handler.appealOrder(getOrderBuilderFromOperationUI().setMember(member).getOrderInfo());
+			OrderInfo info = handler.appealOrder(getOrderFromOperationUI());
 
 			if (info == null || !info.isValid())
 				throw unknownEx();
@@ -145,10 +146,8 @@ public class MemberOrderOperationCourier implements MemberOrderOperationInteract
 	public boolean commentOrder() {
 		String title = getTitle();
 
-		MemberInfo member = acc.getCurrentAccount();
-
 		OrderInfo order = execute(title, () -> {
-			OrderInfo info = handler.commentOrder(getOrderBuilderFromOperationUI().setMember(member).getOrderInfo());
+			OrderInfo info = handler.commentOrder(getOrderFromOperationUI());
 
 			if (info == null || !info.isValid())
 				throw unknownEx();
@@ -162,15 +161,15 @@ public class MemberOrderOperationCourier implements MemberOrderOperationInteract
 		return order != null;
 	}
 
-	private static final OrderVoBuilder getOrderBuilderFromOperationUI() {
-		return MemberOrderOperationAccessorImpl.getInstance().getOrder();
+	private final OrderVo getOrderFromOperationUI() {
+		return attachMemberInfo(MemberOrderOperationAccessorImpl.getInstance().getOrder());
 	}
 
-	private static final OrderVo getCanceledOrderFromOperationUI() {
-		return MemberOrderOperationAccessorImpl.getInstance().getCanceledOrder();
-	}
-
-	private static final OrderVoBuilder getOrderBuilderFromMakerUI() {
+	private final OrderVoBuilder getOrderFromMakerUI() {
 		return OrderMakerAccessorImpl.getIntance().getMadeOrder();
+	}
+
+	private OrderVo attachMemberInfo(OrderInfo info) {
+		return new OrderVoBuilder(info).setMember(acc.getCurrentAccount()).getOrderInfo();
 	}
 }

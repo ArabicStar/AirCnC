@@ -56,9 +56,9 @@ public class AbnormalOrderController implements Initializable {
 
 	@FXML
 	private TableColumn<OrderModel, OrderVo> operation;
-	
+
 	private AbnormalOrderController orderController = this;
-	
+
 	private ObservableList<OrderModel> models;
 
 	private HotelOrderManager manager;
@@ -76,11 +76,13 @@ public class AbnormalOrderController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		orderTable.setEditable(false);
+		states.add(OrderStatus.ABNORMAL);
 
 		manager = HotelOrderManagerImpl.getInstance();
 
 		accessor = SearchOrderAccessorImpl.getInstance();
-		
+		accessor.setSearchTarget(states);
+
 		interactor = HotelOrderCourier.getInstance();
 		interactor.getHotelOrdersByStatus();
 
@@ -109,7 +111,7 @@ public class AbnormalOrderController implements Initializable {
 		accessor.setSearchTarget(states);
 		models = manager.getOrderList();
 		orderTable.setItems(models);
-		
+
 		userName.setCellValueFactory(cellData -> cellData.getValue().usernameProperty());
 		userId.setCellValueFactory(cellData -> cellData.getValue().userIDProperty());
 		orderId.setCellValueFactory(cellData -> cellData.getValue().orderIDProperty());
@@ -126,13 +128,12 @@ public class AbnormalOrderController implements Initializable {
 					}
 				});
 
-		operation
-				.setCellFactory(new Callback<TableColumn<OrderModel, OrderVo>, TableCell<OrderModel, OrderVo>>() {
+		operation.setCellFactory(new Callback<TableColumn<OrderModel, OrderVo>, TableCell<OrderModel, OrderVo>>() {
 
-					public TableCell<OrderModel, OrderVo> call(TableColumn<OrderModel, OrderVo> p) {
-						return new AppealCell(orderController);
-					}
-				});
+			public TableCell<OrderModel, OrderVo> call(TableColumn<OrderModel, OrderVo> p) {
+				return new AppealCell(orderController);
+			}
+		});
 
 	}
 

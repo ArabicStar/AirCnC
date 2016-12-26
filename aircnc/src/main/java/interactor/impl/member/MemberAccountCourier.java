@@ -82,7 +82,7 @@ public final class MemberAccountCourier implements MemberAccountInteractor {
 
 			return tmp;
 		});
-
+		MemberInfoManagerImpl.getInstance().setUser(info);
 		return info != null;
 	}
 

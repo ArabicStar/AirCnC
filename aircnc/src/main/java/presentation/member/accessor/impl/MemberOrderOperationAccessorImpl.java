@@ -13,59 +13,53 @@ import vo.order.comment.CommentVo;
 import vo.order.comment.CommentVoBuilder;
 
 public class MemberOrderOperationAccessorImpl implements MemberOrderOperationAccessor {
-	
+
 	private static MemberOrderOperationAccessor instance;
-	
+
 	private OrderVoBuilder order;
 	private OrderVo vo;
-	
+
 	public static final MemberOrderOperationAccessor launch() {
 		if (instance != null)
 			throw duplicateSingletonEx();
 
 		return instance = new MemberOrderOperationAccessorImpl();
 	}
-	
-	public static final MemberOrderOperationAccessor getInstance(){
+
+	public static final MemberOrderOperationAccessor getInstance() {
 		if (instance == null)
 			throw singletonNotExistsEx();
 
 		return instance;
 	}
-	
-	public static boolean isLaunched(){
-		if(instance == null)
+
+	public static boolean isLaunched() {
+		if (instance == null)
 			return false;
 		else
 			return true;
 	}
-	
+
 	@Override
-	public OrderVo getOrder(){
+	public OrderVo getOrder() {
 		return vo;
 	}
 
 	@Override
 	public void setComment(OrderVo vo, double rate, String content) {
-		if(order == null)
-			throw accessorNotReadyEx();
-		else{
-			CommentVo comment = new CommentVoBuilder(vo).setContent(content).setGrade((int)rate)
-					.setCommentTime(LocalDateTime.now()).getCommentInfo();
-			OrderVoBuilder builder = new OrderVoBuilder(vo).setComment(comment);
-			this.order = builder;
-		}
-			
+
+		CommentVo comment = new CommentVoBuilder(vo).setContent(content).setGrade((int) rate)
+				.setCommentTime(LocalDateTime.now()).getCommentInfo();
+		OrderVoBuilder builder = new OrderVoBuilder(vo).setComment(comment);
+		this.vo = builder.getOrderInfo();
 	}
 
 	@Override
 	public void setAppeal(OrderVo vo, String content) {
-		if(order == null)
-			throw accessorNotReadyEx();
-		else{
-			OrderVoBuilder builder = new OrderVoBuilder(vo).setAppeal(content);
-			this.order = builder;
-		}
+
+		OrderVoBuilder builder = new OrderVoBuilder(vo).setAppeal(content);
+		this.vo = builder.getOrderInfo();
+
 	}
 
 	@Override

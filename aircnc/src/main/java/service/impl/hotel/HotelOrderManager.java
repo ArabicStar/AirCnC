@@ -24,7 +24,7 @@ import utils.info.order.OrderInfo;
 import utils.info.order.OrderStatus;
 import vo.order.OrderVo;
 
-public class HotelOrderManager implements HotelOrderService{
+public class HotelOrderManager implements HotelOrderService {
 	/****** singleton ******/
 	private static HotelOrderManager instance;
 
@@ -52,13 +52,12 @@ public class HotelOrderManager implements HotelOrderService{
 	 * @throws IllegalStateException
 	 *             singleton has existed already <br>
 	 */
-	public static HotelOrderManager launch(final HotelDao hotelDao,final HotelAccountService accountService,
-			final OrderQueryService orderQueryService,final OrderOperationService orderOperationService) {
+	public static HotelOrderManager launch(final HotelDao hotelDao, final HotelAccountService accountService,
+			final OrderQueryService orderQueryService, final OrderOperationService orderOperationService) {
 		if (instance != null)
 			throw duplicateSingletonEx();
 
-		return instance = new HotelOrderManager(hotelDao, accountService, orderQueryService,
-				orderOperationService);
+		return instance = new HotelOrderManager(hotelDao, accountService, orderQueryService, orderOperationService);
 	}
 
 	/**
@@ -80,16 +79,15 @@ public class HotelOrderManager implements HotelOrderService{
 	private OrderQueryService orderQueryService;
 	private OrderOperationService orderOperationService;
 
-
-	public HotelOrderManager(HotelDao hotelDao,HotelAccountService accountService,
-			OrderQueryService orderQueryService,OrderOperationService orderOperationService) {
+	public HotelOrderManager(HotelDao hotelDao, HotelAccountService accountService, OrderQueryService orderQueryService,
+			OrderOperationService orderOperationService) {
 		this.accountService = accountService;
 		this.hotelDao = hotelDao;
 		this.orderQueryService = orderQueryService;
 		this.orderOperationService = orderOperationService;
 
 	}
-	
+
 	@Override
 	public boolean executeOrder(OrderInfo order) {
 		if (!accountService.isLogined())
@@ -99,17 +97,16 @@ public class HotelOrderManager implements HotelOrderService{
 
 		if (order.getHotel().getId() != po.getId())
 			throw new IllegalArgumentException("Incorresponding Hotel");
-		
-		Room room = po.getRooms().stream().filter(r->r.getName().equals(order.getRoomType())).iterator().next();
-		if((room.getRoomNum()-order.getRoomNumber())<0||
-				(!orderOperationService.executeOrder(order).isValid()))
+
+		Room room = po.getRooms().stream().filter(r -> r.getName().equals(order.getRoomType())).iterator().next();
+		if ((room.getRoomNum() - order.getRoomNumber()) < 0 || (!orderOperationService.executeOrder(order).isValid()))
 			return false;
-	
-		room = new RoomBuilder(room).setRoomNum(room.getRoomNum()-order.getRoomNumber()).getRoomInfo();
+
+		room = new RoomBuilder(room).setRoomNum(room.getRoomNum() - order.getRoomNumber()).getRoomInfo();
 		Set<Room> rooms = new HashSet<Room>();
 		rooms.add(room);
 		po.setRooms(rooms);
-		
+
 		return hotelDao.updateHotel(new HotelPoBuilder(po).getHotelInfo());
 	}
 
@@ -122,20 +119,18 @@ public class HotelOrderManager implements HotelOrderService{
 
 		if (order.getHotel().getId() != po.getId())
 			throw new IllegalArgumentException("Incorresponding Hotel");
-		
-		Room room = po.getRooms().stream().filter(r->r.getName().equals(order.getRoomType())).iterator().next();
-		if((room.getRoomNum()-order.getRoomNumber())<0||
-				(!orderOperationService.delayOrder(order).isValid()))
+
+		Room room = po.getRooms().stream().filter(r -> r.getName().equals(order.getRoomType())).iterator().next();
+		if ((room.getRoomNum() - order.getRoomNumber()) < 0 || (!orderOperationService.delayOrder(order).isValid()))
 			return false;
-	
-		room = new RoomBuilder(room).setRoomNum(room.getRoomNum()-order.getRoomNumber()).getRoomInfo();
+
+		room = new RoomBuilder(room).setRoomNum(room.getRoomNum() - order.getRoomNumber()).getRoomInfo();
 		Set<Room> rooms = new HashSet<Room>();
 		rooms.add(room);
 		po.setRooms(rooms);
-		
+
 		return hotelDao.updateHotel(new HotelPoBuilder(po).getHotelInfo());
-		
-		
+
 	}
 
 	/* Buffered member order query service */
@@ -151,7 +146,7 @@ public class HotelOrderManager implements HotelOrderService{
 			throw illegalArgEx("Hotel id");
 
 		/* different id from buffered one */
-		if (bufferedId == Integer.MIN_VALUE || bufferedId!=id) {
+		if (bufferedId == Integer.MIN_VALUE || bufferedId != id) {
 			// get
 			List<OrderVo> res = orderQueryService.getHotelOrders(id);
 
@@ -170,13 +165,15 @@ public class HotelOrderManager implements HotelOrderService{
 	}
 
 	@Override
-	public List<OrderVo> getHotelOrdersByStatus(int id, OrderStatus status)  {
+	public List<OrderVo> getHotelOrdersByStatus(int id, OrderStatus status) {
 
 		if (orderQueryService == null)
 			throw unsupportedOpEx("get hotel orders by status");
 
+		getHotelAllOrders(id);
+
+
 		return bufferedOrderList.stream().filter(o -> o.getStatus() == status).collect(Collectors.toList());
 	}
-
 
 }

@@ -7,7 +7,9 @@ import static interactor.utils.TitleGetter.getTitle;
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import interactor.member.MemberInfoInteractor;
@@ -94,13 +96,15 @@ public final class MemberInfoCourier implements MemberInfoInteractor {
 
 		List<OrderVo> list = execute(title, () -> {
 			String id = getCurrentId();
-			if (id != null)
-				return SearchOrderInfoAccessorImpl.getInstance().getStatus().stream()
+			if (id != null) {
+				Optional<List<OrderVo>> op = SearchOrderInfoAccessorImpl.getInstance().getStatus().stream()
 						.map(status -> handler.getMemberOrdersByStatus(id, status))
 						.collect(Collectors.reducing((l1, l2) -> {
 							l1.addAll(l2);
 							return l1;
-						})).get();
+						}));
+				return op.isPresent() ? op.get() : new ArrayList<>();
+			}
 
 			alertFail(title, "Not logged in yet");
 			return null;

@@ -53,7 +53,7 @@ public class HotelSearchCourier implements HotelSearchInteractor {
 
 		HotelManageInfoAccessor acs = HotelManageInfoAccessorImpl.getInstance();
 		HotelVo hotel = execute(title, () -> {
-			return handler.findById(Integer.parseInt(acs.getHotelId()));
+			return handler.findById(acs.getHotelId());
 
 		});
 		if(hotel != null){
