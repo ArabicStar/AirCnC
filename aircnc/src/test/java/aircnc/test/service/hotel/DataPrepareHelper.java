@@ -24,7 +24,7 @@ public class DataPrepareHelper {
 
 	private static final int testStar = 1;
 	private static final double testGrade = 5;
-	private static final String testName = "AAhotel";
+	private static final String testName = "DDhotel";
 	private static final String testScope = "new way";
 	private static final String testLocation = "newnewnew";
 	private static final String testIntro = "zzzzz";

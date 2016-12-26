@@ -32,8 +32,6 @@ public class OrderExecuteController implements Initializable{
 	
 	private HotelCenterController controller;
 	
-	private List<OrderVo> orders;
-	
 	@FXML
 	private TableView<OrderModel> orderTable;
 	
@@ -103,6 +101,7 @@ public class OrderExecuteController implements Initializable{
     public void refresh() {
 		interactor.getHotelOrdersByStatus();
 		models = manager.getOrderList();
+		orderTable.setItems(models);
 	}
 	
 	public void initOrder(){		

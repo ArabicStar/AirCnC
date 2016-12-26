@@ -56,6 +56,14 @@ public final class HotelServiceProxy extends AccessSecureProxy
 
 		return infoService.getHotelInfo(name);
 	}
+	
+	@Override
+	@AuthenticatePolicy({ Client.MANAGE })
+	public boolean updateBasic(HotelInfo modifiedInfo) {
+		checkAuthentication();
+				
+		return infoService.updateBasic(modifiedInfo);
+	}
 
 	@Override
 	@AuthenticatePolicy({ Client.HOTEL, Client.USER })
@@ -74,7 +82,7 @@ public final class HotelServiceProxy extends AccessSecureProxy
 	}
 
 	@Override
-	@AuthenticatePolicy({ Client.HOTEL, Client.MANAGE })
+	@AuthenticatePolicy({ Client.HOTEL})
 	public boolean updateInfo(HotelInfo modifiedInfo) {
 		checkAuthentication();
 

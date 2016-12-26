@@ -116,6 +116,7 @@ public class OrderBrowseController implements Initializable{
 		accessor.setSearchTarget(states);
 		interactor.getHotelOrdersByStatus();
 		models = manager.getOrderList();
+		orderTable.setItems(models);
 	}
 	
 	@FXML

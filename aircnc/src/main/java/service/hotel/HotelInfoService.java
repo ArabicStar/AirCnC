@@ -16,5 +16,7 @@ public interface HotelInfoService {
 
 	public boolean updateInfo(HotelInfo modifiedInfo);
 	
+	public boolean updateBasic(HotelInfo modifiedInfo);
+	
 	public boolean updatePassword(int oldPass,int newPass);
 }

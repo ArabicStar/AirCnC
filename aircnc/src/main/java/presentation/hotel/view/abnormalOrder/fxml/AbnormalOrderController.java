@@ -102,6 +102,7 @@ public class AbnormalOrderController implements Initializable {
 	public void refresh() {
 		interactor.getHotelOrdersByStatus();
 		models = manager.getOrderList();
+		orderTable.setItems(models);
 	}
 
 	public void initOrder() {

@@ -143,4 +143,13 @@ public class HotelInfoManager implements HotelInfoService {
 
 		return hotelDao.updateHotel(new HotelPoBuilder(po).setPasswordHash(newPwdHash).getHotelInfo());
 	}
+
+	@Override
+	public boolean updateBasic(HotelInfo modifiedInfo) {
+		
+		if(hotelDao.existName(modifiedInfo.getName()))
+			return false;
+		
+		return hotelDao.updateHotel(new HotelPoBuilder(modifiedInfo).getHotelInfo());
+	}
 }

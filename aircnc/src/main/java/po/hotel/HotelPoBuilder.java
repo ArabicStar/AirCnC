@@ -6,6 +6,8 @@ import static utils.exception.StaticExceptionFactory.inconsistentStatusEx;
 import java.util.Iterator;
 import java.util.Set;
 
+import org.apache.commons.lang.StringUtils;
+
 import utils.info.hotel.HotelInfo;
 import utils.info.hotel.HotelInfoBuilder;
 import utils.info.hotel.Room;
@@ -132,8 +134,12 @@ public class HotelPoBuilder extends HotelInfoBuilder {
 		if (from == null || to == null || from == to)
 			return;
 
-		if (from.getId() != to.getId() || !from.getName().equals(to.getName()))
+		if (from.getId() != to.getId() )
 			throw inconsistentStatusEx();
+		
+		if(!from.getName().equals(to.getName())){
+			to.setName(from.getName()).setStar(from.getStar());
+		}
 
 		if (from.getScope() != "") {
 			to.setScope(from.getScope()).setLocation(from.getLocation()).setIntroduction(from.getIntroduction())

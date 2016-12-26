@@ -26,10 +26,10 @@ public class HotelInfoServiceTest {
 	private HotelAccountService acc = DataPrepareHelper.acc;
 	private String newIntro = "newIntro";
 	
-	public HotelInfoServiceTest(){
-		prepareTestStatistic();
-	}
-
+//	public HotelInfoServiceTest(){
+//		prepareTestStatistic();
+//	}
+//
 //	@Test
 //	public void testGetHotelInfo() {
 //		HotelInfo v = info.getHotelInfo(testName());
@@ -37,31 +37,32 @@ public class HotelInfoServiceTest {
 //	}
 	
 	
+	private String newname = "DDhotel";
+	private String oldname = "AAhotel";
+	@Test
+	public void testUpdateBasic() {
+		HotelInfo v = info.getHotelInfo(oldname);
+//		acc.login(StringUtils.deleteWhitespace(v.getName()), "12345678".hashCode());
+		HotelInfo v2 = new HotelVoBuilder(v).setName(newname).getHotelInfo();
+		assertEquals(true, info.updateBasic(v2));
+		v = info.getHotelInfo(newname);
+		assertEquals(newname, v.getName());
+	}
 	
 //	@Test
-//	public void testUpdateBasic() {
+//	public void testUpdateRoom() {
 //		HotelInfo v = info.getHotelInfo(testName());
+//		
 //		acc.login(StringUtils.deleteWhitespace(v.getName()), "12345678".hashCode());
-//		HotelInfo v2 = new HotelVoBuilder(v).setIntro(newIntro).getHotelInfo();
+//		
+//		Set<Room> rooms = new HashSet<Room>();
+//		rooms.add(testRoom());
+//		
+//		HotelInfo v2 = new HotelVoBuilder(v).setRooms(rooms).getHotelInfo();
 //		assertEquals(true, info.updateInfo(v2));
 //		v = info.getHotelInfo(testName());
-//		assertEquals(newIntro, v.getIntroduction());
+//		assertEquals(3, v.getRooms().size());
 //	}
-	
-	@Test
-	public void testUpdateRoom() {
-		HotelInfo v = info.getHotelInfo(testName());
-		
-		acc.login(StringUtils.deleteWhitespace(v.getName()), "12345678".hashCode());
-		
-		Set<Room> rooms = new HashSet<Room>();
-		rooms.add(testRoom());
-		
-		HotelInfo v2 = new HotelVoBuilder(v).setRooms(rooms).getHotelInfo();
-		assertEquals(true, info.updateInfo(v2));
-		v = info.getHotelInfo(testName());
-		assertEquals(3, v.getRooms().size());
-	}
 //	
 //	@Test
 //	public void testHotelOrder() {

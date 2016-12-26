@@ -38,12 +38,12 @@ public abstract class HotelInfo extends HotelInfoTemplate {
 	protected HotelInfo() {
 		id = 0;
 		name = BLANK;
-		scope = BLANK;
-		location = BLANK;
-		introduction = BLANK;
+		scope = "未填写";
+		location = "未填写";
+		introduction = "未填写";
 		rooms = new HashSet<>();
 		star = 1;
-		grade = 0.0;
+		grade = 5.0;
 		equipment = BLANK;
 		isValid = true;
 	}
