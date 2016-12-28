@@ -2,9 +2,9 @@ package data.dao.impl.hotel;
 
 import static data.hibernate.Hibernator.execute;
 
+import java.math.BigDecimal;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 
@@ -12,11 +12,12 @@ import data.dao.hotel.HotelDao;
 import data.dao.query.HotelQueryDao;
 import po.hotel.HotelPo;
 import po.hotel.HotelPoBuilder;
-import po.member.MemberPo;
-import utils.info.hotel.Room;
 
 public enum HotelDaoImpl implements HotelDao, HotelQueryDao {
 	INSTANCE;
+
+	private static final String GET_RANK_SQL = "select hotel, avg(grade) as rank from comments group by hotel";
+	private static final String UPDATE_RANK_SQL = "update hotels set GRADE=%f where ID=%d";
 
 	@Override
 	public HotelPo findHotelById(final int id) {
@@ -31,7 +32,7 @@ public enum HotelDaoImpl implements HotelDao, HotelQueryDao {
 			HotelPo delHotel = (HotelPo) session.get(HotelPo.class, id);
 			if (flag = Boolean.valueOf((delHotel != null)))// check existence
 			{
-				
+
 				session.delete(delHotel);
 			}
 			return flag;
@@ -61,7 +62,8 @@ public enum HotelDaoImpl implements HotelDao, HotelQueryDao {
 
 		return execute(session -> {
 			Boolean flag = Boolean.FALSE;
-			if (flag = Boolean.valueOf(session.createCriteria(HotelPo.class).add(Restrictions.eq("name", po.getName())).list().isEmpty()))
+			if (flag = Boolean.valueOf(
+					session.createCriteria(HotelPo.class).add(Restrictions.eq("name", po.getName())).list().isEmpty()))
 				// save HotelPo
 				session.save(po);
 
@@ -109,4 +111,25 @@ public enum HotelDaoImpl implements HotelDao, HotelQueryDao {
 		});
 	}
 
+	@Override
+	public void updateRank() {
+		String getRank = GET_RANK_SQL;
+
+		execute(session -> {
+			@SuppressWarnings("unchecked")
+			List<Object[]> list = session.createSQLQuery(getRank).list();
+			list.forEach(rank -> session
+					.createSQLQuery(formatUpdateRankString((int) rank[0], ((BigDecimal) rank[1]).doubleValue()))
+					.executeUpdate());
+			return 1;
+		});
+	}
+
+	private static final String formatUpdateRankString(int hotelId, double rank) {
+		return String.format(UPDATE_RANK_SQL, rank, hotelId);
+	}
+
+	public static void main(String[] args) {
+		INSTANCE.updateRank();
+	}
 }

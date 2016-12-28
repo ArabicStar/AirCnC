@@ -111,4 +111,9 @@ public class HotelDaoProxy implements HotelDao {
 		});
 	}
 
+	@Override
+	public void updateRank(){
+		return;
+	}
+
 }

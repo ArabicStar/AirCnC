@@ -60,4 +60,6 @@ public interface HotelDao {
 	 * @return whether given name exists or not<br>
 	 */
 	public boolean existName(final String name);
+	
+	public void updateRank();
 }

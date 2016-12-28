@@ -7,6 +7,7 @@ public class ServerLauncher {
 		LoggerLauncher.launch();
 		HibernateLauncher.launch();
 		RmiLauncher.launch();
+		TimerTaskLauncher.launch();
 	}
 
 	public static void main(String[] args) {
