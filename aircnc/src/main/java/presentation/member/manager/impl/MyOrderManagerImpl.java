@@ -63,6 +63,7 @@ public class MyOrderManagerImpl implements MyOrderManager{
 	@Override
 	public ObservableList<MyOrderModel> getOrderList() {
 		orderData = FXCollections.observableArrayList();
+		orderData.clear();
 		Iterator<OrderVo> it = orders.iterator();
 		while(it.hasNext())
 			orderData.add(new MyOrderModel(it.next()));

@@ -78,9 +78,11 @@ public class HotelManageButtonCell extends TableCell<HotelManageModel, HotelVo> 
 					break;
 				case MODIFY:
 					controller.handleModifyHotel(vo);
+					controller.update();
 					break;
 				case DELETE:
 					controller.handleDeleteHotel(vo);
+					controller.update();
 					break;
 				}
 

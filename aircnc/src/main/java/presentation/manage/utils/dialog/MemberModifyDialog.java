@@ -16,6 +16,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.GridPane;
 import presentation.manage.accessor.impl.MemberManageInfoAccessorImpl;
+import presentation.manage.view.membermanage.fxml.MemberManageMainController;
 import presentation.member.utils.dialog.PlainDialog;
 import vo.member.MemberVo;
 
@@ -26,13 +27,15 @@ public class MemberModifyDialog {
 	ButtonType ConfirmButtonType;
 	private GridPane grid;
 	private MemberVo vo;
+	private MemberManageMainController controller;
 
-	public MemberModifyDialog(MemberVo vo) {
+	public MemberModifyDialog(MemberVo vo, MemberManageMainController controller) {
 		this.vo = vo;
 		if (vo.getType().toUpperCase().equals("BUSINESS"))
 			initBusinessMemberDialog();
 		else
 			initPersonMemberDialog();
+		this.controller = controller;
 
 	}
 
@@ -175,6 +178,7 @@ public class MemberModifyDialog {
 			MemberManageInfoAccessorImpl.getInstance().setMemberVo(vo);
 			MemberManageInfoAccessorImpl.getInstance().setEnterprise(newEnt.getText());
 			ManageMemberCourier.getInstance().ModifyMemberInfo();
+			controller.handleQuery();
 			PlainDialog alert = new PlainDialog(AlertType.INFORMATION, "修改成功", "已成功修改客户信息");
 			alert.showDialog();
 		});

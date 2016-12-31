@@ -67,13 +67,13 @@ public class ManageHotelManager implements ManageHotelService{
 	}
 
 	@Override
-	public HotelInfo getHotelInfo(String name) {
+	public HotelInfo getHotelInfo(int id) {
 		if (dao == null)
 			throw unsupportedOpEx("get hotel info");
 
-		final HotelPo po = dao.findHotelByName(name);
+		final HotelPo po = dao.findHotelById(id);
 
-		return po == null ? null : dao.findHotelByName(name);
+		return po == null ? null : dao.findHotelById(id);
 	}
 
 	@Override

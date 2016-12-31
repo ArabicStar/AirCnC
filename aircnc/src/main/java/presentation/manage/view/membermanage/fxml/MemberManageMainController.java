@@ -18,7 +18,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import presentation.manage.CenterController;
-import presentation.manage.ManageTest;
 import presentation.manage.accessor.MemberManageInfoAccessor;
 import presentation.manage.accessor.impl.MemberManageInfoAccessorImpl;
 import presentation.manage.manager.MemberManageInfoManager;
@@ -105,6 +104,7 @@ public class MemberManageMainController implements Initializable {
 									return new MemberManageButtonCell(memController);
 								}
 							});
+					
 				} else {
 					PlainDialog alert = new PlainDialog(AlertType.INFORMATION, "搜索失败", "未找到该ID！");
 					alert.showDialog();
@@ -141,6 +141,13 @@ public class MemberManageMainController implements Initializable {
 
 	private static boolean checkId(String id) {
 		return id != null && id.matches("[0-9]{8}");
+	}
+	
+	public void update(){
+		accessor.setId(userId.getText());
+		ManageMemberCourier.getInstance().getMemberInfo();
+		models = manager.getMemberInfoList();
+		memberTable.setItems(models);
 	}
 
 }

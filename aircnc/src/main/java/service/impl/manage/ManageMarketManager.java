@@ -72,13 +72,11 @@ public class ManageMarketManager implements ManageMarketService {
 	@Override
 	public boolean ModifyMarketInfo(MarketInfo marketInfo) {
 		MarketPo po = dao.findMarket(marketInfo.getId());
-		
-		
 		if (!marketInfo.getId().equals(po.getId()))
 			throw new IllegalArgumentException("Incorresponding Market Info");
-
-		return dao
-				.updateMarket(new MarketPoBuilder(marketInfo).setPasswordHash(po.getPasswordHash()).getMarketInfo());
+		
+		return 
+			dao.updateMarket(new MarketPoBuilder(marketInfo).setPasswordHash(po.getPasswordHash()).getMarketInfo());
 	}
 
 	@Override

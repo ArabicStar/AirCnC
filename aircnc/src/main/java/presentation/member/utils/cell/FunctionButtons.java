@@ -113,19 +113,19 @@ public class FunctionButtons extends TableCell<MyOrderModel, OrderVo>{
             	 case REVIEW: 
             		 if(order != null){
             			 controller.addCommentPane(order);
-            		 	 controller.refresh();
+            		 	 controller.update();
             		 }
              		 break;
             	 case CANCEL: 
             		 if(order != null){
             			 controller.cancelOrder(order);
-            			 controller.refresh();
+            			 controller.update();
             		 }
               		 break;
             	 case APPEAL: 
             		 if(order != null){
             			 controller.addAppealPane(order);
-            			 controller.refresh();
+            			 controller.update();
             		 }
            			break;
             	 }

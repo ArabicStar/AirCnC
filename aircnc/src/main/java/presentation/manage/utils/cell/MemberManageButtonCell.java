@@ -80,7 +80,8 @@ public class MemberManageButtonCell extends TableCell<MemberManageModel, MemberV
 					break;
 				case MODIFY:
 					@SuppressWarnings("unused") 
-					MemberModifyDialog memAlert = new MemberModifyDialog(vo);
+					MemberModifyDialog memAlert = new MemberModifyDialog(vo,controller);
+					controller.update();
 					break;
 				default:
 					break;

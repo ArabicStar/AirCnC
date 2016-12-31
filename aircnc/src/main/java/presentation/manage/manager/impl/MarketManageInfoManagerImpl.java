@@ -14,7 +14,7 @@ public class MarketManageInfoManagerImpl implements MarketManageInfoManager{
 	private static MarketManageInfoManager instance;
 	
 	private MarketVo vo;
-	private ObservableList<MarketManageModel> marketInfo;
+	private ObservableList<MarketManageModel> marketInfo = FXCollections.observableArrayList();
 	
 	
 	public static final MarketManageInfoManager launch() {
@@ -52,7 +52,7 @@ public class MarketManageInfoManagerImpl implements MarketManageInfoManager{
 	 */
 	@Override
 	public ObservableList<MarketManageModel> getMarketInfoList() {
-		marketInfo = FXCollections.observableArrayList();
+		marketInfo.clear();
 		marketInfo.add(new MarketManageModel(vo));
 		return marketInfo;
 	}

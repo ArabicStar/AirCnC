@@ -108,25 +108,7 @@ public class MemberOrderMainController implements Initializable {
 	@FXML
 	public void handleQuery() {
 		if (finished.isSelected() || unfinished.isSelected() || exception.isSelected() || cancelled.isSelected()) {
-			states = new HashSet<OrderStatus>();
-			if (finished.isSelected()) {
-				states.add(OrderStatus.EXECUTED);
-				states.add(OrderStatus.REVIEWED);
-			}
-
-			if (unfinished.isSelected()) {
-				states.add(OrderStatus.UNEXECUTED);
-			}
-
-			if (exception.isSelected()) {
-				states.add(OrderStatus.ABNORMAL);
-				states.add(OrderStatus.APPEALING);
-			}
-
-			if (cancelled.isSelected()) {
-				states.add(OrderStatus.REPEALED);
-			}
-
+			getSearchTarget();
 			accessor.setSearchTarget(states);
 
 			MemberInfoCourier.getInstance().getMemberOrdersByStatus();
@@ -190,12 +172,6 @@ public class MemberOrderMainController implements Initializable {
 		rootLayout.getChildren().remove(rootLayout.getChildren().size() - 1);
 	}
 
-	public void refresh() {
-		accessor.setSearchTarget(states);
-		MemberInfoCourier.getInstance().getMemberOrdersByStatus();
-		models = manager.getOrderList();
-	}
-
 	public void cancelOrder(OrderVo vo) {
 		PlainDialog alert3 = new PlainDialog(AlertType.INFORMATION, "取消订单", "你确定取消该订单吗？");
 		Optional<ButtonType> result = alert3.showDialog();
@@ -204,5 +180,33 @@ public class MemberOrderMainController implements Initializable {
 			MemberOrderOperationCourier.getInstance().cancelOrder();
 		});
 	}
+	
+	public void getSearchTarget(){
+		states = new HashSet<OrderStatus>();
+		if (finished.isSelected()) {
+			states.add(OrderStatus.EXECUTED);
+			states.add(OrderStatus.REVIEWED);
+		}
 
+		if (unfinished.isSelected()) {
+			states.add(OrderStatus.UNEXECUTED);
+		}
+
+		if (exception.isSelected()) {
+			states.add(OrderStatus.ABNORMAL);
+			states.add(OrderStatus.APPEALING);
+		}
+
+		if (cancelled.isSelected()) {
+			states.add(OrderStatus.REPEALED);
+		}
+	}
+	
+	public void update(){
+		getSearchTarget();
+		accessor.setSearchTarget(states);
+		MemberInfoCourier.getInstance().getMemberOrdersByStatus();
+		models = manager.getOrderList();
+		orderTable.setItems(models);
+	}
 }

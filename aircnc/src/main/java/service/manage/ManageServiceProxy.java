@@ -131,7 +131,7 @@ public class ManageServiceProxy extends AccessSecureProxy
 	}
 
 	@Override
-	public HotelInfo getHotelInfo(String id) {
+	public HotelInfo getHotelInfo(int id) {
 		checkAuthentication();
 		return manageHotelService.getHotelInfo(id);
 	}

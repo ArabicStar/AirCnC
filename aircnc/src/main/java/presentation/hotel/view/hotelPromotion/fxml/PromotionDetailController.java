@@ -105,7 +105,7 @@ public class PromotionDetailController implements Initializable{
 		  				break;
 		  			case "生日优惠":
 		  				whenParaName.setText("优惠名称");
-			  			whenPara.setText("生日优惠");;
+			  			whenPara.setText("生日优惠");
 			  			whenPara.setDisable(true);
 		  				break;
 		  			}

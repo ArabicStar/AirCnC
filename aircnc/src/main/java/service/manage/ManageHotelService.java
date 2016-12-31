@@ -10,7 +10,7 @@ public interface ManageHotelService {
 	
 	public boolean ModifyHotelInfo(HotelInfo hotelInfo);
 	
-	public HotelInfo getHotelInfo(String id);
+	public HotelInfo getHotelInfo(int id);
 	
 	public boolean deleteHotelInfo(int id);
 }

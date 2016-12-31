@@ -15,12 +15,11 @@ public class MemberManageInfoImpl implements MemberManageInfoManager{
 	private static MemberManageInfoManager instance;
 	
 	private MemberVo user;
-	private ObservableList<MemberManageModel> memberInfo;
+	private ObservableList<MemberManageModel> memberInfo = FXCollections.observableArrayList();;
 	
 	public static final MemberManageInfoManager launch() {
 		if (instance != null)
 			throw duplicateSingletonEx();
-
 		return instance = new MemberManageInfoImpl();
 	}
 	
@@ -52,7 +51,7 @@ public class MemberManageInfoImpl implements MemberManageInfoManager{
 	 */
 	@Override
 	public ObservableList<MemberManageModel> getMemberInfoList() {
-		memberInfo = FXCollections.observableArrayList();
+		memberInfo.clear();
 		memberInfo.add(new MemberManageModel(user));
 		return memberInfo;
 	}

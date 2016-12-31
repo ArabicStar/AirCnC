@@ -75,7 +75,7 @@ public class HotelManageMainController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		Platform.runLater(() -> {
-			hotelId.setPromptText("酒店名称");
+			hotelId.setPromptText("酒店ID");
 			hotelTable.setEditable(false);
 			accessor = HotelManageInfoAccessorImpl.getInstance();
 			manager = HotelManageInfoManagerImpl.getInstance();
@@ -163,7 +163,7 @@ public class HotelManageMainController implements Initializable {
 		PlainDialog delete = new PlainDialog(AlertType.CONFIRMATION, "删除酒店", "确认删除该酒店吗？");
 		Optional<ButtonType> result = delete.showDialog();
 
-		if(result.get() == ButtonType.OK){
+		if (result.get() == ButtonType.OK) {
 			HotelManageInfoAccessorImpl.getInstance().setId(vo.getId());
 			ManageHotelCourier.getInstance().deleteHotelInfo();
 		}
@@ -172,6 +172,14 @@ public class HotelManageMainController implements Initializable {
 
 	public void setCenterController(CenterController controller) {
 		this.centerController = controller;
+	}
+
+	public void update() {
+		accessor.setName(hotelId.getText());
+		ManageHotelCourier.getInstance().getHotelInfo();
+		models = manager.getHotelInfoList();
+		model = models.get(0);
+		hotelTable.setItems(models);
 	}
 
 }

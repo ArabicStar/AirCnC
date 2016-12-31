@@ -65,7 +65,6 @@ public class ManageMarketCourier implements ManageMarketInteractor{
 	public boolean ModifyMarketInfo() {
 		String title = getTitle();
 		MarketInfo modified = MarketManageInfoAccessorImpl.getInstance().getModifiedMarketVo();
-
 		boolean res = execute(title, () -> {
 			String id = MarketManageInfoAccessorImpl.getInstance().getMarketId();
 			if (id != null)
