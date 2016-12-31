@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-12-31 21:24:43 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+	<class name="utils.info.level.LevelStrategy" table="level_strategy">
+		<id name="id" type="int">
+			<column name="ID" />
+			<generator class="assigned" />
+		</id>
+		<property name="contentString" column="content" type="text" />
+	</class>
+</hibernate-mapping>

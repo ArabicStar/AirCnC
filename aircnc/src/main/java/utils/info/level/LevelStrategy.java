@@ -1,8 +1,14 @@
 package utils.info.level;
 
+import java.io.Serializable;
+
 import utils.parameter.ParametersList;
 
-public class LevelStrategy {
+public class LevelStrategy implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2404867525093676340L;
 	private int id = 1;
 	private ParametersList list;
 
@@ -37,5 +43,13 @@ public class LevelStrategy {
 	}
 
 	public void setId(int id) {
+	}
+
+	public String getContentString() {
+		return list.toString();
+	}
+
+	public void setContentString(String contentString) throws Exception {
+		list = ParametersList.parseString(contentString);
 	}
 }
