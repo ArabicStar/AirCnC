@@ -48,9 +48,7 @@ public enum MarketDaoImpl implements MarketDao{
 
 	@Override
 	public boolean updateMarket(final MarketPo po) {
-		System.out.println("什么");
 		if(po==null){
-			System.out.println("什么！！！");
 			return false;
 		}
 		return execute(session -> {
@@ -59,7 +57,6 @@ public enum MarketDaoImpl implements MarketDao{
 			MarketPo modified = session.get(MarketPo.class, parseId(po.getId()));
 			if(flag = Boolean.valueOf(modified !=null))
 				session.update(modified);
-			System.out.println(modified.getName()+"啦啦啦");
 			return flag;
 		});
 	}
