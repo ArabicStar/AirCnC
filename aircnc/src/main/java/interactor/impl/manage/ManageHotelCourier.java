@@ -45,7 +45,7 @@ public class ManageHotelCourier implements ManageHotelInteractor{
 		String title = getTitle();
 		HotelInfo info = execute(title, () -> {
 			HotelInfo tmp = handler.AddHotelInfo(new HotelVoBuilder(HotelManageInfoAccessorImpl.getInstance()
-					.getModifiedHotelVo()), HotelManageInfoAccessorImpl.getInstance().getPasswordHash());
+					.getAddedHotelVo()), HotelManageInfoAccessorImpl.getInstance().getPasswordHash());
 
 			if (tmp == null)
 				throw unknownEx();
@@ -53,7 +53,7 @@ public class ManageHotelCourier implements ManageHotelInteractor{
 		});
 
 		if (info != null)
-			AlertHelper.alertSuccess(title, String.format("添加酒店成功！该账号是%s。此账号将会作为登录凭据", info.getId()));
+			AlertHelper.alertSuccess(title, String.format("添加酒店成功！该账号是%s。此账号将会作为登录凭据", String.valueOf(info.getId())));
 		else
 			AlertHelper.alertFail(title, "添加失败！");
 		HotelManageInfoManagerImpl.getInstance().setHotel(new HotelVoBuilder(info).getHotelInfo());
@@ -86,8 +86,6 @@ public class ManageHotelCourier implements ManageHotelInteractor{
 			int id = HotelManageInfoAccessorImpl.getInstance().getHotelId();
 			return handler.getHotelInfo(id);
 		});
-		
-		System.out.println(info);
 		
 		HotelManageInfoManagerImpl.getInstance().setHotel(new HotelVoBuilder(info).getHotelInfo());
 		

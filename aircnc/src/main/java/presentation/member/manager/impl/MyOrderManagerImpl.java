@@ -13,59 +13,55 @@ import presentation.member.model.MyOrderModel;
 import vo.order.OrderVo;
 
 /**
- * the manager of member info
- * aiming to receive the MemberVo from the logic layer
- * and deliver the member info model to the presentation layer
+ * the manager of member info aiming to receive the MemberVo from the logic
+ * layer and deliver the member info model to the presentation layer
+ * 
  * @author paranoia
  *
  */
-public class MyOrderManagerImpl implements MyOrderManager{
-	
+public class MyOrderManagerImpl implements MyOrderManager {
+
 	private static MyOrderManager instance;
-	
+
 	private List<OrderVo> orders;
-	
-	private ObservableList<MyOrderModel> orderData;
-	
+
+	private ObservableList<MyOrderModel> orderData = FXCollections.observableArrayList();
+
 	public static final MyOrderManager launch() {
 		if (instance != null)
 			throw duplicateSingletonEx();
 
 		return instance = new MyOrderManagerImpl();
 	}
-	
-	public static final MyOrderManager getInstance(){
+
+	public static final MyOrderManager getInstance() {
 		if (instance == null)
 			throw singletonNotExistsEx();
 
 		return instance;
 	}
-	
-	public static boolean isLaunched(){
-		if(instance == null)
+
+	public static boolean isLaunched() {
+		if (instance == null)
 			return false;
 		else
 			return true;
 	}
-	
+
 	@Override
 	public boolean setOrderList(List<OrderVo> list) {
-		if(list!=null){
-			this.orders = list;
-			return true;
-		}
-		return false;
+		this.orders = list;
+		return true;
 	}
-	
+
 	/**
 	 * wrap into the observablelist
 	 */
 	@Override
 	public ObservableList<MyOrderModel> getOrderList() {
-		orderData = FXCollections.observableArrayList();
 		orderData.clear();
 		Iterator<OrderVo> it = orders.iterator();
-		while(it.hasNext())
+		while (it.hasNext())
 			orderData.add(new MyOrderModel(it.next()));
 		return orderData;
 	}

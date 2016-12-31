@@ -6,6 +6,8 @@ public interface HotelManageInfoAccessor {
 	
 	public HotelVo getModifiedHotelVo();
 	
+	public HotelVo getAddedHotelVo();
+	
 	public int getPasswordHash();
 	
 	public int getHotelId();

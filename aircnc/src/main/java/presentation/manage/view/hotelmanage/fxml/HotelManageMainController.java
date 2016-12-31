@@ -84,8 +84,8 @@ public class HotelManageMainController implements Initializable {
 
 	@FXML
 	public void handleQuery() {
-		if (hotelId.getText().length() > 0) {
-			accessor.setName(hotelId.getText());
+		if (checkId(hotelId.getText())) {
+			accessor.setId(Integer.valueOf(hotelId.getText()));
 			boolean valid = ManageHotelCourier.getInstance().getHotelInfo();
 			if (valid) {
 				models = manager.getHotelInfoList();
@@ -116,7 +116,7 @@ public class HotelManageMainController implements Initializable {
 				alert.showDialog();
 			}
 		} else {
-			PlainDialog alert = new PlainDialog(AlertType.INFORMATION, "搜索失败", "请输入搜索的ID");
+			PlainDialog alert = new PlainDialog(AlertType.INFORMATION, "搜索失败", "请输入有效的搜索的ID");
 			alert.showDialog();
 		}
 	}
@@ -127,6 +127,11 @@ public class HotelManageMainController implements Initializable {
 
 	public void setRootLayout(AnchorPane pane) {
 		this.rootLayout = pane;
+	}
+	
+	public void clearModels(){
+		models.clear();
+		hotelTable.setItems(models);
 	}
 
 	@FXML
@@ -172,6 +177,17 @@ public class HotelManageMainController implements Initializable {
 
 	public void setCenterController(CenterController controller) {
 		this.centerController = controller;
+	}
+	
+	public static boolean checkId(String id){
+		if(id.length()<=0)
+			return false;
+		try{
+			Integer.valueOf(id);
+		}catch(Exception e){
+			return false;
+		}
+		return true;
 	}
 
 	public void update() {

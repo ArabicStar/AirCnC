@@ -18,7 +18,7 @@ public class ManageHotelCommentManagerImpl implements ManageHotelCommentManager 
 
 	private List<CommentVo> comments;
 
-	private ObservableList<ManageCommentModel> commentData;
+	private ObservableList<ManageCommentModel> commentData = FXCollections.observableArrayList();
 
 	public static final ManageHotelCommentManager launch() {
 		if (instance != null)
@@ -52,8 +52,7 @@ public class ManageHotelCommentManagerImpl implements ManageHotelCommentManager 
 
 	@Override
 	public ObservableList<ManageCommentModel> getCommentList() {
-
-		commentData = FXCollections.observableArrayList();
+		commentData.clear();
 		Iterator<CommentVo> it = comments.iterator();
 		while (it.hasNext())
 			commentData.add(new ManageCommentModel(it.next()));

@@ -5,7 +5,6 @@ import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
 import presentation.member.manager.MakeOrderManager;
 import utils.info.order.OrderInfo;
-import vo.order.OrderVo;
 
 public class MakeOrderManagerImpl implements MakeOrderManager{
 	

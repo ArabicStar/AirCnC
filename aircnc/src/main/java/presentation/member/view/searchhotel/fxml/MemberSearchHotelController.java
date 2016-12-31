@@ -34,7 +34,6 @@ public class MemberSearchHotelController implements Initializable {
 	/*
 	 * 记录点东西：酒店框长720 宽130 第一个坐标30，110 ，往下依次y坐标加150
 	 */
-
 	@FXML
 	private TextField hotelName;
 

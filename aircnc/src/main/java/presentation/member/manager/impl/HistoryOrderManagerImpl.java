@@ -18,7 +18,7 @@ private static HistoryOrderManager instance;
 	
 	private List<OrderVo> orders;
 	
-	private ObservableList<MyOrderModel> orderData;
+	private ObservableList<MyOrderModel> orderData = FXCollections.observableArrayList();
 	
 	public static final HistoryOrderManager launch() {
 		if (instance != null)
@@ -55,7 +55,7 @@ private static HistoryOrderManager instance;
 	 */
 	@Override
 	public ObservableList<MyOrderModel> getOrderList() {
-		orderData = FXCollections.observableArrayList();
+		orderData.clear();
 		Iterator<OrderVo> it = orders.iterator();
 		while(it.hasNext())
 			orderData.add(new MyOrderModel(it.next()));

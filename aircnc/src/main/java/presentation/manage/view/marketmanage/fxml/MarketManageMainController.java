@@ -164,6 +164,11 @@ public class MarketManageMainController implements Initializable {
 		return id != null && id.matches("[0-9]{8}");
 	}
 	
+	public void clearModels(){
+		models.clear();
+		marketTable.setItems(models);
+	}
+	
 	public void update(){
 		accessor.setId(marketId.getText());
 		ManageMarketCourier.getInstance().getMarketInfo();

@@ -66,12 +66,12 @@ public class MakeOrderController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		Platform.runLater(() -> {
-			  initMakeOrder();
-		});	
+			initMakeOrder();
+		});
 
 	}
-	
-	public void initMakeOrder(){
+
+	public void initMakeOrder() {
 		enterDatePickeratePicker = new DatePicker(LocalDate.now().plusDays(1));
 		enterDatePickeratePicker.setShowWeekNumbers(true);
 		final Callback<DatePicker, DateCell> enterDayCellFactory = new Callback<DatePicker, DateCell>() {
@@ -171,12 +171,13 @@ public class MakeOrderController implements Initializable {
 			OrderMakerAccessorImpl.getIntance().setLatestExecuteTime(timePicker.getDateTimeValue());
 			OrderMakerAccessorImpl.getIntance().setHasChildren(hasChild.isSelected());
 			OrderMakerAccessorImpl.getIntance().setHotel(model.getHotel());
-			MemberOrderOperationCourier.getInstance().tryMakeOrder();
-			nextPane = new MakeOrderNextPane();
-			rootLayout.getChildren().add(nextPane.getPane());
-			AnchorPane.setTopAnchor(nextPane.getPane(), 0.0);
-			nextPane.getController().setParentController(this.controller);
-			
+			if (MemberOrderOperationCourier.getInstance().tryMakeOrder()) {
+				nextPane = new MakeOrderNextPane();
+				rootLayout.getChildren().add(nextPane.getPane());
+				AnchorPane.setTopAnchor(nextPane.getPane(), 0.0);
+				nextPane.getController().setParentController(this.controller);
+			}
+
 		} else {
 			PlainDialog alert = new PlainDialog(AlertType.INFORMATION, "下订单", "请输入有效信息！");
 			alert.showDialog();

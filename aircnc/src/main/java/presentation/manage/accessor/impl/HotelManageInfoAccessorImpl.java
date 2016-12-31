@@ -92,5 +92,11 @@ public class HotelManageInfoAccessorImpl implements HotelManageInfoAccessor{
 		return name;
 	}
 
+	@Override
+	public HotelVo getAddedHotelVo() {
+		HotelVo hotel = new HotelVoBuilder().setStar(star).setName(name).getHotelInfo();		
+		return hotel;
+	}
+
 
 }

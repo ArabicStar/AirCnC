@@ -10,6 +10,7 @@ public class CreditChangeOrderAccessorImpl implements CreditChangeOrderAccessor{
 	private static CreditChangeOrderAccessor instance;
 	
 	private String id;
+	private String memberId;
 	
 	public static final CreditChangeOrderAccessor launch() {
 		if (instance != null)
@@ -41,5 +42,16 @@ public class CreditChangeOrderAccessorImpl implements CreditChangeOrderAccessor{
 	public void setCauseId(String id) {
 		this.id = id;
 	}
+
+	@Override
+	public String getMemberId() {
+		return memberId;
+	}
+
+	@Override
+	public void setMemberId(String id) {
+		this.memberId = id;
+	}
+	
 
 }

@@ -8,6 +8,7 @@ import java.util.Set;
 
 import interactor.impl.member.MemberInfoCourier;
 import interactor.impl.member.MemberOrderOperationCourier;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -99,20 +100,16 @@ public class MemberOrderMainController implements Initializable {
 
 		manager = MyOrderManagerImpl.getInstance();
 		accessor = SearchOrderInfoAccessorImpl.getInstance();
-	}
-
-	/**
-	 * 1.deliver the search requirement to the logic layer. 2.get the searched
-	 * results. 3.add the content to the tableview
-	 */
-	@FXML
-	public void handleQuery() {
-		if (finished.isSelected() || unfinished.isSelected() || exception.isSelected() || cancelled.isSelected()) {
-			getSearchTarget();
+		
+		states = new HashSet<OrderStatus>();
+		
+		Platform.runLater(()->{
+			
+			states.add(OrderStatus.UNEXECUTED);
 			accessor.setSearchTarget(states);
 
 			MemberInfoCourier.getInstance().getMemberOrdersByStatus();
-
+			
 			models = manager.getOrderList();
 			orderTable.setItems(models);
 
@@ -138,6 +135,24 @@ public class MemberOrderMainController implements Initializable {
 							return new FunctionButtons(OrderController);
 						}
 					});
+			});
+	}
+
+	/**
+	 * 1.deliver the search requirement to the logic layer. 2.get the searched
+	 * results. 3.add the content to the tableview
+	 */
+	@FXML
+	public void handleQuery() {
+		if (finished.isSelected() || unfinished.isSelected() || exception.isSelected() || cancelled.isSelected()) {
+			getSearchTarget();
+			accessor.setSearchTarget(states);
+
+			MemberInfoCourier.getInstance().getMemberOrdersByStatus();
+			
+			models = manager.getOrderList();
+			orderTable.setItems(models);
+
 		} else {
 			PlainDialog alert = new PlainDialog(AlertType.INFORMATION, "搜索失败", "请选择要搜索的订单");
 			alert.showDialog();
@@ -158,6 +173,7 @@ public class MemberOrderMainController implements Initializable {
 
 	public void removeCommentPane() {
 		rootLayout.getChildren().remove(rootLayout.getChildren().size() - 1);
+		update();
 	}
 
 	public void addAppealPane(OrderVo vo) {
@@ -170,6 +186,7 @@ public class MemberOrderMainController implements Initializable {
 
 	public void removeAppealPane() {
 		rootLayout.getChildren().remove(rootLayout.getChildren().size() - 1);
+		update();
 	}
 
 	public void cancelOrder(OrderVo vo) {
@@ -178,6 +195,7 @@ public class MemberOrderMainController implements Initializable {
 		result.ifPresent(ok -> {
 			MemberOrderOperationAccessorImpl.getInstance().setCancel(vo);
 			MemberOrderOperationCourier.getInstance().cancelOrder();
+			update();
 		});
 	}
 	

@@ -83,7 +83,7 @@ public class MarketManageButtonCell extends TableCell<MarketManageModel, MarketV
 					break;
 				case DELETE:
 					controller.handleDeleteMarket(vo);
-					controller.update();
+					controller.clearModels();
 					break;
 				}
 

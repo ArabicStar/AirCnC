@@ -2,10 +2,14 @@ package presentation.member.model;
 
 import java.time.Instant;
 
+import interactor.impl.member.MemberInfoCourier;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import presentation.member.accessor.impl.CreditChangeOrderAccessorImpl;
+import presentation.member.manager.impl.CreditChangeManagerImpl;
+import presentation.member.manager.impl.MemberInfoManagerImpl;
 import vo.member.credit.CreditChangeVo;
 
 /**
@@ -47,29 +51,48 @@ public class CreditModel {
 
 		//this.description = new SimpleStringProperty(change.getFormatString(),change.getOrderId());
 		String des;
+		String memberId = MemberInfoManagerImpl.getInstance().getMemberVo().getId();
 		switch(change.getActionType()){
 		case CHARGE:
 			des = String.format(change.getFormatString(), (float)change.getMoney()
 					,change.getAfterCredit()-change.getBeforeCredit());
 			break;
 		case ORDER_EXECUTION:
-			des = String.format(change.getFormatString(),change.getOrderId(),change.getOrderId()
-					,change.getAfterCredit()-change.getBeforeCredit());
+			CreditChangeOrderAccessorImpl.getInstance().setCauseId(change.getOrderId());
+			CreditChangeOrderAccessorImpl.getInstance().setMemberId(memberId);
+			MemberInfoCourier.getInstance().getOrder();
+			des = String.format(change.getFormatString(),CreditChangeManagerImpl.getInstance().getCauseHotelName()
+					,change.getOrderId(),change.getAfterCredit()-change.getBeforeCredit());
 			break;
 		case ORDER_CANCEL:
-			des = String.format(change.getFormatString(),change.getOrderId(),change.getOrderId()
-					,change.getBeforeCredit()-change.getAfterCredit());
+			CreditChangeOrderAccessorImpl.getInstance().setCauseId(change.getOrderId());
+			CreditChangeOrderAccessorImpl.getInstance().setMemberId(memberId);
+			MemberInfoCourier.getInstance().getOrder();
+			des = String.format(change.getFormatString(),CreditChangeManagerImpl.getInstance().getCauseHotelName()
+					,change.getOrderId(),change.getBeforeCredit()-change.getAfterCredit());
 			break;
 		case ORDER_OVERDUE:
-			des = String.format(change.getFormatString(),change.getOrderId(),change.getOrderId()
+			CreditChangeOrderAccessorImpl.getInstance().setCauseId(change.getOrderId());
+			CreditChangeOrderAccessorImpl.getInstance().setMemberId(memberId);
+			MemberInfoCourier.getInstance().getOrder();
+			des = String.format(change.getFormatString(),CreditChangeManagerImpl.getInstance().getCauseHotelName()
+					,change.getOrderId()
 					,change.getBeforeCredit()-change.getAfterCredit());
 			break;
 		case ORDER_APPEAL:
-			des = String.format(change.getFormatString(),change.getOrderId(),change.getOrderId()
+			CreditChangeOrderAccessorImpl.getInstance().setCauseId(change.getOrderId());
+			CreditChangeOrderAccessorImpl.getInstance().setMemberId(memberId);
+			MemberInfoCourier.getInstance().getOrder();
+			des = String.format(change.getFormatString(),CreditChangeManagerImpl.getInstance().getCauseHotelName()
+					,change.getOrderId()
 					,change.getAfterCredit()-change.getBeforeCredit());
 			break;
 		case ORDER_DELAY:
-			des = String.format(change.getFormatString(),change.getOrderId(),change.getOrderId()
+			CreditChangeOrderAccessorImpl.getInstance().setCauseId(change.getOrderId());
+			CreditChangeOrderAccessorImpl.getInstance().setMemberId(memberId);
+			MemberInfoCourier.getInstance().getOrder();
+			des = String.format(change.getFormatString(),CreditChangeManagerImpl.getInstance().getCauseHotelName()
+					,change.getOrderId()
 					,change.getAfterCredit()-change.getBeforeCredit());
 			break;
 		default:

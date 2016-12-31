@@ -45,7 +45,7 @@ public class SearchHotelManagerImpl implements SearchHotelManager{
 			return true;
 	}
 	
-	private ObservableList<SearchHotelsModel> searchHotelsData;
+	private ObservableList<SearchHotelsModel> searchHotelsData = FXCollections.observableArrayList();
 	@Override
 	public boolean setHotel(List<HotelVo> list) {
 		if(list!=null){
@@ -60,8 +60,6 @@ public class SearchHotelManagerImpl implements SearchHotelManager{
 	 */
 	@Override
 	public ObservableList<SearchHotelsModel> getHotelList(int page) {
-		searchHotelsData = FXCollections.observableArrayList();
-		
 		searchHotelsData.clear();
 		
 		for(int i = page*4; i < hotels.size() && 

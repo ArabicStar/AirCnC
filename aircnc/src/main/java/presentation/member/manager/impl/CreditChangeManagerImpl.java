@@ -49,7 +49,7 @@ public class CreditChangeManagerImpl implements CreditChangeManager{
 			return true;
 	}
 	
-	private ObservableList<CreditModel> creditChangesData;
+	private ObservableList<CreditModel> creditChangesData = FXCollections.observableArrayList();
 	@Override
 	public boolean setCreditChanges(List<CreditChangeVo> list) {
 		if(list!=null){
@@ -64,7 +64,7 @@ public class CreditChangeManagerImpl implements CreditChangeManager{
 	 */
 	@Override
 	public ObservableList<CreditModel> getCreditList() {
-		creditChangesData = FXCollections.observableArrayList();
+		creditChangesData.clear();
 		Iterator<CreditChangeVo> it = changes.iterator();
 		while(it.hasNext())
 			creditChangesData.add(new CreditModel(it.next()));
