@@ -11,6 +11,8 @@ public interface MemberInfoInteractor {
 
 	public void getMemberCreditChange();
 
+	public void getOrder();
+
 	public void updatePassword();
 
 	public void updateInfo();
