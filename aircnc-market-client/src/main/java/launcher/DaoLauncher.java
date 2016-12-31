@@ -66,6 +66,7 @@ public class DaoLauncher {
 	private static final void launchQueryDao(RemoteHelper helper) {
 		QueryDaoProxy proxy = QueryDaoProxy.launch();
 
+		proxy.loadRemoteHotelQueryDao(helper.getRemoteHotelQueryDao());
 		proxy.loadRemotePromotionQueryDao(helper.getRemotePromotionQueryDao());
 		proxy.loadRemoteOrderQueryDao(helper.getRemoteOrderQueryDao());
 

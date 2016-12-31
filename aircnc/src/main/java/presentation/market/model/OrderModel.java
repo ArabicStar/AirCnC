@@ -24,6 +24,7 @@ public class OrderModel {
     private final StringProperty hasChild;
     private final StringProperty timeAndSum;
     private final StringProperty totalPrice;
+    private final StringProperty appeal;
     private final ObjectProperty<OrderVo> operation;
 
     /**
@@ -48,6 +49,7 @@ public class OrderModel {
     	this.userID = new SimpleStringProperty(order.getMember().getId());
     	this.orderID = new SimpleStringProperty(order.getOrderId());
         this.hotelName = new SimpleStringProperty(order.getHotel().getName());
+        this.appeal = new SimpleStringProperty(order.getAppeal());
         
         //process the checkinTime
         this.checkinTime = new SimpleStringProperty(transformTime(order.getEntryTime()));
@@ -264,5 +266,17 @@ public class OrderModel {
 
     public StringProperty hasChildProperty() {
         return hasChild;
+    }
+    
+    public String getAppeal() {
+        return appeal.get();
+    }
+
+    public void setAppeal(String newAppeal) {
+        this.appeal.set(newAppeal);
+    }
+
+    public StringProperty appealProperty() {
+        return appeal;
     }
 }

@@ -12,6 +12,6 @@ public final class AlertHelper {
 	}
 
 	public static final void alertSuccess(String title, String content) {
-		new PlainDialog(AlertType.CONFIRMATION, title, content).showDialog();
+		new PlainDialog(AlertType.INFORMATION, title, content).showDialog();
 	}
 }

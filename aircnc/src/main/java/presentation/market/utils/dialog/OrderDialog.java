@@ -31,9 +31,9 @@ public class OrderDialog extends GridPane {
 		dialog.initStyle(StageStyle.UNDECORATED);
 		dialog.getDialogPane().setStyle("-fx-background-color: #FFFFFF;");
 		dialog.getDialogPane().setEffect(new DropShadow());
-		final int numberOfDetails = 11;
+		final int numberOfDetails = 9;
 
-		String[] labelNames = { "用户名", "酒店名", "订单号", "状态", "入住时间", "退房时间", "房间类型", "房间数量", "入住人数", "有无儿童", "总价" };
+		String[] labelNames = { "用户名", "酒店名", "订单号", "状态", "入住时间", "退房时间", "房间类型", "总价" ,"申诉内容"};
 		String fontOfName = "-fx-text-fill: #969696; -fx-font-size: 16pt;";
 		Label[] labels = new Label[numberOfDetails];
 		for (int i = 0; i < numberOfDetails; i++) {
@@ -44,10 +44,9 @@ public class OrderDialog extends GridPane {
 
 		String[] labelProperties = { orderModel.getUserName(), orderModel.getHotelName(),
 				orderModel.getOrderID(), orderModel.getState(), 
-				orderModel.getCheckInTime(), orderModel.getLeaveTime(), orderModel.getRoomType(),
-				String.valueOf(orderModel.getRoomNumber()),
-				String.valueOf(orderModel.getPeopleNumber()), orderModel.hasChild(),
-				orderModel.getTotalPrice() };
+				orderModel.getCheckInTime(), orderModel.getLeaveTime(), orderModel.getRoomType(),		
+				orderModel.getTotalPrice(),orderModel.getAppeal()};
+
 		String fontOfProperties = "-fx-text-fill: #585993; -fx-font-size: 16pt;";
 		Label[] properties = new Label[numberOfDetails];
 		for (int i = 0; i < numberOfDetails; i++) {

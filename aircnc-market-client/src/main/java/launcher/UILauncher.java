@@ -2,9 +2,11 @@ package launcher;
 
 import javafx.application.Application;
 import presentation.market.CenterController;
+import presentation.market.accessor.impl.AbnormalOrderAccessorImpl;
 import presentation.market.accessor.impl.MarketChargeAccessorImpl;
 import presentation.market.accessor.impl.MarketLoginAccessorImpl;
 import presentation.market.accessor.impl.MarketPromotionAccessorImpl;
+import presentation.market.manager.impl.AbnormalOrderManagerImpl;
 import presentation.market.manager.impl.MarketPromotionManagerImpl;
 import utils.logger.Log;
 
@@ -29,12 +31,14 @@ public class UILauncher {
 		MarketPromotionAccessorImpl.launch();
 		MarketLoginAccessorImpl.launch();
 		MarketChargeAccessorImpl.launch();
+		AbnormalOrderAccessorImpl.launch();
 
 	}
 
 	private static final void launchManager() {
 		
 		MarketPromotionManagerImpl.launch();
+		AbnormalOrderManagerImpl.launch();
 
 	}
 }

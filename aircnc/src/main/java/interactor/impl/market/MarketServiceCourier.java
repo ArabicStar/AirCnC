@@ -64,7 +64,7 @@ public class MarketServiceCourier implements MarketServiceInteractor{
 
 		execute(title, () -> {
 			MemberInfo member = helper.approveAppeal(AbnormalOrderAccessorImpl.getInstance().getOrderVo());
-			alertSuccess(title, "目前"+member.getId()+"用户信用值为"+member.getCredit());
+			alertSuccess(title, "申诉成功！\n目前"+member.getId()+"用户信用值为"+member.getCredit());
 			return 0;
 		});
 	}

@@ -16,6 +16,7 @@ import data.dao.rmi.member.RemoteMemberDao;
 import data.dao.rmi.order.RemoteOrderDao;
 import data.dao.rmi.promotion.RemoteWebsitePromotionDao;
 import data.dao.rmi.query.RemoteCommentQueryDao;
+import data.dao.rmi.query.RemoteHotelQueryDao;
 import data.dao.rmi.query.RemoteOrderQueryDao;
 import data.dao.rmi.query.RemotePromotionQueryDao;
 import utils.logger.Log;
@@ -116,6 +117,10 @@ public final class RemoteHelper {
 	
 	public RemoteOrderQueryDao getRemoteOrderQueryDao() {
 		return (RemoteOrderQueryDao) queryDaoRemoteObj;
+	}
+	
+	public RemoteHotelQueryDao getRemoteHotelQueryDao() {
+		return (RemoteHotelQueryDao) queryDaoRemoteObj;
 	}
 
 	public RemoteWebsitePromotionDao getRemoteWebsitePromotionDao() {

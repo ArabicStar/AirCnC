@@ -67,10 +67,10 @@ public class OrderCell extends TableCell<OrderModel, OrderVo>{
 						Alert alert = new Alert(AlertType.CONFIRMATION);
 						alert.setTitle("确认信息");
 						alert.setHeaderText("请进行确认");
-						alert.setContentText("确定执行该订单吗？");
+						alert.setContentText("确定通过该订单吗？");
 
 						if (alert.showAndWait().get() == ButtonType.OK) {
-//							controller.executeOrder(vo);
+							controller.approveOrder(vo);
 						}
 					}
 					break;
