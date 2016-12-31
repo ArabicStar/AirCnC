@@ -6,11 +6,11 @@ import java.net.URL;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.layout.Pane;
-import presentation.market.view.credittopup.fxml.CreditTopUpController;
+import presentation.market.view.credittopup.fxml.CreditChargeController;
 
 public class CreditTopUpPane {
 	private Pane orderLayout;
-	private CreditTopUpController controller;
+	private CreditChargeController controller;
 	
 	public CreditTopUpPane() {
 		init();
@@ -24,7 +24,7 @@ public class CreditTopUpPane {
 			loader.setLocation(location);
 			loader.setBuilderFactory(new JavaFXBuilderFactory());
 			loader.load();
-			controller = (CreditTopUpController) loader.getController();
+			controller = (CreditChargeController) loader.getController();
 			orderLayout = loader.getRoot();
 
 		} catch (IOException e) {
@@ -32,7 +32,7 @@ public class CreditTopUpPane {
 		}
 	}
 	
-	public CreditTopUpController getController() {
+	public CreditChargeController getController() {
 		return controller;
 	}
 	

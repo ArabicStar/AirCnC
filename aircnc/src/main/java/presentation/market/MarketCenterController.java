@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import presentation.hotel.CenterController;
 import presentation.market.view.MarketMainPane;
 import presentation.market.view.abnormalorderbrowse.AbnormalOrderBrowsePane;
 import presentation.market.view.credittopup.CreditTopUpPane;
@@ -46,7 +47,7 @@ public class MarketCenterController extends Application {
 	/**
 	 * 添加网站营销策略界面
 	 */
-	public void addWebsitePromotionStrategyPane() {
+	public void addWebsitePromotionPane() {
 		clearContent();
 		websitePromotionPane = new WebsitePromotionPane();
 		mainClient.getBorderPane().setCenter(websitePromotionPane.getPane());
@@ -57,7 +58,7 @@ public class MarketCenterController extends Application {
 	/**
 	 * 添加浏览异常订单界面
 	 */
-	public void addAbnormalOrderBrowsePane() {
+	public void addAbnormalOrderPane() {
 		clearContent();
 		abnormalOrderBrowsePane = new AbnormalOrderBrowsePane();
 		mainClient.getBorderPane().setCenter(abnormalOrderBrowsePane.getPane());
@@ -68,11 +69,22 @@ public class MarketCenterController extends Application {
 	/**
 	 * 添加信用充值界面
 	 */
-	public void addCreditTopUpPane() {
+	public void addCreditCharge() {
 		clearContent();
 		creditTopUpPane = new CreditTopUpPane();
 		mainClient.getBorderPane().setCenter(creditTopUpPane.getPane());
 		creditTopUpPane.getController().setCenterController(this);		
+	}
+	
+	public void initializeLogin(){
+		primaryStage.close();
+		CenterController login = new CenterController();
+		try {
+			login.start(new Stage());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	

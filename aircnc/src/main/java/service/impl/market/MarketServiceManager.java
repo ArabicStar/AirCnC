@@ -5,26 +5,23 @@ import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 import static utils.exception.StaticExceptionFactory.unsupportedOpEx;
 
 import java.util.List;
+
 import service.market.MarketService;
 import service.member.MemberCreditService;
-import service.promotion.WebsitePromotionManagementService;
 import service.query.OrderQueryService;
 import utils.info.order.OrderStatus;
 import vo.member.MemberVo;
 import vo.order.OrderVo;
-import vo.promotion.WebsitePromotionVo;
 
 public class MarketServiceManager implements MarketService{
 	
 	private static MarketService instance;
 
 	public static MarketService launch(OrderQueryService OrderQueryService
-			, MemberCreditService memberCreditService
-			, WebsitePromotionManagementService websitePromotionService) {
+			, MemberCreditService memberCreditService) {
 		if (instance != null)
 			throw duplicateSingletonEx();
-		instance = new MarketServiceManager(OrderQueryService, memberCreditService,
-				websitePromotionService);
+		instance = new MarketServiceManager(OrderQueryService, memberCreditService);
 		return getInstance();
 	}
 
@@ -37,13 +34,10 @@ public class MarketServiceManager implements MarketService{
 	
 	private OrderQueryService orderQueryService;
 	private MemberCreditService creditService;
-	private WebsitePromotionManagementService promotionService;
 	
-	public MarketServiceManager(OrderQueryService orderQueryService, MemberCreditService memberCreditService
-			, WebsitePromotionManagementService promotionService){
+	public MarketServiceManager(OrderQueryService orderQueryService, MemberCreditService memberCreditService){
 		this.orderQueryService = orderQueryService;
 		this.creditService = memberCreditService;
-		this.promotionService = promotionService;
 	}
 	
 	private List<OrderVo> bufferedOrderList;
@@ -63,14 +57,6 @@ public class MarketServiceManager implements MarketService{
 
 			return bufferedOrderList;
 		}
-	
-	@Override
-	public boolean makeMarketPromotion(WebsitePromotionVo promotion) {
-		if (promotionService == null)
-			throw unsupportedOpEx("make website promotions");
-	    
-		return promotionService.addWebsitePromotion(promotion);
-	}
 
 	@Override
 	public boolean creditCharge(int money, String id) {
@@ -85,23 +71,6 @@ public class MarketServiceManager implements MarketService{
 		return true;
 		
 	}
-
-	@Override
-	public boolean deletePromotion(WebsitePromotionVo promotion) {
-		if (promotionService == null)
-			throw unsupportedOpEx("make website promotions");
-	    
-		return promotionService.deleteWebsitePromotion(promotion);
-	}
-
-	@Override
-	public boolean updatePromotion(WebsitePromotionVo vo) {
-		if (promotionService == null)
-			throw unsupportedOpEx("make website promotions");
-	    
-		return promotionService.updateWebsitePromotion(vo);
-	}
-	
 	
 	
 }

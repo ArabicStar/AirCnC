@@ -1,23 +1,28 @@
 package presentation.market.view;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
+import interactor.impl.market.MarketAccountCourier;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
+import javafx.scene.layout.HBox;
 import presentation.market.MarketCenterController;
+import presentation.member.utils.dialog.PlainDialog;
 
 public class MarketMainController implements Initializable {
 
 	@FXML
-	private Label websitePromotionStrategy;
+	private HBox websitePromotion;
 
 	@FXML
-	private Label abnormalOrderBrowse;
+	private HBox abnormalOrder;
 
 	@FXML
-	private Label creditTopup;
+	private HBox creditCharge;
 
 	private MarketCenterController controller;
 
@@ -25,6 +30,18 @@ public class MarketMainController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	@FXML
+	public void handleLogout(){
+		PlainDialog alert = new PlainDialog(AlertType.CONFIRMATION,
+				"注销确认","确认登出吗？");
+		
+		Optional<ButtonType> result = alert.showDialog();		
+		if(result.get() == ButtonType.OK){
+			MarketAccountCourier.getInstance().logout();
+			controller.initializeLogin();
+		}
 	}
 
 	/**
@@ -37,18 +54,27 @@ public class MarketMainController implements Initializable {
 	
 	
 	@FXML
-	private void handleWebsitePromotionStrategy(){
-		this.controller.addWebsitePromotionStrategyPane();
+	private void handleWebsitePromotion(){
+		websitePromotion.setDisable(true);
+		abnormalOrder.setDisable(false);
+		creditCharge.setDisable(false);
+		this.controller.addWebsitePromotionPane();
 	}
 	
 	@FXML
-	private void handleAbnormalOrderBrowse(){
-		this.controller.addAbnormalOrderBrowsePane();
+	private void handleAbnormalOrder(){
+		websitePromotion.setDisable(false);
+		abnormalOrder.setDisable(true);
+		creditCharge.setDisable(false);
+		this.controller.addAbnormalOrderPane();
 	}
 	
 	@FXML
-	private void handleCreditTopup(){
-		this.controller.addCreditTopUpPane();
+	private void handleCreditCharge(){
+		websitePromotion.setDisable(false);
+		abnormalOrder.setDisable(false);
+		creditCharge.setDisable(true);
+		this.controller.addCreditCharge();
 	}
 
 

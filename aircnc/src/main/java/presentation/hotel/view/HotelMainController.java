@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import interactor.impl.hotel.HotelAccountCourier;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -55,6 +56,7 @@ public class HotelMainController implements Initializable{
 		
 		Optional<ButtonType> result = alert.showDialog();		
 		if(result.get() == ButtonType.OK){
+			HotelAccountCourier.getInstance().logout();
 			controller.initializeLogin();
 			
 		}

@@ -3,13 +3,16 @@ package service.market;
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
+import java.util.List;
+
 import utils.info.market.MarketInfo;
 import utils.proxy.AccessSecureProxy;
 import utils.proxy.AuthenticatePolicy;
 import utils.proxy.AuthenticatePolicy.Client;
+import vo.order.OrderVo;
 
 public class MarketServiceProxy extends AccessSecureProxy 
-	implements MarketAccountService, MarketInfoService {
+	implements MarketAccountService, MarketInfoService, MarketService {
 	
 	private static MarketServiceProxy instance;
 
@@ -29,12 +32,13 @@ public class MarketServiceProxy extends AccessSecureProxy
 	
 	protected MarketServiceProxy(Client clientId) {
 		super(clientId);
-		// TODO Auto-generated constructor stub
+
 	}
 	
 	
 	private MarketInfoService infoService;
 	private MarketAccountService accountService;
+	private MarketService marketService;
 	
 	/*
 	 ***************************
@@ -53,6 +57,13 @@ public class MarketServiceProxy extends AccessSecureProxy
 		checkAuthentication();
 
 		this.infoService = infoService;
+	}
+	
+	@AuthenticatePolicy({ Client.MANAGE})
+	public void loadMarketService(MarketService marketService) {
+		checkAuthentication();
+
+		this.marketService = marketService;
 	}
 	
 	
@@ -117,5 +128,26 @@ public class MarketServiceProxy extends AccessSecureProxy
 	public boolean existsMarket(String id) {
 		checkAuthentication();
 		return accountService.existsMarket(id);
+	}
+	
+	
+	/*
+	 ********************************************
+	 * MarketService method proxy
+	 ********************************************
+	 */
+
+	@Override
+	@AuthenticatePolicy({ Client.MARKET })
+	public List<OrderVo> getAbnormalOrder() {
+		checkAuthentication();
+		return marketService.getAbnormalOrder();
+	}
+
+	@Override
+	@AuthenticatePolicy({ Client.MARKET })
+	public boolean creditCharge(int money, String id) {
+		checkAuthentication();
+		return marketService.creditCharge(money, id);
 	}
 }

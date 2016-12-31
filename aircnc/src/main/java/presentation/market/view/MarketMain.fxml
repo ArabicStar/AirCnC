@@ -11,17 +11,17 @@
          <children>
             <VBox alignment="CENTER" layoutY="295.0" prefHeight="417.0" prefWidth="247.0">
                <children>
-                  <HBox alignment="CENTER" onMouseClicked="#handleWebsitePromotionStrategy" prefHeight="100.0" prefWidth="121.0" styleClass="hbox">
+                  <HBox fx:id="websitePromotion" alignment="CENTER" onMouseClicked="#handleWebsitePromotion" prefHeight="100.0" prefWidth="121.0" styleClass="hbox">
                      <children>
-                        <Label fx:id="websitePromotionStrategy" contentDisplay="CENTER" text="网站营销策略" textAlignment="CENTER" />
+                        <Label contentDisplay="CENTER" text="网站营销策略" textAlignment="CENTER" />
                      </children>
                      <padding>
                         <Insets right="30.0" />
                      </padding>
                   </HBox>
-                  <HBox alignment="CENTER" onMouseClicked="#handleAbnormalOrderBrowse" prefHeight="100.0" prefWidth="121.0" styleClass="hbox">
+                  <HBox fx:id="abnormalOrder" alignment="CENTER" onMouseClicked="#handleAbnormalOrder" prefHeight="100.0" prefWidth="121.0" styleClass="hbox">
                      <children>
-                        <Label fx:id="abnormalOrderBrowse" text="异常订单浏览" textAlignment="CENTER" />
+                        <Label text="异常订单浏览" textAlignment="CENTER" />
                      </children>
                      <VBox.margin>
                         <Insets />
@@ -30,14 +30,24 @@
                         <Insets right="30.0" />
                      </padding>
                   </HBox>
-                  <HBox alignment="CENTER" onMouseClicked="#handleCreditTopup" prefHeight="100.0" prefWidth="121.0" styleClass="hbox">
+                  <HBox fx:id="creditCharge" alignment="CENTER" onMouseClicked="#handleCreditCharge" prefHeight="100.0" prefWidth="121.0" styleClass="hbox">
                      <children>
-                        <Label fx:id="creditTopup" text="信用充值" textAlignment="CENTER" />
+                        <Label text="信用充值" textAlignment="CENTER" />
                      </children>
                      <padding>
                         <Insets right="30.0" />
                      </padding>
                   </HBox>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" layoutX="12.0" layoutY="50.0" prefHeight="231.0" prefWidth="223.0" spacing="20.0">
+               <children>
+                  <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="196.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="107.0" prefWidth="100.0" styleClass="portrait-hbox" />
+                     </children>
+                  </HBox>
+                  <Button mnemonicParsing="false" onAction="#handleLogout" styleClass="logout" text="注销" />
                </children>
             </VBox>
          </children>

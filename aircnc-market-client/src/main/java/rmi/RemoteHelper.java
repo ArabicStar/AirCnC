@@ -11,9 +11,12 @@ import java.rmi.RemoteException;
 
 import data.dao.rmi.hotel.RemoteHotelDao;
 import data.dao.rmi.market.RemoteMarketDao;
+import data.dao.rmi.member.RemoteCreditDao;
 import data.dao.rmi.member.RemoteMemberDao;
+import data.dao.rmi.order.RemoteOrderDao;
 import data.dao.rmi.promotion.RemoteWebsitePromotionDao;
 import data.dao.rmi.query.RemoteCommentQueryDao;
+import data.dao.rmi.query.RemoteOrderQueryDao;
 import data.dao.rmi.query.RemotePromotionQueryDao;
 import utils.logger.Log;
 
@@ -45,6 +48,7 @@ public final class RemoteHelper {
 		fetchMarketDaoRemoteObj();
 		fetchQueryDaoRemoteObj();
 		fetchPromotionDaoRemoteObj();
+		fetchOrderDaoRemoteObj();
 	}
 	
 	private void fetchPromotionDaoRemoteObj() {
@@ -76,15 +80,26 @@ public final class RemoteHelper {
 
 		Log.d("fetch market dao remote obj " + (marketDaoRemoteObj != null ? "succeed" : "failed"));
 	}
+	
+	private void fetchOrderDaoRemoteObj() {
+		orderDaoRemoteObj = findRemote("RemoteOrderDao");
+
+		Log.d("fetch order dao remote obj " + (orderDaoRemoteObj != null ? "succeed" : "failed"));
+	}
 
 	private Remote memberDaoRemoteObj;
 	private Remote hotelDaoRemoteObj;
 	private Remote marketDaoRemoteObj;
 	private Remote queryDaoRemoteObj;
 	private Remote promotionDaoRemoteObj;
+	private Remote orderDaoRemoteObj;
 
 	public RemoteMemberDao getRemoteMemberDao() {
 		return (RemoteMemberDao) memberDaoRemoteObj;
+	}
+	
+	public RemoteOrderDao getRemoteOrderDao() {
+		return (RemoteOrderDao) orderDaoRemoteObj;
 	}
 	
 	public RemoteHotelDao getRemoteHotelDao(){
@@ -98,14 +113,22 @@ public final class RemoteHelper {
 	public RemoteCommentQueryDao getRemoteCommentQueryDao() {
 		return (RemoteCommentQueryDao) queryDaoRemoteObj;
 	}
+	
+	public RemoteOrderQueryDao getRemoteOrderQueryDao() {
+		return (RemoteOrderQueryDao) queryDaoRemoteObj;
+	}
 
+	public RemoteWebsitePromotionDao getRemoteWebsitePromotionDao() {
+		return (RemoteWebsitePromotionDao) promotionDaoRemoteObj;	
+	}
+	
 	public RemotePromotionQueryDao getRemotePromotionQueryDao() {
 		return (RemotePromotionQueryDao) queryDaoRemoteObj;
 	}
 	
-	public RemoteWebsitePromotionDao getRemoteWebsitePromotionDao() {
-	return (RemoteWebsitePromotionDao) promotionDaoRemoteObj;
-}
+	public RemoteCreditDao getRemoteCreditDao() {
+		return (RemoteCreditDao) memberDaoRemoteObj;
+	}
 
 	private static final int PORT = 8888;
 	private static final String URL_HEADER = new StringBuilder("rmi://localhost:").append(PORT).append("/").toString();

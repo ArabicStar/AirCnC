@@ -13,7 +13,7 @@ import presentation.market.accessor.MarketChargeAccessor;
 import presentation.market.accessor.impl.MarketChargeAccessorImpl;
 import utils.info.member.MemberInfoTemplate;
 
-public class CreditTopUpController implements Initializable {
+public class CreditChargeController implements Initializable {
 
 	@FXML
 	private TextField userID;

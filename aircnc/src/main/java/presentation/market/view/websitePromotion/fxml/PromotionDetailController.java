@@ -135,7 +135,7 @@ public class PromotionDetailController {
 			}
 			when.setDisable(true);
 			
-			switch (vo.getPromotion().getApplier().how()){
+			switch (vo.getPromotion().getApplier().name()){
 			case "CONST":
 				how.setValue("直接降价");
 				break;
@@ -280,7 +280,7 @@ public class PromotionDetailController {
 //		builder.when(WebsiteWhen.DURING_PERIOD)
 //			.setParam(TriggerParams.FROM, now.plusDays(1))
 //			.setParam(TriggerParams.TO, now.plusDays(5));
-//		
+		
 //		builder.when(WebsiteWhen.LEVEL).setParam(TriggerParams.LEVEL_THRESHOLD, 3);
 //		
 //		builder.when(WebsiteWhen.TRADE_AREA).setParam(TriggerParams.TARGET_TRADE_AREA, "xinjiekou");
