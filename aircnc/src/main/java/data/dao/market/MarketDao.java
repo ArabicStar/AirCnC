@@ -1,6 +1,7 @@
 package data.dao.market;
 
 import po.market.MarketPo;
+import utils.info.level.LevelStrategy;
 
 /**
  * Dao of market.<br>
@@ -19,7 +20,7 @@ import po.market.MarketPo;
  *
  */
 public interface MarketDao {
-	
+
 	/**
 	 * Add a new market by given po.<br>
 	 * 
@@ -39,7 +40,7 @@ public interface MarketDao {
 	 *         </ul>
 	 */
 	public boolean addMarket(final MarketPo po);
-	
+
 	/**
 	 * Delete market by given id.<br>
 	 * 
@@ -81,7 +82,7 @@ public interface MarketDao {
 	 *         </ul>
 	 */
 	public boolean updateMarket(final MarketPo po);
-	
+
 	/**
 	 * Get market by given id.<br>
 	 * 
@@ -102,7 +103,7 @@ public interface MarketDao {
 	 *             Id is invalid
 	 */
 	public MarketPo findMarket(final String id);
-	
+
 	/**
 	 * Check if given market exists.<br>
 	 * 
@@ -123,4 +124,8 @@ public interface MarketDao {
 	 *             Id is invalid
 	 */
 	public boolean existsMarket(final String id);
+
+	public LevelStrategy getLevelStrategy();
+
+	public boolean updateLevelStrategy(LevelStrategy ls);
 }

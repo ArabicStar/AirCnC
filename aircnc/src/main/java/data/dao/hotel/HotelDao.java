@@ -1,9 +1,10 @@
 package data.dao.hotel;
 
 import po.hotel.HotelPo;
+import utils.info.level.LevelStrategy;
 
 public interface HotelDao {
-	
+
 	/**
 	 * Find a hotel by id.<br>
 	 * 
@@ -12,7 +13,7 @@ public interface HotelDao {
 	 *         if not exist, return null<br>
 	 */
 	public HotelPo findHotelById(final int id);
-	
+
 	/**
 	 * Find a hotel by name.<br>
 	 * 
@@ -51,8 +52,7 @@ public interface HotelDao {
 	 *         Fail if id has existed.<br>
 	 */
 	public boolean addHotel(final HotelPo po);
-	
-	
+
 	/**
 	 * Query an hotel exists or not
 	 * 
@@ -60,6 +60,7 @@ public interface HotelDao {
 	 * @return whether given name exists or not<br>
 	 */
 	public boolean existName(final String name);
-	
+
 	public void updateRank();
+
 }

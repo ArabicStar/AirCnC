@@ -201,11 +201,6 @@ public final class MemberInfoManager implements MemberInfoService, MemberQuerySe
 		return memberDao.updateMember(modifiedInfo) & accountService.refreshCurrentAccount() != null;
 	}
 
-	/* Buffered member order query service */
-	private String bufferedId = null;
-	private List<OrderVo> bufferedOrderList;
-	private boolean dirtyBuffer = false;
-
 	@Override
 	public List<OrderVo> getMemberAllOrders(final String id) {
 		if (orderQueryService == null)
@@ -214,31 +209,7 @@ public final class MemberInfoManager implements MemberInfoService, MemberQuerySe
 		if (!MemberInfo.checkID(id))
 			throw illegalArgEx("Member id");
 
-		/* different id from buffered one */
-		if (bufferedId == null || !bufferedId.equals(id)) {
-			// get
-			List<OrderVo> res = orderQueryService.getMemberOrders(id);
-
-			// given id not exists, return
-			if (res == null)
-				return null;
-
-			// exists, refresh buffer
-			bufferedId = id;
-			bufferedOrderList = res;
-			dirtyBuffer = false;
-
-			return bufferedOrderList;
-		}
-
-		/* same id with buffered one */
-		// reverse buffer dirty indicator
-		if (dirtyBuffer = !dirtyBuffer)
-			return bufferedOrderList;// return buffered list
-		else
-			// refresh buffer, same id with buffer assure existence of given id,
-			// not need to check again
-			return bufferedOrderList = orderQueryService.getMemberOrders(id);
+		return orderQueryService.getMemberOrders(id);
 	}
 
 	@Override
@@ -246,9 +217,7 @@ public final class MemberInfoManager implements MemberInfoService, MemberQuerySe
 		if (orderQueryService == null)
 			throw unsupportedOpEx("get member orders by status");
 
-		getMemberAllOrders(id);
-
-		return bufferedOrderList.stream().filter(o -> o.getStatus() == status).collect(Collectors.toList());
+		return getMemberAllOrders(id).stream().filter(o -> o.getStatus() == status).collect(Collectors.toList());
 	}
 
 	@Override
@@ -259,22 +228,9 @@ public final class MemberInfoManager implements MemberInfoService, MemberQuerySe
 		if (!MemberInfo.checkID(id))
 			throw illegalArgEx("Member id");
 
-		/* different id from buffered one */
-		if (bufferedId == null || !bufferedId.equals(id)) {
-			// get
-			List<OrderVo> res = orderQueryService.getMemberOrders(id);
+		getMemberAllOrders(id);
 
-			// given id not exists, return
-			if (res == null)
-				return null;
-
-			// exists, refresh buffer
-			bufferedId = id;
-			bufferedOrderList = res;
-			dirtyBuffer = false;
-		}
-
-		return bufferedOrderList.stream().map(o -> o.getHotel()).map(h -> new HotelVoBuilder(h).getHotelInfo())
+		return getMemberAllOrders(id).stream().map(o -> o.getHotel()).map(h -> new HotelVoBuilder(h).getHotelInfo())
 				.collect(Collectors.toList());
 	}
 

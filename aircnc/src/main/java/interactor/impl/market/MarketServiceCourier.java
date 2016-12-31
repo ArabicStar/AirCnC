@@ -16,10 +16,11 @@ import presentation.market.accessor.impl.MarketChargeAccessorImpl;
 import presentation.market.manager.impl.AbnormalOrderManagerImpl;
 import service.market.MarketService;
 import service.order.OrderOperationService;
+import utils.info.level.LevelStrategy;
 import utils.info.member.MemberInfo;
 import vo.order.OrderVo;
 
-public class MarketServiceCourier implements MarketServiceInteractor{
+public class MarketServiceCourier implements MarketServiceInteractor {
 	private static MarketServiceInteractor instance;
 
 	public static MarketServiceInteractor launch(MarketService handler, OrderOperationService helper) {
@@ -36,13 +37,13 @@ public class MarketServiceCourier implements MarketServiceInteractor{
 
 		return instance;
 	}
-	
+
 	/* singleton */
 
 	private MarketService handler;
 	private OrderOperationService helper;
 
-	private MarketServiceCourier(MarketService handler,OrderOperationService helper) {
+	private MarketServiceCourier(MarketService handler, OrderOperationService helper) {
 		this.handler = handler;
 		this.helper = helper;
 	}
@@ -56,15 +57,15 @@ public class MarketServiceCourier implements MarketServiceInteractor{
 		});
 		AbnormalOrderManagerImpl.getInstance().setAbnormalOrders(orders);
 	}
-	
+
 	@Override
 	@Title("处理申诉订单")
-	public void approveOrder(){
+	public void approveOrder() {
 		String title = getTitle();
 
 		execute(title, () -> {
 			MemberInfo member = helper.approveAppeal(AbnormalOrderAccessorImpl.getInstance().getOrderVo());
-			alertSuccess(title, "目前"+member.getId()+"用户信用值为"+member.getCredit());
+			alertSuccess(title, "目前" + member.getId() + "用户信用值为" + member.getCredit());
 			return 0;
 		});
 	}
@@ -72,14 +73,27 @@ public class MarketServiceCourier implements MarketServiceInteractor{
 	@Override
 	@Title("信用充值")
 	public void creditCharge() {
-		
+
 		String title = getTitle();
 
 		execute(title, () -> {
 			MarketChargeAccessor accessor = MarketChargeAccessorImpl.getInstance();
-			if(handler.creditCharge(accessor.getTopupMoney(),accessor.getMemberId()))
+			if (handler.creditCharge(accessor.getTopupMoney(), accessor.getMemberId()))
 				alertSuccess(title, "充值成功");
 			return 0;
-		});		
+		});
+	}
+
+	@Override
+	@Title("获取等级策略")
+	public void getLevelStrategy() {
+		LevelStrategy ls = execute(getTitle(), () -> handler.getLevelStrategy());
+	}
+
+	@Override
+	@Title("修改等级策略")
+	public void updateLevelStrategy() {
+		LevelStrategy newStrategy = null;
+		boolean res = execute(getTitle(), () -> handler.updateLevelStrategy(newStrategy));
 	}
 }

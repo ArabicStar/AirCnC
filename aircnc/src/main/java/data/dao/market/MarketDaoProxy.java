@@ -6,10 +6,9 @@ import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
 import data.dao.rmi.market.RemoteMarketDao;
 import po.market.MarketPo;
-import utils.proxy.AuthenticatePolicy;
-import utils.proxy.AuthenticatePolicy.Client;
+import utils.info.level.LevelStrategy;
 
-public class MarketDaoProxy implements MarketDao{
+public class MarketDaoProxy implements MarketDao {
 	/* singleton */
 	/**
 	 * Singleton instance
@@ -74,7 +73,6 @@ public class MarketDaoProxy implements MarketDao{
 
 	/* As follow are proxy methods. */
 	@Override
-	@AuthenticatePolicy({ Client.MANAGE })
 	public boolean deleteMarket(String id) {
 		return hazard(() -> {
 			return marketDao.deleteMarket(id);
@@ -82,15 +80,13 @@ public class MarketDaoProxy implements MarketDao{
 	}
 
 	@Override
-	@AuthenticatePolicy({ Client.USER })
 	public boolean updateMarket(MarketPo po) {
 		return hazard(() -> {
 			return marketDao.updateMarket(po);
 		});
 	}
-	
+
 	@Override
-	@AuthenticatePolicy({ Client.USER, Client.MANAGE })
 	public MarketPo findMarket(String id) {
 		return hazard(() -> {
 			return marketDao.findMarket(id);
@@ -98,10 +94,19 @@ public class MarketDaoProxy implements MarketDao{
 	}
 
 	@Override
-	@AuthenticatePolicy({ Client.USER, Client.MARKET })
 	public boolean existsMarket(String id) {
 		return hazard(() -> {
 			return marketDao.existsMarket(id);
 		});
+	}
+
+	@Override
+	public LevelStrategy getLevelStrategy() {
+		return hazard(() -> marketDao.getLevelStrategy());
+	}
+
+	@Override
+	public boolean updateLevelStrategy(LevelStrategy ls) {
+		return hazard(() -> marketDao.updateLevelStrategy(ls));
 	}
 }

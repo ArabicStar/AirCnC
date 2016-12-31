@@ -5,15 +5,16 @@ import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
 import java.util.List;
 
+import utils.info.level.LevelStrategy;
 import utils.info.market.MarketInfo;
 import utils.proxy.AccessSecureProxy;
 import utils.proxy.AuthenticatePolicy;
 import utils.proxy.AuthenticatePolicy.Client;
 import vo.order.OrderVo;
 
-public class MarketServiceProxy extends AccessSecureProxy 
-	implements MarketAccountService, MarketInfoService, MarketService {
-	
+public class MarketServiceProxy extends AccessSecureProxy
+		implements MarketAccountService, MarketInfoService, MarketService {
+
 	private static MarketServiceProxy instance;
 
 	public static MarketServiceProxy launch(Client clientId) {
@@ -29,17 +30,16 @@ public class MarketServiceProxy extends AccessSecureProxy
 
 		return instance;
 	}
-	
+
 	protected MarketServiceProxy(Client clientId) {
 		super(clientId);
 
 	}
-	
-	
+
 	private MarketInfoService infoService;
 	private MarketAccountService accountService;
 	private MarketService marketService;
-	
+
 	/*
 	 ***************************
 	 * Actual manager loader
@@ -52,36 +52,33 @@ public class MarketServiceProxy extends AccessSecureProxy
 		this.accountService = accountService;
 	}
 
-	@AuthenticatePolicy({ Client.MANAGE})
+	@AuthenticatePolicy({ Client.MANAGE })
 	public void loadInfoService(MarketInfoService infoService) {
 		checkAuthentication();
 
 		this.infoService = infoService;
 	}
-	
-	@AuthenticatePolicy({ Client.MARKET})
+
+	@AuthenticatePolicy({ Client.MARKET })
 	public void loadMarketService(MarketService marketService) {
 		checkAuthentication();
 
 		this.marketService = marketService;
 	}
-	
-	
-	
+
 	/*
 	 ********************************************
 	 * MarketInfoService method proxy
 	 ********************************************
 	 */
-	
+
 	@Override
-	@AuthenticatePolicy({ Client.MARKET ,Client.MANAGE })
+	@AuthenticatePolicy({ Client.MARKET, Client.MANAGE })
 	public MarketInfo getMarketInfo(String id) {
 		checkAuthentication();
-		
+
 		return infoService.getMarketInfo(id);
 	}
-
 
 	/*
 	 ********************************************
@@ -129,8 +126,7 @@ public class MarketServiceProxy extends AccessSecureProxy
 		checkAuthentication();
 		return accountService.existsMarket(id);
 	}
-	
-	
+
 	/*
 	 ********************************************
 	 * MarketService method proxy
@@ -149,5 +145,21 @@ public class MarketServiceProxy extends AccessSecureProxy
 	public boolean creditCharge(int money, String id) {
 		checkAuthentication();
 		return marketService.creditCharge(money, id);
+	}
+
+	@Override
+	@AuthenticatePolicy({ Client.USER, Client.MARKET })
+	public LevelStrategy getLevelStrategy() {
+		checkAuthentication();
+
+		return marketService.getLevelStrategy();
+	}
+
+	@Override
+	@AuthenticatePolicy({ Client.MARKET })
+	public boolean updateLevelStrategy(LevelStrategy ls) {
+		checkAuthentication();
+
+		return marketService.updateLevelStrategy(ls);
 	}
 }

@@ -4,6 +4,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 import po.market.MarketPo;
+import utils.info.level.LevelStrategy;
 
 /**
  * Remote interface for market dao.<br>
@@ -12,7 +13,7 @@ import po.market.MarketPo;
  * @author paranoia
  *
  */
-public interface RemoteMarketDao extends Remote{
+public interface RemoteMarketDao extends Remote {
 
 	public boolean addMarket(final MarketPo po) throws RemoteException;
 
@@ -23,4 +24,8 @@ public interface RemoteMarketDao extends Remote{
 	public MarketPo findMarket(final String id) throws RemoteException;
 
 	public boolean existsMarket(final String id) throws RemoteException;
+
+	public LevelStrategy getLevelStrategy() throws RemoteException;
+
+	public boolean updateLevelStrategy(LevelStrategy ls) throws RemoteException;
 }
