@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 
 import interactor.member.MemberInfoInteractor;
 import interactor.utils.Title;
+import presentation.member.accessor.impl.CreditChangeOrderAccessorImpl;
 import presentation.member.accessor.impl.InfoModifyAccessorImpl;
 import presentation.member.accessor.impl.SearchOrderInfoAccessorImpl;
 import presentation.member.manager.impl.CreditChangeManagerImpl;
@@ -186,5 +187,23 @@ public final class MemberInfoCourier implements MemberInfoInteractor {
 	private String getCurrentId() {
 		MemberInfo curAcc = helper.getCurrentAccount();
 		return curAcc == null ? null : curAcc.getId();
+	}
+
+	@Override
+	@Title("获取订单")
+	public void getOrder() {
+		String title = getTitle();
+		String memberId = "";
+		String orderId = CreditChangeOrderAccessorImpl.getInstance().getCauseId();
+
+		OrderVo order = execute(title, () -> {
+			final List<OrderVo> memberOrders = handler.getMemberAllOrders(memberId);
+			for (OrderVo vo : memberOrders)
+				if (vo.getOrderId().equals(orderId))
+					return vo;
+			return null;
+		});
+
+		CreditChangeManagerImpl.getInstance().setCauseOrder(order);
 	}
 }
