@@ -1,6 +1,5 @@
 package interactor.impl.market;
 
-import static interactor.utils.AlertHelper.alertFail;
 import static interactor.utils.AlertHelper.alertSuccess;
 import static interactor.utils.Dipatcher.execute;
 import static interactor.utils.TitleGetter.getTitle;

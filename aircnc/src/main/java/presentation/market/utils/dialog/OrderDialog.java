@@ -8,19 +8,19 @@ import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.GridPane;
 import javafx.stage.StageStyle;
-import presentation.market.model.MyOrderModel;
+import presentation.market.model.OrderModel;
 
-public class LabelDialog extends GridPane {
+
+public class OrderDialog extends GridPane {
 	Dialog<String> dialog;
 	// Alert dialog;
 
-	public LabelDialog(String content) {
+	public OrderDialog() {
 
 		dialog.initStyle(StageStyle.UNDECORATED);
-		dialog.setHeaderText(content);
 	}
 
-	public LabelDialog(String content, MyOrderModel orderModel) {
+	public OrderDialog(OrderModel orderModel) {
 		// Create the custom dialog.
 		dialog = new Dialog<String>();
 		ButtonType btn = ButtonType.OK;
@@ -42,17 +42,11 @@ public class LabelDialog extends GridPane {
 			labels[i].setStyle(fontOfName);
 		}
 
-		String[] labelProperties = { 
-				orderModel.getHotelName(), 
-				orderModel.getUserName(),
-				orderModel.getOrderId(), 
-				orderModel.getState(),
-				orderModel.getCheckInTime(), 
-				orderModel.getLeaveTime(), 
-				orderModel.getRoomType(),
+		String[] labelProperties = { orderModel.getUserName(), orderModel.getHotelName(),
+				orderModel.getOrderID(), orderModel.getState(), 
+				orderModel.getCheckInTime(), orderModel.getLeaveTime(), orderModel.getRoomType(),
 				String.valueOf(orderModel.getRoomNumber()),
-				String.valueOf(orderModel.getPeopleNumber()),
-				orderModel.hasChildren(),
+				String.valueOf(orderModel.getPeopleNumber()), orderModel.hasChild(),
 				orderModel.getTotalPrice() };
 		String fontOfProperties = "-fx-text-fill: #585993; -fx-font-size: 16pt;";
 		Label[] properties = new Label[numberOfDetails];
@@ -74,31 +68,7 @@ public class LabelDialog extends GridPane {
 			grid.add(properties[i], 2, 1 + i);
 		}
 		grid.add(ensureButton, 3, 14);
-		// Label cancelButton = new Label();
-		// cancelButton.setText("");
-		// cancelButton.setScaleX(10);
-		// cancelButton.setScaleY(10);
-		// DropShadow shadow = new DropShadow();
-		// cancelButton.addEventHandler(MouseEvent.MOUSE_ENTERED, (MouseEvent e)
-		// ->{
-		// cancelButton.setEffect(shadow);
-		// });
-		// cancelButton.addEventHandler(MouseEvent.MOUSE_EXITED, (MouseEvent e)
-		// -> {
-		// cancelButton.setEffect(null);
-		// });
-		// cancelButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent e)
-		// -> {
-		// dialog.hide();
-		// });
-		// cancelButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-		// @Override
-		// public void handle(MouseEvent e){
-		// System.out.println(e);
-		// dialog.close();
-		// }
-		// });
-		// grid.add(cancelButton, 5, 1);
+		
 		grid.requestFocus();
 		dialog.getDialogPane().setContent(grid);
 

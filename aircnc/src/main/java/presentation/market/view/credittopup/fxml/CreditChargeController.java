@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import interactor.impl.market.MarketServiceCourier;
 import interactor.market.MarketServiceInteractor;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
@@ -42,6 +43,9 @@ public class CreditChargeController implements Initializable {
 			accessor.setMemberId(userID.getText());
 			accessor.setTopupMoney(Integer.parseInt(money.getText()));
 			interactor.creditCharge();
+			userID.setText("");
+			money.setText("");
+			
 		}
 	}
 

@@ -20,7 +20,7 @@ public class CreditTopUpPane {
 		try {
 			// Load sign in overview.
 			FXMLLoader loader = new FXMLLoader();
-			URL location = getClass().getResource("fxml/CreditTopUp.fxml");
+			URL location = getClass().getResource("fxml/CreditCharge.fxml");
 			loader.setLocation(location);
 			loader.setBuilderFactory(new JavaFXBuilderFactory());
 			loader.load();

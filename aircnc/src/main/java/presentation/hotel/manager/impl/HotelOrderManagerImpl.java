@@ -63,15 +63,10 @@ public class HotelOrderManagerImpl implements HotelOrderManager{
 	@Override
 	public ObservableList<OrderModel> getOrderList() {
 		orderData = FXCollections.observableArrayList();
-		test();
 		Iterator<OrderVo> it = orders.iterator();
 		while(it.hasNext())
 			orderData.add(new OrderModel(it.next()));
 		return orderData;
-	}
-	
-	private void test(){
-
 	}
 
 }

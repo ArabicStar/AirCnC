@@ -2,110 +2,112 @@ package presentation.market.model;
 
 import java.time.LocalDateTime;
 
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import presentation.market.utils.cell.ButtonName;
 import vo.order.OrderVo;
 
 public class OrderModel {
+	private final StringProperty username;
+	private final StringProperty userID;
+	private final StringProperty orderID;
+    private final StringProperty hotelName;
+    private final StringProperty checkinTime;
+    private final StringProperty leaveTime;
+    private final StringProperty state;
+    private final IntegerProperty roomNum;
+    private final StringProperty roomType;
+    private final IntegerProperty peopleNum;
+    private final StringProperty hasChild;
+    private final StringProperty timeAndSum;
+    private final StringProperty totalPrice;
+    private final ObjectProperty<OrderVo> operation;
 
-	private final StringProperty userName;
-	private final StringProperty userId;
-	private final StringProperty orderId;
-	private final StringProperty checkinTime;
-	private final StringProperty status;
-	private final StringProperty totalPrice;
-	private final ObjectProperty<ButtonName> operation;
-
-	/**
-	 * Default constructor.
-	 */
-	public OrderModel() {
-		this(null);
-	}
-
-	/**
-	 * Constructor with some initial data.
-	 * 
-	 * @param userName
-	 * @param userId
-	 * @param orderId_c
-	 * @param checkinTime
-	 * @param status
-	 * @param totalPrice
-	 */
-	public OrderModel(OrderVo order) {
-		this.userName = new SimpleStringProperty(order.getMember().getName());
-		this.userId = new SimpleStringProperty(String.valueOf(order.getMember().getId()));
-		this.orderId = new SimpleStringProperty(String.valueOf(order.getOrderId()));
-		this.checkinTime = new SimpleStringProperty(transformTime(order.getEntryTime()));
-		this.status = new SimpleStringProperty(order.getStatus().toString());
-		this.totalPrice = new SimpleStringProperty(String.valueOf(order.getOriginalPrice()) + "元");
-		this.operation = new SimpleObjectProperty<ButtonName>();
-		
-	}
-	
-	public OrderModel(String s1,String s2,String s3,String s4,String s5,String s6){
-		this.userName = new SimpleStringProperty(s1);
-		this.userId = new SimpleStringProperty(s2);
-		this.orderId = new SimpleStringProperty(s3);
-		this.checkinTime = new SimpleStringProperty(s4);
-		this.status = new SimpleStringProperty(s5);
-		this.totalPrice = new SimpleStringProperty(s6);
-		this.operation = new SimpleObjectProperty<ButtonName>();
-	}
-
-	/**
-	 * transform the local date time (yyyy/mm/dd HH:mm) to the new format
-	 * (yyyy-mm-dd)
-	 * 
-	 * @param date
-	 * @return new date format(String)
-	 */
-
-	private static String transformTime(LocalDateTime date) {
-
-		String result = date.getYear() + "-" + date.getMonthValue() + "-" + date.getDayOfMonth();
-
-		return result;
-	}
-	
-    public String getUserName() {
-        return userName.get();
+    /**
+     * Default constructor.
+     */
+    public OrderModel() {
+        this(null);
     }
 
-    public void setUserName(String userName) {
-        this.userName.set(userName);
-    }
-
-    public StringProperty userNameProperty() {
-        return userName;
-    }
-    
-    public String getUserId() {
-        return userId.get();
-    }
-
-    public void setUserId(String userId) {
-        this.userId.set(userId);
-    }
-
-    public StringProperty userIdProperty() {
-        return userId;
+    /**
+     * Constructor with some initial data.
+     * 
+     * @param hotelName
+     * @param checkinTime
+     * @param state
+     * @param timeAndSum
+     * @param totalPrice
+     * @param operation
+     */
+    public OrderModel(OrderVo order) {
+    	this.username = new SimpleStringProperty(order.getMember().getName());
+    	this.userID = new SimpleStringProperty(order.getMember().getId());
+    	this.orderID = new SimpleStringProperty(order.getOrderId());
+        this.hotelName = new SimpleStringProperty(order.getHotel().getName());
+        
+        //process the checkinTime
+        this.checkinTime = new SimpleStringProperty(transformTime(order.getEntryTime()));
+        
+        this.roomNum = new SimpleIntegerProperty(order.getRoomNumber());
+        this.leaveTime = new SimpleStringProperty(transformTime(order.getEntryTime().plusDays(order.getStayDays())));
+        this.roomType = new SimpleStringProperty(order.getRoomType());
+        this.peopleNum = new SimpleIntegerProperty(order.getPeopleNumber());
+        this.hasChild = new SimpleStringProperty(order.getHasChildren() == true? "有":"无");
+        
+        String state;
+        switch(order.getStatus()){
+        case ABNORMAL: 
+        	state = "异常";  break;
+        case EXECUTED: 
+        	state = "已执行";  break;
+        case UNEXECUTED: 
+        	state = "未执行";  break;
+        case REPEALED: 
+        	state = "撤销";  break;
+        case REVIEWED: 
+        	state = "已评价";  break;
+        case APPEALING: 
+        	state = "申诉中";  break;
+        default: 
+        	state = "";  break;
+        }
+        
+        this.state = new SimpleStringProperty(state);
+        this.timeAndSum = new SimpleStringProperty(order.getStayDays()+"晚/"+order.getRoomNumber()+"间");
+        this.totalPrice = new SimpleStringProperty(String.valueOf(order.getOriginalPrice())+"元");
+        this.operation = new SimpleObjectProperty<OrderVo>(order);
+        
+        
     }
     
-    public String getOrderId() {
-        return orderId.get();
+    /**
+     * transform the local date time (yyyy/mm/dd HH:mm)
+     *  to the new format (yyyy-mm-dd)
+     * @param date
+     * @return new date format(String)
+     */
+    
+    private static String transformTime(LocalDateTime date){
+    	
+    	String result = date.getYear()+"-"+date.getMonthValue()+"-"+date.getDayOfMonth();
+    	
+		return result;	
     }
 
-    public void setOrderId(String orderId) {
-        this.orderId.set(orderId);
+    public String getHotelName() {
+        return hotelName.get();
     }
 
-    public StringProperty orderIdProperty() {
-        return orderId;
+    public void setHotelName(String firstName) {
+        this.hotelName.set(firstName);
+    }
+
+    public StringProperty hotelNameProperty() {
+        return hotelName;
     }
     
     public String getCheckInTime() {
@@ -120,16 +122,28 @@ public class OrderModel {
         return checkinTime;
     }
     
+    public String getState() {
+        return state.get();
+    }
+
+    public void setState(String newState) {
+        this.state.set(newState);
+    }
+
+    public StringProperty stateProperty() {
+        return state;
+    }
+
     public String getTimeAndSum() {
-        return status.get();
+        return timeAndSum.get();
     }
 
     public void setTimeAndSum(String newTimeAndSum) {
-        this.status.set(newTimeAndSum);
+        this.timeAndSum.set(newTimeAndSum);
     }
 
     public StringProperty timeAndSumProperty() {
-        return status;
+        return timeAndSum;
     }
     
     public String getTotalPrice() {
@@ -144,16 +158,111 @@ public class OrderModel {
         return totalPrice;
     }
     
-    public ButtonName getOperation() {
+    public OrderVo getOperation() {
         return operation.get();
     }
 
-    public void setOperation(ButtonName name) {
-        this.operation.set(name);
+    public void setOperation(OrderVo vo) {
+        this.operation.set(vo);
     }
 
-    public ObjectProperty<ButtonName> operationProperty() {
+    public ObjectProperty<OrderVo> operationProperty() {
         return operation;
     }
+    
+    public String getUserName() {
+        return username.get();
+    }
 
+    public void setUserName(String newName) {
+        this.username.set(newName);
+    }
+
+    public StringProperty usernameProperty() {
+        return username;
+    }
+    
+    public String getOrderID() {
+        return orderID.get();
+    }
+
+    public void setorderID(String newID) {
+        this.orderID.set(newID);
+    }
+
+    public StringProperty orderIDProperty() {
+        return orderID;
+    }
+    
+    public String getuserID() {
+        return userID.get();
+    }
+
+    public void setuserID(String newID) {
+        this.userID.set(newID);
+    }
+
+    public StringProperty userIDProperty() {
+        return userID;
+    }
+    
+    public String getLeaveTime() {
+        return leaveTime.get();
+    }
+
+    public void setLeaveTime(String newTime) {
+        this.leaveTime.set(newTime);
+    }
+
+    public StringProperty leaveTimeProperty() {
+        return leaveTime;
+    }
+    
+    public String getRoomType() {
+        return roomType.get();
+    }
+
+    public void setRoomType(String newType) {
+        this.roomType.set(newType);
+    }
+
+    public StringProperty roomTypeProperty() {
+        return roomType;
+    }
+    
+    public int getRoomNumber() {
+        return roomNum.get();
+    }
+
+    public void setRoomNumber(int num) {
+        this.roomNum.set(num);
+    }
+
+    public IntegerProperty roomNumberProperty() {
+        return roomNum;
+    }
+    
+    public int getPeopleNumber() {
+        return peopleNum.get();
+    }
+
+    public void setPeopleNum(int num) {
+        this.peopleNum.set(num);
+    }
+
+    public IntegerProperty peopleNumProperty() {
+        return peopleNum;
+    }
+    
+    public String hasChild() {
+        return hasChild.get();
+    }
+
+    public void setHasChild(String hasChild) {
+        this.hasChild.set(hasChild);
+    }
+
+    public StringProperty hasChildProperty() {
+        return hasChild;
+    }
 }

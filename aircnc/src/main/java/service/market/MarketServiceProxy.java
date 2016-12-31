@@ -59,7 +59,7 @@ public class MarketServiceProxy extends AccessSecureProxy
 		this.infoService = infoService;
 	}
 	
-	@AuthenticatePolicy({ Client.MANAGE})
+	@AuthenticatePolicy({ Client.MARKET})
 	public void loadMarketService(MarketService marketService) {
 		checkAuthentication();
 

@@ -63,7 +63,6 @@ public class MarketCenterController extends Application {
 		abnormalOrderBrowsePane = new AbnormalOrderBrowsePane();
 		mainClient.getBorderPane().setCenter(abnormalOrderBrowsePane.getPane());
 		abnormalOrderBrowsePane.getController().setCenterController(this);
-		abnormalOrderBrowsePane.getController().test();
 	}
 	
 	/**

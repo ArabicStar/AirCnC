@@ -43,12 +43,14 @@ public class ServiceLauncher {
 			MemberServiceProxy.launch(clientId);
 			PromotionServiceProxy.launch(clientId);
 			OrderServiceProxy.launch(clientId);
+			MarketServiceProxy.launch(clientId);
 			
+			launchMemberSerivce(clientId);
 			launchQueryService(clientId);
 			launchPromotionService(clientId);
 			launchOrderService(clientId);
 			launchMarketService(clientId);
-			launchMemberSerivce(clientId);
+			
 
 			Log.i("Service launch succeed");
 		} catch (Exception e) {
@@ -104,7 +106,7 @@ public class ServiceLauncher {
 		final QueryDaoProxy queryDao = QueryDaoProxy.getInstance();
 		final MemberDaoProxy memberDao = MemberDaoProxy.getInstance();
 
-		QueryServiceProxy queryProxy = QueryServiceProxy.launch(clientId);
+		QueryServiceProxy queryProxy = QueryServiceProxy.getInstance();
 
 		final OrderQueryService order = OrderQueryManager.launch(queryDao);
 		final HotelQueryService hotel = HotelQueryManager.launch(queryDao);
@@ -126,7 +128,7 @@ public class ServiceLauncher {
 		final OrderQueryService order = OrderQueryManager.getInstance();
 		final MemberCreditService creditService = MemberCreditManager.getInstance();
 
-		MarketServiceProxy marketProxy = MarketServiceProxy.launch(clientId);
+		MarketServiceProxy marketProxy = MarketServiceProxy.getInstance();
 
 		final MarketAccountService acc = MarketAccountManager.launch(marketDao);
 		final MarketService ms = MarketServiceManager.launch(order, creditService);

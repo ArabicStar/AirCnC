@@ -3,16 +3,14 @@ package presentation.market.manager.impl;
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
+import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import presentation.hotel.model.OrderModel;
 import presentation.market.manager.AbnormalOrderManager;
-import presentation.market.manager.MarketPromotionManager;
-import presentation.market.model.WebsitePromotionModel;
+import presentation.market.model.OrderModel;
 import vo.order.OrderVo;
-import vo.promotion.PromotionVo;
 
 public class AbnormalOrderManagerImpl implements AbnormalOrderManager{
 
@@ -20,7 +18,7 @@ public class AbnormalOrderManagerImpl implements AbnormalOrderManager{
 	
 	private List<OrderVo> orders;
 	
-//	private ObservableList<WebsitePromotionModel> promotionData;
+	private ObservableList<OrderModel> orderData;
 
 	
 	public static final AbnormalOrderManager launch() {
@@ -45,8 +43,11 @@ public class AbnormalOrderManagerImpl implements AbnormalOrderManager{
 
 	@Override
 	public ObservableList<OrderModel> getOrderList() {
-		// TODO Auto-generated method stub
-		return null;
+		orderData = FXCollections.observableArrayList();
+		Iterator<OrderVo> it = orders.iterator();
+		while(it.hasNext())
+			orderData.add(new OrderModel(it.next()));
+		return orderData;
 	}
 
 }

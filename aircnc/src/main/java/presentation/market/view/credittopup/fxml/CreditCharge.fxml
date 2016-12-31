@@ -22,13 +22,13 @@
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="40.0">
                      <children>
                         <Label styleClass="info-index" text="用户账号" />
-                        <TextField fx:id="userID" prefHeight="41.0" prefWidth="180.0" styleClass="info-content" />
+                        <TextField fx:id="userID" prefHeight="41.0" prefWidth="180.0" promptText="8位账号" styleClass="info-content" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="123.0" prefWidth="375.0" spacing="40.0">
                      <children>
                         <Label styleClass="info-index" text="充值金额" />
-                        <TextField fx:id="money" prefHeight="41.0" prefWidth="180.0" styleClass="info-content" />
+                        <TextField fx:id="money" prefHeight="41.0" prefWidth="180.0" promptText="100" styleClass="info-content" />
                      </children>
                   </HBox>
                </children>
