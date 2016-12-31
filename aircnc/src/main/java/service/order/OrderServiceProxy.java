@@ -96,7 +96,7 @@ public class OrderServiceProxy extends AccessSecureProxy implements OrderInfoSer
 	}
 
 	@Override
-	@AuthenticatePolicy({ Client.MARKET })
+	@AuthenticatePolicy({ Client.USER })
 	public OrderInfo appealOrder(OrderInfo info) {
 		checkAuthentication();
 
