@@ -61,7 +61,8 @@ public class HotelInfoMainController implements Initializable{
 		id.setText(model.getId());
 		name.setText(model.getName());
 		grade.setText(model.getGrade());
-		hotelImage.setImage(new Image(this.getClass().getResource("")+"../../../../../images/hotel/star/hotel-"+model.getStar()+".png"));
+		URL location = getClass().getResource("/images/hotel/star/hotel-"+model.getStar()+".png");
+		hotelImage.setImage(new Image(String.valueOf(location)));
 		
 	}
 	

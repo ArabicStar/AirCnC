@@ -1,7 +1,7 @@
 .root{
 	-fx-font-family:"DengXian Light","Pingfang SC","Microsoft Yahei","Helvetica Neue";
 	-fx-background-size: 1024px 768px;
-	-fx-background-image: url("../../../images/hotel/Main_BG.png");
+	-fx-background-image: url("../../../images/hotel/main_BG.png");
 }
 
 .portrait-hbox{

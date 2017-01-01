@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #000;" stylesheets="@HotelMain.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.hotel.view.HotelMainController">
+<BorderPane prefHeight="768.0" prefWidth="1024.0" stylesheets="@HotelMain.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.hotel.view.HotelMainController">
    <left>
       <Pane prefHeight="768" prefWidth="247.0" BorderPane.alignment="CENTER">
          <children>
