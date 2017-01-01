@@ -1,19 +1,16 @@
 package presentation.member.view.searchhotel.hotelInfo.fxml;
 
 import java.net.URL;
+import java.util.Iterator;
 import java.util.ResourceBundle;
 
-import interactor.impl.member.MemberInfoCourier;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import presentation.member.manager.HistoryOrderManager;
-import presentation.member.manager.MyOrderManager;
-import presentation.member.manager.impl.HistoryOrderManagerImpl;
-import presentation.member.manager.impl.MyOrderManagerImpl;
 import presentation.member.model.MyOrderModel;
 import presentation.member.model.SearchHotelsModel;
 
@@ -39,20 +36,20 @@ public class HotelHistoryOrderController implements Initializable{
 
 	private HotelInfoMainController controller;
 	private SearchHotelsModel model;
-	private HistoryOrderManager manager;
 	private ObservableList<MyOrderModel> models;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		manager = HistoryOrderManagerImpl.getInstance();
 		Platform.runLater(()->initOrders());
 	}
 	
 	
 	public void initOrders(){
-		//这里！！！
-		MemberInfoCourier.getInstance().getMemberHistoryHotel();
-		models = manager.getOrderList();
+		Iterator<MyOrderModel> it = model.getHistoryOrder().iterator();
+		models = FXCollections.observableArrayList();
+		while(it.hasNext() && model.getHistoryOrder().size()>0){
+			models.add(it.next());
+		}
 		orderTable.setItems(models);		
 		
 		hotelName.setCellValueFactory(cellData -> cellData.getValue().orderIDProperty());

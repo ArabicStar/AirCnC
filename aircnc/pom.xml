@@ -124,7 +124,7 @@
 			<version>1.7.21</version>
 		</dependency>
 
-		
+
 
 		<!-- mysql jdbc -->
 		<dependency>
@@ -132,14 +132,14 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.9</version>
 		</dependency>
-		
+
 		<!-- controlsfx -->
 		<dependency>
 			<groupId>org.controlsfx</groupId>
 			<artifactId>controlsfx</artifactId>
 			<version>8.40.12</version>
 		</dependency>
-		
+
 		<!-- fxdialogs -->
 		<dependency>
 			<groupId>org.controlsfx</groupId>
@@ -147,9 +147,9 @@
 			<version>1.0.3</version>
 			<type>pom</type>
 		</dependency>
-		
+
 	</dependencies>
-	
+
 	<!-- build encoding -->
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

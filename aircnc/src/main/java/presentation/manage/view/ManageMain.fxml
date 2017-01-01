@@ -74,6 +74,6 @@
          </padding>
       </AnchorPane>
       <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="247.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <Label alignment="CENTER" layoutX="0.0" layoutY="0.0" onMouseClicked="#handleCloseWindow" prefHeight="23.0" prefWidth="23.0" styleClass="close" text="X" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="20.0" />
+      <Label alignment="CENTER" layoutX="0.0" layoutY="0.0" onMouseClicked="#handleCloseWindow" prefHeight="23.0" prefWidth="23.0" styleClass="close" text="X" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0" />
    </children>
 </AnchorPane>

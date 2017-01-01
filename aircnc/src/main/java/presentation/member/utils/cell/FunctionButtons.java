@@ -61,7 +61,7 @@ public class FunctionButtons extends TableCell<MyOrderModel, OrderVo>{
     		break;
     	default:
     		cellButton = new Button[]{ 
-    				createButtons(FunctionButtonType.CHECK)
+    				createButtons(null)
     				};     		
     	}
     	

@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import presentation.manage.manager.HotelManagePromotionManager;
 import presentation.manage.manager.impl.HotelManagePromotionManagerImpl;
+import presentation.manage.model.HotelManageModel;
 
 public class HotelInfoTwoController implements Initializable{
 
@@ -21,6 +22,8 @@ public class HotelInfoTwoController implements Initializable{
 	private List<String> descriptionList;
 	
 	private HotelInfoMainController controller;
+	
+	private HotelManageModel model;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -52,7 +55,7 @@ public class HotelInfoTwoController implements Initializable{
 	}
 	
 	private void initPromotion(){
-		descriptionList = manager.getDescription();
+		descriptionList = model.getPromotion();
 		String content = "";
 		int i = 0;
 		for(String s:descriptionList){
@@ -60,6 +63,10 @@ public class HotelInfoTwoController implements Initializable{
 			content = content+"\n"+Integer.toString(i)+". "+s;
 		}
 		description.setText(content);
+	}
+	
+	public void setModel(HotelManageModel model){
+		this.model = model;
 	}
 
 }
