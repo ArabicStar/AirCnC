@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 
 import po.hotel.HotelPo;
 import po.hotel.HotelPoBuilder;
+import po.order.OrderPo;
 import utils.info.hotel.HotelInfo;
 import utils.info.order.OrderInfo;
 import utils.info.order.comment.CommentInfo;
@@ -14,6 +15,7 @@ import utils.info.order.comment.CommentInfoBuilder;
 public class CommentPoBuilder extends CommentInfoBuilder {
 
 	private HotelPo hotel;
+	private OrderPo order;
 
 	public CommentPoBuilder() {
 		super();
@@ -26,9 +28,10 @@ public class CommentPoBuilder extends CommentInfoBuilder {
 		super(info);
 	}
 
-	public CommentPoBuilder(OrderInfo info){
+	public CommentPoBuilder(OrderInfo info) {
 		super(info);
 	}
+
 	/**
 	 * @param id
 	 *            to be set id
@@ -85,8 +88,12 @@ public class CommentPoBuilder extends CommentInfoBuilder {
 		if (!isReady())
 			throw illegalStateException("Comment Po Builder not set up");
 
-		return new CommentPo().setCommentTime(commentTime).setContent(content).setGrade(grade).setId(id)
-				.setHotel(hotel);
+		final CommentPo newComment = new CommentPo().setCommentTime(commentTime).setContent(content).setGrade(grade)
+				.setId(id).setHotel(hotel);
+		if (order != null)
+			newComment.setRelOrder(order);
+
+		return newComment;
 	}
 
 	@Override

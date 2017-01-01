@@ -10,9 +10,12 @@ import utils.info.order.comment.CommentInfo;
 import utils.info.order.comment.CommentInfoBuilder;
 import vo.hotel.HotelVo;
 import vo.hotel.HotelVoBuilder;
+import vo.order.OrderVo;
+import vo.order.OrderVoBuilder;
 
 public class CommentVoBuilder extends CommentInfoBuilder {
 	private HotelVo hotel;
+	private OrderVo order;
 
 	public CommentVoBuilder() {
 		super();
@@ -23,6 +26,7 @@ public class CommentVoBuilder extends CommentInfoBuilder {
 	 */
 	public CommentVoBuilder(CommentInfo info) {
 		super(info);
+		order = new OrderVoBuilder(info.getRelOrder()).getOrderInfo();
 	}
 
 	public CommentVoBuilder(OrderInfo info) {
@@ -74,8 +78,11 @@ public class CommentVoBuilder extends CommentInfoBuilder {
 		if (!isReady())
 			throw illegalStateException("Comment Vo Builder not set up");
 
-		return new CommentVo().setCommentTime(commentTime).setContent(content).setGrade(grade).setId(id)
-				.setHotel(hotel);
+		final CommentVo newComment = new CommentVo().setCommentTime(commentTime).setContent(content).setGrade(grade)
+				.setId(id).setHotel(hotel);
+		if (order != null)
+			newComment.setRelOrder(order);
+		return newComment;
 	}
 
 	@Override
