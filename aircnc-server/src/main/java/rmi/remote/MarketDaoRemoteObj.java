@@ -8,12 +8,13 @@ import java.rmi.server.UnicastRemoteObject;
 import data.dao.impl.market.MarketDaoImpl;
 import data.dao.market.MarketDao;
 import data.dao.rmi.market.RemoteMarketDao;
+import plugins.LevelCalc;
 import po.market.MarketPo;
 import rmi.RemoteHelper;
 import utils.info.level.LevelStrategy;
 
-public class MarketDaoRemoteObj extends UnicastRemoteObject implements RemoteMarketDao{
-	
+public class MarketDaoRemoteObj extends UnicastRemoteObject implements RemoteMarketDao {
+
 	/**
 	 * 
 	 */
@@ -30,14 +31,14 @@ public class MarketDaoRemoteObj extends UnicastRemoteObject implements RemoteMar
 
 		RemoteHelper.bindRemoteObj("RemoteMarketDao", instance);
 	}
-	
+
 	private MarketDao marketDao;
 
 	private MarketDaoRemoteObj(MarketDao marketDao) throws RemoteException {
 		super();
 		this.marketDao = marketDao;
 	}
-	
+
 	@Override
 	public boolean addMarket(MarketPo po) throws RemoteException {
 		return marketDao.addMarket(po);
@@ -65,12 +66,12 @@ public class MarketDaoRemoteObj extends UnicastRemoteObject implements RemoteMar
 
 	@Override
 	public LevelStrategy getLevelStrategy() throws RemoteException {
-		return marketDao.getLevelStrategy();
+		return LevelCalc.getLevelStrategy();
 	}
 
 	@Override
 	public boolean updateLevelStrategy(LevelStrategy ls) throws RemoteException {
-		return marketDao.updateLevelStrategy(ls);
+		return marketDao.updateLevelStrategy(ls) && LevelCalc.refresh();
 	}
 
 }

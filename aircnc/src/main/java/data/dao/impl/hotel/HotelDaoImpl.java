@@ -12,7 +12,6 @@ import data.dao.hotel.HotelDao;
 import data.dao.query.HotelQueryDao;
 import po.hotel.HotelPo;
 import po.hotel.HotelPoBuilder;
-import utils.info.level.LevelStrategy;
 
 public enum HotelDaoImpl implements HotelDao, HotelQueryDao {
 	INSTANCE;

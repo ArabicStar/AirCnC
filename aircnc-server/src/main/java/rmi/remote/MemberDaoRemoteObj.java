@@ -11,6 +11,7 @@ import data.dao.member.CreditDao;
 import data.dao.member.MemberDao;
 import data.dao.rmi.member.RemoteCreditDao;
 import data.dao.rmi.member.RemoteMemberDao;
+import plugins.LevelCalc;
 import po.member.MemberPo;
 import po.member.credit.CreditChangePo;
 import rmi.RemoteHelper;
@@ -74,7 +75,7 @@ public class MemberDaoRemoteObj extends UnicastRemoteObject implements RemoteMem
 
 	@Override
 	public MemberPo findMember(String id) throws RemoteException {
-		return memberDao.findMember(id);
+		return LevelCalc.calcLevel(memberDao.findMember(id));
 	}
 
 	@Override
