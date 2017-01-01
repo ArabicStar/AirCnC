@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.shape.*?>
@@ -24,8 +25,22 @@
             <Label fx:id="name" layoutX="189.0" layoutY="50.0" styleClass="title" text="名字名字酒店" />
             <VBox alignment="CENTER_RIGHT" layoutX="568.0" layoutY="62.0" prefHeight="78.0" prefWidth="137.0" spacing="10.0">
                <children>
-                  <Label fx:id="id" styleClass="id" text="ID:" />
-                  <Label fx:id="grade" styleClass="grade" text="分" />
+                  <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label styleClass="id" text="ID:" />
+                        <Label fx:id="id" styleClass="id" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="grade" styleClass="grade" text="Label" />
+                        <Label styleClass="grade-small" text="分">
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="5.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
                </children>
             </VBox>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="21.0" layoutX="49.0" layoutY="150.0" stroke="BLACK" strokeType="INSIDE" styleClass="split-line" width="662.0" />

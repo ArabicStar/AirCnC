@@ -5,6 +5,7 @@
 }
 
 .title{
+	-fx-text-fill: #000000;
 	-fx-font-size: 60px;
 }
 
@@ -18,9 +19,11 @@
 }
 
 .info-content{
-	-fx-border-radius: 20px,20px,20px,20px;
+	-fx-border-radius: 10px;
 	-fx-border-color: #4f4e84;
 	-fx-background-color:transparent;
+	-fx-background-radius:10px;
+	-fx-font-size: 20 px;
 }
 
 .id{
@@ -33,6 +36,11 @@
 	-fx-border-color:#575793;
 	-fx-text-fill: #575793;
 	-fx-background-color:transparent;
+}
+
+.room:hover{
+	-fx-text-fill: #ffffff;
+	-fx-background-color:#575793;
 }
 
 .modify{
