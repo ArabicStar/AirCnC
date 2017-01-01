@@ -44,6 +44,11 @@
 	-fx-border-radius:0px;
 }
 
+.modify:hover{
+	-fx-text-fill: #ffffff;
+	-fx-background-color:#575793;
+}
+
 .cancel{
 	-fx-font-size: 20px;
 	-fx-text-fill: #ffffff;

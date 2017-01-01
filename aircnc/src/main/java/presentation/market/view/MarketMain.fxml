@@ -58,7 +58,7 @@
                   <Button mnemonicParsing="false" onAction="#handleLogout" styleClass="logout" text="注销" />
                </children>
             </VBox>
-            <Label alignment="CENTER" layoutX="5.0" layoutY="20.0" onMouseClicked="#handleCloseWindow" prefHeight="23.0" prefWidth="23.0" styleClass="close" text="X" />
+            <Label alignment="CENTER" layoutX="5.0" layoutY="5.0" onMouseClicked="#handleCloseWindow" prefHeight="23.0" prefWidth="23.0" styleClass="close" text="X" />
          </children>
       </Pane>
    </left>
