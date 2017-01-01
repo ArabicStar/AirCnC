@@ -29,13 +29,13 @@ public class ParametersList implements Serializable{
 		properties.add(new Parameter<>(name, type));
 	}
 
-	public <T> void addParameter(String name, Class<T> type, ParameterCriteria<T> limit) {
-		properties.add(new Parameter<>(name, type, limit));
-	}
+//	public <T> void addParameter(String name, Class<T> type, ParameterCriteria<T> limit) {
+//		properties.add(new Parameter<>(name, type, limit));
+//	}
 
-	public <T> void addParameter(String name, Class<T> type, ParameterCriteria<T> limit, boolean notNull) {
-		properties.add(new Parameter<>(name, type, limit).setNotNull(notNull));
-	}
+//	public <T> void addParameter(String name, Class<T> type, ParameterCriteria<T> limit, boolean notNull) {
+//		properties.add(new Parameter<>(name, type, limit).setNotNull(notNull));
+//	}
 
 	public <T> void addParameter(String name, Class<T> type, boolean notNull) {
 		properties.add(new Parameter<>(name, type).setNotNull(notNull));

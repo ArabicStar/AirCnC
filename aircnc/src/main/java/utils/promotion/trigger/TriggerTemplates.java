@@ -11,7 +11,7 @@ import utils.promotion.Describer;
 import utils.promotion.trigger.hotel.HotelWhen;
 import utils.promotion.trigger.website.WebsiteWhen;
 
-public final class TriggerTemplates{
+public final class TriggerTemplates {
 	private static final String DURING_PERIOD = "DURING_PERIOD";
 	private static final String LEVEL = "LEVEL";
 	private static final String TRADE_AREA = "TRADE_AREA";
@@ -39,22 +39,10 @@ public final class TriggerTemplates{
 		ParametersList periodParams = new ParametersList();
 
 		// from date time, should after today
-		periodParams.addParameter(TriggerParams.FROM.paramName(), LocalDateTime.class, //
-				(list, from) -> {
-					LocalDateTime to = list.getParameterValue(TriggerParams.TO.paramName());
-
-					return (from.isAfter(LocalDateTime.now()) || from.isEqual(LocalDateTime.now()))
-							&& (to == null ? true : from.isBefore(to));
-
-				});
+		periodParams.addParameter(TriggerParams.FROM.paramName(), LocalDateTime.class);
 
 		// to date time, should after start date time
-		periodParams.addParameter(TriggerParams.TO.paramName(), LocalDateTime.class, //
-				(list, to) -> {
-					LocalDateTime from = list.getParameterValue(TriggerParams.FROM.paramName());
-
-					return (from == null ? true : to.isAfter(from)) && to.isAfter(LocalDateTime.now());
-				});
+		periodParams.addParameter(TriggerParams.TO.paramName(), LocalDateTime.class);
 
 		return periodParams;
 	}
@@ -62,7 +50,7 @@ public final class TriggerTemplates{
 	private static final ParametersList levelProperties() {
 		ParametersList levelParams = new ParametersList();
 
-		levelParams.addParameter(TriggerParams.LEVEL_THRESHOLD.paramName(), Integer.class, (list, i) -> i > 0);
+		levelParams.addParameter(TriggerParams.LEVEL_THRESHOLD.paramName(), Integer.class);
 
 		return levelParams;
 	}
@@ -168,8 +156,7 @@ public final class TriggerTemplates{
 	private static final ParametersList enterpriseParamerters() {
 		ParametersList enterpriseParams = new ParametersList();
 
-		enterpriseParams.addParameter(TriggerParams.ENTERPRISE.paramName(), String.class,
-				(list, s) -> s != null && s.length() > 0);
+		enterpriseParams.addParameter(TriggerParams.ENTERPRISE.paramName(), String.class);
 
 		return enterpriseParams;
 	}
@@ -177,7 +164,7 @@ public final class TriggerTemplates{
 	private static final ParametersList multiRoomsParameters() {
 		ParametersList multiParams = new ParametersList();
 
-		multiParams.addParameter(TriggerParams.ROOM_NUM_THRESHOLD.paramName(), Integer.class, (list, i) -> i > 0);
+		multiParams.addParameter(TriggerParams.ROOM_NUM_THRESHOLD.paramName(), Integer.class);
 
 		return multiParams;
 	}

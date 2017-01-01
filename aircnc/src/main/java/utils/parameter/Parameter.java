@@ -23,7 +23,7 @@ public class Parameter<T> implements Serializable{
 	private String name;
 	private Class<T> type;
 	private T value;
-	private ParameterCriteria<T> limit;
+	//private ParameterCriteria<T> limit;
 	private boolean allowNull;
 
 	private Parameter(String name) {
@@ -31,7 +31,7 @@ public class Parameter<T> implements Serializable{
 			illegalArgEx("Property name");
 
 		this.name = name;
-		this.limit = (list, o) -> true;
+		//this.limit = (list, o) -> true;
 		this.value = null;
 		this.allowNull = true;
 	}
@@ -41,10 +41,10 @@ public class Parameter<T> implements Serializable{
 		this.type = type;
 	}
 
-	public Parameter(String name, Class<T> type, ParameterCriteria<T> precondition) {
-		this(name, type);
-		setLimit(precondition);
-	}
+//	public Parameter(String name, Class<T> type, ParameterCriteria<T> precondition) {
+//		this(name, type);
+//		setLimit(precondition);
+//	}
 
 	@SuppressWarnings("unchecked")
 	public Parameter(String name, T value) {
@@ -55,10 +55,10 @@ public class Parameter<T> implements Serializable{
 		type = (Class<T>) types[0];
 	}
 
-	public Parameter(String name, T value, ParameterCriteria<T> limit) {
-		this(name, value);
-		setLimit(limit);
-	}
+//	public Parameter(String name, T value, ParameterCriteria<T> limit) {
+//		this(name, value);
+//		setLimit(limit);
+//	}
 
 	public T value() {
 		return value;
@@ -82,8 +82,8 @@ public class Parameter<T> implements Serializable{
 			return true;
 		}
 
-		if (!limit.test(list, value))
-			return false;
+//		if (!limit.test(list, value))
+//			return false;
 
 		this.value = value;
 		return true;
@@ -98,10 +98,10 @@ public class Parameter<T> implements Serializable{
 		return !allowNull;
 	}
 
-	private void setLimit(ParameterCriteria<T> limit) {
-		if (limit != null)
-			this.limit = limit;
-	}
+//	private void setLimit(ParameterCriteria<T> limit) {
+//		if (limit != null)
+//			this.limit = limit;
+//	}
 
 	public boolean nameEquals(Parameter<T> that) {
 		return this.name().equals(that.name());
@@ -145,12 +145,12 @@ public class Parameter<T> implements Serializable{
 
 		baos.reset();
 
-		// serialize limit
-		try (ObjectOutputStream oos = new ObjectOutputStream(baos)) {
-			oos.writeObject(limit);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		// serialize limitb
+//		try (ObjectOutputStream oos = new ObjectOutputStream(baos)) {
+//			oos.writeObject(limit);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 
 		b = baos.toByteArray();
 		try {
@@ -188,13 +188,13 @@ public class Parameter<T> implements Serializable{
 		}
 
 		// limit
-		m.find();
-		bs = hexString2Bytes(m.group(1));
-		try (ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(bs))) {
-			param.setLimit((ParameterCriteria) ois.readObject());
-		} catch (Exception e) {
-			throw e;
-		}
+//		m.find();
+//		bs = hexString2Bytes(m.group(1));
+//		try (ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(bs))) {
+//			param.setLimit((ParameterCriteria) ois.readObject());
+//		} catch (Exception e) {
+//			throw e;
+//		}
 		return param;
 	}
 }

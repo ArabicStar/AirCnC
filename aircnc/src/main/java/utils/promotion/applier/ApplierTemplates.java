@@ -13,12 +13,12 @@ public abstract class ApplierTemplates{
 		switch (how.name()) {
 		case CONST:
 			ParametersList params1 = new ParametersList();
-			params1.addParameter(ApplierParams.AMOUNT.paramName(), Double.class, (list, d) -> d >= 0);
+			params1.addParameter(ApplierParams.AMOUNT.paramName(), Double.class);
 			return params1;
 
 		case PERCENT_OFF:
 			ParametersList params2 = new ParametersList();
-			params2.addParameter(ApplierParams.PERCENT.paramName(), Double.class, (list, d) -> 0 <= d && d <= 1);
+			params2.addParameter(ApplierParams.PERCENT.paramName(), Double.class);
 			return params2;
 		default:
 			return null;
