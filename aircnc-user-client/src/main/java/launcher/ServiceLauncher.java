@@ -16,6 +16,7 @@ import service.impl.promotion.HotelPromotionInfoManager;
 import service.impl.promotion.PromotionApplicationManager;
 import service.impl.promotion.WebsitePromotionApplicationManager;
 import service.impl.promotion.WebsitePromotionInfoManager;
+import service.impl.query.CommentQueryManager;
 import service.impl.query.CreditQueryManager;
 import service.impl.query.HotelQueryManager;
 import service.impl.query.OrderQueryManager;
@@ -108,7 +109,7 @@ public class ServiceLauncher {
 		final CreditQueryService cre = CreditQueryManager.launch(queryDao);
 		final HotelQueryService hotel = HotelQueryManager.launch(queryDao);
 		final OrderQueryService order = OrderQueryManager.launch(queryDao);
-		final CommentQueryService comm = null;
+		final CommentQueryService comm = CommentQueryManager.launch(queryDao);
 
 		proxy.loadOrderQueryService(order);
 		proxy.loadMemberQueryService(mem);

@@ -76,6 +76,7 @@ public class DaoLauncher {
 		proxy.loadRemotePromotionQueryDao(helper.getRemotePromotionQueryDao());
 		proxy.loadRemoteOrderQueryDao(helper.getRemoteOrderQueryDao());
 		proxy.loadRemoteHotelQueryDao(helper.getRemoteHotelQueryDao());
+		proxy.loadRemoteCommentQueryDao(helper.getRemoteCommentQueryDao());
 
 		Log.d("query dao launched");
 	}

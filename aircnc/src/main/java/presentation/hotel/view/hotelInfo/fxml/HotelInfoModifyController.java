@@ -107,10 +107,6 @@ public class HotelInfoModifyController implements Initializable{
 			
 			interactor.updateHotel();
 			
-			PlainDialog alert = new PlainDialog(AlertType.INFORMATION,
-					"保存成功","已保存修改的信息");
-			alert.showDialog();
-			
 		}else{
 			PlainDialog alert = new PlainDialog(AlertType.INFORMATION,
 					"保存信息失败","请输入完整的信息");
