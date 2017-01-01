@@ -111,6 +111,7 @@ public class MemberOrderMainController implements Initializable {
 			MemberInfoCourier.getInstance().getMemberOrdersByStatus();
 			
 			models = manager.getOrderList();
+			orderTable.getItems().clear();
 			orderTable.setItems(models);
 
 			hotelName.setCellValueFactory(cellData -> cellData.getValue().hotelNameProperty());
@@ -151,6 +152,7 @@ public class MemberOrderMainController implements Initializable {
 			MemberInfoCourier.getInstance().getMemberOrdersByStatus();
 			
 			models = manager.getOrderList();
+			orderTable.getItems().clear();
 			orderTable.setItems(models);
 
 		} else {

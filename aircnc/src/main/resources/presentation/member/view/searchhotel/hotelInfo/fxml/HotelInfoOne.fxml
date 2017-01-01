@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="603.0" prefWidth="777.0" stylesheets="@../css/HotelInfoOne.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.member.view.searchhotel.hotelInfo.fxml.HotelInfoOneController">
+   <children>
+      <VBox layoutX="49.0" layoutY="27.0" prefHeight="461.0" prefWidth="687.0">
+         <children>
+            <HBox prefHeight="100.0" spacing="80.0">
+               <children>
+                  <HBox spacing="40.0">
+                     <children>
+                        <Label styleClass="info-index" text="所属商圈" />
+                        <Label fx:id="scope" styleClass="info-content">
+                           <HBox.margin>
+                              <Insets top="5.0" />
+                           </HBox.margin></Label>
+                     </children>
+                  </HBox>
+                  <HBox spacing="40.0">
+                     <children>
+                        <Label styleClass="info-index" text="地址" />
+                        <Label fx:id="location" styleClass="info-content">
+                           <HBox.margin>
+                              <Insets top="5.0" />
+                           </HBox.margin></Label>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="687.0" spacing="40.0">
+               <children>
+                  <Label styleClass="info-index" text="星级" />
+                  <Pane fx:id="star" prefHeight="200.0" prefWidth="200.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="40.0">
+               <children>
+                  <Label styleClass="info-index" text="简介" />
+                  <Label fx:id="introduction" styleClass="info-content" text="Label">
+                     <HBox.margin>
+                        <Insets top="5.0" />
+                     </HBox.margin></Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="200.0" prefWidth="200.0" spacing="40.0">
+               <children>
+                  <Label styleClass="info-index" text="拥有房型" />
+                  <ScrollPane hbarPolicy="NEVER" pannable="true" prefHeight="162.0" prefWidth="289.0">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="170.0" prefWidth="293.0" styleClass="scollpane" stylesheets="@../css/Scroller.css">
+                           <children>
+                              <Label fx:id="roomType" styleClass="info-content" text="类型" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0" />
+                              <Label fx:id="roomPrice" styleClass="price" text="价格" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0" />
+                           </children>
+                        </AnchorPane>
+                    </content>
+                     <HBox.margin>
+                        <Insets bottom="10.0" />
+                     </HBox.margin>
+                  </ScrollPane>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="40.0">
+               <children>
+                  <Label styleClass="info-index" text="设施" />
+                  <FlowPane fx:id="equipment" hgap="20.0" prefHeight="73.0" prefWidth="600.0" vgap="10.0" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Button layoutX="580.0" layoutY="475.0" mnemonicParsing="false" styleClass="reserve" text="预定房间" />
+      <HBox alignment="CENTER" layoutX="282.0" layoutY="509.0" prefHeight="43.0" prefWidth="200.0" spacing="25.0">
+         <children>
+            <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="page-now" text="1" />
+            <Button fx:id="page2" mnemonicParsing="false" onAction="#handlePage2" prefHeight="30.0" prefWidth="30.0" styleClass="page" text="2" />
+            <Button fx:id="page3" mnemonicParsing="false" onAction="#handlePage3" styleClass="page" text="3" />
+            <Button fx:id="page4" mnemonicParsing="false" onAction="#handlePage4" prefHeight="30.0" prefWidth="30.0" styleClass="page" text="4" />
+         </children>
+      </HBox>
+   </children>
+</Pane>

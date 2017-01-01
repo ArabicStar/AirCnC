@@ -17,3 +17,16 @@
 	-fx-background-color: #4f4e84;
 	-fx-font-size: 20px;
 }
+
+.back{
+	-fx-font-size: 10pt;
+	-fx-background-color: transparent;
+	-fx-text-fill: #4f4e84;
+	-fx-border-color: #4f4e84;
+	-fx-border-radius: 3px;
+}
+
+.back:hover{
+	-fx-background-color: #4f4e84;
+	-fx-text-fill: #fff;
+}

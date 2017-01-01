@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane stylesheets="@../css/MakeOrder.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.member.view.searchhotel.fxml.MakeOrderController">
+   <children>
+      <AnchorPane prefHeight="400.0" prefWidth="500.0" style="-fx-background-color: #fff;">
+         <children>
+            <VBox layoutX="45.0" layoutY="60.0" spacing="8.0">
+               <children>
+                  <HBox fx:id="checkInTimeHbox" spacing="50.0">
+                     <children>
+                        <Label text="入住时间" />
+                     </children>
+                  </HBox>
+                  <HBox fx:id="checkOutTimeHbox" layoutX="10.0" layoutY="10.0" spacing="50.0">
+                     <children>
+                        <Label text="退房时间" />
+                     </children>
+                  </HBox>
+                  <HBox spacing="50.0">
+                     <children>
+                        <Label text="房间类型" />
+                        <ComboBox fx:id="roomType" prefHeight="29.0" prefWidth="121.0" />
+                     </children>
+                  </HBox>
+                  <HBox spacing="50.0">
+                     <children>
+                        <Label text="房间数量" />
+                        <TextField fx:id="roomNum" prefHeight="29.0" prefWidth="97.0" />
+                     </children>
+                  </HBox>
+                  <HBox fx:id="latestTimeHbox" spacing="50.0">
+                     <children>
+                        <Label text="最晚订单执行时间" />
+                     </children>
+                  </HBox>
+                  <HBox spacing="50.0">
+                     <children>
+                        <Label text="入住人数" />
+                        <TextField fx:id="peopleNum" prefHeight="29.0" prefWidth="104.0" />
+                     </children>
+                  </HBox>
+                  <HBox spacing="50.0">
+                     <children>
+                        <Label text="有无儿童" />
+                        <RadioButton fx:id="notHasChild" mnemonicParsing="false" text="无" />
+                        <RadioButton fx:id="hasChild" mnemonicParsing="false" text="有" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Label layoutX="482.0" layoutY="2.0" onMouseClicked="#handleClose" text="X" />
+            <Button layoutX="399.0" layoutY="344.0" mnemonicParsing="false" onAction="#handleNext" text="下一步" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
