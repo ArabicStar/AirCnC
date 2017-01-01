@@ -39,11 +39,7 @@
                   </HBox>
                </children>
             </HBox>
-            <HBox layoutX="121.0" layoutY="77.0" prefWidth="200.0" styleClass="promotion">
-               <children>
-                  <Label fx:id="promotion" layoutX="121.0" layoutY="81.0" text="\%促销策略" />
-               </children>
-            </HBox>
+            <HBox fx:id="promotion" layoutX="121.0" layoutY="77.0" prefWidth="200.0" spacing="3.0" styleClass="promotion" />
             <HBox layoutX="399.0" layoutY="30.0" styleClass="money">
                <children>
                   <Label layoutX="393.0" layoutY="39.0" styleClass="price-symbol" text="¥" />

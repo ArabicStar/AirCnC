@@ -2,16 +2,17 @@ package presentation.member.view.searchhotel.hotelInfo.fxml;
 
 import java.net.URL;
 import java.util.Iterator;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.application.Platform;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.VBox;
 import presentation.member.manager.HotelCommentManager;
 import presentation.member.manager.impl.HotelCommentManagerImpl;
 import presentation.member.model.CommentModel;
+import presentation.member.model.SearchHotelsModel;
 import presentation.member.view.searchhotel.hotelInfo.HotelCommentPane;
 
 public class HotelInfoThreeController implements Initializable{
@@ -20,8 +21,10 @@ public class HotelInfoThreeController implements Initializable{
 	@FXML
 	private VBox comments;
 	
+	@SuppressWarnings("unused")
 	private HotelCommentManager manager;
-	private ObservableList<CommentModel> list;
+	private List<CommentModel> list;
+	private SearchHotelsModel model;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -58,7 +61,7 @@ public class HotelInfoThreeController implements Initializable{
 	}
 	
 	public void initComment(){
-		list = manager.getCommentList();
+		list = model.getComments();
 //		System.out.println(list.get(0).getContent());
 		Iterator<CommentModel> it = list.iterator();
 		while(it.hasNext()){
@@ -67,5 +70,9 @@ public class HotelInfoThreeController implements Initializable{
 			newPane.getController().setController(this);
 		}
 		
+	}
+	
+	public void setHotelModel(SearchHotelsModel model){
+		this.model = model;
 	}
 }

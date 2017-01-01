@@ -12,6 +12,8 @@ import java.rmi.RemoteException;
 import data.dao.rmi.hotel.RemoteHotelDao;
 import data.dao.rmi.market.RemoteMarketDao;
 import data.dao.rmi.member.RemoteMemberDao;
+import data.dao.rmi.promotion.RemoteHotelPromotionDao;
+import data.dao.rmi.promotion.RemoteWebsitePromotionDao;
 import data.dao.rmi.query.RemoteCommentQueryDao;
 import data.dao.rmi.query.RemotePromotionQueryDao;
 import utils.logger.Log;
@@ -73,6 +75,7 @@ public final class RemoteHelper {
 	private Remote hotelDaoRemoteObj;
 	private Remote marketDaoRemoteObj;
 	private Remote queryDaoRemoteObj;
+	private Remote promotionDaoRemoteObj;
 
 	public RemoteMemberDao getRemoteMemberDao() {
 		return (RemoteMemberDao) memberDaoRemoteObj;
@@ -92,6 +95,14 @@ public final class RemoteHelper {
 
 	public RemotePromotionQueryDao getRemotePromotionQueryDao() {
 		return (RemotePromotionQueryDao) queryDaoRemoteObj;
+	}
+	
+	public RemoteHotelPromotionDao getRemoteHotelPromotionDao() {
+		return (RemoteHotelPromotionDao) promotionDaoRemoteObj;
+	}
+
+	public RemoteWebsitePromotionDao getRemoteWebsitePromotionDao() {
+		return (RemoteWebsitePromotionDao) promotionDaoRemoteObj;
 	}
 
 	private static final int PORT = 8888;

@@ -1,7 +1,9 @@
 package presentation.member.model;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import interactor.impl.member.MemberInfoCourier;
@@ -17,6 +19,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import presentation.member.manager.impl.MyOrderManagerImpl;
 import vo.hotel.HotelVo;
+import vo.order.comment.CommentVo;
+import vo.promotion.PromotionVo;
 
 /**
  * the model of hotel searched
@@ -47,7 +51,9 @@ public class SearchHotelsModel {
 	private final StringProperty roomName;
 	private final StringProperty roomPrice;
 	
-	private final ObjectProperty<String[]> promotion;
+	private final ObjectProperty<List<String>> promotionGeneral;
+	private final ObjectProperty<List<String>> promotion;
+	private final ObjectProperty<List<CommentModel>> comments;
 	
 	private final HotelVo hotel;
 	/**
@@ -56,9 +62,7 @@ public class SearchHotelsModel {
     public SearchHotelsModel() {
         this(null);
     }
-    
-	//姑且没有PromotionVo
-	//private final ObjectProperty<PromotionVo> promotion;
+
     /**
      * Constructor with some initial data.
      * 
@@ -93,9 +97,9 @@ public class SearchHotelsModel {
 				bufferedList.stream().filter(order->order.getHotelName().equals(vo.getName())).collect(Collectors.toList()));
 		
 		int executeNum = 0; int unexecuteNum = 0; int abnormalNum = 0;  int repealNum = 0;
-		Iterator<MyOrderModel> iter = historyOrder.getValue().iterator();
-		while(iter.hasNext()){
-			switch(iter.next().getState()){
+		Iterator<MyOrderModel> iter1 = historyOrder.getValue().iterator();
+		while(iter1.hasNext()){
+			switch(iter1.next().getState()){
 			case "异常":
 				abnormalNum++;  break;
 	        case "已执行": 
@@ -121,8 +125,40 @@ public class SearchHotelsModel {
 		this.roomPrice = new SimpleStringProperty(vo.getStringRoomPrice());
 		this.roomName = new SimpleStringProperty(vo.getStringRoomName());
 		
-		this.promotion = new SimpleObjectProperty<String[]>();
+		Set<PromotionVo> promotionsList = vo.getPromotions();
+		List<String> proGeneral = new ArrayList<String>();
+		List<String> pro = new ArrayList<String>();
+		Iterator<PromotionVo> iter3 = promotionsList.iterator();
+		while(iter3.hasNext()){
+			PromotionVo temp = iter3.next();
+			switch(temp.getPromotion().getTrigger().name()){
+			case "BIRTHDAY":
+				proGeneral.add("生日优惠");
+				break;
+			case "MULTI_ROOMS":
+				proGeneral.add("多间优惠");
+				break;
+			case "ENTERPRISE":
+				proGeneral.add("企业优惠");
+				break;
+			case "DURING_PERIOD":
+				proGeneral.add("节日折扣");
+				break;
+			}
+			pro.add(temp.getDescription());
+		}
 		
+		this.promotion = new SimpleObjectProperty<List<String>>(pro);
+		
+		this.promotionGeneral = new SimpleObjectProperty<List<String>>(proGeneral);
+		
+		List<CommentVo> commentsList = vo.getComments();
+		List<CommentModel> commentModels = new ArrayList<CommentModel>();
+		Iterator<CommentVo> iter2 = commentsList.iterator();
+		while(iter2.hasNext()){
+			commentModels.add(new CommentModel(iter2.next()));
+		}
+		this.comments = new SimpleObjectProperty<List<CommentModel>>(commentModels);
 	}
 	
 	public int getStar() {
@@ -321,6 +357,42 @@ public class SearchHotelsModel {
         return roomName.get();
     }
 
+    public void setPromotionGeneral(List<String> newPro) {
+        this.promotionGeneral.set(newPro);
+    }
+
+    public ObjectProperty<List<String>> promotionGeneralProperty() {
+        return promotionGeneral;
+    }
+    
+    public List<String> getPromotionGeneral(){
+    	return this.promotionGeneral.get();
+    }
+    
+    public void setPromotion(List<String> newPro) {
+        this.promotion.set(newPro);
+    }
+
+    public ObjectProperty<List<String>> promotionProperty() {
+        return promotion;
+    }
+    
+    public List<String> getPromotion(){
+    	return this.promotion.get();
+    }
+    
+    public void setComments(List<CommentModel> newComment) {
+        this.comments.set(newComment);
+    }
+
+    public ObjectProperty<List<CommentModel>> commentProperty() {
+        return comments;
+    }
+    
+    public List<CommentModel> getComments(){
+    	return this.comments.get();
+    }
+    
     public void setRoomName(String newName) {
         this.roomName.set(newName);
     }

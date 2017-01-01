@@ -1,10 +1,17 @@
 package presentation.manage.model;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import vo.hotel.HotelVo;
+import vo.order.comment.CommentVo;
+import vo.promotion.PromotionVo;
 
 /**
  * the model of hotel
@@ -26,6 +33,9 @@ public class HotelManageModel {
 	private final StringProperty roomName;
 	private final StringProperty roomPrice;
 	private final StringProperty grade;
+	
+	private final ObjectProperty<List<String>> promotion;
+	private final ObjectProperty<List<ManageCommentModel>> comments;
 	
 	private HotelVo vo;
 	
@@ -49,6 +59,25 @@ public class HotelManageModel {
 		this.grade = new SimpleStringProperty(Double.toString(vo.getGrade()));
 		this.roomPrice = new SimpleStringProperty(vo.getStringRoomPrice());
 		this.roomName = new SimpleStringProperty(vo.getStringRoomName());
+		
+		Set<PromotionVo> promotionsList = vo.getPromotions();
+		List<String> proGeneral = new ArrayList<String>();
+		List<String> pro = new ArrayList<String>();
+		Iterator<PromotionVo> iter3 = promotionsList.iterator();
+		while(iter3.hasNext()){
+			proGeneral.add(iter3.next().getContentString());
+			pro.add(iter3.next().getDescription());
+		}
+		
+		this.promotion = new SimpleObjectProperty<List<String>>(proGeneral);
+		
+		List<CommentVo> commentsList = vo.getComments();
+		List<ManageCommentModel> commentModels = new ArrayList<ManageCommentModel>();
+		Iterator<CommentVo> iter2 = commentsList.iterator();
+		while(iter2.hasNext()){
+			commentModels.add(new ManageCommentModel(iter2.next()));
+		}
+		this.comments = new SimpleObjectProperty<List<ManageCommentModel>>(commentModels);
 	}
 	
 	public String getID() {
@@ -185,5 +214,29 @@ public class HotelManageModel {
     
     public HotelVo getHotelVo(){
     	return vo;
+    }
+    
+    public void setPromotion(List<String> newPro) {
+        this.promotion.set(newPro);
+    }
+
+    public ObjectProperty<List<String>> promotionProperty() {
+        return promotion;
+    }
+    
+    public List<String> getPromotion(){
+    	return this.promotion.get();
+    }
+    
+    public void setComments(List<ManageCommentModel> newComment) {
+        this.comments.set(newComment);
+    }
+
+    public ObjectProperty<List<ManageCommentModel>> commentProperty() {
+        return comments;
+    }
+    
+    public List<ManageCommentModel> getComments(){
+    	return this.comments.get();
     }
 }

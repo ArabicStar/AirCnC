@@ -49,7 +49,7 @@
 		<property column="mem_id" generated="never" lazy="false"
 			name="memberId" not-null="true" type="int" update="false" />
 		<!-- hotel -->
-		<many-to-one cascade="all" class="po.hotel.HotelPo"
+		<many-to-one cascade="none" class="po.hotel.HotelPo"
 			column="hotel_id" fetch="select" lazy="false" name="hotel" not-null="true"
 			update="false" />
 		<!-- hotel promotions -->

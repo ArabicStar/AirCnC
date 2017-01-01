@@ -3,7 +3,6 @@ package presentation.member.view.memberinfo.fxml;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import interactor.member.MemberInfoInteractor;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -48,8 +47,6 @@ public class MemberInfoMainController implements Initializable{
 	private UserInfoManager manager;
 	
 	private MemberInfoModel model;
-	
-	private MemberInfoInteractor interactor;
 	
 	/**
 	 * initialize the pane.

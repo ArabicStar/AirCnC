@@ -123,10 +123,6 @@ public final class RemoteHelper {
 	public RemoteCreditQueryDao getRemoteCreditQueryDao() {
 		return (RemoteCreditQueryDao) queryDaoRemoteObj;
 	}
-	
-	public RemoteCommentQueryDao getRemoteCommentQueryDao() {
-		return (RemoteCommentQueryDao) queryDaoRemoteObj;
-	}
 
 	public RemotePromotionQueryDao getRemotePromotionQueryDao() {
 		return (RemotePromotionQueryDao) queryDaoRemoteObj;

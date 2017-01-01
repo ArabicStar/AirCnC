@@ -9,6 +9,10 @@
 /aircnc-manage-client/bin/
 /aircnc-market-client/target/
 /aircnc-market-client/bin/
+/aircnc-user-client/addr.txt
+/aircnc-hotel-client/addr.txt
+/aircnc-manage-client/addr.txt
+/aircnc-market-client/addr.txt
 .classpath
 .project
 .settings
