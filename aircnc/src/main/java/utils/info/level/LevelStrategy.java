@@ -40,8 +40,9 @@ public class LevelStrategy implements Serializable {
 	}
 
 	public int getTreshold(int level) {
-		if (level <= 0 || level >= 10)
+		if (level <= 0 || level > 10)
 			throw new IllegalArgumentException("LevelStrategy - Level Illegal");
+
 		return list.getParameterValue(String.valueOf(level));
 	}
 

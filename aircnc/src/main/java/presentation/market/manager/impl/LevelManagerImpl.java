@@ -40,8 +40,7 @@ public class LevelManagerImpl implements LevelManager {
 				levelCredit.add(100);
 			}
 		}else{
-			this.ls = ls;
-			
+			this.ls = ls;		
 			levelCredit.add(ls.getTreshold(1));
 			for (int i = 1; i < 10; i++) {
 				levelCredit.add(ls.getTreshold(i + 1) - ls.getTreshold(i));
@@ -51,7 +50,8 @@ public class LevelManagerImpl implements LevelManager {
 
 	@Override
 	public List<Integer> getLevelCredit() {
-		
+		if(levelCredit==null)
+			System.out.println("aaa");
 
 		return levelCredit;
 	}

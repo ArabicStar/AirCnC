@@ -42,7 +42,7 @@ public class LevelAccessorImpl implements LevelAccessor {
 		int temp = 0;
 		for (int i = 0; i < 10; i++) {
 			temp += levelCredit.get(i);
-			ls.setThreshold(i, temp);
+			ls.setThreshold(i+1, temp);
 		}
 
 		return ls;
