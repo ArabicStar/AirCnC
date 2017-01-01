@@ -80,6 +80,7 @@ public class HotelInfoMainController implements Initializable{
 		twoPane = new HotelInfoTwoPane();
 		contentLayout.setCenter(twoPane.getPane());
 		twoPane.getController().setInfoMainController(this);
+		twoPane.getController().setModel(model);
 	}
 	
 	@FXML
@@ -93,6 +94,7 @@ public class HotelInfoMainController implements Initializable{
 		threePane = new HotelInfoThreePane();
 		contentLayout.setCenter(threePane.getPane());
 		threePane.getController().setInfoMainController(this);	
+		threePane.getController().setModel(model);
 	}
 	
 	/**

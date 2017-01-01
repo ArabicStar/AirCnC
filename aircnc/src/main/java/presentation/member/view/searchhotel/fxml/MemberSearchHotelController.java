@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.ResourceBundle;
 
 import interactor.impl.member.HotelSearchCourier;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -77,6 +78,22 @@ public class MemberSearchHotelController implements Initializable {
 		this.maxPageNum = 0;
 		preButton.setDisable(true);
 		nextButton.setDisable(true);
+		
+		Platform.runLater( ()->{
+			this.hotelNum = 0;
+			list = manager.getHotelList(pageNum);
+			this.hotelNum = manager.getSearchedNum();
+			this.maxPageNum = (hotelNum - 1) / 4;
+			Iterator<SearchHotelsModel> it = list.iterator();
+			while (it.hasNext()) {
+				MemberSearchHotelGeneralPane newPane = new MemberSearchHotelGeneralPane(it.next());
+				searchedResult.getChildren().add(newPane.getPane());
+				newPane.getController().setController(this);
+				newPane.getController().setRootLayout(rootLayout);
+			}
+			if (maxPageNum > 0)
+				nextButton.setDisable(false);
+		});
 	}
 
 	@FXML

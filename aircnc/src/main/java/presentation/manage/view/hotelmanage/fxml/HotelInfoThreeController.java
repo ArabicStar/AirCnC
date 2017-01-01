@@ -2,6 +2,7 @@ package presentation.manage.view.hotelmanage.fxml;
 
 import java.net.URL;
 import java.util.Iterator;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.application.Platform;
@@ -11,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.VBox;
 import presentation.manage.manager.ManageHotelCommentManager;
 import presentation.manage.manager.impl.ManageHotelCommentManagerImpl;
+import presentation.manage.model.HotelManageModel;
 import presentation.manage.model.ManageCommentModel;
 import presentation.manage.view.hotelmanage.HotelCommentPane;
 
@@ -20,13 +22,13 @@ public class HotelInfoThreeController implements Initializable{
 	@FXML
 	private VBox comments;
 	
-	private ManageHotelCommentManager manager;
-	private ObservableList<ManageCommentModel> list;
+	private List<ManageCommentModel> list;
+	
+	private HotelManageModel model;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		manager = ManageHotelCommentManagerImpl.getInstance();
 		
 		Platform.runLater(new Runnable() {
 			  @Override public void run() {
@@ -50,7 +52,7 @@ public class HotelInfoThreeController implements Initializable{
 	}
 	
 	public void initComment(){
-		list = manager.getCommentList();
+		list = model.getComments();
 //		System.out.println(list.get(0).getContent());
 		Iterator<ManageCommentModel> it = list.iterator();
 		while(it.hasNext()){
@@ -59,5 +61,9 @@ public class HotelInfoThreeController implements Initializable{
 			newPane.getController().setController(this);
 		}
 		
+	}
+	
+	public void setModel(HotelManageModel model){
+		this.model = model;
 	}
 }
