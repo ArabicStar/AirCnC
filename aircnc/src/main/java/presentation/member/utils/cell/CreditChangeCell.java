@@ -54,6 +54,8 @@ public class CreditChangeCell extends TableCell<CreditModel, Integer> {
 		super.updateItem(changeNum, empty);
 		if (!empty) {
 			setGraphic(change);
+		}else{
+			setGraphic(null);
 		}
 	}
 }

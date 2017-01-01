@@ -105,6 +105,8 @@ public class HotelManageButtonCell extends TableCell<HotelManageModel, HotelVo> 
 			this.vo = vo;
 			createButtons();
 			setGraphic(buttons);
+		}else{
+			setGraphic(null);
 		}
 	}
 
