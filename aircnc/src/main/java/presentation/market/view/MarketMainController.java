@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import interactor.impl.market.MarketAccountCourier;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert.AlertType;
@@ -31,8 +32,13 @@ public class MarketMainController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				creditCharge.setDisable(true);
+				controller.addCreditCharge();
+			}
+		});
 	}
 	
 	@FXML
@@ -101,4 +107,6 @@ public class MarketMainController implements Initializable {
 			this.controller.closeWindow();
 		}
 	}
+	
+	
 }

@@ -38,6 +38,11 @@
 	-fx-background-color:transparent;
 }
 
+.room:hover{
+	-fx-text-fill: #ffffff;
+	-fx-background-color:#575793;
+}
+
 .modify{
 	-fx-font-size: 20px;
 	-fx-text-fill: #ffffff;

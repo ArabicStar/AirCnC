@@ -27,6 +27,11 @@
 	-fx-background-color:transparent;
 }
 
+.modify:hover{
+	-fx-text-fill: #ffffff;
+	-fx-background-color:#575793;
+}
+
 .page{
 	-fx-text-fill: #575793;
 	-fx-border-color:#575793;

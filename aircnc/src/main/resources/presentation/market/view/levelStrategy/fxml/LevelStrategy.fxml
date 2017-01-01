@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="777.0" stylesheets="@../css/LevelStrategy.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.market.view.levelStrategy.fxml.LevelStrategyController">
+   <top>
+      <Pane BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="49.0" layoutY="47.0" styleClass="title" text="会员等级策略" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="21.0" layoutX="49.0" layoutY="150.0" stroke="BLACK" strokeType="INSIDE" styleClass="split-line" width="662.0" />
+            <Button fx:id="modify" layoutX="552.0" layoutY="66.0" mnemonicParsing="false" onAction="#handleModify" styleClass="modify" text="修改策略" />
+         </children>
+      </Pane>
+   </top>
+   <center>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="CENTER" layoutX="96.0" layoutY="14.0" spacing="5.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="50.0" spacing="10.0">
+                     <children>
+                        <Label styleClass="info-index" text="从" />
+                        <Label styleClass="level" text="LV0" />
+                        <Label styleClass="info-index" text="到" />
+                        <Label styleClass="level" text="LV1" />
+                        <Label styleClass="info-index" text="需要信用值">
+                           <HBox.margin>
+                              <Insets left="14.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="lv1" prefHeight="41.0" prefWidth="180.0" styleClass="info-content" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" spacing="10.0">
+                     <children>
+                        <Label styleClass="info-index" text="从" />
+                        <Label styleClass="level" text="LV1" />
+                        <Label styleClass="info-index" text="到" />
+                        <Label styleClass="level" text="LV2" />
+                        <Label prefHeight="50.0" styleClass="info-index" text="需要信用值">
+                           <HBox.margin>
+                              <Insets left="14.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="lv2" prefHeight="41.0" prefWidth="180.0" styleClass="info-content" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" spacing="10.0">
+                     <children>
+                        <Label styleClass="info-index" text="从" />
+                        <Label styleClass="level" text="LV2" />
+                        <Label styleClass="info-index" text="到" />
+                        <Label styleClass="level" text="LV3" />
+                        <Label prefHeight="50.0" styleClass="info-index" text="需要信用值">
+                           <HBox.margin>
+                              <Insets left="14.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="lv3" prefHeight="41.0" prefWidth="180.0" styleClass="info-content" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" spacing="10.0">
+                     <children>
+                        <Label styleClass="info-index" text="从" />
+                        <Label styleClass="level" text="LV3" />
+                        <Label styleClass="info-index" text="到" />
+                        <Label styleClass="level" text="LV4" />
+                        <Label prefHeight="50.0" styleClass="info-index" text="需要信用值">
+                           <HBox.margin>
+                              <Insets left="14.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="lv4" prefHeight="41.0" prefWidth="180.0" styleClass="info-content" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefWidth="50.0" spacing="10.0">
+                     <children>
+                        <Label styleClass="info-index" text="从" />
+                        <Label styleClass="level" text="LV4" />
+                        <Label styleClass="info-index" text="到" />
+                        <Label styleClass="level" text="LV5" />
+                        <Label styleClass="info-index" text="需要信用值">
+                           <HBox.margin>
+                              <Insets left="14.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="lv5" prefHeight="41.0" prefWidth="180.0" styleClass="info-content" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefWidth="50.0" spacing="10.0">
+                     <children>
+                        <Label styleClass="info-index" text="从" />
+                        <Label styleClass="level" text="LV5" />
+                        <Label styleClass="info-index" text="到" />
+                        <Label styleClass="level" text="LV6" />
+                        <Label styleClass="info-index" text="需要信用值">
+                           <HBox.margin>
+                              <Insets left="14.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="lv6" prefHeight="41.0" prefWidth="180.0" styleClass="info-content" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="50.0" spacing="10.0">
+                     <children>
+                        <Label styleClass="info-index" text="从" />
+                        <Label styleClass="level" text="LV6" />
+                        <Label styleClass="info-index" text="到" />
+                        <Label styleClass="level" text="LV7" />
+                        <Label styleClass="info-index" text="需要信用值">
+                           <HBox.margin>
+                              <Insets left="14.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="lv7" prefHeight="41.0" prefWidth="180.0" styleClass="info-content" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="50.0" spacing="10.0">
+                     <children>
+                        <Label styleClass="info-index" text="从" />
+                        <Label styleClass="level" text="LV7" />
+                        <Label styleClass="info-index" text="到" />
+                        <Label styleClass="level" text="LV8" />
+                        <Label styleClass="info-index" text="需要信用值">
+                           <HBox.margin>
+                              <Insets left="14.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="lv8" prefHeight="41.0" prefWidth="180.0" styleClass="info-content" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="50.0" spacing="10.0">
+                     <children>
+                        <Label styleClass="info-index" text="从" />
+                        <Label styleClass="level" text="LV8" />
+                        <Label styleClass="info-index" text="到" />
+                        <Label styleClass="level" text="LV9" />
+                        <Label styleClass="info-index" text="需要信用值">
+                           <HBox.margin>
+                              <Insets left="14.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="lv9" prefHeight="41.0" prefWidth="180.0" styleClass="info-content" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefWidth="50.0" spacing="10.0">
+                     <children>
+                        <Label styleClass="info-index" text="从" />
+                        <Label styleClass="level" text="LV9" />
+                        <Label styleClass="info-index" text="到" />
+                        <Label styleClass="level" text="LV10" />
+                        <Label styleClass="info-index" text="需要信用值" />
+                        <TextField fx:id="lv10" prefHeight="41.0" prefWidth="180.0" styleClass="info-content" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Button fx:id="cancel" layoutX="638.0" layoutY="488.0" mnemonicParsing="false" onAction="#handleCancel" styleClass="cancel" text="取消" />
+         </children>
+      </Pane>
+   </center>
+</BorderPane>

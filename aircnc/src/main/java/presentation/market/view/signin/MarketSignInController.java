@@ -1,6 +1,7 @@
 package presentation.market.view.signin;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import interactor.impl.market.MarketAccountCourier;
@@ -8,11 +9,14 @@ import interactor.market.MarketAccountInfoInteractor;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import presentation.market.CenterController;
 import presentation.market.accessor.MarketLoginAccessor;
 import presentation.market.accessor.impl.MarketLoginAccessorImpl;
+import presentation.member.utils.dialog.PlainDialog;
 
 public class MarketSignInController implements Initializable {
 
@@ -36,6 +40,16 @@ public class MarketSignInController implements Initializable {
 		accessor = MarketLoginAccessorImpl.getInstance();
 		interactor = MarketAccountCourier.getInstance();
 
+	}
+	
+	@FXML
+	private void handleCloseWindow(){
+		PlainDialog alert = new PlainDialog(AlertType.CONFIRMATION,"退出客户端","确认退出客户端吗？");
+		Optional<ButtonType> result = alert.showDialog();
+		
+		if(result.get() == ButtonType.OK){
+			this.controller.closeWindow();
+		}
 	}
 
 	/**

@@ -60,7 +60,7 @@
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="40.0">
                <children>
                   <Label styleClass="info-index" text="酒店设施" />
-                  <TextArea fx:id="equipment" prefHeight="100.0" prefWidth="500.0" styleClass="info-content" wrapText="true" HBox.hgrow="NEVER" />
+                  <TextArea fx:id="equipment" prefHeight="100.0" prefWidth="500.0" promptText="请用&quot; ; &quot;隔开不同的设施" styleClass="info-content" wrapText="true" HBox.hgrow="NEVER" />
                </children>
             </HBox>
          </children>

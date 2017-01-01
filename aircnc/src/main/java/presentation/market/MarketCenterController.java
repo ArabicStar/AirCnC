@@ -5,7 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import presentation.hotel.CenterController;
+import presentation.market.CenterController;
 import presentation.market.view.MarketMainPane;
 import presentation.market.view.abnormalorderbrowse.AbnormalOrderBrowsePane;
 import presentation.market.view.credittopup.CreditTopUpPane;

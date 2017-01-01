@@ -47,7 +47,15 @@ public class HotelMainController implements Initializable{
 		});
 	}
 	
-	
+	@FXML
+	private void handleCloseWindow(){
+		PlainDialog alert = new PlainDialog(AlertType.CONFIRMATION,"退出客户端","确认退出客户端吗？");
+		Optional<ButtonType> result = alert.showDialog();
+		
+		if(result.get() == ButtonType.OK){
+			this.controller.closeWindow();
+		}
+	}
 	
 	@FXML
 	private void handleLogout(){

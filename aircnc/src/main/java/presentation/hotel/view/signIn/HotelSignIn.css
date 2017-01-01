@@ -46,3 +46,14 @@
 	letter-spacing: 1pt;
 	-fx-font-size: 15pt;
 }
+
+.close{
+	-fx-border-radius: 10px;
+	-fx-background-radius: 10px;
+	-fx-border-color: #fff;
+}
+
+.close:hover{
+	-fx-background-color: #fff;
+	-fx-text-fill: #4f4e84;
+}
