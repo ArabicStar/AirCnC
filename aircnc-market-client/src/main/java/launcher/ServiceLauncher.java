@@ -131,7 +131,7 @@ public class ServiceLauncher {
 		MarketServiceProxy marketProxy = MarketServiceProxy.getInstance();
 
 		final MarketAccountService acc = MarketAccountManager.launch(marketDao);
-		final MarketService ms = MarketServiceManager.launch(order, creditService);
+		final MarketService ms = MarketServiceManager.launch(marketDao,order, creditService);
 
 		marketProxy.loadAccountService(acc);
 		marketProxy.loadMarketService(ms);

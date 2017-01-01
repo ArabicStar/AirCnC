@@ -10,6 +10,7 @@ import data.dao.market.MarketDao;
 import data.dao.rmi.market.RemoteMarketDao;
 import po.market.MarketPo;
 import rmi.RemoteHelper;
+import utils.info.level.LevelStrategy;
 
 public class MarketDaoRemoteObj extends UnicastRemoteObject implements RemoteMarketDao{
 	
@@ -60,6 +61,16 @@ public class MarketDaoRemoteObj extends UnicastRemoteObject implements RemoteMar
 	@Override
 	public boolean existsMarket(String id) throws RemoteException {
 		return marketDao.existsMarket(id);
+	}
+
+	@Override
+	public LevelStrategy getLevelStrategy() throws RemoteException {
+		return marketDao.getLevelStrategy();
+	}
+
+	@Override
+	public boolean updateLevelStrategy(LevelStrategy ls) throws RemoteException {
+		return marketDao.updateLevelStrategy(ls);
 	}
 
 }
