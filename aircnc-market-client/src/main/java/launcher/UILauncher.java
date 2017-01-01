@@ -3,10 +3,12 @@ package launcher;
 import javafx.application.Application;
 import presentation.market.CenterController;
 import presentation.market.accessor.impl.AbnormalOrderAccessorImpl;
+import presentation.market.accessor.impl.LevelAccessorImpl;
 import presentation.market.accessor.impl.MarketChargeAccessorImpl;
 import presentation.market.accessor.impl.MarketLoginAccessorImpl;
 import presentation.market.accessor.impl.MarketPromotionAccessorImpl;
 import presentation.market.manager.impl.AbnormalOrderManagerImpl;
+import presentation.market.manager.impl.LevelManagerImpl;
 import presentation.market.manager.impl.MarketPromotionManagerImpl;
 import utils.logger.Log;
 
@@ -32,6 +34,7 @@ public class UILauncher {
 		MarketLoginAccessorImpl.launch();
 		MarketChargeAccessorImpl.launch();
 		AbnormalOrderAccessorImpl.launch();
+		LevelAccessorImpl.launch();
 
 	}
 
@@ -39,6 +42,7 @@ public class UILauncher {
 		
 		MarketPromotionManagerImpl.launch();
 		AbnormalOrderManagerImpl.launch();
+		LevelManagerImpl.launch();
 
 	}
 }

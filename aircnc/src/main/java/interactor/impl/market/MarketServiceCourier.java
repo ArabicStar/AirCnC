@@ -1,6 +1,7 @@
 package interactor.impl.market;
 
 import static interactor.utils.AlertHelper.alertSuccess;
+import static interactor.utils.AlertHelper.alertFail;
 import static interactor.utils.Dipatcher.execute;
 import static interactor.utils.TitleGetter.getTitle;
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
@@ -12,8 +13,10 @@ import interactor.market.MarketServiceInteractor;
 import interactor.utils.Title;
 import presentation.market.accessor.MarketChargeAccessor;
 import presentation.market.accessor.impl.AbnormalOrderAccessorImpl;
+import presentation.market.accessor.impl.LevelAccessorImpl;
 import presentation.market.accessor.impl.MarketChargeAccessorImpl;
 import presentation.market.manager.impl.AbnormalOrderManagerImpl;
+import presentation.market.manager.impl.LevelManagerImpl;
 import service.market.MarketService;
 import service.order.OrderOperationService;
 import utils.info.level.LevelStrategy;
@@ -88,12 +91,18 @@ public class MarketServiceCourier implements MarketServiceInteractor {
 	@Title("获取等级策略")
 	public void getLevelStrategy() {
 		LevelStrategy ls = execute(getTitle(), () -> handler.getLevelStrategy());
+		LevelManagerImpl.getInstance().setLevelStrategy(ls);
 	}
 
 	@Override
 	@Title("修改等级策略")
 	public void updateLevelStrategy() {
-		LevelStrategy newStrategy = null;
+		String title = getTitle();
+		LevelStrategy newStrategy = LevelAccessorImpl.getInstance().getStrategy();
 		boolean res = execute(getTitle(), () -> handler.updateLevelStrategy(newStrategy));
+		if(res)
+			alertSuccess(title, "会员升级策略修改成功");
+		else
+			alertFail(title, "啊哦，出错了！");
 	}
 }
