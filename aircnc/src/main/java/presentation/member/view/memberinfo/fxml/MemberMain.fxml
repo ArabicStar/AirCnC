@@ -11,6 +11,7 @@
    <children>
       <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="477.0" AnchorPane.topAnchor="0.0">
          <children>
+            <Label alignment="CENTER" onMouseClicked="#handleCloseWindow" prefHeight="23.0" prefWidth="23.0" styleClass="close" text="X" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="15.0" />
             <VBox alignment="CENTER" prefHeight="450.0" styleClass="nav-vbox" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <HBox alignment="CENTER" prefHeight="57.0">

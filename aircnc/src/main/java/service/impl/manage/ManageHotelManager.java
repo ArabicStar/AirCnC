@@ -75,7 +75,17 @@ public class ManageHotelManager implements ManageHotelService{
 
 		return po == null ? null : dao.findHotelById(id);
 	}
+	
+	@Override
+	public HotelInfo getHotelInfoByName(String name) {
+		if (dao == null)
+			throw unsupportedOpEx("get hotel info");
 
+		final HotelPo po = dao.findHotelByName(name);
+
+		return po == null ? null : dao.findHotelByName(name);
+	}
+	
 	@Override
 	public boolean deleteHotelInfo(int id) {
 		if (!HotelInfo.checkID(id))

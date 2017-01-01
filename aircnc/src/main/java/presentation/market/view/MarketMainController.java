@@ -91,5 +91,14 @@ public class MarketMainController implements Initializable {
 		levelStrategy.setDisable(true);
 		this.controller.addLevelStrategyPane();
 	}
-
+	
+	@FXML
+	private void handleCloseWindow(){
+		PlainDialog alert = new PlainDialog(AlertType.CONFIRMATION,"退出客户端","确认退出客户端吗？");
+		Optional<ButtonType> result = alert.showDialog();
+		
+		if(result.get() == ButtonType.OK){
+			this.controller.closeWindow();
+		}
+	}
 }

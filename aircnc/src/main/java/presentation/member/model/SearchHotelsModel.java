@@ -1,5 +1,10 @@
 package presentation.member.model;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import interactor.impl.member.MemberInfoCourier;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
@@ -10,8 +15,8 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import presentation.member.manager.impl.MyOrderManagerImpl;
 import vo.hotel.HotelVo;
-import vo.order.OrderVo;
 
 /**
  * the model of hotel searched
@@ -29,7 +34,7 @@ public class SearchHotelsModel {
 	private final StringProperty hotelLocation;
 	private final DoubleProperty lowestPrice;
 	private final BooleanProperty reserve;
-	private final ObjectProperty<OrderVo> historyOrder;
+	private final ObjectProperty<List<MyOrderModel>> historyOrder;
 	
 	private final IntegerProperty execute;
 	private final IntegerProperty unexecute;
@@ -41,7 +46,9 @@ public class SearchHotelsModel {
 	private final StringProperty equip;
 	private final StringProperty roomName;
 	private final StringProperty roomPrice;
-
+	
+	private final ObjectProperty<String[]> promotion;
+	
 	private final HotelVo hotel;
 	/**
      * Default constructor.
@@ -80,19 +87,41 @@ public class SearchHotelsModel {
 		
 		this.reserve = new SimpleBooleanProperty(true);
 		
-		this.historyOrder = new SimpleObjectProperty<OrderVo>();
+		MemberInfoCourier.getInstance().getMemberAllOrders();
+		List<MyOrderModel> bufferedList = MyOrderManagerImpl.getInstance().getOrderList();
+		this.historyOrder = new SimpleObjectProperty<List<MyOrderModel>>(
+				bufferedList.stream().filter(order->order.getHotelName().equals(vo.getName())).collect(Collectors.toList()));
 		
-		this.execute = new SimpleIntegerProperty(0);
-		this.unexecute = new SimpleIntegerProperty(1);
-		this.abnormal = new SimpleIntegerProperty(0);
-		this.repeal = new SimpleIntegerProperty(0);
+		int executeNum = 0; int unexecuteNum = 0; int abnormalNum = 0;  int repealNum = 0;
+		Iterator<MyOrderModel> iter = historyOrder.getValue().iterator();
+		while(iter.hasNext()){
+			switch(iter.next().getState()){
+			case "异常":
+				abnormalNum++;  break;
+	        case "已执行": 
+	        	executeNum++;  break;
+	        case "未执行": 
+	        	unexecuteNum++;  break;
+	        case "撤销": 
+	        	repealNum++;  break;
+	        case "已评价": 
+	        	executeNum++;  break;
+	        case "申诉中": 
+	        	unexecuteNum++;  break;
+			}
+		}
+		this.execute = new SimpleIntegerProperty(executeNum);
+		this.unexecute = new SimpleIntegerProperty(unexecuteNum);
+		this.abnormal = new SimpleIntegerProperty(abnormalNum);
+		this.repeal = new SimpleIntegerProperty(repealNum);
 		
 		this.id = new SimpleStringProperty(Integer.toString(vo.getId()));
 		this.intro = new SimpleStringProperty(vo.getIntroduction());
 		this.equip = new SimpleStringProperty(vo.getEquipment());
 		this.roomPrice = new SimpleStringProperty(vo.getStringRoomPrice());
 		this.roomName = new SimpleStringProperty(vo.getStringRoomName());
-		//this.promotion = new SimpleObjectProperty<HotelPromotionCell>();
+		
+		this.promotion = new SimpleObjectProperty<String[]>();
 		
 	}
 	
@@ -180,15 +209,15 @@ public class SearchHotelsModel {
         return reserve;
     }
     
-    public OrderVo getHistoryOrder() {
+    public List<MyOrderModel> getHistoryOrder() {
         return historyOrder.get();
     }
 
-    public void setUsername(OrderVo newVo) {
+    public void setUsername(List<MyOrderModel> newVo) {
         this.historyOrder.set(newVo);
     }
 
-    public ObjectProperty<OrderVo> historyOrderProperty() {
+    public ObjectProperty<List<MyOrderModel>> historyOrderProperty() {
         return historyOrder;
     }
     

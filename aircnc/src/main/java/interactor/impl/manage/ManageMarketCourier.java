@@ -91,9 +91,11 @@ public class ManageMarketCourier implements ManageMarketInteractor{
 			return null;
 		});
 
-		MarketManageInfoManagerImpl.getInstance().setMarket(new MarketVoBuilder(info).getMarketInfo());
-		
-		return info != null;
+		if(info != null){
+			MarketManageInfoManagerImpl.getInstance().setMarket(new MarketVoBuilder(info).getMarketInfo());
+			return true;
+		}else
+			return false;
 	}
 
 	@Override

@@ -135,7 +135,13 @@ public class ManageServiceProxy extends AccessSecureProxy
 		checkAuthentication();
 		return manageHotelService.getHotelInfo(id);
 	}
-
+	
+	@Override
+	public HotelInfo getHotelInfoByName(String name) {
+		checkAuthentication();
+		return manageHotelService.getHotelInfoByName(name);
+	}
+	
 	@Override
 	public boolean deleteHotelInfo(int id) {
 		checkAuthentication();
