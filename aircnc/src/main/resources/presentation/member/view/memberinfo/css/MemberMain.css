@@ -25,10 +25,28 @@
 	-fx-background-color: #7173ab;
 }
 
+.logout{
+	-fx-background-color: transparent;
+	-fx-border-color: #fff;
+	-fx-border-width: 1.5px;
+	-fx-background-radius: 15px;
+	-fx-border-radius: 15px;
+	-fx-text-fill: #fff;
+}
+
+.logout:hover{
+	-fx-background-color: #fff;
+	-fx-text-fill: #4f4e84;
+}
+
 .portrait-hbox{
 	-fx-background-image: url("../../../../../images/member/member-portrait.png");
-	-fx-background-size: 97px 97px;
-	-fx-background-repeat: no-repeat;
+	-fx-background-size: 100px 100px;
+	-fx-background-repeat: stretch;
+	-fx-border-radius: 50px;
+	-fx-background-radius: 50px;
+	-fx-border-color: #4f4e84;
+	-fx-border-width: 2px;
 	/*-fx-background-radius: 50px;
 	-fx-border-color: #4f4e84;
 	-fx-border-width: 3px;
@@ -36,8 +54,19 @@
 }
 
 .portrait-border{
-	-fx-border-radius: 50px;
+	/*-fx-border-radius: 50px;
 	-fx-background-radius: 50px;
 	-fx-border-color: #4f4e84;
-	-fx-border-width: 2px;
+	-fx-border-width: 2px;*/
+}
+
+.close{
+	-fx-border-radius: 3px;
+	-fx-background-radius: 3px;
+	-fx-border-color: #fff;
+}
+
+.close:hover{
+	-fx-background-color: #fff;
+	-fx-text-fill: #4f4e84;
 }

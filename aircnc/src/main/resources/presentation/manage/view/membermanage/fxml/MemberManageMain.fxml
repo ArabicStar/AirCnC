@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="768.0" prefWidth="777.0" stylesheets="@../css/MemberManageMain.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.manage.view.membermanage.fxml.MemberManageMainController">
+   <children>
+      <Label layoutX="37.0" layoutY="73.0" prefHeight="62.0" prefWidth="254.0" styleClass="title" text="客户搜索结果" />
+      <TableView fx:id="memberTable" layoutX="54.0" layoutY="153.0" prefHeight="471.0" prefWidth="702.0">
+         <columns>
+            <TableColumn fx:id="username" prefWidth="153.21662139892578" styleClass="table-row-cell" text="名称" />
+            <TableColumn fx:id="id" prefWidth="184.1353759765625" styleClass="table-row-cell" text="ID" />
+            <TableColumn fx:id="operation" prefWidth="350.0" styleClass="table-row-cell" text="操作" />
+         </columns>
+      </TableView>
+      <HBox layoutX="534.0" layoutY="31.0" styleClass="search-hbox">
+         <children>
+            <TextField fx:id="userId" layoutX="305.0" layoutY="45.0" />
+            <Button fx:id="search" mnemonicParsing="false" onAction="#handleQuery" prefHeight="27.0" prefWidth="27.0" styleClass="search" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

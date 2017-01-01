@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0" stylesheets="@../css/ModifyRoom.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.hotel.view.hotelInfo.fxml.ModifyRoomController">
+   <children>
+      <Pane prefHeight="400.0" prefWidth="500.0" styleClass="bg">
+         <children>
+            <Label layoutX="463.0" layoutY="14.0" onMouseClicked="#close" text="X" />
+            <VBox layoutX="36.0" layoutY="41.0" prefHeight="338.0" prefWidth="348.0" spacing="30.0">
+               <children>
+                  <HBox layoutX="87.0" layoutY="138.0" spacing="40.0">
+                     <children>
+                        <Label layoutX="87.0" layoutY="138.0" text="房间类型" />
+                        <ComboBox fx:id="type" prefHeight="30.0" prefWidth="192.0" styleClass="combo-box" visibleRowCount="4" />
+                     </children>
+                  </HBox>
+                  <HBox spacing="40.0">
+                     <children>
+                        <Label layoutX="95.0" layoutY="198.0" text="房间名称" />
+                        <HBox spacing="10.0">
+                           <children>
+                              <TextField fx:id="name" alignment="CENTER" prefHeight="30.0" prefWidth="189.0" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+                  <HBox spacing="40.0">
+                     <children>
+                        <Label layoutX="160.0" layoutY="263.0" text="适宜人数" />
+                        <Button fx:id="minus" mnemonicParsing="false" onAction="#handleMinus" prefHeight="41.0" prefWidth="43.0" text="-" />
+                        <Label fx:id="peopleNum" alignment="CENTER" contentDisplay="TOP" prefHeight="42.0" prefWidth="30.0" text="1" />
+                        <Button fx:id="plus" mnemonicParsing="false" onAction="#handlePlus" text="+" />
+                     </children>
+                  </HBox>
+                  <HBox spacing="40.0">
+                     <children>
+                        <Label text="房间数量" />
+                        <TextField fx:id="roomNum" alignment="CENTER" prefHeight="30.0" prefWidth="195.0" />
+                     </children>
+                  </HBox>
+                  <HBox spacing="40.0">
+                     <children>
+                        <Label text="每晚价格" />
+                        <TextField fx:id="price" alignment="CENTER" prefHeight="32.0" prefWidth="199.0" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Button fx:id="modify" layoutX="361.0" layoutY="338.0" mnemonicParsing="false" onAction="#handleAddRoom" text="添加房间" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

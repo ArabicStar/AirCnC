@@ -61,6 +61,7 @@ public class TriggerBuilder {
 		if (strs.length == 0)
 			throw illegalArgEx("Trigger source string");
 
+
 		ParametersList list = new ParametersList();
 		if (strs.length == 3)
 			list = ParametersList.parseString(strs[2]);

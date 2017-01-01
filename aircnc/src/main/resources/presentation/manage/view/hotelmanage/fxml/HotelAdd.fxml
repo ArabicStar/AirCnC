@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0" stylesheets="@../css/HotelAdd.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.manage.view.hotelmanage.fxml.HotelAddController">
+   <children>
+      <AnchorPane prefHeight="300.0" prefWidth="400.0" style="-fx-background-color: #fff;">
+         <children>
+            <Button fx:id="confirm" layoutX="318.0" layoutY="245.0" mnemonicParsing="false" onAction="#handleConfirm" text="添加" />
+            <Label layoutX="375.0" layoutY="10.0" onMouseClicked="#handleClose" text="X" />
+            <VBox layoutX="30.0" layoutY="35.0" spacing="25.0">
+               <children>
+                  <HBox layoutX="64.0" layoutY="78.0" spacing="20.0">
+                     <children>
+                        <Label text="酒店名称" />
+                        <TextField fx:id="name" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="90.0" layoutY="138.0" spacing="20.0">
+                     <children>
+                        <Label layoutX="90.0" layoutY="138.0" text="设置密码" />
+                        <PasswordField fx:id="password" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="90.0" layoutY="200.0" spacing="20.0">
+                     <children>
+                        <Label layoutX="90.0" layoutY="138.0" text="确认密码" />
+                        <PasswordField fx:id="passwordConfirm" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="90.0" layoutY="271.0" spacing="20.0">
+                     <children>
+                        <Label layoutX="90.0" layoutY="276.0" text="酒店星级" />
+                        <ComboBox fx:id="star" layoutX="150.0" layoutY="271.0" prefWidth="150.0" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

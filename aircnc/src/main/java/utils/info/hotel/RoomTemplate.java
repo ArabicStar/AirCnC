@@ -74,7 +74,7 @@ public abstract class RoomTemplate implements Serializable{
 	 *         <b>true</b> if valid <br>
 	 */
 	public static boolean checkRoomNum(int roomNum) {
-		return roomNum >= 1 || roomNum <= -1;
+		return roomNum >= 0 || roomNum <= -1;
 	}
 	
 	@Override

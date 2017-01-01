@@ -6,17 +6,18 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane prefHeight="768.0" prefWidth="777.0" stylesheets="@../css/MemberSearchHotel.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.member.view.searchhotel.fxml.MemberSearchHotelController">
+<AnchorPane prefHeight="768.0" prefWidth="777.0" stylesheets="@../css/MemberSearchHotel.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.member.view.searchhotel.fxml.MemberSearchHotelController">
    <children>
-      <HBox layoutX="293.0" layoutY="45.0">
+      <HBox layoutX="293.0" layoutY="25.0" styleClass="search-hbox">
          <children>
             <TextField fx:id="hotelName" layoutX="305.0" layoutY="45.0" />
+            <Button fx:id="add" mnemonicParsing="false" onAction="#handleAddGeneralInfo" prefHeight="27.0" prefWidth="27.0" styleClass="search" />
          </children>
       </HBox>
-      <Label fx:id="supreme" layoutX="548.0" layoutY="50.0" text="高级搜索选项" />
-      <Label layoutX="30.0" layoutY="110.0" prefHeight="120.0" prefWidth="720.0" style="-fx-background-color: #000;" text="Label" />
-      <Label layoutX="30.0" layoutY="253.0" prefHeight="120.0" prefWidth="720.0" style="-fx-background-color: #000;" text="Label" />
-      <Label layoutX="30.0" layoutY="540.0" prefHeight="120.0" prefWidth="720.0" style="-fx-background-color: #000;" text="Label" />
-      <Label layoutX="30.0" layoutY="397.0" prefHeight="120.0" prefWidth="720.0" style="-fx-background-color: #000;" text="Label" />
+      <Label fx:id="supreme" layoutX="521.0" layoutY="35.0" onMouseClicked="#addSupremeSearch" styleClass="supreme" text="高级搜索选项" />
+      <Label layoutX="290.0" layoutY="130.0" style="-fx-font-size: 20px; -fx-text-fill: grey;" text="未查找到符合条件的酒店" />
+      <VBox fx:id="searchedResult" layoutX="30.0" layoutY="90.0" prefHeight="540.0" prefWidth="720.0" spacing="20.0" />
+      <Button fx:id="preButton" layoutX="336.0" layoutY="640.0" mnemonicParsing="false" onAction="#handlePrePage" prefHeight="32.0" prefWidth="32.0" styleClass="page-button" text="←" />
+      <Button fx:id="nextButton" layoutX="408.0" layoutY="640.0" mnemonicParsing="false" onAction="#handleNextPage" prefHeight="32.0" prefWidth="32.0" styleClass="page-button" text="→" />
    </children>
-</Pane>
+</AnchorPane>

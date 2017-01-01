@@ -61,14 +61,18 @@
                   <Insets top="50.0" />
                </VBox.margin>
             </VBox>
-            <Button fx:id="modifyPassword" mnemonicParsing="false" onAction="#handleModifyPassword" text="修改密码">
+            <Button fx:id="modifyPassword" mnemonicParsing="false" onAction="#handleModifyPassword" styleClass="password" text="修改密码">
                <VBox.margin>
-                  <Insets left="400.0" top="30.0" />
+                  <Insets left="413.0" top="30.0" />
                </VBox.margin>
             </Button>
             <HBox prefHeight="57.0" spacing="50.0">
                <children>
-                  <Button fx:id="back" layoutX="311.0" layoutY="442.0" mnemonicParsing="false" onAction="#handleBack" prefHeight="50.0" prefWidth="100.0" styleClass="modify" text="返回" />
+                  <Button fx:id="back" layoutX="311.0" layoutY="442.0" mnemonicParsing="false" onAction="#handleBack" prefHeight="50.0" prefWidth="100.0" text="返回">
+                     <styleClass>
+                        <String fx:value="modify" />
+                        <String fx:value="index-button" />
+                     </styleClass></Button>
                   <Button fx:id="confirm" layoutX="434.0" layoutY="440.0" mnemonicParsing="false" onAction="#handleConfirm" prefHeight="50.0" prefWidth="100.0" styleClass="modify" text="保存" />
                </children>
                <VBox.margin>

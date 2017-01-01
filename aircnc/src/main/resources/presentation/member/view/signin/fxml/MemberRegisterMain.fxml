@@ -30,6 +30,6 @@
          </children>
       </VBox>
       <Group layoutX="86.0" layoutY="91.0" />
-      <Button layoutX="479.0" layoutY="336.0" mnemonicParsing="false" styleClass="back" text="返回" />
+      <Button fx:id="back" layoutX="480.0" layoutY="335.0" mnemonicParsing="false" onAction="#handleBack" styleClass="back" text="返回" />
    </children>
 </Pane>

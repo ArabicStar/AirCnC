@@ -30,6 +30,7 @@ import vo.order.OrderVo;
 
 public class OrderBrowseController implements Initializable{
 
+	@SuppressWarnings("unused")
 	private HotelCenterController controller;
 	
 	@FXML
@@ -116,6 +117,7 @@ public class OrderBrowseController implements Initializable{
 		accessor.setSearchTarget(states);
 		interactor.getHotelOrdersByStatus();
 		models = manager.getOrderList();
+		orderTable.getItems().clear();
 		orderTable.setItems(models);
 	}
 	
@@ -143,6 +145,7 @@ public class OrderBrowseController implements Initializable{
 		interactor.getHotelOrdersByStatus();
 		
 		models = manager.getOrderList();
+		orderTable.getItems().clear();
 		orderTable.setItems(models);
 		userName.setCellValueFactory(cellData -> cellData.getValue().usernameProperty());
 		userId.setCellValueFactory(cellData -> cellData.getValue().userIDProperty());

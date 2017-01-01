@@ -1,5 +1,6 @@
-<<<<<<< Updated upstream
+<<<<<<< HEAD
 localhost
 =======
 localhost
->>>>>>> Stashed changes
+
+>>>>>>> origin/master

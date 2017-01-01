@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="768.0" prefWidth="777.0" stylesheets="@../css/HotelManage.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.manage.view.hotelmanage.fxml.HotelManageMainController">
+   <children>
+      <Label layoutX="37.0" layoutY="73.0" prefHeight="62.0" prefWidth="280.0" styleClass="title" text="酒店搜索结果" />
+      <TableView fx:id="hotelTable" layoutX="54.0" layoutY="153.0" prefHeight="471.0" prefWidth="702.0">
+         <columns>
+            <TableColumn fx:id="hotelName" prefWidth="153.21662139892578" styleClass="table-row-cell" text="名称" />
+            <TableColumn fx:id="id" prefWidth="184.1353759765625" styleClass="table-row-cell" text="ID" />
+            <TableColumn fx:id="operation" prefWidth="350.0" styleClass="table-row-cell" text="操作" />
+         </columns>
+      </TableView>
+      <HBox layoutX="534.0" layoutY="31.0" styleClass="search-hbox">
+         <children>
+            <TextField fx:id="hotelId" layoutX="305.0" layoutY="45.0" />
+            <Button fx:id="search" mnemonicParsing="false" onAction="#handleQuery" prefHeight="27.0" prefWidth="27.0" styleClass="search" />
+         </children>
+      </HBox>
+      <Button layoutX="696.0" layoutY="638.0" mnemonicParsing="false" onAction="#handleAddHotel" prefHeight="40.0" prefWidth="40.0" styleClass="add" />
+   </children>
+</AnchorPane>

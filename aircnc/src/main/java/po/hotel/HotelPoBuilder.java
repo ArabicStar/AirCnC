@@ -150,7 +150,7 @@ public class HotelPoBuilder extends HotelInfoBuilder {
 			to.setPasswordHash(from.getPasswordHash());
 		}
 
-		if (from.getRooms() != null) {
+		if (from.getRooms() != null&&!from.getRooms().isEmpty()) {
 			Iterator<Room> itTo = to.getRooms().iterator();
 			Iterator<Room> itFrom = from.getRooms().iterator();
 			Room newRoom = itFrom.next();

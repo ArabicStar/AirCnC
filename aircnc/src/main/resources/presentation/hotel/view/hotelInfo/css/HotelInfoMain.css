@@ -34,6 +34,11 @@
 }
 
 .grade{
-	-fx-font-size: 30px;
+	-fx-font-size: 36px;
+	-fx-text-fill: #eb7b7b;
+}
+
+.grade-small{
+	-fx-font-size: 20px;
 	-fx-text-fill: #eb7b7b;
 }
