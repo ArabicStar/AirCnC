@@ -8,4 +8,6 @@ public interface LevelManager {
 	public void setLevelStrategy(LevelStrategy ls);
 	
 	public List<Integer> getLevelCredit();
+	
+	public LevelStrategy getOldStrategy();
 }

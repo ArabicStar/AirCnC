@@ -5,10 +5,11 @@ import java.util.ResourceBundle;
 
 import interactor.impl.market.MarketServiceCourier;
 import interactor.market.MarketServiceInteractor;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextField;
+import presentation.hotel.utils.dialog.PlainDialog;
 import presentation.market.MarketCenterController;
 import presentation.market.accessor.MarketChargeAccessor;
 import presentation.market.accessor.impl.MarketChargeAccessorImpl;
@@ -39,13 +40,17 @@ public class CreditChargeController implements Initializable {
 
 	@FXML
 	public void handleConfirm() {
-		if(check()==""){
+		String warning = check();
+		if(warning==""){
 			accessor.setMemberId(userID.getText());
 			accessor.setTopupMoney(Integer.parseInt(money.getText()));
 			interactor.creditCharge();
 			userID.setText("");
-			money.setText("");
-			
+			money.setText("");		
+		}else{
+			PlainDialog alert = new PlainDialog(AlertType.WARNING,"充值失败",warning);
+         	alert.showDialog();
+         	return;
 		}
 	}
 

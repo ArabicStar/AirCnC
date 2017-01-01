@@ -38,6 +38,14 @@
                         <Insets right="30.0" />
                      </padding>
                   </HBox>
+                  <HBox fx:id="levelStrategy" alignment="CENTER" onMouseClicked="#handleLevelStrategy" prefHeight="100.0" prefWidth="121.0" styleClass="hbox">
+                     <children>
+                        <Label contentDisplay="CENTER" text="会员等级策略" textAlignment="CENTER" />
+                     </children>
+                     <padding>
+                        <Insets right="30.0" />
+                     </padding>
+                  </HBox>
                </children>
             </VBox>
             <VBox alignment="CENTER" layoutX="12.0" layoutY="50.0" prefHeight="231.0" prefWidth="223.0" spacing="20.0">

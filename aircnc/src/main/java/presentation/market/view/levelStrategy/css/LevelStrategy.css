@@ -14,7 +14,7 @@
 }
 
 .info-index{
-	-fx-text-fill: #a4a4a4;
+	-fx-text-fill: #000000;
 	-fx-font-size: 24 px;
 }
 
@@ -23,6 +23,7 @@
 	-fx-border-width:0px;
 	-fx-border-color: #4f4e84;
 	-fx-background-color:transparent;
+	-fx-font-size: 22 px;
 }
 
 .level{
@@ -41,4 +42,11 @@
 	-fx-background-color:transparent;
 	-fx-border-color:#575793;
 	-fx-border-radius:0px;
+}
+
+.cancel{
+	-fx-font-size: 20px;
+	-fx-text-fill: #ffffff;
+	-fx-background-radius:15px,15px,15px,15px;
+	-fx-background-color:#575793;
 }

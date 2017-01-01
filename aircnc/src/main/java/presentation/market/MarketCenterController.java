@@ -9,6 +9,7 @@ import presentation.hotel.CenterController;
 import presentation.market.view.MarketMainPane;
 import presentation.market.view.abnormalorderbrowse.AbnormalOrderBrowsePane;
 import presentation.market.view.credittopup.CreditTopUpPane;
+import presentation.market.view.levelStrategy.LevelStrategyPane;
 import presentation.market.view.websitePromotion.WebsitePromotionPane;
 
 public class MarketCenterController extends Application {
@@ -22,6 +23,7 @@ public class MarketCenterController extends Application {
 	private WebsitePromotionPane websitePromotionPane;
 	private AbnormalOrderBrowsePane abnormalOrderBrowsePane;
 	private CreditTopUpPane creditTopUpPane;
+	private LevelStrategyPane levelPane;
 
 	private final static int Client_Width = 1024;
 	private final static int Client_Height = 768;
@@ -53,6 +55,15 @@ public class MarketCenterController extends Application {
 		mainClient.getBorderPane().setCenter(websitePromotionPane.getPane());
 		websitePromotionPane.getController().setCenterController(this);
 		websitePromotionPane.getController().setRootLayout(rootLayout);
+	}
+	
+	/**
+	 * 添加等级策略界面
+	 */
+	public void addLevelStrategyPane() {
+		clearContent();
+		levelPane = new LevelStrategyPane();
+		mainClient.getBorderPane().setCenter(levelPane.getPane());
 	}
 	
 	/**
