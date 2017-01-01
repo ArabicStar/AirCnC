@@ -53,6 +53,9 @@ public class LevelStrategyController implements Initializable {
 	@FXML
 	private Button modify;
 	
+	@FXML
+	private Button cancel;
+	
 	private List<Integer> credits;
 	
 	private LevelManager manager;
@@ -73,6 +76,7 @@ public class LevelStrategyController implements Initializable {
 		credits = manager.getLevelCredit();
 		Platform.runLater(new Runnable() {
 			  @Override public void run() {
+				  cancel.setVisible(false);
 				  initCredit();
 			  }
 		});
@@ -82,6 +86,7 @@ public class LevelStrategyController implements Initializable {
 	@FXML
 	public void handleModify() {
 		if(modify.getText().equals("修改策略")){
+			cancel.setVisible(true);
 			for(int i = 0;i<size;i++){
 				TextField t = levels.get(i);
 				t.setDisable(false);
@@ -90,6 +95,17 @@ public class LevelStrategyController implements Initializable {
 		}else{
 			
 		}
+	}
+	
+	@FXML
+	public void handleCancel() {
+		credits = manager.getLevelCredit();
+		for(int i = 0;i<size;i++){
+			TextField t = levels.get(i);
+			t.setText(String.valueOf(credits.get(i)));
+			t.setDisable(true);		
+		}
+		cancel.setVisible(false);
 	}
 	
 	private void initCredit(){
