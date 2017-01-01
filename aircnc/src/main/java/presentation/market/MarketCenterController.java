@@ -10,6 +10,7 @@ import presentation.market.view.MarketMainPane;
 import presentation.market.view.abnormalorderbrowse.AbnormalOrderBrowsePane;
 import presentation.market.view.credittopup.CreditTopUpPane;
 import presentation.market.view.levelStrategy.LevelStrategyPane;
+import presentation.market.view.unexecuteOrder.UnexecuteOrderPane;
 import presentation.market.view.websitePromotion.WebsitePromotionPane;
 
 public class MarketCenterController extends Application {
@@ -24,6 +25,7 @@ public class MarketCenterController extends Application {
 	private AbnormalOrderBrowsePane abnormalOrderBrowsePane;
 	private CreditTopUpPane creditTopUpPane;
 	private LevelStrategyPane levelPane;
+	private UnexecuteOrderPane unexecuteOrderPane;
 
 	private final static int Client_Width = 1024;
 	private final static int Client_Height = 768;
@@ -64,6 +66,16 @@ public class MarketCenterController extends Application {
 		clearContent();
 		levelPane = new LevelStrategyPane();
 		mainClient.getBorderPane().setCenter(levelPane.getPane());
+	}
+	
+	/**
+	 * 添加浏览异常订单界面
+	 */
+	public void addUnexecuteOrderPane() {
+		clearContent();
+		unexecuteOrderPane = new UnexecuteOrderPane();
+		mainClient.getBorderPane().setCenter(unexecuteOrderPane.getPane());
+		unexecuteOrderPane.getController().setCenterController(this);
 	}
 	
 	/**

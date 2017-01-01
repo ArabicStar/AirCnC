@@ -19,6 +19,14 @@
                         <Insets right="30.0" />
                      </padding>
                   </HBox>
+                  <HBox fx:id="unexecuteOrder" alignment="CENTER" onMouseClicked="#handleUnexecuteOrder" prefHeight="75.0" prefWidth="121.0" styleClass="hbox">
+                     <children>
+                        <Label contentDisplay="CENTER" text="未执行订单浏览" textAlignment="CENTER" />
+                     </children>
+                     <padding>
+                        <Insets right="30.0" />
+                     </padding>
+                  </HBox>
                   <HBox fx:id="abnormalOrder" alignment="CENTER" onMouseClicked="#handleAbnormalOrder" prefHeight="75.0" prefWidth="121.0" styleClass="hbox">
                      <children>
                         <Label text="异常订单浏览" textAlignment="CENTER" />

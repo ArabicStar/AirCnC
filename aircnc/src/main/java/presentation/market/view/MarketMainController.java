@@ -27,6 +27,9 @@ public class MarketMainController implements Initializable {
 	
 	@FXML
 	private HBox levelStrategy;
+	
+	@FXML
+	private HBox unexecuteOrder;
 
 	private MarketCenterController controller;
 
@@ -68,6 +71,7 @@ public class MarketMainController implements Initializable {
 		abnormalOrder.setDisable(false);
 		creditCharge.setDisable(false);
 		levelStrategy.setDisable(false);
+		unexecuteOrder.setDisable(false);
 		this.controller.addWebsitePromotionPane();
 	}
 	
@@ -77,7 +81,18 @@ public class MarketMainController implements Initializable {
 		abnormalOrder.setDisable(true);
 		creditCharge.setDisable(false);
 		levelStrategy.setDisable(false);
+		unexecuteOrder.setDisable(false);
 		this.controller.addAbnormalOrderPane();
+	}
+	
+	@FXML
+	private void handleUnexecuteOrder(){
+		websitePromotion.setDisable(false);
+		abnormalOrder.setDisable(false);
+		creditCharge.setDisable(false);
+		levelStrategy.setDisable(false);
+		unexecuteOrder.setDisable(true);
+		this.controller.addUnexecuteOrderPane();
 	}
 	
 	@FXML
@@ -86,6 +101,7 @@ public class MarketMainController implements Initializable {
 		abnormalOrder.setDisable(false);
 		creditCharge.setDisable(true);
 		levelStrategy.setDisable(false);
+		unexecuteOrder.setDisable(false);
 		this.controller.addCreditCharge();
 	}
 
@@ -95,6 +111,7 @@ public class MarketMainController implements Initializable {
 		abnormalOrder.setDisable(false);
 		creditCharge.setDisable(false);
 		levelStrategy.setDisable(true);
+		unexecuteOrder.setDisable(false);
 		this.controller.addLevelStrategyPane();
 	}
 	

@@ -11,16 +11,16 @@ import javafx.stage.StageStyle;
 import presentation.market.model.OrderModel;
 
 
-public class OrderDialog extends GridPane {
+public class AppealOrderDialog extends GridPane {
 	Dialog<String> dialog;
 	// Alert dialog;
 
-	public OrderDialog() {
+	public AppealOrderDialog() {
 
 		dialog.initStyle(StageStyle.UNDECORATED);
 	}
 
-	public OrderDialog(OrderModel orderModel) {
+	public AppealOrderDialog(OrderModel orderModel) {
 		// Create the custom dialog.
 		dialog = new Dialog<String>();
 		ButtonType btn = ButtonType.OK;

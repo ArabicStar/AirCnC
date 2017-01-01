@@ -10,11 +10,12 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableCell;
 import javafx.scene.layout.HBox;
 import presentation.market.model.OrderModel;
-import presentation.market.utils.dialog.OrderDialog;
+import presentation.market.utils.dialog.AppealOrderDialog;
 import presentation.market.view.abnormalorderbrowse.fxml.AbnormalOrderBrowseController;
+import utils.info.order.OrderStatus;
 import vo.order.OrderVo;
 
-public class OrderCell extends TableCell<OrderModel, OrderVo>{
+public class OrderCell extends TableCell<OrderModel, OrderVo> {
 	private Button[] cellButton;
 	private HBox buttons;
 	private OrderVo vo;
@@ -32,8 +33,9 @@ public class OrderCell extends TableCell<OrderModel, OrderVo>{
 	 * @return
 	 */
 	private void createAllButtons() {
+
 		buttons = new HBox();
-		buttons.setAlignment(Pos.CENTER_RIGHT);
+		buttons.setAlignment(Pos.CENTER);
 
 		cellButton = new Button[] { createButton(ButtonName.CHECK), createButton(ButtonName.APPEAL) };
 
@@ -76,7 +78,7 @@ public class OrderCell extends TableCell<OrderModel, OrderVo>{
 					break;
 				case CHECK:
 					if (vo != null) {
-						OrderDialog details = new OrderDialog(new OrderModel(vo));
+						AppealOrderDialog details = new AppealOrderDialog(new OrderModel(vo));
 						details.showDialog();
 					}
 
@@ -101,9 +103,9 @@ public class OrderCell extends TableCell<OrderModel, OrderVo>{
 			this.vo = vo;
 			createAllButtons();
 			setGraphic(buttons);
-		}else{
+		} else {
 			setGraphic(null);
 		}
 	}
-	
+
 }
