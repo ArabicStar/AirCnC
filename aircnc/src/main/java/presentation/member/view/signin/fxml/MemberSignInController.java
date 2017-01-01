@@ -1,6 +1,7 @@
 package presentation.member.view.signin.fxml;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import interactor.impl.member.MemberAccountCourier;
@@ -9,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import presentation.member.CenterController;
@@ -97,5 +99,13 @@ public class MemberSignInController implements Initializable {
 	public void setCenterController(CenterController controller) {
 		this.controller = controller;
 	}
-
+	
+	public void handleCloseWindow(){
+		PlainDialog alert = new PlainDialog(AlertType.CONFIRMATION,"退出客户端","确认退出客户端吗？");
+		Optional<ButtonType> result = alert.showDialog();
+		
+		if(result.get() == ButtonType.OK){
+			this.controller.closeWindow();
+		}
+	}
 }
