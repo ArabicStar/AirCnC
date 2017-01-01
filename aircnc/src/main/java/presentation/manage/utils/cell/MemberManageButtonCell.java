@@ -106,6 +106,8 @@ public class MemberManageButtonCell extends TableCell<MemberManageModel, MemberV
 			this.vo = vo;
 			createButtons();
 			setGraphic(buttons);
+		}else{
+			setGraphic(null);
 		}
 	}
 

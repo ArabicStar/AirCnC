@@ -144,6 +144,8 @@ public class FunctionButtons extends TableCell<MyOrderModel, OrderVo>{
         		this.order = vo;
         		createFunctionButtons(status);
         		setGraphic(buttons);
+        }else{
+        	setGraphic(null);
         }
     }
 	
