@@ -9,8 +9,10 @@ import service.member.MemberInfoService;
 import service.member.MemberServiceProxy;
 import service.order.OrderOperationService;
 import service.order.OrderServiceProxy;
+import service.promotion.HotelPromotionInfoService;
 import service.promotion.PromotionApplicationService;
 import service.promotion.PromotionServiceProxy;
+import service.query.CommentQueryService;
 import service.query.HotelQueryService;
 import service.query.QueryServiceProxy;
 
@@ -32,18 +34,12 @@ public final class InteractorLauncher {
 	}
 
 	private static void launchHotelInteractor() {
-		
+
 		final HotelQueryService hotelQuery = QueryServiceProxy.getInstance();
+		final HotelPromotionInfoService promotionInfo = PromotionServiceProxy.getInstance();
+		final CommentQueryService commentQuery = QueryServiceProxy.getInstance();
 
-		HotelSearchCourier.launch(hotelQuery);
-	}
-
-	private static void launchManageInteractor() {
-
-	}
-
-	private static void launchMarketInteractor() {
-
+		HotelSearchCourier.launch(hotelQuery, commentQuery, promotionInfo);
 	}
 
 	private InteractorLauncher() {

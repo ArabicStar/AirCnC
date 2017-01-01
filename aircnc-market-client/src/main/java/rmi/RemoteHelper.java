@@ -136,7 +136,8 @@ public final class RemoteHelper {
 	}
 
 	private static final int PORT = 8888;
-	private static final String URL_HEADER = new StringBuilder("rmi://localhost:").append(PORT).append("/").toString();
+	private static final String URL_HEADER = new StringBuilder("rmi://").append(AddrReader.getAddr()).append(":")
+			.append(PORT).append("/").toString();
 
 	private static final Remote findRemote(String name) {
 		final String url = new StringBuilder(URL_HEADER).append(name).toString();

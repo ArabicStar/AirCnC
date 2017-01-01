@@ -1,6 +1,5 @@
 package interactor.impl.member;
 
-import static interactor.utils.AlertHelper.alertFail;
 import static interactor.utils.Dipatcher.execute;
 import static interactor.utils.TitleGetter.getTitle;
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
@@ -8,31 +7,31 @@ import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import interactor.member.HotelSearchInteractor;
 import interactor.utils.Title;
-import presentation.hotel.manager.impl.HotelPromotionManagerImpl;
-import presentation.manage.accessor.HotelManageInfoAccessor;
 import presentation.manage.accessor.impl.HotelManageInfoAccessorImpl;
-import presentation.manage.manager.HotelManageInfoManager;
 import presentation.manage.manager.impl.HotelManageInfoManagerImpl;
-import presentation.member.accessor.HotelSearchAccessor;
 import presentation.member.accessor.impl.HotelSearchAccessorImpl;
-import presentation.member.manager.SearchHotelManager;
 import presentation.member.manager.impl.SearchHotelManagerImpl;
+import service.promotion.HotelPromotionInfoService;
+import service.query.CommentQueryService;
 import service.query.HotelQueryService;
 import vo.hotel.HotelVo;
+import vo.order.comment.CommentVo;
 import vo.promotion.PromotionVo;
 
 public class HotelSearchCourier implements HotelSearchInteractor {
 	private static HotelSearchInteractor instance;
 
-	public static HotelSearchInteractor launch(HotelQueryService handler) {
+	public static HotelSearchInteractor launch(HotelQueryService handler, CommentQueryService commentHelper,
+			HotelPromotionInfoService promotionHelper) {
 		/* singleton */
 		if (instance != null)
 			throw duplicateSingletonEx();
 
-		return instance = new HotelSearchCourier(handler);
+		return instance = new HotelSearchCourier(handler, commentHelper, promotionHelper);
 	}
 
 	public static HotelSearchInteractor getInstance() {
@@ -45,24 +44,32 @@ public class HotelSearchCourier implements HotelSearchInteractor {
 	/* singleton */
 
 	private HotelQueryService handler;
+	private CommentQueryService commentHelper;
+	private HotelPromotionInfoService promotionHelper;
 
-	private HotelSearchCourier(HotelQueryService handler) {
+	/**
+	 * @param handler
+	 * @param commentHelper
+	 * @param promotionHelper
+	 */
+	private HotelSearchCourier(HotelQueryService handler, CommentQueryService commentHelper,
+			HotelPromotionInfoService promotionHelper) {
+		super();
 		this.handler = handler;
+		this.commentHelper = commentHelper;
+		this.promotionHelper = promotionHelper;
 	}
-	
+
 	@Override
 	@Title("Search Hotel By Id")
 	public boolean searchById() {
 		String title = getTitle();
 
-		HotelManageInfoAccessor acs = HotelManageInfoAccessorImpl.getInstance();
-		HotelVo hotel = execute(title, () -> {
-			return handler.findById(acs.getHotelId());
+		HotelVo hotel = attachMoreInfo(
+				execute(title, () -> handler.findById(HotelManageInfoAccessorImpl.getInstance().getHotelId())));
 
-		});
-		if(hotel != null){
-			HotelManageInfoManager man = HotelManageInfoManagerImpl.getInstance();
-			man.setHotel(hotel);
+		if (hotel != null) {
+			HotelManageInfoManagerImpl.getInstance().setHotel(hotel);
 			return true;
 		}
 		return false;
@@ -72,17 +79,25 @@ public class HotelSearchCourier implements HotelSearchInteractor {
 	@Title("Search Hotel By Condition")
 	public boolean searchByCondition() {
 		String title = getTitle();
-		HotelSearchAccessor acs = HotelSearchAccessorImpl.getInstance();
-		List<HotelVo> hotels = execute(title, () -> {
-			return handler.findByCondition(acs.getCondition());
+		List<HotelVo> hotels = execute(title, //
+				() -> handler.findByCondition//
+				(HotelSearchAccessorImpl.getInstance().getCondition()))//
+						.stream().peek(this::attachMoreInfo).collect(Collectors.toList());
 
-		});
-		if(hotels != null){
-			SearchHotelManager man = SearchHotelManagerImpl.getInstance();
-			man.setHotel(hotels);
+		if (hotels != null) {
+			SearchHotelManagerImpl.getInstance().setHotel(hotels);
 			return true;
 		}
 		return false;
 	}
 
+	private HotelVo attachMoreInfo(HotelVo vo) {
+		List<CommentVo> comment = commentHelper.getHotelComments(vo.getId());
+		Set<PromotionVo> promotions = promotionHelper.getUserAvailableHotelPromotions(vo.getId());
+
+		vo.setComments(comment);
+		vo.setPromotions(promotions);
+
+		return vo;
+	}
 }
