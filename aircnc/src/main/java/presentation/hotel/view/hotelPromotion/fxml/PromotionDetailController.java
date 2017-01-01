@@ -204,7 +204,7 @@ public class PromotionDetailController implements Initializable{
 		}
 		switch (when.getValue()){
 		case "时效性优惠":
-  			if(from.getValue().isBefore(LocalDate.now())){
+  			if(from.getValue().isBefore(LocalDate.now().plusDays(1))){
   				return "时效性优惠开始时间不能早于当天！";
   			}
   			

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
@@ -9,9 +10,14 @@
    <center>
       <Pane prefHeight="200.0" prefWidth="200.0" styleClass="pane" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="name" alignment="CENTER" layoutX="166.0" layoutY="213.0" styleClass="textfield" text="name" />
-            <PasswordField fx:id="password" layoutX="166.0" layoutY="250.0" styleClass="passwordfield" text="password" />
+            <TextField fx:id="username" alignment="CENTER" layoutX="166.0" layoutY="213.0" promptText="账号" styleClass="textfield" />
+            <PasswordField fx:id="password" layoutX="166.0" layoutY="250.0" promptText="密码" styleClass="passwordfield" />
             <Button fx:id="confirm" layoutX="163.0" layoutY="313.0" mnemonicParsing="false" onAction="#handleConfirm" styleClass="confirm" text="登 录" />
+            <Label layoutX="15.0" layoutY="15.0" onMouseClicked="#handleCloseWindow" styleClass="close" text="X">
+               <padding>
+                  <Insets left="5.0" right="5.0" />
+               </padding>
+            </Label>
          </children>
       </Pane>
    </center>

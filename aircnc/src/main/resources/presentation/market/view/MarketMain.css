@@ -5,14 +5,39 @@
 	-fx-background-image: url("../../../images/market/main_BG.png");
 }
 
+.portrait-hbox{
+	-fx-background-image: url("../../../images/market/market-portrait.png");
+	-fx-background-size: 100px 100px;
+	-fx-background-repeat: stretch;
+	-fx-border-radius: 50px;
+	-fx-background-radius: 50px;
+	-fx-border-color: #4f4e84;
+	-fx-padding: 0 0 0 1px;
+	-fx-border-width: 2px;
+}
+
+.hbox:hover{
+	-fx-background-color: #7173ab;
+}
+
+.logout{
+	-fx-background-color: transparent;
+	-fx-border-color: #fff;
+	-fx-border-width: 2px;
+	-fx-background-radius: 15px;
+	-fx-border-radius: 15px;
+	-fx-text-fill: #fff;
+}
+
+.logout:hover{
+	-fx-background-color: #fff;
+	-fx-text-fill: #4f4e84;
+}
+
 .hbox{
 	-fx-border-width: 1px 0px 1px 0px;
 	-fx-border-color: #a0a0a0;
 
-}
-
-.nav-vbox{
-	
 }
 
 .label{
@@ -20,6 +45,13 @@
 	-fx-font-size: 18px;
 }
 
-.hbox:hover{
-	-fx-background-color:#ff1111;
+.close{
+	-fx-border-radius: 3px;
+	-fx-background-radius: 3px;
+	-fx-border-color: #fff;
+}
+
+.close:hover{
+	-fx-background-color: #fff;
+	-fx-text-fill: #4f4e84;
 }

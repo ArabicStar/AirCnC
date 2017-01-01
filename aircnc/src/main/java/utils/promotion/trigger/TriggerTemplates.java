@@ -1,6 +1,5 @@
 package utils.promotion.trigger;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -12,8 +11,7 @@ import utils.promotion.Describer;
 import utils.promotion.trigger.hotel.HotelWhen;
 import utils.promotion.trigger.website.WebsiteWhen;
 
-@SuppressWarnings("serial")
-public final class TriggerTemplates implements Serializable{
+public final class TriggerTemplates{
 	private static final String DURING_PERIOD = "DURING_PERIOD";
 	private static final String LEVEL = "LEVEL";
 	private static final String TRADE_AREA = "TRADE_AREA";

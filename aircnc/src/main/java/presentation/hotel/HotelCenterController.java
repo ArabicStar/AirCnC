@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import presentation.hotel.view.HotelMainPane;
 import presentation.hotel.view.abnormalOrder.AbnormalOrderPane;
 import presentation.hotel.view.checkInLive.CheckInLivePane;
@@ -45,7 +46,7 @@ public class HotelCenterController extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		this.primaryStage = primaryStage;
 
-		// primaryStage.initStyle(StageStyle.UNDECORATED);
+		primaryStage.initStyle(StageStyle.UNDECORATED);
 		primaryStage.setTitle("AirCnC");
 		primaryStage.setResizable(false);
 

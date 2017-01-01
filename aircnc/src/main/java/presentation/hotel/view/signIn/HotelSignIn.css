@@ -49,7 +49,7 @@
 
 .close{
 	-fx-border-radius: 10px;
-	-fx-background-radius: 3px;
+	-fx-background-radius: 10px;
 	-fx-border-color: #fff;
 }
 
