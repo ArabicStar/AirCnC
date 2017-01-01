@@ -151,6 +151,8 @@ public class PromotionButtonCell extends TableCell<WebsitePromotionModel, Promot
 			this.practical = vo.getPractical();
 			createAllButtons();
 			setGraphic(buttons);
+		}else{
+			setGraphic(null);
 		}
 	}
 }

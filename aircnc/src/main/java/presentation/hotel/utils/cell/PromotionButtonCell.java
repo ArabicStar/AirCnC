@@ -153,6 +153,8 @@ public class PromotionButtonCell extends TableCell<HotelPromotionModel, Promotio
 			this.practical = vo.getPractical();
 			createAllButtons();
 			setGraphic(buttons);
+		}else{
+			setGraphic(null);
 		}
 	}
 }

@@ -61,7 +61,9 @@ public class AppealCell extends TableCell<OrderModel, OrderVo> {
 		if (!empty) {
 			this.vo = vo;
 			setGraphic(cellButton);
-		} 
+		} else{
+			setGraphic(null);
+		}
 	}
 
 }

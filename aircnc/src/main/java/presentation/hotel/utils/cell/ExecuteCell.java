@@ -61,7 +61,9 @@ public class ExecuteCell extends TableCell<OrderModel, OrderVo> {
 		if (!empty) {
 			this.vo = vo;
 			setGraphic(cellButton);
-		} 
+		} else{
+			setGraphic(null);
+		}
 	}
 
 }

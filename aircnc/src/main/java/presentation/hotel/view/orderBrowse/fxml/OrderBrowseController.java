@@ -7,6 +7,7 @@ import java.util.Set;
 
 import interactor.hotel.HotelOrderInteractor;
 import interactor.impl.hotel.HotelOrderCourier;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -98,8 +99,15 @@ public class OrderBrowseController implements Initializable{
 		manager = HotelOrderManagerImpl.getInstance();
 
 		accessor = SearchOrderAccessorImpl.getInstance();
+		
+		Platform.runLater(()->{
+			initOrders();
+		});
 	}
 	
+	public void initOrders(){
+		
+	}
     
     public void executeOrder(OrderVo vo){
     	accessor.setOrderVo(vo);

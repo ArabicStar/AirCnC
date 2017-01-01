@@ -135,6 +135,8 @@ public class OrderButtonCell extends TableCell<OrderModel, OrderVo> {
 			this.status = vo.getStatus();
 			createAllButtons();
 			setGraphic(buttons);
+		}else{
+			setGraphic(null);
 		}
 	}
 }

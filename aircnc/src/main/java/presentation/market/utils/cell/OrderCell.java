@@ -101,6 +101,8 @@ public class OrderCell extends TableCell<OrderModel, OrderVo>{
 			this.vo = vo;
 			createAllButtons();
 			setGraphic(buttons);
+		}else{
+			setGraphic(null);
 		}
 	}
 	
