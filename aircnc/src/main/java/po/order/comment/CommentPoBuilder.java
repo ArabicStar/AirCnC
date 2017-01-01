@@ -15,7 +15,6 @@ import utils.info.order.comment.CommentInfoBuilder;
 public class CommentPoBuilder extends CommentInfoBuilder {
 
 	private HotelPo hotel;
-	private OrderPo order;
 
 	public CommentPoBuilder() {
 		super();
@@ -90,8 +89,6 @@ public class CommentPoBuilder extends CommentInfoBuilder {
 
 		final CommentPo newComment = new CommentPo().setCommentTime(commentTime).setContent(content).setGrade(grade)
 				.setId(id).setHotel(hotel);
-		if (order != null)
-			newComment.setRelOrder(order);
 
 		return newComment;
 	}

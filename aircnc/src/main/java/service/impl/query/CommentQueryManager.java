@@ -9,8 +9,8 @@ import java.util.stream.Collectors;
 
 import data.dao.query.CommentQueryDao;
 import service.query.CommentQueryService;
+import vo.order.OrderVoBuilder;
 import vo.order.comment.CommentVo;
-import vo.order.comment.CommentVoBuilder;
 
 public class CommentQueryManager implements CommentQueryService {
 	/* Singleton */
@@ -42,8 +42,9 @@ public class CommentQueryManager implements CommentQueryService {
 		if (hotelId < 0)
 			throw illegalArgEx("hotelId");
 
-		return dao.findByHotelId(hotelId).stream().map(po -> new CommentVoBuilder(po).getCommentInfo())
-				.collect(Collectors.toList());
+		return dao.findByHotelId(hotelId).stream().map(po -> new OrderVoBuilder(po.getRelOrder()).getOrderInfo())
+				.map(order -> order.getComments()).collect(Collectors.toList());
+
 	}
 
 }

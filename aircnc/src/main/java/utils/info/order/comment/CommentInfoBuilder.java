@@ -8,6 +8,7 @@ import utils.info.hotel.HotelInfo;
 import utils.info.order.OrderInfo;
 
 public abstract class CommentInfoBuilder extends CommentInfoTemplate {
+	private OrderInfo order;
 
 	protected CommentInfoBuilder() {
 		this.id = 0;

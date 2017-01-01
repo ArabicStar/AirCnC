@@ -1,14 +1,17 @@
 package interactor.impl.member;
 
+import static interactor.utils.AlertHelper.alertFail;
 import static interactor.utils.Dipatcher.execute;
 import static interactor.utils.TitleGetter.getTitle;
 import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
 import java.util.List;
+import java.util.Set;
 
 import interactor.member.HotelSearchInteractor;
 import interactor.utils.Title;
+import presentation.hotel.manager.impl.HotelPromotionManagerImpl;
 import presentation.manage.accessor.HotelManageInfoAccessor;
 import presentation.manage.accessor.impl.HotelManageInfoAccessorImpl;
 import presentation.manage.manager.HotelManageInfoManager;
@@ -19,6 +22,7 @@ import presentation.member.manager.SearchHotelManager;
 import presentation.member.manager.impl.SearchHotelManagerImpl;
 import service.query.HotelQueryService;
 import vo.hotel.HotelVo;
+import vo.promotion.PromotionVo;
 
 public class HotelSearchCourier implements HotelSearchInteractor {
 	private static HotelSearchInteractor instance;

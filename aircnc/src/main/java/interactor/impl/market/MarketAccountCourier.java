@@ -45,8 +45,10 @@ public class MarketAccountCourier implements MarketAccountInfoInteractor{
 			MarketInfo tmp = handler.login(MarketLoginAccessorImpl.getInstance().getId()
 					,MarketLoginAccessorImpl.getInstance().getPasswordHash());
 
-			if (tmp == null)
-				alertFail(title, "请输入账号和密码");
+			if (tmp == null){
+				alertFail(title, "请输入正确的账号和密码");
+				return null;
+			}
 
 			if (!tmp.isValid())
 				alertFail(title, "密码错误");

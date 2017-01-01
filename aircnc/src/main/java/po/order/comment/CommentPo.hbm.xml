@@ -25,7 +25,7 @@
 			column="hotel" fetch="select" name="hotel" not-null="true" />
 
 		<!-- order -->
-		<many-to-one class="po.order.OrderPo" column="rel_order"
+		<many-to-one class="po.order.OrderPo" column="rel_order" lazy="false"
 			fetch="select" name="relOrder" unique="true" />
 	</class>
 </hibernate-mapping>

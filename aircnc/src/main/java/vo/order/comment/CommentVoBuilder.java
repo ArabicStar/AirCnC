@@ -15,7 +15,6 @@ import vo.order.OrderVoBuilder;
 
 public class CommentVoBuilder extends CommentInfoBuilder {
 	private HotelVo hotel;
-	private OrderVo order;
 
 	public CommentVoBuilder() {
 		super();
@@ -26,7 +25,6 @@ public class CommentVoBuilder extends CommentInfoBuilder {
 	 */
 	public CommentVoBuilder(CommentInfo info) {
 		super(info);
-		order = new OrderVoBuilder(info.getRelOrder()).getOrderInfo();
 	}
 
 	public CommentVoBuilder(OrderInfo info) {
@@ -80,8 +78,7 @@ public class CommentVoBuilder extends CommentInfoBuilder {
 
 		final CommentVo newComment = new CommentVo().setCommentTime(commentTime).setContent(content).setGrade(grade)
 				.setId(id).setHotel(hotel);
-		if (order != null)
-			newComment.setRelOrder(order);
+		
 		return newComment;
 	}
 

@@ -109,10 +109,11 @@ public class ServiceLauncher {
 
 		QueryServiceProxy proxy = QueryServiceProxy.getInstance();
 
-		final MemberQueryService memberQuery = MemberInfoManager.launch(memberDao, null, null, null);
+		
 		final OrderQueryService order = OrderQueryManager.launch(orderQueryDao);
 		final CommentQueryService comm = CommentQueryManager.launch(commentQuery);
 		final HotelQueryService hotelQuery = HotelQueryManager.launch(hotelQueryDao);
+		final MemberQueryService memberQuery = MemberInfoManager.launch(memberDao, null, null, order);
 
 		proxy.loadOrderQueryService(order);
 		proxy.loadCommentQueryService(comm);
