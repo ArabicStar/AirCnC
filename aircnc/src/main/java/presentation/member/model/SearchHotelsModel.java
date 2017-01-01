@@ -130,7 +130,6 @@ public class SearchHotelsModel {
 		List<String> pro = new ArrayList<String>();
 		Iterator<PromotionVo> iter3 = promotionsList.iterator();
 		while(iter3.hasNext()){
-<<<<<<< HEAD
 			PromotionVo temp = iter3.next();
 			switch(temp.getPromotion().getTrigger().name()){
 			case "BIRTHDAY":
@@ -153,16 +152,6 @@ public class SearchHotelsModel {
 		
 		this.promotionGeneral = new SimpleObjectProperty<List<String>>(proGeneral);
 		
-=======
-			proGeneral.add(iter3.next().getContentString());
-			pro.add(iter3.next().getDescription());
-		}
-		
-		this.promotion = new SimpleObjectProperty<List<String>>(proGeneral);
-		
-		this.promotionGeneral = new SimpleObjectProperty<List<String>>(pro);
-		
->>>>>>> origin/master
 		List<CommentVo> commentsList = vo.getComments();
 		List<CommentModel> commentModels = new ArrayList<CommentModel>();
 		Iterator<CommentVo> iter2 = commentsList.iterator();

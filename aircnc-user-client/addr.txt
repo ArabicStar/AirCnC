@@ -1,1 +1,6 @@
+<<<<<<< HEAD
 localhost
+=======
+localhost
+
+>>>>>>> origin/master
