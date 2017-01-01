@@ -21,5 +21,6 @@
 		<mapping resource="po/order/comment/CommentPo.hbm.xml" />
 		<mapping resource="po/promotion/HotelPromotionPo.hbm.xml" />
 		<mapping resource="po/promotion/WebsitePromotionPo.hbm.xml" />
+		<mapping resource="utils/info/level/LevelStrategy.hbm.xml"/>
 	</session-factory>
 </hibernate-configuration>

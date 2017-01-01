@@ -193,7 +193,7 @@ public final class MemberInfoCourier implements MemberInfoInteractor {
 	@Title("获取订单")
 	public void getOrder() {
 		String title = getTitle();
-		String memberId = "";
+		String memberId = CreditChangeOrderAccessorImpl.getInstance().getMemberId();
 		String orderId = CreditChangeOrderAccessorImpl.getInstance().getCauseId();
 
 		OrderVo order = execute(title, () -> {

@@ -64,7 +64,6 @@ public enum MarketDaoImpl implements MarketDao {
 
 	@Override
 	public MarketPo findMarket(final String idString) {
-
 		int numId = parseId(idString);
 		return execute(session -> {
 			return (MarketPo) session.get(MarketPo.class, numId);

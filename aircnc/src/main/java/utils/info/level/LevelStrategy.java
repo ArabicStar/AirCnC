@@ -14,6 +14,7 @@ public class LevelStrategy implements Serializable {
 
 	public LevelStrategy() {
 		list = new ParametersList();
+		initList();
 	}
 
 	public void initList() {
@@ -37,9 +38,9 @@ public class LevelStrategy implements Serializable {
 
 		list.putParameterValue(String.valueOf(level), threshold);
 	}
-	
-	public int getTreshold(int level){
-		if(level<=0||level>=10)
+
+	public int getTreshold(int level) {
+		if (level <= 0 || level >= 10)
 			throw new IllegalArgumentException("LevelStrategy - Level Illegal");
 		return list.getParameterValue(String.valueOf(level));
 	}
