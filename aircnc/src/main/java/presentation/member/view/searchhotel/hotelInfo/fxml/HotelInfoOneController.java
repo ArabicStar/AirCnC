@@ -111,4 +111,9 @@ public class HotelInfoOneController implements Initializable{
 		
 	}
 	
+	@FXML
+	public void handleReverse(){
+		controller.handleReverse();
+	}
+	
 }

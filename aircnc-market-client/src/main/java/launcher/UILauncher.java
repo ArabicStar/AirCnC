@@ -10,6 +10,7 @@ import presentation.market.accessor.impl.MarketPromotionAccessorImpl;
 import presentation.market.manager.impl.AbnormalOrderManagerImpl;
 import presentation.market.manager.impl.LevelManagerImpl;
 import presentation.market.manager.impl.MarketPromotionManagerImpl;
+import presentation.market.manager.impl.UnexecutedOrderManagerImpl;
 import utils.logger.Log;
 
 public class UILauncher {
@@ -43,6 +44,7 @@ public class UILauncher {
 		MarketPromotionManagerImpl.launch();
 		AbnormalOrderManagerImpl.launch();
 		LevelManagerImpl.launch();
+		UnexecutedOrderManagerImpl.launch();
 
 	}
 }

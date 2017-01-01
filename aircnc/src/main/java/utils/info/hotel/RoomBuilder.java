@@ -35,7 +35,7 @@ public class RoomBuilder extends RoomTemplate {
 		return INVALID_ROOM;
 	}
 
-	private RoomBuilder() {
+	public RoomBuilder() {
 		this.name = "";
 		this.numOfPeople = -1;
 		this.numOfRoom = -1;

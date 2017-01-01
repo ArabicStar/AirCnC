@@ -11,4 +11,6 @@ public interface MarketServiceInteractor {
 	public void getLevelStrategy();
 
 	public void updateLevelStrategy();
+	
+	public void getUnexecutedOrder();
 }

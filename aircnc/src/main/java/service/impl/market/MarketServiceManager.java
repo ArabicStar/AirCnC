@@ -87,4 +87,20 @@ public class MarketServiceManager implements MarketService {
 		return dao.updateLevelStrategy(ls);
 	}
 
+	@Override
+	public List<OrderVo> getUnexecutedOrder() {
+		if (orderQueryService == null)
+			throw unsupportedOpEx("get unexecuted orders");
+
+		List<OrderVo> res = orderQueryService.getOrdersOfStatus(OrderStatus.UNEXECUTED);
+
+		// given id not exists, return
+		if (res == null)
+			return null;
+
+		bufferedOrderList = res;
+
+		return bufferedOrderList;
+	}
+
 }

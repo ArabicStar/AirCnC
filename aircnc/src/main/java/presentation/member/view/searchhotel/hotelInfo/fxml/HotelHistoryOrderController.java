@@ -81,4 +81,9 @@ public class HotelHistoryOrderController implements Initializable{
 	public void setModel(SearchHotelsModel model){
 		this.model = model;
 	}
+	
+	@FXML
+	public void handleReverse(){
+		controller.handleReverse();
+	}
 }

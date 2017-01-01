@@ -11,6 +11,8 @@ public interface MarketService {
 	 * @return 获取异常订单
 	 */
 	public List<OrderVo> getAbnormalOrder();
+	
+	public List<OrderVo> getUnexecutedOrder();
 
 	public boolean creditCharge(int money, String id);
 

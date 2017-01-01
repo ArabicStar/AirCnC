@@ -73,5 +73,10 @@ public class HotelInfoTwoController implements Initializable{
 	public void setModel(SearchHotelsModel model){
 		this.model = model;
 	}
+	
+	@FXML
+	public void handleReverse(){
+		controller.handleReverse();
+	}
 
 }

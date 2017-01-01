@@ -139,6 +139,13 @@ public class MarketServiceProxy extends AccessSecureProxy
 		checkAuthentication();
 		return marketService.getAbnormalOrder();
 	}
+	
+	@Override
+	@AuthenticatePolicy({ Client.MARKET })
+	public List<OrderVo> getUnexecutedOrder() {
+		checkAuthentication();
+		return marketService.getUnexecutedOrder();
+	}
 
 	@Override
 	@AuthenticatePolicy({ Client.MARKET })

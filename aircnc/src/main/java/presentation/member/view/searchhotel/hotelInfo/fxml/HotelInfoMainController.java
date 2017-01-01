@@ -135,5 +135,9 @@ public class HotelInfoMainController implements Initializable{
 		
 	}
 	
+	public void handleReverse(){
+		controller.handleReverse();
+	}
+	
 	
 }

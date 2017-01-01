@@ -17,6 +17,7 @@ import presentation.market.accessor.impl.LevelAccessorImpl;
 import presentation.market.accessor.impl.MarketChargeAccessorImpl;
 import presentation.market.manager.impl.AbnormalOrderManagerImpl;
 import presentation.market.manager.impl.LevelManagerImpl;
+import presentation.market.manager.impl.UnexecutedOrderManagerImpl;
 import service.market.MarketService;
 import service.order.OrderOperationService;
 import utils.info.level.LevelStrategy;
@@ -59,6 +60,16 @@ public class MarketServiceCourier implements MarketServiceInteractor {
 			return handler.getAbnormalOrder();
 		});
 		AbnormalOrderManagerImpl.getInstance().setAbnormalOrders(orders);
+	}
+	
+	@Override
+	@Title("获取未执行订单")
+	public void getUnexecutedOrder() {
+		String title = getTitle();
+		List<OrderVo> orders = execute(title, () -> {
+			return handler.getUnexecutedOrder();
+		});
+		UnexecutedOrderManagerImpl.getInstance().setUnexecutedOrders(orders);
 	}
 
 	@Override
