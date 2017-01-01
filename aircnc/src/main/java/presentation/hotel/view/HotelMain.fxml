@@ -82,6 +82,11 @@
                   <Button fx:id="logout" mnemonicParsing="false" onAction="#handleLogout" styleClass="logout" text="注销" />
                </children>
             </VBox>
+            <Label layoutX="5.0" layoutY="5.0" onMouseClicked="#handleCloseWindow" styleClass="close" text="X">
+               <padding>
+                  <Insets left="5.0" right="5.0" />
+               </padding>
+            </Label>
          </children>
       </Pane>
    </left>

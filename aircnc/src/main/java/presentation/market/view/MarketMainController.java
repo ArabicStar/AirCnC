@@ -107,4 +107,6 @@ public class MarketMainController implements Initializable {
 			this.controller.closeWindow();
 		}
 	}
+	
+	
 }

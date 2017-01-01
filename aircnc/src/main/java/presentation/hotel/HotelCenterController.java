@@ -147,5 +147,9 @@ public class HotelCenterController extends Application{
 			}
 		}
 	}
+	
+	public void closeWindow(){
+		this.primaryStage.close();
+	}
 
 }

@@ -27,7 +27,8 @@
 }
 
 .level{
-	-fx-text-fill: #ffd700;
+	-fx-font-weight: bolder;
+	-fx-text-fill: orange;
 	-fx-font-size: 24 px;
 }
 

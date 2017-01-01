@@ -1,6 +1,7 @@
 package presentation.hotel.view.signIn;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import interactor.hotel.HotelAccountInteractor;
@@ -10,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import presentation.hotel.CenterController;
@@ -45,6 +47,16 @@ public class HotelSignInController implements Initializable{
 		name.setPromptText("酒店名称");
 		password.setPromptText("密码");
 		
+	}
+	
+	@FXML
+	private void handleCloseWindow(){
+		PlainDialog alert = new PlainDialog(AlertType.CONFIRMATION,"退出客户端","确认退出客户端吗？");
+		Optional<ButtonType> result = alert.showDialog();
+		
+		if(result.get() == ButtonType.OK){
+			this.controller.closeWindow();
+		}
 	}
 	
 	/**

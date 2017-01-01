@@ -52,5 +52,9 @@ public class CenterController extends Application{
 			e.printStackTrace();
 		}
 	}
+	
+	public void closeWindow(){
+		this.primaryStage.close();
+	}
 
 }
