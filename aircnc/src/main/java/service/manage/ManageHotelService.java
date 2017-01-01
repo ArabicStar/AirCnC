@@ -12,5 +12,7 @@ public interface ManageHotelService {
 	
 	public HotelInfo getHotelInfo(int id);
 	
+	public HotelInfo getHotelInfoByName(String name);
+	
 	public boolean deleteHotelInfo(int id);
 }

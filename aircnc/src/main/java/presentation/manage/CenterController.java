@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import presentation.manage.view.ManageMainPane;
 import presentation.manage.view.hotelmanage.HotelManageMainPane;
 import presentation.manage.view.marketmanage.MarketManageMainPane;
@@ -28,8 +29,6 @@ public class CenterController extends Application {
 	private MemberManageMainPane memberManage;
 	private HotelManageMainPane hotelManage;
 	private MarketManageMainPane marketManage;
-	
-	private ManageTest test;
 
 	private final static int Main_Width = 1024;
 	private final static int Main_Height = 768;
@@ -45,28 +44,11 @@ public class CenterController extends Application {
 	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		
-//		HotelManageInfoManagerImpl.launch();
-//		HotelManagePromotionManagerImpl.launch();
-//		ManageHotelCommentManagerImpl.launch();
-//		MarketManageInfoManagerImpl.launch();
-//		MemberManageInfoImpl.launch();
-//		
-//		HotelManageInfoAccessorImpl.launch();
-//		MarketManageInfoAccessorImpl.launch();
-//		MemberManageInfoAccessorImpl.launch();
-		
-//		test = new ManageTest();
-//		
-//		test.getUserData();
-//		test.getHotelData();
-//		test.getMarketData();
-//		test.getCommentData();
 	
 		
 		this.primaryStage = primaryStage;
 
-		//primaryStage.initStyle(StageStyle.UNDECORATED);
+		primaryStage.initStyle(StageStyle.UNDECORATED);
 		primaryStage.setTitle("AirCnC");
 		primaryStage.setResizable(false);
 
@@ -119,5 +101,8 @@ public class CenterController extends Application {
 		marketManage.getController().setRootLayout(content);
 	}
 	
-
+	public void closeWindow(){
+		primaryStage.close();
+	}
+	
 }

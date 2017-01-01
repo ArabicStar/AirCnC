@@ -4,7 +4,6 @@ import static utils.exception.StaticExceptionFactory.duplicateSingletonEx;
 import static utils.exception.StaticExceptionFactory.illegalArgEx;
 import static utils.exception.StaticExceptionFactory.singletonNotExistsEx;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

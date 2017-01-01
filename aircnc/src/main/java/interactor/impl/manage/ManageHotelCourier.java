@@ -51,9 +51,14 @@ public class ManageHotelCourier implements ManageHotelInteractor{
 				throw unknownEx();
 			return tmp;
 		});
+		
+		HotelInfo newInfo = execute(title, () -> {
+			String name = info.getName();
+			return handler.getHotelInfoByName(name);
+		});
 
 		if (info != null)
-			AlertHelper.alertSuccess(title, String.format("添加酒店成功！该账号是%s。此账号将会作为登录凭据", String.valueOf(info.getId())));
+			AlertHelper.alertSuccess(title, String.format("添加酒店成功！该账号ID是%s", String.valueOf(newInfo.getId())));
 		else
 			AlertHelper.alertFail(title, "添加失败！");
 		HotelManageInfoManagerImpl.getInstance().setHotel(new HotelVoBuilder(info).getHotelInfo());
@@ -87,9 +92,11 @@ public class ManageHotelCourier implements ManageHotelInteractor{
 			return handler.getHotelInfo(id);
 		});
 		
-		HotelManageInfoManagerImpl.getInstance().setHotel(new HotelVoBuilder(info).getHotelInfo());
-		
-		return info != null;
+		if(info != null){
+			HotelManageInfoManagerImpl.getInstance().setHotel(new HotelVoBuilder(info).getHotelInfo());
+			return true;
+		}else
+			return false;
 	}
 
 	@Override

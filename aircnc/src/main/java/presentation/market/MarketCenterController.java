@@ -111,4 +111,8 @@ public class MarketCenterController extends Application {
 		}
 	}
 	
+	public void closeWindow(){
+		this.primaryStage.close();
+	}
+	
 }

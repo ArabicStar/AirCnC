@@ -67,7 +67,7 @@ public class ClientCenterController extends Application {
 		content.getChildren().clear();
 		infoMain = new MemberInfoMainPane();
 		content.getChildren().add(infoMain.getContentPane());
-		AnchorPane.setTopAnchor(infoMain.getContentPane(),0.0);
+		AnchorPane.setTopAnchor(infoMain.getContentPane(),10.0);
 		infoMain.getController().setCenterController(this);
 		
 	}
@@ -78,7 +78,7 @@ public class ClientCenterController extends Application {
 		content.getChildren().clear();
 		infoModify = new MemberInfoModifyPane();
 		content.getChildren().add(infoModify.getPane());
-		AnchorPane.setTopAnchor((infoModify.getPane()), 0.0);
+		AnchorPane.setTopAnchor((infoModify.getPane()), 10.0);
 		//(infoModify.getPane());
 		infoModify.getController().setCenterController(this);
 	}
@@ -87,7 +87,7 @@ public class ClientCenterController extends Application {
 		content.getChildren().clear();
 		creditMain = new MemberCreditChangePane();
 		content.getChildren().add(creditMain.getPane());
-		AnchorPane.setTopAnchor(creditMain.getPane(), 0.0);
+		AnchorPane.setTopAnchor(creditMain.getPane(), 10.0);
 		creditMain.getController().setCenterController(this);
 		//addCreditChangeRecord();
 	}
@@ -118,7 +118,7 @@ public class ClientCenterController extends Application {
 		content.getChildren().clear();
 		orderMain = new MemberOrderMainPane();
 		content.getChildren().add(orderMain.getPane());
-		AnchorPane.setTopAnchor(orderMain.getPane(), 0.0);
+		AnchorPane.setTopAnchor(orderMain.getPane(), 10.0);
 		orderMain.getController().setCenterController(this);
 		orderMain.getController().setRootLayout(content);
 	}
@@ -132,6 +132,10 @@ public class ClientCenterController extends Application {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void closeWindow(){
+		primaryStage.close();
 	}
 
 }

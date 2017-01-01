@@ -10,6 +10,8 @@ public final class LevelCalc {
 	private static LevelStrategy level = dao.getLevelStrategy();
 
 	public static final MemberPo calcLevel(MemberPo po) {
+		if(po == null)
+			return null;
 		return po.setLevel(level.calcLevel(po.getCredit()));
 	}
 
