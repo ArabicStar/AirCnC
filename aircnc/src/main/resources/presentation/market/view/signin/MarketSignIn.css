@@ -48,8 +48,8 @@
 }
 
 .close{
-	-fx-border-radius: 15px;
-	-fx-background-radius: 3px;
+	-fx-border-radius: 10px;
+	-fx-background-radius: 10px;
 	-fx-border-color: #fff;
 }
 

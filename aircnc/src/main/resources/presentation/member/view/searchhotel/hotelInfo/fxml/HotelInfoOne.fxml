@@ -72,7 +72,7 @@
             </HBox>
          </children>
       </VBox>
-      <Button layoutX="580.0" layoutY="475.0" mnemonicParsing="false" styleClass="reserve" text="预定房间" />
+      <Button layoutX="580.0" layoutY="475.0" mnemonicParsing="false" styleClass="reserve" text="预订房间" />
       <HBox alignment="CENTER" layoutX="282.0" layoutY="509.0" prefHeight="43.0" prefWidth="200.0" spacing="25.0">
          <children>
             <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="page-now" text="1" />

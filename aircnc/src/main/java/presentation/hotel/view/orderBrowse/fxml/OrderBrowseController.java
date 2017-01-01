@@ -101,12 +101,9 @@ public class OrderBrowseController implements Initializable{
 		accessor = SearchOrderAccessorImpl.getInstance();
 		
 		Platform.runLater(()->{
-			initOrders();
+			unfinished.setSelected(true);
+			handleQuery();
 		});
-	}
-	
-	public void initOrders(){
-		
 	}
     
     public void executeOrder(OrderVo vo){
