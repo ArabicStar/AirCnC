@@ -111,7 +111,7 @@ public class SearchHotelsModel {
 	        case "已评价": 
 	        	executeNum++;  break;
 	        case "申诉中": 
-	        	unexecuteNum++;  break;
+	        	abnormalNum++;  break;
 			}
 		}
 		this.execute = new SimpleIntegerProperty(executeNum);
