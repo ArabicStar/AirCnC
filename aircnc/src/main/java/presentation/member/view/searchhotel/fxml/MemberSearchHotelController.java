@@ -78,8 +78,8 @@ public class MemberSearchHotelController implements Initializable {
 		this.maxPageNum = 0;
 		preButton.setDisable(true);
 		nextButton.setDisable(true);
-
-		Platform.runLater(() -> {
+		
+		Platform.runLater( ()->{
 			this.hotelNum = 0;
 			list = manager.getHotelList(pageNum);
 			this.hotelNum = manager.getSearchedNum();
@@ -93,9 +93,7 @@ public class MemberSearchHotelController implements Initializable {
 			}
 			if (maxPageNum > 0)
 				nextButton.setDisable(false);
-
 		});
-
 	}
 
 	@FXML
@@ -123,8 +121,8 @@ public class MemberSearchHotelController implements Initializable {
 			}
 			if (maxPageNum > 0)
 				nextButton.setDisable(false);
-		} else {
-			PlainDialog alert = new PlainDialog(AlertType.INFORMATION, "搜索失败", "请输入搜索的酒店名称");
+		}else{
+			PlainDialog alert = new PlainDialog(AlertType.INFORMATION,"搜索失败","请输入搜索的酒店名称");
 			alert.showDialog();
 		}
 	}
@@ -193,27 +191,6 @@ public class MemberSearchHotelController implements Initializable {
 
 	public void removeSupremeSearch() {
 		rootLayout.getChildren().remove(rootLayout.getChildren().size() - 1);
-	}
-	
-	private boolean only = false;
-	
-	@FXML
-	public void handleOnlyMe(){
-		manager.setOnlyMe(!only);
-		searchedResult.getChildren().clear();
-		this.hotelNum = 0;
-		list = manager.getHotelList(pageNum);
-		this.hotelNum = manager.getSearchedNum();
-		this.maxPageNum = (hotelNum - 1) / 4;
-		Iterator<SearchHotelsModel> it = list.iterator();
-		while (it.hasNext()) {
-			MemberSearchHotelGeneralPane newPane = new MemberSearchHotelGeneralPane(it.next());
-			searchedResult.getChildren().add(newPane.getPane());
-			newPane.getController().setController(this);
-			newPane.getController().setRootLayout(rootLayout);
-		}
-		if (maxPageNum > 0)
-			nextButton.setDisable(false);
 	}
 
 }

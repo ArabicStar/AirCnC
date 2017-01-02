@@ -26,7 +26,6 @@ import presentation.member.utils.cell.CreditChangeCell;
  */
 public class MemberCreditChangeController implements Initializable{
 	
-	@SuppressWarnings("unused")
 	private ClientCenterController controller;
 	
 	private CreditChangeManager manager;
@@ -42,6 +41,9 @@ public class MemberCreditChangeController implements Initializable{
 	
 	@FXML
 	private TableColumn<CreditModel,String> description;
+	
+	@FXML
+	private TableColumn<CreditModel,Integer> change;
 	
 	private int changeNum;
 	
@@ -70,25 +72,25 @@ public class MemberCreditChangeController implements Initializable{
 		description.setCellValueFactory(cellData -> cellData.getValue().descriptionProperty());
 		//change.setCellValueFactory(cellData -> cellData.getValue().creditChangeProperty());
 		
-//		change.setSortable(false);
-//		
-//		change.setCellValueFactory(
-//                new Callback<TableColumn.CellDataFeatures<CreditModel, Integer>, 
-//                ObservableValue<Integer>>() {
-//
-//            public ObservableValue<Integer> call(TableColumn.CellDataFeatures<CreditModel, Integer> p) {
-//                changeNum=p.getValue().getCreditChange();
-//            	return new SimpleObjectProperty<Integer>(p.getValue().getCreditChange());
-//            }
-//        });
-//		
-//
-//		change.setCellFactory(
-//                new Callback<TableColumn<CreditModel, Integer>, TableCell<CreditModel, Integer>>() {
-//
-//            public TableCell<CreditModel, Integer> call(TableColumn<CreditModel, Integer> p) {
-//                return new CreditChangeCell(changeNum);
-//            }       
-//        });
+		change.setSortable(false);
+		
+		change.setCellValueFactory(
+                new Callback<TableColumn.CellDataFeatures<CreditModel, Integer>, 
+                ObservableValue<Integer>>() {
+
+            public ObservableValue<Integer> call(TableColumn.CellDataFeatures<CreditModel, Integer> p) {
+                changeNum=p.getValue().getCreditChange();
+            	return new SimpleObjectProperty<Integer>(p.getValue().getCreditChange());
+            }
+        });
+		
+
+		change.setCellFactory(
+                new Callback<TableColumn<CreditModel, Integer>, TableCell<CreditModel, Integer>>() {
+
+            public TableCell<CreditModel, Integer> call(TableColumn<CreditModel, Integer> p) {
+                return new CreditChangeCell(changeNum);
+            }       
+        });
 	}
 }

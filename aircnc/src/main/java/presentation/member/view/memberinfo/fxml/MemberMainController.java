@@ -32,9 +32,6 @@ public class MemberMainController implements Initializable {
 
 	@FXML
 	private Label creditChange;
-	
-	@FXML
-	private Label browse;
 
 	@FXML
 	private Button logout;
@@ -59,7 +56,6 @@ public class MemberMainController implements Initializable {
 
 	@FXML
 	private void HandleMemberInfo() {
-		browse.setDisable(false);
 		memberInfo.setDisable(true);
 		searchHotel.setDisable(false);
 		myOrder.setDisable(false);
@@ -69,19 +65,8 @@ public class MemberMainController implements Initializable {
 
 	@FXML
 	private void HandleSearchHotel() {
-		browse.setDisable(false);
 		memberInfo.setDisable(false);
 		searchHotel.setDisable(true);
-		myOrder.setDisable(false);
-		creditChange.setDisable(false);
-		controller.addSearchHotelPane();
-	}
-	
-	@FXML
-	private void HandleBrowseHotel() {
-		browse.setDisable(true);
-		memberInfo.setDisable(false);
-		searchHotel.setDisable(false);
 		myOrder.setDisable(false);
 		creditChange.setDisable(false);
 		controller.addSearchHotelPane();
@@ -89,7 +74,6 @@ public class MemberMainController implements Initializable {
 
 	@FXML
 	private void HandleMyOrder() {
-		browse.setDisable(false);
 		memberInfo.setDisable(false);
 		searchHotel.setDisable(false);
 		myOrder.setDisable(true);
@@ -99,7 +83,6 @@ public class MemberMainController implements Initializable {
 
 	@FXML
 	private void HandleCreditChange() {
-		browse.setDisable(false);
 		memberInfo.setDisable(false);
 		searchHotel.setDisable(false);
 		myOrder.setDisable(false);
@@ -109,10 +92,6 @@ public class MemberMainController implements Initializable {
 
 	public void setSearchHotelDisable(boolean b) {
 		searchHotel.setDisable(b);
-	}
-	
-	public void setBrowseHotelDisable(boolean b) {
-		browse.setDisable(b);
 	}
 
 	@FXML

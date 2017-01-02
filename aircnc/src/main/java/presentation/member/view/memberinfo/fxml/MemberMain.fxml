@@ -44,22 +44,6 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="57.0">
                      <children>
-                        <Label fx:id="browse" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#HandleCreditChange" prefHeight="50.0" prefWidth="247.0" text="浏览酒店">
-                           <padding>
-                              <Insets right="30.0" />
-                           </padding>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </Label>
-                     </children>
-                     <styleClass>
-                        <String fx:value="credit-change-hbox" />
-                        <String fx:value="hbox" />
-                     </styleClass>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="57.0">
-                     <children>
                         <Label fx:id="myOrder" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#HandleMyOrder" prefHeight="50.0" prefWidth="247.0" text="我的订单">
                            <HBox.margin>
                               <Insets />
@@ -108,6 +92,6 @@
             <Insets right="300.0" />
          </padding>
       </AnchorPane>
-      <AnchorPane onMouseClicked="#HandleBrowseHotel" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="247.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="247.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
    </children>
 </AnchorPane>

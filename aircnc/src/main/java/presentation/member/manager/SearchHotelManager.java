@@ -12,10 +12,6 @@ public interface SearchHotelManager {
 	
 	public ObservableList<SearchHotelsModel> getHotelList(int pageNum);
 	
-	public ObservableList<SearchHotelsModel> getWholeHotelList();
-	
 	public int getSearchedNum();
-	
-	public void setOnlyMe(boolean onlyMe);
 	
 }

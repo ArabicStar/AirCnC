@@ -62,21 +62,21 @@ public class CreditModel {
 			CreditChangeOrderAccessorImpl.getInstance().setMemberId(memberId);
 			MemberInfoCourier.getInstance().getOrder();
 			des = String.format(change.getFormatString(),CreditChangeManagerImpl.getInstance().getCauseHotelName()
-					,change.getOrderId().substring(8),change.getAfterCredit()-change.getBeforeCredit());
+					,change.getOrderId(),change.getAfterCredit()-change.getBeforeCredit());
 			break;
 		case ORDER_CANCEL:
 			CreditChangeOrderAccessorImpl.getInstance().setCauseId(change.getOrderId());
 			CreditChangeOrderAccessorImpl.getInstance().setMemberId(memberId);
 			MemberInfoCourier.getInstance().getOrder();
 			des = String.format(change.getFormatString(),CreditChangeManagerImpl.getInstance().getCauseHotelName()
-					,change.getOrderId().substring(8),change.getBeforeCredit()-change.getAfterCredit());
+					,change.getOrderId(),change.getBeforeCredit()-change.getAfterCredit());
 			break;
 		case ORDER_OVERDUE:
 			CreditChangeOrderAccessorImpl.getInstance().setCauseId(change.getOrderId());
 			CreditChangeOrderAccessorImpl.getInstance().setMemberId(memberId);
 			MemberInfoCourier.getInstance().getOrder();
 			des = String.format(change.getFormatString(),CreditChangeManagerImpl.getInstance().getCauseHotelName()
-					,change.getOrderId().substring(8)
+					,change.getOrderId()
 					,change.getBeforeCredit()-change.getAfterCredit());
 			break;
 		case ORDER_APPEAL:
@@ -84,7 +84,7 @@ public class CreditModel {
 			CreditChangeOrderAccessorImpl.getInstance().setMemberId(memberId);
 			MemberInfoCourier.getInstance().getOrder();
 			des = String.format(change.getFormatString(),CreditChangeManagerImpl.getInstance().getCauseHotelName()
-					,change.getOrderId().substring(8)
+					,change.getOrderId()
 					,change.getAfterCredit()-change.getBeforeCredit());
 			break;
 		case ORDER_DELAY:
@@ -92,7 +92,7 @@ public class CreditModel {
 			CreditChangeOrderAccessorImpl.getInstance().setMemberId(memberId);
 			MemberInfoCourier.getInstance().getOrder();
 			des = String.format(change.getFormatString(),CreditChangeManagerImpl.getInstance().getCauseHotelName()
-					,change.getOrderId().substring(8)
+					,change.getOrderId()
 					,change.getAfterCredit()-change.getBeforeCredit());
 			break;
 		default:

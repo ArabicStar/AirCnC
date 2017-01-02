@@ -72,9 +72,9 @@ public class HotelCommentController implements Initializable{
 	
 	/**
 	 * set the main controller
-	 * @param hotelInfoThreeController
+	 * @param controller
 	 */
-	public void setController(HotelInfoThreeController hotelInfoThreeController){
-		this.controller = hotelInfoThreeController;
+	public void setController(HotelInfoThreeController controller){
+		this.controller = controller;
 	}
 }

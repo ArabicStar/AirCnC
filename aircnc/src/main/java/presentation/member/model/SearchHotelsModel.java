@@ -55,12 +55,6 @@ public class SearchHotelsModel {
 	private final ObjectProperty<List<String>> promotion;
 	private final ObjectProperty<List<CommentModel>> comments;
 	
-	private final StringProperty stringLowPrice;
-	private final StringProperty stringStar;
-	private final StringProperty stringGrade;
-	private final StringProperty reverse;
-	private final ObjectProperty<HotelVo> operation;
-	
 	private final HotelVo hotel;
 	/**
      * Default constructor.
@@ -152,7 +146,6 @@ public class SearchHotelsModel {
 				break;
 			}
 			pro.add(temp.getDescription());
-			
 		}
 		
 		this.promotion = new SimpleObjectProperty<List<String>>(pro);
@@ -166,61 +159,8 @@ public class SearchHotelsModel {
 			commentModels.add(new CommentModel(iter2.next()));
 		}
 		this.comments = new SimpleObjectProperty<List<CommentModel>>(commentModels);
-		
-		this.stringLowPrice = new SimpleStringProperty(String.valueOf(vo.getLowestPrice())+"元");
-		this.stringGrade = new SimpleStringProperty(String.valueOf(vo.getGrade())+"分");
-		this.stringStar = new SimpleStringProperty(String.valueOf(vo.getStar())+"分");
-		this.reverse = new SimpleStringProperty(this.historyOrder.get().size()>0 ? "有" : "无");
-		this.operation = new SimpleObjectProperty<HotelVo>(vo);
 	}
 	
-	public String gettringLowPrice() {
-        return stringLowPrice.get();
-    }
-
-    public void settringLowPrice(String newName) {
-        this.stringLowPrice.set(newName);
-    }
-
-    public StringProperty stringLowPriceProperty() {
-        return stringLowPrice;
-    }
-    
-    public String gettringGrade() {
-        return stringGrade.get();
-    }
-
-    public void settringGrade(String newName) {
-        this.stringGrade.set(newName);
-    }
-
-    public StringProperty stringGradeProperty() {
-        return stringGrade;
-    }
-    
-    public String getStringStar() {
-        return stringStar.get();
-    }
-
-    public void setStringStar(String newName) {
-        this.stringStar.set(newName);
-    }
-
-    public StringProperty stringStarProperty() {
-        return stringStar;
-    }
-    
-    public String getReverse() {
-        return reverse.get();
-    }
-
-    public void setReverse(String newName) {
-        this.reverse.set(newName);
-    }
-
-    public StringProperty reverseProperty() {
-        return reverse;
-    }
 	public int getStar() {
         return star.get();
     }
@@ -463,17 +403,5 @@ public class SearchHotelsModel {
     
     public HotelVo getHotel(){
     	return this.hotel;
-    }
-    
-    public HotelVo getOperation() {
-        return operation.get();
-    }
-
-    public void setOperation(HotelVo vo) {
-        this.operation.set(vo);
-    }
-
-    public ObjectProperty<HotelVo> operationProperty() {
-        return operation;
     }
 }
