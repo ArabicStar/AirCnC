@@ -49,7 +49,6 @@ public class CenterController extends Application {
 
 	private final static int Login_Width = 550;
 	private final static int Login_Height = 385;
-	private MemberTest test;
 
 	public static void main(String[] args) throws Exception {
 		launch(args);
@@ -62,31 +61,6 @@ public class CenterController extends Application {
 	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		
-//		InfoModifyAccessorImpl.launch();
-//		MemberAppealAccessorImpl.launch();
-//		MemberCommentAccessorImpl.launch();
-//		MemberLoginAccessorImpl.launch();
-//		MemberOrderOperationAccessorImpl.launch();
-//		RegisterAccessorImpl.launch();
-//		SearchOrderInfoAccessorImpl.launch();
-//		SupremeSearchAccessorImpl.launch();
-//		CreditChangeOrderAccessorImpl.launch();
-//		HotelNameAccessorImpl.launch();
-//		
-//		CreditChangeManagerImpl.launch();
-//		MemberInfoManagerImpl.launch();
-//		MyOrderManagerImpl.launch();
-//		SearchHotelManagerImpl.launch();
-//		HotelCommentManagerImpl.launch();
-//		HotelPromotionManagerImpl.launch();
-//		HistoryOrderManagerImpl.launch();
-//		
-		test = new MemberTest();
-		test.getSearchedData();
-		test.getMyOrderData();
-		test.getCreditData();
-		test.getUserData();
 		
 		this.primaryStage = primaryStage;
 

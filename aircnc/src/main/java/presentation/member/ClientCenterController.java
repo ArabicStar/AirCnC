@@ -17,6 +17,7 @@ import presentation.member.accessor.impl.HotelSearchAccessorImpl;
 import presentation.member.manager.impl.SearchHotelManagerImpl;
 import presentation.member.utils.dialog.TextFieldDialog;
 import presentation.member.view.MemberMainPane;
+import presentation.member.view.browsehotel.BrowseHotelsPane;
 import presentation.member.view.creditchange.MemberCreditChangePane;
 
 /**
@@ -35,6 +36,7 @@ public class ClientCenterController extends Application {
 	private MemberCreditChangePane creditMain;
 	private MemberSearchHotelPane searchMain;
 	private MemberOrderMainPane orderMain;
+	private BrowseHotelsPane browse;
 
 	private AnchorPane rootLayout;
 	private AnchorPane content;
@@ -111,6 +113,25 @@ public class ClientCenterController extends Application {
 			searchMain.getController().setRootLayout(content);			
 		}else{
 			mainClient.getController().setSearchHotelDisable(false);
+		}
+	}
+	
+	public void addBrowseHotelPane() {
+		content.getChildren().clear();
+		TextFieldDialog dialog = new TextFieldDialog("浏览酒店","商圈：");
+		
+		Optional<String> result = dialog.showDialog();
+		
+		if(result.isPresent()){
+			HotelSearchAccessorImpl.getInstance().setScope(result.get());
+			HotelSearchCourier.getInstance().searchByCondition();
+			HotelSearchAccessorImpl.getInstance().setScope(null);
+			browse = new BrowseHotelsPane();
+			content.getChildren().add(browse.getPane());
+			AnchorPane.setTopAnchor(browse.getPane(), 0.0);
+			browse.getController().setCenterController(this);		
+		}else{
+			mainClient.getController().setBrowseHotelDisable(false);
 		}
 	}
 	

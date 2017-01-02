@@ -4,5 +4,6 @@ public enum FunctionButtonType {
 	CHECK,
 	REVIEW,
 	APPEAL,
-	CANCEL
+	CANCEL,
+	REVERSE
 }

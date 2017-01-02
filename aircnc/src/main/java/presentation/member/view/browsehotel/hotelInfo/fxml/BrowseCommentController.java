@@ -1,4 +1,4 @@
-package presentation.member.view.searchhotel.hotelInfo.fxml;
+package presentation.member.view.browsehotel.hotelInfo.fxml;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -11,7 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import presentation.member.model.CommentModel;
 
-public class HotelCommentController implements Initializable{
+public class BrowseCommentController implements Initializable{
 	@FXML
 	private Label level;
 	
@@ -36,7 +36,7 @@ public class HotelCommentController implements Initializable{
 	private CommentModel model;
 	
 	@SuppressWarnings("unused")
-	private HotelInfoThreeController controller;
+	private BrowseInfoThreeController controller;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -72,9 +72,9 @@ public class HotelCommentController implements Initializable{
 	
 	/**
 	 * set the main controller
-	 * @param hotelInfoThreeController
+	 * @param controller
 	 */
-	public void setController(HotelInfoThreeController hotelInfoThreeController){
-		this.controller = hotelInfoThreeController;
+	public void setController(BrowseInfoThreeController controller){
+		this.controller = controller;
 	}
 }

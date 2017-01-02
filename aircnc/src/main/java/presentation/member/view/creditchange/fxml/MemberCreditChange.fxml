@@ -17,20 +17,15 @@
                   <String fx:value="table-row-cell" />
                   <String fx:value="date-row" />
                </styleClass></TableColumn>
-          <TableColumn fx:id="date" prefWidth="54.0">
+          <TableColumn fx:id="date" prefWidth="50.0">
                <styleClass>
                   <String fx:value="table-row-cell" />
                   <String fx:value="time-row" />
                </styleClass></TableColumn>
-            <TableColumn fx:id="description" prefWidth="441.0">
+            <TableColumn fx:id="description" prefWidth="557.0">
                <styleClass>
                   <String fx:value="table-row-cell" />
                   <String fx:value="description-row" />
-               </styleClass></TableColumn>
-            <TableColumn fx:id="change" prefWidth="125.0">
-               <styleClass>
-                  <String fx:value="table-row-cell" />
-                  <String fx:value="change-row" />
                </styleClass></TableColumn>
         </columns>
       </TableView>
